@@ -6,6 +6,6 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "ZZZ Archive",
     ) {
-        App()
+        ZzzArchiveApp()
     }
 }

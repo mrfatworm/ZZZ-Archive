@@ -12,7 +12,7 @@
 - [Planing] Feedback Screen
 
 ### Tech Issue
-- [Planing] RWD Layout
+- [V] RWD Layout
 - [Planing] Nested Navigation
 - [Planing] Design System
 - [Planing] Where could I get data...
