@@ -29,23 +29,24 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.PermanentNavigationDrawer
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import ui.navigation.DismissibleNavigationDrawerContent
 import ui.navigation.ModalNavigationDrawerContent
-import ui.navigation.PermanentNavigationDrawerContent
 import ui.navigation.RootScreen
 import ui.navigation.ZzzArchiveBottomNavigationBar
 import ui.navigation.ZzzArchiveNavigationActions
@@ -85,12 +86,12 @@ fun ZzzArchiveApp() {
         }
     }
     MaterialTheme {
-        ZzzArchiveWrapper(navigationType, contentType)
+        ZzzArchiveNavigationWrapper(navigationType, contentType)
     }
 }
 
 @Composable
-fun ZzzArchiveWrapper(
+fun ZzzArchiveNavigationWrapper(
     navigationType: ZzzArchiveNavigationType, contentType: ZzzArchiveContentType
 ) {
     val navController = rememberNavController()
@@ -103,41 +104,28 @@ fun ZzzArchiveWrapper(
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
-    if (navigationType == ZzzArchiveNavigationType.NAVIGATION_DRAWER) {
-        PermanentNavigationDrawer(drawerContent = {
-            PermanentNavigationDrawerContent(
-                selectedDestination = selectedDestination,
-                navigationActions = navigationActions,
-            )
-        }) {
-
-        }
-    } else {
-        ModalNavigationDrawer(
-            drawerContent = {
-                ModalNavigationDrawerContent(selectedDestination = selectedDestination,
-                    navigationActions = navigationActions,
-                    onDrawerClicked = {
-                        scope.launch {
-                            drawerState.close()
-                        }
-                    })
-            }, drawerState = drawerState, gesturesEnabled = false
-        ) {
-            RoverArchiveAppContent(navController = navController,
-                navigationType = navigationType,
-                contentType = contentType,
-                selectedDestination = selectedDestination,
+    ModalNavigationDrawer(
+        drawerContent = {
+            ModalNavigationDrawerContent(selectedDestination = selectedDestination,
                 navigationActions = navigationActions,
                 onDrawerClicked = {
                     scope.launch {
-                        drawerState.open()
+                        drawerState.close()
                     }
                 })
-        }
+        }, drawerState = drawerState, gesturesEnabled = false
+    ) {
+        RoverArchiveAppContent(navController = navController,
+            navigationType = navigationType,
+            contentType = contentType,
+            selectedDestination = selectedDestination,
+            navigationActions = navigationActions,
+            onDrawerClicked = {
+                scope.launch {
+                    drawerState.open()
+                }
+            })
     }
-
-
 }
 
 @Composable
@@ -150,15 +138,36 @@ fun RoverArchiveAppContent(
     contentType: ZzzArchiveContentType,
     onDrawerClicked: () -> Unit = {}
 ) {
+
+    var drawerState by remember { mutableStateOf(false) }
+
     Row(modifier = modifier.fillMaxSize()) {
         AnimatedVisibility(
             visible = navigationType == ZzzArchiveNavigationType.NAVIGATION_RAIL || navigationType == ZzzArchiveNavigationType.NAVIGATION_DRAWER
         ) {
-            ZzzArchiveNavigationRail(
-                selectedDestination = selectedDestination,
-                navigationActions = navigationActions,
-                onDrawerClicked = onDrawerClicked,
-            )
+            when (navigationType) {
+                ZzzArchiveNavigationType.BOTTOM_NAVIGATION -> {}
+                ZzzArchiveNavigationType.NAVIGATION_RAIL -> {
+                    ZzzArchiveNavigationRail(
+                        selectedDestination = selectedDestination,
+                        navigationActions = navigationActions,
+                        onDrawerClicked = onDrawerClicked,
+                    )
+                }
+
+                ZzzArchiveNavigationType.NAVIGATION_DRAWER -> {
+                    if (drawerState) {
+                        DismissibleNavigationDrawerContent(selectedDestination = selectedDestination,
+                            navigationActions = navigationActions,
+                            onDrawerClicked = { drawerState = !drawerState })
+                    } else {
+                        ZzzArchiveNavigationRail(selectedDestination = selectedDestination,
+                            navigationActions = navigationActions,
+                            onDrawerClicked = { drawerState = !drawerState })
+                    }
+
+                }
+            }
         }
         Column(
             modifier = Modifier.fillMaxSize()
