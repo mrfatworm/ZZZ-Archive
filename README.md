@@ -13,7 +13,8 @@
 
 ### Tech Issue
 - [V] RWD Layout
-- [Planing] Nested Navigation
+- [V] Nested Navigation
+- [Planing] Localization
 - [Planing] Design System
 - [Planing] Where could I get data...
 - [Planing] Ktor Network
