@@ -14,6 +14,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -25,6 +26,7 @@ import zzzarchive.composeapp.generated.resources.compose_multiplatform
 
 @Composable
 fun HomeScreenSingle(
+    viewModelText: String,
     homeState: HomeState = stubHomeState,
     onCharacterOverviewClick: () -> Unit = {},
     onWeaponOverviewClick: () -> Unit = {},
@@ -48,6 +50,7 @@ fun HomeScreenSingle(
                     contentDescription = "cover"
                 )
             }
+            Text(modifier = Modifier.padding(16.dp), text = viewModelText)
             HomeListSection("Characters",
                 homeState.charactersList,
                 onSeeAllClick = {

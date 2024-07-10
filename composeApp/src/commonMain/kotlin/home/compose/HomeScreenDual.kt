@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -22,6 +23,7 @@ import zzzarchive.composeapp.generated.resources.compose_multiplatform
 
 @Composable
 fun HomeScreenDual(
+    viewModelText: String,
     homeState: HomeState = stubHomeState,
     onCharacterOverviewClick: () -> Unit = {},
     onWeaponOverviewClick: () -> Unit = {},
@@ -47,6 +49,7 @@ fun HomeScreenDual(
                     contentDescription = "cover"
                 )
             }
+            Text(modifier = Modifier.padding(16.dp), text = viewModelText)
             HomeListSection("Characters",
                 homeState.charactersList,
                 onSeeAllClick = {

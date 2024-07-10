@@ -18,7 +18,7 @@
  * Modifications by mrfatworm, 2024
  * customized,
  * remove navigationContentPosition & foldingDevice,
- * replace PermanentNavigationDrawer
+ * replace PermanentNavigationDrawer with DismissibleNavigationDrawer
  */
 
 import androidx.compose.animation.AnimatedVisibility

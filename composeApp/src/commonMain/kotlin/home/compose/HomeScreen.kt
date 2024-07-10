@@ -6,8 +6,12 @@
 package home.compose
 
 import androidx.compose.runtime.Composable
+import home.domain.ZzzViewModel
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 import ui.utils.ZzzArchiveContentType
 
+@OptIn(KoinExperimentalAPI::class)
 @Composable
 fun HomeScreen(
     contentType: ZzzArchiveContentType,
@@ -18,8 +22,10 @@ fun HomeScreen(
     onWeaponDetailClick: (Long) -> Unit = {},
     onEchoDetailClick: (Long) -> Unit = {},
 ) {
+    val viewModel = koinViewModel<ZzzViewModel>()
     if (contentType == ZzzArchiveContentType.SINGLE) {
         HomeScreenSingle(
+            viewModelText = viewModel.getImageUrl(),
             onCharacterOverviewClick = onCharacterOverviewClick,
             onWeaponOverviewClick = onWeaponOverviewClick,
             onEchoesOverviewClick = onEchoesOverviewClick,
@@ -29,6 +35,7 @@ fun HomeScreen(
         )
     } else {
         HomeScreenDual(
+            viewModelText = viewModel.getImageUrl(),
             onCharacterOverviewClick = onCharacterOverviewClick,
             onWeaponOverviewClick = onWeaponOverviewClick,
             onEchoesOverviewClick = onEchoesOverviewClick,
