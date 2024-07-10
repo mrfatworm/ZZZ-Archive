@@ -45,6 +45,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.KoinContext
 import ui.navigation.DismissibleNavigationDrawerContent
 import ui.navigation.ModalNavigationDrawerContent
 import ui.navigation.RootScreen
@@ -86,7 +87,9 @@ fun ZzzArchiveApp() {
         }
     }
     MaterialTheme {
-        ZzzArchiveNavigationWrapper(navigationType, contentType)
+        KoinContext {
+            ZzzArchiveNavigationWrapper(navigationType, contentType)
+        }
     }
 }
 

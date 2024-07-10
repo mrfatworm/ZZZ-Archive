@@ -1,9 +1,9 @@
 /*
- *  Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- *  License: Apache-2.0
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: Apache-2.0
  */
 
-package home
+package home.compose
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -17,8 +17,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import home.data.HomeState
-import home.data.stubHomeState
+import home.model.HomeState
+import home.model.stubHomeState
 import org.jetbrains.compose.resources.painterResource
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.compose_multiplatform

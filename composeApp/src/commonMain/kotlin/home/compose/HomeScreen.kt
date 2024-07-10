@@ -1,9 +1,9 @@
 /*
- *  Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- *  License: Apache-2.0
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: Apache-2.0
  */
 
-package home
+package home.compose
 
 import androidx.compose.runtime.Composable
 import ui.utils.ZzzArchiveContentType
