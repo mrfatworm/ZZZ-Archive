@@ -12,7 +12,3 @@ enum class ZzzArchiveNavigationType {
 enum class ZzzArchiveContentType {
     SINGLE, DUAL
 }
-
-enum class ZzzArchiveNavigationContentPosition {
-    TOP, CENTER
-}

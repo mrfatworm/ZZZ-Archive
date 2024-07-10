@@ -3,7 +3,7 @@
  *  License: Apache-2.0
  */
 
-package home
+package home.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

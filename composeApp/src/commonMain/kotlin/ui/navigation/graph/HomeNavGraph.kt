@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import home.HomeScreen
+import home.compose.HomeScreen
 import ui.navigation.RootScreen
 import ui.navigation.SubScreen
 import ui.utils.ZzzArchiveContentType

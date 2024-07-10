@@ -3,7 +3,7 @@
  *  License: Apache-2.0
  */
 
-package home.data
+package home.model
 
 import ui.data.SimpleListItemState
 import ui.data.stubArtifactsList
