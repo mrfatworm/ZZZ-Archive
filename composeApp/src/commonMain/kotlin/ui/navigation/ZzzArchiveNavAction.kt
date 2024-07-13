@@ -32,9 +32,9 @@ class ZzzArchiveNavigationActions(private val navController: NavHostController) 
 
 val TOP_LEVEL_DESTINATIONS_MEDIUM = listOf(
     RootScreen.Home,
-    RootScreen.Characters,
+    RootScreen.Agents,
     RootScreen.Weapons,
-    RootScreen.Artifacts,
+    RootScreen.Drivers,
     RootScreen.Setting,
     RootScreen.Feedback
 )

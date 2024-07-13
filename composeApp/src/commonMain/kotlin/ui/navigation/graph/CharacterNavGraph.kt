@@ -17,7 +17,7 @@ fun CharacterNavGraph(
     contentType: ZzzArchiveContentType, navigateToTopLevelDestination: (RootScreen) -> Unit) {
     val characterNavController = rememberNavController()
     NavHost(
-        navController = characterNavController, startDestination = SubScreen.CharactersList.route
+        navController = characterNavController, startDestination = SubScreen.AgentsList.route
     ) {
         sharedScreenDestination(characterNavController, contentType,navigateToTopLevelDestination)
     }

@@ -23,22 +23,22 @@ fun HomeNavHost(
         if (contentType == ZzzArchiveContentType.DUAL) {
             composable(SubScreen.Home.route) {
                 HomeScreen(contentType = contentType,
-                    onCharacterOverviewClick = { navigateToTopLevelDestination(RootScreen.Characters) },
+                    onCharacterOverviewClick = { navigateToTopLevelDestination(RootScreen.Agents) },
                     onWeaponOverviewClick = { navigateToTopLevelDestination(RootScreen.Weapons) },
-                    onEchoesOverviewClick = { navigateToTopLevelDestination(RootScreen.Artifacts) },
-                    onCharacterDetailClick = { homeNavController.navigate(SubScreen.CharacterDetail.route) },
+                    onEchoesOverviewClick = { navigateToTopLevelDestination(RootScreen.Drivers) },
+                    onCharacterDetailClick = { homeNavController.navigate(SubScreen.AgentDetail.route) },
                     onWeaponDetailClick = { homeNavController.navigate(SubScreen.WeaponDetail.route) },
-                    onEchoDetailClick = { homeNavController.navigate(SubScreen.EchoDetail.route) })
+                    onEchoDetailClick = { homeNavController.navigate(SubScreen.DriverDetail.route) })
             }
         } else {
             composable(SubScreen.Home.route) {
                 HomeScreen(contentType = contentType,
-                    onCharacterOverviewClick = { homeNavController.navigate(SubScreen.CharactersList.route) },
+                    onCharacterOverviewClick = { homeNavController.navigate(SubScreen.AgentsList.route) },
                     onWeaponOverviewClick = { homeNavController.navigate(SubScreen.WeaponsList.route) },
-                    onEchoesOverviewClick = { homeNavController.navigate(SubScreen.ArtifactsList.route) },
-                    onCharacterDetailClick = { homeNavController.navigate(SubScreen.CharacterDetail.route) },
+                    onEchoesOverviewClick = { homeNavController.navigate(SubScreen.DriversList.route) },
+                    onCharacterDetailClick = { homeNavController.navigate(SubScreen.AgentDetail.route) },
                     onWeaponDetailClick = { homeNavController.navigate(SubScreen.WeaponDetail.route) },
-                    onEchoDetailClick = { homeNavController.navigate(SubScreen.EchoDetail.route) })
+                    onEchoDetailClick = { homeNavController.navigate(SubScreen.DriverDetail.route) })
             }
         }
         sharedScreenDestination(homeNavController, contentType, navigateToTopLevelDestination)

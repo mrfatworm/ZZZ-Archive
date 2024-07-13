@@ -23,15 +23,15 @@ fun NavGraphBuilder.sharedScreenDestination(
     contentType: ZzzArchiveContentType,
     navigateToTopLevelDestination: (RootScreen) -> Unit
 ) {
-    composable(SubScreen.CharactersList.route) {
+    composable(SubScreen.AgentsList.route) {
         CharactersListScreen(contentType, onCharacterClick = {
             navController.navigate(
-                SubScreen.CharacterDetail.route
+                SubScreen.AgentDetail.route
             )
         })
     }
 
-    composable(SubScreen.CharacterDetail.route) {
+    composable(SubScreen.AgentDetail.route) {
         CharacterDetailScreen(onWeaponClick = { navController.navigate(SubScreen.WeaponDetail.route) })
     }
 
@@ -44,19 +44,19 @@ fun NavGraphBuilder.sharedScreenDestination(
     }
 
     composable(SubScreen.WeaponDetail.route) {
-        WeaponDetailScreen(onCharacterClick = { navController.navigate(SubScreen.CharacterDetail.route) })
+        WeaponDetailScreen(onCharacterClick = { navController.navigate(SubScreen.AgentDetail.route) })
     }
 
-    composable(SubScreen.ArtifactsList.route) {
+    composable(SubScreen.DriversList.route) {
         ArtifactsListScreen(onEchoClick = {
             navController.navigate(
-                SubScreen.EchoDetail.route
+                SubScreen.DriverDetail.route
             )
         })
     }
 
-    composable(SubScreen.EchoDetail.route) {
-        ArtifactDetailScreen(onCharacterClick = { navController.navigate(SubScreen.CharacterDetail.route) })
+    composable(SubScreen.DriverDetail.route) {
+        ArtifactDetailScreen(onCharacterClick = { navController.navigate(SubScreen.AgentDetail.route) })
     }
 
 }
