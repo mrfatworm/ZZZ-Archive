@@ -16,24 +16,24 @@ Android Studio > Run > Edit Configurations > New > Gradle
 > desktopRun -DmainClass=MainKt --quiet
 
 ## 未來計畫 / Planning
-- 🚧  Home Screen
-- 🚧  Agents Screen
-- 🚧  W-Engines Screen
-- 🚧  Drivers Screen
-- 🚧  Bangboo Screen
-- 🚧  Setting Screen
-- 🚧  Feedback Screen
-- 🚧  Sync from HoYoLab
+- 🚧 Home Screen
+- 🚧 Agents Screen
+- 🚧 W-Engines Screen
+- 🚧 Drivers Screen
+- 🚧 Bangboo Screen
+- 🚧 Setting Screen
+- 🚧 Feedback Screen
+- 🚧 Sync from HoYoLab
 
 ## 使用技術 / Tech Stack
 - ✅ Shared UI: Jetpack Compose
 - ✅ RWD Layout ([by chrisbanes](https://github.com/chrisbanes/material3-windowsizeclass-multiplatform))
 - ✅ Nested Navigation
 - ✅ Koin DI
-- 🚧  Localization(zh-TW, zh-CN, en-US)
-- 🚧  Design System (Base on Material 3)
-- 🚧  Ktor Network
-- 🚧  Room Database or SQLDelight
+- ✅ Localization(English, Chinese Traditional)
+- 🚧 Design System (Base on Material 3)
+- 🚧 Ktor Network
+- 🚧 Room Database or SQLDelight
 
 ## 鳴謝 / Special Thanks
 * Resource from Zenless Zone Zero

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="app_name">繩匠檔案</string>
+    <string name="home">首頁</string>
+    <string name="agents">代理人</string>
+    <string name="w_engines">音擎</string>"
+    <string name="drivers">驅動光碟</string>
+    <string name="bangboo">邦布</string>
+    <string name="setting">設定</string>
+    <string name="feedback">意見回饋</string>
+
+    <string name="agents_list">代理人列表</string>
+    <string name="w_engines_list">音擎列表</string>
+    <string name="drivers_list">驅動光碟列表</string>
+    <string name="bangboo_list">邦布列表</string>
+
+    <string name="confirm">確認</string>
+    <string name="cancel">取消</string>
+
+</resources>
