@@ -17,7 +17,7 @@ fun ArtifactNavGraph(
     contentType: ZzzArchiveContentType, navigateToTopLevelDestination: (RootScreen) -> Unit) {
     val echoNavController = rememberNavController()
     NavHost(
-        navController = echoNavController, startDestination = SubScreen.ArtifactsList.route
+        navController = echoNavController, startDestination = SubScreen.DriversList.route
     ) {
         sharedScreenDestination(echoNavController,contentType, navigateToTopLevelDestination)
     }

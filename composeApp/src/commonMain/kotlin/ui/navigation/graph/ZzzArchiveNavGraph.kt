@@ -31,7 +31,7 @@ fun ZzzArchiveNavGraph(
             HomeNavHost(contentType = contentType,
                 navigateToTopLevelDestination = { navigationActions.navigationToTopAndSave(it) })
         }
-        composable(RootScreen.Characters.route) {
+        composable(RootScreen.Agents.route) {
             CharacterNavGraph(contentType, navigateToTopLevelDestination = {
                 navigationActions.navigationToTopAndSave(it)
             })
@@ -41,7 +41,7 @@ fun ZzzArchiveNavGraph(
                 navigationActions.navigationToTopAndSave(it)
             })
         }
-        composable(RootScreen.Artifacts.route) {
+        composable(RootScreen.Drivers.route) {
             ArtifactNavGraph(contentType, navigateToTopLevelDestination = {
                 navigationActions.navigationToTopAndSave(it)
             })

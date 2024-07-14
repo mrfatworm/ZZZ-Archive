@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="app_name">ZZZ Archive</string>
+    <string name="home">Home</string>
+    <string name="agents">Agents</string>
+    <string name="w_engines">W-Engines</string>"
+    <string name="drivers">Drivers</string>
+    <string name="bangboo">Bangboo</string>
+    <string name="setting">Setting</string>
+    <string name="feedback">Feedback</string>
+
+    <string name="agents_list">Agents List</string>
+    <string name="w_engines_list">W-Engines List</string>
+    <string name="drivers_list">Drivers List</string>
+    <string name="bangboo_list">Bangboo List</string>
+
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+
+</resources>

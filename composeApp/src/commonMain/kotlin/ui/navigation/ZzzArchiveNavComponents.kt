@@ -49,6 +49,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_nav
 import zzzarchive.composeapp.generated.resources.ic_nav_back
@@ -67,8 +68,8 @@ fun ZzzArchiveBottomNavigationBar(
                 }
             }, icon = {
                 Icon(
-                    painter = painterResource(destination.icon),
-                    contentDescription = destination.text
+                    painter = painterResource(destination.iconRes),
+                    contentDescription = stringResource(destination.textRes)
                 )
             })
         }
@@ -112,11 +113,11 @@ fun ZzzArchiveNavigationRail(
                     }
                 }, icon = {
                     Icon(
-                        painter = painterResource(destination.icon),
-                        contentDescription = destination.text
+                        painter = painterResource(destination.iconRes),
+                        contentDescription = stringResource(destination.textRes)
                     )
                 }, label = {
-                    Text(text = destination.text)
+                    Text(text = stringResource(destination.textRes))
                 })
                 Spacer(Modifier.height(4.dp)) // NavigationRailVerticalPadding
             }
@@ -185,12 +186,13 @@ private fun DrawerContent(
         TOP_LEVEL_DESTINATIONS_MEDIUM.forEach { destination ->
             NavigationDrawerItem(selected = selectedDestination == destination.route, label = {
                 Text(
-                    text = destination.text, modifier = Modifier.padding(horizontal = 16.dp)
+                    text = stringResource(destination.textRes),
+                    modifier = Modifier.padding(horizontal = 16.dp)
                 )
             }, icon = {
                 Icon(
-                    painter = painterResource(destination.icon),
-                    contentDescription = destination.text
+                    painter = painterResource(destination.iconRes),
+                    contentDescription = stringResource(destination.textRes)
                 )
             }, colors = NavigationDrawerItemDefaults.colors(
                 unselectedContainerColor = Color.Transparent

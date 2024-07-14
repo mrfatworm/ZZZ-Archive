@@ -8,58 +8,66 @@ package ui.navigation
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import org.jetbrains.compose.resources.StringResource
+import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.agents_list
+import zzzarchive.composeapp.generated.resources.drivers_list
+import zzzarchive.composeapp.generated.resources.feedback
+import zzzarchive.composeapp.generated.resources.home
+import zzzarchive.composeapp.generated.resources.setting
+import zzzarchive.composeapp.generated.resources.w_engines_list
 
 sealed class SubScreen(
     val route: String,
-    val text: String,
+    val textRes: StringResource? = null,
     val navArguments: List<NamedNavArgument> = emptyList()
 ) {
     data object Home : SubScreen(
-        route = "homeOverview", text = "Home Overview"
+        route = "homeOverview", textRes = Res.string.home
     )
 
-    data object CharactersList : SubScreen(
-        route = "charactersList", text = "Characters List"
+    data object AgentsList : SubScreen(
+        route = "agentsList", textRes = Res.string.agents_list
     )
 
-    data object CharacterDetail : SubScreen(
-        route = "characterDetail/{characterId}", text = "Character Detail", navArguments = listOf(navArgument("characterId") {
+    data object AgentDetail : SubScreen(
+        route = "agentDetail/{agentId}",navArguments = listOf(navArgument("agentId") {
             type = NavType.StringType
         })
     ) {
-        fun createRoute(characterId: String) = "characterDetail/${characterId}"
+        fun createRoute(agentId: String) = "agentDetail/${agentId}"
     }
 
     data object WeaponsList : SubScreen(
-        route = "weaponsList", text = "Weapons List"
+        route = "weaponsList", textRes = Res.string.w_engines_list
     )
 
     data object WeaponDetail : SubScreen(
-        route = "weaponDetail/{weaponId}", text = "Weapon Detail", navArguments = listOf(navArgument("weaponId") {
+        route = "weaponDetail/{weaponId}", navArguments = listOf(navArgument("weaponId") {
             type = NavType.StringType
         })
     ) {
         fun createRoute(weaponId: String) = "weaponDetail/${weaponId}"
     }
 
-    data object ArtifactsList : SubScreen(
-        route = "artifactsList", text = "Artifacts List"
+    data object DriversList : SubScreen(
+        route = "driversList", textRes = Res.string.drivers_list
     )
 
-    data object EchoDetail : SubScreen(
-        route = "echoDetail/{echoId}", text = "Artifact Detail", navArguments = listOf(navArgument("echoId") {
+    data object DriverDetail : SubScreen(
+        route = "driverDetail/{driverId}", navArguments = listOf(navArgument("driverId") {
             type = NavType.StringType
         })
     ) {
-        fun createRoute(echoId: String) = "echoDetail/${echoId}"
+        fun createRoute(driverId: String) = "driverDetail/${driverId}"
     }
 
     data object Setting : SubScreen(
-        route = "settingOverview", text = "Setting Overview"
+        route = "settingOverview", textRes = Res.string.setting
     )
 
     data object Feedback : SubScreen(
-        route = "feedbackOverview", text = "Feedback Overview"
+        route = "feedbackOverview", textRes = Res.string.feedback
     )
 
 }
