@@ -51,6 +51,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.material3.window.size)
             implementation(libs.navigation.compose)
+            implementation(libs.kotlinx.coroutines)
 
             api(libs.koin.core)
             implementation(libs.koin.compose.viewmodel)

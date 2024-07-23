@@ -3,11 +3,10 @@
  * License: Apache-2.0
  */
 
-package home.data
+package network
 
 import home.model.OfficialActivities
-import utils.ZzzResult
 
-interface ZzzRepository {
-    suspend fun getActivities(): ZzzResult<OfficialActivities>
+interface ZzzHttpClient {
+    suspend fun requestActivities(): OfficialActivities
 }
