@@ -19,7 +19,7 @@ class ZzzViewModel(private val repository: ZzzRepository) : ViewModel() {
     private var _uiState = MutableStateFlow(HomeState())
     val uiState = _uiState.asStateFlow()
 
-    fun getImageUrl() {
+    fun getActivityTitle() {
         viewModelScope.launch {
             when (val result = repository.getActivities()) {
                 is ZzzResult.Success -> {

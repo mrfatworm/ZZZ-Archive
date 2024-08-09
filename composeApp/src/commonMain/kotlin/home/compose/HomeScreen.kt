@@ -27,7 +27,7 @@ fun HomeScreen(
     val viewModel = koinViewModel<ZzzViewModel>()
     val uiState = viewModel.uiState.collectAsState()
     LaunchedEffect(true) {
-        viewModel.getImageUrl()
+        viewModel.getActivityTitle()
     }
     if (contentType == ZzzArchiveContentType.SINGLE) {
         HomeScreenSingle(

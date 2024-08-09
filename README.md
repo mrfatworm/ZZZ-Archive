@@ -8,7 +8,7 @@ ZZZ Archive 是一個絕區零的維基應用程式，
 ---
 
 ## Current Status / 目前狀態
-🟢 In Design (Figma)
+🟢 In UI Design (Figma)
 
 ## How to run on desktop / 如何執行桌面板
 Android Studio > Run > Edit Configurations > New > Gradle
@@ -25,8 +25,8 @@ Android Studio > Run > Edit Configurations > New > Gradle
 - 🚧 Sync from HoYoLab
 
 ## Tech Stack / 使用技術
-- ✅ Multi-Platform: KMP (Kotlin Multi-Platform)
-- ✅ Shared UI: CMP (Compose Multi-Platform)
+- ✅ Multi-Platform: KMP (Kotlin multiplatform)
+- ✅ Shared UI: CMP (Compose multiplatform)
 - ✅ RWD Layout ([by chrisbanes](https://github.com/chrisbanes/material3-windowsizeclass-multiplatform))
 - ✅ Nested Navigation
 - ✅ Koin DI
