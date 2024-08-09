@@ -1,9 +1,9 @@
-ZZZ Archive 是一個絕區零的維基應用程式，
-主要目標為桌面端 Windows, macOS ，同時 Android, iOS 也將盡可能相容
-
 ZZZ Archive is a Wiki application for “Zenless Zone Zero”.
 The main targets are desktop platforms (Windows, macOS),
 but it will also aim to be compatible with Android and iOS as much as possible.
+
+ZZZ Archive 是一個絕區零的維基應用程式，
+主要目標為桌面端 Windows, macOS ，同時 Android, iOS 也將盡可能相容
 
 ---
 
