@@ -16,7 +16,7 @@ import org.koin.dsl.module
 expect val platformModule: Module
 
 val sharedModule = module {
-    single { ZzzRepositoryImpl(get()) }.bind<ZzzRepository>()
+    single { ZzzRepositoryImpl(get(), get()) }.bind<ZzzRepository>()
     viewModelOf(::ZzzViewModel)
 
 }

@@ -1,21 +1,20 @@
-ZZZ Archive 是一個絕區零的維基應用程式，也是我第一個 Kotlin 跨平台的專案，
-主要目標為桌面端 Windows, macOS ，行動裝置 Android, iOS 也將盡可能相容
-
-ZZZ Archive is a Wiki application for the game “Zenless Zone Zero”.
-It is also my first Kotlin multiplatform project. 
+ZZZ Archive is a Wiki application for “Zenless Zone Zero”.
 The main targets are desktop platforms (Windows, macOS),
-but it will also aim to be compatible with mobile devices (Android, iOS) as much as possible.
+but it will also aim to be compatible with Android and iOS as much as possible.
+
+ZZZ Archive 是一個絕區零的維基應用程式，
+主要目標為桌面端 Windows, macOS ，同時 Android, iOS 也將盡可能相容
 
 ---
 
-## 目前狀態 / Current Status
-🟢 In Design (Figma)
+## Current Status / 目前狀態
+🟢 In UI Design (Figma)
 
-## 如何執行桌面板 / How to run on desktop
+## How to run on desktop / 如何執行桌面板
 Android Studio > Run > Edit Configurations > New > Gradle
 > desktopRun -DmainClass=MainKt --quiet
 
-## 未來計畫 / Planning
+## Planning / 未來計畫
 - 🚧 Home Screen
 - 🚧 Agents Screen
 - 🚧 W-Engines Screen
@@ -25,17 +24,18 @@ Android Studio > Run > Edit Configurations > New > Gradle
 - 🚧 Feedback Screen
 - 🚧 Sync from HoYoLab
 
-## 使用技術 / Tech Stack
-- ✅ Shared UI: Jetpack Compose
+## Tech Stack / 使用技術
+- ✅ Multi-Platform: KMP (Kotlin multiplatform)
+- ✅ Shared UI: CMP (Compose multiplatform)
 - ✅ RWD Layout ([by chrisbanes](https://github.com/chrisbanes/material3-windowsizeclass-multiplatform))
 - ✅ Nested Navigation
 - ✅ Koin DI
 - ✅ Localization(English, Chinese Traditional)
+- ✅ Ktor Network
 - 🚧 Design System (Base on Material 3)
-- 🚧 Ktor Network
 - 🚧 Room Database or SQLDelight
 
-## 鳴謝 / Special Thanks
+## Special Thanks / 鳴謝
 * Resource from Zenless Zone Zero
 * [JetBrains KMP Guideline](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
 * Android Open Source Project

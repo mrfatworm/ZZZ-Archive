@@ -11,7 +11,7 @@ import ui.data.stubCharactersList
 import ui.data.stubWeaponsList
 
 data class HomeState(
-    val activityImageUrl: String = "",
+    val firstActivityTitle: String = "",
     val charactersList: List<SimpleListItemState> = emptyList(),
     val weaponsList: List<SimpleListItemState> = emptyList(),
     val artifactsList: List<SimpleListItemState> = emptyList()
@@ -19,7 +19,7 @@ data class HomeState(
 
 
 val stubHomeState = HomeState(
-    activityImageUrl = "",
+    firstActivityTitle = "",
     charactersList = stubCharactersList + stubCharactersList + stubCharactersList,
     weaponsList = stubWeaponsList,
     artifactsList = stubArtifactsList
