@@ -3,13 +3,13 @@ agp = "8.3.2"
 android-compileSdk = "34"
 android-minSdk = "26"
 android-targetSdk = "34"
-androidx-activityCompose = "1.9.0"
+androidx-activityCompose = "1.9.1"
 androidx-appcompat = "1.7.0"
 androidx-constraintlayout = "2.1.4"
 androidx-core-ktx = "1.13.1"
 androidx-espresso-core = "3.6.1"
 androidx-material = "1.12.0"
-androidx-lifecycle-viewmodel = "2.8.3"
+androidx-lifecycle-viewmodel = "2.8.4"
 androidx-test-junit = "1.2.1"
 compose-plugin = "1.6.10"
 junit = "4.13.2"
@@ -30,6 +30,7 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotl
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 navigation-compose = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref ="navigation-compose" }
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 
 #===Android
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core-ktx" }
