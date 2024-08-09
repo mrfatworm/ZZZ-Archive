@@ -6,9 +6,21 @@
 package home.data
 
 import database.ZzzDatabase
+import home.model.OfficialActivities
+import kotlinx.coroutines.withTimeout
+import network.ZzzHttpClient
+import utils.ZzzResult
 
-class ZzzRepositoryImpl(private val ZzzDatabase: ZzzDatabase): ZzzRepository {
-    override fun getImageUrl(): String {
-        return "https://mihoyo.com/anbi/jpg"
-    }
+class ZzzRepositoryImpl(private val database: ZzzDatabase, private val httpClient: ZzzHttpClient) :
+    ZzzRepository {
+    override suspend fun getActivities(): ZzzResult<OfficialActivities> {
+            return try {
+                val result = withTimeout(5000) {
+                    httpClient.requestActivities()
+                }
+                ZzzResult.Success(result)
+            } catch (e: Exception) {
+                ZzzResult.Error(e)
+            }
+        }
 }

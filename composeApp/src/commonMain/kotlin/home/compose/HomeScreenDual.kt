@@ -23,8 +23,7 @@ import zzzarchive.composeapp.generated.resources.compose_multiplatform
 
 @Composable
 fun HomeScreenDual(
-    viewModelText: String,
-    homeState: HomeState = stubHomeState,
+    uiState: HomeState = stubHomeState,
     onCharacterOverviewClick: () -> Unit = {},
     onWeaponOverviewClick: () -> Unit = {},
     onEchoesOverviewClick: () -> Unit = {},
@@ -49,9 +48,9 @@ fun HomeScreenDual(
                     contentDescription = "cover"
                 )
             }
-            Text(modifier = Modifier.padding(16.dp), text = viewModelText)
+            Text(modifier = Modifier.padding(16.dp), text = uiState.firstActivityTitle)
             HomeListSection("Characters",
-                homeState.charactersList,
+                uiState.charactersList,
                 onSeeAllClick = {
                     onCharacterOverviewClick()
                 },
@@ -60,7 +59,7 @@ fun HomeScreenDual(
                 })
 
             HomeListSection("Weapons",
-                homeState.weaponsList,
+                uiState.weaponsList,
                 onSeeAllClick = {
                     onWeaponOverviewClick()
                 },
@@ -69,7 +68,7 @@ fun HomeScreenDual(
                 })
 
             HomeListSection("Artifacts",
-                homeState.artifactsList,
+                uiState.artifactsList,
                 onSeeAllClick = {
                     onEchoesOverviewClick()
                 },
