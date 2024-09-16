@@ -1,6 +1,6 @@
 /*
  *  Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- *  License: Apache-2.0
+ *  License: CC BY-SA 4.0
  */
 
 package ui.data
