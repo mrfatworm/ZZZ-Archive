@@ -14,16 +14,6 @@ ZZZ Archive 是一個絕區零的維基應用程式，
 Android Studio > Run > Edit Configurations > New > Gradle
 > desktopRun -DmainClass=MainKt --quiet
 
-## Planning / 未來計畫
-- 🚧 Home Screen
-- 🚧 Agents Screen
-- 🚧 W-Engines Screen
-- 🚧 Drivers Screen
-- 🚧 Bangboo Screen
-- 🚧 Setting Screen
-- 🚧 Feedback Screen
-- 🚧 Sync from HoYoLab
-
 ## Tech Stack / 使用技術
 - ✅ Multi-Platform: KMP (Kotlin multiplatform)
 - ✅ Shared UI: CMP (Compose multiplatform)
@@ -32,7 +22,7 @@ Android Studio > Run > Edit Configurations > New > Gradle
 - ✅ Koin DI
 - ✅ Localization(English, Chinese Traditional)
 - ✅ Ktor Network
-- 🚧 Design System (Base on Material 3)
+- ✅ Design System
 - 🚧 Room Database or SQLDelight
 
 ## Special Thanks / 鳴謝

@@ -1,5 +1,5 @@
 [versions]
-agp = "8.3.2"
+agp = "8.5.2"
 android-compileSdk = "34"
 android-minSdk = "26"
 android-targetSdk = "34"
@@ -11,9 +11,10 @@ androidx-espresso-core = "3.6.1"
 androidx-material = "1.12.0"
 androidx-lifecycle-viewmodel = "2.8.4"
 androidx-test-junit = "1.2.1"
-compose-plugin = "1.6.10"
+compose-adaptive = "1.0.0-alpha03"
+compose-plugin = "1.7.0-beta02"
 junit = "4.13.2"
-kotlin = "2.0.0"
+kotlin = "2.0.20"
 kotlinx-coroutines = "1.8.1"
 material3-window-size = "0.5.0"
 navigation-compose = "2.8.0-alpha02"
@@ -29,6 +30,7 @@ ktor = "2.3.12"
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 navigation-compose = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref ="navigation-compose" }
+compose-adaptive = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive", version.ref = "compose-adaptive"}
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 
@@ -41,7 +43,6 @@ androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmode
 androidx-material = { group = "com.google.android.material", name = "material", version.ref = "androidx-material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
-androidx-material3-window-size = {module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "material3-window-size" }
 
 #===Ktor
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
