@@ -11,6 +11,7 @@ import androidx.compose.ui.test.runComposeUiTest
 import home.model.stubHomeState
 import kotlin.test.Test
 
+// Android UI Test is not supported yet
 @OptIn(ExperimentalTestApi::class)
 class HomeScreenDualTest {
 
@@ -19,6 +20,6 @@ class HomeScreenDualTest {
         setContent {
             HomeScreenDual(uiState = stubHomeState)
         }
-        onNodeWithText("ZZZ Boy").assertExists()
+        onNodeWithText("Home List").assertExists()
     }
 }
