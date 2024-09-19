@@ -29,10 +29,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.material3.rememberDrawerState
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,6 +41,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.window.core.layout.WindowWidthSizeClass
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinContext
@@ -57,26 +56,26 @@ import ui.utils.ZzzArchiveContentType
 import ui.utils.ZzzArchiveNavigationType
 
 
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 @Preview
 fun ZzzArchiveApp() {
-    val windowSizeClass = calculateWindowSizeClass()
+    val adaptiveInfo = currentWindowAdaptiveInfo()
+    val windowSizeClass = adaptiveInfo.windowSizeClass.windowWidthSizeClass
     val navigationType: ZzzArchiveNavigationType
     val contentType: ZzzArchiveContentType
 
-    when (windowSizeClass.widthSizeClass) {
-        WindowWidthSizeClass.Compact -> {
+    when (windowSizeClass) {
+        WindowWidthSizeClass.COMPACT -> {
             navigationType = ZzzArchiveNavigationType.BOTTOM_NAVIGATION
             contentType = ZzzArchiveContentType.SINGLE
         }
 
-        WindowWidthSizeClass.Medium -> {
+        WindowWidthSizeClass.MEDIUM -> {
             navigationType = ZzzArchiveNavigationType.NAVIGATION_RAIL
             contentType = ZzzArchiveContentType.DUAL
         }
 
-        WindowWidthSizeClass.Expanded -> {
+        WindowWidthSizeClass.EXPANDED -> {
             navigationType = ZzzArchiveNavigationType.NAVIGATION_DRAWER
             contentType = ZzzArchiveContentType.DUAL
         }

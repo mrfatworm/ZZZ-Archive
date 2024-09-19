@@ -1,27 +1,23 @@
 [versions]
-agp = "8.3.2"
-android-compileSdk = "34"
-android-minSdk = "26"
-android-targetSdk = "34"
-androidx-activityCompose = "1.9.1"
+agp = "8.5.2"
+androidx-activityCompose = "1.9.2"
 androidx-appcompat = "1.7.0"
 androidx-constraintlayout = "2.1.4"
 androidx-core-ktx = "1.13.1"
 androidx-espresso-core = "3.6.1"
 androidx-material = "1.12.0"
-androidx-lifecycle-viewmodel = "2.8.4"
+androidx-lifecycle-viewmodel = "2.8.6"
 androidx-test-junit = "1.2.1"
-compose-plugin = "1.6.10"
+compose-adaptive = "1.0.0-alpha03"
+compose-plugin = "1.7.0-beta02"
 junit = "4.13.2"
-kotlin = "2.0.0"
-kotlinx-coroutines = "1.8.1"
-material3-window-size = "0.5.0"
-navigation-compose = "2.8.0-alpha02"
-koin = "3.6.0-Beta4"
-koinComposeMultiplatform = "1.2.0-Beta4"
+kotlin = "2.0.20"
+kotlinx-coroutines = "1.9.0"
+navigation-compose = "2.8.0-alpha10"
+koin = "4.0.0"
 assertk = "0.28.1"
 coreKtx = "1.6.1"
-composeTest = "1.6.8"
+composeTest = "1.7.1"
 ktor = "2.3.12"
 
 [libraries]
@@ -29,6 +25,7 @@ ktor = "2.3.12"
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 navigation-compose = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref ="navigation-compose" }
+compose-adaptive = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive", version.ref = "compose-adaptive"}
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 
@@ -41,7 +38,6 @@ androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmode
 androidx-material = { group = "com.google.android.material", name = "material", version.ref = "androidx-material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
-androidx-material3-window-size = {module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "material3-window-size" }
 
 #===Ktor
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
@@ -55,8 +51,8 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
-koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinComposeMultiplatform" }
-koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeMultiplatform" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 
 #===Test
 junit = { group = "junit", name = "junit", version.ref = "junit" }
