@@ -14,13 +14,13 @@ import zzzarchive.composeapp.generated.resources.bangboo
 import zzzarchive.composeapp.generated.resources.drivers
 import zzzarchive.composeapp.generated.resources.feedback
 import zzzarchive.composeapp.generated.resources.home
-import zzzarchive.composeapp.generated.resources.ic_android
-import zzzarchive.composeapp.generated.resources.ic_armor
-import zzzarchive.composeapp.generated.resources.ic_charactor
-import zzzarchive.composeapp.generated.resources.ic_feedback
+import zzzarchive.composeapp.generated.resources.ic_bangboo
+import zzzarchive.composeapp.generated.resources.ic_cd
+import zzzarchive.composeapp.generated.resources.ic_happy
 import zzzarchive.composeapp.generated.resources.ic_home
+import zzzarchive.composeapp.generated.resources.ic_people
 import zzzarchive.composeapp.generated.resources.ic_setting
-import zzzarchive.composeapp.generated.resources.ic_weapon
+import zzzarchive.composeapp.generated.resources.ic_w_engine
 import zzzarchive.composeapp.generated.resources.setting
 import zzzarchive.composeapp.generated.resources.w_engines
 
@@ -35,19 +35,19 @@ sealed class RootScreen(
     )
 
     data object Agents : RootScreen(
-        route = "characters", iconRes = Res.drawable.ic_charactor, textRes = Res.string.agents
+        route = "characters", iconRes = Res.drawable.ic_people, textRes = Res.string.agents
     )
 
     data object Weapons : RootScreen(
-        route = "weapons", iconRes = Res.drawable.ic_weapon, textRes = Res.string.w_engines
+        route = "weapons", iconRes = Res.drawable.ic_w_engine, textRes = Res.string.w_engines
     )
 
     data object Drivers : RootScreen(
-        route = "echoes", iconRes = Res.drawable.ic_armor, textRes = Res.string.drivers
+        route = "echoes", iconRes = Res.drawable.ic_cd, textRes = Res.string.drivers
     )
 
     data object Bangboo : RootScreen(
-        route = "bangboo", iconRes = Res.drawable.ic_android, textRes = Res.string.bangboo
+        route = "bangboo", iconRes = Res.drawable.ic_bangboo, textRes = Res.string.bangboo
     )
 
     data object Setting : RootScreen(
@@ -55,7 +55,7 @@ sealed class RootScreen(
     )
 
     data object Feedback : RootScreen(
-        route = "feedback", iconRes = Res.drawable.ic_feedback, textRes = Res.string.feedback
+        route = "feedback", iconRes = Res.drawable.ic_happy, textRes = Res.string.feedback
     )
 
 }

@@ -8,11 +8,17 @@
     <string name="bangboo">Bangboo</string>
     <string name="setting">Setting</string>
     <string name="feedback">Feedback</string>
+    <string name="wiki_route">Wiki</string>
+    <string name="function_route">Tools</string>
+    <string name="view_all">View All</string>
+    <string name="light_theme">Light Theme</string>
+    <string name="dark_theme">Dark Theme</string>
 
-    <string name="agents_list">Agents List</string>
-    <string name="w_engines_list">W-Engines List</string>
-    <string name="drivers_list">Drivers List</string>
-    <string name="bangboo_list">Bangboo List</string>
+    <string name="ether">Ether</string>
+    <string name="fire">Fire</string>
+    <string name="ice">Ice</string>
+    <string name="electric">Electric</string>
+    <string name="physical">Physical</string>
 
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>

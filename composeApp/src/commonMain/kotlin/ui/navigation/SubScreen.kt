@@ -10,12 +10,12 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import org.jetbrains.compose.resources.StringResource
 import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.agents_list
-import zzzarchive.composeapp.generated.resources.drivers_list
+import zzzarchive.composeapp.generated.resources.agents
+import zzzarchive.composeapp.generated.resources.drivers
 import zzzarchive.composeapp.generated.resources.feedback
 import zzzarchive.composeapp.generated.resources.home
 import zzzarchive.composeapp.generated.resources.setting
-import zzzarchive.composeapp.generated.resources.w_engines_list
+import zzzarchive.composeapp.generated.resources.w_engines
 
 sealed class SubScreen(
     val route: String,
@@ -27,7 +27,7 @@ sealed class SubScreen(
     )
 
     data object AgentsList : SubScreen(
-        route = "agentsList", textRes = Res.string.agents_list
+        route = "agentsList", textRes = Res.string.agents
     )
 
     data object AgentDetail : SubScreen(
@@ -39,7 +39,7 @@ sealed class SubScreen(
     }
 
     data object WeaponsList : SubScreen(
-        route = "weaponsList", textRes = Res.string.w_engines_list
+        route = "weaponsList", textRes = Res.string.w_engines
     )
 
     data object WeaponDetail : SubScreen(
@@ -51,7 +51,7 @@ sealed class SubScreen(
     }
 
     data object DriversList : SubScreen(
-        route = "driversList", textRes = Res.string.drivers_list
+        route = "driversList", textRes = Res.string.drivers
     )
 
     data object DriverDetail : SubScreen(
