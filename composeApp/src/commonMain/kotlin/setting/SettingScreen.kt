@@ -15,14 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ui.utils.ZzzArchiveContentType
+import ui.utils.ContentType
 
 @Composable
 fun SettingScreen(
-    contentType: ZzzArchiveContentType,
+    contentType: ContentType,
     onFeedbackClicked: () -> Unit
 ) {
-    if (contentType == ZzzArchiveContentType.SINGLE) {
+    if (contentType == ContentType.SINGLE) {
         SettingScreenSingle(onFeedbackClicked)
     } else {
         SettingScreenDual()

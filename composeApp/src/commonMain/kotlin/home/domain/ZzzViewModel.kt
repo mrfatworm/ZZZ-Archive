@@ -24,12 +24,12 @@ class ZzzViewModel(private val repository: ZzzRepository) : ViewModel() {
             when (val result = repository.getActivities()) {
                 is ZzzResult.Success -> {
                     _uiState.value = uiState.value.copy(
-                        firstActivityTitle = result.data.data.list.first().sTitle
+                        activityImageUrl = result.data.data.list.first().sTitle
                     )
                 }
                 is ZzzResult.Error -> {
                     _uiState.value = uiState.value.copy(
-                        firstActivityTitle = "error"
+                        activityImageUrl = "error"
                     )
                 }
             }

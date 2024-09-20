@@ -1,10 +1,11 @@
 /*
- *  Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- *  License: CC BY-SA 4.0
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: CC BY-SA 4.0
  */
 
-package character
+package agent
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -17,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import ui.component.SimpleItem
 
 @Composable
-fun CharactersListScreenSingle(
-    state: CharactersListState, onCharacterClick: (Long) -> Unit = {}
+fun AgentsListScreenSingle(
+    state: AgentsListState, onAgentClick: (Long) -> Unit = {}
 ) {
     Surface(modifier = Modifier.fillMaxSize()) {
         LazyVerticalGrid(
@@ -26,14 +27,15 @@ fun CharactersListScreenSingle(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(4.dp)
         ) {
-            items(state.charactersList.size) { index ->
-                val character = state.charactersList[index]
-                SimpleItem(modifier = Modifier.padding(top = 8.dp),
+            items(state.agentsList.size) { index ->
+                val agent = state.agentsList[index]
+                SimpleItem(modifier = Modifier
+                    .clickable { onAgentClick(agent.id) }
+                    .padding(top = 8.dp),
                     isLargeSize = true,
-                    name = character.name,
-                    rarity = character.rarity,
-                    imgRes = character.imageRes,
-                    onClick = { onCharacterClick(character.id) })
+                    name = agent.name,
+                    rarity = agent.rarity,
+                    imgRes = agent.imageRes)
             }
         }
     }

@@ -8,7 +8,9 @@ package ui.data
 import org.jetbrains.compose.resources.DrawableResource
 import utils.ZzzArchiveRarity
 import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.compose_multiplatform
+import zzzarchive.composeapp.generated.resources.img_agent_11
+import zzzarchive.composeapp.generated.resources.img_driver
+import zzzarchive.composeapp.generated.resources.img_w_engine_brimstone
 
 
 data class SimpleListItemState(
@@ -18,37 +20,38 @@ data class SimpleListItemState(
     val rarity: ZzzArchiveRarity = ZzzArchiveRarity.One
 )
 
-val stubCharacterState = SimpleListItemState(
-    name = "ZZZ Boy", imageRes = Res.drawable.compose_multiplatform, rarity = ZzzArchiveRarity.Five
+val sampleAgentState = SimpleListItemState(
+    name = "11號", imageRes = Res.drawable.img_agent_11, rarity = ZzzArchiveRarity.Five
 )
 
-val stubWeaponState = SimpleListItemState(
-    name = "ZZZ Boy's weapon', long string test long string test",
-    imageRes = Res.drawable.compose_multiplatform,
+val sampleWEnginState = SimpleListItemState(
+    name = "11號的專武，長字串測試測試測試測試測試",
+    imageRes = Res.drawable.img_w_engine_brimstone,
     rarity = ZzzArchiveRarity.Five
 )
 
-val stubArtifactState = SimpleListItemState(
-    name = "DVD", imageRes = Res.drawable.compose_multiplatform, rarity = ZzzArchiveRarity.One
+val sampleDriverState = SimpleListItemState(
+    name = "震星迪思可", imageRes = Res.drawable.img_driver, rarity = ZzzArchiveRarity.One
 )
 
-val stubCharactersList = listOf(
-    stubCharacterState,
-    stubCharacterState.copy(rarity = ZzzArchiveRarity.Four),
-    stubCharacterState.copy(rarity = ZzzArchiveRarity.Three),
-    stubCharacterState.copy(rarity = ZzzArchiveRarity.Two),
-    stubCharacterState.copy(rarity = ZzzArchiveRarity.One)
+val sampleAgentsList = listOf(
+    sampleAgentState,
+    sampleAgentState.copy(rarity = ZzzArchiveRarity.Four),
+    sampleAgentState.copy(rarity = ZzzArchiveRarity.Three),
+    sampleAgentState.copy(rarity = ZzzArchiveRarity.Two),
+    sampleAgentState.copy(rarity = ZzzArchiveRarity.One)
 )
 
-val stubWeaponsList = listOf(
-    stubWeaponState,
-    stubWeaponState.copy(rarity = ZzzArchiveRarity.Four),
-    stubWeaponState.copy(rarity = ZzzArchiveRarity.Three),
-    stubWeaponState.copy(rarity = ZzzArchiveRarity.Two),
-    stubWeaponState.copy(rarity = ZzzArchiveRarity.One)
+val sampleWEnginesList = listOf(
+    sampleWEnginState,
+    sampleWEnginState.copy(rarity = ZzzArchiveRarity.Four),
+    sampleWEnginState.copy(rarity = ZzzArchiveRarity.Three),
+    sampleWEnginState.copy(rarity = ZzzArchiveRarity.Two),
+    sampleWEnginState.copy(rarity = ZzzArchiveRarity.One)
 )
 
-val stubArtifactsList = listOf(
-    stubArtifactState, stubArtifactState, stubArtifactState, stubArtifactState, stubArtifactState
+val sampleDriversList = listOf(
+    sampleDriverState, sampleDriverState, sampleDriverState, sampleDriverState, sampleDriverState
 )
+
 

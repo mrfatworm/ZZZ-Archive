@@ -1,9 +1,9 @@
 /*
- *  Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- *  License: CC BY-SA 4.0
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: CC BY-SA 4.0
  */
 
-package character
+package agent
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,13 +21,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CharacterDetailScreen(onWeaponClick: (String) -> Unit = {}) {
+fun AgentDetailScreen(onWEngineClick: (String) -> Unit = {}) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Text(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            text = "ZZZ Boy",
+            text = "11號",
             textAlign = TextAlign.Center,
             fontSize = 24.sp
         )
@@ -36,8 +36,8 @@ fun CharacterDetailScreen(onWeaponClick: (String) -> Unit = {}) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceAround
         ) {
-            Button(onClick = { onWeaponClick("Super Weapon") }) {
-                Text(text = "Suggest：Super Weapon")
+            Button(onClick = { onWEngineClick("硫磺石") }) {
+                Text(text = "推薦武器：硫磺石")
             }
         }
     }

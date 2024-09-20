@@ -21,18 +21,20 @@ import androidx.compose.ui.unit.dp
 import home.model.HomeState
 import home.model.stubHomeState
 import org.jetbrains.compose.resources.painterResource
+import ui.utils.NavigationType
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.compose_multiplatform
 
 @Composable
 fun HomeScreenSingle(
     uiState: HomeState = stubHomeState,
-    onCharacterOverviewClick: () -> Unit = {},
-    onWeaponOverviewClick: () -> Unit = {},
-    onEchoesOverviewClick: () -> Unit = {},
-    onCharacterDetailClick: (Long) -> Unit = {},
-    onWeaponDetailClick: (Long) -> Unit = {},
-    onEchoDetailClick: (Long) -> Unit = {},
+    navigationType: NavigationType = NavigationType.BOTTOM_NAVIGATION,
+    onAgentsOverviewClick: () -> Unit = {},
+    onWEnginesOverviewClick: () -> Unit = {},
+    onDriversOverviewClick: () -> Unit = {},
+    onAgentDetailClick: (Long) -> Unit = {},
+    onWEngineDetailClick: (Long) -> Unit = {},
+    onDriverDetailClick: (Long) -> Unit = {},
 ) {
     Surface(
         modifier = Modifier
@@ -49,32 +51,35 @@ fun HomeScreenSingle(
                     contentDescription = "cover"
                 )
             }
-            Text(modifier = Modifier.padding(16.dp), text = uiState.firstActivityTitle)
-            HomeListSection("Characters",
-                uiState.charactersList,
+            Text(modifier = Modifier.padding(16.dp), text = uiState.activityImageUrl)
+            HomeListSection(
+                "Agents",
+                uiState.agentsList,
                 onSeeAllClick = {
-                    onCharacterOverviewClick()
+                    onAgentsOverviewClick()
                 },
                 onItemClick = { id ->
-                    onCharacterDetailClick(id)
+                    onAgentDetailClick(id)
                 })
 
-            HomeListSection("Weapons",
-                uiState.weaponsList,
+            HomeListSection(
+                "W-Engines",
+                uiState.wEnginesList,
                 onSeeAllClick = {
-                    onWeaponOverviewClick()
+                    onWEnginesOverviewClick()
                 },
                 onItemClick = { id ->
-                    onWeaponDetailClick(id)
+                    onWEngineDetailClick(id)
                 })
 
-            HomeListSection("Artifacts",
-                uiState.artifactsList,
+            HomeListSection(
+                "Drivers",
+                uiState.driversList,
                 onSeeAllClick = {
-                    onEchoesOverviewClick()
+                    onDriversOverviewClick()
                 },
                 onItemClick = { id ->
-                    onEchoDetailClick(id)
+                    onDriverDetailClick(id)
                 })
         }
     }

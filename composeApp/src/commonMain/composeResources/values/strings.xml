@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
     <string name="app_name">ZZZ Archive</string>
+    <string name="unknown">Unknown ?</string>
     <string name="home">Home</string>
     <string name="agents">Agents</string>
     <string name="w_engines">W-Engines</string>"
@@ -8,8 +9,8 @@
     <string name="bangboo">Bangboo</string>
     <string name="setting">Setting</string>
     <string name="feedback">Feedback</string>
-    <string name="wiki_route">Wiki</string>
-    <string name="function_route">Tools</string>
+    <string name="wiki">Wiki</string>
+    <string name="function">Tools</string>
     <string name="view_all">View All</string>
     <string name="light_theme">Light Theme</string>
     <string name="dark_theme">Dark Theme</string>
@@ -20,6 +21,7 @@
     <string name="electric">Electric</string>
     <string name="physical">Physical</string>
 
+    <string name="navigation_drawer">Navigation Drawer</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
 

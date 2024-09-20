@@ -6,22 +6,22 @@
 package home.model
 
 import ui.data.SimpleListItemState
-import ui.data.stubArtifactsList
-import ui.data.stubCharactersList
-import ui.data.stubWeaponsList
+import ui.data.sampleAgentsList
+import ui.data.sampleDriversList
+import ui.data.sampleWEnginesList
 
 data class HomeState(
-    val firstActivityTitle: String = "",
-    val charactersList: List<SimpleListItemState> = emptyList(),
-    val weaponsList: List<SimpleListItemState> = emptyList(),
-    val artifactsList: List<SimpleListItemState> = emptyList()
+    val activityImageUrl: String = "",
+    val agentsList: List<SimpleListItemState> = emptyList(),
+    val wEnginesList: List<SimpleListItemState> = emptyList(),
+    val driversList: List<SimpleListItemState> = emptyList()
 )
 
 
 val stubHomeState = HomeState(
-    firstActivityTitle = "",
-    charactersList = stubCharactersList + stubCharactersList + stubCharactersList,
-    weaponsList = stubWeaponsList,
-    artifactsList = stubArtifactsList
+    activityImageUrl = "",
+    agentsList = sampleAgentsList + sampleAgentsList + sampleAgentsList,
+    wEnginesList = sampleWEnginesList,
+    driversList = sampleDriversList
 )
 

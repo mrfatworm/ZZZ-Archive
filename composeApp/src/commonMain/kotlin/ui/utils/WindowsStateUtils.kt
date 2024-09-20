@@ -5,10 +5,10 @@
 
 package ui.utils
 
-enum class ZzzArchiveNavigationType {
+enum class NavigationType {
     BOTTOM_NAVIGATION, NAVIGATION_RAIL, NAVIGATION_DRAWER
 }
 
-enum class ZzzArchiveContentType {
+enum class ContentType {
     SINGLE, DUAL
 }

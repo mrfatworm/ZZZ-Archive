@@ -1,9 +1,9 @@
 /*
- *  Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- *  License: CC BY-SA 4.0
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: CC BY-SA 4.0
  */
 
-package weapon
+package bangboo
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,15 +19,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mrfatworm.android.zzzarchive.ui.theme.ZzzArchiveTheme
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun WeaponDetailScreen(onCharacterClick: (String) -> Unit = {}) {
+fun BangbooListScreen(onBangbooClick: (String) -> Unit = {}) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Text(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            text = "Super Weapon",
+            text = "邦布清單",
             textAlign = TextAlign.Center,
             fontSize = 24.sp
         )
@@ -36,9 +38,17 @@ fun WeaponDetailScreen(onCharacterClick: (String) -> Unit = {}) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceAround
         ) {
-            Button(onClick = { onCharacterClick("ZZZ Boy")}) {
-                Text(text = "Suggest: ZZZ Boy")
+            Button(onClick = { onBangbooClick("破抹布") }) {
+                Text(text = "破抹布")
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun PreviewBangbooListScreen() {
+    ZzzArchiveTheme {
+        BangbooListScreen()
     }
 }

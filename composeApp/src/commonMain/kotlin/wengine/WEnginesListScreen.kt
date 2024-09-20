@@ -1,9 +1,9 @@
 /*
- *  Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- *  License: CC BY-SA 4.0
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: CC BY-SA 4.0
  */
 
-package weapon
+package wengine
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,15 +19,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mrfatworm.android.zzzarchive.ui.theme.ZzzArchiveTheme
+import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
+import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.w_engines
 
 @Composable
-fun WeaponsListScreen(onWeaponClick: (String) -> Unit = {}) {
+fun WEnginesListScreen(onWEngineClick: (String) -> Unit = {}) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Text(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            text = "Weapons List",
+            text = stringResource(Res.string.w_engines),
             textAlign = TextAlign.Center,
             fontSize = 24.sp
         )
@@ -36,9 +41,17 @@ fun WeaponsListScreen(onWeaponClick: (String) -> Unit = {}) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceAround
         ) {
-            Button(onClick = { onWeaponClick("Super Weapon") }) {
-                Text(text = "Super Weapon")
+            Button(onClick = { onWEngineClick("硫磺石") }) {
+                Text(text = "硫磺石")
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun PreviewWEnginesListScreen() {
+    ZzzArchiveTheme {
+        WEnginesListScreen()
     }
 }

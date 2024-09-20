@@ -1,9 +1,9 @@
 /*
- *  Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- *  License: CC BY-SA 4.0
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: CC BY-SA 4.0
  */
 
-package artifact
+package bangboo
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,15 +19,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mrfatworm.android.zzzarchive.ui.theme.ZzzArchiveTheme
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun ArtifactDetailScreen(onCharacterClick: (String) -> Unit = {}) {
+fun BangbooDetailScreen(onAgentClick: (String) -> Unit = {}) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Text(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            text = "DVD",
+            text = "破抹布",
             textAlign = TextAlign.Center,
             fontSize = 24.sp
         )
@@ -36,9 +38,17 @@ fun ArtifactDetailScreen(onCharacterClick: (String) -> Unit = {}) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceAround
         ) {
-            Button(onClick = { onCharacterClick("ZZZ Boy") }) {
-                Text(text = "Suggest：ZZZ Boy")
+            Button(onClick = { onAgentClick("11號") }) {
+                Text(text = "推薦角色：11號")
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun PreviewBangbooDetailScreen() {
+    ZzzArchiveTheme {
+        BangbooDetailScreen()
     }
 }

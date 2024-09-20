@@ -24,12 +24,12 @@ import zzzarchive.composeapp.generated.resources.compose_multiplatform
 @Composable
 fun HomeScreenDual(
     uiState: HomeState = stubHomeState,
-    onCharacterOverviewClick: () -> Unit = {},
-    onWeaponOverviewClick: () -> Unit = {},
-    onEchoesOverviewClick: () -> Unit = {},
-    onCharacterDetailClick: (Long) -> Unit = {},
-    onWeaponDetailClick: (Long) -> Unit = {},
-    onEchoDetailClick: (Long) -> Unit = {},
+    onAgentsOverviewClick: () -> Unit = {},
+    onWEnginesOverviewClick: () -> Unit = {},
+    onDriversOverviewClick: () -> Unit = {},
+    onAgentDetailClick: (Long) -> Unit = {},
+    onWEngineDetailClick: (Long) -> Unit = {},
+    onDriverDetailClick: (Long) -> Unit = {},
 ) {
 
     Surface(
@@ -48,32 +48,35 @@ fun HomeScreenDual(
                     contentDescription = "cover"
                 )
             }
-            Text(modifier = Modifier.padding(16.dp), text = uiState.firstActivityTitle)
-            HomeListSection("Characters",
-                uiState.charactersList,
+            Text(modifier = Modifier.padding(16.dp), text = uiState.activityImageUrl)
+            HomeListSection(
+                "Agents",
+                uiState.agentsList,
                 onSeeAllClick = {
-                    onCharacterOverviewClick()
+                    onAgentsOverviewClick()
                 },
                 onItemClick = { id ->
-                    onCharacterDetailClick(id)
+                    onAgentDetailClick(id)
                 })
 
-            HomeListSection("Weapons",
-                uiState.weaponsList,
+            HomeListSection(
+                "W-Engines",
+                uiState.wEnginesList,
                 onSeeAllClick = {
-                    onWeaponOverviewClick()
+                    onWEnginesOverviewClick()
                 },
                 onItemClick = { id ->
-                    onWeaponDetailClick(id)
+                    onWEngineDetailClick(id)
                 })
 
-            HomeListSection("Artifacts",
-                uiState.artifactsList,
+            HomeListSection(
+                "Drivers",
+                uiState.driversList,
                 onSeeAllClick = {
-                    onEchoesOverviewClick()
+                    onDriversOverviewClick()
                 },
                 onItemClick = { id ->
-                    onEchoDetailClick(id)
+                    onDriverDetailClick(id)
                 })
         }
     }
