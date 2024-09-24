@@ -5,7 +5,6 @@
 
 package ui.component
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,11 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import coil3.ImageLoader
 import coil3.compose.AsyncImage
-import coil3.compose.LocalPlatformContext
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.painterResource
 import utils.ZzzArchiveRarity
 
 val itemSize = 80.dp
@@ -40,7 +35,7 @@ fun SimpleItem(
     isLargeSize: Boolean = false,
     rarity: ZzzArchiveRarity = ZzzArchiveRarity.Four,
     name: String,
-    imgRes: DrawableResource? = null,
+    imgUrl: String? = null,
     onClick: () -> Unit = {}
 ) {
     Column(modifier = modifier.clickable(onClick = onClick), horizontalAlignment = Alignment.CenterHorizontally,
@@ -56,10 +51,10 @@ fun SimpleItem(
                         brush = rarity.color, shape = RoundedCornerShape(8.dp)
                     )
             ) {
-                imgRes?.let {
+                imgUrl?.let {
                     AsyncImage(
                         modifier = Modifier.fillMaxSize(),
-                        model = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Bangboo/Profile/3.webp",
+                        model = imgUrl,
                         contentDescription = name
                     )
                 }

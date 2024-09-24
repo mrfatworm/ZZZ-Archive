@@ -3,7 +3,7 @@
  * License: CC BY-SA 4.0
  */
 
-package com.mrfatworm.android.zzzarchive.ui.theme
+package ui.theme
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -17,13 +17,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
-import ui.theme.ColorScheme
-import ui.theme.Dimens
-import ui.theme.Radius
-import ui.theme.Typography
-import ui.theme.darkScheme
-import ui.theme.lightScheme
-import ui.theme.provideTypography
 
 /**
  * Ref:

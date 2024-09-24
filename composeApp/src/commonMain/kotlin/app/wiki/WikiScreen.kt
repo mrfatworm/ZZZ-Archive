@@ -14,9 +14,9 @@ fun WikiScreen(
     onAgentOverviewClick: () -> Unit,
     onWEngineOverviewClick: () -> Unit,
     onDrivesOverviewClick: () -> Unit,
-    onAgentDetailClick: (Long) -> Unit = {},
-    onWEngineDetailClick: (Long) -> Unit = {},
-    onDriveDetailClick: (Long) -> Unit = {},
+    onAgentDetailClick: (Int) -> Unit = {},
+    onWEngineDetailClick: (Int) -> Unit = {},
+    onDriveDetailClick: (Int) -> Unit = {},
 ) {
     if (contentType == ContentType.SINGLE) {
         WikiScreenSingle(

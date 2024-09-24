@@ -1,50 +1,32 @@
 package network
 
-import app.home.model.OfficialActivities
-import io.ktor.client.HttpClient
-import io.ktor.client.call.body
+import app.agent.model.AgentsListResponse
+import app.home.model.BannerResponse
 import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.logging.LogLevel
-import io.ktor.client.plugins.logging.Logger
-import io.ktor.client.plugins.logging.Logging
-import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.http.ContentType
-import io.ktor.http.contentType
-import io.ktor.http.path
-import io.ktor.http.takeFrom
-import io.ktor.serialization.kotlinx.json.json
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.appendPathSegments
 import kotlinx.serialization.json.Json
 
 class ZzzHttpClientImpl(engine: HttpClientEngine) : ZzzHttpClient {
+    override val defaultTimeout = 5000L
+    override val longTimeout = 10000L
+    private val client = createZzzHttpClient(engine)
 
-    private val client = HttpClient(engine) {
-        install(ContentNegotiation) {
-            json(Json {
-                prettyPrint = true
-                isLenient = true
-                ignoreUnknownKeys = true
-            })
-        }
-        install(Logging) {
-            logger = Logger.SIMPLE
-            level = LogLevel.ALL
-        }
+    private suspend inline fun <reified T> requestData(path: String): T {
+        val result = client.get {
+            url.appendPathSegments(path)
+        }.bodyAsText()
+        return Json.decodeFromString(result)
     }
 
-    override suspend fun requestActivities(): OfficialActivities = client.get {
-        url {
-            takeFrom("https://sg-public-api-static.hoyoverse.com")
-            path("/content_v2_user/app/3e9196a4b9274bd7/getContentList")
-        }
-        contentType(ContentType.Application.Json)
-        parameter("iPageSize", 7)
-        parameter("iPage", 1)
-        parameter("iChanId", 288)
-        parameter("sLangKey", "zh-tw")
-    }.body()
+    override suspend fun requestBanner(): BannerResponse {
+        return requestData("banner.json")
+    }
+
+    override suspend fun requestAgentList(): AgentsListResponse {
+        return requestData("zh-tw/agent/list.json")
+    }
 }
 
 

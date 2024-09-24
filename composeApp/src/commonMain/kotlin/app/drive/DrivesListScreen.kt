@@ -19,30 +19,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mrfatworm.android.zzzarchive.ui.theme.ZzzArchiveTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import ui.component.ZzzOutlineButton
+import ui.theme.AppTheme
+import ui.theme.ZzzArchiveTheme
 
 @Composable
 fun DrivesListScreen(onDriveClick: (String) -> Unit = {}) {
-    Surface(modifier = Modifier.fillMaxSize()) {
         Text(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
             text = "驅動光碟清單",
             textAlign = TextAlign.Center,
-            fontSize = 24.sp
+            style = AppTheme.typography.headlineMedium,
+            color = AppTheme.colors.onSurface
         )
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceAround
         ) {
-            Button(onClick = { onDriveClick("哈哈") }) {
-                Text(text = "哈哈")
-            }
+            ZzzOutlineButton(text = "震星迪斯可", onClick = { onDriveClick("震星迪斯可") })
         }
-    }
 }
 
 @Preview

@@ -7,6 +7,7 @@ package ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -23,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.mrfatworm.android.zzzarchive.ui.theme.AppTheme
 import kotlinx.coroutines.launch
 import ui.navigation.MainFlow
 import ui.navigation.NavActions
@@ -31,6 +31,7 @@ import ui.navigation.component.ModalNavigationDrawerContent
 import ui.navigation.component.ZzzArchiveBottomNavigationBar
 import ui.navigation.component.ZzzArchiveNavigationRail
 import ui.navigation.graph.MainNavGraph
+import ui.theme.AppTheme
 import ui.theme.Dimens
 import ui.utils.ContentType
 import ui.utils.NavigationType
@@ -87,7 +88,6 @@ fun MainFunContent(
     contentType: ContentType,
     onDrawerClicked: () -> Unit = {}
 ) {
-
     Scaffold(
         modifier = Modifier.fillMaxSize(), bottomBar = {
             AnimatedVisibility(visible = navType == NavigationType.BOTTOM_NAVIGATION) {
@@ -100,8 +100,7 @@ fun MainFunContent(
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
-                .containerPadding(navType, AppTheme.dimens),
+                .containerPadding(navType, AppTheme.dimens, innerPadding),
             horizontalArrangement = Arrangement.spacedBy(
                 when (navType) {
                     NavigationType.NAVIGATION_DRAWER -> AppTheme.dimens.gapParentExpanded
@@ -131,17 +130,31 @@ fun MainFunContent(
     }
 }
 
-fun Modifier.containerPadding(navType: NavigationType, dimens: Dimens) = this.padding(
-    start = when (navType) {
-        NavigationType.NAVIGATION_DRAWER -> dimens.paddingParentStartExpanded
-        NavigationType.NAVIGATION_RAIL -> dimens.paddingParentStartMedium
-        NavigationType.BOTTOM_NAVIGATION -> dimens.paddingParentCompact
-    },
-    end = when (navType) {
-        NavigationType.NAVIGATION_DRAWER -> dimens.paddingParentOthersExpanded
-        NavigationType.NAVIGATION_RAIL -> dimens.paddingParentOthersMedium
-        NavigationType.BOTTOM_NAVIGATION -> dimens.paddingParentCompact
-    },
-    top = 0.dp,
-    bottom = 0.dp
-)
+fun Modifier.containerPadding(navType: NavigationType, dimens: Dimens, innerPadding: PaddingValues):Modifier {
+    if (innerPadding.calculateTopPadding() > 0.dp) {
+        return this.padding(innerPadding)
+    } else {
+        return this.padding(
+            start = when (navType) {
+                NavigationType.NAVIGATION_DRAWER -> dimens.paddingParentStartExpanded
+                NavigationType.NAVIGATION_RAIL -> dimens.paddingParentStartMedium
+                NavigationType.BOTTOM_NAVIGATION -> dimens.paddingParentCompact
+            },
+            end = when (navType) {
+                NavigationType.NAVIGATION_DRAWER -> dimens.paddingParentOthersExpanded
+                NavigationType.NAVIGATION_RAIL -> dimens.paddingParentOthersMedium
+                NavigationType.BOTTOM_NAVIGATION -> dimens.paddingParentCompact
+            },
+            top = when (navType) {
+                NavigationType.NAVIGATION_DRAWER -> dimens.paddingParentOthersExpanded
+                NavigationType.NAVIGATION_RAIL -> dimens.paddingParentOthersMedium
+                NavigationType.BOTTOM_NAVIGATION -> dimens.paddingParentCompact
+            },
+            bottom = when (navType) {
+                NavigationType.NAVIGATION_DRAWER -> dimens.paddingParentOthersExpanded
+                NavigationType.NAVIGATION_RAIL -> dimens.paddingParentOthersMedium
+                NavigationType.BOTTOM_NAVIGATION -> dimens.paddingParentCompact
+            }
+        )
+    }
+}

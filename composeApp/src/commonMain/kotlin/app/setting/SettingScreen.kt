@@ -8,19 +8,19 @@ package app.setting
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import ui.component.ZzzOutlineButton
+import ui.theme.AppTheme
 import ui.utils.ContentType
 
 @Composable
 fun SettingScreen(
-    contentType: ContentType,
-    onFeedbackClicked: () -> Unit
+    contentType: ContentType, onFeedbackClicked: () -> Unit
 ) {
     if (contentType == ContentType.SINGLE) {
         SettingScreenSingle(onFeedbackClicked)
@@ -30,35 +30,40 @@ fun SettingScreen(
 }
 
 @Composable
-fun SettingScreenSingle(onFeedbackClicked: () -> Unit
+fun SettingScreenSingle(
+    onFeedbackClicked: () -> Unit
 ) {
-    Surface(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(
-                16.dp, alignment = Alignment.CenterVertically
-            )
-        ) {
-            Text(text = "Setting")
-            Button(onClick = { onFeedbackClicked() }) {
-                Text(text = "Feedback")
-            }
-        }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(
+            16.dp, alignment = Alignment.CenterVertically
+        )
+    ) {
+        Text(
+            text = "Setting",
+            textAlign = TextAlign.Center,
+            style = AppTheme.typography.headlineMedium,
+            color = AppTheme.colors.onSurface
+        )
+        ZzzOutlineButton(text = "Feedback", onClick = { onFeedbackClicked() })
     }
 }
 
 @Composable
 fun SettingScreenDual() {
-    Surface(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(
-                16.dp, alignment = Alignment.CenterVertically
-            )
-        ) {
-            Text(text = "Setting")
-        }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(
+            16.dp, alignment = Alignment.CenterVertically
+        )
+    ) {
+        Text(
+            text = "Setting",
+            textAlign = TextAlign.Center,
+            style = AppTheme.typography.headlineMedium,
+            color = AppTheme.colors.onSurface
+        )
     }
 }

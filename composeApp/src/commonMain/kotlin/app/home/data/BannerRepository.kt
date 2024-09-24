@@ -5,9 +5,9 @@
 
 package app.home.data
 
-import app.home.model.OfficialActivities
+import app.home.model.BannerResponse
 import utils.ZzzResult
 
-interface ZzzRepository {
-    suspend fun getActivities(): ZzzResult<OfficialActivities>
+interface BannerRepository {
+    suspend fun getBanner(): ZzzResult<BannerResponse>
 }

@@ -19,26 +19,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ui.component.ZzzOutlineButton
+import ui.theme.AppTheme
 
 @Composable
 fun AgentDetailScreen(onWEngineClick: (String) -> Unit = {}) {
-    Surface(modifier = Modifier.fillMaxSize()) {
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            text = "11號",
-            textAlign = TextAlign.Center,
-            fontSize = 24.sp
-        )
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceAround
-        ) {
-            Button(onClick = { onWEngineClick("硫磺石") }) {
-                Text(text = "推薦武器：硫磺石")
-            }
-        }
+    Text(
+        modifier = Modifier.fillMaxWidth().padding(16.dp),
+        text = "11號",
+        textAlign = TextAlign.Center,
+        style = AppTheme.typography.headlineMedium,
+        color = AppTheme.colors.onSurface
+    )
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceAround
+    ) {
+        ZzzOutlineButton(text = "推薦武器：硫磺石", onClick = { onWEngineClick("硫磺石") })
     }
 }

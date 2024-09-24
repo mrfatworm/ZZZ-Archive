@@ -8,8 +8,8 @@ package home.compose
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.runComposeUiTest
-import app.home.compose.HomeScreenDual
-import app.home.model.stubHomeState
+import app.home.HomeScreenDual
+import app.home.model.sampleHomeState
 import kotlin.test.Test
 
 // Android UI Test is not supported yet
@@ -19,7 +19,7 @@ class HomeScreenDualTest {
     @Test
     fun showUrl() = runComposeUiTest {
         setContent {
-            HomeScreenDual(uiState = stubHomeState)
+            HomeScreenDual(uiState = sampleHomeState)
         }
         onNodeWithText("Home List").assertExists()
     }

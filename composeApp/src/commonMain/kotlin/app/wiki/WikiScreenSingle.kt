@@ -10,17 +10,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.mrfatworm.android.zzzarchive.ui.theme.ZzzArchiveTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import ui.theme.ZzzArchiveTheme
 
 @Composable
 fun WikiScreenSingle(
     onAgentsOverviewClick: () -> Unit = {},
     onWEnginesOverviewClick: () -> Unit = {},
     onDrivesOverviewClick: () -> Unit = {},
-    onAgentDetailClick: (Long) -> Unit = {},
-    onWEngineDetailClick: (Long) -> Unit = {},
-    onDriveDetailClick: (Long) -> Unit = {},
+    onAgentDetailClick: (Int) -> Unit = {},
+    onWEngineDetailClick: (Int) -> Unit = {},
+    onDriveDetailClick: (Int) -> Unit = {},
 ) {
     Column(
         modifier = Modifier.fillMaxSize()

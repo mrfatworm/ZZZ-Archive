@@ -5,33 +5,28 @@
 
 package ui.data
 
-import org.jetbrains.compose.resources.DrawableResource
 import utils.ZzzArchiveRarity
-import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.img_agent_11
-import zzzarchive.composeapp.generated.resources.img_driver
-import zzzarchive.composeapp.generated.resources.img_w_engine_brimstone
 
 
 data class SimpleListItemState(
-    val id: Long = 0,
+    val id: Int = 0,
     val name: String,
-    val imageRes: DrawableResource?,
+    val imgUrl: String?,
     val rarity: ZzzArchiveRarity = ZzzArchiveRarity.One
 )
 
 val sampleAgentState = SimpleListItemState(
-    name = "11號", imageRes = Res.drawable.img_agent_11, rarity = ZzzArchiveRarity.Five
+    name = "11號", imgUrl = "", rarity = ZzzArchiveRarity.Five
 )
 
 val sampleWEnginState = SimpleListItemState(
     name = "11號的專武，長字串測試測試測試測試測試",
-    imageRes = Res.drawable.img_w_engine_brimstone,
+    imgUrl = "",
     rarity = ZzzArchiveRarity.Five
 )
 
 val sampleDriverState = SimpleListItemState(
-    name = "震星迪思可", imageRes = Res.drawable.img_driver, rarity = ZzzArchiveRarity.One
+    name = "震星迪思可", imgUrl = "", rarity = ZzzArchiveRarity.One
 )
 
 val sampleAgentsList = listOf(
@@ -50,7 +45,7 @@ val sampleWEnginesList = listOf(
     sampleWEnginState.copy(rarity = ZzzArchiveRarity.One)
 )
 
-val sampleDriversList = listOf(
+val sampleDrivesList = listOf(
     sampleDriverState, sampleDriverState, sampleDriverState, sampleDriverState, sampleDriverState
 )
 

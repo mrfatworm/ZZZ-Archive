@@ -10,7 +10,7 @@ import ui.utils.ContentType
 
 @Composable
 fun AgentsListScreen(
-    contentType: ContentType, onAgentClick: (Long) -> Unit = {}
+    contentType: ContentType, onAgentClick: (Int) -> Unit = {}
 ) {
     if (contentType == ContentType.SINGLE) {
         AgentsListScreenSingle(

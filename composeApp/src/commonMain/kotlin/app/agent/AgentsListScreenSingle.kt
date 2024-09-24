@@ -19,24 +19,20 @@ import ui.component.SimpleItem
 
 @Composable
 fun AgentsListScreenSingle(
-    state: AgentsListState, onAgentClick: (Long) -> Unit = {}
+    state: AgentsListState, onAgentClick: (Int) -> Unit = {}
 ) {
-    Surface(modifier = Modifier.fillMaxSize()) {
-        LazyVerticalGrid(
-            columns = GridCells.Adaptive(120.dp),
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(4.dp)
-        ) {
-            items(state.agentsList.size) { index ->
-                val agent = state.agentsList[index]
-                SimpleItem(modifier = Modifier
-                    .clickable { onAgentClick(agent.id) }
-                    .padding(top = 8.dp),
-                    isLargeSize = true,
-                    name = agent.name,
-                    rarity = agent.rarity,
-                    imgRes = agent.imageRes)
-            }
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(120.dp),
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(4.dp)
+    ) {
+        items(state.agentsList.size) { index ->
+            val agent = state.agentsList[index]
+            SimpleItem(modifier = Modifier.clickable { onAgentClick(agent.id) }.padding(top = 8.dp),
+                isLargeSize = true,
+                name = agent.name,
+                rarity = agent.rarity,
+                imgUrl = agent.imgUrl)
         }
     }
 }

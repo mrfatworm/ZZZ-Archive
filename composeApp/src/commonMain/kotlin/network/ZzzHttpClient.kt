@@ -5,8 +5,12 @@
 
 package network
 
-import app.home.model.OfficialActivities
+import app.agent.model.AgentsListResponse
+import app.home.model.BannerResponse
 
 interface ZzzHttpClient {
-    suspend fun requestActivities(): OfficialActivities
+    val defaultTimeout: Long
+    val longTimeout: Long
+    suspend fun requestBanner(): BannerResponse
+    suspend fun requestAgentList(): AgentsListResponse
 }

@@ -13,11 +13,11 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.mrfatworm.android.zzzarchive.ui.theme.AppTheme
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.navigation.NavActions
 import ui.navigation.TOP_LEVEL_DESTINATIONS_COMPACT
+import ui.theme.AppTheme
 
 @Composable
 fun ZzzArchiveBottomNavigationBar(

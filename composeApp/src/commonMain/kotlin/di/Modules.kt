@@ -5,18 +5,23 @@
 
 package di
 
-import app.home.data.ZzzRepository
-import app.home.data.ZzzRepositoryImpl
-import app.home.domain.ZzzViewModel
+import app.agent.data.AgentRepository
+import app.agent.data.AgentRepositoryImpl
+import app.home.data.BannerRepository
+import app.home.data.BannerRepositoryImpl
+import app.home.data.NewsRepository
+import app.home.data.NewsRepositoryImpl
+import app.home.domain.HomeViewModel
 import org.koin.core.module.Module
-import org.koin.core.module.dsl.viewModelOf
-import org.koin.dsl.bind
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 expect val platformModule: Module
 
 val sharedModule = module {
-    single { ZzzRepositoryImpl(get(), get()) }.bind<ZzzRepository>()
-    viewModelOf(::ZzzViewModel)
+    single<NewsRepository> { NewsRepositoryImpl(get()) }
+    single<BannerRepository> { BannerRepositoryImpl(get()) }
+    single<AgentRepository> { AgentRepositoryImpl(get()) }
 
+    viewModel { HomeViewModel(get(), get(), get()) }
 }

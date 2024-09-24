@@ -19,29 +19,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mrfatworm.android.zzzarchive.ui.theme.ZzzArchiveTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import ui.component.ZzzOutlineButton
+import ui.theme.AppTheme
+import ui.theme.ZzzArchiveTheme
 
 @Composable
 fun BangbooListScreen(onBangbooClick: (String) -> Unit = {}) {
-    Surface(modifier = Modifier.fillMaxSize()) {
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            text = "邦布清單",
-            textAlign = TextAlign.Center,
-            fontSize = 24.sp
-        )
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceAround
-        ) {
-            Button(onClick = { onBangbooClick("破抹布") }) {
-                Text(text = "破抹布")
-            }
-        }
+    Text(
+        modifier = Modifier.fillMaxWidth().padding(16.dp),
+        text = "邦布清單",
+        textAlign = TextAlign.Center,
+        style = AppTheme.typography.headlineMedium,
+        color = AppTheme.colors.onSurface
+    )
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceAround
+    ) {
+        ZzzOutlineButton(text = "破抹布", onClick = { onBangbooClick("破抹布") })
     }
 }
 

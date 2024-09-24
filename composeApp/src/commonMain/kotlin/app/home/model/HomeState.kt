@@ -5,23 +5,26 @@
 
 package app.home.model
 
+import app.agent.model.AgentListItem
+import app.agent.model.stubAgentsListResponse
 import ui.data.SimpleListItemState
-import ui.data.sampleAgentsList
-import ui.data.sampleDriversList
+import ui.data.sampleDrivesList
 import ui.data.sampleWEnginesList
 
 data class HomeState(
-    val activityImageUrl: String = "",
-    val agentsList: List<SimpleListItemState> = emptyList(),
+    val news: OfficialNewsResponse? = null,
+    val banner: BannerResponse? = null,
+    val agentsList: List<AgentListItem> = emptyList(),
     val wEnginesList: List<SimpleListItemState> = emptyList(),
-    val driversList: List<SimpleListItemState> = emptyList()
+    val drivesList: List<SimpleListItemState> = emptyList()
 )
 
 
-val stubHomeState = HomeState(
-    activityImageUrl = "",
-    agentsList = sampleAgentsList + sampleAgentsList + sampleAgentsList,
+val sampleHomeState = HomeState(
+    news = stubOfficialNewsDataResponse,
+    banner = stubBannerResponse,
+    agentsList = stubAgentsListResponse.agents,
     wEnginesList = sampleWEnginesList,
-    driversList = sampleDriversList
+    drivesList = sampleDrivesList
 )
 

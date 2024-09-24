@@ -3,12 +3,11 @@
  * License: CC BY-SA 4.0
  */
 
-package app.home.compose
+package app.home
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import app.home.domain.ZzzViewModel
+import app.home.domain.HomeViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import ui.utils.ContentType
@@ -22,35 +21,33 @@ fun HomeScreen(
     onAgentOverviewClick: () -> Unit,
     onWEngineOverviewClick: () -> Unit,
     onDrivesOverviewClick: () -> Unit,
-    onAgentDetailClick: (Long) -> Unit = {},
-    onWEngineDetailClick: (Long) -> Unit = {},
-    onDriveDetailClick: (Long) -> Unit = {},
+    onAgentDetailClick: (Int) -> Unit = {},
+    onWEngineDetailClick: (Int) -> Unit = {},
+    onDriveDetailClick: (Int) -> Unit = {},
 ) {
-    val viewModel = koinViewModel<ZzzViewModel>()
+    val viewModel: HomeViewModel = koinViewModel()
     val uiState = viewModel.uiState.collectAsState()
-    LaunchedEffect(true) {
-        viewModel.getActivityTitle()
-    }
+
     if (contentType == ContentType.SINGLE) {
         HomeScreenSingle(
             uiState = uiState.value,
             navigationType = navigationType,
             onAgentsOverviewClick = onAgentOverviewClick,
             onWEnginesOverviewClick = onWEngineOverviewClick,
-            onDriversOverviewClick = onDrivesOverviewClick,
+            onDrivesOverviewClick = onDrivesOverviewClick,
             onAgentDetailClick = onAgentDetailClick,
             onWEngineDetailClick = onWEngineDetailClick,
-            onDriverDetailClick = onDriveDetailClick,
+            onDriveDetailClick = onDriveDetailClick,
         )
     } else {
         HomeScreenDual(
             uiState = uiState.value,
             onAgentsOverviewClick = onAgentOverviewClick,
             onWEnginesOverviewClick = onWEngineOverviewClick,
-            onDriversOverviewClick = onDrivesOverviewClick,
+            onDrivesOverviewClick = onDrivesOverviewClick,
             onAgentDetailClick = onAgentDetailClick,
             onWEngineDetailClick = onWEngineDetailClick,
-            onDriverDetailClick = onDriveDetailClick,
+            onDriveDetailClick = onDriveDetailClick,
         )
     }
 }

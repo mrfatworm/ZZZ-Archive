@@ -10,20 +10,34 @@ package utils
 import coil3.ImageLoader
 import coil3.PlatformContext
 import coil3.disk.DiskCache
+import coil3.memory.MemoryCache
 import coil3.request.CachePolicy
 import coil3.request.crossfade
 import coil3.util.DebugLogger
 import okio.FileSystem
 
-fun coilImageLoader(
+fun imageLoaderMemoryCache(
     context: PlatformContext,
     debug: Boolean,
 ): ImageLoader {
-//    return ImageLoader.Builder(context).memoryCachePolicy(CachePolicy.ENABLED).memoryCache {
-//            MemoryCache.Builder()
-//                // Set the max size to 25% of the app's available memory.
-//                .maxSizePercent(context, percent = 0.25).strongReferencesEnabled(true).build()
-//        } //memory cache
+    return ImageLoader.Builder(context).memoryCachePolicy(CachePolicy.ENABLED).memoryCache {
+        MemoryCache.Builder()
+            // Set the max size to 25% of the app's available memory.
+            .maxSizePercent(context, percent = 0.25).strongReferencesEnabled(true).build()
+    }
+        // Show a short crossfade when loading images asynchronously.
+        .crossfade(true)
+        .apply {
+            if (debug) {
+                logger(DebugLogger())
+            }
+        }.build()
+}
+
+fun imageLoaderDiskCache(
+    context: PlatformContext,
+    debug: Boolean,
+): ImageLoader {
     return ImageLoader.Builder(context)
         .diskCachePolicy(CachePolicy.ENABLED)
         .networkCachePolicy(CachePolicy.ENABLED)
