@@ -18,11 +18,11 @@ Android Studio > Run > Edit Configurations > New > Gradle
 > desktopRun -DmainClass=MainKt --quiet
 
 ## Tech Stack / 使用技術
-- KMP (Kotlin multiplatform)
-- CMP (Compose multiplatform)
+- KMP (Kotlin Multiplatform)
+- CMP (Compose Multiplatform)
 - JetBrains Adaptive Layout
 - JetBrains Navigation Compose
-- Androidx Lifecycle ViewModel
+- JetBrains Lifecycle ViewModel
 - Koin DI
 - Ktor Network
 - Localization(en-us, zh-tw)

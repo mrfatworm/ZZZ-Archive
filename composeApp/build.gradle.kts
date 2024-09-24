@@ -49,6 +49,7 @@ kotlin {
             api(libs.koin.core)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.bundles.ktor)
         }
         commonTest.dependencies {
