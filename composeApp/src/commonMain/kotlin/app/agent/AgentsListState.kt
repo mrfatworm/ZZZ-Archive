@@ -13,5 +13,5 @@ data class AgentsListState(
 )
 
 val stubAgentsListState = AgentsListState(
-    agentsList = sampleAgentsList + sampleAgentsList + sampleAgentsList + sampleAgentsList
+    agentsList = sampleAgentsList
 )

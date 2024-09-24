@@ -9,15 +9,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
+import coil3.annotation.ExperimentalCoilApi
+import coil3.compose.setSingletonImageLoaderFactory
 import com.mrfatworm.android.zzzarchive.ui.theme.ZzzArchiveTheme
 import ui.navigation.NavActions
 import ui.navigation.graph.RootNavGraph
 import ui.utils.ContentType
 import ui.utils.NavigationType
+import utils.coilImageLoader
 
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun ZzzArchiveApp() {
+    setSingletonImageLoaderFactory { context ->
+        coilImageLoader(context, false)
+    }
     ZzzArchiveTheme {
         val adaptiveInfo = currentWindowAdaptiveInfo()
         val windowSizeClass = adaptiveInfo.windowSizeClass.windowWidthSizeClass

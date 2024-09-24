@@ -46,11 +46,14 @@ kotlin {
             implementation(libs.kotlinx.coroutines)
             implementation(libs.coil)
             implementation(libs.coil.network.ktor)
+            implementation(libs.coil.mp)
+            implementation(libs.coil.compose)
             api(libs.koin.core)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.bundles.ktor)
+            implementation(libs.okio)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

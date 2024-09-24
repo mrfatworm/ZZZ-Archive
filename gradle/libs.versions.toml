@@ -20,6 +20,7 @@ kotlinx-coroutines = "1.9.0"
 koin = "4.0.0"
 ktor = "3.0.0-rc-1"
 navigation-compose = "2.8.0-alpha10"
+okio = "3.9.1"
 
 [libraries]
 #===Jetbrains
@@ -44,6 +45,8 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 #===Coil
 coil = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coil" }
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
+coil-mp = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 
 #===Ktor
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
@@ -59,6 +62,9 @@ koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", versi
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
+
+#===Okio
+okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
 
 #===Test
 junit = { group = "junit", name = "junit", version.ref = "junit" }

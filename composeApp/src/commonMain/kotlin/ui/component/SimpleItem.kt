@@ -24,6 +24,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil3.ImageLoader
+import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import utils.ZzzArchiveRarity
@@ -54,9 +57,9 @@ fun SimpleItem(
                     )
             ) {
                 imgRes?.let {
-                    Image(
+                    AsyncImage(
                         modifier = Modifier.fillMaxSize(),
-                        painter = painterResource(imgRes),
+                        model = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Bangboo/Profile/3.webp",
                         contentDescription = name
                     )
                 }
