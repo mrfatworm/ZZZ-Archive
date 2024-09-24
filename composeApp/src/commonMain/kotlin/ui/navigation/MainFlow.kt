@@ -8,7 +8,7 @@ package ui.navigation
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.agents
 import zzzarchive.composeapp.generated.resources.bangboo
-import zzzarchive.composeapp.generated.resources.drivers
+import zzzarchive.composeapp.generated.resources.drives
 import zzzarchive.composeapp.generated.resources.feedback
 import zzzarchive.composeapp.generated.resources.function
 import zzzarchive.composeapp.generated.resources.home
@@ -39,7 +39,7 @@ sealed interface MainFlow {
     )
 
     data object Driver : Screen(
-        route = "driver_flow", iconRes = Res.drawable.ic_cd, textRes = Res.string.drivers
+        route = "driver_flow", iconRes = Res.drawable.ic_cd, textRes = Res.string.drives
     )
 
     data object Bangboo : Screen(

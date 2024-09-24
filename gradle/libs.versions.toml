@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.2"
+agp = "8.6.1"
 androidx-activityCompose = "1.9.2"
 androidx-appcompat = "1.7.0"
 androidx-constraintlayout = "2.1.4"
@@ -7,18 +7,19 @@ androidx-core-ktx = "1.13.1"
 androidx-espresso-core = "3.6.1"
 androidx-material = "1.12.0"
 androidx-lifecycle-viewmodel = "2.8.6"
+assertk = "0.28.1"
 androidx-test-junit = "1.2.1"
+coreKtx = "1.6.1"
+coil = "3.0.0-alpha10"
 compose-adaptive = "1.0.0-alpha03"
 compose-plugin = "1.7.0-beta02"
+composeTest = "1.7.2"
 junit = "4.13.2"
 kotlin = "2.0.20"
 kotlinx-coroutines = "1.9.0"
-navigation-compose = "2.8.0-alpha10"
 koin = "4.0.0"
-assertk = "0.28.1"
-coreKtx = "1.6.1"
-composeTest = "1.7.1"
-ktor = "2.3.12"
+ktor = "3.0.0-rc-1"
+navigation-compose = "2.8.0-alpha10"
 
 [libraries]
 #===Jetbrains
@@ -38,6 +39,10 @@ androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmode
 androidx-material = { group = "com.google.android.material", name = "material", version.ref = "androidx-material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+
+#===Coil
+coil = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coil" }
+coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 
 #===Ktor
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }

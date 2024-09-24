@@ -13,7 +13,7 @@ import org.jetbrains.compose.resources.StringResource
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.agents
 import zzzarchive.composeapp.generated.resources.bangboo
-import zzzarchive.composeapp.generated.resources.drivers
+import zzzarchive.composeapp.generated.resources.drives
 import zzzarchive.composeapp.generated.resources.feedback
 import zzzarchive.composeapp.generated.resources.home
 import zzzarchive.composeapp.generated.resources.ic_help
@@ -57,7 +57,7 @@ sealed class Screen(
     }
 
     data object DriversList : Screen(
-        route = "driversList", textRes = Res.string.drivers
+        route = "driversList", textRes = Res.string.drives
     )
 
     data object DriverDetail : Screen(

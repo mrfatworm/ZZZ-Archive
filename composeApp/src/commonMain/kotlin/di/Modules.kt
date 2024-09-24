@@ -8,8 +8,8 @@ package di
 import home.data.ZzzRepository
 import home.data.ZzzRepositoryImpl
 import home.domain.ZzzViewModel
-import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 

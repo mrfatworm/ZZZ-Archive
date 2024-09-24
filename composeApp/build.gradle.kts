@@ -44,7 +44,8 @@ kotlin {
             implementation(libs.navigation.compose)
             implementation(libs.compose.adaptive)
             implementation(libs.kotlinx.coroutines)
-
+            implementation(libs.coil)
+            implementation(libs.coil.network.ktor)
             api(libs.koin.core)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.androidx.lifecycle.viewmodel)
