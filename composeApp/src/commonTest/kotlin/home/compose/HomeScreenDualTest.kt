@@ -8,7 +8,8 @@ package home.compose
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.runComposeUiTest
-import home.model.stubHomeState
+import app.home.compose.HomeScreenDual
+import app.home.model.stubHomeState
 import kotlin.test.Test
 
 // Android UI Test is not supported yet

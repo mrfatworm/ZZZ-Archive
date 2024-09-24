@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import home.compose.HomeScreen
+import app.home.compose.HomeScreen
 import ui.navigation.MainFlow
 import ui.navigation.Screen
 import ui.utils.ContentType
@@ -29,10 +29,10 @@ fun HomeNavHost(
                     navigationType = navigationType,
                     onAgentOverviewClick = { navigateToTopLevelDestination(MainFlow.Agent) },
                     onWEngineOverviewClick = { navigateToTopLevelDestination(MainFlow.WEngine) },
-                    onDriversOverviewClick = { navigateToTopLevelDestination(MainFlow.Driver) },
+                    onDrivesOverviewClick = { navigateToTopLevelDestination(MainFlow.Drive) },
                     onAgentDetailClick = { navController.navigate(Screen.AgentDetail.route) },
                     onWEngineDetailClick = { navController.navigate(Screen.WEngineDetail.route) },
-                    onDriverDetailClick = { navController.navigate(Screen.DriverDetail.route) })
+                    onDriveDetailClick = { navController.navigate(Screen.DriveDetail.route) })
             }
         } else {
             composable(Screen.Home.route) {
@@ -40,10 +40,10 @@ fun HomeNavHost(
                     navigationType = navigationType,
                     onAgentOverviewClick = { navController.navigate(Screen.AgentsList.route) },
                     onWEngineOverviewClick = { navController.navigate(Screen.WEnginesList.route) },
-                    onDriversOverviewClick = { navController.navigate(Screen.DriversList.route) },
+                    onDrivesOverviewClick = { navController.navigate(Screen.DrivesList.route) },
                     onAgentDetailClick = { navController.navigate(Screen.AgentDetail.route) },
                     onWEngineDetailClick = { navController.navigate(Screen.WEngineDetail.route) },
-                    onDriverDetailClick = { navController.navigate(Screen.DriverDetail.route) })
+                    onDriveDetailClick = { navController.navigate(Screen.DriveDetail.route) })
             }
         }
         sharedScreenDestination(navController, contentType, navigateToTopLevelDestination)

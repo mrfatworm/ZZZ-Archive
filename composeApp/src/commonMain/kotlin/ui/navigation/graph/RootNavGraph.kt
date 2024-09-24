@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import splash.SplashScreen
+import app.splash.SplashScreen
 import ui.MainFunScreen
 import ui.navigation.NavActions
 import ui.navigation.RootFlow

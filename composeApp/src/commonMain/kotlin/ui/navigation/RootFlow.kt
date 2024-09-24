@@ -6,6 +6,6 @@
 package ui.navigation
 
 sealed interface RootFlow {
-    data object Splash : Screen(route = "splash")
+    data object Splash : Screen(route = "app/splash")
     data object ZzzArchive : Screen(route = "zzzArchive")
 }

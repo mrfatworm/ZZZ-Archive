@@ -29,7 +29,7 @@ sealed class Screen(
     val navArguments: List<NamedNavArgument> = emptyList()
 ) {
     data object Home : Screen(
-        route = "home", textRes = Res.string.home
+        route = "app/home", textRes = Res.string.home
     )
 
     data object AgentsList : Screen(
@@ -56,16 +56,16 @@ sealed class Screen(
         fun createRoute(wEngineId: String) = "wEngineDetail/${wEngineId}"
     }
 
-    data object DriversList : Screen(
-        route = "driversList", textRes = Res.string.drives
+    data object DrivesList : Screen(
+        route = "drivesList", textRes = Res.string.drives
     )
 
-    data object DriverDetail : Screen(
-        route = "driverDetail/{driverId}", navArguments = listOf(navArgument("driverId") {
+    data object DriveDetail : Screen(
+        route = "driveDetail/{driverId}", navArguments = listOf(navArgument("driveId") {
             type = NavType.StringType
         })
     ) {
-        fun createRoute(driverId: String) = "driverDetail/${driverId}"
+        fun createRoute(driveId: String) = "driveDetail/${driveId}"
     }
 
     data object BangbooList : Screen(
@@ -79,11 +79,11 @@ sealed class Screen(
     )
 
     data object Setting : Screen(
-        route = "setting", textRes = Res.string.setting
+        route = "app/setting", textRes = Res.string.setting
     )
 
     data object Feedback : Screen(
-        route = "feedback", textRes = Res.string.feedback
+        route = "app/feedback", textRes = Res.string.feedback
     )
 
 }

@@ -10,13 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import feedback.FeedbackScreen
-import function.FunctionScreen
+import app.feedback.FeedbackScreen
+import app.function.FunctionScreen
 import ui.navigation.MainFlow
 import ui.navigation.NavActions
 import ui.utils.ContentType
 import ui.utils.NavigationType
-import wiki.WikiScreen
+import app.wiki.WikiScreen
 
 @Composable
 fun MainNavGraph(
@@ -47,8 +47,8 @@ fun MainNavGraph(
                 mainNavActions.navigationToTopAndSave(it)
             })
         }
-        composable(MainFlow.Driver.route) {
-            DriverNavGraph(contentType, navigateToTopLevelDestination = {
+        composable(MainFlow.Drive.route) {
+            DriveNavGraph(contentType, navigateToTopLevelDestination = {
                 mainNavActions.navigationToTopAndSave(it)
             })
         }
@@ -67,7 +67,7 @@ fun MainNavGraph(
             WikiScreen(contentType = contentType,
                 onAgentOverviewClick = { },
                 onWEngineOverviewClick = { },
-                onDriversOverviewClick = { })
+                onDrivesOverviewClick = { })
         }
         composable(MainFlow.Function.route) {
             FunctionScreen(contentType = contentType)

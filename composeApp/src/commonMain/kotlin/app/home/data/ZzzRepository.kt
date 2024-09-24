@@ -3,10 +3,11 @@
  * License: CC BY-SA 4.0
  */
 
-package network
+package app.home.data
 
 import app.home.model.OfficialActivities
+import utils.ZzzResult
 
-interface ZzzHttpClient {
-    suspend fun requestActivities(): OfficialActivities
+interface ZzzRepository {
+    suspend fun getActivities(): ZzzResult<OfficialActivities>
 }

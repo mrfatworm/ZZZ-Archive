@@ -38,8 +38,8 @@ sealed interface MainFlow {
         route = "wEngine_flow", iconRes = Res.drawable.ic_w_engine, textRes = Res.string.w_engines
     )
 
-    data object Driver : Screen(
-        route = "driver_flow", iconRes = Res.drawable.ic_cd, textRes = Res.string.drives
+    data object Drive : Screen(
+        route = "drive_flow", iconRes = Res.drawable.ic_cd, textRes = Res.string.drives
     )
 
     data object Bangboo : Screen(
@@ -67,7 +67,7 @@ val TOP_LEVEL_DESTINATIONS_MEDIUM = listOf(
     MainFlow.Home,
     MainFlow.Agent,
     MainFlow.WEngine,
-    MainFlow.Driver,
+    MainFlow.Drive,
     MainFlow.Bangboo,
     MainFlow.Setting,
     MainFlow.Feedback

@@ -5,9 +5,9 @@
 
 package di
 
-import home.data.ZzzRepository
-import home.data.ZzzRepositoryImpl
-import home.domain.ZzzViewModel
+import app.home.data.ZzzRepository
+import app.home.data.ZzzRepositoryImpl
+import app.home.domain.ZzzViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.bind
