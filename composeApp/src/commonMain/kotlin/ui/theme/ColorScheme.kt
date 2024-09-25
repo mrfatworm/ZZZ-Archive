@@ -33,7 +33,8 @@ class ColorScheme(
     val imageRarity2: Color = Color.Unspecified,
     val imageRarity3: Color = Color.Unspecified,
     val imageRarity4: Color = Color.Unspecified,
-    val imageRarity5: Color = Color.Unspecified
+    val imageRarity5: Color = Color.Unspecified,
+    val buttonBorder: Color = Color.Unspecified
 )
 
 internal val darkScheme = ColorScheme(
@@ -53,14 +54,15 @@ internal val darkScheme = ColorScheme(
     onAlert = alert200,
     imageBorder = neutral700,
     imageInsideBorder = neutral900,
-    imageBackground = neutral950,
+    imageBackground = neutral900,
     imageTagContainer = Color(0x80151515),
     imageOnTagContainer = Color(0xFFF0F0F0),
     imageRarity1 = Color(0xFF838282),
     imageRarity2 = Color(0xFF7DA89B),
     imageRarity3 = Color(0xFF00A9FF),
     imageRarity4 = Color(0xFFBB37C7),
-    imageRarity5 = Color(0xFFFFB500)
+    imageRarity5 = Color(0xFFFFB500),
+    buttonBorder = neutral700
 )
 
 internal val lightScheme = ColorScheme(
@@ -78,8 +80,8 @@ internal val lightScheme = ColorScheme(
     onSurfaceVariant = neutral600,
     alert = alert600,
     onAlert = alert100,
-    imageBorder = neutral50,
-    imageInsideBorder = neutral100,
+    imageBorder = neutral200,
+    imageInsideBorder = Color.White,
     imageBackground = neutral100,
     imageTagContainer = Color(0x80151515),
     imageOnTagContainer = Color(0xFFF0F0F0),
@@ -87,5 +89,6 @@ internal val lightScheme = ColorScheme(
     imageRarity2 = Color(0xFF7DA89B),
     imageRarity3 = Color(0xFF00A9FF),
     imageRarity4 = Color(0xFFDA4EE8),
-    imageRarity5 = Color(0xFFFFB500)
+    imageRarity5 = Color(0xFFFFB500),
+    buttonBorder = neutral300
 )

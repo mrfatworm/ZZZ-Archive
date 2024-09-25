@@ -95,7 +95,7 @@ fun GnfButton(
     Button(
         modifier = modifier.border(
             width = if (hasBorder) 3.dp else 0.dp,
-            color = if (hasBorder) AppTheme.colors.border else Color.Transparent,
+            color = if (hasBorder) AppTheme.colors.buttonBorder else Color.Transparent,
             shape = CircleShape
         ),
         shape = RoundedCornerShape(64.dp),

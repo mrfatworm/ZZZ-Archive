@@ -8,13 +8,13 @@ package app.home
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import app.home.compose.BannerImageCard
 import app.home.compose.HoYoLabZzzStatusCard
+import app.home.compose.NewsPagerCard
 import app.home.compose.PixivTrendingCard
 import app.home.model.HomeState
 import app.home.model.sampleHomeState
@@ -22,11 +22,12 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import ui.theme.AppTheme
 import ui.theme.ZzzArchiveTheme
 import ui.utils.NavigationType
+import ui.utils.contentPadding
 
 @Composable
 fun HomeScreenSingle(
     uiState: HomeState,
-    navigationType: NavigationType = NavigationType.BOTTOM_NAVIGATION,
+    navigationType: NavigationType,
     onAgentsOverviewClick: () -> Unit = {},
     onWEnginesOverviewClick: () -> Unit = {},
     onDrivesOverviewClick: () -> Unit = {},
@@ -35,14 +36,14 @@ fun HomeScreenSingle(
     onDriveDetailClick: (Int) -> Unit = {},
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(vertical = if (navigationType == NavigationType.NAVIGATION_RAIL) AppTheme.dimens.paddingParentOthersExpanded else AppTheme.dimens.paddingParentCompact),
+            .contentPadding(navigationType, AppTheme.dimens),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         BannerImageCard(uiState.banner)
         HoYoLabZzzStatusCard()
+        NewsPagerCard(uiState.news?.data)
         PixivTrendingCard()
     }
 }
@@ -52,7 +53,7 @@ fun HomeScreenSingle(
 @Composable
 private fun PreviewHomeScreenSingle() {
     ZzzArchiveTheme {
-        HomeScreenSingle(sampleHomeState)
+        HomeScreenSingle(sampleHomeState, NavigationType.BOTTOM_NAVIGATION)
     }
 }
 
@@ -60,6 +61,6 @@ private fun PreviewHomeScreenSingle() {
 @Composable
 private fun PreviewHomeScreenSingleDark() {
     ZzzArchiveTheme(isDarkTheme = false) {
-        HomeScreenSingle(sampleHomeState)
+        HomeScreenSingle(sampleHomeState, NavigationType.BOTTOM_NAVIGATION)
     }
 }

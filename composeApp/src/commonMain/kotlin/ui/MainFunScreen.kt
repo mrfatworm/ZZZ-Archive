@@ -7,13 +7,12 @@ package ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,15 +31,14 @@ import ui.navigation.component.ZzzArchiveBottomNavigationBar
 import ui.navigation.component.ZzzArchiveNavigationRail
 import ui.navigation.graph.MainNavGraph
 import ui.theme.AppTheme
-import ui.theme.Dimens
 import ui.utils.ContentType
 import ui.utils.NavigationType
+import ui.utils.containerPadding
+import ui.utils.contentPadding
 
 @Composable
 fun MainFunScreen(
-    rootNavActions: NavActions,
-    navigationType: NavigationType,
-    contentType: ContentType
+    rootNavActions: NavActions, navigationType: NavigationType, contentType: ContentType
 ) {
     val mainFunNavController = rememberNavController()
     val mainFunNavActions = remember(mainFunNavController) {
@@ -63,12 +61,11 @@ fun MainFunScreen(
                 })
         }, drawerState = drawerState, gesturesEnabled = false
     ) {
-        MainFunContent(
-            mainFunNavController = mainFunNavController,
+        MainFunContent(mainFunNavController = mainFunNavController,
             mainNavActions = mainFunNavActions,
             rootNavActions = rootNavActions,
             selectedDestination = selectedDestination,
-            navType = navigationType,
+            navigationType = navigationType,
             contentType = contentType,
             onDrawerClicked = {
                 scope.launch {
@@ -84,77 +81,51 @@ fun MainFunContent(
     mainNavActions: NavActions,
     rootNavActions: NavActions,
     selectedDestination: String,
-    navType: NavigationType,
+    navigationType: NavigationType,
     contentType: ContentType,
     onDrawerClicked: () -> Unit = {}
 ) {
-    Scaffold(
-        modifier = Modifier.fillMaxSize(), bottomBar = {
-            AnimatedVisibility(visible = navType == NavigationType.BOTTOM_NAVIGATION) {
-                ZzzArchiveBottomNavigationBar(
-                    selectedDestination = selectedDestination, navigationActions = mainNavActions
-                )
-            }
-        }, containerColor = AppTheme.colors.surface
-    ) { innerPadding ->
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
         Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .containerPadding(navType, AppTheme.dimens, innerPadding),
-            horizontalArrangement = Arrangement.spacedBy(
-                when (navType) {
-                    NavigationType.NAVIGATION_DRAWER -> AppTheme.dimens.gapParentExpanded
-                    NavigationType.NAVIGATION_RAIL -> AppTheme.dimens.gapParentMedium
-                    NavigationType.BOTTOM_NAVIGATION -> 0.dp
-                }
-            )
+            modifier = Modifier.weight(1f).containerPadding(navigationType, AppTheme.dimens),
+            horizontalArrangement = horizontalParentGap(navigationType)
         ) {
             AnimatedVisibility(
-                visible = navType == NavigationType.NAVIGATION_RAIL || navType == NavigationType.NAVIGATION_DRAWER
+                visible = navigationType == NavigationType.NAVIGATION_RAIL || navigationType == NavigationType.NAVIGATION_DRAWER
             ) {
                 ZzzArchiveNavigationRail(
+                    modifier = Modifier.fillMaxHeight()
+                        .contentPadding(navigationType, AppTheme.dimens),
                     selectedDestination = selectedDestination,
                     navigationActions = mainNavActions,
                     onDrawerClicked = onDrawerClicked,
                 )
             }
             MainNavGraph(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.fillMaxSize(),
                 mainNavController = mainFunNavController,
                 contentType = contentType,
-                navigationType = navType,
+                navigationType = navigationType,
                 mainNavActions = mainNavActions,
                 rootNavActions = rootNavActions
+            )
+        }
+
+        AnimatedVisibility(visible = navigationType == NavigationType.BOTTOM_NAVIGATION) {
+            ZzzArchiveBottomNavigationBar(
+                selectedDestination = selectedDestination, navigationActions = mainNavActions
             )
         }
     }
 }
 
-fun Modifier.containerPadding(navType: NavigationType, dimens: Dimens, innerPadding: PaddingValues):Modifier {
-    if (innerPadding.calculateTopPadding() > 0.dp) {
-        return this.padding(innerPadding)
-    } else {
-        return this.padding(
-            start = when (navType) {
-                NavigationType.NAVIGATION_DRAWER -> dimens.paddingParentStartExpanded
-                NavigationType.NAVIGATION_RAIL -> dimens.paddingParentStartMedium
-                NavigationType.BOTTOM_NAVIGATION -> dimens.paddingParentCompact
-            },
-            end = when (navType) {
-                NavigationType.NAVIGATION_DRAWER -> dimens.paddingParentOthersExpanded
-                NavigationType.NAVIGATION_RAIL -> dimens.paddingParentOthersMedium
-                NavigationType.BOTTOM_NAVIGATION -> dimens.paddingParentCompact
-            },
-            top = when (navType) {
-                NavigationType.NAVIGATION_DRAWER -> dimens.paddingParentOthersExpanded
-                NavigationType.NAVIGATION_RAIL -> dimens.paddingParentOthersMedium
-                NavigationType.BOTTOM_NAVIGATION -> dimens.paddingParentCompact
-            },
-            bottom = when (navType) {
-                NavigationType.NAVIGATION_DRAWER -> dimens.paddingParentOthersExpanded
-                NavigationType.NAVIGATION_RAIL -> dimens.paddingParentOthersMedium
-                NavigationType.BOTTOM_NAVIGATION -> dimens.paddingParentCompact
-            }
-        )
+@Composable
+private fun horizontalParentGap(navigationType: NavigationType) = Arrangement.spacedBy(
+    when (navigationType) {
+        NavigationType.NAVIGATION_DRAWER -> AppTheme.dimens.gapParentExpanded
+        NavigationType.NAVIGATION_RAIL -> AppTheme.dimens.gapParentMedium
+        NavigationType.BOTTOM_NAVIGATION -> 0.dp
     }
-}
+)

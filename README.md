@@ -26,6 +26,7 @@ Android Studio > Run > Edit Configurations > New > Gradle
 - Koin DI
 - Ktor Network
 - Localization(en-us, zh-tw)
+- Full Screen Layout (edge-to-edge)
 - Design System
   - UI Component
   - Color Scheme (Dark, Light)

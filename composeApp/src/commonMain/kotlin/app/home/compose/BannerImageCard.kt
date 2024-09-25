@@ -39,20 +39,16 @@ fun BannerImageCard(banner: BannerResponse?) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed = interactionSource.collectIsPressedAsState()
     val isHovered = interactionSource.collectIsHoveredAsState()
+
     Box(
-        modifier = Modifier
-            .aspectRatio(1.7f)
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
+        modifier = Modifier.aspectRatio(1.7f).fillMaxWidth().clip(RoundedCornerShape(16.dp))
     ) {
         if (banner == null) {
             ImageNotFound()
         } else {
             val urlHandler = LocalUriHandler.current
             AsyncImage(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clickable(
+                modifier = Modifier.fillMaxSize().clickable(
                         interactionSource = interactionSource, indication = ripple(radius = 16.dp)
                     ) {
                         urlHandler.openUri(banner.artworkUrl)
@@ -72,9 +68,7 @@ fun BannerImageCard(banner: BannerResponse?) {
 @Composable
 private fun ArtworkInfo(modifier: Modifier, banner: BannerResponse) {
     Column(
-        modifier
-            .fillMaxWidth()
-            .background(AppTheme.colors.surface.copy(alpha = 0.9f))
+        modifier.fillMaxWidth().background(AppTheme.colors.surface.copy(alpha = 0.9f))
             .padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(

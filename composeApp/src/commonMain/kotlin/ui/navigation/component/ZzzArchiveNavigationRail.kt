@@ -44,12 +44,13 @@ import zzzarchive.composeapp.generated.resources.navigation_drawer
 
 @Composable
 fun ZzzArchiveNavigationRail(
+    modifier: Modifier,
     selectedDestination: String,
     navigationActions: NavActions,
     onDrawerClicked: () -> Unit = {},
 ) {
     Column(
-        Modifier.fillMaxHeight()
+        modifier
             .border(3.dp, AppTheme.colors.border, CircleShape)
             .background(AppTheme.colors.surfaceContainer, CircleShape).widthIn(min = 80.dp)
             .padding(vertical = 16.dp).selectableGroup(),

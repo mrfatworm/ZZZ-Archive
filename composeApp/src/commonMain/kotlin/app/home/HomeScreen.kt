@@ -9,11 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import app.home.domain.HomeViewModel
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 import ui.utils.ContentType
 import ui.utils.NavigationType
 
-@OptIn(KoinExperimentalAPI::class)
 @Composable
 fun HomeScreen(
     contentType: ContentType,
@@ -42,6 +40,7 @@ fun HomeScreen(
     } else {
         HomeScreenDual(
             uiState = uiState.value,
+            navigationType = navigationType,
             onAgentsOverviewClick = onAgentOverviewClick,
             onWEnginesOverviewClick = onWEngineOverviewClick,
             onDrivesOverviewClick = onDrivesOverviewClick,

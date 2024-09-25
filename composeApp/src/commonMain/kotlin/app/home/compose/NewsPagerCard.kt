@@ -48,12 +48,11 @@ fun NewsPagerCard(newsData: OfficialNewsData?) {
     val pagerState = rememberPagerState(pageCount = { newsData?.list?.size ?: 0 })
     val coroutineScope = rememberCoroutineScope()
     Column(
-        Modifier
-            .background(
-                AppTheme.colors.surfaceContainer, RoundedCornerShape(AppTheme.radius.contentCard)
-            )
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        Modifier.background(
+            AppTheme.colors.surfaceContainer, RoundedCornerShape(AppTheme.radius.contentCard)
+        ).padding(bottom = 8.dp).clip(
+            RoundedCornerShape(AppTheme.radius.contentCard)
+        ), verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         HorizontalPager(modifier = Modifier, state = pagerState) { currentPager ->
             NewsPagerCardItem(newsData?.list?.get(currentPager))
@@ -85,36 +84,25 @@ fun NewsPagerCardItem(news: OfficialNewsListItem?) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed = interactionSource.collectIsPressedAsState()
     val isHovered = interactionSource.collectIsHoveredAsState()
-    Column(
-        modifier = Modifier
-            .background(
-                AppTheme.colors.surfaceContainer, RoundedCornerShape(16.dp)
-            ),
+    Box(
+        modifier = Modifier.aspectRatio(1.7f).fillMaxWidth()
     ) {
-        Box(
-            modifier = Modifier
-                .aspectRatio(1.7f)
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(16.dp))
-        ) {
-            if (news == null) {
-                ImageNotFound()
-            } else {
-                val urlHandler = LocalUriHandler.current
-                AsyncImage(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clickable(
-                            interactionSource = interactionSource,
-                            indication = ripple(radius = 16.dp)
-                        ) {
-                            urlHandler.openUri("https://zenless.hoyoverse.com/en-us/news/${news.getNewsId()}")
-                        }, model = news.getImageUrl(), contentDescription = news.getDescription(),
-                    contentScale = ContentScale.Crop
-                )
-                if (isPressed.value || isHovered.value) {
-                    NewsInfo(Modifier.align(Alignment.BottomCenter), news)
-                }
+        if (news == null) {
+            ImageNotFound()
+        } else {
+            val urlHandler = LocalUriHandler.current
+            AsyncImage(
+                modifier = Modifier.fillMaxSize().clickable(
+                    interactionSource = interactionSource, indication = ripple(radius = 16.dp)
+                ) {
+                    urlHandler.openUri("https://zenless.hoyoverse.com/en-us/news/${news.getNewsId()}")
+                },
+                model = news.getImageUrl(),
+                contentDescription = news.getDescription(),
+                contentScale = ContentScale.Crop
+            )
+            if (isPressed.value || isHovered.value) {
+                NewsInfo(Modifier.align(Alignment.BottomCenter), news)
             }
         }
     }
@@ -123,9 +111,7 @@ fun NewsPagerCardItem(news: OfficialNewsListItem?) {
 @Composable
 private fun NewsInfo(modifier: Modifier, news: OfficialNewsListItem) {
     Column(
-        modifier
-            .fillMaxWidth()
-            .background(AppTheme.colors.surface.copy(alpha = 0.9f))
+        modifier.fillMaxWidth().background(AppTheme.colors.surface.copy(alpha = 0.9f))
             .padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
