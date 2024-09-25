@@ -1,22 +1,27 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: Apache-2.0
+ * License: CC BY-SA 4.0
  */
 
 package di
 
-import home.data.ZzzRepository
-import home.data.ZzzRepositoryImpl
-import home.domain.ZzzViewModel
-import org.koin.compose.viewmodel.dsl.viewModelOf
+import app.agent.data.AgentRepository
+import app.agent.data.AgentRepositoryImpl
+import app.home.data.BannerRepository
+import app.home.data.BannerRepositoryImpl
+import app.home.data.NewsRepository
+import app.home.data.NewsRepositoryImpl
+import app.home.domain.HomeViewModel
 import org.koin.core.module.Module
-import org.koin.dsl.bind
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 expect val platformModule: Module
 
 val sharedModule = module {
-    single { ZzzRepositoryImpl(get(), get()) }.bind<ZzzRepository>()
-    viewModelOf(::ZzzViewModel)
+    single<NewsRepository> { NewsRepositoryImpl(get()) }
+    single<BannerRepository> { BannerRepositoryImpl(get()) }
+    single<AgentRepository> { AgentRepositoryImpl(get()) }
 
+    viewModel { HomeViewModel(get(), get(), get()) }
 }

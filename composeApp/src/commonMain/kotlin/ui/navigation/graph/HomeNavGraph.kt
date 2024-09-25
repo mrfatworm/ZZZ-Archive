@@ -1,6 +1,6 @@
 /*
- *  Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- *  License: Apache-2.0
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: CC BY-SA 4.0
  */
 
 package ui.navigation.graph
@@ -9,38 +9,43 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import home.compose.HomeScreen
-import ui.navigation.RootScreen
-import ui.navigation.SubScreen
-import ui.utils.ZzzArchiveContentType
+import app.home.HomeScreen
+import ui.navigation.MainFlow
+import ui.navigation.Screen
+import ui.utils.ContentType
+import ui.utils.NavigationType
 
 @Composable
 fun HomeNavHost(
-    contentType: ZzzArchiveContentType, navigateToTopLevelDestination: (RootScreen) -> Unit
+    contentType: ContentType,
+    navigationType: NavigationType,
+    navigateToTopLevelDestination: (Screen) -> Unit
 ) {
-    val homeNavController = rememberNavController()
-    NavHost(navController = homeNavController, startDestination = SubScreen.Home.route) {
-        if (contentType == ZzzArchiveContentType.DUAL) {
-            composable(SubScreen.Home.route) {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = Screen.Home.route) {
+        if (contentType == ContentType.DUAL) {
+            composable(Screen.Home.route) {
                 HomeScreen(contentType = contentType,
-                    onCharacterOverviewClick = { navigateToTopLevelDestination(RootScreen.Agents) },
-                    onWeaponOverviewClick = { navigateToTopLevelDestination(RootScreen.Weapons) },
-                    onEchoesOverviewClick = { navigateToTopLevelDestination(RootScreen.Drivers) },
-                    onCharacterDetailClick = { homeNavController.navigate(SubScreen.AgentDetail.route) },
-                    onWeaponDetailClick = { homeNavController.navigate(SubScreen.WeaponDetail.route) },
-                    onEchoDetailClick = { homeNavController.navigate(SubScreen.DriverDetail.route) })
+                    navigationType = navigationType,
+                    onAgentOverviewClick = { navigateToTopLevelDestination(MainFlow.Agent) },
+                    onWEngineOverviewClick = { navigateToTopLevelDestination(MainFlow.WEngine) },
+                    onDrivesOverviewClick = { navigateToTopLevelDestination(MainFlow.Drive) },
+                    onAgentDetailClick = { navController.navigate(Screen.AgentDetail.route) },
+                    onWEngineDetailClick = { navController.navigate(Screen.WEngineDetail.route) },
+                    onDriveDetailClick = { navController.navigate(Screen.DriveDetail.route) })
             }
         } else {
-            composable(SubScreen.Home.route) {
+            composable(Screen.Home.route) {
                 HomeScreen(contentType = contentType,
-                    onCharacterOverviewClick = { homeNavController.navigate(SubScreen.AgentsList.route) },
-                    onWeaponOverviewClick = { homeNavController.navigate(SubScreen.WeaponsList.route) },
-                    onEchoesOverviewClick = { homeNavController.navigate(SubScreen.DriversList.route) },
-                    onCharacterDetailClick = { homeNavController.navigate(SubScreen.AgentDetail.route) },
-                    onWeaponDetailClick = { homeNavController.navigate(SubScreen.WeaponDetail.route) },
-                    onEchoDetailClick = { homeNavController.navigate(SubScreen.DriverDetail.route) })
+                    navigationType = navigationType,
+                    onAgentOverviewClick = { navController.navigate(Screen.AgentsList.route) },
+                    onWEngineOverviewClick = { navController.navigate(Screen.WEnginesList.route) },
+                    onDrivesOverviewClick = { navController.navigate(Screen.DrivesList.route) },
+                    onAgentDetailClick = { navController.navigate(Screen.AgentDetail.route) },
+                    onWEngineDetailClick = { navController.navigate(Screen.WEngineDetail.route) },
+                    onDriveDetailClick = { navController.navigate(Screen.DriveDetail.route) })
             }
         }
-        sharedScreenDestination(homeNavController, contentType, navigateToTopLevelDestination)
+        sharedScreenDestination(navController, contentType, navigateToTopLevelDestination)
     }
 }

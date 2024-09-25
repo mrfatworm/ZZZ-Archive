@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
     <string name="app_name">繩匠檔案</string>
+    <string name="unknown">未知 ?</string>
     <string name="home">首頁</string>
     <string name="agents">代理人</string>
     <string name="w_engines">音擎</string>"
-    <string name="drivers">驅動光碟</string>
+    <string name="drives">驅動光碟</string>
     <string name="bangboo">邦布</string>
     <string name="setting">設定</string>
     <string name="feedback">意見回饋</string>
+    <string name="wiki">Wiki</string>
+    <string name="function">工具</string>
+    <string name="view_all">查看全部</string>
+    <string name="light_theme">亮色主題</string>
+    <string name="dark_theme">暗色主題</string>
 
-    <string name="agents_list">代理人列表</string>
-    <string name="w_engines_list">音擎列表</string>
-    <string name="drivers_list">驅動光碟列表</string>
-    <string name="bangboo_list">邦布列表</string>
+    <string name="ether">以太</string>
+    <string name="fire">火屬性</string>
+    <string name="ice">冰屬性</string>
+    <string name="electric">電屬性</string>
+    <string name="physical">物理</string>
+
+    <string name="navigation_drawer">導航列</string>
 
     <string name="confirm">確認</string>
     <string name="cancel">取消</string>
-
 </resources>

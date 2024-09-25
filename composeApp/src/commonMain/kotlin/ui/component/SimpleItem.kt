@@ -1,11 +1,10 @@
 /*
  *  Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- *  License: Apache-2.0
+ *  License: CC BY-SA 4.0
  */
 
 package ui.component
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,8 +22,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.painterResource
+import coil3.compose.AsyncImage
+import ui.theme.AppTheme
 import utils.ZzzArchiveRarity
 
 val itemSize = 80.dp
@@ -37,7 +35,7 @@ fun SimpleItem(
     isLargeSize: Boolean = false,
     rarity: ZzzArchiveRarity = ZzzArchiveRarity.Four,
     name: String,
-    imgRes: DrawableResource? = null,
+    imgUrl: String? = null,
     onClick: () -> Unit = {}
 ) {
     Column(modifier = modifier.clickable(onClick = onClick), horizontalAlignment = Alignment.CenterHorizontally,
@@ -53,10 +51,10 @@ fun SimpleItem(
                         brush = rarity.color, shape = RoundedCornerShape(8.dp)
                     )
             ) {
-                imgRes?.let {
-                    Image(
+                imgUrl?.let {
+                    AsyncImage(
                         modifier = Modifier.fillMaxSize(),
-                        painter = painterResource(imgRes),
+                        model = imgUrl,
                         contentDescription = name
                     )
                 }
@@ -68,8 +66,8 @@ fun SimpleItem(
             text = name,
             textAlign = TextAlign.Center,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface,
+            style = AppTheme.typography.bodyMedium,
+            color = AppTheme.colors.onSurfaceContainer,
             maxLines = 2)
     }
 }

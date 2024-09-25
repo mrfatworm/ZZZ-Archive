@@ -1,6 +1,6 @@
 /*
- *  Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- *  License: Apache-2.0
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: CC BY-SA 4.0
  */
 
 package ui.navigation.graph
@@ -9,25 +9,25 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import feedback.FeedbackScreen
-import setting.SettingScreen
-import ui.navigation.SubScreen
-import ui.utils.ZzzArchiveContentType
+import app.feedback.FeedbackScreen
+import app.setting.SettingScreen
+import ui.navigation.Screen
+import ui.utils.ContentType
 
 @Composable
 fun SettingNavGraph(
-    contentType: ZzzArchiveContentType
+    contentType: ContentType
 ) {
-    val settingNavController = rememberNavController()
+    val navController = rememberNavController()
     NavHost(
-        navController = settingNavController, startDestination = SubScreen.Setting.route
+        navController = navController, startDestination = Screen.Setting.route
     ) {
-        composable(SubScreen.Setting.route) {
+        composable(Screen.Setting.route) {
             SettingScreen(
                 contentType = contentType,
-                onFeedbackClicked = { settingNavController.navigate(SubScreen.Feedback.route) })
+                onFeedbackClicked = { navController.navigate(Screen.Feedback.route) })
         }
-        composable(SubScreen.Feedback.route) {
+        composable(Screen.Feedback.route) {
             FeedbackScreen()
         }
     }

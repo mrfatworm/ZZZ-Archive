@@ -1,12 +1,16 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: Apache-2.0
+ * License: CC BY-SA 4.0
  */
 
 package network
 
-import home.model.OfficialActivities
+import app.agent.model.AgentsListResponse
+import app.home.model.BannerResponse
 
 interface ZzzHttpClient {
-    suspend fun requestActivities(): OfficialActivities
+    val defaultTimeout: Long
+    val longTimeout: Long
+    suspend fun requestBanner(): BannerResponse
+    suspend fun requestAgentList(): AgentsListResponse
 }
