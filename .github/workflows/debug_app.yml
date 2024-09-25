@@ -1,0 +1,10 @@
+name: On Feature Branch Update
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    uses: ./.github/workflows/job_lint.yml
+
+  comment_unit_test:
+    uses: ./.github/workflows/job_test_debug.yml
