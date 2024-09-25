@@ -17,7 +17,11 @@ data class HomeState(
     val agentsList: List<AgentListItem> = emptyList(),
     val wEnginesList: List<SimpleListItemState> = emptyList(),
     val drivesList: List<SimpleListItemState> = emptyList()
-)
+) {
+    fun getAgentsNewToOld(): List<AgentListItem> {
+        return agentsList.reversed()
+    }
+}
 
 
 val sampleHomeState = HomeState(

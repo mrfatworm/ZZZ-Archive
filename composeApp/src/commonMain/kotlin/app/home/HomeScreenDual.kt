@@ -60,7 +60,7 @@ fun HomeScreenDual(
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             NewsPagerCard(uiState.news?.data)
-            AgentsListCard(uiState.agentsList, onAgentsOverviewClick, onAgentDetailClick)
+            AgentsListCard(uiState.getAgentsNewToOld(), onAgentsOverviewClick, onAgentDetailClick)
             WEnginesListCard(uiState.wEnginesList, onWEnginesOverviewClick, onWEngineDetailClick)
             DrivesListCard(uiState.drivesList, onDrivesOverviewClick, onDriveDetailClick)
         }

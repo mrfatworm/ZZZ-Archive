@@ -25,7 +25,7 @@ class ZzzHttpClientImpl(engine: HttpClientEngine) : ZzzHttpClient {
     }
 
     override suspend fun requestAgentList(): AgentsListResponse {
-        return requestData("zh-tw/agent/list.json")
+        return requestData("agent/zh-tw/list.json")
     }
 }
 

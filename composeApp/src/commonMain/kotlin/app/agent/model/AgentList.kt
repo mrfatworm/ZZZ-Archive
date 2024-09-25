@@ -27,10 +27,6 @@ data class AgentListItem(
     val attribute: String,
     @SerialName("attack_type")
     val attackType: String,
-    @SerialName("img_profile")
-    val imgProfile: String,
-    @SerialName("img_portrait")
-    val imgPortrait: String,
     @SerialName("faction_id")
     val factionId: Int
 ) {
@@ -46,6 +42,10 @@ data class AgentListItem(
             }
         }
     }
+
+    fun getProfileUrl(buildType: String = "dev"): String {
+        return "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/$buildType/Asset/Agent/Profile/$id.webp"
+    }
 }
 
 val stubAgentsListResponse = AgentsListResponse(
@@ -59,8 +59,6 @@ val stubAgentsListResponse = AgentsListResponse(
             specialty = "strike",
             attribute = "physical",
             attackType = "slash",
-            imgProfile = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Agent/Profile/3.webp",
-            imgPortrait = "",
             factionId = 1
         ),
         AgentListItem(
@@ -72,8 +70,6 @@ val stubAgentsListResponse = AgentsListResponse(
             specialty = "stun",
             attribute = "electric",
             attackType = "slash",
-            imgProfile = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Agent/Profile/4.webp",
-            imgPortrait = "",
             factionId = 1
         )
     )
