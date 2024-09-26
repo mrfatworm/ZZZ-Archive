@@ -1,18 +1,21 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec
 import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
+import java.util.regex.Pattern
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.buildKonfig)
     alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(11)
     androidTarget {
         //https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-test.html
         @OptIn(ExperimentalKotlinGradlePluginApi::class) instrumentedTestVariant.sourceSetTree.set(
@@ -99,6 +102,26 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    buildFeatures {
+        buildConfig = true
+    }
+
+    flavorDimensions.add("variant")
+    productFlavors {
+        create("dev") {
+            dimension = "variant"
+            isDefault = true
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+            buildConfigField("String", "ASSET_PATH", "\"mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset\"")
+            buildConfigField("String", "API_PATH", "\"/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api/\"")
+        }
+        create("prod") {
+            dimension = "variant"
+            buildConfigField("String", "ASSET_PATH", "\"/mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Asset/\"")
+            buildConfigField("String", "API_PATH", "\"/mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Api/\"")
+        }
+    }
 }
 
 compose.desktop {
@@ -111,4 +134,54 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+}
+
+// Ref: https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/
+project.extra.set("buildkonfig.flavor", currentBuildVariant())
+
+buildkonfig {
+    packageName = "com.mrfatworm.zzzarchive"
+    objectName = "ZzzArchive"
+    exposeObjectWithName = "ZzzArchive"
+
+    defaultConfigs {
+        buildConfigField(FieldSpec.Type.STRING, "variant", "dev")
+        buildConfigField(FieldSpec.Type.STRING, "apiEndPoint", "https://dev.example.com")
+    }
+
+    defaultConfigs("dev") {
+        buildConfigField(FieldSpec.Type.STRING, "variant", "dev")
+        buildConfigField(FieldSpec.Type.STRING, "apiEndPoint", "https://dev.example.com")
+    }
+
+    defaultConfigs("prod") {
+        buildConfigField(FieldSpec.Type.STRING, "variant", "prod")
+        buildConfigField(FieldSpec.Type.STRING, "apiEndPoint", "https://example.com")
+    }
+}
+
+fun Project.getAndroidBuildVariantOrNull(): String? {
+    val variants = setOf("dev", "prod")
+    val taskRequestsStr = gradle.startParameter.taskRequests.toString()
+    val pattern: Pattern = if (taskRequestsStr.contains("assemble")) {
+        Pattern.compile("assemble(\\w+)(Release|Debug)")
+    } else {
+        Pattern.compile("bundle(\\w+)(Release|Debug)")
+    }
+
+    val matcher = pattern.matcher(taskRequestsStr)
+    val variant = if (matcher.find()) matcher.group(1).lowercase() else null
+    return if (variant in variants) {
+        variant
+    } else {
+        null
+    }
+}
+
+private fun Project.currentBuildVariant(): String {
+    val variants = setOf("dev", "prod")
+    return getAndroidBuildVariantOrNull()
+        ?: System.getenv()["VARIANT"]
+            .toString()
+            .takeIf { it in variants } ?: "dev"
 }
