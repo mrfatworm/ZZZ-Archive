@@ -17,6 +17,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.mrfatworm.zzzarchive.ZzzConfig
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -59,7 +60,7 @@ fun SplashScreenSingle(
             tint = AppTheme.colors.onSurface
         )
         Text(
-            text = stringResource(Res.string.app_name),
+            text = stringResource(Res.string.app_name) + " " + ZzzConfig.variant,
             style = AppTheme.typography.headlineMedium,
             color = AppTheme.colors.onSurface
         )
@@ -80,7 +81,7 @@ fun SplashScreenDual() {
             tint = AppTheme.colors.onSurface
         )
         Text(
-            text = stringResource(Res.string.app_name),
+            text = stringResource(Res.string.app_name) + " " + ZzzConfig.variant,
             style = AppTheme.typography.headlineMedium,
             color = AppTheme.colors.onSurface
         )

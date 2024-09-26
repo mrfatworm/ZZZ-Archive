@@ -22,7 +22,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: Execute Gradle command - lintDebug
-      run: ./gradlew lintDebug
+      run: ./gradlew lintDevDebug
 
     - name: Upload Lint Report
       uses: actions/upload-artifact@v4

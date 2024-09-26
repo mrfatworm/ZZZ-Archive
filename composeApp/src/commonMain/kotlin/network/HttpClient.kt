@@ -5,6 +5,7 @@
 
 package network
 
+import com.mrfatworm.zzzarchive.ZzzConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -36,7 +37,7 @@ fun createZzzHttpClient(engine: HttpClientEngine): HttpClient {
         defaultRequest {
             url {
                 takeFrom("https://raw.githubusercontent.com")
-                path("/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api/")
+                path("/${ZzzConfig.API_PATH}/")
             }
             contentType(ContentType.Application.Json)
         }

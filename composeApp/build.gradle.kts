@@ -102,24 +102,17 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildFeatures {
-        buildConfig = true
-    }
 
     flavorDimensions.add("variant")
     productFlavors {
-        create("dev") {
+        create("Dev") {
             dimension = "variant"
             isDefault = true
             applicationIdSuffix = ".dev"
-            versionNameSuffix = "-dev"
-            buildConfigField("String", "ASSET_PATH", "\"mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset\"")
-            buildConfigField("String", "API_PATH", "\"/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api/\"")
+            versionNameSuffix = " Beta"
         }
-        create("prod") {
+        create("Live") {
             dimension = "variant"
-            buildConfigField("String", "ASSET_PATH", "\"/mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Asset/\"")
-            buildConfigField("String", "API_PATH", "\"/mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Api/\"")
         }
     }
 }
@@ -141,27 +134,30 @@ project.extra.set("buildkonfig.flavor", currentBuildVariant())
 
 buildkonfig {
     packageName = "com.mrfatworm.zzzarchive"
-    objectName = "ZzzArchive"
-    exposeObjectWithName = "ZzzArchive"
+    objectName = "ZzzConfig"
+    exposeObjectWithName = "ZzzConfig"
 
     defaultConfigs {
-        buildConfigField(FieldSpec.Type.STRING, "variant", "dev")
-        buildConfigField(FieldSpec.Type.STRING, "apiEndPoint", "https://dev.example.com")
+        buildConfigField(FieldSpec.Type.STRING, "variant", "Beta")
+        buildConfigField(FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset")
+        buildConfigField(FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api")
     }
 
-    defaultConfigs("dev") {
-        buildConfigField(FieldSpec.Type.STRING, "variant", "dev")
-        buildConfigField(FieldSpec.Type.STRING, "apiEndPoint", "https://dev.example.com")
+    defaultConfigs("Dev") {
+        buildConfigField(FieldSpec.Type.STRING, "variant", "Beta")
+        buildConfigField(FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset")
+        buildConfigField(FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api")
     }
 
-    defaultConfigs("prod") {
-        buildConfigField(FieldSpec.Type.STRING, "variant", "prod")
-        buildConfigField(FieldSpec.Type.STRING, "apiEndPoint", "https://example.com")
+    defaultConfigs("Live") {
+        buildConfigField(FieldSpec.Type.STRING, "variant", "Stable")
+        buildConfigField(FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Asset")
+        buildConfigField(FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Api")
     }
 }
 
 fun Project.getAndroidBuildVariantOrNull(): String? {
-    val variants = setOf("dev", "prod")
+    val variants = setOf("Dev", "Live")
     val taskRequestsStr = gradle.startParameter.taskRequests.toString()
     val pattern: Pattern = if (taskRequestsStr.contains("assemble")) {
         Pattern.compile("assemble(\\w+)(Release|Debug)")
@@ -179,9 +175,9 @@ fun Project.getAndroidBuildVariantOrNull(): String? {
 }
 
 private fun Project.currentBuildVariant(): String {
-    val variants = setOf("dev", "prod")
+    val variants = setOf("Dev", "Live")
     return getAndroidBuildVariantOrNull()
         ?: System.getenv()["VARIANT"]
             .toString()
-            .takeIf { it in variants } ?: "dev"
+            .takeIf { it in variants } ?: "Dev"
 }
