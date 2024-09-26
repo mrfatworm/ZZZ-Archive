@@ -30,12 +30,14 @@ Android Studio > Run > Edit Configurations > New > Gradle
 - Design System
   - UI Component
   - Color Scheme (Dark, Light)
-  - Typographic
+  - Typographic (Noto Sans)
   - Spacer
   - Radius
+- BuildKonfig
 
 ## Special Thanks / 鳴謝
 * Resource from Zenless Zone Zero
 * [JetBrains KMP Guideline](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
 * Android Open Source Project
 * [Compose Multiplatform Wizard](https://github.com/terrakok/Compose-Multiplatform-Wizard)
+* [BuildKonfig for KMP](https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/)
