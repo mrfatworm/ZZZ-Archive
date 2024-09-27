@@ -14,9 +14,10 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import app.agent.model.AgentListItem
 import ui.component.ContentCard
-import ui.component.SimpleItem
+import ui.component.RarityItem
 import ui.component.ViewAllCardHeader
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
@@ -44,10 +45,11 @@ fun AgentsListCard(
             )
         ) {
             items(items = agentsList, key = { it.id }) { item ->
-                SimpleItem(
-                    modifier = Modifier.clickable { onAgentDetailClick(item.id) },
-                    rarity = item.getRarity(),
+                RarityItem(
+                    modifier = Modifier.size(100.dp).clickable { onAgentDetailClick(item.id) },
+                    rarityLevel = item.rarity,
                     name = item.name,
+                    attribute = item.attribute,
                     imgUrl = item.getProfileUrl()
                 )
                 Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))

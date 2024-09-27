@@ -9,12 +9,13 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ui.component.SimpleItem
+import ui.component.RarityItem
 
 @Composable
 fun AgentsListScreenDual(
@@ -27,10 +28,9 @@ fun AgentsListScreenDual(
     ) {
         items(state.agentsList.size) { index ->
             val agent = state.agentsList[index]
-            SimpleItem(modifier = Modifier.clickable { onAgentClick(agent.id) }.padding(top = 8.dp),
-                isLargeSize = true,
+            RarityItem(modifier = Modifier.size(100.dp).clickable { onAgentClick(agent.id) }.padding(top = 8.dp),
                 name = agent.name,
-                rarity = agent.rarity,
+                rarityLevel = agent.rarity,
                 imgUrl = agent.imgUrl)
         }
     }

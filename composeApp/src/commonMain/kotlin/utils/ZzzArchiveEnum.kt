@@ -5,14 +5,10 @@
 
 package utils
 
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
-import ui.utils.rarityFiveBrush
-import ui.utils.rarityFourBrush
-import ui.utils.rarityOneBrush
-import ui.utils.rarityThreeBrush
-import ui.utils.rarityTwoBrush
+import ui.theme.ColorScheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.electric
 import zzzarchive.composeapp.generated.resources.ether
@@ -26,15 +22,15 @@ import zzzarchive.composeapp.generated.resources.ice
 import zzzarchive.composeapp.generated.resources.physical
 
 
-enum class ZzzArchiveRarity(val rarity: Int, val color: Brush) {
-    One(1, rarityOneBrush),
-    Two(2, rarityTwoBrush),
-    Three(3, rarityThreeBrush),
-    Four(4, rarityFourBrush),
-    Five(5, rarityFiveBrush)
+enum class ZzzRarity(val level: Int, val color: Color) {
+    One(1, ColorScheme().imageRarity1),
+    Two(2, ColorScheme().imageRarity2),
+    Three(3, ColorScheme().imageRarity3),
+    Four(4, ColorScheme().imageRarity4),
+    Five(5, ColorScheme().imageRarity5)
 }
 
-enum class AgentAttribute(val attribute: StringResource, val iconRes: DrawableResource) {
+enum class AgentAttribute(val textRes: StringResource, val iconRes: DrawableResource) {
     Ether(Res.string.ether, Res.drawable.ic_attribute_ether),
     Fire(Res.string.fire, Res.drawable.ic_attribute_fire),
     Ice(Res.string.ice, Res.drawable.ic_attribute_ice),

@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import ui.component.SimpleItem
+import ui.component.RarityItem
 import ui.data.SimpleListItemState
 import ui.data.sampleAgentsList
 import ui.theme.AppTheme
@@ -75,10 +75,10 @@ fun HomeListSection(
                 Spacer(modifier = Modifier.padding(8.dp))
             }
             items(items = items) { item ->
-                SimpleItem(modifier = Modifier
+                RarityItem(modifier = Modifier
                     .clickable { onItemClick(item.id) }
                     .padding(horizontal = 4.dp),
-                    rarity = item.rarity,
+                    rarityLevel = item.rarity,
                     name = item.name,
                     imgUrl = "")
             }

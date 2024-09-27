@@ -45,12 +45,11 @@ fun ContentCard(
 fun ViewAllCardHeader(modifier: Modifier, titleRes: StringResource, onActionClick: () -> Unit) {
     CardHeader(
         modifier = modifier
-            .fillMaxWidth()
-            .clickable { onActionClick() },
+            .fillMaxWidth(),
         titleRes = titleRes
     ) {
         Row(
-            modifier = Modifier,
+            modifier = Modifier.clickable { onActionClick() },
             horizontalArrangement = Arrangement.spacedBy(4.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {

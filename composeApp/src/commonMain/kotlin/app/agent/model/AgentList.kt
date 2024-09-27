@@ -8,7 +8,7 @@ package app.agent.model
 import com.mrfatworm.zzzarchive.ZzzConfig
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import utils.ZzzArchiveRarity
+import utils.ZzzRarity
 
 @Serializable
 data class AgentsListResponse(
@@ -31,19 +31,6 @@ data class AgentListItem(
     @SerialName("faction_id")
     val factionId: Int
 ) {
-    fun getRarity(): ZzzArchiveRarity {
-        return when (rarity) {
-            1 -> ZzzArchiveRarity.One
-            2 -> ZzzArchiveRarity.Two
-            3 -> ZzzArchiveRarity.Three
-            4 -> ZzzArchiveRarity.Four
-            5 -> ZzzArchiveRarity.Five
-            else -> {
-                ZzzArchiveRarity.One
-            }
-        }
-    }
-
     fun getProfileUrl(): String {
         return "https://raw.githubusercontent.com/${ZzzConfig.ASSET_PATH}/Agent/Profile/$id.webp"
     }

@@ -15,7 +15,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import ui.component.ContentCard
-import ui.component.SimpleItem
+import ui.component.RarityItem
 import ui.component.ViewAllCardHeader
 import ui.data.SimpleListItemState
 import ui.theme.AppTheme
@@ -44,9 +44,9 @@ fun DrivesListCard(
             )
         ) {
             items(items = drivesList) { item ->
-                SimpleItem(
+                RarityItem(
                     modifier = Modifier.clickable { onDriveDetailClick(item.id) },
-                    rarity = item.rarity,
+                    rarityLevel = item.rarity,
                     name = item.name,
                     imgUrl = ""
                 )

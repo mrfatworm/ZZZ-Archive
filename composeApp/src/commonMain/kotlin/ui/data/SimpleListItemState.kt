@@ -5,44 +5,42 @@
 
 package ui.data
 
-import utils.ZzzArchiveRarity
-
 
 data class SimpleListItemState(
     val id: Int = 0,
     val name: String,
     val imgUrl: String?,
-    val rarity: ZzzArchiveRarity = ZzzArchiveRarity.One
+    val rarity: Int = 1
 )
 
 val sampleAgentState = SimpleListItemState(
-    name = "11號", imgUrl = "", rarity = ZzzArchiveRarity.Five
+    name = "11號", imgUrl = "", rarity = 5
 )
 
 val sampleWEnginState = SimpleListItemState(
     name = "11號的專武，長字串測試測試測試測試測試",
     imgUrl = "",
-    rarity = ZzzArchiveRarity.Five
+    rarity = 5
 )
 
 val sampleDriverState = SimpleListItemState(
-    name = "震星迪思可", imgUrl = "", rarity = ZzzArchiveRarity.One
+    name = "震星迪思可", imgUrl = "", rarity = 5
 )
 
 val sampleAgentsList = listOf(
     sampleAgentState,
-    sampleAgentState.copy(rarity = ZzzArchiveRarity.Four),
-    sampleAgentState.copy(rarity = ZzzArchiveRarity.Three),
-    sampleAgentState.copy(rarity = ZzzArchiveRarity.Two),
-    sampleAgentState.copy(rarity = ZzzArchiveRarity.One)
+    sampleAgentState.copy(rarity = 4),
+    sampleAgentState.copy(rarity = 3),
+    sampleAgentState.copy(rarity = 2),
+    sampleAgentState.copy(rarity = 1)
 )
 
 val sampleWEnginesList = listOf(
     sampleWEnginState,
-    sampleWEnginState.copy(rarity = ZzzArchiveRarity.Four),
-    sampleWEnginState.copy(rarity = ZzzArchiveRarity.Three),
-    sampleWEnginState.copy(rarity = ZzzArchiveRarity.Two),
-    sampleWEnginState.copy(rarity = ZzzArchiveRarity.One)
+    sampleWEnginState.copy(rarity = 4),
+    sampleWEnginState.copy(rarity = 3),
+    sampleWEnginState.copy(rarity = 2),
+    sampleWEnginState.copy(rarity = 1)
 )
 
 val sampleDrivesList = listOf(
