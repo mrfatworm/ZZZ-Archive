@@ -5,7 +5,7 @@ on:
 
 jobs:
   test:
-    name: ComposeApp Unit Test
+    name: Unit Test
     runs-on: ubuntu-latest
 
     steps:
@@ -23,4 +23,4 @@ jobs:
 
       # Run Tests Build
     - name: Run tests
-      run: ./gradlew :composeApp:testDebugUnitTest
+      run: ./gradlew :composeApp:testDevDebugUnitTest

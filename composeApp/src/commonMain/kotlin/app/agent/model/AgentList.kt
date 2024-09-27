@@ -5,6 +5,7 @@
 
 package app.agent.model
 
+import com.mrfatworm.zzzarchive.ZzzConfig
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import utils.ZzzArchiveRarity
@@ -43,8 +44,8 @@ data class AgentListItem(
         }
     }
 
-    fun getProfileUrl(buildType: String = "dev"): String {
-        return "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/$buildType/Asset/Agent/Profile/$id.webp"
+    fun getProfileUrl(): String {
+        return "https://raw.githubusercontent.com/${ZzzConfig.ASSET_PATH}/Agent/Profile/$id.webp"
     }
 }
 
