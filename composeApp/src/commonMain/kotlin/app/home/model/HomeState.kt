@@ -14,6 +14,7 @@ import ui.data.sampleWEnginesList
 data class HomeState(
     val news: OfficialNewsResponse? = null,
     val banner: BannerResponse? = null,
+    val pixivPuppiesList: List<RecentArticle> = emptyList(),
     val agentsList: List<AgentListItem> = emptyList(),
     val wEnginesList: List<SimpleListItemState> = emptyList(),
     val drivesList: List<SimpleListItemState> = emptyList()

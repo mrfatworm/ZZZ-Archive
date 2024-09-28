@@ -6,21 +6,15 @@
 package network
 
 import app.home.model.OfficialNewsResponse
-import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.path
-import io.ktor.http.takeFrom
-import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.json.Json
 
-class OfficialWebHttpClientImpl(engine: HttpClientEngine) : OfficialWebHttpClient {
+class OfficialWebHttpImpl(engine: HttpClientEngine) : OfficialWebHttp {
     override val timeout = 5000L
     private val client = createOfficialWebHttpClient(engine)
 

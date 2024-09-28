@@ -25,4 +25,7 @@
 
     <string name="confirm">確認</string>
     <string name="cancel">取消</string>
+
+    <string name="pixiv_hot">Pixiv 熱門</string>
+
 </resources>

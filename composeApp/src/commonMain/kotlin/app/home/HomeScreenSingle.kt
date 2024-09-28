@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import app.home.compose.BannerImageCard
 import app.home.compose.HoYoLabZzzStatusCard
 import app.home.compose.NewsPagerCard
-import app.home.compose.PixivTrendingCard
+import app.home.compose.PixivTopicCard
 import app.home.model.HomeState
 import app.home.model.sampleHomeState
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -44,7 +44,7 @@ fun HomeScreenSingle(
         BannerImageCard(uiState.banner)
         HoYoLabZzzStatusCard()
         NewsPagerCard(uiState.news?.data)
-        PixivTrendingCard()
+        PixivTopicCard(uiState.pixivPuppiesList)
     }
 }
 

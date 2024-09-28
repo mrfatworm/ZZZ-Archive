@@ -5,45 +5,45 @@
 
 package app.home.data
 
-import app.home.model.stubOfficialNewsDataResponse
+import app.home.model.stubPixivZzzTopic
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
-import network.FakeOfficialWebHttp
+import network.FakePixivHttp
 import utils.ZzzResult
 import kotlin.test.Test
 
 
-class NewsRepositoryTest {
+class PixivRepositoryTest {
 
-    private val httpClient = FakeOfficialWebHttp()
-    private val repository = NewsRepositoryImpl(httpClient)
+    private val httpClient = FakePixivHttp()
+    private val repository = PixivRepositoryImpl(httpClient)
 
     @Test
     fun `Get News Success`() = runTest {
-        val result = repository.getNews(0, "") as ZzzResult.Success
-        assertThat(result.data).isEqualTo(stubOfficialNewsDataResponse)
+        val result = repository.getZzzTopic() as ZzzResult.Success
+        assertThat(result.data).isEqualTo(stubPixivZzzTopic)
     }
 
     @Test
     fun `Get News Error`() = runTest {
         httpClient.setError(true)
-        val result = repository.getNews(0, "") as ZzzResult.Error
+        val result = repository.getZzzTopic() as ZzzResult.Error
         assertThat(result.exception).isInstanceOf(Exception::class)
     }
 
     @Test
     fun `Get New Every 10 Minutes`() = runTest {
-        val result = repository.getNewsPeriodically(10, 0, "").first() as ZzzResult.Success
-        assertThat(result.data).isEqualTo(stubOfficialNewsDataResponse)
+        val result = repository.getZzzTopicPeriodically(10).first() as ZzzResult.Success
+        assertThat(result.data).isEqualTo(stubPixivZzzTopic)
     }
 
     @Test
     fun `Get New Every 10 Minutes Fail`() = runTest {
         httpClient.setError(true)
-        val result = repository.getNewsPeriodically(10, 0, "").first() as ZzzResult.Error
+        val result = repository.getZzzTopicPeriodically(10).first() as ZzzResult.Error
         assertThat(result.exception).isInstanceOf(Exception::class)
     }
 }

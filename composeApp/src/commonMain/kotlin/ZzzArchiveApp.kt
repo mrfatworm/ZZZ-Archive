@@ -22,6 +22,7 @@ import utils.imageLoaderDiskCache
 @OptIn(ExperimentalCoilApi::class)
 @Composable
 fun ZzzArchiveApp() {
+    // Initialize the Coil3 image loader
     setSingletonImageLoaderFactory { context ->
         imageLoaderDiskCache(context, false)
     }

@@ -85,7 +85,7 @@ fun NewsPagerCardItem(news: OfficialNewsListItem?) {
     val isPressed = interactionSource.collectIsPressedAsState()
     val isHovered = interactionSource.collectIsHoveredAsState()
     Box(
-        modifier = Modifier.aspectRatio(1.7f).fillMaxWidth()
+        modifier = Modifier.fillMaxWidth().aspectRatio(1.7f)
     ) {
         if (news == null) {
             ImageNotFound()

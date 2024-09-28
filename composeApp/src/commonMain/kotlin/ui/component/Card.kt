@@ -68,8 +68,8 @@ fun ViewAllCardHeader(modifier: Modifier, titleRes: StringResource, onActionClic
 }
 
 @Composable
-private fun CardHeader(
-    modifier: Modifier, titleRes: StringResource, action: @Composable () -> Unit
+fun CardHeader(
+    modifier: Modifier, titleRes: StringResource, action: @Composable () -> Unit = {}
 ) {
     Row(
         modifier = modifier

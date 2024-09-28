@@ -7,10 +7,10 @@ package app.agent.data
 
 import app.agent.model.AgentsListResponse
 import kotlinx.coroutines.withTimeout
-import network.ZzzHttpClient
+import network.ZzzHttp
 import utils.ZzzResult
 
-class AgentRepositoryImpl(private val httpClient: ZzzHttpClient) : AgentRepository {
+class AgentRepositoryImpl(private val httpClient: ZzzHttp) : AgentRepository {
     override suspend fun getAgentsList(): ZzzResult<AgentsListResponse> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {

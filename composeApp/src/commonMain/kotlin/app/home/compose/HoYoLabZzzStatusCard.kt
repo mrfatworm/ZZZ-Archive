@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ui.component.ContentCard
 import ui.theme.AppTheme
@@ -26,10 +27,11 @@ fun HoYoLabZzzStatusCard() {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                modifier = Modifier.padding(96.dp),
+                modifier = Modifier.padding(32.dp),
                 text = "HoYoLab ZZZ Status",
+                textAlign = TextAlign.Center,
                 color = AppTheme.colors.onSurfaceContainer,
-                style = AppTheme.typography.headlineMedium
+                style = AppTheme.typography.headlineSmall
             )
         }
     }

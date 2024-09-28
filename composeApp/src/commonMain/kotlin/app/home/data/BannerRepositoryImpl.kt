@@ -7,10 +7,10 @@ package app.home.data
 
 import app.home.model.BannerResponse
 import kotlinx.coroutines.withTimeout
-import network.ZzzHttpClient
+import network.ZzzHttp
 import utils.ZzzResult
 
-class BannerRepositoryImpl(private val httpClient: ZzzHttpClient) : BannerRepository {
+class BannerRepositoryImpl(private val httpClient: ZzzHttp) : BannerRepository {
     override suspend fun getBanner(): ZzzResult<BannerResponse> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {

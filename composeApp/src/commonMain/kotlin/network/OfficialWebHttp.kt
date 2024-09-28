@@ -8,7 +8,7 @@ package network
 import app.home.model.OfficialNewsResponse
 
 
-interface OfficialWebHttpClient {
+interface OfficialWebHttp {
     val timeout: Long
     suspend fun requestNews(amount: Int, langKey: String): OfficialNewsResponse
 }

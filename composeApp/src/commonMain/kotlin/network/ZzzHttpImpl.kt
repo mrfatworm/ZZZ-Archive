@@ -8,7 +8,7 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.appendPathSegments
 import kotlinx.serialization.json.Json
 
-class ZzzHttpClientImpl(engine: HttpClientEngine) : ZzzHttpClient {
+class ZzzHttpImpl(engine: HttpClientEngine) : ZzzHttp {
     override val defaultTimeout = 5000L
     override val longTimeout = 10000L
     private val client = createZzzHttpClient(engine)

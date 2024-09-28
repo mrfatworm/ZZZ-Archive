@@ -5,10 +5,10 @@
 
 package network
 
-import app.home.model.OfficialNewsResponse
-import app.home.model.stubOfficialNewsDataResponse
+import app.home.model.PixivZzzTopic
+import app.home.model.stubPixivZzzTopic
 
-class FakeOfficialWebHttpClient : OfficialWebHttpClient {
+class FakePixivHttp : PixivHttp {
     override val timeout = 5000L
     private var isError = false
 
@@ -16,11 +16,11 @@ class FakeOfficialWebHttpClient : OfficialWebHttpClient {
         this.isError = isError
     }
 
-    override suspend fun requestNews(amount: Int, langKey: String): OfficialNewsResponse {
+    override suspend fun requestZzzTopic(): PixivZzzTopic {
         return if (isError) {
             throw Exception()
         } else {
-            stubOfficialNewsDataResponse
+            stubPixivZzzTopic
         }
     }
 }

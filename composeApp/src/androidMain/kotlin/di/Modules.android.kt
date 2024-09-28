@@ -7,15 +7,18 @@ package di
 
 import database.ZzzDatabase
 import io.ktor.client.engine.okhttp.OkHttp
-import network.OfficialWebHttpClient
-import network.OfficialWebHttpClientImpl
-import network.ZzzHttpClient
-import network.ZzzHttpClientImpl
+import network.OfficialWebHttp
+import network.OfficialWebHttpImpl
+import network.PixivHttp
+import network.PixivHttpImpl
+import network.ZzzHttp
+import network.ZzzHttpImpl
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 actual val platformModule = module {
     singleOf(::ZzzDatabase)
-    single<ZzzHttpClient> { ZzzHttpClientImpl(OkHttp.create()) }
-    single<OfficialWebHttpClient> { OfficialWebHttpClientImpl(OkHttp.create()) }
+    single<ZzzHttp> { ZzzHttpImpl(OkHttp.create()) }
+    single<OfficialWebHttp> { OfficialWebHttpImpl(OkHttp.create()) }
+    single<PixivHttp> { PixivHttpImpl(OkHttp.create()) }
 }

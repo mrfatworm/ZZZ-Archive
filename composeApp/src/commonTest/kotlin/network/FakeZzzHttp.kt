@@ -11,7 +11,7 @@ import app.home.model.BannerResponse
 import app.home.model.stubBannerResponse
 
 
-class FakeZzzHttpClient : ZzzHttpClient {
+class FakeZzzHttp : ZzzHttp {
     override val defaultTimeout = 5000L
     override val longTimeout = 10000L
     private var isError = false

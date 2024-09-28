@@ -18,7 +18,7 @@ import app.home.compose.BannerImageCard
 import app.home.compose.DrivesListCard
 import app.home.compose.HoYoLabZzzStatusCard
 import app.home.compose.NewsPagerCard
-import app.home.compose.PixivTrendingCard
+import app.home.compose.PixivTopicCard
 import app.home.compose.WEnginesListCard
 import app.home.model.HomeState
 import app.home.model.sampleHomeState
@@ -51,7 +51,7 @@ fun HomeScreenDual(
         ) {
             BannerImageCard(uiState.banner)
             HoYoLabZzzStatusCard()
-            PixivTrendingCard()
+            PixivTopicCard(uiState.pixivPuppiesList)
         }
 
         Column(

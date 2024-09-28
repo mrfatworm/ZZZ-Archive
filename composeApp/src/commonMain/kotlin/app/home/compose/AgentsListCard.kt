@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -46,7 +47,7 @@ fun AgentsListCard(
         ) {
             items(items = agentsList, key = { it.id }) { item ->
                 RarityItem(
-                    modifier = Modifier.size(100.dp).clickable { onAgentDetailClick(item.id) },
+                    modifier = Modifier.width(100.dp).clickable { onAgentDetailClick(item.id) },
                     rarityLevel = item.rarity,
                     name = item.name,
                     attribute = item.attribute,

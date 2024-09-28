@@ -8,7 +8,7 @@ package network
 import app.agent.model.AgentsListResponse
 import app.home.model.BannerResponse
 
-interface ZzzHttpClient {
+interface ZzzHttp {
     val defaultTimeout: Long
     val longTimeout: Long
     suspend fun requestBanner(): BannerResponse

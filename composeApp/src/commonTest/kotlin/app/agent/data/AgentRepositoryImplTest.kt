@@ -10,12 +10,12 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import kotlinx.coroutines.test.runTest
-import network.FakeZzzHttpClient
+import network.FakeZzzHttp
 import utils.ZzzResult
 import kotlin.test.Test
 
 class AgentRepositoryImplTest {
-    private val httpClient = FakeZzzHttpClient()
+    private val httpClient = FakeZzzHttp()
     private val repository = AgentRepositoryImpl(httpClient)
 
     @Test
