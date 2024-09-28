@@ -5,21 +5,23 @@
 
 package ui.navigation.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
@@ -45,47 +47,42 @@ import zzzarchive.composeapp.generated.resources.ic_sun
 import zzzarchive.composeapp.generated.resources.light_theme
 import zzzarchive.composeapp.generated.resources.navigation_drawer
 
+val navigationDrawerShape = RoundedCornerShape(32.dp)
+val navigationDrawerMinWidth = 240.dp
+val navigationDrawerMaxWidth = 360.dp
 
 @Composable
 fun ModalNavigationDrawerContent(
     selectedDestination: String, navigationActions: NavActions, onDrawerClicked: () -> Unit = {}
 ) {
-    ModalDrawerSheet(
-        modifier = Modifier.border(3.dp, AppTheme.colors.border, RoundedCornerShape(32.dp)),
-        drawerShape = RoundedCornerShape(32.dp),
-        drawerContainerColor = AppTheme.colors.surfaceContainer
+    Column(
+        modifier = Modifier.fillMaxHeight().padding(4.dp)
+            .widthIn(min = navigationDrawerMinWidth, max = navigationDrawerMaxWidth)
+            .border(3.dp, AppTheme.colors.border, navigationDrawerShape)
+            .background(AppTheme.colors.surfaceContainer, navigationDrawerShape)
+            .padding(horizontal = 16.dp, vertical = 20.dp)
     ) {
-        Column(
-            modifier = Modifier.padding(horizontal = 12.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = stringResource(Res.string.app_name).uppercase(),
-                    style = AppTheme.typography.labelMedium,
-                    color = AppTheme.colors.onSurfaceVariant
+            Text(
+                text = stringResource(Res.string.app_name).uppercase(),
+                style = AppTheme.typography.labelMedium,
+                color = AppTheme.colors.onSurfaceVariant
+            )
+            IconButton(onClick = onDrawerClicked) {
+                Icon(
+                    painter = painterResource(Res.drawable.ic_nav_back),
+                    contentDescription = stringResource(Res.string.navigation_drawer),
+                    tint = AppTheme.colors.onSurfaceVariant
                 )
-                IconButton(onClick = onDrawerClicked) {
-                    Icon(
-                        painter = painterResource(Res.drawable.ic_nav_back),
-                        contentDescription = stringResource(Res.string.navigation_drawer),
-                        tint = AppTheme.colors.onSurfaceVariant
-                    )
-                }
             }
         }
 
         Column(
-            modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 12.dp),
+            modifier = Modifier.verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             TOP_LEVEL_DESTINATIONS_MEDIUM.forEach { destination ->
@@ -117,9 +114,7 @@ fun ModalNavigationDrawerContent(
             }
         }
         Spacer(
-            modifier = Modifier
-                .weight(1f)
-                .heightIn(min = 16.dp)
+            modifier = Modifier.weight(1f).heightIn(min = 16.dp)
         )
         var isDark by AppTheme.isDark
         NavigationDrawerItem(

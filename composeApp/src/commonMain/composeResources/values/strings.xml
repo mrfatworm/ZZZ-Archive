@@ -2,6 +2,13 @@
 <resources>
     <string name="app_name">ZZZ Archive</string>
     <string name="unknown">Unknown ?</string>
+
+    <string name="navigation_drawer">Navigation Drawer</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+
     <string name="home">Home</string>
     <string name="agents">Agents</string>
     <string name="w_engines">W-Engines</string>"
@@ -20,10 +27,6 @@
     <string name="ice">Ice</string>
     <string name="electric">Electric</string>
     <string name="physical">Physical</string>
-
-    <string name="navigation_drawer">Navigation Drawer</string>
-    <string name="confirm">Confirm</string>
-    <string name="cancel">Cancel</string>
 
     <string name="pixiv_hot">Pixiv Hot</string>
 

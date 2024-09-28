@@ -21,13 +21,13 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
-import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
@@ -93,10 +93,10 @@ fun NewsPagerCardItem(news: OfficialNewsListItem?) {
             val urlHandler = LocalUriHandler.current
             AsyncImage(
                 modifier = Modifier.fillMaxSize().clickable(
-                    interactionSource = interactionSource, indication = ripple(radius = 16.dp)
+                    interactionSource = interactionSource, indication = null
                 ) {
                     urlHandler.openUri("https://zenless.hoyoverse.com/en-us/news/${news.getNewsId()}")
-                },
+                }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
                 model = news.getImageUrl(),
                 contentDescription = news.getDescription(),
                 contentScale = ContentScale.Crop
@@ -111,24 +111,24 @@ fun NewsPagerCardItem(news: OfficialNewsListItem?) {
 @Composable
 private fun NewsInfo(modifier: Modifier, news: OfficialNewsListItem) {
     Column(
-        modifier.fillMaxWidth().background(AppTheme.colors.surface.copy(alpha = 0.9f))
+        modifier.fillMaxWidth().background(AppTheme.colors.hoveredMask)
             .padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
             text = news.getTitle(),
-            color = AppTheme.colors.onSurface,
+            color = AppTheme.colors.onHoveredMask,
             style = AppTheme.typography.titleMedium
         )
         Text(
             modifier = Modifier.weight(1f),
             text = news.getDescription(),
-            color = AppTheme.colors.onSurfaceVariant,
+            color = AppTheme.colors.onHoveredMaskVariant,
             style = AppTheme.typography.bodyMedium
         )
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = news.getDate(),
-            color = AppTheme.colors.onSurfaceVariant,
+            color = AppTheme.colors.onHoveredMaskVariant,
             style = AppTheme.typography.labelMedium,
             textAlign = TextAlign.End
         )

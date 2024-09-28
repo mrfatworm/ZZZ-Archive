@@ -34,7 +34,10 @@ class ColorScheme(
     val imageRarity3: Color = Color(0xFF00A9FF),
     val imageRarity4: Color = Color(0xFFBB37C7),
     val imageRarity5: Color = Color(0xFFFFB500),
-    val buttonBorder: Color = Color.Unspecified
+    val buttonBorder: Color = Color.Unspecified,
+    val hoveredMask: Color = Color.Unspecified,
+    val onHoveredMask: Color = Color.Unspecified,
+    val onHoveredMaskVariant: Color = Color.Unspecified
 )
 
 internal val darkScheme = ColorScheme(
@@ -57,7 +60,10 @@ internal val darkScheme = ColorScheme(
     imageBackground = neutral900,
     imageTagContainer = Color(0x80151515),
     imageOnTagContainer = Color(0xFFF0F0F0),
-    buttonBorder = neutral700
+    buttonBorder = neutral700,
+    hoveredMask = Color(0x80000000),
+    onHoveredMask = neutral100,
+    onHoveredMaskVariant = neutral200
 )
 
 internal val lightScheme = ColorScheme(
@@ -78,7 +84,10 @@ internal val lightScheme = ColorScheme(
     imageBorder = neutral200,
     imageInsideBorder = Color.White,
     imageBackground = neutral100,
-    imageTagContainer = Color(0x80151515),
+    imageTagContainer = Color(0x804A4A4A),
     imageOnTagContainer = Color(0xFFF0F0F0),
-    buttonBorder = neutral300
+    buttonBorder = neutral300,
+    hoveredMask = Color(0x80CCCCCC),
+    onHoveredMask = neutral900,
+    onHoveredMaskVariant = neutral800
 )

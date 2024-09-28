@@ -19,12 +19,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
-import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
@@ -48,11 +50,12 @@ fun BannerImageCard(banner: BannerResponse?) {
         } else {
             val urlHandler = LocalUriHandler.current
             AsyncImage(
-                modifier = Modifier.fillMaxSize().clickable(
-                        interactionSource = interactionSource, indication = ripple(radius = 16.dp)
+                modifier = Modifier.fillMaxSize().pointerHoverIcon(PointerIcon.Hand)
+                    .clickable(
+                        interactionSource = interactionSource, indication = null
                     ) {
                         urlHandler.openUri(banner.artworkUrl)
-                    },
+                    }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
                 model = banner.getImageUrl(),
                 contentDescription = banner.artworkName,
                 contentScale = ContentScale.Crop
@@ -68,18 +71,22 @@ fun BannerImageCard(banner: BannerResponse?) {
 @Composable
 private fun ArtworkInfo(modifier: Modifier, banner: BannerResponse) {
     Column(
-        modifier.fillMaxWidth().background(AppTheme.colors.surface.copy(alpha = 0.9f))
-            .padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier.fillMaxWidth().background(AppTheme.colors.hoveredMask).padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
-            modifier = Modifier.weight(1f),
-            text = banner.artworkName,
-            color = AppTheme.colors.onSurface,
+            modifier = Modifier,
+            text = banner.artworkName, color = AppTheme.colors.onHoveredMask,
             style = AppTheme.typography.titleMedium
         )
         Text(
-            text = banner.authorName,
-            color = AppTheme.colors.onSurfaceVariant,
+            modifier = Modifier.weight(1f),
+            text = banner.artworkName,
+            color = AppTheme.colors.onHoveredMask,
+            style = AppTheme.typography.bodyMedium
+        )
+        Text(
+            text = banner.authorName, color = AppTheme.colors.onHoveredMaskVariant,
             style = AppTheme.typography.labelMedium
         )
     }

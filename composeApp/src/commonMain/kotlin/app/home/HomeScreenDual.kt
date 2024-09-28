@@ -43,7 +43,7 @@ fun HomeScreenDual(
         ) {
             BannerImageCard(uiState.banner)
             HoYoLabZzzStatusCard()
-            PixivTopicCard(uiState.pixivPuppiesList)
+            PixivTopicCard(uiState.pixivPuppiesList, navigationType)
         }
 
         Column(

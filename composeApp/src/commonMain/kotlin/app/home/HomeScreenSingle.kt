@@ -44,7 +44,7 @@ fun HomeScreenSingle(
         BannerImageCard(uiState.banner)
         HoYoLabZzzStatusCard()
         NewsPagerCard(uiState.news?.data)
-        PixivTopicCard(uiState.pixivPuppiesList)
+        PixivTopicCard(uiState.pixivPuppiesList, navigationType)
     }
 }
 

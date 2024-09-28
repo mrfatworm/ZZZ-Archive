@@ -7,6 +7,9 @@ package app.home.compose
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.hoverable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,17 +19,23 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -37,46 +46,97 @@ import coil3.network.NetworkHeaders
 import coil3.network.httpHeaders
 import coil3.request.ImageRequest
 import coil3.size.Size
+import kotlinx.coroutines.launch
 import ui.component.CardHeader
 import ui.component.ContentCard
 import ui.component.ImageNotFound
+import ui.component.ZzzIconButton
 import ui.theme.AppTheme
+import ui.utils.NavigationType
 import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.ic_arrow_back
+import zzzarchive.composeapp.generated.resources.ic_arrow_next
+import zzzarchive.composeapp.generated.resources.next
 import zzzarchive.composeapp.generated.resources.pixiv_hot
+import zzzarchive.composeapp.generated.resources.previous
 
 @Composable
-fun PixivTopicCard(recentArticlesList: List<RecentArticle>) {
-    ContentCard(modifier = Modifier.fillMaxWidth()) {
-        CardHeader(
-            modifier = Modifier.fillMaxWidth(),
-            titleRes = Res.string.pixiv_hot,
-        )
-        LazyRow(
-            contentPadding = PaddingValues(
-                top = AppTheme.dimens.paddingUnderCardHeader,
-                start = AppTheme.dimens.paddingCard,
-                end = AppTheme.dimens.paddingCard,
-                bottom = 24.dp
+fun PixivTopicCard(
+    recentArticlesList: List<RecentArticle>, navigationType: NavigationType
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val isHovered = interactionSource.collectIsHoveredAsState()
+    val lazyListState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
+    Box {
+        ContentCard(modifier = Modifier.fillMaxWidth()) {
+            CardHeader(
+                modifier = Modifier.fillMaxWidth(),
+                titleRes = Res.string.pixiv_hot,
             )
-        ) {
-            items(items = recentArticlesList, key = { it.id }) { item ->
-                PixivTopicItem(
-                    artworkId = item.id,
-                    artworkName = item.title,
-                    artworkUrl = item.url,
-                    profileId = item.userId,
-                    profileName = item.userName,
-                    profileUrl = item.profileImageUrl
+            LazyRow(
+                modifier = Modifier.hoverable(interactionSource = interactionSource),
+                state = lazyListState,
+                contentPadding = PaddingValues(
+                    top = AppTheme.dimens.paddingUnderCardHeader,
+                    start = AppTheme.dimens.paddingCard,
+                    end = AppTheme.dimens.paddingCard,
+                    bottom = 24.dp
                 )
-                Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
+            ) {
+                items(items = recentArticlesList, key = { it.id }) { item ->
+                    PixivTopicItem(
+                        navigationType,
+                        artworkId = item.id,
+                        artworkName = item.title,
+                        artworkUrl = item.url,
+                        profileId = item.userId,
+                        profileName = item.userName,
+                        profileUrl = item.profileImageUrl
+                    )
+                    Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
+                }
+            }
+        }
+        if (isHovered.value) {
+            ZzzIconButton(
+                Modifier.align(Alignment.CenterStart).padding(8.dp),
+                iconRes = Res.drawable.ic_arrow_back,
+                textRes = Res.string.previous,
+                interactionSource = interactionSource
+            ) {
+                val targetIndex = lazyListState.firstVisibleItemIndex - 3
+                coroutineScope.launch {
+                    if (targetIndex >= 0) {
+                        lazyListState.animateScrollToItem(targetIndex)
+                    } else {
+                        lazyListState.animateScrollToItem(0)
+                    }
+                }
+            }
+            ZzzIconButton(
+                Modifier.align(Alignment.CenterEnd).padding(8.dp),
+                iconRes = Res.drawable.ic_arrow_next,
+                textRes = Res.string.next,
+                interactionSource = interactionSource
+            ) {
+                val targetIndex = lazyListState.firstVisibleItemIndex + 3
+                coroutineScope.launch {
+                    if (targetIndex < recentArticlesList.size) {
+                        lazyListState.animateScrollToItem(targetIndex)
+                    } else {
+                        lazyListState.animateScrollToItem(recentArticlesList.size - 1)
+                    }
+                }
             }
         }
     }
+
 }
 
 @Composable
 private fun PixivTopicItem(
-    modifier: Modifier = Modifier.width(150.dp),
+    navigationType: NavigationType,
     artworkId: String,
     artworkName: String,
     artworkUrl: String?,
@@ -84,7 +144,7 @@ private fun PixivTopicItem(
     profileName: String,
     profileUrl: String?,
 ) {
-
+    val interactionSource = remember { MutableInteractionSource() }
     val urlHandler = LocalUriHandler.current
     val header = NetworkHeaders.Builder().add("Referer", "https://app-api.pixiv.net/").build()
     val imageState = rememberAsyncImagePainter(
@@ -92,9 +152,7 @@ private fun PixivTopicItem(
             .data(artworkUrl).size(Size.ORIGINAL).build()
     )
     Column(
-        modifier = modifier.clickable {
-            urlHandler.openUri("https://www.pixiv.net/artworks/$artworkId")
-        },
+        modifier = Modifier.width(if (navigationType == NavigationType.BOTTOM_NAVIGATION) 120.dp else 160.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -103,16 +161,20 @@ private fun PixivTopicItem(
         ) {
             if (artworkUrl != null) {
                 Image(
-                    modifier = Modifier.fillMaxSize(),
-                    painter = imageState,
-                    contentDescription = artworkName
+                    modifier = Modifier.fillMaxSize().pointerHoverIcon(PointerIcon.Hand)
+                        .clickable(interactionSource = interactionSource, indication = null) {
+                            urlHandler.openUri("https://www.pixiv.net/artworks/$artworkId")
+                        }, painter = imageState, contentDescription = artworkName
                 )
             } else {
                 ImageNotFound()
             }
         }
         Text(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand)
+                .clickable(interactionSource = interactionSource, indication = null) {
+                    urlHandler.openUri("https://www.pixiv.net/artworks/$artworkId")
+                },
             text = artworkName,
             overflow = TextOverflow.Ellipsis,
             style = AppTheme.typography.labelMedium,
@@ -129,12 +191,15 @@ private fun PixivTopicItem(
 private fun AuthorInfo(
     profileName: String, profileUrl: String?, header: NetworkHeaders, onClick: () -> Unit = {}
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
     val imageState = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalPlatformContext.current).httpHeaders(header)
             .data(profileUrl).size(Size.ORIGINAL).build()
     )
     Row(
-        modifier = Modifier.clickable(onClick = onClick),
+        modifier = Modifier.clickable(
+            interactionSource = interactionSource, indication = null, onClick = onClick
+        ).pointerHoverIcon(PointerIcon.Hand),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
