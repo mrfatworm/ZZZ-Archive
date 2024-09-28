@@ -22,5 +22,6 @@ data class Dimens(
     val gapContentCompact: Dp = 8.dp,
     val paddingUnderCardHeader: Dp = 0.dp,
     val paddingCard: Dp = 16.dp,
-    val gapImageProfileList: Dp = 12.dp
+    val gapImageProfileList: Dp = 12.dp,
+    val maxContainerWidth: Dp = 1280.dp
 )

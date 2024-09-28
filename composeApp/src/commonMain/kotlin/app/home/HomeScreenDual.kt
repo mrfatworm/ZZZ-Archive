@@ -8,7 +8,6 @@ package app.home
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -21,10 +20,7 @@ import app.home.compose.NewsPagerCard
 import app.home.compose.PixivTopicCard
 import app.home.compose.WEnginesListCard
 import app.home.model.HomeState
-import app.home.model.sampleHomeState
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import ui.theme.AppTheme
-import ui.theme.ZzzArchiveTheme
 import ui.utils.NavigationType
 import ui.utils.contentPadding
 
@@ -39,11 +35,7 @@ fun HomeScreenDual(
     onWEngineDetailClick: (Int) -> Unit = {},
     onDriveDetailClick: (Int) -> Unit = {},
 ) {
-
-    Row(
-        modifier = Modifier.fillMaxSize(),
-        horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
-    ) {
+    Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
                 .contentPadding(navigationType, AppTheme.dimens),
@@ -64,21 +56,5 @@ fun HomeScreenDual(
             WEnginesListCard(uiState.wEnginesList, onWEnginesOverviewClick, onWEngineDetailClick)
             DrivesListCard(uiState.drivesList, onDrivesOverviewClick, onDriveDetailClick)
         }
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewHomeScreenDual() {
-    ZzzArchiveTheme {
-        HomeScreenDual(sampleHomeState, NavigationType.NAVIGATION_DRAWER)
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewHomeScreenDualDark() {
-    ZzzArchiveTheme(isDarkTheme = false) {
-        HomeScreenDual(sampleHomeState, NavigationType.NAVIGATION_DRAWER)
     }
 }

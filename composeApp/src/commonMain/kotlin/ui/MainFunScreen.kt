@@ -7,10 +7,12 @@ package ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.rememberDrawerState
@@ -18,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -103,14 +106,17 @@ fun MainFunContent(
                     onDrawerClicked = onDrawerClicked,
                 )
             }
-            MainNavGraph(
-                modifier = Modifier.fillMaxSize(),
-                mainNavController = mainFunNavController,
-                contentType = contentType,
-                navigationType = navigationType,
-                mainNavActions = mainNavActions,
-                rootNavActions = rootNavActions
-            )
+            Box(modifier = Modifier.fillMaxSize()) {
+                MainNavGraph(
+                    modifier = Modifier.widthIn(max = AppTheme.dimens.maxContainerWidth)
+                        .align(Alignment.TopCenter),
+                    mainNavController = mainFunNavController,
+                    contentType = contentType,
+                    navigationType = navigationType,
+                    mainNavActions = mainNavActions,
+                    rootNavActions = rootNavActions
+                )
+            }
         }
 
         AnimatedVisibility(visible = navigationType == NavigationType.BOTTOM_NAVIGATION) {
