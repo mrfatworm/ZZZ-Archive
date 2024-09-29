@@ -31,6 +31,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -45,20 +47,20 @@ private val itemShape = RoundedCornerShape(8.dp)
 
 @Composable
 fun RarityItem(
-    modifier: Modifier = Modifier.size(100.dp),
+    modifier: Modifier = Modifier.size(100.dp), id: Int = 0,
     name: String,
     imgUrl: String? = null,
     rarityLevel: Int? = null,
-    attribute: String? = null,
-    onClick: () -> Unit = {}
+    attribute: String? = null, onClick: (Int) -> Unit = {}
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed = interactionSource.collectIsPressedAsState()
     val isHovered = interactionSource.collectIsHoveredAsState()
 
     Column(
-        modifier = modifier.clickable(interactionSource = interactionSource, indication = null) {
-            onClick()
+        modifier = modifier.pointerHoverIcon(if (onClick != {}) PointerIcon.Hand else PointerIcon.Default)
+            .clickable(interactionSource = interactionSource, indication = null) {
+                onClick(id)
         },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(6.dp)

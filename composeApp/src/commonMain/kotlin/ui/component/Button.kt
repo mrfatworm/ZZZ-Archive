@@ -21,13 +21,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.theme.AppTheme
 
 @Composable
-fun ZzzButton(
+fun ZzzPrimaryButton(
     modifier: Modifier = Modifier,
     text: String = "Button",
     iconRes: DrawableResource? = null,
@@ -36,7 +38,7 @@ fun ZzzButton(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {}
 ) {
-    GnfButton(
+    ZzzButton(
         modifier = modifier,
         containerColor = AppTheme.colors.primary,
         contentColor = AppTheme.colors.onPrimary,
@@ -61,7 +63,7 @@ fun ZzzOutlineButton(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {}
 ) {
-    GnfButton(
+    ZzzButton(
         modifier = modifier,
         containerColor = AppTheme.colors.surface,
         contentColor = AppTheme.colors.onSurface,
@@ -78,7 +80,7 @@ fun ZzzOutlineButton(
 }
 
 @Composable
-fun GnfButton(
+fun ZzzButton(
     modifier: Modifier = Modifier,
     containerColor: Color,
     contentColor: Color,
@@ -93,7 +95,8 @@ fun GnfButton(
     onClick: () -> Unit = {},
 ) {
     Button(
-        modifier = modifier.border(
+        modifier = modifier.pointerHoverIcon(if (enabled) PointerIcon.Hand else PointerIcon.Default)
+            .border(
             width = if (hasBorder) 3.dp else 0.dp,
             color = if (hasBorder) AppTheme.colors.buttonBorder else Color.Transparent,
             shape = CircleShape

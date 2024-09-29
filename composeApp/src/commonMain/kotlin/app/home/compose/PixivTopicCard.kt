@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
@@ -47,18 +46,13 @@ import coil3.network.httpHeaders
 import coil3.request.ImageRequest
 import coil3.size.Size
 import kotlinx.coroutines.launch
-import ui.component.CardHeader
 import ui.component.ContentCard
+import ui.component.HoveredIndicatorHeader
 import ui.component.ImageNotFound
-import ui.component.ZzzIconButton
 import ui.theme.AppTheme
 import ui.utils.NavigationType
 import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.ic_arrow_back
-import zzzarchive.composeapp.generated.resources.ic_arrow_next
-import zzzarchive.composeapp.generated.resources.next
 import zzzarchive.composeapp.generated.resources.pixiv_hot
-import zzzarchive.composeapp.generated.resources.previous
 
 @Composable
 fun PixivTopicCard(
@@ -68,43 +62,13 @@ fun PixivTopicCard(
     val isHovered = interactionSource.collectIsHoveredAsState()
     val lazyListState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
-    Box {
-        ContentCard(modifier = Modifier.fillMaxWidth()) {
-            CardHeader(
-                modifier = Modifier.fillMaxWidth(),
-                titleRes = Res.string.pixiv_hot,
-            )
-            LazyRow(
-                modifier = Modifier.hoverable(interactionSource = interactionSource),
-                state = lazyListState,
-                contentPadding = PaddingValues(
-                    top = AppTheme.dimens.paddingUnderCardHeader,
-                    start = AppTheme.dimens.paddingCard,
-                    end = AppTheme.dimens.paddingCard,
-                    bottom = 24.dp
-                )
-            ) {
-                items(items = recentArticlesList, key = { it.id }) { item ->
-                    PixivTopicItem(
-                        navigationType,
-                        artworkId = item.id,
-                        artworkName = item.title,
-                        artworkUrl = item.url,
-                        profileId = item.userId,
-                        profileName = item.userName,
-                        profileUrl = item.profileImageUrl
-                    )
-                    Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
-                }
-            }
-        }
-        if (isHovered.value) {
-            ZzzIconButton(
-                Modifier.align(Alignment.CenterStart).padding(8.dp),
-                iconRes = Res.drawable.ic_arrow_back,
-                textRes = Res.string.previous,
-                interactionSource = interactionSource
-            ) {
+    ContentCard(
+        modifier = Modifier.fillMaxWidth().hoverable(interactionSource = interactionSource)
+    ) {
+        HoveredIndicatorHeader(modifier = Modifier.fillMaxWidth(),
+            titleRes = Res.string.pixiv_hot,
+            isHovered = isHovered.value,
+            onPreviousClick = {
                 val targetIndex = lazyListState.firstVisibleItemIndex - 3
                 coroutineScope.launch {
                     if (targetIndex >= 0) {
@@ -113,13 +77,8 @@ fun PixivTopicCard(
                         lazyListState.animateScrollToItem(0)
                     }
                 }
-            }
-            ZzzIconButton(
-                Modifier.align(Alignment.CenterEnd).padding(8.dp),
-                iconRes = Res.drawable.ic_arrow_next,
-                textRes = Res.string.next,
-                interactionSource = interactionSource
-            ) {
+            },
+            onNextClick = {
                 val targetIndex = lazyListState.firstVisibleItemIndex + 3
                 coroutineScope.launch {
                     if (targetIndex < recentArticlesList.size) {
@@ -128,10 +87,31 @@ fun PixivTopicCard(
                         lazyListState.animateScrollToItem(recentArticlesList.size - 1)
                     }
                 }
+            })
+        LazyRow(
+            modifier = Modifier.hoverable(interactionSource = interactionSource),
+            state = lazyListState,
+            contentPadding = PaddingValues(
+                top = AppTheme.dimens.paddingUnderCardHeader,
+                start = AppTheme.dimens.paddingCard,
+                end = AppTheme.dimens.paddingCard,
+                bottom = 24.dp
+            )
+        ) {
+            items(items = recentArticlesList, key = { it.id }) { item ->
+                PixivTopicItem(
+                    navigationType,
+                    artworkId = item.id,
+                    artworkName = item.title,
+                    artworkUrl = item.url,
+                    profileId = item.userId,
+                    profileName = item.userName,
+                    profileUrl = item.profileImageUrl
+                )
+                Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
             }
         }
     }
-
 }
 
 @Composable

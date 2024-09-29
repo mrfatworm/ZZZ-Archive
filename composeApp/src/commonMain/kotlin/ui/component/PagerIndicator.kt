@@ -18,6 +18,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import ui.theme.AppTheme
 
@@ -26,7 +28,7 @@ fun PagerIndicator(modifier: Modifier, pageCount: Int, currentPage: Int, onClick
     Row(
         modifier
             .wrapContentHeight()
-            .fillMaxWidth(),
+            .fillMaxWidth().pointerHoverIcon(PointerIcon.Hand),
         horizontalArrangement = Arrangement.Center
     ) {
         for (page in 0 until pageCount) {
