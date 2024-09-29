@@ -10,12 +10,12 @@ import androidx.compose.runtime.collectAsState
 import app.home.domain.HomeViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import ui.utils.ContentType
-import ui.utils.NavigationType
+import ui.utils.AdaptiveLayoutType
 
 @Composable
 fun HomeScreen(
     contentType: ContentType,
-    navigationType: NavigationType,
+    adaptiveLayoutType: AdaptiveLayoutType,
     onAgentOverviewClick: () -> Unit,
     onWEngineOverviewClick: () -> Unit,
     onDrivesOverviewClick: () -> Unit,
@@ -26,10 +26,10 @@ fun HomeScreen(
     val viewModel: HomeViewModel = koinViewModel()
     val uiState = viewModel.uiState.collectAsState()
 
-    if (contentType == ContentType.SINGLE) {
+    if (contentType == ContentType.Single) {
         HomeScreenSingle(
             uiState = uiState.value,
-            navigationType = navigationType,
+            adaptiveLayoutType = adaptiveLayoutType,
             onAgentsOverviewClick = onAgentOverviewClick,
             onWEnginesOverviewClick = onWEngineOverviewClick,
             onDrivesOverviewClick = onDrivesOverviewClick,
@@ -40,7 +40,7 @@ fun HomeScreen(
     } else {
         HomeScreenDual(
             uiState = uiState.value,
-            navigationType = navigationType,
+            adaptiveLayoutType = adaptiveLayoutType,
             onAgentsOverviewClick = onAgentOverviewClick,
             onWEnginesOverviewClick = onWEngineOverviewClick,
             onDrivesOverviewClick = onDrivesOverviewClick,

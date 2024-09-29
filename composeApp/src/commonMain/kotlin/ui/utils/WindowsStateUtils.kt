@@ -5,10 +5,10 @@
 
 package ui.utils
 
-enum class NavigationType {
-    BOTTOM_NAVIGATION, NAVIGATION_RAIL, NAVIGATION_DRAWER
+enum class AdaptiveLayoutType {
+    Compact, Medium, Expanded
 }
 
 enum class ContentType {
-    SINGLE, DUAL
+    Single, Dual
 }

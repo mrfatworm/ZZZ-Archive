@@ -15,7 +15,7 @@ import app.function.FunctionScreen
 import ui.navigation.MainFlow
 import ui.navigation.NavActions
 import ui.utils.ContentType
-import ui.utils.NavigationType
+import ui.utils.AdaptiveLayoutType
 import app.wiki.WikiScreen
 
 @Composable
@@ -23,7 +23,7 @@ fun MainNavGraph(
     modifier: Modifier = Modifier,
     mainNavController: NavHostController,
     contentType: ContentType,
-    navigationType: NavigationType,
+    adaptiveLayoutType: AdaptiveLayoutType,
     mainNavActions: NavActions,
     rootNavActions: NavActions,
 ) {
@@ -34,7 +34,7 @@ fun MainNavGraph(
     ) {
         composable(MainFlow.Home.route) {
             HomeNavHost(
-                contentType = contentType, navigationType = navigationType,
+                contentType = contentType, adaptiveLayoutType = adaptiveLayoutType,
                 navigateToTopLevelDestination = { mainNavActions.navigationToTopAndSave(it) })
         }
         composable(MainFlow.Agent.route) {

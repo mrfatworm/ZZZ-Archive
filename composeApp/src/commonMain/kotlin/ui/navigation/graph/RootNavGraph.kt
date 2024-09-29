@@ -15,14 +15,14 @@ import ui.MainFunScreen
 import ui.navigation.NavActions
 import ui.navigation.RootFlow
 import ui.utils.ContentType
-import ui.utils.NavigationType
+import ui.utils.AdaptiveLayoutType
 
 @Composable
 fun RootNavGraph(
     modifier: Modifier = Modifier,
     rootNavController: NavHostController,
     rootNavActions: NavActions,
-    navigationType: NavigationType,
+    adaptiveLayoutType: AdaptiveLayoutType,
     contentType: ContentType
 ) {
     NavHost(
@@ -37,7 +37,7 @@ fun RootNavGraph(
         composable(RootFlow.ZzzArchive.route) {
             MainFunScreen(
                 rootNavActions = rootNavActions,
-                navigationType = navigationType,
+                adaptiveLayoutType = adaptiveLayoutType,
                 contentType = contentType
             )
         }

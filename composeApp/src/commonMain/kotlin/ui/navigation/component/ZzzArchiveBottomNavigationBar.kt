@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.navigation.NavActions
-import ui.navigation.TOP_LEVEL_DESTINATIONS_COMPACT
+import ui.navigation.TOP_LEVEL_DESTINATIONS_BOTTOM_NAV
 import ui.theme.AppTheme
 
 @Composable
@@ -26,7 +26,7 @@ fun ZzzArchiveBottomNavigationBar(
     NavigationBar(
         modifier = Modifier.fillMaxWidth(), containerColor = AppTheme.colors.surface
     ) {
-        TOP_LEVEL_DESTINATIONS_COMPACT.forEach { destination ->
+        TOP_LEVEL_DESTINATIONS_BOTTOM_NAV.forEach { destination ->
             val isSelected = selectedDestination == destination.route
             NavigationBarItem(selected = isSelected, onClick = {
                 if (isSelected) {

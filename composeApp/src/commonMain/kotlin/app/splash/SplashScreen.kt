@@ -35,7 +35,7 @@ fun SplashScreen(
         delay(1000)
         startMainFlow()
     }
-    if (contentType == ContentType.SINGLE) {
+    if (contentType == ContentType.Single) {
         SplashScreenSingle()
     } else {
         SplashScreenDual()

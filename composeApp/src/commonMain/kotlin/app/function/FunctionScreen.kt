@@ -12,7 +12,7 @@ import ui.utils.ContentType
 fun FunctionScreen(
     contentType: ContentType
 ) {
-    if (contentType == ContentType.SINGLE) {
+    if (contentType == ContentType.Single) {
         FunctionScreenSingle()
     } else {
         FunctionScreenDual()

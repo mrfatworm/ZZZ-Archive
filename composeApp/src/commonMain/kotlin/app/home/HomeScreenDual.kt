@@ -21,13 +21,13 @@ import app.home.compose.PixivTopicCard
 import app.home.compose.WEnginesListCard
 import app.home.model.HomeState
 import ui.theme.AppTheme
-import ui.utils.NavigationType
+import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
 
 @Composable
 fun HomeScreenDual(
     uiState: HomeState,
-    navigationType: NavigationType,
+    adaptiveLayoutType: AdaptiveLayoutType,
     onAgentsOverviewClick: () -> Unit = {},
     onWEnginesOverviewClick: () -> Unit = {},
     onDrivesOverviewClick: () -> Unit = {},
@@ -38,17 +38,17 @@ fun HomeScreenDual(
     Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
-                .contentPadding(navigationType, AppTheme.dimens),
+                .contentPadding(adaptiveLayoutType, AppTheme.dimens),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             BannerImageCard(uiState.banner)
             HoYoLabZzzStatusCard()
-            PixivTopicCard(uiState.pixivPuppiesList, navigationType)
+            PixivTopicCard(uiState.pixivPuppiesList, adaptiveLayoutType)
         }
 
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
-                .contentPadding(navigationType, AppTheme.dimens),
+                .contentPadding(adaptiveLayoutType, AppTheme.dimens),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             NewsPagerCard(uiState.news?.data)

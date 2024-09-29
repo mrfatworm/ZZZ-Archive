@@ -29,6 +29,13 @@ class HomeViewModel(
     val uiState = _uiState.asStateFlow()
 
     init {
+        fetchBanner()
+        fetchAgentsList()
+        fetchZzzOfficialNewsEveryTenMinutes()
+        fetchPixivTopicEveryTenMinutes()
+    }
+
+    private fun fetchBanner() {
         viewModelScope.launch {
             when (val result = bannerRepository.getBanner()) {
                 is ZzzResult.Success -> {
@@ -42,21 +49,25 @@ class HomeViewModel(
                 }
             }
         }
-        viewModelScope.launch {
-            pixivRepository.getZzzTopicPeriodically(10).collect { result ->
-                when (result) {
-                    is ZzzResult.Success -> {
-                        _uiState.update { state ->
-                            state.copy(pixivPuppiesList = result.data.getPopularArticles())
-                        }
-                    }
+    }
 
-                    is ZzzResult.Error -> {
-                        println("get pixiv error: ${result.exception}")
+    private fun fetchAgentsList() {
+        viewModelScope.launch {
+            when (val result = agentRepository.getAgentsList()) {
+                is ZzzResult.Success -> {
+                    _uiState.update { state ->
+                        state.copy(agentsList = result.data.agents)
                     }
+                }
+
+                is ZzzResult.Error -> {
+                    println("get agents error: ${result.exception}")
                 }
             }
         }
+    }
+
+    private fun fetchZzzOfficialNewsEveryTenMinutes() {
         viewModelScope.launch {
             newsRepository.getNewsPeriodically(10, 5, "en-us").collect { result ->
                 when (result) {
@@ -72,16 +83,21 @@ class HomeViewModel(
                 }
             }
         }
-        viewModelScope.launch {
-            when (val result = agentRepository.getAgentsList()) {
-                is ZzzResult.Success -> {
-                    _uiState.update { state ->
-                        state.copy(agentsList = result.data.agents)
-                    }
-                }
+    }
 
-                is ZzzResult.Error -> {
-                    println("get agents error: ${result.exception}")
+    private fun fetchPixivTopicEveryTenMinutes() {
+        viewModelScope.launch {
+            pixivRepository.getZzzTopicPeriodically(10).collect { result ->
+                when (result) {
+                    is ZzzResult.Success -> {
+                        _uiState.update { state ->
+                            state.copy(pixivPuppiesList = result.data.getPopularArticles())
+                        }
+                    }
+
+                    is ZzzResult.Error -> {
+                        println("get pixiv error: ${result.exception}")
+                    }
                 }
             }
         }

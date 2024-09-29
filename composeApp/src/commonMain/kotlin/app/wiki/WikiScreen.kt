@@ -18,7 +18,7 @@ fun WikiScreen(
     onWEngineDetailClick: (Int) -> Unit = {},
     onDriveDetailClick: (Int) -> Unit = {},
 ) {
-    if (contentType == ContentType.SINGLE) {
+    if (contentType == ContentType.Single) {
         WikiScreenSingle(
             onAgentsOverviewClick = onAgentOverviewClick,
             onWEnginesOverviewClick = onWEngineOverviewClick,

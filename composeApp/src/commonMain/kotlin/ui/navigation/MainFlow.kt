@@ -63,7 +63,7 @@ sealed interface MainFlow {
     )
 }
 
-val TOP_LEVEL_DESTINATIONS_MEDIUM = listOf(
+val TOP_LEVEL_DESTINATIONS_NAV_RAIL = listOf(
     MainFlow.Home,
     MainFlow.Agent,
     MainFlow.WEngine,
@@ -73,7 +73,7 @@ val TOP_LEVEL_DESTINATIONS_MEDIUM = listOf(
     MainFlow.Feedback
 )
 
-val TOP_LEVEL_DESTINATIONS_COMPACT = listOf(
+val TOP_LEVEL_DESTINATIONS_BOTTOM_NAV = listOf(
     MainFlow.Home,
     MainFlow.Wiki,
     MainFlow.Function,

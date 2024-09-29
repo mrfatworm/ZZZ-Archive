@@ -13,20 +13,20 @@ import app.home.HomeScreen
 import ui.navigation.MainFlow
 import ui.navigation.Screen
 import ui.utils.ContentType
-import ui.utils.NavigationType
+import ui.utils.AdaptiveLayoutType
 
 @Composable
 fun HomeNavHost(
     contentType: ContentType,
-    navigationType: NavigationType,
+    adaptiveLayoutType: AdaptiveLayoutType,
     navigateToTopLevelDestination: (Screen) -> Unit
 ) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.Home.route) {
-        if (contentType == ContentType.DUAL) {
+        if (contentType == ContentType.Dual) {
             composable(Screen.Home.route) {
                 HomeScreen(contentType = contentType,
-                    navigationType = navigationType,
+                    adaptiveLayoutType = adaptiveLayoutType,
                     onAgentOverviewClick = { navigateToTopLevelDestination(MainFlow.Agent) },
                     onWEngineOverviewClick = { navigateToTopLevelDestination(MainFlow.WEngine) },
                     onDrivesOverviewClick = { navigateToTopLevelDestination(MainFlow.Drive) },
@@ -37,7 +37,7 @@ fun HomeNavHost(
         } else {
             composable(Screen.Home.route) {
                 HomeScreen(contentType = contentType,
-                    navigationType = navigationType,
+                    adaptiveLayoutType = adaptiveLayoutType,
                     onAgentOverviewClick = { navController.navigate(Screen.AgentsList.route) },
                     onWEngineOverviewClick = { navController.navigate(Screen.WEnginesList.route) },
                     onDrivesOverviewClick = { navController.navigate(Screen.DrivesList.route) },

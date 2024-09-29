@@ -12,7 +12,7 @@ import ui.utils.ContentType
 fun AgentsListScreen(
     contentType: ContentType, onAgentClick: (Int) -> Unit = {}
 ) {
-    if (contentType == ContentType.SINGLE) {
+    if (contentType == ContentType.Single) {
         AgentsListScreenSingle(
             state = stubAgentsListState, onAgentClick = onAgentClick
         )

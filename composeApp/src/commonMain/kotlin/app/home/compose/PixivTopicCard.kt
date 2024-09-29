@@ -50,13 +50,13 @@ import ui.component.ContentCard
 import ui.component.HoveredIndicatorHeader
 import ui.component.ImageNotFound
 import ui.theme.AppTheme
-import ui.utils.NavigationType
+import ui.utils.AdaptiveLayoutType
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.pixiv_hot
 
 @Composable
 fun PixivTopicCard(
-    recentArticlesList: List<RecentArticle>, navigationType: NavigationType
+    recentArticlesList: List<RecentArticle>, adaptiveLayoutType: AdaptiveLayoutType
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered = interactionSource.collectIsHoveredAsState()
@@ -100,7 +100,7 @@ fun PixivTopicCard(
         ) {
             items(items = recentArticlesList, key = { it.id }) { item ->
                 PixivTopicItem(
-                    navigationType,
+                    adaptiveLayoutType,
                     artworkId = item.id,
                     artworkName = item.title,
                     artworkUrl = item.url,
@@ -116,7 +116,7 @@ fun PixivTopicCard(
 
 @Composable
 private fun PixivTopicItem(
-    navigationType: NavigationType,
+    adaptiveLayoutType: AdaptiveLayoutType,
     artworkId: String,
     artworkName: String,
     artworkUrl: String?,
@@ -132,7 +132,7 @@ private fun PixivTopicItem(
             .data(artworkUrl).size(Size.ORIGINAL).build()
     )
     Column(
-        modifier = Modifier.width(if (navigationType == NavigationType.BOTTOM_NAVIGATION) 120.dp else 160.dp),
+        modifier = Modifier.width(if (adaptiveLayoutType == AdaptiveLayoutType.Compact) 120.dp else 160.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {

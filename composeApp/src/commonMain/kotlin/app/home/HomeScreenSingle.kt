@@ -21,13 +21,13 @@ import app.home.model.sampleHomeState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import ui.theme.AppTheme
 import ui.theme.ZzzArchiveTheme
-import ui.utils.NavigationType
+import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
 
 @Composable
 fun HomeScreenSingle(
     uiState: HomeState,
-    navigationType: NavigationType,
+    adaptiveLayoutType: AdaptiveLayoutType,
     onAgentsOverviewClick: () -> Unit = {},
     onWEnginesOverviewClick: () -> Unit = {},
     onDrivesOverviewClick: () -> Unit = {},
@@ -38,13 +38,13 @@ fun HomeScreenSingle(
     Column(
         modifier = Modifier.fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .contentPadding(navigationType, AppTheme.dimens),
+            .contentPadding(adaptiveLayoutType, AppTheme.dimens),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         BannerImageCard(uiState.banner)
         HoYoLabZzzStatusCard()
         NewsPagerCard(uiState.news?.data)
-        PixivTopicCard(uiState.pixivPuppiesList, navigationType)
+        PixivTopicCard(uiState.pixivPuppiesList, adaptiveLayoutType)
     }
 }
 
@@ -53,7 +53,7 @@ fun HomeScreenSingle(
 @Composable
 private fun PreviewHomeScreenSingle() {
     ZzzArchiveTheme {
-        HomeScreenSingle(sampleHomeState, NavigationType.BOTTOM_NAVIGATION)
+        HomeScreenSingle(sampleHomeState, AdaptiveLayoutType.Compact)
     }
 }
 
@@ -61,6 +61,6 @@ private fun PreviewHomeScreenSingle() {
 @Composable
 private fun PreviewHomeScreenSingleDark() {
     ZzzArchiveTheme(isDarkTheme = false) {
-        HomeScreenSingle(sampleHomeState, NavigationType.BOTTOM_NAVIGATION)
+        HomeScreenSingle(sampleHomeState, AdaptiveLayoutType.Compact)
     }
 }

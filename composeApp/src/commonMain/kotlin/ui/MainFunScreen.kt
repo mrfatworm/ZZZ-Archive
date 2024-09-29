@@ -35,13 +35,13 @@ import ui.navigation.component.ZzzArchiveNavigationRail
 import ui.navigation.graph.MainNavGraph
 import ui.theme.AppTheme
 import ui.utils.ContentType
-import ui.utils.NavigationType
+import ui.utils.AdaptiveLayoutType
 import ui.utils.containerPadding
 import ui.utils.contentPadding
 
 @Composable
 fun MainFunScreen(
-    rootNavActions: NavActions, navigationType: NavigationType, contentType: ContentType
+    rootNavActions: NavActions, adaptiveLayoutType: AdaptiveLayoutType, contentType: ContentType
 ) {
     val mainFunNavController = rememberNavController()
     val mainFunNavActions = remember(mainFunNavController) {
@@ -68,7 +68,7 @@ fun MainFunScreen(
             mainNavActions = mainFunNavActions,
             rootNavActions = rootNavActions,
             selectedDestination = selectedDestination,
-            navigationType = navigationType,
+            adaptiveLayoutType = adaptiveLayoutType,
             contentType = contentType,
             onDrawerClicked = {
                 scope.launch {
@@ -84,7 +84,7 @@ fun MainFunContent(
     mainNavActions: NavActions,
     rootNavActions: NavActions,
     selectedDestination: String,
-    navigationType: NavigationType,
+    adaptiveLayoutType: AdaptiveLayoutType,
     contentType: ContentType,
     onDrawerClicked: () -> Unit = {}
 ) {
@@ -92,15 +92,15 @@ fun MainFunContent(
         modifier = Modifier.fillMaxSize()
     ) {
         Row(
-            modifier = Modifier.weight(1f).containerPadding(navigationType, AppTheme.dimens),
-            horizontalArrangement = horizontalParentGap(navigationType)
+            modifier = Modifier.weight(1f).containerPadding(adaptiveLayoutType, AppTheme.dimens),
+            horizontalArrangement = horizontalParentGap(adaptiveLayoutType)
         ) {
             AnimatedVisibility(
-                visible = navigationType == NavigationType.NAVIGATION_RAIL || navigationType == NavigationType.NAVIGATION_DRAWER
+                visible = adaptiveLayoutType == AdaptiveLayoutType.Medium || adaptiveLayoutType == AdaptiveLayoutType.Expanded
             ) {
                 ZzzArchiveNavigationRail(
                     modifier = Modifier.fillMaxHeight()
-                        .contentPadding(navigationType, AppTheme.dimens),
+                        .contentPadding(adaptiveLayoutType, AppTheme.dimens),
                     selectedDestination = selectedDestination,
                     navigationActions = mainNavActions,
                     onDrawerClicked = onDrawerClicked,
@@ -112,14 +112,14 @@ fun MainFunContent(
                         .align(Alignment.TopCenter),
                     mainNavController = mainFunNavController,
                     contentType = contentType,
-                    navigationType = navigationType,
+                    adaptiveLayoutType = adaptiveLayoutType,
                     mainNavActions = mainNavActions,
                     rootNavActions = rootNavActions
                 )
             }
         }
 
-        AnimatedVisibility(visible = navigationType == NavigationType.BOTTOM_NAVIGATION) {
+        AnimatedVisibility(visible = adaptiveLayoutType == AdaptiveLayoutType.Compact) {
             ZzzArchiveBottomNavigationBar(
                 selectedDestination = selectedDestination, navigationActions = mainNavActions
             )
@@ -128,10 +128,10 @@ fun MainFunContent(
 }
 
 @Composable
-private fun horizontalParentGap(navigationType: NavigationType) = Arrangement.spacedBy(
-    when (navigationType) {
-        NavigationType.NAVIGATION_DRAWER -> AppTheme.dimens.gapParentExpanded
-        NavigationType.NAVIGATION_RAIL -> AppTheme.dimens.gapParentMedium
-        NavigationType.BOTTOM_NAVIGATION -> 0.dp
+private fun horizontalParentGap(adaptiveLayoutType: AdaptiveLayoutType) = Arrangement.spacedBy(
+    when (adaptiveLayoutType) {
+        AdaptiveLayoutType.Expanded -> AppTheme.dimens.gapParentExpanded
+        AdaptiveLayoutType.Medium -> AppTheme.dimens.gapParentMedium
+        AdaptiveLayoutType.Compact -> 0.dp
     }
 )

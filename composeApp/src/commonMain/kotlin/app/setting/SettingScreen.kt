@@ -22,7 +22,7 @@ import ui.utils.ContentType
 fun SettingScreen(
     contentType: ContentType, onFeedbackClicked: () -> Unit
 ) {
-    if (contentType == ContentType.SINGLE) {
+    if (contentType == ContentType.Single) {
         SettingScreenSingle(onFeedbackClicked)
     } else {
         SettingScreenDual()

@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.navigation.NavActions
-import ui.navigation.TOP_LEVEL_DESTINATIONS_MEDIUM
+import ui.navigation.TOP_LEVEL_DESTINATIONS_NAV_RAIL
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.dark_theme
@@ -70,7 +70,7 @@ fun ZzzArchiveNavigationRail(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            TOP_LEVEL_DESTINATIONS_MEDIUM.forEach { destination ->
+            TOP_LEVEL_DESTINATIONS_NAV_RAIL.forEach { destination ->
                 val isSelected = selectedDestination == destination.route
                 NavigationRailItem(
                     selected = isSelected, onClick = {

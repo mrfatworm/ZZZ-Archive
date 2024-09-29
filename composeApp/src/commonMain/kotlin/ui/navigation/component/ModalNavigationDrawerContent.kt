@@ -36,7 +36,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.navigation.NavActions
-import ui.navigation.TOP_LEVEL_DESTINATIONS_MEDIUM
+import ui.navigation.TOP_LEVEL_DESTINATIONS_NAV_RAIL
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.app_name
@@ -82,10 +82,10 @@ fun ModalNavigationDrawerContent(
         }
 
         Column(
-            modifier = Modifier.verticalScroll(rememberScrollState()),
+            modifier = Modifier.fillMaxHeight().verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            TOP_LEVEL_DESTINATIONS_MEDIUM.forEach { destination ->
+            TOP_LEVEL_DESTINATIONS_NAV_RAIL.forEach { destination ->
                 val isSelected = selectedDestination == destination.route
                 NavigationDrawerItem(selected = isSelected, label = {
                     Text(
@@ -112,31 +112,32 @@ fun ModalNavigationDrawerContent(
                     color = AppTheme.colors.border
                 )
             }
+            Spacer(
+                modifier = Modifier.weight(1f).heightIn(min = 16.dp)
+            )
+            var isDark by AppTheme.isDark
+            NavigationDrawerItem(
+                modifier = Modifier.padding(horizontal = 12.dp),
+                selected = false,
+                onClick = {
+                    isDark = !isDark
+                },
+                icon = {
+                    Icon(
+                        imageVector = vectorResource(if (isDark) Res.drawable.ic_sun else Res.drawable.ic_moon),
+                        contentDescription = null,
+                    )
+                },
+                label = {
+                    Text(
+                        text = stringResource(if (isDark) Res.string.light_theme else Res.string.dark_theme),
+                        style = AppTheme.typography.labelMedium,
+                    )
+                },
+                colors = navigationDrawerItemColors()
+            )
         }
-        Spacer(
-            modifier = Modifier.weight(1f).heightIn(min = 16.dp)
-        )
-        var isDark by AppTheme.isDark
-        NavigationDrawerItem(
-            modifier = Modifier.padding(horizontal = 12.dp),
-            selected = false,
-            onClick = {
-                isDark = !isDark
-            },
-            icon = {
-                Icon(
-                    imageVector = vectorResource(if (isDark) Res.drawable.ic_sun else Res.drawable.ic_moon),
-                    contentDescription = null,
-                )
-            },
-            label = {
-                Text(
-                    text = stringResource(if (isDark) Res.string.light_theme else Res.string.dark_theme),
-                    style = AppTheme.typography.labelMedium,
-                )
-            },
-            colors = navigationDrawerItemColors()
-        )
+
     }
 }
 
