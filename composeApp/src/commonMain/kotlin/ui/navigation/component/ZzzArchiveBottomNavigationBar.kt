@@ -29,11 +29,7 @@ fun ZzzArchiveBottomNavigationBar(
         TOP_LEVEL_DESTINATIONS_BOTTOM_NAV.forEach { destination ->
             val isSelected = selectedDestination == destination.route
             NavigationBarItem(selected = isSelected, onClick = {
-                if (isSelected) {
-                    navigationActions.navigationToTop(destination)
-                } else {
-                    navigationActions.navigationToTopAndSave(destination)
-                }
+                navigationActions.navigationToTop(destination)
             }, icon = {
                 Icon(
                     imageVector = vectorResource(destination.iconRes),

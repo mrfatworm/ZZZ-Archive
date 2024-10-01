@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -50,7 +51,7 @@ private val itemShape = RoundedCornerShape(8.dp)
 
 @Composable
 fun RarityItem(
-    modifier: Modifier = Modifier.size(100.dp), id: Int = 0,
+    modifier: Modifier = Modifier.width(100.dp), id: Int = 0,
     name: String,
     imgUrl: String? = null,
     rarityLevel: Int? = null,

@@ -99,11 +99,7 @@ fun ModalNavigationDrawerContent(
                         contentDescription = stringResource(destination.textRes)
                     )
                 }, colors = navigationDrawerItemColors(), onClick = {
-                    if (isSelected) {
-                        navigationActions.navigationToTop(destination)
-                    } else {
-                        navigationActions.navigationToTopAndSave(destination)
-                    }
+                    navigationActions.navigationToTop(destination)
                     onDrawerClicked()
                 })
                 HorizontalDivider(

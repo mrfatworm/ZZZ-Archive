@@ -14,6 +14,15 @@ class NavActions(private val navController: NavHostController) {
         navController.navigate(destination.route)
     }
 
+    fun navigationToTop(destination: Screen) {
+        navController.navigate(destination.route) {
+            popUpTo(navController.graph.findStartDestination().route ?: "splash") {
+                inclusive = true
+            }
+        }
+    }
+
+    @Deprecated("Only work on Android - last test: 2.8.0-alpha10")
     fun navigationToTopAndSave(destination: Screen) {
         navController.navigate(destination.route) {
             popUpTo(navController.graph.findStartDestination().route ?: "splash") {
@@ -21,14 +30,6 @@ class NavActions(private val navController: NavHostController) {
             }
             launchSingleTop = true
             restoreState = true
-        }
-    }
-
-    fun navigationToTop(destination: Screen) {
-        navController.navigate(destination.route) {
-            popUpTo(navController.graph.findStartDestination().route ?: "splash") {
-                inclusive = true
-            }
         }
     }
 }

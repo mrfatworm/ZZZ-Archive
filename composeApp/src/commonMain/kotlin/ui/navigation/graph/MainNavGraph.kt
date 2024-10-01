@@ -12,11 +12,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import app.feedback.FeedbackScreen
 import app.function.FunctionScreen
+import app.wiki.WikiScreen
 import ui.navigation.MainFlow
 import ui.navigation.NavActions
-import ui.utils.ContentType
 import ui.utils.AdaptiveLayoutType
-import app.wiki.WikiScreen
+import ui.utils.ContentType
 
 @Composable
 fun MainNavGraph(
@@ -35,26 +35,26 @@ fun MainNavGraph(
         composable(MainFlow.Home.route) {
             HomeNavHost(
                 contentType = contentType, adaptiveLayoutType = adaptiveLayoutType,
-                navigateToTopLevelDestination = { mainNavActions.navigationToTopAndSave(it) })
+                navigateToTopLevelDestination = { mainNavActions.navigationToTop(it) })
         }
         composable(MainFlow.Agent.route) {
             AgentNavGraph(contentType, navigateToTopLevelDestination = {
-                mainNavActions.navigationToTopAndSave(it)
+                mainNavActions.navigationToTop(it)
             })
         }
         composable(MainFlow.WEngine.route) {
             WEngineNavGraph(contentType, navigateToTopLevelDestination = {
-                mainNavActions.navigationToTopAndSave(it)
+                mainNavActions.navigationToTop(it)
             })
         }
         composable(MainFlow.Drive.route) {
             DriveNavGraph(contentType, navigateToTopLevelDestination = {
-                mainNavActions.navigationToTopAndSave(it)
+                mainNavActions.navigationToTop(it)
             })
         }
         composable(MainFlow.Bangboo.route) {
             BangbooNavGraph(contentType, navigateToTopLevelDestination = {
-                mainNavActions.navigationToTopAndSave(it)
+                mainNavActions.navigationToTop(it)
             })
         }
         composable(MainFlow.Setting.route) {

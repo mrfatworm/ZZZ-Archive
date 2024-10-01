@@ -22,7 +22,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.NavigationRailItemDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -74,24 +73,14 @@ fun ZzzArchiveNavigationRail(
                 val isSelected = selectedDestination == destination.route
                 NavigationRailItem(
                     selected = isSelected, onClick = {
-                        if (isSelected) {
-                            navigationActions.navigationToTop(destination)
-                        } else {
-                            navigationActions.navigationToTopAndSave(destination)
-                        }
+                        navigationActions.navigationToTop(destination)
                     }, icon = {
                         Icon(
                             imageVector = vectorResource(destination.iconRes),
                             contentDescription = stringResource(destination.textRes)
                         )
-                    }, label = {
-                        Text(
-                            text = stringResource(destination.textRes),
-                            style = if (isSelected) AppTheme.typography.labelMedium else AppTheme.typography.labelSmall
-                        )
                     }, colors = navigationRailItemColors()
                 )
-                Spacer(Modifier.height(4.dp)) // NavigationRailVerticalPadding
             }
             Spacer(
                 modifier = Modifier.weight(1f).heightIn(min = 16.dp)

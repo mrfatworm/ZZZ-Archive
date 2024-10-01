@@ -39,12 +39,12 @@ fun HomeScreenDual(
     onDriveDetailClick: (Int) -> Unit = {},
 ) {
     Row(
-        modifier = Modifier.verticalScroll(rememberScrollState()),
+        modifier = Modifier.verticalScroll(rememberScrollState())
+            .contentPadding(adaptiveLayoutType, AppTheme.dimens),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         Column(
-            modifier = Modifier.weight(1f)
-                .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+            modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             BannerImageCard(uiState.banner)
@@ -53,8 +53,7 @@ fun HomeScreenDual(
         }
 
         Column(
-            modifier = Modifier.weight(1f)
-                .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+            modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             NewsPagerCard(uiState.news?.data)
