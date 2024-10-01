@@ -37,7 +37,7 @@ fun ZzzIconButton(
     Surface(modifier = modifier.pointerHoverIcon(if (enabled) PointerIcon.Hand else PointerIcon.Default).size(size),
         color = AppTheme.colors.surface,
         border = BorderStroke(
-            width = AppTheme.dimens.borderWidth, color = AppTheme.colors.buttonBorder
+            width = AppTheme.dimens.borderWidth, color = AppTheme.colors.border
         ),
         shape = CircleShape,
         interactionSource = interactionSource,

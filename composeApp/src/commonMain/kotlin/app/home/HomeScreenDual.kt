@@ -13,6 +13,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import app.home.compose.AgentsListCard
+import app.home.compose.BangbooListCard
 import app.home.compose.BannerImageCard
 import app.home.compose.DrivesListCard
 import app.home.compose.HoYoLabZzzStatusCard
@@ -30,14 +31,19 @@ fun HomeScreenDual(
     adaptiveLayoutType: AdaptiveLayoutType,
     onAgentsOverviewClick: () -> Unit = {},
     onWEnginesOverviewClick: () -> Unit = {},
+    onBangbooOverviewClick: () -> Unit = {},
     onDrivesOverviewClick: () -> Unit = {},
     onAgentDetailClick: (Int) -> Unit = {},
     onWEngineDetailClick: (Int) -> Unit = {},
+    onBangbooDetailClick: (Int) -> Unit = {},
     onDriveDetailClick: (Int) -> Unit = {},
 ) {
-    Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
+    Row(
+        modifier = Modifier.verticalScroll(rememberScrollState()),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
+    ) {
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
+            modifier = Modifier.weight(1f)
                 .contentPadding(adaptiveLayoutType, AppTheme.dimens),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
@@ -47,13 +53,14 @@ fun HomeScreenDual(
         }
 
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
+            modifier = Modifier.weight(1f)
                 .contentPadding(adaptiveLayoutType, AppTheme.dimens),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             NewsPagerCard(uiState.news?.data)
-            AgentsListCard(uiState.getAgentsNewToOld(), onAgentsOverviewClick, onAgentDetailClick)
+            AgentsListCard(uiState.agentsList, onAgentsOverviewClick, onAgentDetailClick)
             WEnginesListCard(uiState.wEnginesList, onWEnginesOverviewClick, onWEngineDetailClick)
+            BangbooListCard(uiState.bangbooList, onBangbooOverviewClick, onBangbooDetailClick)
             DrivesListCard(uiState.drivesList, onDrivesOverviewClick, onDriveDetailClick)
         }
     }

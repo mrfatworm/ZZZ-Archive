@@ -16,7 +16,7 @@ class NavActions(private val navController: NavHostController) {
 
     fun navigationToTopAndSave(destination: Screen) {
         navController.navigate(destination.route) {
-            popUpTo(navController.graph.findStartDestination().route ?: "app/splash") {
+            popUpTo(navController.graph.findStartDestination().route ?: "splash") {
                 saveState = true
             }
             launchSingleTop = true
@@ -26,7 +26,7 @@ class NavActions(private val navController: NavHostController) {
 
     fun navigationToTop(destination: Screen) {
         navController.navigate(destination.route) {
-            popUpTo(navController.graph.findStartDestination().route ?: "app/splash") {
+            popUpTo(navController.graph.findStartDestination().route ?: "splash") {
                 inclusive = true
             }
         }

@@ -9,19 +9,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import app.home.domain.HomeViewModel
 import org.koin.compose.viewmodel.koinViewModel
-import ui.utils.ContentType
 import ui.utils.AdaptiveLayoutType
+import ui.utils.ContentType
 
 @Composable
 fun HomeScreen(
     contentType: ContentType,
     adaptiveLayoutType: AdaptiveLayoutType,
-    onAgentOverviewClick: () -> Unit,
-    onWEngineOverviewClick: () -> Unit,
+    onAgentsOverviewClick: () -> Unit,
+    onWEnginesOverviewClick: () -> Unit,
+    onBangbooOverviewClick: () -> Unit,
     onDrivesOverviewClick: () -> Unit,
-    onAgentDetailClick: (Int) -> Unit = {},
-    onWEngineDetailClick: (Int) -> Unit = {},
-    onDriveDetailClick: (Int) -> Unit = {},
+    onAgentDetailClick: (Int) -> Unit,
+    onWEngineDetailClick: (Int) -> Unit,
+    onBangbooDetailClick: (Int) -> Unit,
+    onDriveDetailClick: (Int) -> Unit,
 ) {
     val viewModel: HomeViewModel = koinViewModel()
     val uiState = viewModel.uiState.collectAsState()
@@ -30,22 +32,18 @@ fun HomeScreen(
         HomeScreenSingle(
             uiState = uiState.value,
             adaptiveLayoutType = adaptiveLayoutType,
-            onAgentsOverviewClick = onAgentOverviewClick,
-            onWEnginesOverviewClick = onWEngineOverviewClick,
-            onDrivesOverviewClick = onDrivesOverviewClick,
-            onAgentDetailClick = onAgentDetailClick,
-            onWEngineDetailClick = onWEngineDetailClick,
-            onDriveDetailClick = onDriveDetailClick,
         )
     } else {
         HomeScreenDual(
             uiState = uiState.value,
             adaptiveLayoutType = adaptiveLayoutType,
-            onAgentsOverviewClick = onAgentOverviewClick,
-            onWEnginesOverviewClick = onWEngineOverviewClick,
+            onAgentsOverviewClick = onAgentsOverviewClick,
+            onWEnginesOverviewClick = onWEnginesOverviewClick,
+            onBangbooOverviewClick = onBangbooOverviewClick,
             onDrivesOverviewClick = onDrivesOverviewClick,
             onAgentDetailClick = onAgentDetailClick,
             onWEngineDetailClick = onWEngineDetailClick,
+            onBangbooDetailClick = onBangbooDetailClick,
             onDriveDetailClick = onDriveDetailClick,
         )
     }

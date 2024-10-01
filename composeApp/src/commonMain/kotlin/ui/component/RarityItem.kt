@@ -37,10 +37,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.theme.AppTheme
 import utils.AgentAttribute
+import utils.AgentSpecialty
 import utils.ZzzRarity
 
 private val itemShape = RoundedCornerShape(8.dp)
@@ -51,7 +54,9 @@ fun RarityItem(
     name: String,
     imgUrl: String? = null,
     rarityLevel: Int? = null,
-    attribute: String? = null, onClick: (Int) -> Unit = {}
+    attribute: AgentAttribute? = null,
+    specialty: AgentSpecialty? = null,
+    onClick: (Int) -> Unit = {}
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed = interactionSource.collectIsPressedAsState()
@@ -77,8 +82,10 @@ fun RarityItem(
                     modifier = Modifier.fillMaxSize(), model = imgUrl, contentDescription = name
                 )
             }
-            attribute?.let {
-                AttributeTag(Modifier.align(Alignment.TopEnd), attribute)
+            if (attribute != null) {
+                AttributeTag(Modifier.align(Alignment.TopEnd), attribute.textRes, attribute.iconRes)
+            } else if (specialty != null) {
+                AttributeTag(Modifier.align(Alignment.TopEnd), specialty.textRes, specialty.iconRes)
             }
 
             rarityLevel?.let {
@@ -102,16 +109,13 @@ fun RarityItem(
 }
 
 @Composable
-private fun AttributeTag(modifier: Modifier, attribute: String) {
-    val attributeEnum = AgentAttribute.entries.find {
-        it.name.lowercase() == attribute.lowercase()
-    } ?: AgentAttribute.Physical
+private fun AttributeTag(modifier: Modifier, textRes: StringResource, iconRes: DrawableResource) {
     Icon(
         modifier = modifier.background(
             AppTheme.colors.imageTagContainer, RoundedCornerShape(bottomStart = 8.dp)
         ).padding(4.dp).size(18.dp),
-        imageVector = vectorResource(attributeEnum.iconRes),
-        contentDescription = stringResource(attributeEnum.textRes),
+        imageVector = vectorResource(iconRes),
+        contentDescription = stringResource(textRes),
         tint = AppTheme.colors.imageOnTagContainer
     )
 }

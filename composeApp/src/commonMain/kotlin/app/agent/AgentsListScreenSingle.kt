@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import app.agent.model.AgentsListState
 import ui.component.RarityItem
 
 @Composable
@@ -31,7 +32,7 @@ fun AgentsListScreenSingle(
             RarityItem(modifier = Modifier.size(100.dp).clickable { onAgentClick(agent.id) }.padding(top = 8.dp),
                 name = agent.name,
                 rarityLevel = agent.rarity,
-                imgUrl = agent.imgUrl)
+                imgUrl = agent.getProfileUrl())
         }
     }
 }

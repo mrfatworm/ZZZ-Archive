@@ -12,8 +12,8 @@ import androidx.navigation.compose.rememberNavController
 import app.home.HomeScreen
 import ui.navigation.MainFlow
 import ui.navigation.Screen
-import ui.utils.ContentType
 import ui.utils.AdaptiveLayoutType
+import ui.utils.ContentType
 
 @Composable
 fun HomeNavHost(
@@ -23,28 +23,17 @@ fun HomeNavHost(
 ) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.Home.route) {
-        if (contentType == ContentType.Dual) {
-            composable(Screen.Home.route) {
-                HomeScreen(contentType = contentType,
-                    adaptiveLayoutType = adaptiveLayoutType,
-                    onAgentOverviewClick = { navigateToTopLevelDestination(MainFlow.Agent) },
-                    onWEngineOverviewClick = { navigateToTopLevelDestination(MainFlow.WEngine) },
-                    onDrivesOverviewClick = { navigateToTopLevelDestination(MainFlow.Drive) },
-                    onAgentDetailClick = { navController.navigate(Screen.AgentDetail.route) },
-                    onWEngineDetailClick = { navController.navigate(Screen.WEngineDetail.route) },
-                    onDriveDetailClick = { navController.navigate(Screen.DriveDetail.route) })
-            }
-        } else {
-            composable(Screen.Home.route) {
-                HomeScreen(contentType = contentType,
-                    adaptiveLayoutType = adaptiveLayoutType,
-                    onAgentOverviewClick = { navController.navigate(Screen.AgentsList.route) },
-                    onWEngineOverviewClick = { navController.navigate(Screen.WEnginesList.route) },
-                    onDrivesOverviewClick = { navController.navigate(Screen.DrivesList.route) },
-                    onAgentDetailClick = { navController.navigate(Screen.AgentDetail.route) },
-                    onWEngineDetailClick = { navController.navigate(Screen.WEngineDetail.route) },
-                    onDriveDetailClick = { navController.navigate(Screen.DriveDetail.route) })
-            }
+        composable(Screen.Home.route) {
+            HomeScreen(contentType = contentType,
+                adaptiveLayoutType = adaptiveLayoutType,
+                onAgentsOverviewClick = { navigateToTopLevelDestination(MainFlow.Agent) },
+                onWEnginesOverviewClick = { navigateToTopLevelDestination(MainFlow.WEngine) },
+                onBangbooOverviewClick = { navigateToTopLevelDestination(MainFlow.Bangboo) },
+                onDrivesOverviewClick = { navigateToTopLevelDestination(MainFlow.Drive) },
+                onAgentDetailClick = { navController.navigate(Screen.AgentDetail.route) },
+                onWEngineDetailClick = { navController.navigate(Screen.WEngineDetail.route) },
+                onBangbooDetailClick = { navController.navigate(Screen.BangbooDetail.route) },
+                onDriveDetailClick = { navController.navigate(Screen.DriveDetail.route) })
         }
         sharedScreenDestination(navController, contentType, navigateToTopLevelDestination)
     }

@@ -6,6 +6,7 @@
 package app.agent
 
 import androidx.compose.runtime.Composable
+import app.agent.model.stubAgentsListState
 import ui.utils.ContentType
 
 @Composable

@@ -19,7 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import app.drive.model.DriveListItem
+import app.bangboo.model.BangbooListItem
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import ui.component.ContentCard
@@ -29,15 +29,14 @@ import ui.component.RowListFooterItem
 import ui.theme.AppTheme
 import ui.utils.drawRowListMask
 import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.all_drives
-import zzzarchive.composeapp.generated.resources.drives
-
+import zzzarchive.composeapp.generated.resources.all_bangboo
+import zzzarchive.composeapp.generated.resources.bangboo
 
 @Composable
-fun DrivesListCard(
-    drivesList: List<DriveListItem>,
-    onDrivesOverviewClick: () -> Unit,
-    onDriveDetailClick: (Int) -> Unit
+fun BangbooListCard(
+    bangbooList: List<BangbooListItem>,
+    onBangbooOverviewClick: () -> Unit,
+    onBangbooDetailClick: (Int) -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered = interactionSource.collectIsHoveredAsState()
@@ -47,7 +46,7 @@ fun DrivesListCard(
         modifier = Modifier.fillMaxWidth().hoverable(interactionSource = interactionSource)
     ) {
         HoveredIndicatorHeader(modifier = Modifier.fillMaxWidth(),
-            titleRes = Res.string.drives,
+            titleRes = Res.string.bangboo,
             isHovered = isHovered.value,
             onPreviousClick = {
                 val targetIndex = lazyListState.firstVisibleItemIndex - 3
@@ -62,10 +61,10 @@ fun DrivesListCard(
             onNextClick = {
                 val targetIndex = lazyListState.firstVisibleItemIndex + 3
                 coroutineScope.launch {
-                    if (targetIndex < drivesList.size) {
+                    if (targetIndex < bangbooList.size) {
                         lazyListState.animateScrollToItem(targetIndex)
                     } else {
-                        lazyListState.animateScrollToItem(drivesList.size - 1)
+                        lazyListState.animateScrollToItem(bangbooList.size - 1)
                     }
                 }
             })
@@ -74,29 +73,29 @@ fun DrivesListCard(
                 colorScheme = AppTheme.colors,
                 startEnable = lazyListState.canScrollBackward,
                 endEnable = lazyListState.canScrollForward
-            ), state = lazyListState,
-            contentPadding = PaddingValues(
+            ),
+            state = lazyListState, contentPadding = PaddingValues(
                 top = AppTheme.dimens.paddingUnderCardHeader,
                 start = AppTheme.dimens.paddingCard,
                 end = AppTheme.dimens.paddingCard,
                 bottom = AppTheme.dimens.paddingCard
             )
         ) {
-            items(items = drivesList, key = { it.id }) { item ->
+            items(items = bangbooList, key = { it.id }) { item ->
                 RarityItem(
+                    rarityLevel = item.rarity,
                     name = item.name,
                     imgUrl = item.getProfileUrl(),
                     onClick = { id ->
-                        onDriveDetailClick(id)
+                        onBangbooDetailClick(id)
                     })
                 Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
             }
             item {
-                RowListFooterItem(text = stringResource(Res.string.all_drives)) {
-                    onDrivesOverviewClick()
+                RowListFooterItem(text = stringResource(Res.string.all_bangboo)) {
+                    onBangbooOverviewClick()
                 }
             }
         }
     }
 }
-

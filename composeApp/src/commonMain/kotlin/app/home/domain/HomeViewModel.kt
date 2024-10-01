@@ -8,10 +8,13 @@ package app.home.domain
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.agent.data.AgentRepository
+import app.bangboo.data.BangbooRepository
+import app.drive.data.DriveRepository
 import app.home.data.BannerRepository
 import app.home.data.NewsRepository
 import app.home.data.PixivRepository
 import app.home.model.HomeState
+import app.wengine.data.WEngineRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -22,84 +25,127 @@ class HomeViewModel(
     private val bannerRepository: BannerRepository,
     private val pixivRepository: PixivRepository,
     private val newsRepository: NewsRepository,
-    private val agentRepository: AgentRepository
+    private val agentRepository: AgentRepository,
+    private val wEngineRepository: WEngineRepository,
+    private val bangbooRepository: BangbooRepository,
+    private val driveRepository: DriveRepository,
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(HomeState())
     val uiState = _uiState.asStateFlow()
 
     init {
-        fetchBanner()
-        fetchAgentsList()
-        fetchZzzOfficialNewsEveryTenMinutes()
-        fetchPixivTopicEveryTenMinutes()
+        viewModelScope.launch {
+            launch { fetchBannerImage() }
+            launch { fetchZzzOfficialNewsEveryTenMinutes() }
+            launch { fetchPixivTopicEveryTenMinutes() }
+            launch { fetchAgentsList() }
+            launch { fetchWEnginesList() }
+            launch { fetchBangbooList() }
+            launch { fetchDrivesList() }
+        }
     }
 
-    private fun fetchBanner() {
-        viewModelScope.launch {
-            when (val result = bannerRepository.getBanner()) {
+    private suspend fun fetchBannerImage() {
+        when (val result = bannerRepository.getBanner()) {
+            is ZzzResult.Success -> {
+                _uiState.update { state ->
+                    state.copy(banner = result.data)
+                }
+            }
+
+            is ZzzResult.Error -> {
+                println("get banner error: ${result.exception}")
+            }
+        }
+    }
+
+    private suspend fun fetchZzzOfficialNewsEveryTenMinutes() {
+        newsRepository.getNewsPeriodically(10, 5, "en-us").collect { result ->
+            when (result) {
                 is ZzzResult.Success -> {
                     _uiState.update { state ->
-                        state.copy(banner = result.data)
+                        state.copy(news = result.data)
                     }
                 }
 
                 is ZzzResult.Error -> {
-                    println("get banner error: ${result.exception}")
+                    println("get news error: ${result.exception}")
                 }
             }
         }
     }
 
-    private fun fetchAgentsList() {
-        viewModelScope.launch {
-            when (val result = agentRepository.getAgentsList()) {
+    private suspend fun fetchPixivTopicEveryTenMinutes() {
+        pixivRepository.getZzzTopicPeriodically(10).collect { result ->
+            when (result) {
                 is ZzzResult.Success -> {
                     _uiState.update { state ->
-                        state.copy(agentsList = result.data.agents)
+                        state.copy(pixivPuppiesList = result.data.getPopularArticles())
                     }
                 }
 
                 is ZzzResult.Error -> {
-                    println("get agents error: ${result.exception}")
+                    println("get pixiv error: ${result.exception}")
                 }
             }
         }
     }
 
-    private fun fetchZzzOfficialNewsEveryTenMinutes() {
-        viewModelScope.launch {
-            newsRepository.getNewsPeriodically(10, 5, "en-us").collect { result ->
-                when (result) {
-                    is ZzzResult.Success -> {
-                        _uiState.update { state ->
-                            state.copy(news = result.data)
-                        }
-                    }
-
-                    is ZzzResult.Error -> {
-                        println("get news error: ${result.exception}")
-                    }
+    private suspend fun fetchAgentsList() {
+        when (val result = agentRepository.getAgentsList()) {
+            is ZzzResult.Success -> {
+                _uiState.update { state ->
+                    state.copy(agentsList = result.data.getAgentsNewToOld())
                 }
+            }
+
+            is ZzzResult.Error -> {
+                println("get agents error: ${result.exception}")
             }
         }
     }
 
-    private fun fetchPixivTopicEveryTenMinutes() {
-        viewModelScope.launch {
-            pixivRepository.getZzzTopicPeriodically(10).collect { result ->
-                when (result) {
-                    is ZzzResult.Success -> {
-                        _uiState.update { state ->
-                            state.copy(pixivPuppiesList = result.data.getPopularArticles())
-                        }
-                    }
-
-                    is ZzzResult.Error -> {
-                        println("get pixiv error: ${result.exception}")
-                    }
+    private suspend fun fetchWEnginesList() {
+        when (val result = wEngineRepository.getWEnginesList()) {
+            is ZzzResult.Success -> {
+                _uiState.update { state ->
+                    state.copy(wEnginesList = result.data.getWEnginesNewToOld())
                 }
+            }
+
+            is ZzzResult.Error -> {
+                println("get w-engines error: ${result.exception}")
             }
         }
     }
+
+    private suspend fun fetchBangbooList() {
+        when (val result = bangbooRepository.getBangbooList()) {
+            is ZzzResult.Success -> {
+                _uiState.update { state ->
+                    state.copy(bangbooList = result.data.getBangbooNewToOld())
+                }
+            }
+
+            is ZzzResult.Error -> {
+                println("get bangboo error: ${result.exception}")
+            }
+        }
+    }
+
+    private suspend fun fetchDrivesList() {
+        when (val result = driveRepository.getDrivesList()) {
+            is ZzzResult.Success -> {
+                _uiState.update { state ->
+                    state.copy(drivesList = result.data.getDrivesNewToOld())
+                }
+            }
+
+            is ZzzResult.Error -> {
+                println("get drives error: ${result.exception}")
+            }
+        }
+    }
+
 }

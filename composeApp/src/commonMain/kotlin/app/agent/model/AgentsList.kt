@@ -8,12 +8,17 @@ package app.agent.model
 import com.mrfatworm.zzzarchive.ZzzConfig
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import utils.ZzzRarity
+import utils.AgentAttribute
+import kotlin.enums.EnumEntries
 
 @Serializable
 data class AgentsListResponse(
     val agents: List<AgentListItem>
-)
+) {
+    fun getAgentsNewToOld(): List<AgentListItem> {
+        return agents.reversed()
+    }
+}
 
 @Serializable
 data class AgentListItem(
@@ -31,9 +36,14 @@ data class AgentListItem(
     @SerialName("faction_id")
     val factionId: Int
 ) {
-    fun getProfileUrl(): String {
-        return "https://raw.githubusercontent.com/${ZzzConfig.ASSET_PATH}/Agent/Profile/$id.webp"
+    fun getProfileUrl(path: String = ZzzConfig.ASSET_PATH): String {
+        return "https://raw.githubusercontent.com/$path/Agent/Profile/$id.webp"
     }
+
+    fun getAttributeEnum(agentAttribute: EnumEntries<AgentAttribute> = AgentAttribute.entries) =
+        agentAttribute.find {
+            it.name.lowercase() == attribute.lowercase()
+        } ?: AgentAttribute.None
 }
 
 val stubAgentsListResponse = AgentsListResponse(

@@ -1,7 +1,10 @@
 package network
 
 import app.agent.model.AgentsListResponse
+import app.bangboo.model.BangbooListResponse
+import app.drive.model.DriveListResponse
 import app.home.model.BannerResponse
+import app.wengine.model.WEnginesListResponse
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
@@ -21,11 +24,23 @@ class ZzzHttpImpl(engine: HttpClientEngine) : ZzzHttp {
     }
 
     override suspend fun requestBanner(): BannerResponse {
-        return requestData("banner.json")
+        return requestData("Banner.json")
     }
 
     override suspend fun requestAgentList(): AgentsListResponse {
-        return requestData("agent/zh-tw/list.json")
+        return requestData("Agent/zh-tw/List.json")
+    }
+
+    override suspend fun requestWEngineList(): WEnginesListResponse {
+        return requestData("W-Engine/zh-tw/List.json")
+    }
+
+    override suspend fun requestBangbooList(): BangbooListResponse {
+        return requestData("Bangboo/zh-tw/List.json")
+    }
+
+    override suspend fun requestDriveList(): DriveListResponse {
+        return requestData("Drive/zh-tw/List.json")
     }
 }
 

@@ -28,12 +28,6 @@ import ui.utils.contentPadding
 fun HomeScreenSingle(
     uiState: HomeState,
     adaptiveLayoutType: AdaptiveLayoutType,
-    onAgentsOverviewClick: () -> Unit = {},
-    onWEnginesOverviewClick: () -> Unit = {},
-    onDrivesOverviewClick: () -> Unit = {},
-    onAgentDetailClick: (Int) -> Unit = {},
-    onWEngineDetailClick: (Int) -> Unit = {},
-    onDriveDetailClick: (Int) -> Unit = {},
 ) {
     Column(
         modifier = Modifier.fillMaxSize()

@@ -3,25 +3,24 @@
  * License: CC BY-SA 4.0
  */
 
-package app.home.data
+package app.drive.data
 
-import app.agent.data.AgentRepository
-import app.agent.model.AgentsListResponse
-import app.agent.model.stubAgentsListResponse
+import app.drive.model.DriveListResponse
+import app.drive.model.stubDriveListResponse
 import utils.ZzzResult
 
-class FakeAgentRepository : AgentRepository {
+class FakeDriveRepository : DriveRepository {
     private var isError = false
 
     fun setError(isError: Boolean) {
         this.isError = isError
     }
 
-    override suspend fun getAgentsList(): ZzzResult<AgentsListResponse> {
+    override suspend fun getDrivesList(): ZzzResult<DriveListResponse> {
         return if (isError) {
             ZzzResult.Error(Exception())
         } else {
-            ZzzResult.Success(stubAgentsListResponse)
+            ZzzResult.Success(stubDriveListResponse)
         }
     }
 }

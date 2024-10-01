@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -20,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import app.agent.model.AgentListItem
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
@@ -29,9 +27,10 @@ import ui.component.HoveredIndicatorHeader
 import ui.component.RarityItem
 import ui.component.RowListFooterItem
 import ui.theme.AppTheme
+import ui.utils.drawRowListMask
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.agents
-import zzzarchive.composeapp.generated.resources.all
+import zzzarchive.composeapp.generated.resources.all_agents
 
 @Composable
 fun AgentsListCard(
@@ -70,6 +69,11 @@ fun AgentsListCard(
                 }
             })
         LazyRow(
+            modifier = Modifier.drawRowListMask(
+                colorScheme = AppTheme.colors,
+                startEnable = lazyListState.canScrollBackward,
+                endEnable = lazyListState.canScrollForward
+            ),
             state = lazyListState, contentPadding = PaddingValues(
                 top = AppTheme.dimens.paddingUnderCardHeader,
                 start = AppTheme.dimens.paddingCard,
@@ -78,10 +82,10 @@ fun AgentsListCard(
             )
         ) {
             items(items = agentsList, key = { it.id }) { item ->
-                RarityItem(modifier = Modifier.width(100.dp),
+                RarityItem(
                     rarityLevel = item.rarity,
                     name = item.name,
-                    attribute = item.attribute,
+                    attribute = item.getAttributeEnum(),
                     imgUrl = item.getProfileUrl(),
                     onClick = { id ->
                         onAgentDetailClick(id)
@@ -89,7 +93,7 @@ fun AgentsListCard(
                 Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
             }
             item {
-                RowListFooterItem(text = stringResource(Res.string.all) + stringResource(Res.string.agents)) {
+                RowListFooterItem(text = stringResource(Res.string.all_agents)) {
                     onAgentsOverviewClick()
                 }
             }

@@ -8,13 +8,16 @@
     <string name="cancel">Cancel</string>
     <string name="previous">Previous</string>
     <string name="next">Next</string>
-    <string name="all">All</string>
 
     <string name="home">Home</string>
     <string name="agents">Agents</string>
-    <string name="w_engines">W-Engines</string>"
+    <string name="all_agents">All Agents</string>
+    <string name="w_engines">W-Engines</string>
+    <string name="all_w_engines">All W-Engines</string>
     <string name="drives">Drives</string>
+    <string name="all_drives">All Drives</string>
     <string name="bangboo">Bangboo</string>
+    <string name="all_bangboo">All Bangboo</string>
     <string name="setting">Setting</string>
     <string name="feedback">Feedback</string>
     <string name="wiki">Wiki</string>
@@ -28,6 +31,13 @@
     <string name="ice">Ice</string>
     <string name="electric">Electric</string>
     <string name="physical">Physical</string>
+
+    <string name="attack">Attack</string>
+    <string name="stun">Stun</string>
+    <string name="support">Support</string>
+    <string name="anomaly">Anomaly</string>
+    <string name="defense">Defense</string>
+
 
     <string name="pixiv_hot">Pixiv Hot</string>
 

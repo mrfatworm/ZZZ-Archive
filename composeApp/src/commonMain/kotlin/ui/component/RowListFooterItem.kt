@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -22,14 +23,14 @@ fun RowListFooterItem(
 ) {
     Box(
         modifier = modifier.clickable { onClick() }.background(
-            AppTheme.colors.onSurfaceVariant, RoundedCornerShape(radius)
+            Color(0xFF888888), RoundedCornerShape(radius)
         ).background(AppTheme.colors.hoveredMask, RoundedCornerShape(radius)).padding(8.dp),
     ) {
         Text(
             modifier = Modifier.align(Alignment.Center).fillMaxWidth(),
             text = text,
             textAlign = TextAlign.Center,
-            style = AppTheme.typography.labelMedium,
+            style = AppTheme.typography.bodyLarge,
             color = AppTheme.colors.onHoveredMaskVariant
         )
     }

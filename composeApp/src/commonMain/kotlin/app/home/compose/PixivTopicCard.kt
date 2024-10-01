@@ -51,6 +51,7 @@ import ui.component.HoveredIndicatorHeader
 import ui.component.ImageNotFound
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
+import ui.utils.drawRowListMask
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.pixiv_hot
 
@@ -89,9 +90,11 @@ fun PixivTopicCard(
                 }
             })
         LazyRow(
-            modifier = Modifier.hoverable(interactionSource = interactionSource),
-            state = lazyListState,
-            contentPadding = PaddingValues(
+            modifier = Modifier.drawRowListMask(
+                colorScheme = AppTheme.colors,
+                startEnable = lazyListState.canScrollBackward,
+                endEnable = lazyListState.canScrollForward
+            ), state = lazyListState, contentPadding = PaddingValues(
                 top = AppTheme.dimens.paddingUnderCardHeader,
                 start = AppTheme.dimens.paddingCard,
                 end = AppTheme.dimens.paddingCard,

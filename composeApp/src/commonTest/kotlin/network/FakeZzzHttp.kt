@@ -7,8 +7,14 @@ package network
 
 import app.agent.model.AgentsListResponse
 import app.agent.model.stubAgentsListResponse
+import app.bangboo.model.BangbooListResponse
+import app.bangboo.model.stubBangbooListResponse
+import app.drive.model.DriveListResponse
+import app.drive.model.stubDriveListResponse
 import app.home.model.BannerResponse
 import app.home.model.stubBannerResponse
+import app.wengine.model.WEnginesListResponse
+import app.wengine.model.stubWEnginesListResponse
 
 
 class FakeZzzHttp : ZzzHttp {
@@ -33,6 +39,30 @@ class FakeZzzHttp : ZzzHttp {
             throw Exception()
         } else {
             stubAgentsListResponse
+        }
+    }
+
+    override suspend fun requestWEngineList(): WEnginesListResponse {
+        return if (isError) {
+            throw Exception()
+        } else {
+            stubWEnginesListResponse
+        }
+    }
+
+    override suspend fun requestBangbooList(): BangbooListResponse {
+        return if (isError) {
+            throw Exception()
+        } else {
+            stubBangbooListResponse
+        }
+    }
+
+    override suspend fun requestDriveList(): DriveListResponse {
+        return if (isError) {
+            throw Exception()
+        } else {
+            stubDriveListResponse
         }
     }
 }

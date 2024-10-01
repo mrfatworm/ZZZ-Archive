@@ -8,13 +8,16 @@
     <string name="cancel">取消</string>
     <string name="previous">上一個</string>
     <string name="next">下一個</string>
-    <string name="all">全部</string>
 
     <string name="home">首頁</string>
     <string name="agents">代理人</string>
-    <string name="w_engines">音擎</string>"
+    <string name="all_agents">全部代理人</string>
+    <string name="w_engines">音擎</string>
+    <string name="all_w_engines">全部音擎</string>
     <string name="drives">驅動光碟</string>
+    <string name="all_drives">全部驅動光碟</string>
     <string name="bangboo">邦布</string>
+    <string name="all_bangboo">全部邦布</string>
     <string name="setting">設定</string>
     <string name="feedback">意見回饋</string>
     <string name="wiki">Wiki</string>
@@ -28,6 +31,12 @@
     <string name="ice">冰屬性</string>
     <string name="electric">電屬性</string>
     <string name="physical">物理</string>
+
+    <string name="attack">強攻</string>
+    <string name="stun">擊破</string>
+    <string name="support">支援</string>
+    <string name="anomaly">異常</string>
+    <string name="defense">防護</string>
 
     <string name="pixiv_hot">Pixiv 熱門</string>
 
