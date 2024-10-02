@@ -121,8 +121,18 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.mrfatworm.zzzarchive"
+            packageName = "Zzz Archive"
             packageVersion = "1.0.0"
+            linux {
+                iconFile.set(project.file("desktopLogo/Logo.png"))
+            }
+            windows {
+                iconFile.set(project.file("desktopLogo/Logo.ico"))
+            }
+            macOS {
+                iconFile.set(project.file("desktopLogo/Logo.icns"))
+                bundleID = "com.mrfatworm.zzzarchive"
+            }
         }
     }
 }
