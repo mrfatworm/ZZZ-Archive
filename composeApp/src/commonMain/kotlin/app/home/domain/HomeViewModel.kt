@@ -14,6 +14,7 @@ import app.home.data.BannerRepository
 import app.home.data.NewsRepository
 import app.home.data.PixivRepository
 import app.home.model.HomeState
+import app.home.model.pixivTagDropdownItems
 import app.wengine.data.WEngineRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -38,7 +39,7 @@ class HomeViewModel(
         viewModelScope.launch {
             launch { fetchBannerImage() }
             launch { fetchZzzOfficialNewsEveryTenMinutes() }
-            launch { fetchPixivTopicEveryTenMinutes() }
+            launch { fetchPixivTopic() }
             launch { fetchAgentsList() }
             launch { fetchWEnginesList() }
             launch { fetchBangbooList() }
@@ -76,18 +77,16 @@ class HomeViewModel(
         }
     }
 
-    private suspend fun fetchPixivTopicEveryTenMinutes() {
-        pixivRepository.getZzzTopicPeriodically(10).collect { result ->
-            when (result) {
-                is ZzzResult.Success -> {
-                    _uiState.update { state ->
-                        state.copy(pixivPuppiesList = result.data.getPopularArticles())
-                    }
+    suspend fun fetchPixivTopic(zzzTag: String = pixivTagDropdownItems.first().tagOnPixiv) {
+        when (val result = pixivRepository.getZzzTopic(zzzTag)) {
+            is ZzzResult.Success -> {
+                _uiState.update { state ->
+                    state.copy(pixivPuppiesList = result.data.getPopularArticles())
                 }
+            }
 
-                is ZzzResult.Error -> {
-                    println("get pixiv error: ${result.exception}")
-                }
+            is ZzzResult.Error -> {
+                println("get pixiv error: ${result.exception}")
             }
         }
     }

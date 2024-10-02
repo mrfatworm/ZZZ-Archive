@@ -9,7 +9,6 @@ import app.home.model.stubPixivZzzTopic
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import network.FakePixivHttp
 import utils.ZzzResult
@@ -23,27 +22,27 @@ class PixivRepositoryTest {
 
     @Test
     fun `Get News Success`() = runTest {
-        val result = repository.getZzzTopic() as ZzzResult.Success
+        val result = repository.getZzzTopic("") as ZzzResult.Success
         assertThat(result.data).isEqualTo(stubPixivZzzTopic)
     }
 
     @Test
     fun `Get News Error`() = runTest {
         httpClient.setError(true)
-        val result = repository.getZzzTopic() as ZzzResult.Error
+        val result = repository.getZzzTopic("") as ZzzResult.Error
         assertThat(result.exception).isInstanceOf(Exception::class)
     }
 
     @Test
     fun `Get New Every 10 Minutes`() = runTest {
-        val result = repository.getZzzTopicPeriodically(10).first() as ZzzResult.Success
+        val result = repository.getZzzTopic("") as ZzzResult.Success
         assertThat(result.data).isEqualTo(stubPixivZzzTopic)
     }
 
     @Test
     fun `Get New Every 10 Minutes Fail`() = runTest {
         httpClient.setError(true)
-        val result = repository.getZzzTopicPeriodically(10).first() as ZzzResult.Error
+        val result = repository.getZzzTopic("") as ZzzResult.Error
         assertThat(result.exception).isInstanceOf(Exception::class)
     }
 }

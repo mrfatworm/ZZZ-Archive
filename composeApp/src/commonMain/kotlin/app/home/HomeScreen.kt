@@ -7,7 +7,9 @@ package app.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import app.home.domain.HomeViewModel
+import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
@@ -27,15 +29,18 @@ fun HomeScreen(
 ) {
     val viewModel: HomeViewModel = koinViewModel()
     val uiState = viewModel.uiState.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
 
     if (contentType == ContentType.Single) {
-        HomeScreenSingle(
-            uiState = uiState.value,
+        HomeScreenSingle(uiState = uiState.value,
             adaptiveLayoutType = adaptiveLayoutType,
-        )
+            onPixivTagChange = {
+                coroutineScope.launch {
+                    viewModel.fetchPixivTopic(it)
+                }
+            })
     } else {
-        HomeScreenDual(
-            uiState = uiState.value,
+        HomeScreenDual(uiState = uiState.value,
             adaptiveLayoutType = adaptiveLayoutType,
             onAgentsOverviewClick = onAgentsOverviewClick,
             onWEnginesOverviewClick = onWEnginesOverviewClick,
@@ -45,6 +50,10 @@ fun HomeScreen(
             onWEngineDetailClick = onWEngineDetailClick,
             onBangbooDetailClick = onBangbooDetailClick,
             onDriveDetailClick = onDriveDetailClick,
-        )
+            onPixivTagChange = {
+                coroutineScope.launch {
+                    viewModel.fetchPixivTopic(it)
+                }
+            })
     }
 }

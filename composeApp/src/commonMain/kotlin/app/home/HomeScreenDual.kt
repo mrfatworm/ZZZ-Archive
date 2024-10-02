@@ -37,6 +37,7 @@ fun HomeScreenDual(
     onWEngineDetailClick: (Int) -> Unit = {},
     onBangbooDetailClick: (Int) -> Unit = {},
     onDriveDetailClick: (Int) -> Unit = {},
+    onPixivTagChange: (String) -> Unit
 ) {
     Row(
         modifier = Modifier.verticalScroll(rememberScrollState())
@@ -49,7 +50,7 @@ fun HomeScreenDual(
         ) {
             BannerImageCard(uiState.banner)
             HoYoLabZzzStatusCard()
-            PixivTopicCard(uiState.pixivPuppiesList, adaptiveLayoutType)
+            PixivTopicCard(uiState.pixivPuppiesList, adaptiveLayoutType, onPixivTagChange)
         }
 
         Column(

@@ -7,8 +7,6 @@ package app.home.data
 
 import app.home.model.PixivZzzTopic
 import app.home.model.stubPixivZzzTopic
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import utils.ZzzResult
 
 class FakePixivRepository : PixivRepository {
@@ -18,21 +16,11 @@ class FakePixivRepository : PixivRepository {
         this.isError = isError
     }
 
-    override suspend fun getZzzTopic(): ZzzResult<PixivZzzTopic> {
+    override suspend fun getZzzTopic(zzzTag: String): ZzzResult<PixivZzzTopic> {
         return if (isError) {
             ZzzResult.Error(Exception())
         } else {
             ZzzResult.Success(stubPixivZzzTopic)
-        }
-    }
-
-    override fun getZzzTopicPeriodically(
-        perMinutes: Int
-    ): Flow<ZzzResult<PixivZzzTopic>> {
-        return if (isError) {
-            flowOf(ZzzResult.Error(Exception()))
-        } else {
-            flowOf(ZzzResult.Success(stubPixivZzzTopic))
         }
     }
 }

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -42,7 +43,7 @@ fun ContentCard(
 
 @Composable
 fun CardHeader(
-    modifier: Modifier, titleRes: StringResource, action: @Composable () -> Unit = {}
+    modifier: Modifier, titleRes: StringResource, action: @Composable RowScope.() -> Unit = {}
 ) {
     Row(
         modifier = modifier.heightIn(min = 56.dp).padding(horizontal = 16.dp, vertical = 8.dp),

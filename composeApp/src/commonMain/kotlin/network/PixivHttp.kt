@@ -10,5 +10,5 @@ import app.home.model.PixivZzzTopic
 
 interface PixivHttp {
     val timeout: Long
-    suspend fun requestZzzTopic(): PixivZzzTopic
+    suspend fun requestZzzTopic(zzzTag: String): PixivZzzTopic
 }

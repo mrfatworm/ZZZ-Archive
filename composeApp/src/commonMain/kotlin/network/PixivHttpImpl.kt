@@ -17,13 +17,12 @@ import io.ktor.http.path
 class PixivHttpImpl(engine: HttpClientEngine) : PixivHttp {
     override val timeout = 5000L
     private val client = createPixivHttpClient(engine)
-    private val zzzJpTag100LikeId = "ゼンゼロ100users入り"
 
-    override suspend fun requestZzzTopic(): PixivZzzTopic = client.get {
+    override suspend fun requestZzzTopic(zzzTag: String): PixivZzzTopic = client.get {
         url {
-            path("/ajax/search/artworks/$zzzJpTag100LikeId")
+            path("/ajax/search/artworks/$zzzTag")
         }
-        parameter("word", zzzJpTag100LikeId)
+        parameter("word", zzzTag)
         parameter("mode", "safe")
         parameter("lang", "zh")
         contentType(ContentType.Application.Json)

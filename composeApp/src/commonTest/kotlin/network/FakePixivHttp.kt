@@ -16,7 +16,7 @@ class FakePixivHttp : PixivHttp {
         this.isError = isError
     }
 
-    override suspend fun requestZzzTopic(): PixivZzzTopic {
+    override suspend fun requestZzzTopic(zzzTag: String): PixivZzzTopic {
         return if (isError) {
             throw Exception()
         } else {

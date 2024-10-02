@@ -6,10 +6,8 @@
 package app.home.data
 
 import app.home.model.PixivZzzTopic
-import kotlinx.coroutines.flow.Flow
 import utils.ZzzResult
 
 interface PixivRepository {
-    suspend fun getZzzTopic(): ZzzResult<PixivZzzTopic>
-    fun getZzzTopicPeriodically(perMinutes: Int): Flow<ZzzResult<PixivZzzTopic>>
+    suspend fun getZzzTopic(zzzTag: String): ZzzResult<PixivZzzTopic>
 }
