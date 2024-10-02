@@ -11,7 +11,7 @@ import ui.theme.ColorScheme
 // Draw an Mask on the start and end of list depend on list status
 fun Modifier.drawRowListMask(
     colorScheme: ColorScheme,
-    width: Dp = 50.dp,
+    width: Dp = 36.dp,
     startEnable: Boolean = false,
     endEnable: Boolean = true
 ) = this.drawWithContent {

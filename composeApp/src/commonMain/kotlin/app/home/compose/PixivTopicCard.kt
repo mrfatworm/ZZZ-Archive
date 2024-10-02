@@ -46,6 +46,7 @@ import coil3.network.httpHeaders
 import coil3.request.ImageRequest
 import coil3.size.Size
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
 import ui.component.ContentCard
 import ui.component.HoveredIndicatorHeader
 import ui.component.ImageNotFound
@@ -54,6 +55,7 @@ import ui.utils.AdaptiveLayoutType
 import ui.utils.drawRowListMask
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.pixiv_hot
+import zzzarchive.composeapp.generated.resources.unknown
 
 @Composable
 fun PixivTopicCard(
@@ -105,7 +107,7 @@ fun PixivTopicCard(
                 PixivTopicItem(
                     adaptiveLayoutType,
                     artworkId = item.id,
-                    artworkName = item.title,
+                    artworkName = item.title?: stringResource(Res.string.unknown),
                     artworkUrl = item.url,
                     profileId = item.userId,
                     profileName = item.userName,
