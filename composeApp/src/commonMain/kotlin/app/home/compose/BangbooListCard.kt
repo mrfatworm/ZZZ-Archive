@@ -43,7 +43,8 @@ fun BangbooListCard(
     val lazyListState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
     ContentCard(
-        modifier = Modifier.fillMaxWidth().hoverable(interactionSource = interactionSource)
+        modifier = Modifier.fillMaxWidth().hoverable(interactionSource = interactionSource),
+        hasDefaultPadding = false
     ) {
         HoveredIndicatorHeader(modifier = Modifier.fillMaxWidth(),
             titleRes = Res.string.bangboo,

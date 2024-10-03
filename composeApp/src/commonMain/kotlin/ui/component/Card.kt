@@ -31,12 +31,16 @@ import zzzarchive.composeapp.generated.resources.previous
 
 @Composable
 fun ContentCard(
-    modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit
+    modifier: Modifier = Modifier,
+    hasDefaultPadding: Boolean = true,
+    content: @Composable ColumnScope.() -> Unit
 ) {
     Column(
         modifier = modifier.background(
             AppTheme.colors.surfaceContainer, RoundedCornerShape(AppTheme.radius.contentCard)
         ).clip(RoundedCornerShape(AppTheme.radius.contentCard))
+            .padding(if (hasDefaultPadding) AppTheme.dimens.paddingCard else 0.dp)
+
     ) {
         content()
     }

@@ -82,7 +82,8 @@ fun PixivTopicCard(
     val isHovered = interactionSource.collectIsHoveredAsState()
     val lazyListState = rememberLazyListState()
     ContentCard(
-        modifier = Modifier.fillMaxWidth().hoverable(interactionSource = interactionSource)
+        modifier = Modifier.fillMaxWidth().hoverable(interactionSource = interactionSource),
+        hasDefaultPadding = false
     ) {
         Header(isHovered.value, lazyListState, recentArticlesList, onPixivTagChange)
         LazyRow(

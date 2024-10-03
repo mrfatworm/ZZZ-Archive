@@ -40,4 +40,12 @@
 
     <string name="pixiv_hot">Pixiv 熱門</string>
 
+    <string name="engagement_today">今日活躍度</string>
+    <string name="scratch_card">刮刮樂</string>
+    <string name="video_store">錄音帶店</string>
+    <string name="bounty_commissions">懸賞委託</string>
+    <string name="investigate_point">調查點數</string>
+    <string name="incomplete">未完成</string>
+    <string name="open">營業中</string>
+    <string name="check_in">簽到</string>
 </resources>

@@ -38,7 +38,14 @@
     <string name="anomaly">Anomaly</string>
     <string name="defense">Defense</string>
 
-
     <string name="pixiv_hot">Pixiv Hot</string>
 
+    <string name="engagement_today">Engagement Today</string>
+    <string name="scratch_card">Scratch Card</string>
+    <string name="video_store">Video Store</string>
+    <string name="bounty_commissions">Bounty Commissions</string>
+    <string name="investigate_point">Investigate Point</string>
+    <string name="incomplete">Incomplete</string>
+    <string name="open">Open</string>
+    <string name="check_in">Check In</string>
 </resources>

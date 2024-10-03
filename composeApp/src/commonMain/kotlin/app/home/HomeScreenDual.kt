@@ -16,7 +16,7 @@ import app.home.compose.AgentsListCard
 import app.home.compose.BangbooListCard
 import app.home.compose.BannerImageCard
 import app.home.compose.DrivesListCard
-import app.home.compose.HoYoLabZzzStatusCard
+import app.home.compose.HoYoLabCard
 import app.home.compose.NewsPagerCard
 import app.home.compose.PixivTopicCard
 import app.home.compose.WEnginesListCard
@@ -49,7 +49,7 @@ fun HomeScreenDual(
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             BannerImageCard(uiState.banner)
-            HoYoLabZzzStatusCard()
+            HoYoLabCard()
             PixivTopicCard(uiState.pixivPuppiesList, adaptiveLayoutType, onPixivTagChange)
         }
 
