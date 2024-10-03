@@ -14,10 +14,12 @@ data class BannerResponse(
     val id: Int,
     @SerialName("artwork_url")
     val artworkUrl: String,
-    @SerialName("author_url")
-    val authorUrl: String,
     @SerialName("artwork_name")
     val artworkName: String,
+    @SerialName("artwork_description")
+    val artworkDescription: String,
+    @SerialName("author_url")
+    val authorUrl: String,
     @SerialName("author_name")
     val authorName: String,
 ) {
@@ -29,8 +31,9 @@ data class BannerResponse(
 val stubBannerResponse = BannerResponse(
     id = 1,
     artworkUrl = "https://zzz-archive.com/mrfatworm/1",
-    authorUrl = "https://zzz-archive.com/mrfatworm",
     artworkName = "banner",
+    artworkDescription = "banner test",
+    authorUrl = "https://zzz-archive.com/mrfatworm",
     authorName = "mrfatworm"
 )
 

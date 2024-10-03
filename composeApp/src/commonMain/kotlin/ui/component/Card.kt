@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -35,7 +36,7 @@ fun ContentCard(
     Column(
         modifier = modifier.background(
             AppTheme.colors.surfaceContainer, RoundedCornerShape(AppTheme.radius.contentCard)
-        )
+        ).clip(RoundedCornerShape(AppTheme.radius.contentCard))
     ) {
         content()
     }

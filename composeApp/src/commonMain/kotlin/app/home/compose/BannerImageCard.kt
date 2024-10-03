@@ -81,7 +81,7 @@ private fun ArtworkInfo(modifier: Modifier, banner: BannerResponse) {
         )
         Text(
             modifier = Modifier.weight(1f),
-            text = banner.artworkName,
+            text = banner.artworkDescription,
             color = AppTheme.colors.onHoveredMask,
             style = AppTheme.typography.bodyMedium
         )
