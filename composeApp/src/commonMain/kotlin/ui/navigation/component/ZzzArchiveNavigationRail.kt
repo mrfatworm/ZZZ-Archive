@@ -24,7 +24,6 @@ import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -46,7 +45,8 @@ fun ZzzArchiveNavigationRail(
     modifier: Modifier,
     selectedDestination: String,
     navigationActions: NavActions,
-    onDrawerClicked: () -> Unit = {},
+    onDrawerClicked: () -> Unit,
+    onThemeChanged: () -> Unit
 ) {
     Column(
         modifier
@@ -86,9 +86,9 @@ fun ZzzArchiveNavigationRail(
                 modifier = Modifier.weight(1f).heightIn(min = 16.dp)
             )
 
-            var isDark by AppTheme.isDark
+            val isDark by AppTheme.isDark
             NavigationRailItem(selected = false, onClick = {
-                isDark = !isDark
+                onThemeChanged()
             }, icon = {
                 Icon(
                     imageVector = vectorResource(if (isDark) Res.drawable.ic_sun else Res.drawable.ic_moon),

@@ -17,9 +17,11 @@ import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -27,6 +29,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
+import org.koin.compose.viewmodel.koinViewModel
 import ui.navigation.MainFlow
 import ui.navigation.NavActions
 import ui.navigation.component.ModalNavigationDrawerContent
@@ -34,8 +37,8 @@ import ui.navigation.component.ZzzArchiveBottomNavigationBar
 import ui.navigation.component.ZzzArchiveNavigationRail
 import ui.navigation.graph.MainNavGraph
 import ui.theme.AppTheme
-import ui.utils.ContentType
 import ui.utils.AdaptiveLayoutType
+import ui.utils.ContentType
 import ui.utils.containerPadding
 import ui.utils.contentPadding
 
@@ -52,6 +55,9 @@ fun MainFunScreen(
 
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val viewModel: MainFunViewModel = koinViewModel()
+    val isDark by viewModel.isDark.collectAsState()
+    var isDarkComposeState by AppTheme.isDark
 
     ModalNavigationDrawer(
         drawerContent = {
@@ -74,6 +80,10 @@ fun MainFunScreen(
                 scope.launch {
                     drawerState.open()
                 }
+            },
+            onThemeChanged = {
+                viewModel.setIsDarkTheme(!isDark)
+                isDarkComposeState = !isDark
             })
     }
 }
@@ -86,7 +96,8 @@ fun MainFunContent(
     selectedDestination: String,
     adaptiveLayoutType: AdaptiveLayoutType,
     contentType: ContentType,
-    onDrawerClicked: () -> Unit = {}
+    onDrawerClicked: () -> Unit,
+    onThemeChanged: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
@@ -104,6 +115,7 @@ fun MainFunContent(
                     selectedDestination = selectedDestination,
                     navigationActions = mainNavActions,
                     onDrawerClicked = onDrawerClicked,
+                    onThemeChanged = onThemeChanged
                 )
             }
             Box(modifier = Modifier.fillMaxSize()) {

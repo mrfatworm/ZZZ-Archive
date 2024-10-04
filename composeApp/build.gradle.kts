@@ -55,6 +55,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.bundles.ktor)
             implementation(libs.okio)
+            implementation(libs.multiplatformSettings.no.arg)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -62,6 +63,7 @@ kotlin {
             implementation(libs.assertk)
             @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.uiTest)
+            implementation(libs.multiplatformSettings.test)
         }
 
         val desktopMain by getting
