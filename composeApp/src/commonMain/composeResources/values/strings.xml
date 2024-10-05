@@ -48,4 +48,5 @@
     <string name="incomplete">Incomplete</string>
     <string name="open">Open</string>
     <string name="check_in">Check In</string>
+    <string name="under_development">Under Development</string>
 </resources>

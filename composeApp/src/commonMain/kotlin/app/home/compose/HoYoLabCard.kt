@@ -23,7 +23,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
@@ -40,26 +42,33 @@ import zzzarchive.composeapp.generated.resources.ic_calendar_clock
 import zzzarchive.composeapp.generated.resources.ic_check_circle
 import zzzarchive.composeapp.generated.resources.ic_dot
 import zzzarchive.composeapp.generated.resources.ic_warning
-import zzzarchive.composeapp.generated.resources.incomplete
 import zzzarchive.composeapp.generated.resources.investigate_point
-import zzzarchive.composeapp.generated.resources.open
 import zzzarchive.composeapp.generated.resources.scratch_card
+import zzzarchive.composeapp.generated.resources.under_development
 import zzzarchive.composeapp.generated.resources.video_store
 
 @Composable
 fun HoYoLabCard() {
-    BoxWithConstraints {
+    BoxWithConstraints(Modifier.clip(RoundedCornerShape(16.dp))) {
         if (maxWidth > 450.dp) {
             HoYoLabHorizontalCard()
         } else {
             HoYoLabVerticalCard()
         }
+        Text(
+            modifier = Modifier.align(Alignment.Center).rotate(15f)
+                .background(AppTheme.colors.hoveredMask, RoundedCornerShape(16.dp))
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            text = stringResource(Res.string.under_development),
+            color = AppTheme.colors.onHoveredMaskVariant,
+            style = AppTheme.typography.headlineMedium
+        )
     }
 }
 
 @Composable
 fun HoYoLabHorizontalCard() {
-    ContentCard(modifier = Modifier.fillMaxWidth()) {
+    ContentCard(modifier = Modifier.fillMaxWidth().blur(1.dp)) {
         Header()
         Spacer(Modifier.size(16.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -72,7 +81,7 @@ fun HoYoLabHorizontalCard() {
 @Composable
 fun HoYoLabVerticalCard() {
 
-    ContentCard(modifier = Modifier.fillMaxWidth()) {
+    ContentCard(modifier = Modifier.fillMaxWidth().blur(4.dp)) {
         Header()
         Spacer(Modifier.size(16.dp))
         DailyMission(Modifier.fillMaxWidth())
@@ -105,7 +114,7 @@ private fun PlayerInfo(modifier: Modifier) {
         modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
-            text = "mrfatworm",
+            text = "Unknown User",
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             color = AppTheme.colors.onSurfaceContainer,
@@ -115,7 +124,7 @@ private fun PlayerInfo(modifier: Modifier) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Asia",
+                text = "Unknown Server",
                 color = AppTheme.colors.onSurfaceVariant,
                 style = AppTheme.typography.labelSmall
             )
@@ -131,8 +140,7 @@ private fun PlayerInfo(modifier: Modifier) {
                 style = AppTheme.typography.labelSmall
             )
             Text(
-                modifier = Modifier.fillMaxWidth(),
-                text = "1300051361",
+                modifier = Modifier.fillMaxWidth(), text = "--",
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 color = AppTheme.colors.onSurfaceVariant,
@@ -158,7 +166,7 @@ private fun PlayerEnergy() {
             tint = AppTheme.colors.primary
         )
         Text(
-            text = "173/240",
+            text = "-- / 240",
             color = AppTheme.colors.onSurface,
             style = AppTheme.typography.labelLarge
         )
@@ -170,15 +178,13 @@ private fun PlayerEnergy() {
 private fun DailyMission(modifier: Modifier) {
     Column(modifier = modifier.clip(RoundedCornerShape(16.dp))) {
         PlayerTodoItem(
-            title = stringResource(Res.string.engagement_today), content = "0/400"
+            title = stringResource(Res.string.engagement_today), content = "-- / 400"
         )
         PlayerTodoItem(
-            title = stringResource(Res.string.scratch_card),
-            content = stringResource(Res.string.incomplete)
+            title = stringResource(Res.string.scratch_card), content = "--"
         )
         PlayerTodoItem(
-            title = stringResource(Res.string.video_store),
-            content = stringResource(Res.string.open)
+            title = stringResource(Res.string.video_store), content = "--"
         )
     }
 }
@@ -192,10 +198,10 @@ private fun WeeklyMission(modifier: Modifier) {
     ) {
         Column(modifier = Modifier.clip(RoundedCornerShape(16.dp))) {
             PlayerTodoItem(
-                title = stringResource(Res.string.bounty_commissions), content = "0/4"
+                title = stringResource(Res.string.bounty_commissions), content = "-- / 4"
             )
             PlayerTodoItem(
-                title = stringResource(Res.string.investigate_point), content = "0/8000"
+                title = stringResource(Res.string.investigate_point), content = "-- / 8000"
             )
         }
         CheckInButton()

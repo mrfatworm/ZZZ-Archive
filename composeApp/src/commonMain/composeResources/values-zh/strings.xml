@@ -48,4 +48,5 @@
     <string name="incomplete">未完成</string>
     <string name="open">營業中</string>
     <string name="check_in">簽到</string>
+    <string name="under_development">開發中功能</string>
 </resources>
