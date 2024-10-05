@@ -5,6 +5,9 @@
 
 package app.home.compose
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -133,7 +136,7 @@ private fun Header(
             }
         })
         Spacer(Modifier.weight(1f))
-        if (isHovered) {
+        AnimatedVisibility(visible = isHovered, enter = fadeIn(), exit = fadeOut()){
             Row(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalAlignment = Alignment.CenterVertically

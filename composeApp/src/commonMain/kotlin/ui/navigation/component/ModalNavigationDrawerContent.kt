@@ -27,7 +27,6 @@ import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -53,7 +52,7 @@ val navigationDrawerMaxWidth = 360.dp
 
 @Composable
 fun ModalNavigationDrawerContent(
-    selectedDestination: String, navigationActions: NavActions, onDrawerClicked: () -> Unit = {}
+    selectedDestination: String, navigationActions: NavActions, onDrawerClicked: () -> Unit, onThemeChanged: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxHeight().padding(4.dp)
@@ -111,13 +110,11 @@ fun ModalNavigationDrawerContent(
             Spacer(
                 modifier = Modifier.weight(1f).heightIn(min = 16.dp)
             )
-            var isDark by AppTheme.isDark
+            val isDark by AppTheme.isDark
             NavigationDrawerItem(
                 modifier = Modifier.padding(horizontal = 12.dp),
                 selected = false,
-                onClick = {
-                    isDark = !isDark
-                },
+                onClick = onThemeChanged,
                 icon = {
                     Icon(
                         imageVector = vectorResource(if (isDark) Res.drawable.ic_sun else Res.drawable.ic_moon),

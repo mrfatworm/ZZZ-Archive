@@ -67,6 +67,10 @@ fun MainFunScreen(
                     scope.launch {
                         drawerState.close()
                     }
+                },
+                onThemeChanged = {
+                    viewModel.setIsDarkTheme(!isDark)
+                    isDarkComposeState = !isDark
                 })
         }, drawerState = drawerState, gesturesEnabled = false
     ) {

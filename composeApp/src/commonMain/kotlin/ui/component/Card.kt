@@ -5,6 +5,9 @@
 
 package ui.component
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -75,7 +78,7 @@ fun HoveredIndicatorHeader(
     CardHeader(
         modifier = modifier.fillMaxWidth(), titleRes = titleRes
     ) {
-        if (isHovered) {
+        AnimatedVisibility (visible = isHovered, enter = fadeIn(), exit = fadeOut()) {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalAlignment = Alignment.CenterVertically

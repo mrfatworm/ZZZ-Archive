@@ -5,6 +5,9 @@
 
 package app.home.compose
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -60,7 +63,7 @@ fun BannerImageCard(banner: BannerResponse?) {
                 contentDescription = banner.artworkName,
                 contentScale = ContentScale.Crop
             )
-            if (isPressed.value || isHovered.value) {
+            AnimatedVisibility (visible = isPressed.value || isHovered.value, enter = fadeIn(), exit = fadeOut()) {
                 ArtworkInfo(Modifier.align(Alignment.BottomCenter), banner)
             }
         }
