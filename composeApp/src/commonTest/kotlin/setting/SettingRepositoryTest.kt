@@ -37,6 +37,19 @@ class SettingRepositoryTest {
     }
 
     @Test
+    fun `Get Default Banner Ignore Id`() {
+        val ignoreId = settingsRepository.getBannerIgnoreId()
+        assertThat(ignoreId).isEqualTo(0)
+    }
+
+    @Test
+    fun `Set Banner Ignore Id`() {
+        settingsRepository.setBannerIgnoreId(1)
+        val ignoreId = settingsRepository.getBannerIgnoreId()
+        assertThat(ignoreId).isEqualTo(1)
+    }
+
+    @Test
     fun `Delete All Setting and Get Default Value`() {
         settingsRepository.clear()
         val isDarkTheme = settingsRepository.getIsDarkTheme()

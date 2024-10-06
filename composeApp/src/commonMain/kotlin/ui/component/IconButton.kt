@@ -28,7 +28,7 @@ import ui.theme.AppTheme
 fun ZzzIconButton(
     modifier: Modifier = Modifier,
     iconRes: DrawableResource,
-    textRes: StringResource? = null,
+    contentDescriptionRes: StringResource? = null,
     size: Dp = 40.dp,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
@@ -46,7 +46,9 @@ fun ZzzIconButton(
         Icon(
             modifier = Modifier.padding(8.dp),
             imageVector = vectorResource(iconRes),
-            contentDescription = if (textRes == null) null else stringResource(textRes),
+            contentDescription = if (contentDescriptionRes == null) null else stringResource(
+                contentDescriptionRes
+            ),
             tint = AppTheme.colors.onSurface.copy(alpha = if (enabled) 1f else 0.38f)
         )
     }

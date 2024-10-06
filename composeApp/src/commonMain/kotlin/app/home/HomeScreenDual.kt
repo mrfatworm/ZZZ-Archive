@@ -14,9 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import app.home.compose.AgentsListCard
 import app.home.compose.BangbooListCard
-import app.home.compose.BannerImageCard
 import app.home.compose.DrivesListCard
 import app.home.compose.HoYoLabCard
+import app.home.compose.ImageBannerCard
 import app.home.compose.NewsPagerCard
 import app.home.compose.PixivTopicCard
 import app.home.compose.WEnginesListCard
@@ -48,7 +48,7 @@ fun HomeScreenDual(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
-            BannerImageCard(uiState.banner)
+            ImageBannerCard(uiState.banner)
             HoYoLabCard()
             PixivTopicCard(uiState.pixivPuppiesList, adaptiveLayoutType, onPixivTagChange)
         }

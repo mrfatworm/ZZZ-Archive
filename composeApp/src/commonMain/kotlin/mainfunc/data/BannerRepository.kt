@@ -3,9 +3,9 @@
  * License: CC BY-SA 4.0
  */
 
-package app.home.data
+package mainfunc.data
 
-import app.home.model.BannerResponse
+import mainfunc.model.BannerResponse
 import utils.ZzzResult
 
 interface BannerRepository {

@@ -15,7 +15,7 @@ import app.wengine.model.stubWEnginesListResponse
 
 data class HomeState(
     val news: OfficialNewsResponse? = null,
-    val banner: BannerResponse? = null,
+    val banner: ImageBannerResponse? = null,
     val pixivPuppiesList: List<RecentArticle> = emptyList(),
     val agentsList: List<AgentListItem> = emptyList(),
     val wEnginesList: List<WEngineListItem> = emptyList(),
@@ -25,7 +25,7 @@ data class HomeState(
 
 val sampleHomeState = HomeState(
     news = stubOfficialNewsDataResponse,
-    banner = stubBannerResponse,
+    banner = stubImageBannerResponse,
     agentsList = stubAgentsListResponse.agents,
     wEnginesList = stubWEnginesListResponse.wEngines,
     drivesList = stubDriveListResponse.drives

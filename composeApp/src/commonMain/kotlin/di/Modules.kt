@@ -11,8 +11,8 @@ import app.bangboo.data.BangbooRepository
 import app.bangboo.data.BangbooRepositoryImpl
 import app.drive.data.DriveRepository
 import app.drive.data.DriveRepositoryImpl
-import app.home.data.BannerRepository
-import app.home.data.BannerRepositoryImpl
+import app.home.data.ImageBannerRepository
+import app.home.data.ImageBannerRepositoryImpl
 import app.home.data.NewsRepository
 import app.home.data.NewsRepositoryImpl
 import app.home.data.PixivRepository
@@ -22,27 +22,30 @@ import app.splash.SplashViewModel
 import app.wengine.data.WEngineRepository
 import app.wengine.data.WEngineRepositoryImpl
 import com.russhwolf.settings.Settings
+import mainfunc.MainFuncViewModel
+import mainfunc.data.BannerRepository
+import mainfunc.data.BannerRepositoryImpl
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import setting.SettingsRepository
 import setting.SettingsRepositoryImpl
-import ui.MainFunViewModel
 
 expect val platformModule: Module
 
 val sharedModule = module {
     single<Settings> { Settings() }
     single<SettingsRepository> { SettingsRepositoryImpl(get()) }
+    single<BannerRepository> { BannerRepositoryImpl(get()) }
     single<NewsRepository> { NewsRepositoryImpl(get()) }
     single<PixivRepository> { PixivRepositoryImpl(get()) }
-    single<BannerRepository> { BannerRepositoryImpl(get()) }
+    single<ImageBannerRepository> { ImageBannerRepositoryImpl(get()) }
     single<AgentRepository> { AgentRepositoryImpl(get()) }
     single<WEngineRepository> { WEngineRepositoryImpl(get()) }
     single<BangbooRepository> { BangbooRepositoryImpl(get()) }
     single<DriveRepository> { DriveRepositoryImpl(get()) }
 
     viewModel { SplashViewModel(get()) }
-    viewModel { MainFunViewModel(get()) }
+    viewModel { MainFuncViewModel(get(), get()) }
     viewModel { HomeViewModel(get(), get(), get(), get(), get(), get(), get()) }
 }

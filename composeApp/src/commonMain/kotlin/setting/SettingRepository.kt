@@ -7,5 +7,7 @@ interface SettingsRepository {
     fun setIsDarkTheme(value: Boolean)
     fun getLanguage(): Language
     fun setLanguage(value: Language)
+    fun getBannerIgnoreId(): Int
+    fun setBannerIgnoreId(value: Int)
     fun clear()
 }

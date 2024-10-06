@@ -3,10 +3,10 @@
  * License: CC BY-SA 4.0
  */
 
-package app.home.data
+package mainfunc.data
 
-import app.home.model.BannerResponse
-import app.home.model.stubBannerResponse
+import mainfunc.model.BannerResponse
+import mainfunc.model.stubBannerResponse
 import utils.ZzzResult
 
 class FakeBannerRepository : BannerRepository {

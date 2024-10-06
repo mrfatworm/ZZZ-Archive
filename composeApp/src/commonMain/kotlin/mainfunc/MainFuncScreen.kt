@@ -3,11 +3,10 @@
  * License: CC BY-SA 4.0
  */
 
-package ui
+package mainfunc
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -19,6 +18,7 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -29,7 +29,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
+import mainfunc.model.BannerResponse
 import org.koin.compose.viewmodel.koinViewModel
+import ui.component.Banner
+import ui.component.BannerDialog
 import ui.navigation.MainFlow
 import ui.navigation.NavActions
 import ui.navigation.component.ModalNavigationDrawerContent
@@ -39,11 +42,14 @@ import ui.navigation.graph.MainNavGraph
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
+import ui.utils.bannerPadding
 import ui.utils.containerPadding
 import ui.utils.contentPadding
+import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.view_detail
 
 @Composable
-fun MainFunScreen(
+fun MainFuncScreen(
     rootNavActions: NavActions, adaptiveLayoutType: AdaptiveLayoutType, contentType: ContentType
 ) {
     val mainFunNavController = rememberNavController()
@@ -55,9 +61,10 @@ fun MainFunScreen(
 
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val viewModel: MainFunViewModel = koinViewModel()
+    val viewModel: MainFuncViewModel = koinViewModel()
     val isDark by viewModel.isDark.collectAsState()
     var isDarkComposeState by AppTheme.isDark
+    val banner by viewModel.banner.collectAsState()
 
     ModalNavigationDrawer(
         drawerContent = {
@@ -74,12 +81,14 @@ fun MainFunScreen(
                 })
         }, drawerState = drawerState, gesturesEnabled = false
     ) {
-        MainFunContent(mainFunNavController = mainFunNavController,
+        MainFuncContent(
+            mainFunNavController = mainFunNavController,
             mainNavActions = mainFunNavActions,
             rootNavActions = rootNavActions,
             selectedDestination = selectedDestination,
             adaptiveLayoutType = adaptiveLayoutType,
             contentType = contentType,
+            banner = banner,
             onDrawerClicked = {
                 scope.launch {
                     drawerState.open()
@@ -88,21 +97,27 @@ fun MainFunScreen(
             onThemeChanged = {
                 viewModel.setIsDarkTheme(!isDark)
                 isDarkComposeState = !isDark
+            },
+            onBannerClosed = { id ->
+                viewModel.setBannerIgnoreId(id)
             })
     }
 }
 
 @Composable
-fun MainFunContent(
+fun MainFuncContent(
     mainFunNavController: NavHostController,
     mainNavActions: NavActions,
     rootNavActions: NavActions,
     selectedDestination: String,
     adaptiveLayoutType: AdaptiveLayoutType,
     contentType: ContentType,
+    banner: BannerResponse?,
     onDrawerClicked: () -> Unit,
-    onThemeChanged: () -> Unit
+    onThemeChanged: () -> Unit,
+    onBannerClosed: (Int) -> Unit,
 ) {
+    val openBannerDialog = remember { mutableStateOf(false) }
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -122,10 +137,28 @@ fun MainFunContent(
                     onThemeChanged = onThemeChanged
                 )
             }
-            Box(modifier = Modifier.fillMaxSize()) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                AnimatedVisibility(visible = banner != null) {
+                    banner?.let {
+                        Banner(modifier = Modifier.widthIn(max = AppTheme.dimens.maxContainerWidth)
+                            .bannerPadding(adaptiveLayoutType, AppTheme.dimens),
+                            title = banner.title,
+                            bannerLevel = banner.getBannerLevel(),
+                            closable = banner.ignorable,
+                            actionTextRes = Res.string.view_detail,
+                            onActionClicked = {
+                                openBannerDialog.value = true
+                            },
+                            onClosed = {
+                                onBannerClosed(banner.id)
+                            })
+                    }
+                }
                 MainNavGraph(
-                    modifier = Modifier.widthIn(max = AppTheme.dimens.maxContainerWidth)
-                        .align(Alignment.TopCenter),
+                    modifier = Modifier.widthIn(max = AppTheme.dimens.maxContainerWidth),
                     mainNavController = mainFunNavController,
                     contentType = contentType,
                     adaptiveLayoutType = adaptiveLayoutType,
@@ -139,6 +172,13 @@ fun MainFunContent(
             ZzzArchiveBottomNavigationBar(
                 selectedDestination = selectedDestination, navigationActions = mainNavActions
             )
+        }
+    }
+    when {
+        openBannerDialog.value -> {
+            BannerDialog(message = banner?.title ?: "",
+                url = banner?.url ?: "",
+                onDismiss = { openBannerDialog.value = false })
         }
     }
 }

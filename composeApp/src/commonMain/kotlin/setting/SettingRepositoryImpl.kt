@@ -31,8 +31,10 @@ import utils.Language
 class SettingsRepositoryImpl(private val settings: Settings) : SettingsRepository {
 
     private val isDarkTheme: SettingConfig<Boolean> =
-        BooleanSettingConfig(settings, "DARK_THEME", true)
+        BooleanSettingConfig(settings, "IS_DARK_THEME", true)
     private val language: SettingConfig<String> = StringSettingConfig(settings, "LANGUAGE", "en")
+    private val bannerIgnoreId: SettingConfig<Int> =
+        IntSettingConfig(settings, "BANNER_IGNORE_ID", 0)
 
     override fun getIsDarkTheme(): Boolean {
         return isDarkTheme.get().toBoolean()
@@ -49,6 +51,14 @@ class SettingsRepositoryImpl(private val settings: Settings) : SettingsRepositor
 
     override fun setLanguage(value: Language) {
         language.set(value.code)
+    }
+
+    override fun getBannerIgnoreId(): Int {
+        return bannerIgnoreId.get().toInt()
+    }
+
+    override fun setBannerIgnoreId(value: Int) {
+        bannerIgnoreId.set(value.toString())
     }
 
 

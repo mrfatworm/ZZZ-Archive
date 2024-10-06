@@ -7,6 +7,7 @@ package app.home.compose
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -23,9 +24,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
@@ -61,14 +64,14 @@ fun HoYoLabCard() {
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             text = stringResource(Res.string.under_development),
             color = AppTheme.colors.onHoveredMaskVariant,
-            style = AppTheme.typography.headlineMedium
+            style = AppTheme.typography.headlineSmall
         )
     }
 }
 
 @Composable
 fun HoYoLabHorizontalCard() {
-    ContentCard(modifier = Modifier.fillMaxWidth().blur(1.dp)) {
+    ContentCard(modifier = Modifier.fillMaxWidth()) {
         Header()
         Spacer(Modifier.size(16.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -81,7 +84,7 @@ fun HoYoLabHorizontalCard() {
 @Composable
 fun HoYoLabVerticalCard() {
 
-    ContentCard(modifier = Modifier.fillMaxWidth().blur(4.dp)) {
+    ContentCard(modifier = Modifier.fillMaxWidth()) {
         Header()
         Spacer(Modifier.size(16.dp))
         DailyMission(Modifier.fillMaxWidth())
@@ -140,7 +143,8 @@ private fun PlayerInfo(modifier: Modifier) {
                 style = AppTheme.typography.labelSmall
             )
             Text(
-                modifier = Modifier.fillMaxWidth(), text = "--",
+                modifier = Modifier.fillMaxWidth(),
+                text = "--",
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 color = AppTheme.colors.onSurfaceVariant,
@@ -256,11 +260,12 @@ fun PlayerTodoItem(
 
 @Composable
 private fun CheckInButton() {
+    val urlHandler = LocalUriHandler.current
     Row(
-        modifier = Modifier.background(AppTheme.colors.surface, CircleShape)
-            .padding(horizontal = 16.dp, vertical = 8.dp).clip(
-                CircleShape
-            ),
+        modifier = Modifier.clip(CircleShape).clickable {
+            urlHandler.openUri("https://act.hoyolab.com/bbs/event/signin/zzz/e202406031448091.html?act_id=e202406031448091")
+        }.pointerHoverIcon(PointerIcon.Hand).background(AppTheme.colors.surface, CircleShape)
+            .padding(horizontal = 16.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

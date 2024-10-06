@@ -85,14 +85,14 @@ fun HoveredIndicatorHeader(
             ) {
                 ZzzIconButton(
                     iconRes = Res.drawable.ic_arrow_back,
-                    textRes = Res.string.previous,
+                    contentDescriptionRes = Res.string.previous,
                     size = 32.dp
                 ) {
                     onPreviousClick()
                 }
                 ZzzIconButton(
                     iconRes = Res.drawable.ic_arrow_next,
-                    textRes = Res.string.previous,
+                    contentDescriptionRes = Res.string.previous,
                     size = 32.dp
                 ) {
                     onNextClick()

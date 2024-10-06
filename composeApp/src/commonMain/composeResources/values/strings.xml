@@ -3,12 +3,20 @@
     <string name="app_name">ZZZ Archive</string>
     <string name="unknown">Unknown ?</string>
 
+    <!-- Common -->
     <string name="navigation_drawer">Navigation Drawer</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
     <string name="previous">Previous</string>
     <string name="next">Next</string>
+    <string name="view_detail">View Detail</string>
+    <string name="view_all">View All</string>
+    <string name="light_theme">Light Theme</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="announcement">Announcement</string>
 
+    <!-- Sub System -->
     <string name="home">Home</string>
     <string name="agents">Agents</string>
     <string name="all_agents">All Agents</string>
@@ -22,24 +30,23 @@
     <string name="feedback">Feedback</string>
     <string name="wiki">Wiki</string>
     <string name="function">Tools</string>
-    <string name="view_all">View All</string>
-    <string name="light_theme">Light Theme</string>
-    <string name="dark_theme">Dark Theme</string>
 
+    <!-- Attribute -->
     <string name="ether">Ether</string>
     <string name="fire">Fire</string>
     <string name="ice">Ice</string>
     <string name="electric">Electric</string>
     <string name="physical">Physical</string>
 
+    <!-- Specialty -->
     <string name="attack">Attack</string>
     <string name="stun">Stun</string>
     <string name="support">Support</string>
     <string name="anomaly">Anomaly</string>
     <string name="defense">Defense</string>
 
+    <!-- Home -->
     <string name="pixiv_hot">Pixiv Hot</string>
-
     <string name="engagement_today">Engagement Today</string>
     <string name="scratch_card">Scratch Card</string>
     <string name="video_store">Video Store</string>

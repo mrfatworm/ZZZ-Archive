@@ -10,7 +10,7 @@ import androidx.lifecycle.viewModelScope
 import app.agent.data.AgentRepository
 import app.bangboo.data.BangbooRepository
 import app.drive.data.DriveRepository
-import app.home.data.BannerRepository
+import app.home.data.ImageBannerRepository
 import app.home.data.NewsRepository
 import app.home.data.PixivRepository
 import app.home.model.HomeState
@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 import utils.ZzzResult
 
 class HomeViewModel(
-    private val bannerRepository: BannerRepository,
+    private val imageBannerRepository: ImageBannerRepository,
     private val pixivRepository: PixivRepository,
     private val newsRepository: NewsRepository,
     private val agentRepository: AgentRepository,
@@ -48,7 +48,7 @@ class HomeViewModel(
     }
 
     private suspend fun fetchBannerImage() {
-        when (val result = bannerRepository.getBanner()) {
+        when (val result = imageBannerRepository.getImageBanner()) {
             is ZzzResult.Success -> {
                 _uiState.update { state ->
                     state.copy(banner = result.data)

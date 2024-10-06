@@ -33,14 +33,14 @@ import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
-import app.home.model.BannerResponse
+import app.home.model.ImageBannerResponse
 import coil3.compose.AsyncImage
 import ui.component.ImageNotFound
 import ui.theme.AppTheme
 
 
 @Composable
-fun BannerImageCard(banner: BannerResponse?) {
+fun ImageBannerCard(imageBanner: ImageBannerResponse?) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed = interactionSource.collectIsPressedAsState()
     val isHovered = interactionSource.collectIsHoveredAsState()
@@ -48,7 +48,7 @@ fun BannerImageCard(banner: BannerResponse?) {
     Box(
         modifier = Modifier.aspectRatio(1.7f).fillMaxWidth().clip(RoundedCornerShape(16.dp))
     ) {
-        if (banner == null) {
+        if (imageBanner == null) {
             ImageNotFound()
         } else {
             val urlHandler = LocalUriHandler.current
@@ -57,14 +57,14 @@ fun BannerImageCard(banner: BannerResponse?) {
                     .clickable(
                         interactionSource = interactionSource, indication = null
                     ) {
-                        urlHandler.openUri(banner.artworkUrl)
+                        urlHandler.openUri(imageBanner.artworkUrl)
                     }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
-                model = banner.getImageUrl(),
-                contentDescription = banner.artworkName,
+                model = imageBanner.getImageUrl(),
+                contentDescription = imageBanner.artworkName,
                 contentScale = ContentScale.Crop
             )
             AnimatedVisibility (visible = isPressed.value || isHovered.value, enter = fadeIn(), exit = fadeOut()) {
-                ArtworkInfo(Modifier.align(Alignment.BottomCenter), banner)
+                ArtworkInfo(Modifier.align(Alignment.BottomCenter), imageBanner)
             }
         }
     }
@@ -72,7 +72,7 @@ fun BannerImageCard(banner: BannerResponse?) {
 
 
 @Composable
-private fun ArtworkInfo(modifier: Modifier, banner: BannerResponse) {
+private fun ArtworkInfo(modifier: Modifier, banner: ImageBannerResponse) {
     Column(
         modifier.fillMaxWidth().background(AppTheme.colors.hoveredMask).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)

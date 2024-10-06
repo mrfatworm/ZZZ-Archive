@@ -51,3 +51,21 @@ fun Modifier.contentPadding(adaptiveLayoutType: AdaptiveLayoutType, dimens: Dime
         }
     )
 }
+
+@Composable
+fun Modifier.bannerPadding(adaptiveLayoutType: AdaptiveLayoutType, dimens: Dimens): Modifier {
+    val topPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
+    return this.padding(
+        horizontal = when (adaptiveLayoutType) {
+            AdaptiveLayoutType.Expanded -> 0.dp
+            AdaptiveLayoutType.Medium -> 0.dp
+            AdaptiveLayoutType.Compact -> dimens.paddingParentCompact
+        }
+    ).padding(
+        top = if (topPadding > 0.dp) topPadding else when (adaptiveLayoutType) {
+            AdaptiveLayoutType.Expanded -> dimens.paddingParentOthersExpanded
+            AdaptiveLayoutType.Medium -> dimens.paddingParentOthersMedium
+            AdaptiveLayoutType.Compact -> dimens.paddingParentCompact
+        }
+    )
+}

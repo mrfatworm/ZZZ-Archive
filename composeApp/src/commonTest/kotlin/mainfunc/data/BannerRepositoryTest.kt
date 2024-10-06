@@ -3,13 +3,13 @@
  * License: CC BY-SA 4.0
  */
 
-package app.home.data
+package mainfunc.data
 
-import app.home.model.stubBannerResponse
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import kotlinx.coroutines.test.runTest
+import mainfunc.model.stubBannerResponse
 import network.FakeZzzHttp
 import utils.ZzzResult
 import kotlin.test.Test

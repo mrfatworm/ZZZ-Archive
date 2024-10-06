@@ -12,8 +12,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import app.home.compose.BannerImageCard
 import app.home.compose.HoYoLabCard
+import app.home.compose.ImageBannerCard
 import app.home.compose.NewsPagerCard
 import app.home.compose.PixivTopicCard
 import app.home.model.HomeState
@@ -33,9 +33,9 @@ fun HomeScreenSingle(
             .contentPadding(adaptiveLayoutType, AppTheme.dimens),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
-        BannerImageCard(uiState.banner)
         HoYoLabCard()
         NewsPagerCard(uiState.news?.data)
+        ImageBannerCard(uiState.banner)
         PixivTopicCard(uiState.pixivPuppiesList, adaptiveLayoutType, onPixivTagChange)
     }
 }

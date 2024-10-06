@@ -9,7 +9,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BannerResponse(
+data class ImageBannerResponse(
     @SerialName("img_id")
     val id: Int,
     @SerialName("artwork_url")
@@ -28,7 +28,7 @@ data class BannerResponse(
     }
 }
 
-val stubBannerResponse = BannerResponse(
+val stubImageBannerResponse = ImageBannerResponse(
     id = 1,
     artworkUrl = "https://zzz-archive.com/mrfatworm/1",
     artworkName = "banner",

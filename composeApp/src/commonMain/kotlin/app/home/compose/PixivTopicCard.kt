@@ -78,7 +78,8 @@ import zzzarchive.composeapp.generated.resources.unknown
 
 @Composable
 fun PixivTopicCard(
-    recentArticlesList: List<RecentArticle>, adaptiveLayoutType: AdaptiveLayoutType,
+    recentArticlesList: List<RecentArticle>,
+    adaptiveLayoutType: AdaptiveLayoutType,
     onPixivTagChange: (String) -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -136,14 +137,14 @@ private fun Header(
             }
         })
         Spacer(Modifier.weight(1f))
-        AnimatedVisibility(visible = isHovered, enter = fadeIn(), exit = fadeOut()){
+        AnimatedVisibility(visible = isHovered, enter = fadeIn(), exit = fadeOut()) {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 ZzzIconButton(
                     iconRes = Res.drawable.ic_arrow_back,
-                    textRes = Res.string.previous,
+                    contentDescriptionRes = Res.string.previous,
                     size = 32.dp
                 ) {
                     val targetIndex = lazyListState.firstVisibleItemIndex - 3
@@ -157,7 +158,7 @@ private fun Header(
                 }
                 ZzzIconButton(
                     iconRes = Res.drawable.ic_arrow_next,
-                    textRes = Res.string.previous,
+                    contentDescriptionRes = Res.string.previous,
                     size = 32.dp
                 ) {
                     val targetIndex = lazyListState.firstVisibleItemIndex + 3
@@ -180,13 +181,11 @@ private fun TagDropDownButton(onPixivTagChange: (String) -> Unit) {
         val pixivZzzLikeTags = pixivTagDropdownItems
         var showTagsList by remember { mutableStateOf(false) }
         var tagText by remember { mutableStateOf(pixivZzzLikeTags.first().tagText) }
-        Row(
-            modifier = Modifier.clickable { showTagsList = true }.background(
-                AppTheme.colors.surface, RoundedCornerShape(8.dp)
-            ).padding(horizontal = 8.dp, vertical = 4.dp),
+        Row(modifier = Modifier.clip(RoundedCornerShape(8.dp)).clickable { showTagsList = true }
+            .pointerHoverIcon(PointerIcon.Hand).background(AppTheme.colors.surface)
+            .padding(horizontal = 8.dp, vertical = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
+            horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             Icon(
                 modifier = Modifier.size(16.dp),
                 imageVector = vectorResource(Res.drawable.ic_favorite),
@@ -230,6 +229,7 @@ private fun PixivTopicItem(
     profileUrl: String?,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
+    val isHovered = interactionSource.collectIsHoveredAsState()
     val urlHandler = LocalUriHandler.current
     val header = NetworkHeaders.Builder().add("Referer", "https://app-api.pixiv.net/").build()
     val imageState = rememberAsyncImagePainter(

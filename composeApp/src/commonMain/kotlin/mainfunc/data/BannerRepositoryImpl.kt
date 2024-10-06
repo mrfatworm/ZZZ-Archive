@@ -3,10 +3,10 @@
  * License: CC BY-SA 4.0
  */
 
-package app.home.data
+package mainfunc.data
 
-import app.home.model.BannerResponse
 import kotlinx.coroutines.withTimeout
+import mainfunc.model.BannerResponse
 import network.ZzzHttp
 import utils.ZzzResult
 

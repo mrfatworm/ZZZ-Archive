@@ -5,6 +5,7 @@ import utils.Language
 class FakeSettingRepository : SettingsRepository {
     private var isDarkTheme = true
     private var language = Language.En
+    private var bannerIgnoreId = 0
 
     override fun getIsDarkTheme(): Boolean {
         return isDarkTheme
@@ -22,9 +23,16 @@ class FakeSettingRepository : SettingsRepository {
         language = value
     }
 
+    override fun getBannerIgnoreId(): Int {
+        return bannerIgnoreId
+    }
+
+    override fun setBannerIgnoreId(value: Int) {
+        bannerIgnoreId = value
+    }
+
     override fun clear() {
         isDarkTheme = true
         language = Language.En
     }
-
 }

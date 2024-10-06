@@ -11,15 +11,18 @@ import app.bangboo.model.BangbooListResponse
 import app.bangboo.model.stubBangbooListResponse
 import app.drive.model.DriveListResponse
 import app.drive.model.stubDriveListResponse
-import app.home.model.BannerResponse
-import app.home.model.stubBannerResponse
+import app.home.model.ImageBannerResponse
+import app.home.model.stubImageBannerResponse
 import app.wengine.model.WEnginesListResponse
 import app.wengine.model.stubWEnginesListResponse
+import mainfunc.model.BannerResponse
+import mainfunc.model.stubBannerResponse
 
 
 class FakeZzzHttp : ZzzHttp {
     override val defaultTimeout = 5000L
     override val longTimeout = 10000L
+
     private var isError = false
 
     fun setError(isError: Boolean) {
@@ -31,6 +34,14 @@ class FakeZzzHttp : ZzzHttp {
             throw Exception()
         } else {
             stubBannerResponse
+        }
+    }
+
+    override suspend fun requestImageBanner(): ImageBannerResponse {
+        return if (isError) {
+            throw Exception()
+        } else {
+            stubImageBannerResponse
         }
     }
 
