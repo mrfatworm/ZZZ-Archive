@@ -7,6 +7,7 @@ package di
 
 import app.agent.data.AgentRepository
 import app.agent.data.AgentRepositoryImpl
+import app.agent.domain.AgentListViewModel
 import app.bangboo.data.BangbooRepository
 import app.bangboo.data.BangbooRepositoryImpl
 import app.drive.data.DriveRepository
@@ -48,4 +49,5 @@ val sharedModule = module {
     viewModel { SplashViewModel(get()) }
     viewModel { MainFuncViewModel(get(), get()) }
     viewModel { HomeViewModel(get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { AgentListViewModel(get()) }
 }

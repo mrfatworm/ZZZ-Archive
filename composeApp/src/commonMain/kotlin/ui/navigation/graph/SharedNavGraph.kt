@@ -5,30 +5,34 @@
 
 package ui.navigation.graph
 
-import app.agent.AgentDetailScreen
-import app.agent.AgentsListScreen
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import app.agent.AgentDetailScreen
+import app.agent.AgentsListScreen
 import app.bangboo.BangbooDetailScreen
 import app.bangboo.BangbooListScreen
 import app.drive.DriveDetailScreen
 import app.drive.DrivesListScreen
-import ui.navigation.Screen
-import ui.utils.ContentType
 import app.wengine.WEngineDetailScreen
 import app.wengine.WEnginesListScreen
+import ui.navigation.Screen
+import ui.utils.AdaptiveLayoutType
+import ui.utils.ContentType
 
 fun NavGraphBuilder.sharedScreenDestination(
     navController: NavHostController,
-    contentType: ContentType,
+    contentType: ContentType, adaptiveLayoutType: AdaptiveLayoutType,
     navigateToTopLevelDestination: (Screen) -> Unit
 ) {
     composable(Screen.AgentsList.route) {
-        AgentsListScreen(contentType, onAgentClick = {
+        AgentsListScreen(contentType, adaptiveLayoutType, onAgentClick = {
             navController.navigate(
                 Screen.AgentDetail.route
             )
+        }, onBackClick = {
+            println("Back")
+            navController.popBackStack()
         })
     }
 

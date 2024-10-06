@@ -35,6 +35,11 @@ fun HomeNavHost(
                 onBangbooDetailClick = { navController.navigate(Screen.BangbooDetail.route) },
                 onDriveDetailClick = { navController.navigate(Screen.DriveDetail.route) })
         }
-        sharedScreenDestination(navController, contentType, navigateToTopLevelDestination)
+        sharedScreenDestination(
+            navController,
+            contentType,
+            adaptiveLayoutType,
+            navigateToTopLevelDestination
+        )
     }
 }

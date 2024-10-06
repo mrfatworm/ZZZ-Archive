@@ -6,20 +6,33 @@
 package app.agent
 
 import androidx.compose.runtime.Composable
-import app.agent.model.stubAgentsListState
+import androidx.compose.runtime.collectAsState
+import app.agent.domain.AgentListViewModel
+import org.koin.compose.viewmodel.koinViewModel
+import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
 
 @Composable
 fun AgentsListScreen(
-    contentType: ContentType, onAgentClick: (Int) -> Unit = {}
+    contentType: ContentType,
+    adaptiveLayoutType: AdaptiveLayoutType,
+    onAgentClick: (Int) -> Unit,
+    onBackClick: () -> Unit
 ) {
+    val viewModel: AgentListViewModel = koinViewModel()
+    val uiState = viewModel.uiState.collectAsState()
     if (contentType == ContentType.Single) {
         AgentsListScreenSingle(
-            state = stubAgentsListState, onAgentClick = onAgentClick
+            uiState = uiState.value,
+            adaptiveLayoutType = adaptiveLayoutType,
+            onAgentDetailClick = onAgentClick,
+            onBackClick = onBackClick
         )
     } else {
         AgentsListScreenDual(
-            state = stubAgentsListState, onAgentClick = onAgentClick
+            uiState = uiState.value,
+            adaptiveLayoutType = adaptiveLayoutType,
+            onAgentDetailClick = onAgentClick
         )
     }
 }

@@ -38,22 +38,22 @@ fun MainNavGraph(
                 navigateToTopLevelDestination = { mainNavActions.navigationToTop(it) })
         }
         composable(MainFlow.Agent.route) {
-            AgentNavGraph(contentType, navigateToTopLevelDestination = {
+            AgentNavGraph(contentType, adaptiveLayoutType, navigateToTopLevelDestination = {
                 mainNavActions.navigationToTop(it)
             })
         }
         composable(MainFlow.WEngine.route) {
-            WEngineNavGraph(contentType, navigateToTopLevelDestination = {
+            WEngineNavGraph(contentType, adaptiveLayoutType, navigateToTopLevelDestination = {
                 mainNavActions.navigationToTop(it)
             })
         }
         composable(MainFlow.Drive.route) {
-            DriveNavGraph(contentType, navigateToTopLevelDestination = {
+            DriveNavGraph(contentType, adaptiveLayoutType, navigateToTopLevelDestination = {
                 mainNavActions.navigationToTop(it)
             })
         }
         composable(MainFlow.Bangboo.route) {
-            BangbooNavGraph(contentType, navigateToTopLevelDestination = {
+            BangbooNavGraph(contentType, adaptiveLayoutType, navigateToTopLevelDestination = {
                 mainNavActions.navigationToTop(it)
             })
         }
