@@ -6,28 +6,19 @@
 package app.home.model
 
 import app.agent.model.AgentListItem
-import app.agent.model.stubAgentsListResponse
 import app.bangboo.model.BangbooListItem
 import app.drive.model.DriveListItem
-import app.drive.model.stubDriveListResponse
 import app.wengine.model.WEngineListItem
-import app.wengine.model.stubWEnginesListResponse
+import mainfunc.model.BannerResponse
 
 data class HomeState(
+    val banner: BannerResponse? = null,
+    val imageBanner: ImageBannerResponse? = null,
     val news: OfficialNewsResponse? = null,
-    val banner: ImageBannerResponse? = null,
     val pixivPuppiesList: List<RecentArticle> = emptyList(),
     val agentsList: List<AgentListItem> = emptyList(),
     val wEnginesList: List<WEngineListItem> = emptyList(),
     val bangbooList: List<BangbooListItem> = emptyList(),
     val drivesList: List<DriveListItem> = emptyList()
-)
-
-val sampleHomeState = HomeState(
-    news = stubOfficialNewsDataResponse,
-    banner = stubImageBannerResponse,
-    agentsList = stubAgentsListResponse.agents,
-    wEnginesList = stubWEnginesListResponse.wEngines,
-    drivesList = stubDriveListResponse.drives
 )
 

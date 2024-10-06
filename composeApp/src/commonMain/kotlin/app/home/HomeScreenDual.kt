@@ -12,6 +12,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import app.home.compose.AgentsListCard
 import app.home.compose.BangbooListCard
 import app.home.compose.DrivesListCard
@@ -37,31 +38,43 @@ fun HomeScreenDual(
     onWEngineDetailClick: (Int) -> Unit = {},
     onBangbooDetailClick: (Int) -> Unit = {},
     onDriveDetailClick: (Int) -> Unit = {},
-    onPixivTagChange: (String) -> Unit
+    onPixivTagChange: (String) -> Unit,
+    onActionClicked: () -> Unit,
+    onClosed: (Int) -> Unit,
 ) {
-    Row(
+    Column(
         modifier = Modifier.verticalScroll(rememberScrollState())
             .contentPadding(adaptiveLayoutType, AppTheme.dimens),
-        horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
-        ) {
-            ImageBannerCard(uiState.banner)
-            HoYoLabCard()
-            PixivTopicCard(uiState.pixivPuppiesList, adaptiveLayoutType, onPixivTagChange)
-        }
+        AnnouncementBanner(
+            uiState.banner,
+            onActionClicked = onActionClicked,
+            onClosed = onClosed
+        )
+        Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
+            ) {
+                ImageBannerCard(uiState.imageBanner)
+                HoYoLabCard()
+                PixivTopicCard(uiState.pixivPuppiesList, adaptiveLayoutType, onPixivTagChange)
+            }
 
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
-        ) {
-            NewsPagerCard(uiState.news?.data)
-            AgentsListCard(uiState.agentsList, onAgentsOverviewClick, onAgentDetailClick)
-            WEnginesListCard(uiState.wEnginesList, onWEnginesOverviewClick, onWEngineDetailClick)
-            BangbooListCard(uiState.bangbooList, onBangbooOverviewClick, onBangbooDetailClick)
-            DrivesListCard(uiState.drivesList, onDrivesOverviewClick, onDriveDetailClick)
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
+            ) {
+                NewsPagerCard(uiState.news?.data)
+                AgentsListCard(uiState.agentsList, onAgentsOverviewClick, onAgentDetailClick)
+                WEnginesListCard(
+                    uiState.wEnginesList, onWEnginesOverviewClick, onWEngineDetailClick
+                )
+                BangbooListCard(uiState.bangbooList, onBangbooOverviewClick, onBangbooDetailClick)
+                DrivesListCard(uiState.drivesList, onDrivesOverviewClick, onDriveDetailClick)
+            }
         }
     }
+
 }

@@ -18,7 +18,6 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -29,10 +28,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
-import mainfunc.model.BannerResponse
 import org.koin.compose.viewmodel.koinViewModel
-import ui.component.Banner
-import ui.component.BannerDialog
 import ui.navigation.MainFlow
 import ui.navigation.NavActions
 import ui.navigation.component.ModalNavigationDrawerContent
@@ -42,11 +38,8 @@ import ui.navigation.graph.MainNavGraph
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
-import ui.utils.bannerPadding
 import ui.utils.containerPadding
 import ui.utils.contentPadding
-import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.view_detail
 
 @Composable
 fun MainFuncScreen(
@@ -64,7 +57,6 @@ fun MainFuncScreen(
     val viewModel: MainFuncViewModel = koinViewModel()
     val isDark by viewModel.isDark.collectAsState()
     var isDarkComposeState by AppTheme.isDark
-    val banner by viewModel.banner.collectAsState()
 
     ModalNavigationDrawer(
         drawerContent = {
@@ -88,7 +80,6 @@ fun MainFuncScreen(
             selectedDestination = selectedDestination,
             adaptiveLayoutType = adaptiveLayoutType,
             contentType = contentType,
-            banner = banner,
             onDrawerClicked = {
                 scope.launch {
                     drawerState.open()
@@ -97,9 +88,6 @@ fun MainFuncScreen(
             onThemeChanged = {
                 viewModel.setIsDarkTheme(!isDark)
                 isDarkComposeState = !isDark
-            },
-            onBannerClosed = { id ->
-                viewModel.setBannerIgnoreId(id)
             })
     }
 }
@@ -112,12 +100,9 @@ fun MainFuncContent(
     selectedDestination: String,
     adaptiveLayoutType: AdaptiveLayoutType,
     contentType: ContentType,
-    banner: BannerResponse?,
     onDrawerClicked: () -> Unit,
     onThemeChanged: () -> Unit,
-    onBannerClosed: (Int) -> Unit,
 ) {
-    val openBannerDialog = remember { mutableStateOf(false) }
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -141,22 +126,6 @@ fun MainFuncContent(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                AnimatedVisibility(visible = banner != null) {
-                    banner?.let {
-                        Banner(modifier = Modifier.widthIn(max = AppTheme.dimens.maxContainerWidth)
-                            .bannerPadding(adaptiveLayoutType, AppTheme.dimens),
-                            title = banner.title,
-                            bannerLevel = banner.getBannerLevel(),
-                            closable = banner.ignorable,
-                            actionTextRes = Res.string.view_detail,
-                            onActionClicked = {
-                                openBannerDialog.value = true
-                            },
-                            onClosed = {
-                                onBannerClosed(banner.id)
-                            })
-                    }
-                }
                 MainNavGraph(
                     modifier = Modifier.widthIn(max = AppTheme.dimens.maxContainerWidth),
                     mainNavController = mainFunNavController,
@@ -172,13 +141,6 @@ fun MainFuncContent(
             ZzzArchiveBottomNavigationBar(
                 selectedDestination = selectedDestination, navigationActions = mainNavActions
             )
-        }
-    }
-    when {
-        openBannerDialog.value -> {
-            BannerDialog(message = banner?.title ?: "",
-                url = banner?.url ?: "",
-                onDismiss = { openBannerDialog.value = false })
         }
     }
 }

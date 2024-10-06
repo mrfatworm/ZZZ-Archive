@@ -20,9 +20,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import mainfunc.data.BannerRepository
+import setting.SettingsRepository
 import utils.ZzzResult
 
 class HomeViewModel(
+    private val bannerRepository: BannerRepository,
     private val imageBannerRepository: ImageBannerRepository,
     private val pixivRepository: PixivRepository,
     private val newsRepository: NewsRepository,
@@ -30,13 +33,17 @@ class HomeViewModel(
     private val wEngineRepository: WEngineRepository,
     private val bangbooRepository: BangbooRepository,
     private val driveRepository: DriveRepository,
+    private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(HomeState())
     val uiState = _uiState.asStateFlow()
+    private var ignoreBannerId = 0
 
     init {
+        ignoreBannerId = settingsRepository.getBannerIgnoreId()
         viewModelScope.launch {
+            launch { fetchBanner() }
             launch { fetchBannerImage() }
             launch { fetchZzzOfficialNewsEveryTenMinutes() }
             launch { fetchPixivTopic() }
@@ -47,11 +54,35 @@ class HomeViewModel(
         }
     }
 
+    fun closeBannerAndIgnoreId(id: Int) {
+        ignoreBannerId = id
+        settingsRepository.setBannerIgnoreId(id)
+        _uiState.update { state ->
+            state.copy(banner = null)
+        }
+    }
+
+    private suspend fun fetchBanner() {
+        when (val result = bannerRepository.getBanner()) {
+            is ZzzResult.Success -> {
+                if (result.data.id > ignoreBannerId) {
+                    _uiState.update { state ->
+                        state.copy(banner = result.data)
+                    }
+                }
+            }
+
+            is ZzzResult.Error -> {
+                println("get banner error: ${result.exception}")
+            }
+        }
+    }
+
     private suspend fun fetchBannerImage() {
         when (val result = imageBannerRepository.getImageBanner()) {
             is ZzzResult.Success -> {
                 _uiState.update { state ->
-                    state.copy(banner = result.data)
+                    state.copy(imageBanner = result.data)
                 }
             }
 
@@ -62,7 +93,7 @@ class HomeViewModel(
     }
 
     private suspend fun fetchZzzOfficialNewsEveryTenMinutes() {
-        newsRepository.getNewsPeriodically(10, 5, "en-us").collect { result ->
+        newsRepository.getNewsPeriodically(1, 5, "en-us").collect { result ->
             when (result) {
                 is ZzzResult.Success -> {
                     _uiState.update { state ->

@@ -25,17 +25,23 @@ import ui.utils.contentPadding
 fun HomeScreenSingle(
     uiState: HomeState,
     adaptiveLayoutType: AdaptiveLayoutType,
-    onPixivTagChange: (String) -> Unit
+    onPixivTagChange: (String) -> Unit,
+    onActionClicked: () -> Unit,
+    onClosed: (Int) -> Unit,
 ) {
     Column(
-        modifier = Modifier.fillMaxSize()
-            .verticalScroll(rememberScrollState())
+        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
             .contentPadding(adaptiveLayoutType, AppTheme.dimens),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
+        AnnouncementBanner(
+            uiState.banner,
+            onActionClicked = onActionClicked,
+            onClosed = onClosed
+        )
         HoYoLabCard()
         NewsPagerCard(uiState.news?.data)
-        ImageBannerCard(uiState.banner)
+        ImageBannerCard(uiState.imageBanner)
         PixivTopicCard(uiState.pixivPuppiesList, adaptiveLayoutType, onPixivTagChange)
     }
 }

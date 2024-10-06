@@ -47,7 +47,7 @@ val sharedModule = module {
     single<DriveRepository> { DriveRepositoryImpl(get()) }
 
     viewModel { SplashViewModel(get()) }
-    viewModel { MainFuncViewModel(get(), get()) }
-    viewModel { HomeViewModel(get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { MainFuncViewModel(get()) }
+    viewModel { HomeViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
     viewModel { AgentListViewModel(get()) }
 }

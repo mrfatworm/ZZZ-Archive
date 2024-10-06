@@ -30,7 +30,12 @@ import app.wengine.data.WEngineRepository
 import app.wengine.model.stubWEnginesListResponse
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import mainfunc.data.BannerRepository
+import mainfunc.data.FakeBannerRepository
+import mainfunc.model.stubBannerResponse
 import org.junit.Rule
+import setting.FakeSettingRepository
+import setting.SettingsRepository
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
@@ -39,6 +44,7 @@ class HomeViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
+    private lateinit var bannerRepository: BannerRepository
     private lateinit var imageBannerRepository: ImageBannerRepository
     private lateinit var pixivRepository: PixivRepository
     private lateinit var newsRepository: NewsRepository
@@ -46,10 +52,12 @@ class HomeViewModelTest {
     private lateinit var wEngineRepository: WEngineRepository
     private lateinit var bangbooRepository: BangbooRepository
     private lateinit var driveRepository: DriveRepository
+    private lateinit var settingsRepository: SettingsRepository
     private lateinit var viewModel: HomeViewModel
 
     @BeforeTest
     fun setup() {
+        bannerRepository = FakeBannerRepository()
         imageBannerRepository = FakeImageBannerRepository()
         pixivRepository = FakePixivRepository()
         newsRepository = FakeNewsRepository()
@@ -57,26 +65,37 @@ class HomeViewModelTest {
         wEngineRepository = FakeWEngineRepository()
         bangbooRepository = FakeBangbooRepository()
         driveRepository = FakeDriveRepository()
+        settingsRepository = FakeSettingRepository()
         viewModel = HomeViewModel(
+            bannerRepository,
             imageBannerRepository,
             pixivRepository,
             newsRepository,
             agentRepository,
             wEngineRepository,
             bangbooRepository,
-            driveRepository
+            driveRepository,
+            settingsRepository
         )
     }
 
     @Test
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
-        assertThat(state.banner).isEqualTo(stubImageBannerResponse)
+        assertThat(state.banner).isEqualTo(stubBannerResponse)
+        assertThat(state.imageBanner).isEqualTo(stubImageBannerResponse)
         assertThat(state.pixivPuppiesList).isEqualTo(stubPixivZzzTopic.getPopularArticles())
         assertThat(state.news).isEqualTo(stubOfficialNewsDataResponse)
         assertThat(state.agentsList).isEqualTo(stubAgentsListResponse.getAgentsNewToOld())
         assertThat(state.wEnginesList).isEqualTo(stubWEnginesListResponse.getWEnginesNewToOld())
         assertThat(state.bangbooList).isEqualTo(stubBangbooListResponse.getBangbooNewToOld())
         assertThat(state.drivesList).isEqualTo(stubDriveListResponse.getDrivesNewToOld())
+    }
+
+    @Test
+    fun `Set Banner Ignore Id as One than ignore banner data`() {
+        viewModel.closeBannerAndIgnoreId(1)
+        val state = viewModel.uiState.value
+        assertThat(state.banner).isEqualTo(null)
     }
 }
