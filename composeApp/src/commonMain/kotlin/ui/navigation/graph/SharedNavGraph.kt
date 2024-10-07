@@ -6,7 +6,6 @@
 package ui.navigation.graph
 
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import app.agent.AgentDetailScreen
 import app.agent.AgentsListScreen
@@ -16,62 +15,62 @@ import app.drive.DriveDetailScreen
 import app.drive.DrivesListScreen
 import app.wengine.WEngineDetailScreen
 import app.wengine.WEnginesListScreen
+import ui.navigation.NavActions
 import ui.navigation.Screen
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
 
-fun NavGraphBuilder.sharedScreenDestination(
-    navController: NavHostController,
-    contentType: ContentType, adaptiveLayoutType: AdaptiveLayoutType,
-    navigateToTopLevelDestination: (Screen) -> Unit
+
+fun NavGraphBuilder.sharedComposable(
+    contentType: ContentType,
+    adaptiveLayoutType: AdaptiveLayoutType,
+    navActions: NavActions
 ) {
     composable(Screen.AgentsList.route) {
         AgentsListScreen(contentType, adaptiveLayoutType, onAgentClick = {
-            navController.navigate(
-                Screen.AgentDetail.route
+            navActions.navigationTo(
+                Screen.AgentDetail
             )
         }, onBackClick = {
-            println("Back")
-            navController.popBackStack()
+            navActions.back()
         })
     }
 
     composable(Screen.AgentDetail.route) {
-        AgentDetailScreen(onWEngineClick = { navController.navigate(Screen.WEngineDetail.route) })
+        AgentDetailScreen(onWEngineClick = { navActions.navigationTo(Screen.WEngineDetail) })
     }
 
     composable(Screen.WEnginesList.route) {
         WEnginesListScreen(onWEngineClick = {
-            navController.navigate(
-                Screen.WEngineDetail.route
+            navActions.navigationTo(
+                Screen.WEngineDetail
             )
         })
     }
 
     composable(Screen.WEngineDetail.route) {
-        WEngineDetailScreen(onAgentClick = { navController.navigate(Screen.AgentDetail.route) })
+        WEngineDetailScreen(onAgentClick = { navActions.navigationTo(Screen.AgentDetail) })
     }
 
     composable(Screen.DrivesList.route) {
         DrivesListScreen(onDriveClick = {
-            navController.navigate(
-                Screen.DriveDetail.route
+            navActions.navigationTo(
+                Screen.DriveDetail
             )
         })
     }
 
     composable(Screen.DriveDetail.route) {
-        DriveDetailScreen(onAgentClick = { navController.navigate(Screen.AgentDetail.route) })
+        DriveDetailScreen(onAgentClick = { navActions.navigationTo(Screen.AgentDetail) })
     }
 
     composable(Screen.BangbooList.route) {
         BangbooListScreen(onBangbooClick = {
-            navController.navigate(Screen.BangbooDetail.route)
+            navActions.navigationTo(Screen.BangbooDetail)
         })
     }
 
     composable(Screen.BangbooDetail.route) {
-        BangbooDetailScreen(onAgentClick = { navController.navigate(Screen.AgentDetail.route) })
+        BangbooDetailScreen(onAgentClick = { navActions.navigationTo(Screen.AgentDetail) })
     }
-
 }

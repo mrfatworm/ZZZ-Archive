@@ -34,8 +34,8 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
+import ui.navigation.NAV_RAIL_MAIN_FLOW
 import ui.navigation.NavActions
-import ui.navigation.TOP_LEVEL_DESTINATIONS_NAV_RAIL
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.app_name
@@ -52,7 +52,10 @@ val navigationDrawerMaxWidth = 360.dp
 
 @Composable
 fun ModalNavigationDrawerContent(
-    selectedDestination: String, navigationActions: NavActions, onDrawerClicked: () -> Unit, onThemeChanged: () -> Unit
+    selectedMainFlow: String,
+    navigationActions: NavActions,
+    onDrawerClicked: () -> Unit,
+    onThemeChanged: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxHeight().padding(4.dp)
@@ -84,8 +87,8 @@ fun ModalNavigationDrawerContent(
             modifier = Modifier.fillMaxHeight().verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            TOP_LEVEL_DESTINATIONS_NAV_RAIL.forEach { destination ->
-                val isSelected = selectedDestination == destination.route
+            NAV_RAIL_MAIN_FLOW.forEach { destination ->
+                val isSelected = selectedMainFlow == destination.route
                 NavigationDrawerItem(selected = isSelected, label = {
                     Text(
                         modifier = Modifier.padding(horizontal = 16.dp),
@@ -98,7 +101,7 @@ fun ModalNavigationDrawerContent(
                         contentDescription = stringResource(destination.textRes)
                     )
                 }, colors = navigationDrawerItemColors(), onClick = {
-                    navigationActions.navigationToTop(destination)
+                    navigationActions.navigationToMainScreen(destination)
                     onDrawerClicked()
                 })
                 HorizontalDivider(

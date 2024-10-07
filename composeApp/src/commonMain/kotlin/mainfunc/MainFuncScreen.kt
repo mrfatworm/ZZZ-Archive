@@ -29,7 +29,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
+import ui.navigation.ALL_MAIN_FLOW
 import ui.navigation.MainFlow
+import ui.navigation.NAV_BOTTOM_MAIN_FLOW
 import ui.navigation.NavActions
 import ui.navigation.component.ModalNavigationDrawerContent
 import ui.navigation.component.ZzzArchiveBottomNavigationBar
@@ -50,7 +52,17 @@ fun MainFuncScreen(
         NavActions(mainFunNavController)
     }
     val navBackStackEntry by mainFunNavController.currentBackStackEntryAsState()
-    val selectedDestination = navBackStackEntry?.destination?.route ?: MainFlow.Home.route
+
+    val selectedDestination =
+        navBackStackEntry?.destination?.route ?: MainFlow.Home.startScreen.route
+
+    // BackStack = { null, home_flow, home, [target] <-this, [target_start_destination] }
+    val fourthNavDestination =
+        mainFunNavController.currentBackStack.value.getOrNull(3)?.destination?.route
+            ?: MainFlow.Home.route
+
+    val selectedMainFlow =
+        ALL_MAIN_FLOW.find { it.route == fourthNavDestination }?.route ?: MainFlow.Home.route
 
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -60,7 +72,7 @@ fun MainFuncScreen(
 
     ModalNavigationDrawer(
         drawerContent = {
-            ModalNavigationDrawerContent(selectedDestination = selectedDestination,
+            ModalNavigationDrawerContent(selectedMainFlow = selectedMainFlow,
                 navigationActions = mainFunNavActions,
                 onDrawerClicked = {
                     scope.launch {
@@ -73,11 +85,11 @@ fun MainFuncScreen(
                 })
         }, drawerState = drawerState, gesturesEnabled = false
     ) {
-        MainFuncContent(
-            mainFunNavController = mainFunNavController,
+        MainFuncContent(mainFunNavController = mainFunNavController,
             mainNavActions = mainFunNavActions,
             rootNavActions = rootNavActions,
             selectedDestination = selectedDestination,
+            selectedMainFlow = selectedMainFlow,
             adaptiveLayoutType = adaptiveLayoutType,
             contentType = contentType,
             onDrawerClicked = {
@@ -98,6 +110,7 @@ fun MainFuncContent(
     mainNavActions: NavActions,
     rootNavActions: NavActions,
     selectedDestination: String,
+    selectedMainFlow: String,
     adaptiveLayoutType: AdaptiveLayoutType,
     contentType: ContentType,
     onDrawerClicked: () -> Unit,
@@ -116,8 +129,8 @@ fun MainFuncContent(
                 ZzzArchiveNavigationRail(
                     modifier = Modifier.fillMaxHeight()
                         .contentPadding(adaptiveLayoutType, AppTheme.dimens),
-                    selectedDestination = selectedDestination,
-                    navigationActions = mainNavActions,
+                    selectedMainFlow = selectedMainFlow,
+                    navActions = mainNavActions,
                     onDrawerClicked = onDrawerClicked,
                     onThemeChanged = onThemeChanged
                 )
@@ -128,18 +141,19 @@ fun MainFuncContent(
             ) {
                 MainNavGraph(
                     modifier = Modifier.widthIn(max = AppTheme.dimens.maxContainerWidth),
-                    mainNavController = mainFunNavController,
+                    navController = mainFunNavController,
                     contentType = contentType,
                     adaptiveLayoutType = adaptiveLayoutType,
-                    mainNavActions = mainNavActions,
+                    navActions = mainNavActions,
                     rootNavActions = rootNavActions
                 )
             }
         }
-
-        AnimatedVisibility(visible = adaptiveLayoutType == AdaptiveLayoutType.Compact) {
+        val isBottomNavItem =
+            NAV_BOTTOM_MAIN_FLOW.find { it.startScreen.route == selectedDestination }
+        AnimatedVisibility(visible = adaptiveLayoutType == AdaptiveLayoutType.Compact && isBottomNavItem != null) {
             ZzzArchiveBottomNavigationBar(
-                selectedDestination = selectedDestination, navigationActions = mainNavActions
+                selectedMainFlow = selectedMainFlow, navigationActions = mainNavActions
             )
         }
     }

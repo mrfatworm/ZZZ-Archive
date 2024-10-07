@@ -29,8 +29,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
+import ui.navigation.NAV_RAIL_MAIN_FLOW
 import ui.navigation.NavActions
-import ui.navigation.TOP_LEVEL_DESTINATIONS_NAV_RAIL
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.dark_theme
@@ -43,8 +43,8 @@ import zzzarchive.composeapp.generated.resources.navigation_drawer
 @Composable
 fun ZzzArchiveNavigationRail(
     modifier: Modifier,
-    selectedDestination: String,
-    navigationActions: NavActions,
+    selectedMainFlow: String,
+    navActions: NavActions,
     onDrawerClicked: () -> Unit,
     onThemeChanged: () -> Unit
 ) {
@@ -69,11 +69,11 @@ fun ZzzArchiveNavigationRail(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            TOP_LEVEL_DESTINATIONS_NAV_RAIL.forEach { destination ->
-                val isSelected = selectedDestination == destination.route
+            NAV_RAIL_MAIN_FLOW.forEach { destination ->
+                val isSelected = selectedMainFlow == destination.route
                 NavigationRailItem(
                     selected = isSelected, onClick = {
-                        navigationActions.navigationToTop(destination)
+                        navActions.navigationToMainScreen(destination)
                     }, icon = {
                         Icon(
                             imageVector = vectorResource(destination.iconRes),

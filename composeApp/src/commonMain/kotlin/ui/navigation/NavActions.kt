@@ -14,10 +14,22 @@ class NavActions(private val navController: NavHostController) {
         navController.navigate(destination.route)
     }
 
-    fun navigationToTop(destination: Screen) {
+    fun back() {
+        navController.popBackStack()
+    }
+
+    fun navigationToMainScreen(destination: MainFlow) {
         navController.navigate(destination.route) {
-            popUpTo(navController.graph.findStartDestination().route ?: "splash") {
-                inclusive = true
+            popUpTo(MainFlow.Home.startScreen.route) {
+                inclusive = MainFlow.Home.route == destination.route
+            }
+        }
+    }
+
+    fun popAndNavigation(destination: Screen) {
+        navController.navigate(destination.route) {
+            popUpTo(navController.graph.findStartDestination().route ?: "home_flow") {
+                this.inclusive = true
             }
         }
     }

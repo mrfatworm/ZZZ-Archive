@@ -32,7 +32,7 @@ fun RootNavGraph(
     ) {
         composable(RootFlow.Splash.route) {
             SplashScreen(contentType = contentType,
-                startMainFlow = { rootNavActions.navigationToTop(RootFlow.ZzzArchive) })
+                startMainFlow = { rootNavActions.popAndNavigation(RootFlow.ZzzArchive) })
         }
         composable(RootFlow.ZzzArchive.route) {
             MainFuncScreen(
