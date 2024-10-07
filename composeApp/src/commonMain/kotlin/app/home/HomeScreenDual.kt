@@ -67,12 +67,26 @@ fun HomeScreenDual(
                 verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
             ) {
                 NewsPagerCard(uiState.news?.data)
-                AgentsListCard(uiState.agentsList, onAgentsOverviewClick, onAgentDetailClick)
-                WEnginesListCard(
-                    uiState.wEnginesList, onWEnginesOverviewClick, onWEngineDetailClick
+                AgentsListCard(
+                    agentsList = uiState.agentsList,
+                    onAgentsOverviewClick = onAgentsOverviewClick,
+                    onAgentDetailClick = onAgentDetailClick
                 )
-                BangbooListCard(uiState.bangbooList, onBangbooOverviewClick, onBangbooDetailClick)
-                DrivesListCard(uiState.drivesList, onDrivesOverviewClick, onDriveDetailClick)
+                WEnginesListCard(
+                    wEnginesList = uiState.wEnginesList,
+                    onWEnginesOverviewClick = onWEnginesOverviewClick,
+                    onWEngineDetailClick = onWEngineDetailClick
+                )
+                BangbooListCard(
+                    bangbooList = uiState.bangbooList,
+                    onBangbooOverviewClick = onBangbooOverviewClick,
+                    onBangbooDetailClick = onBangbooDetailClick
+                )
+                DrivesListCard(
+                    drivesList = uiState.drivesList,
+                    onDrivesOverviewClick = onDrivesOverviewClick,
+                    onDriveDetailClick = onDriveDetailClick
+                )
             }
         }
     }

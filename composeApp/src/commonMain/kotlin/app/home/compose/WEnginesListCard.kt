@@ -34,7 +34,7 @@ import zzzarchive.composeapp.generated.resources.w_engines
 
 @Composable
 fun WEnginesListCard(
-    wEnginesList: List<WEngineListItem>,
+    wEnginesList: List<WEngineListItem>, showViewAll: Boolean = false,
     onWEnginesOverviewClick: () -> Unit,
     onWEngineDetailClick: (Int) -> Unit
 ) {
@@ -48,6 +48,7 @@ fun WEnginesListCard(
     ) {
         HoveredIndicatorHeader(modifier = Modifier.fillMaxWidth(),
             titleRes = Res.string.w_engines,
+            viewAllTextRes = if (showViewAll) Res.string.all_w_engines else null,
             isHovered = isHovered.value,
             onPreviousClick = {
                 val targetIndex = lazyListState.firstVisibleItemIndex - 3
@@ -68,7 +69,9 @@ fun WEnginesListCard(
                         lazyListState.animateScrollToItem(wEnginesList.size - 1)
                     }
                 }
-            })
+            },
+            onViewAllClick = onWEnginesOverviewClick
+        )
         LazyRow(
             modifier = Modifier.drawRowListMask(
                 colorScheme = AppTheme.colors,

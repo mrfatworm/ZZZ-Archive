@@ -34,7 +34,7 @@ import zzzarchive.composeapp.generated.resources.all_agents
 
 @Composable
 fun AgentsListCard(
-    agentsList: List<AgentListItem>,
+    agentsList: List<AgentListItem>, showViewAll: Boolean = false,
     onAgentsOverviewClick: () -> Unit,
     onAgentDetailClick: (Int) -> Unit
 ) {
@@ -48,6 +48,7 @@ fun AgentsListCard(
     ) {
         HoveredIndicatorHeader(modifier = Modifier.fillMaxWidth(),
             titleRes = Res.string.agents,
+            viewAllTextRes = if (showViewAll) Res.string.all_agents else null,
             isHovered = isHovered.value,
             onPreviousClick = {
                 val targetIndex = lazyListState.firstVisibleItemIndex - 3
@@ -68,7 +69,9 @@ fun AgentsListCard(
                         lazyListState.animateScrollToItem(agentsList.size - 1)
                     }
                 }
-            })
+            },
+            onViewAllClick = onAgentsOverviewClick
+        )
         LazyRow(
             modifier = Modifier.drawRowListMask(
                 colorScheme = AppTheme.colors,

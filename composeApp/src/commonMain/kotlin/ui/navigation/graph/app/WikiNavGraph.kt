@@ -25,10 +25,16 @@ fun NavGraphBuilder.wikiNavGraph(
         route = MainFlow.Wiki.route, startDestination = MainFlow.Wiki.startScreen.route
     ) {
         composable(Screen.Wiki.route) {
-            WikiScreen(contentType = contentType,
-                onAgentOverviewClick = { },
-                onWEngineOverviewClick = { },
-                onDrivesOverviewClick = { })
+            WikiScreen(
+                adaptiveLayoutType = adaptiveLayoutType,
+                onAgentsOverviewClick = { navActions.navigationTo(Screen.AgentsList) },
+                onWEnginesOverviewClick = { navActions.navigationTo(Screen.WEnginesList) },
+                onBangbooOverviewClick = { navActions.navigationTo(Screen.BangbooList) },
+                onDrivesOverviewClick = { navActions.navigationTo(Screen.DrivesList) },
+                onAgentDetailClick = { navActions.navigationTo(Screen.AgentDetail) },
+                onWEngineDetailClick = { navActions.navigationTo(Screen.WEngineDetail) },
+                onBangbooDetailClick = { navActions.navigationTo(Screen.BangbooDetail) },
+                onDriveDetailClick = { navActions.navigationTo(Screen.DriveDetail) })
         }
         sharedComposable(contentType, adaptiveLayoutType, navActions)
     }

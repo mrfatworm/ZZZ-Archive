@@ -9,6 +9,8 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -23,6 +25,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -71,33 +75,54 @@ fun CardHeader(
 fun HoveredIndicatorHeader(
     modifier: Modifier,
     titleRes: StringResource,
+    viewAllTextRes: StringResource? = null,
     isHovered: Boolean,
     onPreviousClick: () -> Unit,
-    onNextClick: () -> Unit
+    onNextClick: () -> Unit,
+    onViewAllClick: () -> Unit = {},
 ) {
     CardHeader(
         modifier = modifier.fillMaxWidth(), titleRes = titleRes
     ) {
-        AnimatedVisibility (visible = isHovered, enter = fadeIn(), exit = fadeOut()) {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                ZzzIconButton(
-                    iconRes = Res.drawable.ic_arrow_back,
-                    contentDescriptionRes = Res.string.previous,
-                    size = 32.dp
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            AnimatedVisibility(visible = isHovered, enter = fadeIn(), exit = fadeOut()) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    onPreviousClick()
-                }
-                ZzzIconButton(
-                    iconRes = Res.drawable.ic_arrow_next,
-                    contentDescriptionRes = Res.string.previous,
-                    size = 32.dp
-                ) {
-                    onNextClick()
+                    ZzzIconButton(
+                        iconRes = Res.drawable.ic_arrow_back,
+                        contentDescriptionRes = Res.string.previous,
+                        size = 32.dp
+                    ) {
+                        onPreviousClick()
+                    }
+                    ZzzIconButton(
+                        iconRes = Res.drawable.ic_arrow_next,
+                        contentDescriptionRes = Res.string.previous,
+                        size = 32.dp
+                    ) {
+                        onNextClick()
+                    }
                 }
             }
+            viewAllTextRes?.let {
+                Text(
+                    modifier = Modifier.clip(RoundedCornerShape(8.dp))
+                        .clickable { onViewAllClick() }.pointerHoverIcon(PointerIcon.Hand)
+                        .background(AppTheme.colors.surface)
+                        .border(1.dp, AppTheme.colors.border, RoundedCornerShape(8.dp))
+                        .padding(8.dp),
+                    text = stringResource(viewAllTextRes),
+                    style = AppTheme.typography.labelMedium,
+                    color = AppTheme.colors.onSurface
+                )
+
+            }
         }
+
     }
 }

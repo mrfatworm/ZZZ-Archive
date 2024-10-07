@@ -34,7 +34,7 @@ import zzzarchive.composeapp.generated.resources.bangboo
 
 @Composable
 fun BangbooListCard(
-    bangbooList: List<BangbooListItem>,
+    bangbooList: List<BangbooListItem>, showViewAll: Boolean = false,
     onBangbooOverviewClick: () -> Unit,
     onBangbooDetailClick: (Int) -> Unit
 ) {
@@ -48,6 +48,7 @@ fun BangbooListCard(
     ) {
         HoveredIndicatorHeader(modifier = Modifier.fillMaxWidth(),
             titleRes = Res.string.bangboo,
+            viewAllTextRes = if (showViewAll) Res.string.all_bangboo else null,
             isHovered = isHovered.value,
             onPreviousClick = {
                 val targetIndex = lazyListState.firstVisibleItemIndex - 3
@@ -68,7 +69,9 @@ fun BangbooListCard(
                         lazyListState.animateScrollToItem(bangbooList.size - 1)
                     }
                 }
-            })
+            },
+            onViewAllClick = onBangbooOverviewClick
+        )
         LazyRow(
             modifier = Modifier.drawRowListMask(
                 colorScheme = AppTheme.colors,

@@ -22,6 +22,7 @@ import app.home.domain.HomeViewModel
 import app.splash.SplashViewModel
 import app.wengine.data.WEngineRepository
 import app.wengine.data.WEngineRepositoryImpl
+import app.wiki.domain.WikiViewModel
 import com.russhwolf.settings.Settings
 import mainfunc.MainFuncViewModel
 import mainfunc.data.BannerRepository
@@ -49,5 +50,6 @@ val sharedModule = module {
     viewModel { SplashViewModel(get()) }
     viewModel { MainFuncViewModel(get()) }
     viewModel { HomeViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { WikiViewModel(get(), get(), get(), get()) }
     viewModel { AgentListViewModel(get()) }
 }

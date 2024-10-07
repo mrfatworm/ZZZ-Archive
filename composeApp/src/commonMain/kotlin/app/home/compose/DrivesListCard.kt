@@ -35,7 +35,7 @@ import zzzarchive.composeapp.generated.resources.drives
 
 @Composable
 fun DrivesListCard(
-    drivesList: List<DriveListItem>,
+    drivesList: List<DriveListItem>, showViewAll: Boolean = false,
     onDrivesOverviewClick: () -> Unit,
     onDriveDetailClick: (Int) -> Unit
 ) {
@@ -49,6 +49,7 @@ fun DrivesListCard(
     ) {
         HoveredIndicatorHeader(modifier = Modifier.fillMaxWidth(),
             titleRes = Res.string.drives,
+            viewAllTextRes = if (showViewAll) Res.string.all_drives else null,
             isHovered = isHovered.value,
             onPreviousClick = {
                 val targetIndex = lazyListState.firstVisibleItemIndex - 3
@@ -69,7 +70,9 @@ fun DrivesListCard(
                         lazyListState.animateScrollToItem(drivesList.size - 1)
                     }
                 }
-            })
+            },
+            onViewAllClick = onDrivesOverviewClick
+        )
         LazyRow(
             modifier = Modifier.drawRowListMask(
                 colorScheme = AppTheme.colors,
