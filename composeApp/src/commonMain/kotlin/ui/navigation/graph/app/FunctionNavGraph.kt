@@ -25,7 +25,7 @@ fun NavGraphBuilder.functionNavGraph(
         route = MainFlow.Function.route, startDestination = MainFlow.Function.startScreen.route
     ) {
         composable(Screen.Function.route) {
-            FunctionScreen(contentType = contentType)
+            FunctionScreen(adaptiveLayoutType = adaptiveLayoutType)
         }
         sharedComposable(contentType, adaptiveLayoutType, navActions)
     }

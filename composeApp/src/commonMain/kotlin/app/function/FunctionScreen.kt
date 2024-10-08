@@ -6,15 +6,11 @@
 package app.function
 
 import androidx.compose.runtime.Composable
-import ui.utils.ContentType
+import ui.utils.AdaptiveLayoutType
 
 @Composable
 fun FunctionScreen(
-    contentType: ContentType
+    adaptiveLayoutType: AdaptiveLayoutType,
 ) {
-    if (contentType == ContentType.Single) {
-        FunctionScreenSingle()
-    } else {
-        FunctionScreenDual()
-    }
+    FunctionScreenSingle(adaptiveLayoutType)
 }
