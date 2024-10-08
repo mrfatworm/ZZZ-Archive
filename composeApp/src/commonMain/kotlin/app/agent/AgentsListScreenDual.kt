@@ -6,57 +6,38 @@
 package app.agent
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import app.agent.compose.AgentsListFilterCard
 import app.agent.model.AgentsListState
-import ui.component.ContentCard
-import ui.component.RarityItem
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
+import utils.AgentAttribute
+import utils.AgentSpecialty
+import utils.ZzzRarity
 
 @Composable
 fun AgentsListScreenDual(
     uiState: AgentsListState,
     adaptiveLayoutType: AdaptiveLayoutType,
-    onAgentDetailClick: (Int) -> Unit = {}
+    onAgentDetailClick: (Int) -> Unit = {},
+    onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
+    onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
+    onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit
 ) {
     Row(
         modifier = Modifier.contentPadding(adaptiveLayoutType, AppTheme.dimens),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
-        ContentCard(
-            modifier = Modifier.weight(1f),
-            hasDefaultPadding = false,
-        ) {
-            LazyVerticalGrid(
-                columns = GridCells.Adaptive(100.dp),
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(AppTheme.dimens.paddingCard),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                items(
-                    count = uiState.agentsList.size,
-                    key = { index -> uiState.agentsList[index].id }) { index ->
-                    val agent = uiState.agentsList[index]
-                    RarityItem(rarityLevel = agent.rarity,
-                        name = agent.name,
-                        attribute = agent.getAttributeEnum(),
-                        imgUrl = agent.getProfileUrl(),
-                        onClick = { id ->
-                            onAgentDetailClick(id)
-                        })
-                }
-            }
-        }
+        AgentsListFilterCard(
+            Modifier.weight(1f),
+            uiState,
+            onAgentDetailClick,
+            onRarityChipSelectionChanged,
+            onAttributeChipSelectionChanged,
+            onSpecialtyChipSelectionChanged
+        )
     }
-
-
 }

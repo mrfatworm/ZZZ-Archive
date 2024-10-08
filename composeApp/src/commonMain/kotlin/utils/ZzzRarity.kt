@@ -3,10 +3,10 @@ package utils
 import androidx.compose.ui.graphics.Color
 import ui.theme.ColorScheme
 
-enum class ZzzRarity(val level: Int, val color: Color) {
-    One(1, ColorScheme().imageRarity1),
-    Two(2, ColorScheme().imageRarity2),
-    Three(3, ColorScheme().imageRarity3),
-    Four(4, ColorScheme().imageRarity4),
-    Five(5, ColorScheme().imageRarity5)
+enum class ZzzRarity(val level: Int, val code: String, val color: Color) {
+    RANK_D(1, "D", ColorScheme().imageRarity1),
+    RANK_C(2, "C", ColorScheme().imageRarity2),
+    RANK_B(3, "B", ColorScheme().imageRarity3),
+    RANK_A(4, "A", ColorScheme().imageRarity4),
+    RANK_S(5, "S", ColorScheme().imageRarity5)
 }

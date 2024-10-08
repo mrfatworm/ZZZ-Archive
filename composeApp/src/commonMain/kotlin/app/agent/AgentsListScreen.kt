@@ -25,14 +25,41 @@ fun AgentsListScreen(
         AgentsListScreenSingle(
             uiState = uiState.value,
             adaptiveLayoutType = adaptiveLayoutType,
-            onAgentDetailClick = onAgentClick,
+            onAgentDetailClick = onAgentClick, onRarityChipSelectionChanged = { newSelection ->
+                viewModel.rarityFilterChanged(
+                    newSelection
+                )
+            }, onAttributeChipSelectionChanged = { newSelection ->
+                viewModel.attributeFilterChanged(
+                    newSelection
+                )
+            }, onSpecialtyChipSelectionChanged = { newSelection ->
+                viewModel.specialtyFilterChanged(
+                    newSelection
+                )
+            },
             onBackClick = onBackClick
         )
     } else {
         AgentsListScreenDual(
             uiState = uiState.value,
             adaptiveLayoutType = adaptiveLayoutType,
-            onAgentDetailClick = onAgentClick
+            onAgentDetailClick = onAgentClick,
+            onRarityChipSelectionChanged = { newSelection ->
+                viewModel.rarityFilterChanged(
+                    newSelection
+                )
+            },
+            onAttributeChipSelectionChanged = { newSelection ->
+                viewModel.attributeFilterChanged(
+                    newSelection
+                )
+            },
+            onSpecialtyChipSelectionChanged = { newSelection ->
+                viewModel.specialtyFilterChanged(
+                    newSelection
+                )
+            }
         )
     }
 }

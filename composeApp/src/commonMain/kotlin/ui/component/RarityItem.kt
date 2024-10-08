@@ -124,7 +124,7 @@ private fun AttributeTag(modifier: Modifier, textRes: StringResource, iconRes: D
 @Composable
 private fun RarityIndicator(modifier: Modifier, rarityLevel: Int, isFocus: Boolean = false) {
     val animatedHeight by animateDpAsState(targetValue = if (isFocus) 8.dp else 0.dp)
-    val rarityEnum = ZzzRarity.entries.find { it.level == rarityLevel } ?: ZzzRarity.One
+    val rarityEnum = ZzzRarity.entries.find { it.level == rarityLevel } ?: ZzzRarity.RANK_D
 
     Spacer(modifier.fillMaxWidth().height(animatedHeight).background(rarityEnum.color))
 }

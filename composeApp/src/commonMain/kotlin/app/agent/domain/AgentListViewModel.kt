@@ -8,11 +8,15 @@ package app.agent.domain
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.agent.data.AgentRepository
+import app.agent.model.AgentListItem
 import app.agent.model.AgentsListState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import utils.AgentAttribute
+import utils.AgentSpecialty
+import utils.ZzzRarity
 import utils.ZzzResult
 
 class AgentListViewModel(
@@ -21,6 +25,8 @@ class AgentListViewModel(
 
     private var _uiState = MutableStateFlow(AgentsListState())
     val uiState = _uiState.asStateFlow()
+    private var unfilteredAgentsList: MutableStateFlow<List<AgentListItem>> =
+        MutableStateFlow(emptyList())
 
     init {
         viewModelScope.launch {
@@ -31,14 +37,54 @@ class AgentListViewModel(
     private suspend fun fetchAgentsList() {
         when (val result = agentRepository.getAgentsList()) {
             is ZzzResult.Success -> {
-                _uiState.update { state ->
-                    state.copy(agentsList = result.data.getAgentsNewToOld())
+                unfilteredAgentsList.update {
+                    result.data.getAgentsNewToOld()
                 }
+                filterAgentList()
             }
 
             is ZzzResult.Error -> {
                 println("get agents error: ${result.exception}")
             }
+        }
+    }
+
+    fun rarityFilterChanged(
+        rarities: Set<ZzzRarity>
+    ) {
+        _uiState.update {
+            it.copy(selectedRarity = rarities)
+        }
+        filterAgentList()
+    }
+
+    fun attributeFilterChanged(
+        attributes: Set<AgentAttribute>
+    ) {
+        _uiState.update {
+            it.copy(selectedAttributes = attributes)
+        }
+        filterAgentList()
+    }
+
+    fun specialtyFilterChanged(
+        specialties: Set<AgentSpecialty>
+    ) {
+        _uiState.update {
+            it.copy(selectedSpecialties = specialties)
+        }
+        filterAgentList()
+    }
+
+    private fun filterAgentList(
+    ) {
+        val filteredAgents = unfilteredAgentsList.value.filter { agent ->
+            (uiState.value.selectedRarity.isEmpty() || uiState.value.selectedRarity.any { it.level == agent.rarity }) && (uiState.value.selectedAttributes.isEmpty() || uiState.value.selectedAttributes.any { it.name.lowercase() == agent.attribute }) && (uiState.value.selectedSpecialties.isEmpty() || uiState.value.selectedSpecialties.any { it.name.lowercase() == agent.specialty })
+        }
+        _uiState.update {
+            it.copy(
+                agentsList = filteredAgents
+            )
         }
     }
 }

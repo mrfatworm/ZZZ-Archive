@@ -5,11 +5,14 @@
 
 package app.agent.model
 
+import utils.AgentAttribute
+import utils.AgentSpecialty
+import utils.ZzzRarity
+
 
 data class AgentsListState(
-    val agentsList: List<AgentListItem> = emptyList()
-)
-
-val stubAgentsListState = AgentsListState(
-    agentsList = stubAgentsListResponse.agents
+    val agentsList: List<AgentListItem> = emptyList(),
+    val selectedRarity: Set<ZzzRarity> = emptySet(),
+    val selectedAttributes: Set<AgentAttribute> = emptySet(),
+    val selectedSpecialties: Set<AgentSpecialty> = emptySet(),
 )
