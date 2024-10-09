@@ -100,7 +100,7 @@ fun PixivTopicCard(
                 start = AppTheme.dimens.paddingCard,
                 end = AppTheme.dimens.paddingCard,
                 bottom = 24.dp
-            )
+            ), horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapImageProfileList)
         ) {
             items(items = recentArticlesList, key = { it.id }) { item ->
                 PixivTopicItem(
@@ -112,7 +112,6 @@ fun PixivTopicCard(
                     profileName = item.userName,
                     profileUrl = item.profileImageUrl
                 )
-                Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
             }
         }
     }
@@ -229,7 +228,6 @@ private fun PixivTopicItem(
     profileUrl: String?,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
-    val isHovered = interactionSource.collectIsHoveredAsState()
     val urlHandler = LocalUriHandler.current
     val header = NetworkHeaders.Builder().add("Referer", "https://app-api.pixiv.net/").build()
     val imageState = rememberAsyncImagePainter(

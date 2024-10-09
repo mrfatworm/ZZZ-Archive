@@ -1,3 +1,8 @@
+/*
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: CC BY-SA 4.0
+ */
+
 package ui.utils
 
 import androidx.compose.ui.Modifier
@@ -32,6 +37,35 @@ fun Modifier.drawRowListMask(
                 listOf(
                     colorScheme.surfaceContainer.copy(alpha = 0.0f), colorScheme.surfaceContainer
                 ), startX = size.width - width.toPx(), endX = size.width
+            )
+        )
+    }
+}
+
+// Draw an Mask on the top and bottom of list depend on list status
+fun Modifier.drawColumnListMask(
+    colorScheme: ColorScheme,
+    height: Dp = 36.dp,
+    topEnable: Boolean = false,
+    bottomEnable: Boolean = true
+) = this.drawWithContent {
+    drawContent()
+    if (topEnable) {
+        drawRect(
+            brush = Brush.verticalGradient(
+                listOf(
+                    colorScheme.surfaceContainer,
+                    colorScheme.surfaceContainer.copy(alpha = 0.0f),
+                ), startY = 0f, endY = height.toPx()
+            )
+        )
+    }
+    if (bottomEnable) {
+        drawRect(
+            brush = Brush.verticalGradient(
+                listOf(
+                    colorScheme.surfaceContainer.copy(alpha = 0.0f), colorScheme.surfaceContainer
+                ), startY = size.height - height.toPx(), endY = size.height
             )
         )
     }

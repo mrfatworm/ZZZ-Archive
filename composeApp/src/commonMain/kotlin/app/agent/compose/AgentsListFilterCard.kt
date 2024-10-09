@@ -25,6 +25,7 @@ import ui.component.RarityFilterChips
 import ui.component.RarityItem
 import ui.component.SpecialtyFilterChips
 import ui.theme.AppTheme
+import ui.utils.drawColumnListMask
 import utils.AgentAttribute
 import utils.AgentSpecialty
 import utils.ZzzRarity
@@ -34,7 +35,7 @@ fun AgentsListFilterCard(
     modifier: Modifier,
     uiState: AgentsListState,
     lazyGridState: LazyGridState = rememberLazyGridState(),
-    invisibleFilter: Boolean = true,
+    invisibleFilter: Boolean = false,
     onAgentDetailClick: (Int) -> Unit,
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
@@ -58,7 +59,11 @@ fun AgentsListFilterCard(
         LazyVerticalGrid(
             state = lazyGridState,
             columns = GridCells.Adaptive(100.dp),
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().drawColumnListMask(
+                colorScheme = AppTheme.colors,
+                topEnable = lazyGridState.canScrollBackward,
+                bottomEnable = lazyGridState.canScrollForward
+            ),
             contentPadding = PaddingValues(AppTheme.dimens.paddingCard),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
