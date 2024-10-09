@@ -87,6 +87,7 @@ fun AgentsListCard(
         ) {
             items(items = agentsList, key = { it.id }) { item ->
                 RarityItem(
+                    modifier = Modifier.animateItem(),
                     rarityLevel = item.rarity,
                     name = item.name,
                     attribute = item.getAttributeEnum(),

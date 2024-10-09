@@ -87,6 +87,7 @@ fun WEnginesListCard(
         ) {
             items(items = wEnginesList, key = { it.id }) { item ->
                 RarityItem(
+                    modifier = Modifier.animateItem(),
                     rarityLevel = item.rarity,
                     name = item.name,
                     imgUrl = item.getImageUrl(),

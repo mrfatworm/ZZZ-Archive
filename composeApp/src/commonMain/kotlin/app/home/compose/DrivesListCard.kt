@@ -88,6 +88,7 @@ fun DrivesListCard(
         ) {
             items(items = drivesList, key = { it.id }) { item ->
                 RarityItem(
+                    modifier = Modifier.animateItem(),
                     name = item.name,
                     imgUrl = item.getProfileUrl(),
                     onClick = { id ->

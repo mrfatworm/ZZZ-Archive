@@ -51,7 +51,7 @@ private val itemShape = RoundedCornerShape(8.dp)
 
 @Composable
 fun RarityItem(
-    modifier: Modifier = Modifier.width(100.dp), id: Int = 0,
+    modifier: Modifier = Modifier, id: Int = 0,
     name: String,
     imgUrl: String? = null,
     rarityLevel: Int? = null,
@@ -64,7 +64,8 @@ fun RarityItem(
     val isHovered = interactionSource.collectIsHoveredAsState()
 
     Column(
-        modifier = modifier.pointerHoverIcon(if (onClick != {}) PointerIcon.Hand else PointerIcon.Default)
+        modifier = modifier.width(100.dp)
+            .pointerHoverIcon(if (onClick != {}) PointerIcon.Hand else PointerIcon.Default)
             .clickable(interactionSource = interactionSource, indication = null) {
                 onClick(id)
         },

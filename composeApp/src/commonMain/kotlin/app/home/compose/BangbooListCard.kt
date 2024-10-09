@@ -87,6 +87,7 @@ fun BangbooListCard(
         ) {
             items(items = bangbooList, key = { it.id }) { item ->
                 RarityItem(
+                    modifier = Modifier.animateItem(),
                     rarityLevel = item.rarity,
                     name = item.name,
                     imgUrl = item.getProfileUrl(),

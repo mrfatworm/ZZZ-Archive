@@ -5,13 +5,16 @@
 
 package app.agent.compose
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -30,6 +33,8 @@ import utils.ZzzRarity
 fun AgentsListFilterCard(
     modifier: Modifier,
     uiState: AgentsListState,
+    lazyGridState: LazyGridState = rememberLazyGridState(),
+    invisibleFilter: Boolean = true,
     onAgentDetailClick: (Int) -> Unit,
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
@@ -39,17 +44,19 @@ fun AgentsListFilterCard(
         modifier = modifier,
         hasDefaultPadding = false,
     ) {
-        Column(
-            modifier = Modifier.padding(top = AppTheme.dimens.paddingCard),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            RarityFilterChips(uiState.selectedRarity, onRarityChipSelectionChanged)
-
-            AttributeFilterChips(uiState.selectedAttributes, onAttributeChipSelectionChanged)
-            SpecialtyFilterChips(uiState.selectedSpecialties, onSpecialtyChipSelectionChanged)
+        AnimatedVisibility(visible = !invisibleFilter) {
+            Column(
+                modifier = Modifier.padding(top = AppTheme.dimens.paddingCard),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                RarityFilterChips(uiState.selectedRarity, onRarityChipSelectionChanged)
+                AttributeFilterChips(uiState.selectedAttributes, onAttributeChipSelectionChanged)
+                SpecialtyFilterChips(uiState.selectedSpecialties, onSpecialtyChipSelectionChanged)
+            }
         }
 
         LazyVerticalGrid(
+            state = lazyGridState,
             columns = GridCells.Adaptive(100.dp),
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(AppTheme.dimens.paddingCard),
@@ -60,7 +67,9 @@ fun AgentsListFilterCard(
                 count = uiState.agentsList.size,
                 key = { index -> uiState.agentsList[index].id }) { index ->
                 val agent = uiState.agentsList[index]
-                RarityItem(rarityLevel = agent.rarity,
+                RarityItem(
+                    modifier = Modifier.animateItem(),
+                    rarityLevel = agent.rarity,
                     name = agent.name,
                     attribute = agent.getAttributeEnum(),
                     imgUrl = agent.getProfileUrl(),

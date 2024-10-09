@@ -16,6 +16,7 @@
     <string name="light_theme">Light Theme</string>
     <string name="dark_theme">Dark Theme</string>
     <string name="announcement">Announcement</string>
+    <string name="filter">Filter</string>">
 
     <!-- Sub System -->
     <string name="home">Home</string>

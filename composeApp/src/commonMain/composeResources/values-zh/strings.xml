@@ -16,6 +16,7 @@
     <string name="light_theme">亮色主題</string>
     <string name="dark_theme">暗色主題</string>
     <string name="announcement">公告</string>
+    <string name="filter">條件過濾</string>">
 
     <!-- Sub System -->
     <string name="home">首頁</string>

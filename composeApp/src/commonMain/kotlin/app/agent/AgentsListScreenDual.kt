@@ -32,12 +32,12 @@ fun AgentsListScreenDual(
         horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         AgentsListFilterCard(
-            Modifier.weight(1f),
-            uiState,
-            onAgentDetailClick,
-            onRarityChipSelectionChanged,
-            onAttributeChipSelectionChanged,
-            onSpecialtyChipSelectionChanged
+            modifier = Modifier.weight(1f),
+            uiState = uiState,
+            onAgentDetailClick = onAgentDetailClick,
+            onRarityChipSelectionChanged = onRarityChipSelectionChanged,
+            onAttributeChipSelectionChanged = onAttributeChipSelectionChanged,
+            onSpecialtyChipSelectionChanged = onSpecialtyChipSelectionChanged
         )
     }
 }

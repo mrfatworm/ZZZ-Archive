@@ -6,7 +6,9 @@
 package ui.component
 
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -18,6 +20,8 @@ import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.back
 import zzzarchive.composeapp.generated.resources.ic_arrow_back
+
+val horizontalSpacer = 16.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,7 +40,7 @@ fun ZzzTopBar(
     }, navigationIcon = {
         if (hasBack) {
             ZzzIconButton(
-                modifier = Modifier.padding(start = 16.dp),
+                modifier = Modifier.padding(start = horizontalSpacer),
                 iconRes = Res.drawable.ic_arrow_back,
                 contentDescriptionRes = Res.string.back,
                 onClick = onBackClick
@@ -44,6 +48,7 @@ fun ZzzTopBar(
         }
     }, actions = {
         actions()
+        Spacer(Modifier.size(horizontalSpacer))
     }, colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
         containerColor = AppTheme.colors.surfaceContainer,
         navigationIconContentColor = AppTheme.colors.onSurfaceContainer,

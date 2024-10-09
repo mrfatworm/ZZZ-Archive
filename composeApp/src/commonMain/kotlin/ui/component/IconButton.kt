@@ -14,6 +14,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.Dp
@@ -29,6 +30,7 @@ fun ZzzIconButton(
     modifier: Modifier = Modifier,
     iconRes: DrawableResource,
     contentDescriptionRes: StringResource? = null,
+    tint: Color = AppTheme.colors.onSurface,
     size: Dp = 40.dp,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
@@ -49,7 +51,7 @@ fun ZzzIconButton(
             contentDescription = if (contentDescriptionRes == null) null else stringResource(
                 contentDescriptionRes
             ),
-            tint = AppTheme.colors.onSurface.copy(alpha = if (enabled) 1f else 0.38f)
+            tint = tint.copy(alpha = if (enabled) 1f else 0.38f)
         )
     }
 }
