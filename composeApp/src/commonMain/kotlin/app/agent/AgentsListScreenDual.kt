@@ -7,9 +7,13 @@ package app.agent
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import app.agent.compose.AgentsListFilterCard
+import app.agent.compose.FactionItem
 import app.agent.model.AgentsListState
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
@@ -25,19 +29,29 @@ fun AgentsListScreenDual(
     onAgentDetailClick: (Int) -> Unit = {},
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
-    onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit
+    onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit,
+    onFactionClick: (Int) -> Unit
 ) {
     Row(
         modifier = Modifier.contentPadding(adaptiveLayoutType, AppTheme.dimens),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         AgentsListFilterCard(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.weight(0.7f),
             uiState = uiState,
             onAgentDetailClick = onAgentDetailClick,
             onRarityChipSelectionChanged = onRarityChipSelectionChanged,
             onAttributeChipSelectionChanged = onAttributeChipSelectionChanged,
             onSpecialtyChipSelectionChanged = onSpecialtyChipSelectionChanged
         )
+        LazyColumn(
+            modifier = Modifier.weight(0.3f), verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            items(items = uiState.factionsList, key = { it.id }) { faction ->
+                FactionItem(faction, uiState.selectedFaction == faction.id) {
+                    onFactionClick(faction.id)
+                }
+            }
+        }
     }
 }

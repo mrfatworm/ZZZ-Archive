@@ -51,8 +51,12 @@ fun AgentsListFilterCard(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 RarityFilterChips(uiState.selectedRarity, onRarityChipSelectionChanged)
-                AttributeFilterChips(uiState.selectedAttributes, onAttributeChipSelectionChanged)
-                SpecialtyFilterChips(uiState.selectedSpecialties, onSpecialtyChipSelectionChanged)
+                AttributeFilterChips(uiState.selectedAttributes, 1, onAttributeChipSelectionChanged)
+                SpecialtyFilterChips(
+                    uiState.selectedSpecialties,
+                    1,
+                    onSpecialtyChipSelectionChanged
+                )
             }
         }
 

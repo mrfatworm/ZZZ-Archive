@@ -47,6 +47,15 @@
     <string name="anomaly">Anomaly</string>
     <string name="defense">Defense</string>
 
+    <!-- Faction -->
+    <string name="gentle_house">Gentle House</string>
+    <string name="victoria_housekeeping">Victoria Housekeeping</string>
+    <string name="belobog_heavy_industries">Belobog Heavy Industries</string>
+    <string name="obol_squad">Obol Squad</string>
+    <string name="section_6">Section 6</string>
+    <string name="criminal_investigation_special_response_team">Criminal Investigation Special Response Team</string>
+    <string name="sons_of_calydon">Sons of Calydon</string>
+
     <!-- Home -->
     <string name="pixiv_hot">Pixiv Hot</string>
     <string name="engagement_today">Engagement Today</string>

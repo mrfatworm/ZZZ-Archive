@@ -40,12 +40,17 @@ fun AgentFilterBottomSheet(
             modifier = Modifier.padding(horizontal = 8.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            RarityFilterChips(uiState.selectedRarity, onRarityChipSelectionChanged)
+            RarityFilterChips(
+                selectedRarity = uiState.selectedRarity,
+                onSelectionChanged = onRarityChipSelectionChanged
+            )
             AttributeFilterChips(
-                uiState.selectedAttributes, onAttributeChipSelectionChanged
+                selectedAttributes = uiState.selectedAttributes,
+                onSelectionChanged = onAttributeChipSelectionChanged
             )
             SpecialtyFilterChips(
-                uiState.selectedSpecialties, onSpecialtyChipSelectionChanged
+                selectedSpecialty = uiState.selectedSpecialties,
+                onSelectionChanged = onSpecialtyChipSelectionChanged
             )
             Spacer(Modifier.size(32.dp))
         }

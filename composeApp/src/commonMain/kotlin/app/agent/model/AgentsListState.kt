@@ -12,7 +12,9 @@ import utils.ZzzRarity
 
 data class AgentsListState(
     val agentsList: List<AgentListItem> = emptyList(),
+    val factionsList: List<Faction> = emptyList(),
     val selectedRarity: Set<ZzzRarity> = emptySet(),
     val selectedAttributes: Set<AgentAttribute> = emptySet(),
     val selectedSpecialties: Set<AgentSpecialty> = emptySet(),
+    val selectedFaction: Int = 0
 )

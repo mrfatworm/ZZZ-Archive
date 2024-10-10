@@ -8,6 +8,7 @@ package ui.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -30,6 +32,7 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.theme.AppTheme
+import ui.utils.conditional
 import utils.AgentAttribute
 import utils.AgentSpecialty
 import utils.ZzzRarity
@@ -102,14 +105,19 @@ fun RarityFilterChips(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun AttributeFilterChips(
-    selectedAttributes: Set<AgentAttribute>, onSelectionChanged: (Set<AgentAttribute>) -> Unit
+    selectedAttributes: Set<AgentAttribute>,
+    maxLine: Int = Int.MAX_VALUE,
+    onSelectionChanged: (Set<AgentAttribute>) -> Unit
 ) {
     val attributes = AgentAttribute.entries.toTypedArray().dropLast(1)
 
     FlowRow(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = AppTheme.dimens.paddingCard),
+        modifier = Modifier.fillMaxWidth().conditional(maxLine != Int.MAX_VALUE) {
+            horizontalScroll(rememberScrollState())
+        }.padding(horizontal = AppTheme.dimens.paddingCard),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        maxLines = maxLine
     ) {
         attributes.forEach { attribute ->
             ZzzFilterChip(text = stringResource(attribute.textRes),
@@ -130,24 +138,28 @@ fun AttributeFilterChips(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SpecialtyFilterChips(
-    selectedTypes: Set<AgentSpecialty>, onSelectionChanged: (Set<AgentSpecialty>) -> Unit
+    selectedSpecialty: Set<AgentSpecialty>,
+    maxLine: Int = Int.MAX_VALUE,
+    onSelectionChanged: (Set<AgentSpecialty>) -> Unit
 ) {
     val specialties = AgentSpecialty.entries.toTypedArray().dropLast(1)
 
     FlowRow(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = AppTheme.dimens.paddingCard),
+        modifier = Modifier.fillMaxWidth().conditional(maxLine != Int.MAX_VALUE) {
+            horizontalScroll(rememberScrollState())
+        }.padding(horizontal = AppTheme.dimens.paddingCard),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         specialties.forEach { specialty ->
             ZzzFilterChip(text = stringResource(specialty.textRes),
                 iconRes = specialty.iconRes,
-                selected = selectedTypes.contains(specialty),
+                selected = selectedSpecialty.contains(specialty),
                 onClick = {
-                    val newSelection = if (selectedTypes.contains(specialty)) {
-                        selectedTypes - specialty
+                    val newSelection = if (selectedSpecialty.contains(specialty)) {
+                        selectedSpecialty - specialty
                     } else {
-                        selectedTypes + specialty
+                        selectedSpecialty + specialty
                     }
                     onSelectionChanged(newSelection)
                 })

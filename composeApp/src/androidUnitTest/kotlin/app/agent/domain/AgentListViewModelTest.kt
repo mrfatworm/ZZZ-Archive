@@ -41,6 +41,7 @@ class AgentListViewModelTest {
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
         assertThat(state.agentsList).isEqualTo(stubAgentsListResponse.getAgentsNewToOld())
+        assertThat(state.factionsList.size).isEqualTo(2)
     }
 
     @Test
@@ -65,5 +66,12 @@ class AgentListViewModelTest {
         val state = viewModel.uiState.value
         assertThat(state.agentsList.first().id).isEqualTo(4) // Anby
         assertThat(state.agentsList.size).isEqualTo(1)
+    }
+
+    @Test
+    fun `Filter Faction Success`() {
+        viewModel.factionFilterChanged(1)
+        val state = viewModel.uiState.value
+        assertThat(state.agentsList.size).isEqualTo(2)
     }
 }

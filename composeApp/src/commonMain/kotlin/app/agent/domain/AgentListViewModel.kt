@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import app.agent.data.AgentRepository
 import app.agent.model.AgentListItem
 import app.agent.model.AgentsListState
+import app.agent.model.Faction
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -40,6 +41,7 @@ class AgentListViewModel(
                 unfilteredAgentsList.update {
                     result.data.getAgentsNewToOld()
                 }
+                updateFactionsList()
                 filterAgentList()
             }
 
@@ -47,6 +49,12 @@ class AgentListViewModel(
                 println("get agents error: ${result.exception}")
             }
         }
+    }
+
+    private fun updateFactionsList() {
+        val maxFactionId = unfilteredAgentsList.value.maxOfOrNull { it.factionId } ?: 0
+        val factionsList = List(maxFactionId) { index -> Faction(index + 1) }
+        _uiState.update { it.copy(factionsList = factionsList) }
     }
 
     fun rarityFilterChanged(
@@ -76,10 +84,29 @@ class AgentListViewModel(
         filterAgentList()
     }
 
+    fun factionFilterChanged(
+        factionId: Int
+    ) {
+        _uiState.update {
+            it.copy(selectedFaction = if (it.selectedFaction == factionId) 0 else factionId)
+        }
+        filterAgentList()
+    }
+
+
     private fun filterAgentList(
     ) {
         val filteredAgents = unfilteredAgentsList.value.filter { agent ->
-            (uiState.value.selectedRarity.isEmpty() || uiState.value.selectedRarity.any { it.level == agent.rarity }) && (uiState.value.selectedAttributes.isEmpty() || uiState.value.selectedAttributes.any { it.name.lowercase() == agent.attribute }) && (uiState.value.selectedSpecialties.isEmpty() || uiState.value.selectedSpecialties.any { it.name.lowercase() == agent.specialty })
+            val matchRarity =
+                uiState.value.selectedRarity.isEmpty() || uiState.value.selectedRarity.any { it.level == agent.rarity }
+            val matchAttribute =
+                uiState.value.selectedAttributes.isEmpty() || uiState.value.selectedAttributes.any { it.name.lowercase() == agent.attribute }
+            val matchSpecialty =
+                uiState.value.selectedSpecialties.isEmpty() || uiState.value.selectedSpecialties.any { it.name.lowercase() == agent.specialty }
+            val matchFaction =
+                uiState.value.selectedFaction == 0 || uiState.value.selectedFaction == agent.factionId
+
+            matchRarity && matchAttribute && matchSpecialty && matchFaction
         }
         _uiState.update {
             it.copy(

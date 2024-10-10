@@ -47,6 +47,15 @@
     <string name="anomaly">異常</string>
     <string name="defense">防護</string>
 
+    <!-- Faction -->
+    <string name="gentle_house">狡兔屋</string>
+    <string name="victoria_housekeeping">維多利亞居家服務</string>
+    <string name="belobog_heavy_industries">白祇重工</string>
+    <string name="obol_squad">奧波勒斯小隊</string>
+    <string name="section_6">對空六課</string>
+    <string name="criminal_investigation_special_response_team">刑偵特勤組</string>
+    <string name="sons_of_calydon">卡呂冬之子</string>
+
     <!-- Home -->
     <string name="pixiv_hot">Pixiv 熱門</string>
     <string name="engagement_today">今日活躍度</string>

@@ -59,6 +59,9 @@ fun AgentsListScreen(
                 viewModel.specialtyFilterChanged(
                     newSelection
                 )
+            },
+            onFactionClick = {
+                viewModel.factionFilterChanged(it)
             }
         )
     }

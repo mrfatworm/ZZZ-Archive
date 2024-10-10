@@ -69,6 +69,17 @@ val stubAgentsListResponse = AgentsListResponse(
             attribute = "electric",
             attackType = "slash",
             factionId = 1
+        ),
+        AgentListItem(
+            id = 16,
+            name = "可琳",
+            fullName = "可琳·威克斯",
+            isLeak = false,
+            rarity = 4,
+            specialty = "attack",
+            attribute = "physical",
+            attackType = "slash",
+            factionId = 2
         )
     )
 )
