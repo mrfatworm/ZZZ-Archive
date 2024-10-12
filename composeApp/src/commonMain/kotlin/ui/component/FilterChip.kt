@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
+import app.agent.model.Faction
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -37,6 +38,7 @@ import utils.AgentAttribute
 import utils.AgentSpecialty
 import utils.ZzzRarity
 import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.ic_award_star
 import zzzarchive.composeapp.generated.resources.ic_rare
 
 val chipShape = RoundedCornerShape(8.dp)
@@ -162,6 +164,27 @@ fun SpecialtyFilterChips(
                         selectedSpecialty + specialty
                     }
                     onSelectionChanged(newSelection)
+                })
+        }
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+fun FactionFilterChips(
+    selectedFactionId: Int, factionsList: List<Faction>, onSelectionChanged: (Int) -> Unit
+) {
+    FlowRow(
+        modifier = Modifier.fillMaxWidth().padding(horizontal = AppTheme.dimens.paddingCard),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        factionsList.forEach { faction ->
+            ZzzFilterChip(text = stringResource(faction.getFactionNameRes()),
+                iconRes = Res.drawable.ic_award_star,
+                selected = selectedFactionId == faction.id,
+                onClick = {
+                    onSelectionChanged(faction.id)
                 })
         }
     }

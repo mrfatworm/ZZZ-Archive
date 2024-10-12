@@ -48,7 +48,7 @@ fun AgentsListScreenDual(
             modifier = Modifier.weight(0.3f), verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(items = uiState.factionsList, key = { it.id }) { faction ->
-                FactionItem(faction, uiState.selectedFaction == faction.id) {
+                FactionItem(faction, uiState.selectedFactionId == faction.id) {
                     onFactionClick(faction.id)
                 }
             }

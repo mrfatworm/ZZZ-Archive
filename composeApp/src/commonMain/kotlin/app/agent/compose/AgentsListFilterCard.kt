@@ -65,8 +65,8 @@ fun AgentsListFilterCard(
             }
         }
         Box {
-            if (uiState.selectedFaction != 0) {
-                val selectedFaction = uiState.factionsList[uiState.selectedFaction-1]
+            if (uiState.selectedFactionId != 0) {
+                val selectedFaction = uiState.factionsList[uiState.selectedFactionId - 1]
                 AsyncImage(
                     modifier = Modifier.fillMaxWidth().align(Alignment.BottomEnd),
                     model = selectedFaction.getFactionFullUrl(),

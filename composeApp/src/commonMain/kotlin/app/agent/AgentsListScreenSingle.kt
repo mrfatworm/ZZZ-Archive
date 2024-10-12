@@ -17,8 +17,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import app.agent.compose.AgentsListFilterCard
 import app.agent.compose.AgentFilterBottomSheet
+import app.agent.compose.AgentsListFilterCard
 import app.agent.model.AgentsListState
 import org.jetbrains.compose.resources.stringResource
 import ui.component.ZzzIconButton
@@ -43,12 +43,13 @@ fun AgentsListScreenSingle(
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
     onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit,
+    onFactionChipSelectionChanged: (Int) -> Unit,
     onBackClick: () -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(false) }
     val isFiltered =
-        uiState.selectedRarity.isNotEmpty() || uiState.selectedAttributes.isNotEmpty() || uiState.selectedSpecialties.isNotEmpty()
+        uiState.selectedRarity.isNotEmpty() || uiState.selectedAttributes.isNotEmpty() || uiState.selectedSpecialties.isNotEmpty() || uiState.selectedFactionId != 0
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
         AnimatedVisibility(adaptiveLayoutType == AdaptiveLayoutType.Compact) {
             ZzzTopBar(title = stringResource(Res.string.agents),
@@ -83,6 +84,7 @@ fun AgentsListScreenSingle(
                 onRarityChipSelectionChanged = onRarityChipSelectionChanged,
                 onAttributeChipSelectionChanged = onAttributeChipSelectionChanged,
                 onSpecialtyChipSelectionChanged = onSpecialtyChipSelectionChanged,
+                onFactionChipSelectionChanged = onFactionChipSelectionChanged,
                 onDismiss = { showBottomSheet = false })
         }
     }

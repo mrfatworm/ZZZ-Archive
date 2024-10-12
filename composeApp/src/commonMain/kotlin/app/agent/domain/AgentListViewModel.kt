@@ -88,7 +88,7 @@ class AgentListViewModel(
         factionId: Int
     ) {
         _uiState.update {
-            it.copy(selectedFaction = if (it.selectedFaction == factionId) 0 else factionId)
+            it.copy(selectedFactionId = if (it.selectedFactionId == factionId) 0 else factionId)
         }
         filterAgentList()
     }
@@ -104,7 +104,7 @@ class AgentListViewModel(
             val matchSpecialty =
                 uiState.value.selectedSpecialties.isEmpty() || uiState.value.selectedSpecialties.any { it.name.lowercase() == agent.specialty }
             val matchFaction =
-                uiState.value.selectedFaction == 0 || uiState.value.selectedFaction == agent.factionId
+                uiState.value.selectedFactionId == 0 || uiState.value.selectedFactionId == agent.factionId
 
             matchRarity && matchAttribute && matchSpecialty && matchFaction
         }

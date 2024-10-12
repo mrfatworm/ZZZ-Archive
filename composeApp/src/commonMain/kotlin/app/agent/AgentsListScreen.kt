@@ -37,6 +37,8 @@ fun AgentsListScreen(
                 viewModel.specialtyFilterChanged(
                     newSelection
                 )
+            }, onFactionChipSelectionChanged = {
+                viewModel.factionFilterChanged(it)
             },
             onBackClick = onBackClick
         )
