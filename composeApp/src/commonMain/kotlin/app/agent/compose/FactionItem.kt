@@ -61,7 +61,7 @@ fun FactionItem(faction: Faction, isSelected: Boolean = false, onFactionClick: (
             modifier = Modifier.fillMaxSize()
                 .blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
             model = faction.getFactionThumbnailUrl(),
-            contentDescription = stringResource(faction.getFactionName()),
+            contentDescription = stringResource(faction.getFactionNameRes()),
             contentScale = ContentScale.Crop,
             alpha = 0.7f
         )
@@ -76,7 +76,7 @@ fun FactionItem(faction: Faction, isSelected: Boolean = false, onFactionClick: (
             visible = isPressed.value || isHovered.value, enter = fadeIn(), exit = fadeOut()
         ) {
             FactionInfo(
-                Modifier.align(Alignment.BottomCenter), stringResource(faction.getFactionName())
+                Modifier.align(Alignment.BottomCenter), stringResource(faction.getFactionNameRes())
             )
         }
     }

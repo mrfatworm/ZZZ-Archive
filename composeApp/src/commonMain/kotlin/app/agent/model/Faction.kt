@@ -20,7 +20,7 @@ import zzzarchive.composeapp.generated.resources.victoria_housekeeping
 data class Faction(
     val id: Int
 ) {
-    fun getFactionName(): StringResource {
+    fun getFactionNameRes(): StringResource {
         return when (id) {
             1 -> Res.string.gentle_house
             2 -> Res.string.victoria_housekeeping

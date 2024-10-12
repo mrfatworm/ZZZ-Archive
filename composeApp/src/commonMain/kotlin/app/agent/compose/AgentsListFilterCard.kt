@@ -7,18 +7,23 @@ package app.agent.compose
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.agent.model.AgentsListState
+import coil3.compose.AsyncImage
+import org.jetbrains.compose.resources.stringResource
 import ui.component.AttributeFilterChips
 import ui.component.ContentCard
 import ui.component.RarityFilterChips
@@ -59,33 +64,44 @@ fun AgentsListFilterCard(
                 )
             }
         }
+        Box {
+            if (uiState.selectedFaction != 0) {
+                val selectedFaction = uiState.factionsList[uiState.selectedFaction-1]
+                AsyncImage(
+                    modifier = Modifier.fillMaxWidth().align(Alignment.BottomEnd),
+                    model = selectedFaction.getFactionFullUrl(),
+                    contentDescription = stringResource(selectedFaction.getFactionNameRes()),
+                    alpha = 0.7f
+                )
+            }
 
-        LazyVerticalGrid(
-            state = lazyGridState,
-            columns = GridCells.Adaptive(100.dp),
-            modifier = Modifier.fillMaxSize().drawColumnListMask(
-                colorScheme = AppTheme.colors,
-                topEnable = lazyGridState.canScrollBackward,
-                bottomEnable = lazyGridState.canScrollForward
-            ),
-            contentPadding = PaddingValues(AppTheme.dimens.paddingCard),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            items(
-                count = uiState.agentsList.size,
-                key = { index -> uiState.agentsList[index].id }) { index ->
-                val agent = uiState.agentsList[index]
-                RarityItem(
-                    modifier = Modifier.animateItem(),
-                    rarityLevel = agent.rarity,
-                    name = agent.name,
-                    attribute = agent.getAttributeEnum(),
-                    imgUrl = agent.getProfileUrl(),
-                    onClick = { id ->
-                        onAgentDetailClick(id)
-                    })
+            LazyVerticalGrid(
+                state = lazyGridState,
+                columns = GridCells.Adaptive(100.dp),
+                modifier = Modifier.fillMaxSize().drawColumnListMask(
+                    colorScheme = AppTheme.colors,
+                    topEnable = lazyGridState.canScrollBackward,
+                    bottomEnable = lazyGridState.canScrollForward
+                ),
+                contentPadding = PaddingValues(AppTheme.dimens.paddingCard),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                items(count = uiState.agentsList.size,
+                    key = { index -> uiState.agentsList[index].id }) { index ->
+                    val agent = uiState.agentsList[index]
+                    RarityItem(modifier = Modifier.animateItem(),
+                        rarityLevel = agent.rarity,
+                        name = agent.name,
+                        attribute = agent.getAttributeEnum(),
+                        imgUrl = agent.getProfileUrl(),
+                        onClick = { id ->
+                            onAgentDetailClick(id)
+                        })
+                }
             }
         }
+
+
     }
 }
