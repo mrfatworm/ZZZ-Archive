@@ -11,6 +11,7 @@
     <string name="back">返回</string>
     <string name="previous">上一個</string>
     <string name="next">下一個</string>
+    <string name="loading">載入中...</string>
     <string name="view_detail">查看詳情</string>
     <string name="view_all">查看全部</string>
     <string name="light_theme">亮色主題</string>

@@ -5,7 +5,9 @@
 
 package app.agent.data
 
+import app.agent.model.AgentDetailResponse
 import app.agent.model.AgentsListResponse
+import app.agent.model.stubAgentDetailResponse
 import app.agent.model.stubAgentsListResponse
 import utils.ZzzResult
 
@@ -21,6 +23,14 @@ class FakeAgentRepository : AgentRepository {
             ZzzResult.Error(Exception())
         } else {
             ZzzResult.Success(stubAgentsListResponse)
+        }
+    }
+
+    override suspend fun getAgentDetail(id: Int): ZzzResult<AgentDetailResponse> {
+        return if (isError) {
+            ZzzResult.Error(Exception())
+        } else {
+            ZzzResult.Success(stubAgentDetailResponse)
         }
     }
 }

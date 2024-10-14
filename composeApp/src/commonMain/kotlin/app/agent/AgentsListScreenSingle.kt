@@ -39,7 +39,7 @@ import zzzarchive.composeapp.generated.resources.ic_filter_filled
 fun AgentsListScreenSingle(
     uiState: AgentsListState,
     adaptiveLayoutType: AdaptiveLayoutType,
-    onAgentDetailClick: (Int) -> Unit = {},
+    onAgentClick: (Int) -> Unit = {},
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
     onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit,
@@ -72,7 +72,7 @@ fun AgentsListScreenSingle(
                 modifier = Modifier.weight(1f),
                 uiState = uiState,
                 invisibleFilter = adaptiveLayoutType == AdaptiveLayoutType.Compact,
-                onAgentDetailClick = onAgentDetailClick,
+                onAgentClick = onAgentClick,
                 onRarityChipSelectionChanged = onRarityChipSelectionChanged,
                 onAttributeChipSelectionChanged = onAttributeChipSelectionChanged,
                 onSpecialtyChipSelectionChanged = onSpecialtyChipSelectionChanged

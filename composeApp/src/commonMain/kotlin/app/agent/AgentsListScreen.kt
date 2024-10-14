@@ -25,7 +25,7 @@ fun AgentsListScreen(
         AgentsListScreenSingle(
             uiState = uiState.value,
             adaptiveLayoutType = adaptiveLayoutType,
-            onAgentDetailClick = onAgentClick, onRarityChipSelectionChanged = { newSelection ->
+            onAgentClick = onAgentClick, onRarityChipSelectionChanged = { newSelection ->
                 viewModel.rarityFilterChanged(
                     newSelection
                 )
@@ -46,7 +46,7 @@ fun AgentsListScreen(
         AgentsListScreenDual(
             uiState = uiState.value,
             adaptiveLayoutType = adaptiveLayoutType,
-            onAgentDetailClick = onAgentClick,
+            onAgentClick = onAgentClick,
             onRarityChipSelectionChanged = { newSelection ->
                 viewModel.rarityFilterChanged(
                     newSelection

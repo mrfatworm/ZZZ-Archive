@@ -85,15 +85,15 @@ fun WEnginesListCard(
                 bottom = AppTheme.dimens.paddingCard
             )
         ) {
-            items(items = wEnginesList, key = { it.id }) { item ->
+            items(items = wEnginesList, key = { it.id }) { wEngine ->
                 RarityItem(
                     modifier = Modifier.animateItem(),
-                    rarityLevel = item.rarity,
-                    name = item.name,
-                    imgUrl = item.getImageUrl(),
-                    specialty = item.getSpecialtyEnum(),
-                    onClick = { id ->
-                        onWEngineDetailClick(id)
+                    rarityLevel = wEngine.rarity,
+                    name = wEngine.name,
+                    imgUrl = wEngine.getImageUrl(),
+                    specialty = wEngine.getSpecialtyEnum(),
+                    onClick = {
+                        onWEngineDetailClick(wEngine.id)
                     })
                 Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
             }

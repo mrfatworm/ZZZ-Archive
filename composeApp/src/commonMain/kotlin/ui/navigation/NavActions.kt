@@ -14,6 +14,10 @@ class NavActions(private val navController: NavHostController) {
         navController.navigate(destination.route)
     }
 
+    fun navigationToRoute(route: String) {
+        navController.navigate(route)
+    }
+
     fun back() {
         navController.popBackStack()
     }

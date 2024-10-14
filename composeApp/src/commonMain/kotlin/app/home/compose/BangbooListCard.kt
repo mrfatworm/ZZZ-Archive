@@ -85,14 +85,14 @@ fun BangbooListCard(
                 bottom = AppTheme.dimens.paddingCard
             )
         ) {
-            items(items = bangbooList, key = { it.id }) { item ->
+            items(items = bangbooList, key = { it.id }) { bangboo ->
                 RarityItem(
                     modifier = Modifier.animateItem(),
-                    rarityLevel = item.rarity,
-                    name = item.name,
-                    imgUrl = item.getProfileUrl(),
-                    onClick = { id ->
-                        onBangbooDetailClick(id)
+                    rarityLevel = bangboo.rarity,
+                    name = bangboo.name,
+                    imgUrl = bangboo.getProfileUrl(),
+                    onClick = {
+                        onBangbooDetailClick(bangboo.id)
                     })
                 Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
             }

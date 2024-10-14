@@ -10,8 +10,6 @@ import MainDispatcherRule
 import app.agent.data.AgentRepository
 import app.agent.data.FakeAgentRepository
 import app.agent.model.stubAgentsListResponse
-import app.home.data.FakeImageBannerRepository
-import app.home.data.ImageBannerRepository
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import org.junit.Rule
@@ -26,13 +24,11 @@ class AgentListViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private lateinit var imageBannerRepository: ImageBannerRepository
     private lateinit var agentRepository: AgentRepository
     private lateinit var viewModel: AgentListViewModel
 
     @BeforeTest
     fun setup() {
-        imageBannerRepository = FakeImageBannerRepository()
         agentRepository = FakeAgentRepository()
         viewModel = AgentListViewModel(agentRepository)
     }

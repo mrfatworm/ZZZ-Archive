@@ -5,6 +5,7 @@
 
 package app.agent.data
 
+import app.agent.model.AgentDetailResponse
 import app.agent.model.AgentsListResponse
 import kotlinx.coroutines.withTimeout
 import network.ZzzHttp
@@ -15,6 +16,17 @@ class AgentRepositoryImpl(private val httpClient: ZzzHttp) : AgentRepository {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
                 httpClient.requestAgentList()
+            }
+            ZzzResult.Success(result)
+        } catch (e: Exception) {
+            ZzzResult.Error(e)
+        }
+    }
+
+    override suspend fun getAgentDetail(id: Int): ZzzResult<AgentDetailResponse> {
+        return try {
+            val result = withTimeout(httpClient.defaultTimeout) {
+                httpClient.requestAgentDetail(id)
             }
             ZzzResult.Success(result)
         } catch (e: Exception) {

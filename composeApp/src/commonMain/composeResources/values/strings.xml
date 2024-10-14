@@ -11,6 +11,7 @@
     <string name="back">Back</string>
     <string name="previous">Previous</string>
     <string name="next">Next</string>
+    <string name="loading">Loading...</string>
     <string name="view_detail">View Detail</string>
     <string name="view_all">View All</string>
     <string name="light_theme">Light Theme</string>

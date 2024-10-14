@@ -7,6 +7,7 @@ package di
 
 import app.agent.data.AgentRepository
 import app.agent.data.AgentRepositoryImpl
+import app.agent.domain.AgentDetailViewModel
 import app.agent.domain.AgentListViewModel
 import app.bangboo.data.BangbooRepository
 import app.bangboo.data.BangbooRepositoryImpl
@@ -28,7 +29,7 @@ import mainfunc.MainFuncViewModel
 import mainfunc.data.BannerRepository
 import mainfunc.data.BannerRepositoryImpl
 import org.koin.core.module.Module
-import org.koin.core.module.dsl.viewModel
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import setting.SettingsRepository
 import setting.SettingsRepositoryImpl
@@ -47,9 +48,10 @@ val sharedModule = module {
     single<BangbooRepository> { BangbooRepositoryImpl(get()) }
     single<DriveRepository> { DriveRepositoryImpl(get()) }
 
-    viewModel { SplashViewModel(get()) }
-    viewModel { MainFuncViewModel(get()) }
-    viewModel { HomeViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
-    viewModel { WikiViewModel(get(), get(), get(), get()) }
-    viewModel { AgentListViewModel(get()) }
+    viewModelOf(::SplashViewModel)
+    viewModelOf(::MainFuncViewModel)
+    viewModelOf(::HomeViewModel)
+    viewModelOf(::WikiViewModel)
+    viewModelOf(::AgentListViewModel)
+    viewModelOf(::AgentDetailViewModel)
 }

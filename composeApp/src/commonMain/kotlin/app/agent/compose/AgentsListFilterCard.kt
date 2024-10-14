@@ -41,7 +41,7 @@ fun AgentsListFilterCard(
     uiState: AgentsListState,
     lazyGridState: LazyGridState = rememberLazyGridState(),
     invisibleFilter: Boolean = false,
-    onAgentDetailClick: (Int) -> Unit,
+    onAgentClick: (Int) -> Unit,
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
     onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit
@@ -95,8 +95,8 @@ fun AgentsListFilterCard(
                         name = agent.name,
                         attribute = agent.getAttributeEnum(),
                         imgUrl = agent.getProfileUrl(),
-                        onClick = { id ->
-                            onAgentDetailClick(id)
+                        onClick = {
+                            onAgentClick(agent.id)
                         })
                 }
             }

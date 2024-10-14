@@ -5,7 +5,9 @@
 
 package network
 
+import app.agent.model.AgentDetailResponse
 import app.agent.model.AgentsListResponse
+import app.agent.model.stubAgentDetailResponse
 import app.agent.model.stubAgentsListResponse
 import app.bangboo.model.BangbooListResponse
 import app.bangboo.model.stubBangbooListResponse
@@ -50,6 +52,14 @@ class FakeZzzHttp : ZzzHttp {
             throw Exception()
         } else {
             stubAgentsListResponse
+        }
+    }
+
+    override suspend fun requestAgentDetail(id: Int): AgentDetailResponse {
+        return if (isError) {
+            throw Exception()
+        } else {
+            stubAgentDetailResponse
         }
     }
 

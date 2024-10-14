@@ -86,13 +86,13 @@ fun DrivesListCard(
                 bottom = AppTheme.dimens.paddingCard
             )
         ) {
-            items(items = drivesList, key = { it.id }) { item ->
+            items(items = drivesList, key = { it.id }) { drive ->
                 RarityItem(
                     modifier = Modifier.animateItem(),
-                    name = item.name,
-                    imgUrl = item.getProfileUrl(),
-                    onClick = { id ->
-                        onDriveDetailClick(id)
+                    name = drive.name,
+                    imgUrl = drive.getProfileUrl(),
+                    onClick = {
+                        onDriveDetailClick(drive.id)
                     })
                 Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
             }

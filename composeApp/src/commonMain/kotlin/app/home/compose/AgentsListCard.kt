@@ -85,15 +85,15 @@ fun AgentsListCard(
                 bottom = AppTheme.dimens.paddingCard
             )
         ) {
-            items(items = agentsList, key = { it.id }) { item ->
+            items(items = agentsList, key = { it.id }) { agent ->
                 RarityItem(
                     modifier = Modifier.animateItem(),
-                    rarityLevel = item.rarity,
-                    name = item.name,
-                    attribute = item.getAttributeEnum(),
-                    imgUrl = item.getProfileUrl(),
-                    onClick = { id ->
-                        onAgentDetailClick(id)
+                    rarityLevel = agent.rarity,
+                    name = agent.name,
+                    attribute = agent.getAttributeEnum(),
+                    imgUrl = agent.getProfileUrl(),
+                    onClick = {
+                        onAgentDetailClick(agent.id)
                     })
                 Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
             }

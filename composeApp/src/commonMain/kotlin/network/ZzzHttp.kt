@@ -5,6 +5,7 @@
 
 package network
 
+import app.agent.model.AgentDetailResponse
 import app.agent.model.AgentsListResponse
 import app.bangboo.model.BangbooListResponse
 import app.drive.model.DriveListResponse
@@ -18,6 +19,7 @@ interface ZzzHttp {
     suspend fun requestBanner(): BannerResponse
     suspend fun requestImageBanner(): ImageBannerResponse
     suspend fun requestAgentList(): AgentsListResponse
+    suspend fun requestAgentDetail(id: Int): AgentDetailResponse
     suspend fun requestWEngineList(): WEnginesListResponse
     suspend fun requestBangbooList(): BangbooListResponse
     suspend fun requestDriveList(): DriveListResponse

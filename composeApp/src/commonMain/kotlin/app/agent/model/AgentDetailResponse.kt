@@ -1,0 +1,206 @@
+/*
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: CC BY-SA 4.0
+ */
+
+package app.agent.model
+
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class AgentDetailResponse(
+    val id: Int,
+    val name: String,
+    @SerialName("full_name") val fullName: String,
+    @SerialName("is_leak") val isLeak: Boolean,
+    val rarity: Int,
+    val specialty: String,
+    val attribute: String,
+    @SerialName("attack_type") val attackType: String,
+    @SerialName("faction_id") val factionId: Int,
+    @SerialName("character_background") val characterBackground: String,
+    @SerialName("basic_data") val basicData: AgentBasicData,
+    val skills: AgentSkill,
+    @SerialName("mindscape_cinema") val mindscapeCinema: List<NameAndDesc>,
+    @SerialName("level_material") val levelMaterial: AgentLevelMaterial,
+    @SerialName("suggest_w_engines") val suggestWEngines: List<Int>,
+    @SerialName("suggest_drives") val suggestDrives: List<Int>,
+)
+
+@Serializable
+data class AgentBasicData(
+    val hp: Int,
+    val atk: Int,
+    val def: Int,
+    @SerialName("core_skill_enhancements") val coreSkillEnhancements: List<CoreSkillEnhancement>
+)
+
+@Serializable
+data class CoreSkillEnhancement(
+    val name: String, val value: String
+)
+
+@Serializable
+data class AgentLevelMaterial(
+    @SerialName("skill_ten") val skillTen: List<LevelMaterial>,
+    @SerialName("skill_max") val skillMax: List<LevelMaterial>
+)
+
+@Serializable
+data class LevelMaterial(
+    val id: Int, val amount: Int
+)
+
+@Serializable
+data class AgentSkill(
+    @SerialName("basic_attack") val basicAttack: List<NameAndDesc>,
+    val dodge: List<NameAndDesc>,
+    @SerialName("dash_attack") val dashAttack: List<NameAndDesc>,
+    @SerialName("dodge_counter") val dodgeCounter: List<NameAndDesc>,
+    @SerialName("quick_assist") val quickAssist: List<NameAndDesc>,
+    @SerialName("defensive_assist") val defensiveAssist: List<NameAndDesc>,
+    @SerialName("assist_follow_up") val assistFollowUp: List<NameAndDesc>,
+    @SerialName("special_attack") val specialAttack: List<NameAndDesc>,
+    @SerialName("ex_special_attack") val exSpecialAttack: List<NameAndDesc>,
+    @SerialName("chain_attack") val chainAttack: List<NameAndDesc>,
+    val ultimate: List<NameAndDesc>,
+    @SerialName("core_passive") val corePassive: List<NameAndDesc>,
+    @SerialName("additional_ability") val additionalAbility: List<NameAndDesc>
+)
+
+@Serializable
+data class NameAndDesc(
+    val name: String, val description: String
+)
+
+val stubAgentDetailResponse = AgentDetailResponse(
+    id = 20,
+    name = "青衣",
+    fullName = "青衣",
+    isLeak = false,
+    rarity = 5,
+    specialty = "stun",
+    attribute = "electric",
+    attackType = "strike",
+    factionId = 6,
+    characterBackground = "青衣背景",
+    basicData = AgentBasicData(
+        hp = 8250, atk = 683, def = 612, coreSkillEnhancements = listOf(
+            CoreSkillEnhancement(
+                name = "攻擊力", value = "+75"
+            ), CoreSkillEnhancement(
+                name = "衝擊力", value = "+18"
+            )
+        )
+    ),
+    skills = AgentSkill(
+        basicAttack = listOf(
+            NameAndDesc(
+                name = "一煞", description = "一煞描述"
+            ), NameAndDesc(
+                name = "醉花雲", description = "醉花雲描述"
+            ), NameAndDesc(
+                name = "醉花月雲轉", description = "醉花月雲轉描述"
+            ), NameAndDesc(
+                name = "閃絡", description = "閃絡描述"
+            )
+        ),
+        dodge = listOf(
+            NameAndDesc(
+                name = "雁過聲", description = "雁過聲描述"
+            )
+        ),
+        dashAttack = listOf(
+            NameAndDesc(
+                name = "入破", description = "入破描述"
+            )
+        ),
+        dodgeCounter = listOf(
+            NameAndDesc(
+                name = "意不盡", description = "意不盡描述"
+            )
+        ),
+        quickAssist = listOf(
+            NameAndDesc(
+                name = "風入松", description = "風入松描述"
+            )
+        ),
+        defensiveAssist = listOf(
+            NameAndDesc(
+                name = "錦上花", description = "錦上花描述"
+            )
+        ),
+        assistFollowUp = listOf(
+            NameAndDesc(
+                name = "清江引", description = "清江引描述"
+            )
+        ),
+        specialAttack = listOf(
+            NameAndDesc(
+                name = "constituent", description = "constituent描述"
+            )
+        ),
+        exSpecialAttack = listOf(
+            NameAndDesc(
+                name = "月上海棠", description = "月上海棠描述"
+            )
+        ),
+        chainAttack = listOf(
+            NameAndDesc(
+                name = "太平令", description = "太平令描述"
+            )
+        ),
+        ultimate = listOf(
+            NameAndDesc(
+                name = "八聲甘州", description = "八聲甘州描述"
+            )
+        ),
+        corePassive = listOf(
+            NameAndDesc(
+                name = "千秋歲", description = "千秋歲描述"
+            )
+        ),
+        additionalAbility = listOf(
+            NameAndDesc(
+                name = "陽關三疊", description = "陽關三疊描述"
+            )
+        ),
+    ),
+    mindscapeCinema = listOf(
+        NameAndDesc(
+            name = "介電擊穿", description = "介電擊穿描述"
+        ), NameAndDesc(
+            name = "四兩撥千斤", description = "四兩撥千斤描述"
+        ), NameAndDesc(
+            name = "多喝熱水", description = "多喝熱水描述"
+        ), NameAndDesc(
+            name = "穩態電弧屏障", description = "穩態電弧屏障描述"
+        ), NameAndDesc(
+            name = "童心未泯", description = "童心未泯描述"
+        ), NameAndDesc(
+            name = "奇經八脈", description = "奇經八脈描述"
+        )
+    ),
+    levelMaterial = AgentLevelMaterial(
+        skillTen = listOf(
+            LevelMaterial(
+                id = 1, amount = 2467500
+            ), LevelMaterial(
+                id = 7, amount = 309
+            )
+        ), skillMax = listOf(
+            LevelMaterial(
+                id = 1, amount = 3705000
+            ), LevelMaterial(
+                id = 7, amount = 309
+            )
+        )
+    ),
+    suggestWEngines = listOf(
+        47, 38, 37, 19
+    ),
+    suggestDrives = listOf(
+        5, 1, 7
+    )
+)

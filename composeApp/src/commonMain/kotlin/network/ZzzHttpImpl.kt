@@ -1,5 +1,6 @@
 package network
 
+import app.agent.model.AgentDetailResponse
 import app.agent.model.AgentsListResponse
 import app.bangboo.model.BangbooListResponse
 import app.drive.model.DriveListResponse
@@ -35,6 +36,10 @@ class ZzzHttpImpl(engine: HttpClientEngine) : ZzzHttp {
 
     override suspend fun requestAgentList(): AgentsListResponse {
         return requestData("Agent/zh-tw/List.json")
+    }
+
+    override suspend fun requestAgentDetail(id: Int): AgentDetailResponse {
+        return requestData("Agent/zh-tw/Detail/$id.json")
     }
 
     override suspend fun requestWEngineList(): WEnginesListResponse {

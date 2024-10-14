@@ -40,10 +40,10 @@ sealed class Screen(
 
     data object AgentDetail : Screen(
         route = "agentDetail/{agentId}", navArguments = listOf(navArgument("agentId") {
-            type = NavType.StringType
+            type = NavType.IntType
         })
     ) {
-        fun createRoute(agentId: String) = "agentDetail/${agentId}"
+        fun createRoute(agentId: Int) = "agentDetail/$agentId"
     }
 
     data object WEnginesList : Screen(
