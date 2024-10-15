@@ -28,16 +28,14 @@ fun NavGraphBuilder.sharedComposable(
 ) {
     composable(Screen.AgentsList.route) {
         AgentsListScreen(contentType, adaptiveLayoutType, onAgentClick = { id ->
-            navActions.navigationToRoute(
-                Screen.AgentDetail.createRoute(id)
-            )
+            navActions.navigationToRoute(Screen.AgentDetail.createRoute(id))
         }, onBackClick = {
             navActions.back()
         })
     }
 
     composable(route = Screen.AgentDetail.route, arguments = Screen.AgentDetail.navArguments) {
-        AgentDetailScreen()
+        AgentDetailScreen(contentType, adaptiveLayoutType, onBackClick = { navActions.back() })
     }
 
     composable(Screen.WEnginesList.route) {

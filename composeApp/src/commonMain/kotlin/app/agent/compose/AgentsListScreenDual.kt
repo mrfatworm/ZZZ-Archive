@@ -3,7 +3,7 @@
  * License: CC BY-SA 4.0
  */
 
-package app.agent
+package app.agent.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -12,8 +12,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import app.agent.compose.AgentsListFilterCard
-import app.agent.compose.FactionItem
 import app.agent.model.AgentsListState
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType

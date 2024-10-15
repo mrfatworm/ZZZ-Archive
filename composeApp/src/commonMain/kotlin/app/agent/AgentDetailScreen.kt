@@ -5,55 +5,30 @@
 
 package app.agent
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import app.agent.domain.AgentDetailViewModel
-import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import ui.component.ZzzOutlineButton
-import ui.theme.AppTheme
-import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.loading
+import ui.utils.AdaptiveLayoutType
+import ui.utils.ContentType
 
 @Composable
-fun AgentDetailScreen() {
+fun AgentDetailScreen(
+    contentType: ContentType, adaptiveLayoutType: AdaptiveLayoutType, onBackClick: () -> Unit
+) {
     val viewModel: AgentDetailViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsState()
-    val agentDetail = uiState.agentDetail
-    if (agentDetail == null) {
-        Text(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-            text = stringResource(Res.string.loading),
-            textAlign = TextAlign.Center,
-            style = AppTheme.typography.headlineMedium,
-            color = AppTheme.colors.onSurface
+    if (contentType == ContentType.Single) {
+        AgentDetailScreenSingle(
+            uiState = uiState, adaptiveLayoutType = adaptiveLayoutType, onBackClick = onBackClick
         )
     } else {
-        Text(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-            text = agentDetail.fullName,
-            textAlign = TextAlign.Center,
-            style = AppTheme.typography.headlineMedium,
-            color = AppTheme.colors.onSurface
+        AgentDetailScreenDual(
+            uiState = uiState,
+            adaptiveLayoutType = adaptiveLayoutType,
+            onBackClick = onBackClick
         )
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceAround
-        ) {
-            ZzzOutlineButton(text = "推薦武器：硫磺石", onClick = { })
-        }
     }
 
 }

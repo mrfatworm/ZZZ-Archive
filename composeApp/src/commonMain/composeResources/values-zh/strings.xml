@@ -48,6 +48,11 @@
     <string name="anomaly">異常</string>
     <string name="defense">防護</string>
 
+    <!-- Attack Type -->
+    <string name="pierce">穿透</string>
+    <string name="slash">斬擊</string>
+    <string name="strike">打擊</string>
+
     <!-- Faction -->
     <string name="gentle_house">狡兔屋</string>
     <string name="victoria_housekeeping">維多利亞居家服務</string>

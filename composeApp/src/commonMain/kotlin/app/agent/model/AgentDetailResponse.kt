@@ -5,8 +5,23 @@
 
 package app.agent.model
 
+import com.mrfatworm.zzzarchive.ZzzConfig
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.jetbrains.compose.resources.StringResource
+import utils.AgentAttackType
+import utils.AgentAttribute
+import utils.AgentSpecialty
+import utils.ZzzRarity
+import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.belobog_heavy_industries
+import zzzarchive.composeapp.generated.resources.criminal_investigation_special_response_team
+import zzzarchive.composeapp.generated.resources.gentle_house
+import zzzarchive.composeapp.generated.resources.obol_squad
+import zzzarchive.composeapp.generated.resources.section_6
+import zzzarchive.composeapp.generated.resources.sons_of_calydon
+import zzzarchive.composeapp.generated.resources.unknown
+import zzzarchive.composeapp.generated.resources.victoria_housekeeping
 
 @Serializable
 data class AgentDetailResponse(
@@ -26,7 +41,47 @@ data class AgentDetailResponse(
     @SerialName("level_material") val levelMaterial: AgentLevelMaterial,
     @SerialName("suggest_w_engines") val suggestWEngines: List<Int>,
     @SerialName("suggest_drives") val suggestDrives: List<Int>,
-)
+) {
+    fun getAgentPortraitImageUrl(path: String = ZzzConfig.ASSET_PATH): String {
+        return "https://raw.githubusercontent.com/$path/Agent/Portrait/$id.webp"
+    }
+
+    fun getFactionIconUrl(path: String = ZzzConfig.ASSET_PATH): String {
+        return "https://raw.githubusercontent.com/$path/Agent/Faction/Icon/$factionId.webp"
+    }
+
+    fun getRarity(): ZzzRarity {
+        return ZzzRarity.entries.find { it.level == rarity } ?: ZzzRarity.RANK_A
+    }
+
+    fun getAttribute(): AgentAttribute {
+        return AgentAttribute.entries.find { it.name.lowercase().lowercase() == attribute }
+            ?: AgentAttribute.None
+    }
+
+    fun getSpecialty(): AgentSpecialty {
+        return AgentSpecialty.entries.find { it.name.lowercase() == specialty }
+            ?: AgentSpecialty.None
+    }
+
+    fun getAttackType(): AgentAttackType {
+        return AgentAttackType.entries.find { it.name.lowercase() == attackType }
+            ?: AgentAttackType.None
+    }
+
+    fun getFactionNameRes(): StringResource {
+        return when (factionId) {
+            1 -> Res.string.gentle_house
+            2 -> Res.string.victoria_housekeeping
+            3 -> Res.string.belobog_heavy_industries
+            4 -> Res.string.obol_squad
+            5 -> Res.string.section_6
+            6 -> Res.string.criminal_investigation_special_response_team
+            7 -> Res.string.sons_of_calydon
+            else -> Res.string.unknown
+        }
+    }
+}
 
 @Serializable
 data class AgentBasicData(

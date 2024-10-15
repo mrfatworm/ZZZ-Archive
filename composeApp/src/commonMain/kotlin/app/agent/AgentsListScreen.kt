@@ -7,6 +7,8 @@ package app.agent
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import app.agent.compose.AgentsListScreenDual
+import app.agent.compose.AgentsListScreenSingle
 import app.agent.domain.AgentListViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import ui.utils.AdaptiveLayoutType

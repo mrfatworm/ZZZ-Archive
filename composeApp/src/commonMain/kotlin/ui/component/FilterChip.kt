@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.agent.model.Faction
 import org.jetbrains.compose.resources.DrawableResource
@@ -41,7 +42,7 @@ import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_award_star
 import zzzarchive.composeapp.generated.resources.ic_rare
 
-val chipShape = RoundedCornerShape(8.dp)
+private val chipShape = RoundedCornerShape(8.dp)
 
 @Composable
 fun ZzzFilterChip(
@@ -72,7 +73,9 @@ fun ZzzFilterChip(
         Text(
             text = text,
             color = if (selected) AppTheme.colors.onPrimaryContainer else AppTheme.colors.onSurface,
-            style = AppTheme.typography.labelMedium
+            style = AppTheme.typography.labelMedium,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
     }
 }

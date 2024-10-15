@@ -17,9 +17,7 @@ import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
 
 fun NavGraphBuilder.wikiNavGraph(
-    contentType: ContentType,
-    adaptiveLayoutType: AdaptiveLayoutType,
-    navActions: NavActions
+    contentType: ContentType, adaptiveLayoutType: AdaptiveLayoutType, navActions: NavActions
 ) {
     navigation(
         route = MainFlow.Wiki.route, startDestination = MainFlow.Wiki.startScreen.route
@@ -31,7 +29,9 @@ fun NavGraphBuilder.wikiNavGraph(
                 onWEnginesOverviewClick = { navActions.navigationTo(Screen.WEnginesList) },
                 onBangbooOverviewClick = { navActions.navigationTo(Screen.BangbooList) },
                 onDrivesOverviewClick = { navActions.navigationTo(Screen.DrivesList) },
-                onAgentDetailClick = { navActions.navigationTo(Screen.AgentDetail) },
+                onAgentDetailClick = { id ->
+                    navActions.navigationToRoute(Screen.AgentDetail.createRoute(id))
+                },
                 onWEngineDetailClick = { navActions.navigationTo(Screen.WEngineDetail) },
                 onBangbooDetailClick = { navActions.navigationTo(Screen.BangbooDetail) },
                 onDriveDetailClick = { navActions.navigationTo(Screen.DriveDetail) })

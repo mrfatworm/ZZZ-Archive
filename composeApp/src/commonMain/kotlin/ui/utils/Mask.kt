@@ -70,3 +70,18 @@ fun Modifier.drawColumnListMask(
         )
     }
 }
+
+fun Modifier.drawBottomMask(
+    colorScheme: ColorScheme,
+    height: Dp = 108.dp
+) = this.drawWithContent {
+    drawContent()
+    drawRect(
+        brush = Brush.verticalGradient(
+            listOf(
+                colorScheme.surfaceContainer.copy(alpha = 0.0f), colorScheme.surfaceContainer
+            ), startY = size.height - height.toPx(), endY = size.height
+        )
+    )
+
+}

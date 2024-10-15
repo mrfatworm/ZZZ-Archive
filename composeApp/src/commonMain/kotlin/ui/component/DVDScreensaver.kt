@@ -7,8 +7,11 @@ package ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -41,13 +44,19 @@ fun DVDScreensaver(modifier: Modifier, colors: List<Color>, imageSize: Int = 24)
     BoxWithConstraints(modifier = modifier) {
         var currentColorIndex by remember { mutableStateOf(0) }
         var dvdState by remember { mutableStateOf(DvdState(size = imageSize)) }
+        val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding().value
         val screenWidth = with(LocalDensity.current) { maxWidth.toPx() }
         val screenHeight = with(LocalDensity.current) { maxHeight.toPx() }
 
         LaunchedEffect(key1 = dvdState) {
             while (true) {
                 delay(8) // ~60 FPS
-                dvdState = updateDVDPosition(dvdState, screenWidth, screenHeight, onBounce = {
+                dvdState = updateDVDPosition(
+                    dvdState,
+                    screenWidth,
+                    screenHeight,
+                    statusBarHeight,
+                    onBounce = {
                     currentColorIndex = (currentColorIndex + 1) % colors.size
                 })
             }
@@ -66,17 +75,21 @@ fun DVDScreensaver(modifier: Modifier, colors: List<Color>, imageSize: Int = 24)
 }
 
 private fun updateDVDPosition(
-    dvdState: DvdState, screenWidth: Float, screenHeight: Float, onBounce: () -> Unit
+    dvdState: DvdState,
+    screenWidth: Float,
+    screenHeight: Float,
+    statusBarHeight: Float,
+    onBounce: () -> Unit
 ): DvdState {
     var newOffsetX = dvdState.offsetX + dvdState.velocityX
     var newOffsetY = dvdState.offsetY + dvdState.velocityY
     // Bounce off edges
-    if (newOffsetX + dvdState.size * 2 >= screenWidth || newOffsetX <= 0) {
+    if (newOffsetX + statusBarHeight + dvdState.size * 2 >= screenWidth || newOffsetX <= 0) {
         dvdState.velocityX *= -1
         newOffsetX = dvdState.offsetX + dvdState.velocityX
         onBounce()
     }
-    if (newOffsetY + dvdState.size * 2 >= screenHeight || newOffsetY <= 0) {
+    if (newOffsetY + statusBarHeight + dvdState.size * 2 >= screenHeight || newOffsetY <= 0) {
         dvdState.velocityY *= -1
         newOffsetY = dvdState.offsetY + dvdState.velocityY
         onBounce()

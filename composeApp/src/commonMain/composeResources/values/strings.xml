@@ -57,6 +57,11 @@
     <string name="criminal_investigation_special_response_team">Criminal Investigation Special Response Team</string>
     <string name="sons_of_calydon">Sons of Calydon</string>
 
+    <!-- Attack Type -->
+    <string name="pierce">Pierce</string>
+    <string name="slash">Slash</string>
+    <string name="strike">Strike</string>
+
     <!-- Home -->
     <string name="pixiv_hot">Pixiv Hot</string>
     <string name="engagement_today">Engagement Today</string>

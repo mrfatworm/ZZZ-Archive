@@ -9,7 +9,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.agent.data.AgentRepository
-import app.agent.model.AgentsDetailState
+import app.agent.model.AgentDetailState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -22,7 +22,7 @@ class AgentDetailViewModel(
 ) : ViewModel() {
     private var agentId: Int = checkNotNull(savedStateHandle["agentId"])
 
-    private var _uiState = MutableStateFlow(AgentsDetailState())
+    private var _uiState = MutableStateFlow(AgentDetailState())
     val uiState = _uiState.asStateFlow()
 
     init {

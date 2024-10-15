@@ -3,7 +3,7 @@
  * License: CC BY-SA 4.0
  */
 
-package app.agent
+package app.agent.compose
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
@@ -17,8 +17,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import app.agent.compose.AgentFilterBottomSheet
-import app.agent.compose.AgentsListFilterCard
 import app.agent.model.AgentsListState
 import org.jetbrains.compose.resources.stringResource
 import ui.component.ZzzIconButton

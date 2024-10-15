@@ -31,7 +31,13 @@ fun NavGraphBuilder.homeNavGraph(
                 onWEnginesOverviewClick = { navActions.navigationToMainScreen(MainFlow.WEngine) },
                 onBangbooOverviewClick = { navActions.navigationToMainScreen(MainFlow.Bangboo) },
                 onDrivesOverviewClick = { navActions.navigationToMainScreen(MainFlow.Drive) },
-                onAgentDetailClick = { navActions.navigationTo(Screen.AgentDetail) },
+                onAgentDetailClick = { id ->
+                    navActions.navigationToRoute(
+                        Screen.AgentDetail.createRoute(
+                            id
+                        )
+                    )
+                },
                 onWEngineDetailClick = { navActions.navigationTo(Screen.WEngineDetail) },
                 onBangbooDetailClick = { navActions.navigationTo(Screen.BangbooDetail) },
                 onDriveDetailClick = { navActions.navigationTo(Screen.DriveDetail) })
