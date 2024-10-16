@@ -63,10 +63,8 @@ fun BangbooListCard(
             onNextClick = {
                 val targetIndex = lazyListState.firstVisibleItemIndex + 3
                 coroutineScope.launch {
-                    if (targetIndex < bangbooList.size) {
+                    if (lazyListState.canScrollForward) {
                         lazyListState.animateScrollToItem(targetIndex)
-                    } else {
-                        lazyListState.animateScrollToItem(bangbooList.size - 1)
                     }
                 }
             },

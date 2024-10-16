@@ -13,6 +13,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import app.agent.compose.AgentImageCard
+import app.agent.compose.AgentPromoteMaterialCard
 import app.agent.compose.AttributesCard
 import app.agent.model.AgentDetailState
 import ui.theme.AppTheme
@@ -32,5 +33,6 @@ fun AgentDetailScreenSingle(
     ) {
         AgentImageCard(uiState.agentDetail, onBackClick)
         AttributesCard(agentDetail = uiState.agentDetail)
+        AgentPromoteMaterialCard(material = uiState.agentDetail.levelMaterial)
     }
 }

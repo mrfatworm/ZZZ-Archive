@@ -63,10 +63,8 @@ fun WEnginesListCard(
             onNextClick = {
                 val targetIndex = lazyListState.firstVisibleItemIndex + 3
                 coroutineScope.launch {
-                    if (targetIndex < wEnginesList.size) {
+                    if (lazyListState.canScrollForward) {
                         lazyListState.animateScrollToItem(targetIndex)
-                    } else {
-                        lazyListState.animateScrollToItem(wEnginesList.size - 1)
                     }
                 }
             },

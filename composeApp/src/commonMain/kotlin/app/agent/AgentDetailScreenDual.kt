@@ -14,9 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.agent.compose.AgentImageCard
+import app.agent.compose.AgentPromoteMaterialCard
 import app.agent.compose.AttributesCard
 import app.agent.model.AgentDetailState
-import app.home.compose.HoYoLabCard
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
@@ -46,9 +46,11 @@ fun AgentDetailScreenDual(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
             ) {
-                HoYoLabCard()
+                AgentPromoteMaterialCard(material = uiState.agentDetail.levelMaterial)
             }
         }
     }
 }
+
+
 

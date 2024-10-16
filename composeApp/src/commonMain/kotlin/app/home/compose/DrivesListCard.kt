@@ -64,10 +64,8 @@ fun DrivesListCard(
             onNextClick = {
                 val targetIndex = lazyListState.firstVisibleItemIndex + 3
                 coroutineScope.launch {
-                    if (targetIndex < drivesList.size) {
+                    if (lazyListState.canScrollForward) {
                         lazyListState.animateScrollToItem(targetIndex)
-                    } else {
-                        lazyListState.animateScrollToItem(drivesList.size - 1)
                     }
                 }
             },

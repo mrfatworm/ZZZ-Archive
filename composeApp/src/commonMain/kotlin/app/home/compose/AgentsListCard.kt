@@ -63,10 +63,8 @@ fun AgentsListCard(
             onNextClick = {
                 val targetIndex = lazyListState.firstVisibleItemIndex + 3
                 coroutineScope.launch {
-                    if (targetIndex < agentsList.size) {
+                    if (lazyListState.canScrollForward) {
                         lazyListState.animateScrollToItem(targetIndex)
-                    } else {
-                        lazyListState.animateScrollToItem(agentsList.size - 1)
                     }
                 }
             },

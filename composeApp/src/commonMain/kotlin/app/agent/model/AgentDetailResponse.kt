@@ -109,7 +109,15 @@ data class AgentLevelMaterial(
 @Serializable
 data class LevelMaterial(
     val id: Int, val amount: Int
-)
+) {
+    fun getAmountText(): String {
+        return amount.toString()
+    }
+
+    fun getProfileUrl(path: String = ZzzConfig.ASSET_PATH): String {
+        return "https://raw.githubusercontent.com/$path/Material/$id.webp"
+    }
+}
 
 @Serializable
 data class AgentSkill(

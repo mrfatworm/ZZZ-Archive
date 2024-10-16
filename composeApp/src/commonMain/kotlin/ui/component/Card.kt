@@ -80,6 +80,7 @@ fun HoveredIndicatorHeader(
     onPreviousClick: () -> Unit,
     onNextClick: () -> Unit,
     onViewAllClick: () -> Unit = {},
+    action: @Composable RowScope.() -> Unit = {}
 ) {
     CardHeader(
         modifier = modifier.fillMaxWidth(), title = stringResource(titleRes)
@@ -120,9 +121,8 @@ fun HoveredIndicatorHeader(
                     style = AppTheme.typography.labelMedium,
                     color = AppTheme.colors.onSurface
                 )
-
             }
+            action()
         }
-
     }
 }

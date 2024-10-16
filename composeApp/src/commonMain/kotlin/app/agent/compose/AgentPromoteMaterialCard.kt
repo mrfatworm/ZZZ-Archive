@@ -1,0 +1,138 @@
+/*
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: CC BY-SA 4.0
+ */
+
+package app.agent.compose
+
+import androidx.compose.foundation.hoverable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsHoveredAsState
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import app.agent.model.AgentLevelMaterial
+import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
+import ui.component.ContentCard
+import ui.component.HoveredIndicatorHeader
+import ui.component.RarityItemLight
+import ui.theme.AppTheme
+import ui.utils.drawRowListMask
+import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.materials
+import zzzarchive.composeapp.generated.resources.skill
+
+@Composable
+fun AgentPromoteMaterialCard(material: AgentLevelMaterial) {
+    var checkState by remember { mutableStateOf(false) }
+    val levelLabel = if (checkState) " Lv.12" else " Lv.10"
+    val materialsList = if (checkState) material.skillMax else material.skillTen
+    val lazyListState = rememberLazyListState()
+    val interactionSource = remember { MutableInteractionSource() }
+    val isHovered = interactionSource.collectIsHoveredAsState()
+    ContentCard(
+        modifier = Modifier.hoverable(interactionSource = interactionSource),
+        hasDefaultPadding = false
+    ) {
+        Header(isHovered, lazyListState, levelLabel, checkState) {
+            checkState = it
+        }
+        LazyRow(
+            modifier = Modifier.drawRowListMask(
+                colorScheme = AppTheme.colors,
+                startEnable = lazyListState.canScrollBackward,
+                endEnable = lazyListState.canScrollForward
+            ), state = lazyListState, contentPadding = PaddingValues(
+                top = AppTheme.dimens.paddingUnderCardHeader,
+                start = AppTheme.dimens.paddingCard,
+                end = AppTheme.dimens.paddingCard,
+                bottom = AppTheme.dimens.paddingCard
+            )
+        ) {
+            items(items = materialsList, key = { it.id }) { material ->
+                RarityItemLight(
+                    modifier = Modifier.animateItem(),
+                    text = material.getAmountText(),
+                    imgUrl = material.getProfileUrl()
+                )
+                Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
+            }
+        }
+    }
+}
+
+@Composable
+private fun Header(
+    isHovered: State<Boolean>,
+    lazyListState: LazyListState,
+    levelLabel: String,
+    checkState: Boolean,
+    onCheckChange: (Boolean) -> Unit = {}
+) {
+    val coroutineScope = rememberCoroutineScope()
+    HoveredIndicatorHeader(modifier = Modifier.fillMaxWidth(),
+        titleRes = Res.string.materials,
+        isHovered = isHovered.value,
+        onPreviousClick = {
+            val targetIndex = lazyListState.firstVisibleItemIndex - 3
+            coroutineScope.launch {
+                if (targetIndex >= 0) {
+                    lazyListState.animateScrollToItem(targetIndex)
+                } else {
+                    lazyListState.animateScrollToItem(0)
+                }
+            }
+        },
+        onNextClick = {
+            val targetIndex = lazyListState.firstVisibleItemIndex + 3
+            coroutineScope.launch {
+                if (lazyListState.canScrollForward) {
+                    lazyListState.animateScrollToItem(targetIndex)
+                }
+            }
+        }) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = stringResource(Res.string.skill) + levelLabel,
+                style = AppTheme.typography.labelMedium,
+                color = AppTheme.colors.onSurfaceVariant
+            )
+            Switch(
+                checked = checkState,
+                onCheckedChange = { onCheckChange(it) },
+                colors = SwitchDefaults.colors(
+                    uncheckedThumbColor = AppTheme.colors.buttonBorder,
+                    uncheckedBorderColor = AppTheme.colors.buttonBorder,
+                    uncheckedTrackColor = Color.Transparent,
+                    checkedThumbColor = Color.White,
+                    checkedTrackColor = AppTheme.colors.primaryContainer
+                )
+            )
+        }
+    }
+}
