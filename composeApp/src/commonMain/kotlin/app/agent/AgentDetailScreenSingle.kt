@@ -13,6 +13,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import app.agent.compose.AgentImageCard
+import app.agent.compose.AttributesCard
 import app.agent.model.AgentDetailState
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
@@ -30,5 +31,6 @@ fun AgentDetailScreenSingle(
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         AgentImageCard(uiState.agentDetail, onBackClick)
+        AttributesCard(agentDetail = uiState.agentDetail)
     }
 }

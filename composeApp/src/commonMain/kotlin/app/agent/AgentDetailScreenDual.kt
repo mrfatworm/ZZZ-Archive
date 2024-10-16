@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.agent.compose.AgentImageCard
+import app.agent.compose.AttributesCard
 import app.agent.model.AgentDetailState
 import app.home.compose.HoYoLabCard
 import ui.theme.AppTheme
@@ -38,6 +39,7 @@ fun AgentDetailScreenDual(
                 verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
             ) {
                 AgentImageCard(agentDetail = uiState.agentDetail, onBackClick = onBackClick)
+                AttributesCard(agentDetail = uiState.agentDetail)
             }
 
             Column(
@@ -49,3 +51,4 @@ fun AgentDetailScreenDual(
         }
     }
 }
+

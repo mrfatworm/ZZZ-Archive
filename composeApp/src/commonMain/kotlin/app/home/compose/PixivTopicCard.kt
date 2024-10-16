@@ -126,7 +126,7 @@ private fun Header(
 ) {
     val coroutineScope = rememberCoroutineScope()
     CardHeader(
-        modifier = Modifier.fillMaxWidth(), titleRes = Res.string.pixiv_hot
+        modifier = Modifier.fillMaxWidth(), title = stringResource(Res.string.pixiv_hot)
     ) {
         Spacer(Modifier.size(8.dp))
         TagDropDownButton(onPixivTagChange = {

@@ -73,4 +73,27 @@
     <string name="open">Open</string>
     <string name="check_in">Check In</string>
     <string name="under_development">Under Development</string>
+
+    <!-- Agent Detail -->
+    <string name="attributes">Attributes</string>
+    <string name="hp_atk_def">HP / ATK / DEF</string>
+    <string name="materials">Materials</string>
+    <string name="skill">Skill</string>
+    <string name="expand_all">Expand All</string>
+    <string name="basic_attack">Basic Attack</string>
+    <string name="dodge">Dodge</string>
+    <string name="dash_attack">Dash Attack</string>
+    <string name="dodge_counter">Dodge Counter</string>
+    <string name="quick_assist">Quick Assist</string>
+    <string name="defensive_assist">Defensive Assist</string>
+    <string name="assist_follow_up">Assist Follow Up</string>
+    <string name="special_attack">Special Attack</string>
+    <string name="ex_special_attack">Ex Special Attack</string>
+    <string name="chain_attack">Chain Attack</string>
+    <string name="ultimate">Ultimate</string>
+    <string name="core_passive">Core Passive</string>
+    <string name="additional_ability">Additional Ability</string>
+    <string name="mindscape_cinema">Mindscape Cinema</string>
+    <string name="recommended_w_engines">Recommended W-Engines</string>
+    <string name="recommended_drives">Recommended Drives</string>
 </resources>

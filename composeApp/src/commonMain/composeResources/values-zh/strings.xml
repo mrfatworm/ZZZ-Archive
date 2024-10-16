@@ -73,4 +73,27 @@
     <string name="open">營業中</string>
     <string name="check_in">簽到</string>
     <string name="under_development">開發中功能</string>
+
+    <!-- Agent Detail -->
+    <string name="attributes">屬性</string>
+    <string name="hp_atk_def">生命 / 攻擊 / 防禦</string>
+    <string name="materials">素材</string>
+    <string name="skill">技能</string>
+    <string name="expand_all">全部展開</string>
+    <string name="basic_attack">普通攻擊</string>
+    <string name="dodge">閃避</string>
+    <string name="dash_attack">衝刺攻擊</string>
+    <string name="dodge_counter">閃避反擊</string>
+    <string name="quick_assist">快速支援</string>
+    <string name="defensive_assist">招架支援</string>
+    <string name="assist_follow_up">支援突擊</string>
+    <string name="special_attack">特殊技</string>
+    <string name="ex_special_attack">強化特殊技</string>
+    <string name="chain_attack">連攜技</string>
+    <string name="ultimate">終結技</string>
+    <string name="core_passive">核心被動</string>
+    <string name="additional_ability">額外能力</string>
+    <string name="mindscape_cinema">意象影畫</string>
+    <string name="recommended_w_engines">推薦音擎</string>
+    <string name="recommended_drives">推薦驅動光碟</string>
 </resources>

@@ -55,7 +55,7 @@ fun ContentCard(
 
 @Composable
 fun CardHeader(
-    modifier: Modifier, titleRes: StringResource, action: @Composable RowScope.() -> Unit = {}
+    modifier: Modifier, title: String, action: @Composable RowScope.() -> Unit = {}
 ) {
     Row(
         modifier = modifier.heightIn(min = 56.dp).padding(horizontal = 16.dp, vertical = 8.dp),
@@ -63,9 +63,9 @@ fun CardHeader(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = stringResource(titleRes),
+            text = title,
             color = AppTheme.colors.onSurfaceVariant,
-            style = AppTheme.typography.labelLarge
+            style = AppTheme.typography.titleMedium
         )
         action()
     }
@@ -82,7 +82,7 @@ fun HoveredIndicatorHeader(
     onViewAllClick: () -> Unit = {},
 ) {
     CardHeader(
-        modifier = modifier.fillMaxWidth(), titleRes = titleRes
+        modifier = modifier.fillMaxWidth(), title = stringResource(titleRes)
     ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(16.dp),

@@ -62,7 +62,7 @@ fun AgentImageCard(agentDetail: AgentDetailResponse, onBackClick: () -> Unit) {
                 contentDescription = null,
             )
         }
-        Spacer(Modifier.size(16.dp))
+        Spacer(Modifier.size(8.dp))
         Text(
             text = agentDetail.fullName,
             style = AppTheme.typography.headlineLarge,

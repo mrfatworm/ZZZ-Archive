@@ -81,6 +81,10 @@ data class AgentDetailResponse(
             else -> Res.string.unknown
         }
     }
+
+    fun getHpAtkDef(): String {
+        return "${basicData.hp} / ${basicData.atk} / ${basicData.def}"
+    }
 }
 
 @Serializable
