@@ -31,7 +31,7 @@ fun AttributesCard(agentDetail: AgentDetailResponse) {
     ContentCard(hasDefaultPadding = false) {
         CardHeader(
             modifier = Modifier.fillMaxWidth(),
-            title = stringResource(Res.string.attributes) + " Lv.Max"
+            title = stringResource(Res.string.attributes).uppercase() + " Lv.Max"
         )
         AttributeItem(
             title = stringResource(Res.string.hp_atk_def),

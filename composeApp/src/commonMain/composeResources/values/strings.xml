@@ -78,7 +78,7 @@
     <string name="attributes">Attributes</string>
     <string name="hp_atk_def">HP / ATK / DEF</string>
     <string name="materials">Materials</string>
-    <string name="skill">Skill</string>
+    <string name="skills">Skills</string>
     <string name="expand_all">Expand All</string>
     <string name="basic_attack">Basic Attack</string>
     <string name="dodge">Dodge</string>

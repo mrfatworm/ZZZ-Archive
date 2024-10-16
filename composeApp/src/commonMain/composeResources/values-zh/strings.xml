@@ -78,7 +78,7 @@
     <string name="attributes">屬性</string>
     <string name="hp_atk_def">生命 / 攻擊 / 防禦</string>
     <string name="materials">素材</string>
-    <string name="skill">技能</string>
+    <string name="skills">技能</string>
     <string name="expand_all">全部展開</string>
     <string name="basic_attack">普通攻擊</string>
     <string name="dodge">閃避</string>

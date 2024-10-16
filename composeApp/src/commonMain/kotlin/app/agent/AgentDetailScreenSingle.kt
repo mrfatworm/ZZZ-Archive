@@ -15,6 +15,8 @@ import androidx.compose.ui.Modifier
 import app.agent.compose.AgentImageCard
 import app.agent.compose.AgentPromoteMaterialCard
 import app.agent.compose.AttributesCard
+import app.agent.compose.CinemaCard
+import app.agent.compose.SkillsCard
 import app.agent.model.AgentDetailState
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
@@ -32,7 +34,9 @@ fun AgentDetailScreenSingle(
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         AgentImageCard(uiState.agentDetail, onBackClick)
-        AttributesCard(agentDetail = uiState.agentDetail)
-        AgentPromoteMaterialCard(material = uiState.agentDetail.levelMaterial)
+        AttributesCard(uiState.agentDetail)
+        AgentPromoteMaterialCard(uiState.agentDetail.levelMaterial)
+        SkillsCard(uiState.agentDetail)
+        CinemaCard(uiState.agentDetail)
     }
 }

@@ -42,7 +42,7 @@ import ui.theme.AppTheme
 import ui.utils.drawRowListMask
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.materials
-import zzzarchive.composeapp.generated.resources.skill
+import zzzarchive.composeapp.generated.resources.skills
 
 @Composable
 fun AgentPromoteMaterialCard(material: AgentLevelMaterial) {
@@ -118,7 +118,7 @@ private fun Header(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = stringResource(Res.string.skill) + levelLabel,
+                text = stringResource(Res.string.skills) + levelLabel,
                 style = AppTheme.typography.labelMedium,
                 color = AppTheme.colors.onSurfaceVariant
             )
