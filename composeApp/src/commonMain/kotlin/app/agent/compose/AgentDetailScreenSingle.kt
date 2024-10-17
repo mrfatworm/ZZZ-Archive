@@ -30,7 +30,7 @@ fun AgentDetailScreenSingle(
     ) {
         AgentImageCard(uiState.agentDetail, onBackClick)
         AttributesCard(uiState.agentDetail)
-        AgentPromoteMaterialCard(uiState.agentDetail.levelMaterial)
+        AgentMaterialsCard(uiState.agentDetail.levelMaterial)
         SkillsCard(uiState.agentDetail)
         CinemaCard(uiState.agentDetail)
         SuggestWEnginesCard(uiState.agentDetail.suggestWEngines)

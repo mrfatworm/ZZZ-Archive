@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
@@ -26,14 +25,12 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import app.agent.model.AgentLevelMaterial
-import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import ui.component.ContentCard
 import ui.component.HoveredIndicatorHeader
@@ -45,9 +42,8 @@ import zzzarchive.composeapp.generated.resources.materials
 import zzzarchive.composeapp.generated.resources.skills
 
 @Composable
-fun AgentPromoteMaterialCard(material: AgentLevelMaterial) {
+fun AgentMaterialsCard(material: AgentLevelMaterial) {
     var checkState by remember { mutableStateOf(false) }
-    val levelLabel = if (checkState) " Lv.12" else " Lv.10"
     val materialsList = if (checkState) material.skillMax else material.skillTen
     val lazyListState = rememberLazyListState()
     val interactionSource = remember { MutableInteractionSource() }
@@ -56,7 +52,7 @@ fun AgentPromoteMaterialCard(material: AgentLevelMaterial) {
         modifier = Modifier.hoverable(interactionSource = interactionSource),
         hasDefaultPadding = false
     ) {
-        Header(isHovered, lazyListState, levelLabel, checkState) {
+        Header(isHovered, lazyListState, checkState) {
             checkState = it
         }
         LazyRow(
@@ -87,32 +83,15 @@ fun AgentPromoteMaterialCard(material: AgentLevelMaterial) {
 private fun Header(
     isHovered: State<Boolean>,
     lazyListState: LazyListState,
-    levelLabel: String,
     checkState: Boolean,
     onCheckChange: (Boolean) -> Unit = {}
 ) {
-    val coroutineScope = rememberCoroutineScope()
-    HoveredIndicatorHeader(modifier = Modifier.fillMaxWidth(),
-        titleRes = Res.string.materials,
+    val levelLabel = if (checkState) " Lv.12" else " Lv.10"
+    HoveredIndicatorHeader(
+        title = stringResource(Res.string.materials),
         isHovered = isHovered.value,
-        onPreviousClick = {
-            val targetIndex = lazyListState.firstVisibleItemIndex - 3
-            coroutineScope.launch {
-                if (targetIndex >= 0) {
-                    lazyListState.animateScrollToItem(targetIndex)
-                } else {
-                    lazyListState.animateScrollToItem(0)
-                }
-            }
-        },
-        onNextClick = {
-            val targetIndex = lazyListState.firstVisibleItemIndex + 3
-            coroutineScope.launch {
-                if (lazyListState.canScrollForward) {
-                    lazyListState.animateScrollToItem(targetIndex)
-                }
-            }
-        }) {
+        lazyListState = lazyListState
+    ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically

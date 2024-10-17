@@ -10,19 +10,15 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import app.agent.model.DriveItem
-import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
 import ui.component.ContentCard
 import ui.component.HoveredIndicatorHeader
 import ui.component.RarityItemMini
@@ -40,7 +36,11 @@ fun SuggestDrivesCard(drivesList: List<DriveItem>) {
         modifier = Modifier.hoverable(interactionSource = interactionSource),
         hasDefaultPadding = false
     ) {
-        Header(isHovered, lazyListState)
+        HoveredIndicatorHeader(
+            title = stringResource(Res.string.suggest_drives),
+            isHovered = isHovered.value && (lazyListState.canScrollForward || lazyListState.canScrollBackward),
+            lazyListState = lazyListState
+        )
         LazyRow(
             modifier = Modifier.drawRowListMask(
                 colorScheme = AppTheme.colors,
@@ -63,32 +63,4 @@ fun SuggestDrivesCard(drivesList: List<DriveItem>) {
             }
         }
     }
-}
-
-@Composable
-private fun Header(
-    isHovered: State<Boolean>, lazyListState: LazyListState
-) {
-    val coroutineScope = rememberCoroutineScope()
-    HoveredIndicatorHeader(modifier = Modifier.fillMaxWidth(),
-        titleRes = Res.string.suggest_drives,
-        isHovered = isHovered.value && (lazyListState.canScrollForward || lazyListState.canScrollBackward),
-        onPreviousClick = {
-            val targetIndex = lazyListState.firstVisibleItemIndex - 3
-            coroutineScope.launch {
-                if (targetIndex >= 0) {
-                    lazyListState.animateScrollToItem(targetIndex)
-                } else {
-                    lazyListState.animateScrollToItem(0)
-                }
-            }
-        },
-        onNextClick = {
-            val targetIndex = lazyListState.firstVisibleItemIndex + 3
-            coroutineScope.launch {
-                if (lazyListState.canScrollForward) {
-                    lazyListState.animateScrollToItem(targetIndex)
-                }
-            }
-        })
 }

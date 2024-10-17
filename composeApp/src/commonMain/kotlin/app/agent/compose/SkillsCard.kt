@@ -5,9 +5,7 @@
 
 package app.agent.compose
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import app.agent.model.AgentDetailResponse
 import org.jetbrains.compose.resources.stringResource
 import ui.component.CardHeader
@@ -33,7 +31,6 @@ import zzzarchive.composeapp.generated.resources.ultimate
 fun SkillsCard(agentDetail: AgentDetailResponse) {
     ContentCard(hasDefaultPadding = false) {
         CardHeader(
-            modifier = Modifier.fillMaxWidth(),
             title = stringResource(Res.string.skills).uppercase()
         )
         agentDetail.skills.basicAttack.forEach {

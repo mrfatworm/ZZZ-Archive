@@ -38,7 +38,7 @@ fun AgentDetailScreenDual(
                 .contentPadding(adaptiveLayoutType, AppTheme.dimens),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
-            AgentPromoteMaterialCard(uiState.agentDetail.levelMaterial)
+            AgentMaterialsCard(uiState.agentDetail.levelMaterial)
             SkillsCard(uiState.agentDetail)
             CinemaCard(uiState.agentDetail)
             SuggestWEnginesCard(uiState.agentDetail.suggestWEngines)

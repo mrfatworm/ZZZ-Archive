@@ -5,9 +5,7 @@
 
 package app.agent.compose
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import app.agent.model.AgentDetailResponse
 import org.jetbrains.compose.resources.stringResource
 import ui.component.CardHeader
@@ -22,7 +20,6 @@ val CinemaTitle = listOf("I", "II", "III", "IV", "V", "VI")
 fun CinemaCard(agentDetail: AgentDetailResponse) {
     ContentCard(hasDefaultPadding = false) {
         CardHeader(
-            modifier = Modifier.fillMaxWidth(),
             title = stringResource(Res.string.mindscape_cinema).uppercase()
         )
         for (i in agentDetail.mindscapeCinema.indices) {

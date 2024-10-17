@@ -8,7 +8,6 @@ package app.agent.compose
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
@@ -30,7 +29,6 @@ import zzzarchive.composeapp.generated.resources.hp_atk_def
 fun AttributesCard(agentDetail: AgentDetailResponse) {
     ContentCard(hasDefaultPadding = false) {
         CardHeader(
-            modifier = Modifier.fillMaxWidth(),
             title = stringResource(Res.string.attributes).uppercase() + " Lv.Max"
         )
         AttributeItem(

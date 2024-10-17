@@ -5,9 +5,6 @@
 
 package app.home.compose
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -61,19 +58,15 @@ import coil3.size.Size
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
-import ui.component.CardHeader
 import ui.component.ContentCard
+import ui.component.HoveredIndicatorHeader
 import ui.component.ImageNotFound
-import ui.component.ZzzIconButton
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import ui.utils.drawRowListMask
 import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.ic_arrow_back
-import zzzarchive.composeapp.generated.resources.ic_arrow_next
 import zzzarchive.composeapp.generated.resources.ic_favorite
 import zzzarchive.composeapp.generated.resources.pixiv_hot
-import zzzarchive.composeapp.generated.resources.previous
 import zzzarchive.composeapp.generated.resources.unknown
 
 @Composable
@@ -89,7 +82,7 @@ fun PixivTopicCard(
         modifier = Modifier.fillMaxWidth().hoverable(interactionSource = interactionSource),
         hasDefaultPadding = false
     ) {
-        Header(isHovered.value, lazyListState, recentArticlesList, onPixivTagChange)
+        Header(isHovered.value, lazyListState, onPixivTagChange)
         LazyRow(
             modifier = Modifier.drawRowListMask(
                 colorScheme = AppTheme.colors,
@@ -121,57 +114,23 @@ fun PixivTopicCard(
 private fun Header(
     isHovered: Boolean,
     lazyListState: LazyListState,
-    recentArticlesList: List<RecentArticle>,
     onPixivTagChange: (String) -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
-    CardHeader(
-        modifier = Modifier.fillMaxWidth(), title = stringResource(Res.string.pixiv_hot)
-    ) {
-        Spacer(Modifier.size(8.dp))
-        TagDropDownButton(onPixivTagChange = {
-            onPixivTagChange(it)
-            coroutineScope.launch {
-                lazyListState.animateScrollToItem(0)
-            }
-        })
-        Spacer(Modifier.weight(1f))
-        AnimatedVisibility(visible = isHovered, enter = fadeIn(), exit = fadeOut()) {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                ZzzIconButton(
-                    iconRes = Res.drawable.ic_arrow_back,
-                    contentDescriptionRes = Res.string.previous,
-                    size = 32.dp
-                ) {
-                    val targetIndex = lazyListState.firstVisibleItemIndex - 3
-                    coroutineScope.launch {
-                        if (targetIndex >= 0) {
-                            lazyListState.animateScrollToItem(targetIndex)
-                        } else {
-                            lazyListState.animateScrollToItem(0)
-                        }
-                    }
+    HoveredIndicatorHeader(
+        title = stringResource(Res.string.pixiv_hot),
+        isHovered = isHovered,
+        lazyListState = lazyListState,
+        startContent = {
+            TagDropDownButton(onPixivTagChange = {
+                onPixivTagChange(it)
+                coroutineScope.launch {
+                    lazyListState.animateScrollToItem(0)
                 }
-                ZzzIconButton(
-                    iconRes = Res.drawable.ic_arrow_next,
-                    contentDescriptionRes = Res.string.previous,
-                    size = 32.dp
-                ) {
-                    val targetIndex = lazyListState.firstVisibleItemIndex + 3
-                    coroutineScope.launch {
-                        if (targetIndex < recentArticlesList.size) {
-                            lazyListState.animateScrollToItem(targetIndex)
-                        } else {
-                            lazyListState.animateScrollToItem(recentArticlesList.size - 1)
-                        }
-                    }
-                }
-            }
+            })
+            Spacer(Modifier.weight(1f))
         }
-    }
+    )
 }
 
 @Composable
