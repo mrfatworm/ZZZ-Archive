@@ -20,7 +20,7 @@ val emptyAgentDetailResponse = AgentDetailResponse(
     attribute = "",
     attackType = "",
     factionId = 0,
-    characterBackground = "---",
+    agentBackground = "---",
     basicData = AgentBasicData(
         hp = 0, atk = 0, def = 0, coreSkillEnhancements = emptyList()
     ),

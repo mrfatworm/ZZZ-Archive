@@ -5,6 +5,7 @@
 
 package ui.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -32,7 +33,7 @@ fun ZzzTag(
     iconRes: DrawableResource,
 ) {
     Row(
-        modifier = modifier.clip(tagShape).border(
+        modifier = modifier.clip(tagShape).background(AppTheme.colors.surface).border(
             width = 3.dp,
             color = AppTheme.colors.border,
             shape = tagShape

@@ -94,6 +94,6 @@
     <string name="core_passive">Core Passive</string>
     <string name="additional_ability">Additional Ability</string>
     <string name="mindscape_cinema">Mindscape Cinema</string>
-    <string name="recommended_w_engines">Recommended W-Engines</string>
-    <string name="recommended_drives">Recommended Drives</string>
+    <string name="suggest_w_engines">Recommended W-Engines</string>
+    <string name="suggest_drives">Recommended Drives</string>
 </resources>

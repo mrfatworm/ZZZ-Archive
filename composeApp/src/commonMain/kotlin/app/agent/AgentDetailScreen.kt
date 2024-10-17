@@ -8,6 +8,8 @@ package app.agent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import app.agent.compose.AgentDetailScreenDual
+import app.agent.compose.AgentDetailScreenSingle
 import app.agent.domain.AgentDetailViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import ui.utils.AdaptiveLayoutType

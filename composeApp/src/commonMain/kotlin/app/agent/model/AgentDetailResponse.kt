@@ -34,13 +34,13 @@ data class AgentDetailResponse(
     val attribute: String,
     @SerialName("attack_type") val attackType: String,
     @SerialName("faction_id") val factionId: Int,
-    @SerialName("character_background") val characterBackground: String,
+    @SerialName("agent_background") val agentBackground: String,
     @SerialName("basic_data") val basicData: AgentBasicData,
     val skills: AgentSkill,
     @SerialName("mindscape_cinema") val mindscapeCinema: List<NameAndDesc>,
     @SerialName("level_material") val levelMaterial: AgentLevelMaterial,
-    @SerialName("suggest_w_engines") val suggestWEngines: List<Int>,
-    @SerialName("suggest_drives") val suggestDrives: List<Int>,
+    @SerialName("suggest_w_engines") val suggestWEngines: List<RarityItem>,
+    @SerialName("suggest_drives") val suggestDrives: List<DriveItem>,
 ) {
     fun getAgentPortraitImageUrl(path: String = ZzzConfig.ASSET_PATH): String {
         return "https://raw.githubusercontent.com/$path/Agent/Portrait/$id.webp"
@@ -120,6 +120,32 @@ data class LevelMaterial(
 }
 
 @Serializable
+data class RarityItem(
+    val id: Int, val rarity: Int
+) {
+    fun getWEngineIconUrl(path: String = ZzzConfig.ASSET_PATH): String {
+        return "https://raw.githubusercontent.com/$path/W-Engine/Image/$id.webp"
+    }
+
+    fun getRarity(): ZzzRarity {
+        return ZzzRarity.entries.find { it.level == rarity } ?: ZzzRarity.RANK_A
+    }
+}
+
+@Serializable
+data class DriveItem(
+    val id: Int, val suit: Int
+) {
+    fun getDriveIconUrl(path: String = ZzzConfig.ASSET_PATH): String {
+        return "https://raw.githubusercontent.com/$path/Drive/$id.webp"
+    }
+
+    fun getSuitString(): String {
+        return suit.toString()
+    }
+}
+
+@Serializable
 data class AgentSkill(
     @SerialName("basic_attack") val basicAttack: List<NameAndDesc>,
     val dodge: List<NameAndDesc>,
@@ -150,8 +176,7 @@ val stubAgentDetailResponse = AgentDetailResponse(
     specialty = "stun",
     attribute = "electric",
     attackType = "strike",
-    factionId = 6,
-    characterBackground = "青衣背景",
+    factionId = 6, agentBackground = "青衣背景",
     basicData = AgentBasicData(
         hp = 8250, atk = 683, def = 612, coreSkillEnhancements = listOf(
             CoreSkillEnhancement(
@@ -265,9 +290,9 @@ val stubAgentDetailResponse = AgentDetailResponse(
         )
     ),
     suggestWEngines = listOf(
-        47, 38, 37, 19
+        RarityItem(47, 5), RarityItem(19, 4)
     ),
     suggestDrives = listOf(
-        5, 1, 7
+        DriveItem(5, 4), DriveItem(1, 2), DriveItem(7, 2)
     )
 )

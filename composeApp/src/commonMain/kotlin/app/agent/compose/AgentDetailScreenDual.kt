@@ -3,7 +3,7 @@
  * License: CC BY-SA 4.0
  */
 
-package app.agent
+package app.agent.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,11 +12,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import app.agent.compose.AgentImageCard
-import app.agent.compose.AgentPromoteMaterialCard
-import app.agent.compose.AttributesCard
-import app.agent.compose.CinemaCard
-import app.agent.compose.SkillsCard
 import app.agent.model.AgentDetailState
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
@@ -46,6 +41,8 @@ fun AgentDetailScreenDual(
             AgentPromoteMaterialCard(uiState.agentDetail.levelMaterial)
             SkillsCard(uiState.agentDetail)
             CinemaCard(uiState.agentDetail)
+            SuggestWEnginesCard(uiState.agentDetail.suggestWEngines)
+            SuggestDrivesCard(uiState.agentDetail.suggestDrives)
         }
     }
 }

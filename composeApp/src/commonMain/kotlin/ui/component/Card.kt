@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -59,7 +60,7 @@ fun CardHeader(
 ) {
     Row(
         modifier = modifier.heightIn(min = 56.dp).padding(horizontal = 16.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -67,6 +68,7 @@ fun CardHeader(
             color = AppTheme.colors.onSurfaceVariant,
             style = AppTheme.typography.titleMedium
         )
+        Spacer(modifier.weight(1f))
         action()
     }
 }

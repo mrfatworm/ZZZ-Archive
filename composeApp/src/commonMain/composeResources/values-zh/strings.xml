@@ -94,6 +94,6 @@
     <string name="core_passive">核心被動</string>
     <string name="additional_ability">額外能力</string>
     <string name="mindscape_cinema">意象影畫</string>
-    <string name="recommended_w_engines">推薦音擎</string>
-    <string name="recommended_drives">推薦驅動光碟</string>
+    <string name="suggest_w_engines">推薦音擎</string>
+    <string name="suggest_drives">推薦驅動光碟</string>
 </resources>
