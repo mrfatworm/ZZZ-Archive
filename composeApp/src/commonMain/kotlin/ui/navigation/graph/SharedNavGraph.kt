@@ -5,69 +5,70 @@
 
 package ui.navigation.graph
 
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
 import app.agent.AgentDetailScreen
 import app.agent.AgentsListScreen
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.composable
 import app.bangboo.BangbooDetailScreen
 import app.bangboo.BangbooListScreen
 import app.drive.DriveDetailScreen
 import app.drive.DrivesListScreen
-import ui.navigation.Screen
-import ui.utils.ContentType
 import app.wengine.WEngineDetailScreen
 import app.wengine.WEnginesListScreen
+import ui.navigation.NavActions
+import ui.navigation.Screen
+import ui.utils.AdaptiveLayoutType
+import ui.utils.ContentType
 
-fun NavGraphBuilder.sharedScreenDestination(
-    navController: NavHostController,
+
+fun NavGraphBuilder.sharedComposable(
     contentType: ContentType,
-    navigateToTopLevelDestination: (Screen) -> Unit
+    adaptiveLayoutType: AdaptiveLayoutType,
+    navActions: NavActions
 ) {
     composable(Screen.AgentsList.route) {
-        AgentsListScreen(contentType, onAgentClick = {
-            navController.navigate(
-                Screen.AgentDetail.route
-            )
+        AgentsListScreen(contentType, adaptiveLayoutType, onAgentClick = { id ->
+            navActions.navigationToRoute(Screen.AgentDetail.createRoute(id))
+        }, onBackClick = {
+            navActions.back()
         })
     }
 
-    composable(Screen.AgentDetail.route) {
-        AgentDetailScreen(onWEngineClick = { navController.navigate(Screen.WEngineDetail.route) })
+    composable(route = Screen.AgentDetail.route, arguments = Screen.AgentDetail.navArguments) {
+        AgentDetailScreen(contentType, adaptiveLayoutType, onBackClick = { navActions.back() })
     }
 
     composable(Screen.WEnginesList.route) {
         WEnginesListScreen(onWEngineClick = {
-            navController.navigate(
-                Screen.WEngineDetail.route
+            navActions.navigationTo(
+                Screen.WEngineDetail
             )
         })
     }
 
     composable(Screen.WEngineDetail.route) {
-        WEngineDetailScreen(onAgentClick = { navController.navigate(Screen.AgentDetail.route) })
+        WEngineDetailScreen(onAgentClick = { navActions.navigationTo(Screen.AgentDetail) })
     }
 
     composable(Screen.DrivesList.route) {
         DrivesListScreen(onDriveClick = {
-            navController.navigate(
-                Screen.DriveDetail.route
+            navActions.navigationTo(
+                Screen.DriveDetail
             )
         })
     }
 
     composable(Screen.DriveDetail.route) {
-        DriveDetailScreen(onAgentClick = { navController.navigate(Screen.AgentDetail.route) })
+        DriveDetailScreen(onAgentClick = { navActions.navigationTo(Screen.AgentDetail) })
     }
 
     composable(Screen.BangbooList.route) {
         BangbooListScreen(onBangbooClick = {
-            navController.navigate(Screen.BangbooDetail.route)
+            navActions.navigationTo(Screen.BangbooDetail)
         })
     }
 
     composable(Screen.BangbooDetail.route) {
-        BangbooDetailScreen(onAgentClick = { navController.navigate(Screen.AgentDetail.route) })
+        BangbooDetailScreen(onAgentClick = { navActions.navigationTo(Screen.AgentDetail) })
     }
-
 }

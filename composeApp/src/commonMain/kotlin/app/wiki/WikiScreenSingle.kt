@@ -5,42 +5,63 @@
 
 package app.wiki
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import app.home.compose.AgentsListCard
+import app.home.compose.BangbooListCard
+import app.home.compose.DrivesListCard
+import app.home.compose.WEnginesListCard
+import app.wiki.model.WikiState
 import ui.theme.AppTheme
-import ui.theme.ZzzArchiveTheme
+import ui.utils.AdaptiveLayoutType
+import ui.utils.contentPadding
 
 @Composable
 fun WikiScreenSingle(
-    onAgentsOverviewClick: () -> Unit = {},
-    onWEnginesOverviewClick: () -> Unit = {},
-    onDrivesOverviewClick: () -> Unit = {},
-    onAgentDetailClick: (Int) -> Unit = {},
-    onWEngineDetailClick: (Int) -> Unit = {},
-    onDriveDetailClick: (Int) -> Unit = {},
+    uiState: WikiState,
+    adaptiveLayoutType: AdaptiveLayoutType,
+    onAgentsOverviewClick: () -> Unit,
+    onWEnginesOverviewClick: () -> Unit,
+    onBangbooOverviewClick: () -> Unit,
+    onDrivesOverviewClick: () -> Unit,
+    onAgentDetailClick: (Int) -> Unit,
+    onWEngineDetailClick: (Int) -> Unit,
+    onBangbooDetailClick: (Int) -> Unit,
+    onDriveDetailClick: (Int) -> Unit,
 ) {
     Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+            .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
-        Text(
-            text = "Wiki Single",
-            style = AppTheme.typography.headlineMedium,
-            color = AppTheme.colors.onSurface
+        AgentsListCard(
+            agentsList = uiState.agentsList,
+            showViewAll = true,
+            onAgentsOverviewClick = onAgentsOverviewClick,
+            onAgentDetailClick = onAgentDetailClick
         )
-    }
-}
-
-
-@Preview
-@Composable
-fun PreviewWikiScreenSingle() {
-    ZzzArchiveTheme {
-        WikiScreenSingle()
+        WEnginesListCard(
+            wEnginesList = uiState.wEnginesList,
+            showViewAll = true,
+            onWEnginesOverviewClick = onWEnginesOverviewClick,
+            onWEngineDetailClick = onWEngineDetailClick
+        )
+        BangbooListCard(
+            bangbooList = uiState.bangbooList,
+            showViewAll = true,
+            onBangbooOverviewClick = onBangbooOverviewClick,
+            onBangbooDetailClick = onBangbooDetailClick
+        )
+        DrivesListCard(
+            drivesList = uiState.drivesList,
+            showViewAll = true,
+            onDrivesOverviewClick = onDrivesOverviewClick,
+            onDriveDetailClick = onDriveDetailClick
+        )
     }
 }

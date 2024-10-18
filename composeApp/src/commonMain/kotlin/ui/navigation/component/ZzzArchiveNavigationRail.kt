@@ -22,17 +22,15 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.NavigationRailItemDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
+import ui.navigation.NAV_RAIL_MAIN_FLOW
 import ui.navigation.NavActions
-import ui.navigation.TOP_LEVEL_DESTINATIONS_MEDIUM
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.dark_theme
@@ -45,9 +43,10 @@ import zzzarchive.composeapp.generated.resources.navigation_drawer
 @Composable
 fun ZzzArchiveNavigationRail(
     modifier: Modifier,
-    selectedDestination: String,
-    navigationActions: NavActions,
-    onDrawerClicked: () -> Unit = {},
+    selectedMainFlow: String,
+    navActions: NavActions,
+    onDrawerClicked: () -> Unit,
+    onThemeChanged: () -> Unit
 ) {
     Column(
         modifier
@@ -70,36 +69,26 @@ fun ZzzArchiveNavigationRail(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            TOP_LEVEL_DESTINATIONS_MEDIUM.forEach { destination ->
-                val isSelected = selectedDestination == destination.route
+            NAV_RAIL_MAIN_FLOW.forEach { destination ->
+                val isSelected = selectedMainFlow == destination.route
                 NavigationRailItem(
                     selected = isSelected, onClick = {
-                        if (isSelected) {
-                            navigationActions.navigationToTop(destination)
-                        } else {
-                            navigationActions.navigationToTopAndSave(destination)
-                        }
+                        navActions.navigationToMainScreen(destination)
                     }, icon = {
                         Icon(
                             imageVector = vectorResource(destination.iconRes),
                             contentDescription = stringResource(destination.textRes)
                         )
-                    }, label = {
-                        Text(
-                            text = stringResource(destination.textRes),
-                            style = if (isSelected) AppTheme.typography.labelMedium else AppTheme.typography.labelSmall
-                        )
                     }, colors = navigationRailItemColors()
                 )
-                Spacer(Modifier.height(4.dp)) // NavigationRailVerticalPadding
             }
             Spacer(
                 modifier = Modifier.weight(1f).heightIn(min = 16.dp)
             )
 
-            var isDark by AppTheme.isDark
+            val isDark by AppTheme.isDark
             NavigationRailItem(selected = false, onClick = {
-                isDark = !isDark
+                onThemeChanged()
             }, icon = {
                 Icon(
                     imageVector = vectorResource(if (isDark) Res.drawable.ic_sun else Res.drawable.ic_moon),

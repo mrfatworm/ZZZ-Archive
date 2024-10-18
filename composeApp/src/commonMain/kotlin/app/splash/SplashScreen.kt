@@ -14,12 +14,17 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.mrfatworm.zzzarchive.ZzzConfig
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
+import org.koin.compose.viewmodel.koinViewModel
 import ui.theme.AppTheme
 import ui.utils.ContentType
 import zzzarchive.composeapp.generated.resources.Res
@@ -30,11 +35,16 @@ import zzzarchive.composeapp.generated.resources.ic_bangboo
 fun SplashScreen(
     contentType: ContentType, startMainFlow: () -> Unit
 ) {
+    val viewModel: SplashViewModel = koinViewModel()
+    val isDark by viewModel.isDark.collectAsState()
+    var isDarkComposeState by AppTheme.isDark
+    isDarkComposeState = isDark
+
     LaunchedEffect(true) {
         delay(1000)
         startMainFlow()
     }
-    if (contentType == ContentType.SINGLE) {
+    if (contentType == ContentType.Single) {
         SplashScreenSingle()
     } else {
         SplashScreenDual()
@@ -59,7 +69,7 @@ fun SplashScreenSingle(
             tint = AppTheme.colors.onSurface
         )
         Text(
-            text = stringResource(Res.string.app_name),
+            text = stringResource(Res.string.app_name) + " " + ZzzConfig.variant,
             style = AppTheme.typography.headlineMedium,
             color = AppTheme.colors.onSurface
         )
@@ -80,7 +90,7 @@ fun SplashScreenDual() {
             tint = AppTheme.colors.onSurface
         )
         Text(
-            text = stringResource(Res.string.app_name),
+            text = stringResource(Res.string.app_name) + " " + ZzzConfig.variant,
             style = AppTheme.typography.headlineMedium,
             color = AppTheme.colors.onSurface
         )

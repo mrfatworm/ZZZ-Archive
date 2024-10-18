@@ -15,11 +15,13 @@ import zzzarchive.composeapp.generated.resources.agents
 import zzzarchive.composeapp.generated.resources.bangboo
 import zzzarchive.composeapp.generated.resources.drives
 import zzzarchive.composeapp.generated.resources.feedback
+import zzzarchive.composeapp.generated.resources.function
 import zzzarchive.composeapp.generated.resources.home
 import zzzarchive.composeapp.generated.resources.ic_help
 import zzzarchive.composeapp.generated.resources.setting
 import zzzarchive.composeapp.generated.resources.unknown
 import zzzarchive.composeapp.generated.resources.w_engines
+import zzzarchive.composeapp.generated.resources.wiki
 
 
 sealed class Screen(
@@ -29,7 +31,7 @@ sealed class Screen(
     val navArguments: List<NamedNavArgument> = emptyList()
 ) {
     data object Home : Screen(
-        route = "app/home", textRes = Res.string.home
+        route = "home", textRes = Res.string.home
     )
 
     data object AgentsList : Screen(
@@ -38,10 +40,10 @@ sealed class Screen(
 
     data object AgentDetail : Screen(
         route = "agentDetail/{agentId}", navArguments = listOf(navArgument("agentId") {
-            type = NavType.StringType
+            type = NavType.IntType
         })
     ) {
-        fun createRoute(agentId: String) = "agentDetail/${agentId}"
+        fun createRoute(agentId: Int) = "agentDetail/$agentId"
     }
 
     data object WEnginesList : Screen(
@@ -79,11 +81,20 @@ sealed class Screen(
     )
 
     data object Setting : Screen(
-        route = "app/setting", textRes = Res.string.setting
+        route = "setting", textRes = Res.string.setting
     )
 
     data object Feedback : Screen(
-        route = "app/feedback", textRes = Res.string.feedback
+        route = "feedback", textRes = Res.string.feedback
     )
+
+    data object Wiki : Screen(
+        route = "wiki", textRes = Res.string.wiki
+    )
+
+    data object Function : Screen(
+        route = "function", textRes = Res.string.function
+    )
+
 
 }

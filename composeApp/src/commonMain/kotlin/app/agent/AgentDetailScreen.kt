@@ -5,37 +5,32 @@
 
 package app.agent
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import ui.component.ZzzOutlineButton
-import ui.theme.AppTheme
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import app.agent.compose.AgentDetailScreenDual
+import app.agent.compose.AgentDetailScreenSingle
+import app.agent.domain.AgentDetailViewModel
+import org.koin.compose.viewmodel.koinViewModel
+import ui.utils.AdaptiveLayoutType
+import ui.utils.ContentType
 
 @Composable
-fun AgentDetailScreen(onWEngineClick: (String) -> Unit = {}) {
-    Text(
-        modifier = Modifier.fillMaxWidth().padding(16.dp),
-        text = "11號",
-        textAlign = TextAlign.Center,
-        style = AppTheme.typography.headlineMedium,
-        color = AppTheme.colors.onSurface
-    )
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceAround
-    ) {
-        ZzzOutlineButton(text = "推薦武器：硫磺石", onClick = { onWEngineClick("硫磺石") })
+fun AgentDetailScreen(
+    contentType: ContentType, adaptiveLayoutType: AdaptiveLayoutType, onBackClick: () -> Unit
+) {
+    val viewModel: AgentDetailViewModel = koinViewModel()
+    val uiState by viewModel.uiState.collectAsState()
+    if (contentType == ContentType.Single) {
+        AgentDetailScreenSingle(
+            uiState = uiState, adaptiveLayoutType = adaptiveLayoutType, onBackClick = onBackClick
+        )
+    } else {
+        AgentDetailScreenDual(
+            uiState = uiState,
+            adaptiveLayoutType = adaptiveLayoutType,
+            onBackClick = onBackClick
+        )
     }
+
 }

@@ -16,38 +16,38 @@ import androidx.compose.ui.unit.dp
 import ui.theme.Dimens
 
 // Parent horizontal padding for Expanded and Medium layout
-fun Modifier.containerPadding(navigationType: NavigationType, dimens: Dimens) = this.padding(
-    start = when (navigationType) {
-        NavigationType.NAVIGATION_DRAWER -> dimens.paddingParentStartExpanded
-        NavigationType.NAVIGATION_RAIL -> dimens.paddingParentStartMedium
-        NavigationType.BOTTOM_NAVIGATION -> 0.dp
-    }, end = when (navigationType) {
-        NavigationType.NAVIGATION_DRAWER -> dimens.paddingParentOthersExpanded
-        NavigationType.NAVIGATION_RAIL -> dimens.paddingParentOthersMedium
-        NavigationType.BOTTOM_NAVIGATION -> 0.dp
+fun Modifier.containerPadding(adaptiveLayoutType: AdaptiveLayoutType, dimens: Dimens) = this.padding(
+    start = when (adaptiveLayoutType) {
+        AdaptiveLayoutType.Expanded -> dimens.paddingParentStartExpanded
+        AdaptiveLayoutType.Medium -> dimens.paddingParentStartMedium
+        AdaptiveLayoutType.Compact -> 0.dp
+    }, end = when (adaptiveLayoutType) {
+        AdaptiveLayoutType.Expanded -> dimens.paddingParentOthersExpanded
+        AdaptiveLayoutType.Medium -> dimens.paddingParentOthersMedium
+        AdaptiveLayoutType.Compact -> 0.dp
     }, top = 0.dp, bottom = 0.dp
 )
 
 // Padding for each container to match edge-to-edge
 @Composable
-fun Modifier.contentPadding(navigationType: NavigationType, dimens: Dimens): Modifier {
+fun Modifier.contentPadding(adaptiveLayoutType: AdaptiveLayoutType, dimens: Dimens): Modifier {
     val topPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     val bottomPadding = WindowInsets.systemBars.asPaddingValues().calculateBottomPadding()
     return this.padding(
-        horizontal = when (navigationType) {
-            NavigationType.NAVIGATION_DRAWER -> 0.dp
-            NavigationType.NAVIGATION_RAIL -> 0.dp
-            NavigationType.BOTTOM_NAVIGATION -> dimens.paddingParentCompact
+        horizontal = when (adaptiveLayoutType) {
+            AdaptiveLayoutType.Expanded -> 0.dp
+            AdaptiveLayoutType.Medium -> 0.dp
+            AdaptiveLayoutType.Compact -> dimens.paddingParentCompact
         }
     ).padding(
-        top = if (topPadding > 0.dp) topPadding else when (navigationType) {
-            NavigationType.NAVIGATION_DRAWER -> dimens.paddingParentOthersExpanded
-            NavigationType.NAVIGATION_RAIL -> dimens.paddingParentOthersMedium
-            NavigationType.BOTTOM_NAVIGATION -> dimens.paddingParentCompact
-        }, bottom = if (bottomPadding > 0.dp) bottomPadding else when (navigationType) {
-            NavigationType.NAVIGATION_DRAWER -> dimens.paddingParentOthersExpanded
-            NavigationType.NAVIGATION_RAIL -> dimens.paddingParentOthersMedium
-            NavigationType.BOTTOM_NAVIGATION -> dimens.paddingParentCompact
+        top = if (topPadding > 0.dp) topPadding else when (adaptiveLayoutType) {
+            AdaptiveLayoutType.Expanded -> dimens.paddingParentOthersExpanded
+            AdaptiveLayoutType.Medium -> dimens.paddingParentOthersMedium
+            AdaptiveLayoutType.Compact -> dimens.paddingParentCompact
+        }, bottom = if (bottomPadding > 0.dp) bottomPadding else when (adaptiveLayoutType) {
+            AdaptiveLayoutType.Expanded -> dimens.paddingParentOthersExpanded
+            AdaptiveLayoutType.Medium -> dimens.paddingParentOthersMedium
+            AdaptiveLayoutType.Compact -> dimens.paddingParentCompact
         }
     )
 }

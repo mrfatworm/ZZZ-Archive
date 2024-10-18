@@ -13,10 +13,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withTimeout
-import network.OfficialWebHttpClient
+import network.OfficialWebHttp
 import utils.ZzzResult
 
-class NewsRepositoryImpl(private val httpClient: OfficialWebHttpClient) : NewsRepository {
+class NewsRepositoryImpl(private val httpClient: OfficialWebHttp) : NewsRepository {
     override suspend fun getNews(amount: Int, langKey: String): ZzzResult<OfficialNewsResponse> {
         return try {
             val result = withTimeout(httpClient.timeout) {

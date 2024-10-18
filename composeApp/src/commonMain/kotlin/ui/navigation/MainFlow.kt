@@ -5,6 +5,8 @@
 
 package ui.navigation
 
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.StringResource
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.agents
 import zzzarchive.composeapp.generated.resources.bangboo
@@ -17,53 +19,99 @@ import zzzarchive.composeapp.generated.resources.ic_bangboo
 import zzzarchive.composeapp.generated.resources.ic_cd
 import zzzarchive.composeapp.generated.resources.ic_function
 import zzzarchive.composeapp.generated.resources.ic_happy
+import zzzarchive.composeapp.generated.resources.ic_help
 import zzzarchive.composeapp.generated.resources.ic_home
 import zzzarchive.composeapp.generated.resources.ic_people
 import zzzarchive.composeapp.generated.resources.ic_setting
 import zzzarchive.composeapp.generated.resources.ic_w_engine
 import zzzarchive.composeapp.generated.resources.setting
+import zzzarchive.composeapp.generated.resources.unknown
 import zzzarchive.composeapp.generated.resources.w_engines
 import zzzarchive.composeapp.generated.resources.wiki
 
-sealed interface MainFlow {
-    data object Home : Screen(
-        route = "home_flow", iconRes = Res.drawable.ic_home, textRes = Res.string.home
+sealed class MainFlow(
+    val route: String,
+    val startScreen: Screen,
+    val iconRes: DrawableResource = Res.drawable.ic_help,
+    val textRes: StringResource = Res.string.unknown
+) {
+    data object Home : MainFlow(
+        route = "home_flow",
+        startScreen = Screen.Home,
+        iconRes = Res.drawable.ic_home,
+        textRes = Res.string.home
     )
 
-    data object Agent : Screen(
-        route = "agent_flow", iconRes = Res.drawable.ic_people, textRes = Res.string.agents
+    data object Agent : MainFlow(
+        route = "agent_flow",
+        startScreen = Screen.AgentsList,
+        iconRes = Res.drawable.ic_people,
+        textRes = Res.string.agents
     )
 
-    data object WEngine : Screen(
-        route = "wEngine_flow", iconRes = Res.drawable.ic_w_engine, textRes = Res.string.w_engines
+    data object WEngine : MainFlow(
+        route = "wEngine_flow",
+        startScreen = Screen.WEnginesList,
+        iconRes = Res.drawable.ic_w_engine,
+        textRes = Res.string.w_engines
     )
 
-    data object Drive : Screen(
-        route = "drive_flow", iconRes = Res.drawable.ic_cd, textRes = Res.string.drives
+    data object Drive : MainFlow(
+        route = "drive_flow",
+        startScreen = Screen.DrivesList,
+        iconRes = Res.drawable.ic_cd,
+        textRes = Res.string.drives
     )
 
-    data object Bangboo : Screen(
-        route = "bangboo_flow", iconRes = Res.drawable.ic_bangboo, textRes = Res.string.bangboo
+    data object Bangboo : MainFlow(
+        route = "bangboo_flow",
+        startScreen = Screen.BangbooList,
+        iconRes = Res.drawable.ic_bangboo,
+        textRes = Res.string.bangboo
     )
 
-    data object Setting : Screen(
-        route = "setting_flow", iconRes = Res.drawable.ic_setting, textRes = Res.string.setting
+    data object Setting : MainFlow(
+        route = "setting_flow",
+        startScreen = Screen.Setting,
+        iconRes = Res.drawable.ic_setting,
+        textRes = Res.string.setting
     )
 
-    data object Feedback : Screen(
-        route = "feedback_flow", iconRes = Res.drawable.ic_happy, textRes = Res.string.feedback
+    data object Feedback : MainFlow(
+        route = "feedback_flow",
+        startScreen = Screen.Feedback,
+        iconRes = Res.drawable.ic_happy,
+        textRes = Res.string.feedback
     )
 
-    data object Wiki : Screen(
-        route = "wiki_flow", iconRes = Res.drawable.ic_article_scroll, textRes = Res.string.wiki
+    data object Wiki : MainFlow(
+        route = "wiki_flow",
+        startScreen = Screen.Wiki,
+        iconRes = Res.drawable.ic_article_scroll,
+        textRes = Res.string.wiki
     )
 
-    data object Function : Screen(
-        route = "function_flow", iconRes = Res.drawable.ic_function, textRes = Res.string.function
+    data object Function : MainFlow(
+        route = "function_flow",
+        startScreen = Screen.Function,
+        iconRes = Res.drawable.ic_function,
+        textRes = Res.string.function
     )
 }
 
-val TOP_LEVEL_DESTINATIONS_MEDIUM = listOf(
+val ALL_MAIN_FLOW = listOf(
+    MainFlow.Home,
+    MainFlow.Agent,
+    MainFlow.WEngine,
+    MainFlow.Drive,
+    MainFlow.Bangboo,
+    MainFlow.Setting,
+    MainFlow.Feedback,
+    MainFlow.Wiki,
+    MainFlow.Function
+)
+
+val NAV_RAIL_MAIN_FLOW = listOf(
     MainFlow.Home,
     MainFlow.Agent,
     MainFlow.WEngine,
@@ -73,7 +121,7 @@ val TOP_LEVEL_DESTINATIONS_MEDIUM = listOf(
     MainFlow.Feedback
 )
 
-val TOP_LEVEL_DESTINATIONS_COMPACT = listOf(
+val NAV_BOTTOM_MAIN_FLOW = listOf(
     MainFlow.Home,
     MainFlow.Wiki,
     MainFlow.Function,

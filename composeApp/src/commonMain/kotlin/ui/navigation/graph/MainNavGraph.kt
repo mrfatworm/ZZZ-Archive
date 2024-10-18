@@ -9,68 +9,44 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import app.feedback.FeedbackScreen
-import app.function.FunctionScreen
 import ui.navigation.MainFlow
 import ui.navigation.NavActions
+import ui.navigation.graph.app.agentNavGraph
+import ui.navigation.graph.app.bangbooNavGraph
+import ui.navigation.graph.app.driveNavGraph
+import ui.navigation.graph.app.feedbackNavGraph
+import ui.navigation.graph.app.functionNavGraph
+import ui.navigation.graph.app.homeNavGraph
+import ui.navigation.graph.app.settingNavGraph
+import ui.navigation.graph.app.wEngineNavGraph
+import ui.navigation.graph.app.wikiNavGraph
+import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
-import ui.utils.NavigationType
-import app.wiki.WikiScreen
 
 @Composable
 fun MainNavGraph(
     modifier: Modifier = Modifier,
-    mainNavController: NavHostController,
+    navController: NavHostController,
     contentType: ContentType,
-    navigationType: NavigationType,
-    mainNavActions: NavActions,
+    adaptiveLayoutType: AdaptiveLayoutType,
+    navActions: NavActions,
     rootNavActions: NavActions,
 ) {
     NavHost(
         modifier = modifier,
-        navController = mainNavController,
+        navController = navController,
         startDestination = MainFlow.Home.route,
     ) {
-        composable(MainFlow.Home.route) {
-            HomeNavHost(
-                contentType = contentType, navigationType = navigationType,
-                navigateToTopLevelDestination = { mainNavActions.navigationToTopAndSave(it) })
-        }
-        composable(MainFlow.Agent.route) {
-            AgentNavGraph(contentType, navigateToTopLevelDestination = {
-                mainNavActions.navigationToTopAndSave(it)
-            })
-        }
-        composable(MainFlow.WEngine.route) {
-            WEngineNavGraph(contentType, navigateToTopLevelDestination = {
-                mainNavActions.navigationToTopAndSave(it)
-            })
-        }
-        composable(MainFlow.Drive.route) {
-            DriveNavGraph(contentType, navigateToTopLevelDestination = {
-                mainNavActions.navigationToTopAndSave(it)
-            })
-        }
-        composable(MainFlow.Bangboo.route) {
-            BangbooNavGraph(contentType, navigateToTopLevelDestination = {
-                mainNavActions.navigationToTopAndSave(it)
-            })
-        }
-        composable(MainFlow.Setting.route) {
-            SettingNavGraph(contentType = contentType)
-        }
-        composable(MainFlow.Feedback.route) {
-            FeedbackScreen()
-        }
-        composable(MainFlow.Wiki.route) {
-            WikiScreen(contentType = contentType,
-                onAgentOverviewClick = { },
-                onWEngineOverviewClick = { },
-                onDrivesOverviewClick = { })
-        }
-        composable(MainFlow.Function.route) {
-            FunctionScreen(contentType = contentType)
-        }
+        homeNavGraph(contentType, adaptiveLayoutType, navActions)
+        agentNavGraph(contentType, adaptiveLayoutType, navActions)
+        wEngineNavGraph(contentType, adaptiveLayoutType, navActions)
+        bangbooNavGraph(contentType, adaptiveLayoutType, navActions)
+        driveNavGraph(contentType, adaptiveLayoutType, navActions)
+        wikiNavGraph(contentType, adaptiveLayoutType, navActions)
+        functionNavGraph(contentType, adaptiveLayoutType, navActions)
+        settingNavGraph(contentType, navActions)
+        feedbackNavGraph()
     }
 }
+
+

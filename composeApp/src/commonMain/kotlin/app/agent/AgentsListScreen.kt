@@ -6,19 +6,67 @@
 package app.agent
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import app.agent.compose.AgentsListScreenDual
+import app.agent.compose.AgentsListScreenSingle
+import app.agent.domain.AgentListViewModel
+import org.koin.compose.viewmodel.koinViewModel
+import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
 
 @Composable
 fun AgentsListScreen(
-    contentType: ContentType, onAgentClick: (Int) -> Unit = {}
+    contentType: ContentType,
+    adaptiveLayoutType: AdaptiveLayoutType,
+    onAgentClick: (Int) -> Unit,
+    onBackClick: () -> Unit
 ) {
-    if (contentType == ContentType.SINGLE) {
+    val viewModel: AgentListViewModel = koinViewModel()
+    val uiState = viewModel.uiState.collectAsState()
+    if (contentType == ContentType.Single) {
         AgentsListScreenSingle(
-            state = stubAgentsListState, onAgentClick = onAgentClick
+            uiState = uiState.value,
+            adaptiveLayoutType = adaptiveLayoutType,
+            onAgentClick = onAgentClick, onRarityChipSelectionChanged = { newSelection ->
+                viewModel.rarityFilterChanged(
+                    newSelection
+                )
+            }, onAttributeChipSelectionChanged = { newSelection ->
+                viewModel.attributeFilterChanged(
+                    newSelection
+                )
+            }, onSpecialtyChipSelectionChanged = { newSelection ->
+                viewModel.specialtyFilterChanged(
+                    newSelection
+                )
+            }, onFactionChipSelectionChanged = {
+                viewModel.factionFilterChanged(it)
+            },
+            onBackClick = onBackClick
         )
     } else {
         AgentsListScreenDual(
-            state = stubAgentsListState, onAgentClick = onAgentClick
+            uiState = uiState.value,
+            adaptiveLayoutType = adaptiveLayoutType,
+            onAgentClick = onAgentClick,
+            onRarityChipSelectionChanged = { newSelection ->
+                viewModel.rarityFilterChanged(
+                    newSelection
+                )
+            },
+            onAttributeChipSelectionChanged = { newSelection ->
+                viewModel.attributeFilterChanged(
+                    newSelection
+                )
+            },
+            onSpecialtyChipSelectionChanged = { newSelection ->
+                viewModel.specialtyFilterChanged(
+                    newSelection
+                )
+            },
+            onFactionClick = {
+                viewModel.factionFilterChanged(it)
+            }
         )
     }
 }

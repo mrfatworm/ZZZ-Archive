@@ -15,40 +15,41 @@ import ui.navigation.NavActions
 import ui.navigation.graph.RootNavGraph
 import ui.theme.ZzzArchiveTheme
 import ui.utils.ContentType
-import ui.utils.NavigationType
+import ui.utils.AdaptiveLayoutType
 import utils.imageLoaderDiskCache
 
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
 fun ZzzArchiveApp() {
+    // Initialize the Coil3 image loader
     setSingletonImageLoaderFactory { context ->
         imageLoaderDiskCache(context, false)
     }
     ZzzArchiveTheme {
         val adaptiveInfo = currentWindowAdaptiveInfo()
         val windowSizeClass = adaptiveInfo.windowSizeClass.windowWidthSizeClass
-        val navigationType: NavigationType
+        val adaptiveLayoutType: AdaptiveLayoutType
         val contentType: ContentType
         when (windowSizeClass) {
             WindowWidthSizeClass.COMPACT -> {
-                navigationType = NavigationType.BOTTOM_NAVIGATION
-                contentType = ContentType.SINGLE
+                adaptiveLayoutType = AdaptiveLayoutType.Compact
+                contentType = ContentType.Single
             }
 
             WindowWidthSizeClass.MEDIUM -> {
-                navigationType = NavigationType.NAVIGATION_RAIL
-                contentType = ContentType.SINGLE
+                adaptiveLayoutType = AdaptiveLayoutType.Medium
+                contentType = ContentType.Single
             }
 
             WindowWidthSizeClass.EXPANDED -> {
-                navigationType = NavigationType.NAVIGATION_DRAWER
-                contentType = ContentType.DUAL
+                adaptiveLayoutType = AdaptiveLayoutType.Expanded
+                contentType = ContentType.Dual
             }
 
             else -> {
-                navigationType = NavigationType.BOTTOM_NAVIGATION
-                contentType = ContentType.SINGLE
+                adaptiveLayoutType = AdaptiveLayoutType.Compact
+                contentType = ContentType.Single
             }
         }
         val rootNavController = rememberNavController()
@@ -59,7 +60,7 @@ fun ZzzArchiveApp() {
         RootNavGraph(
             rootNavController = rootNavController,
             rootNavActions = rootNavActions,
-            navigationType = navigationType,
+            adaptiveLayoutType = adaptiveLayoutType,
             contentType = contentType
         )
     }

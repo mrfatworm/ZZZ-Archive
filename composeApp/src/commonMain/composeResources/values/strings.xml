@@ -2,27 +2,99 @@
 <resources>
     <string name="app_name">ZZZ Archive</string>
     <string name="unknown">Unknown ?</string>
+
+    <!-- Common -->
+    <string name="navigation_drawer">Navigation Drawer</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+    <string name="back">Back</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="loading">Loading...</string>
+    <string name="view_detail">View Detail</string>
+    <string name="view_all">View All</string>
+    <string name="light_theme">Light Theme</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="announcement">Announcement</string>
+    <string name="filter">Filter</string>">
+
+    <!-- Sub System -->
     <string name="home">Home</string>
     <string name="agents">Agents</string>
-    <string name="w_engines">W-Engines</string>"
+    <string name="all_agents">All Agents</string>
+    <string name="w_engines">W-Engines</string>
+    <string name="all_w_engines">All W-Engines</string>
     <string name="drives">Drives</string>
+    <string name="all_drives">All Drives</string>
     <string name="bangboo">Bangboo</string>
+    <string name="all_bangboo">All Bangboo</string>
     <string name="setting">Setting</string>
     <string name="feedback">Feedback</string>
     <string name="wiki">Wiki</string>
     <string name="function">Tools</string>
-    <string name="view_all">View All</string>
-    <string name="light_theme">Light Theme</string>
-    <string name="dark_theme">Dark Theme</string>
 
+    <!-- Attribute -->
     <string name="ether">Ether</string>
     <string name="fire">Fire</string>
     <string name="ice">Ice</string>
     <string name="electric">Electric</string>
     <string name="physical">Physical</string>
 
-    <string name="navigation_drawer">Navigation Drawer</string>
-    <string name="confirm">Confirm</string>
-    <string name="cancel">Cancel</string>
+    <!-- Specialty -->
+    <string name="attack">Attack</string>
+    <string name="stun">Stun</string>
+    <string name="support">Support</string>
+    <string name="anomaly">Anomaly</string>
+    <string name="defense">Defense</string>
 
+    <!-- Faction -->
+    <string name="gentle_house">Gentle House</string>
+    <string name="victoria_housekeeping">Victoria Housekeeping</string>
+    <string name="belobog_heavy_industries">Belobog Heavy Industries</string>
+    <string name="obol_squad">Obol Squad</string>
+    <string name="section_6">Section 6</string>
+    <string name="criminal_investigation_special_response_team">Criminal Investigation Special Response Team</string>
+    <string name="sons_of_calydon">Sons of Calydon</string>
+
+    <!-- Attack Type -->
+    <string name="pierce">Pierce</string>
+    <string name="slash">Slash</string>
+    <string name="strike">Strike</string>
+
+    <!-- Home -->
+    <string name="pixiv_hot">Pixiv Hot</string>
+    <string name="engagement_today">Engagement Today</string>
+    <string name="scratch_card">Scratch Card</string>
+    <string name="video_store">Video Store</string>
+    <string name="bounty_commissions">Bounty Commissions</string>
+    <string name="investigate_point">Investigate Point</string>
+    <string name="incomplete">Incomplete</string>
+    <string name="open">Open</string>
+    <string name="check_in">Check In</string>
+    <string name="under_development">Under Development</string>
+
+    <!-- Agent Detail -->
+    <string name="attributes">Attributes</string>
+    <string name="hp_atk_def">HP / ATK / DEF</string>
+    <string name="materials">Materials</string>
+    <string name="skills">Skills</string>
+    <string name="expand_all">Expand All</string>
+    <string name="basic_attack">Basic Attack</string>
+    <string name="dodge">Dodge</string>
+    <string name="dash_attack">Dash Attack</string>
+    <string name="dodge_counter">Dodge Counter</string>
+    <string name="quick_assist">Quick Assist</string>
+    <string name="defensive_assist">Defensive Assist</string>
+    <string name="assist_follow_up">Assist Follow Up</string>
+    <string name="special_attack">Special Attack</string>
+    <string name="ex_special_attack">Ex Special Attack</string>
+    <string name="chain_attack">Chain Attack</string>
+    <string name="ultimate">Ultimate</string>
+    <string name="core_passive">Core Passive</string>
+    <string name="additional_ability">Additional Ability</string>
+    <string name="mindscape_cinema">Mindscape Cinema</string>
+    <string name="suggest_w_engines">Recommended W-Engines</string>
+    <string name="suggest_drives">Recommended Drives</string>
+    <string name="agent_background">Agent Background</string>
 </resources>

@@ -7,15 +7,18 @@ package di
 
 import database.ZzzDatabase
 import io.ktor.client.engine.darwin.Darwin
-import network.OfficialWebHttpClient
-import network.OfficialWebHttpClientImpl
-import network.ZzzHttpClient
-import network.ZzzHttpClientImpl
+import network.OfficialWebHttp
+import network.OfficialWebHttpImpl
+import network.PixivHttp
+import network.PixivHttpImpl
+import network.ZzzHttp
+import network.ZzzHttpImpl
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 actual val platformModule = module {
     singleOf(::ZzzDatabase)
-    single<ZzzHttpClient> { ZzzHttpClientImpl(Darwin.create()) }
-    single<OfficialWebHttpClient> { OfficialWebHttpClientImpl(Darwin.create()) }
+    single<ZzzHttp> { ZzzHttpImpl(Darwin.create()) }
+    single<OfficialWebHttp> { OfficialWebHttpImpl(Darwin.create()) }
+    single<PixivHttp> { PixivHttpImpl(Darwin.create()) }
 }

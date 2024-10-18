@@ -6,29 +6,19 @@
 package app.home.model
 
 import app.agent.model.AgentListItem
-import app.agent.model.stubAgentsListResponse
-import ui.data.SimpleListItemState
-import ui.data.sampleDrivesList
-import ui.data.sampleWEnginesList
+import app.bangboo.model.BangbooListItem
+import app.drive.model.DriveListItem
+import app.wengine.model.WEngineListItem
+import mainfunc.model.BannerResponse
 
 data class HomeState(
-    val news: OfficialNewsResponse? = null,
     val banner: BannerResponse? = null,
+    val imageBanner: ImageBannerResponse? = null,
+    val news: OfficialNewsResponse? = null,
+    val pixivPuppiesList: List<RecentArticle> = emptyList(),
     val agentsList: List<AgentListItem> = emptyList(),
-    val wEnginesList: List<SimpleListItemState> = emptyList(),
-    val drivesList: List<SimpleListItemState> = emptyList()
-) {
-    fun getAgentsNewToOld(): List<AgentListItem> {
-        return agentsList.reversed()
-    }
-}
-
-
-val sampleHomeState = HomeState(
-    news = stubOfficialNewsDataResponse,
-    banner = stubBannerResponse,
-    agentsList = stubAgentsListResponse.agents,
-    wEnginesList = sampleWEnginesList,
-    drivesList = sampleDrivesList
+    val wEnginesList: List<WEngineListItem> = emptyList(),
+    val bangbooList: List<BangbooListItem> = emptyList(),
+    val drivesList: List<DriveListItem> = emptyList()
 )
 

@@ -2,27 +2,99 @@
 <resources>
     <string name="app_name">繩匠檔案</string>
     <string name="unknown">未知 ?</string>
+
+    <!-- Common -->
+    <string name="navigation_drawer">導航列</string>
+    <string name="confirm">確認</string>
+    <string name="cancel">取消</string>
+    <string name="close">關閉</string>
+    <string name="back">返回</string>
+    <string name="previous">上一個</string>
+    <string name="next">下一個</string>
+    <string name="loading">載入中...</string>
+    <string name="view_detail">查看詳情</string>
+    <string name="view_all">查看全部</string>
+    <string name="light_theme">亮色主題</string>
+    <string name="dark_theme">暗色主題</string>
+    <string name="announcement">公告</string>
+    <string name="filter">條件過濾</string>">
+
+    <!-- Sub System -->
     <string name="home">首頁</string>
     <string name="agents">代理人</string>
-    <string name="w_engines">音擎</string>"
+    <string name="all_agents">全部代理人</string>
+    <string name="w_engines">音擎</string>
+    <string name="all_w_engines">全部音擎</string>
     <string name="drives">驅動光碟</string>
+    <string name="all_drives">全部驅動光碟</string>
     <string name="bangboo">邦布</string>
+    <string name="all_bangboo">全部邦布</string>
     <string name="setting">設定</string>
     <string name="feedback">意見回饋</string>
     <string name="wiki">Wiki</string>
     <string name="function">工具</string>
-    <string name="view_all">查看全部</string>
-    <string name="light_theme">亮色主題</string>
-    <string name="dark_theme">暗色主題</string>
 
+    <!-- Attribute -->
     <string name="ether">以太</string>
     <string name="fire">火屬性</string>
     <string name="ice">冰屬性</string>
     <string name="electric">電屬性</string>
     <string name="physical">物理</string>
 
-    <string name="navigation_drawer">導航列</string>
+    <!-- Specialty -->
+    <string name="attack">強攻</string>
+    <string name="stun">擊破</string>
+    <string name="support">支援</string>
+    <string name="anomaly">異常</string>
+    <string name="defense">防護</string>
 
-    <string name="confirm">確認</string>
-    <string name="cancel">取消</string>
+    <!-- Attack Type -->
+    <string name="pierce">穿透</string>
+    <string name="slash">斬擊</string>
+    <string name="strike">打擊</string>
+
+    <!-- Faction -->
+    <string name="gentle_house">狡兔屋</string>
+    <string name="victoria_housekeeping">維多利亞居家服務</string>
+    <string name="belobog_heavy_industries">白祇重工</string>
+    <string name="obol_squad">奧波勒斯小隊</string>
+    <string name="section_6">對空六課</string>
+    <string name="criminal_investigation_special_response_team">刑偵特勤組</string>
+    <string name="sons_of_calydon">卡呂冬之子</string>
+
+    <!-- Home -->
+    <string name="pixiv_hot">Pixiv 熱門</string>
+    <string name="engagement_today">今日活躍度</string>
+    <string name="scratch_card">刮刮樂</string>
+    <string name="video_store">錄音帶店</string>
+    <string name="bounty_commissions">懸賞委託</string>
+    <string name="investigate_point">調查點數</string>
+    <string name="incomplete">未完成</string>
+    <string name="open">營業中</string>
+    <string name="check_in">簽到</string>
+    <string name="under_development">開發中功能</string>
+
+    <!-- Agent Detail -->
+    <string name="attributes">屬性</string>
+    <string name="hp_atk_def">生命 / 攻擊 / 防禦</string>
+    <string name="materials">素材</string>
+    <string name="skills">技能</string>
+    <string name="expand_all">全部展開</string>
+    <string name="basic_attack">普通攻擊</string>
+    <string name="dodge">閃避</string>
+    <string name="dash_attack">衝刺攻擊</string>
+    <string name="dodge_counter">閃避反擊</string>
+    <string name="quick_assist">快速支援</string>
+    <string name="defensive_assist">招架支援</string>
+    <string name="assist_follow_up">支援突擊</string>
+    <string name="special_attack">特殊技</string>
+    <string name="ex_special_attack">強化特殊技</string>
+    <string name="chain_attack">連攜技</string>
+    <string name="ultimate">終結技</string>
+    <string name="core_passive">核心被動</string>
+    <string name="additional_ability">額外能力</string>
+    <string name="mindscape_cinema">意象影畫</string>
+    <string name="suggest_w_engines">推薦音擎</string>
+    <string name="suggest_drives">推薦驅動光碟</string>
+    <string name="agent_background">代理人設定</string>
 </resources>

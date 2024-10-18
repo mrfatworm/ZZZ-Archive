@@ -52,8 +52,9 @@ fun ZzzArchiveTheme(
 ) {
     val isDarkState = remember { mutableStateOf(isDarkTheme) }
     val colorScheme: ColorScheme = if (isDarkState.value) darkScheme else lightScheme
-
     val typography: Typography = provideTypography()
+    SystemAppearance(!isDarkState.value)
+
     CompositionLocalProvider(
         LocalThemeIsDark provides isDarkState,
         localColorScheme provides colorScheme,
@@ -70,3 +71,7 @@ fun ZzzArchiveTheme(
         }
     }
 }
+
+
+@Composable
+internal expect fun SystemAppearance(isDark: Boolean)
