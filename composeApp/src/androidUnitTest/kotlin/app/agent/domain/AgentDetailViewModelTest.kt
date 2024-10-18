@@ -11,11 +11,10 @@ import androidx.lifecycle.SavedStateHandle
 import app.agent.data.AgentRepository
 import app.agent.data.FakeAgentRepository
 import app.agent.model.stubAgentDetailResponse
-import assertk.assertThat
-import assertk.assertions.isEqualTo
 import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class AgentDetailViewModelTest {
 
@@ -38,6 +37,6 @@ class AgentDetailViewModelTest {
     @Test
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
-        assertThat(state.agentDetail).isEqualTo(stubAgentDetailResponse)
+        assertEquals(state.agentDetail, stubAgentDetailResponse)
     }
 }

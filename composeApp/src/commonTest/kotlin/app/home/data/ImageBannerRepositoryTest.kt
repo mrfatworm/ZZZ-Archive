@@ -6,13 +6,13 @@
 package app.home.data
 
 import app.home.model.stubImageBannerResponse
-import assertk.assertThat
-import assertk.assertions.isEqualTo
-import assertk.assertions.isInstanceOf
+import io.ktor.util.reflect.instanceOf
 import kotlinx.coroutines.test.runTest
 import network.FakeZzzHttp
 import utils.ZzzResult
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 
 class ImageBannerRepositoryTest {
@@ -23,13 +23,13 @@ class ImageBannerRepositoryTest {
     @Test
     fun `Get Banner Success`() = runTest {
         val result = repository.getImageBanner() as ZzzResult.Success
-        assertThat(result.data).isEqualTo(stubImageBannerResponse)
+        assertEquals(result.data, stubImageBannerResponse)
     }
 
     @Test
     fun `Get Banner Error`() = runTest {
         httpClient.setError(true)
         val result = repository.getImageBanner() as ZzzResult.Error
-        assertThat(result.exception).isInstanceOf(Exception::class)
+        assertTrue(result.exception.instanceOf(Exception::class))
     }
 }

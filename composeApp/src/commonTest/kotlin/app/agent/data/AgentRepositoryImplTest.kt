@@ -7,13 +7,13 @@ package app.agent.data
 
 import app.agent.model.stubAgentDetailResponse
 import app.agent.model.stubAgentsListResponse
-import assertk.assertThat
-import assertk.assertions.isEqualTo
-import assertk.assertions.isInstanceOf
+import io.ktor.util.reflect.instanceOf
 import kotlinx.coroutines.test.runTest
 import network.FakeZzzHttp
 import utils.ZzzResult
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class AgentRepositoryImplTest {
     private val httpClient = FakeZzzHttp()
@@ -22,26 +22,26 @@ class AgentRepositoryImplTest {
     @Test
     fun `Get Agents List Success`() = runTest {
         val result = repository.getAgentsList() as ZzzResult.Success
-        assertThat(result.data).isEqualTo(stubAgentsListResponse)
+        assertEquals(result.data, stubAgentsListResponse)
     }
 
     @Test
     fun `Get Agents List Error`() = runTest {
         httpClient.setError(true)
         val result = repository.getAgentsList() as ZzzResult.Error
-        assertThat(result.exception).isInstanceOf(Exception::class)
+        assertTrue(result.exception.instanceOf(Exception::class))
     }
 
     @Test
     fun `Get Agent Detail Success`() = runTest {
         val result = repository.getAgentDetail(20) as ZzzResult.Success
-        assertThat(result.data).isEqualTo(stubAgentDetailResponse)
+        assertEquals(result.data, stubAgentDetailResponse)
     }
 
     @Test
     fun `Get Agent Detail Error`() = runTest {
         httpClient.setError(true)
         val result = repository.getAgentDetail(20) as ZzzResult.Error
-        assertThat(result.exception).isInstanceOf(Exception::class)
+        assertTrue(result.exception.instanceOf(Exception::class))
     }
 }

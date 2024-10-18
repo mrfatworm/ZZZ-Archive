@@ -10,14 +10,13 @@ import MainDispatcherRule
 import app.agent.data.AgentRepository
 import app.agent.data.FakeAgentRepository
 import app.agent.model.stubAgentsListResponse
-import assertk.assertThat
-import assertk.assertions.isEqualTo
 import org.junit.Rule
 import utils.AgentAttribute
 import utils.AgentSpecialty
 import utils.ZzzRarity
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class AgentListViewModelTest {
 
@@ -36,38 +35,38 @@ class AgentListViewModelTest {
     @Test
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
-        assertThat(state.agentsList).isEqualTo(stubAgentsListResponse.getAgentsNewToOld())
-        assertThat(state.factionsList.size).isEqualTo(2)
+        assertEquals(state.agentsList, stubAgentsListResponse.getAgentsNewToOld())
+        assertEquals(state.factionsList.size, 2)
     }
 
     @Test
     fun `Filter Rarity S Success`() {
         viewModel.rarityFilterChanged(setOf(ZzzRarity.RANK_S))
         val state = viewModel.uiState.value
-        assertThat(state.agentsList.first().id).isEqualTo(3) // Nekomiya
-        assertThat(state.agentsList.size).isEqualTo(1)
+        assertEquals(state.agentsList.first().id, 3) // Nekomiya
+        assertEquals(state.agentsList.size, 1)
     }
 
     @Test
     fun `Filter Attribute Electric Success`() {
         viewModel.attributeFilterChanged(setOf(AgentAttribute.Electric))
         val state = viewModel.uiState.value
-        assertThat(state.agentsList.first().id).isEqualTo(4) // Anby
-        assertThat(state.agentsList.size).isEqualTo(1)
+        assertEquals(state.agentsList.first().id, 4) // Anby
+        assertEquals(state.agentsList.size, 1)
     }
 
     @Test
     fun `Filter Specialty Stun Success`() {
         viewModel.specialtyFilterChanged(setOf(AgentSpecialty.Stun))
         val state = viewModel.uiState.value
-        assertThat(state.agentsList.first().id).isEqualTo(4) // Anby
-        assertThat(state.agentsList.size).isEqualTo(1)
+        assertEquals(state.agentsList.first().id, 4) // Anby
+        assertEquals(state.agentsList.size, 1)
     }
 
     @Test
     fun `Filter Faction Success`() {
         viewModel.factionFilterChanged(1)
         val state = viewModel.uiState.value
-        assertThat(state.agentsList.size).isEqualTo(2)
+        assertEquals(state.agentsList.size, 2)
     }
 }

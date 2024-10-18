@@ -7,13 +7,13 @@ package mainfunc
 
 
 import MainDispatcherRule
-import assertk.assertThat
-import assertk.assertions.isEqualTo
 import org.junit.Rule
 import setting.FakeSettingRepository
 import setting.SettingsRepository
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class MainFuncViewModelTest {
 
@@ -32,13 +32,13 @@ class MainFuncViewModelTest {
     @Test
     fun `Init Data Success`() {
         val isDark = viewModel.isDark.value
-        assertThat(isDark).isEqualTo(true)
+        assertTrue(isDark)
     }
 
     @Test
     fun `Set Dark Theme`() {
         viewModel.setIsDarkTheme(false)
         val state = viewModel.isDark.value
-        assertThat(state).isEqualTo(false)
+        assertFalse(state)
     }
 }

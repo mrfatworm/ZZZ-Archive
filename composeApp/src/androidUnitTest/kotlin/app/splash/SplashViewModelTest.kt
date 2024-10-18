@@ -7,13 +7,12 @@ package app.splash
 
 
 import MainDispatcherRule
-import assertk.assertThat
-import assertk.assertions.isEqualTo
 import org.junit.Rule
 import setting.FakeSettingRepository
 import setting.SettingsRepository
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertTrue
 
 class SplashViewModelTest {
 
@@ -32,6 +31,6 @@ class SplashViewModelTest {
     @Test
     fun `Init Data Success`() {
         val state = viewModel.isDark.value
-        assertThat(state).isEqualTo(true)
+        assertTrue(state)
     }
 }

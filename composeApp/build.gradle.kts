@@ -60,10 +60,9 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(kotlin("test-annotations-common"))
-            implementation(libs.assertk)
+            implementation(libs.multiplatformSettings.test)
             @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.uiTest)
-            implementation(libs.multiplatformSettings.test)
         }
 
         val desktopMain by getting

@@ -5,14 +5,14 @@
 
 package mainfunc.data
 
-import assertk.assertThat
-import assertk.assertions.isEqualTo
-import assertk.assertions.isInstanceOf
+import io.ktor.util.reflect.instanceOf
 import kotlinx.coroutines.test.runTest
 import mainfunc.model.stubBannerResponse
 import network.FakeZzzHttp
 import utils.ZzzResult
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 
 class BannerRepositoryTest {
@@ -23,13 +23,13 @@ class BannerRepositoryTest {
     @Test
     fun `Get Banner Success`() = runTest {
         val result = repository.getBanner() as ZzzResult.Success
-        assertThat(result.data).isEqualTo(stubBannerResponse)
+        assertEquals(result.data, stubBannerResponse)
     }
 
     @Test
     fun `Get Banner Error`() = runTest {
         httpClient.setError(true)
         val result = repository.getBanner() as ZzzResult.Error
-        assertThat(result.exception).isInstanceOf(Exception::class)
+        assertTrue(result.exception.instanceOf(Exception::class))
     }
 }

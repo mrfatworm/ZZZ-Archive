@@ -28,8 +28,6 @@ import app.home.model.stubPixivZzzTopic
 import app.wengine.data.FakeWEngineRepository
 import app.wengine.data.WEngineRepository
 import app.wengine.model.stubWEnginesListResponse
-import assertk.assertThat
-import assertk.assertions.isEqualTo
 import mainfunc.data.BannerRepository
 import mainfunc.data.FakeBannerRepository
 import mainfunc.model.stubBannerResponse
@@ -38,6 +36,7 @@ import setting.FakeSettingRepository
 import setting.SettingsRepository
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class HomeViewModelTest {
 
@@ -82,20 +81,20 @@ class HomeViewModelTest {
     @Test
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
-        assertThat(state.banner).isEqualTo(stubBannerResponse)
-        assertThat(state.imageBanner).isEqualTo(stubImageBannerResponse)
-        assertThat(state.pixivPuppiesList).isEqualTo(stubPixivZzzTopic.getPopularArticles())
-        assertThat(state.news).isEqualTo(stubOfficialNewsDataResponse)
-        assertThat(state.agentsList).isEqualTo(stubAgentsListResponse.getAgentsNewToOld())
-        assertThat(state.wEnginesList).isEqualTo(stubWEnginesListResponse.getWEnginesNewToOld())
-        assertThat(state.bangbooList).isEqualTo(stubBangbooListResponse.getBangbooNewToOld())
-        assertThat(state.drivesList).isEqualTo(stubDriveListResponse.getDrivesNewToOld())
+        assertEquals(state.banner, stubBannerResponse)
+        assertEquals(state.imageBanner, stubImageBannerResponse)
+        assertEquals(state.pixivPuppiesList, stubPixivZzzTopic.getPopularArticles())
+        assertEquals(state.news, stubOfficialNewsDataResponse)
+        assertEquals(state.agentsList, stubAgentsListResponse.getAgentsNewToOld())
+        assertEquals(state.wEnginesList, stubWEnginesListResponse.getWEnginesNewToOld())
+        assertEquals(state.bangbooList, stubBangbooListResponse.getBangbooNewToOld())
+        assertEquals(state.drivesList, stubDriveListResponse.getDrivesNewToOld())
     }
 
     @Test
     fun `Set Banner Ignore Id as One than ignore banner data`() {
         viewModel.closeBannerAndIgnoreId(1)
         val state = viewModel.uiState.value
-        assertThat(state.banner).isEqualTo(null)
+        assertEquals(state.banner, null)
     }
 }

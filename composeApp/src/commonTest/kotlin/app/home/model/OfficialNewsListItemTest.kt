@@ -5,10 +5,9 @@
 
 package app.home.model
 
-import assertk.assertThat
-import assertk.assertions.isEqualTo
 import kotlin.test.Ignore
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class OfficialNewsListItemTest {
 
@@ -19,7 +18,7 @@ class OfficialNewsListItemTest {
         val newsListItem = stubNewsListItem
         val imageUrl = newsListItem.getImageUrl()
         val expectedUrl = "https://fastcdn.hoyoverse.com/content-v2/nap/126022/93934296a401f3337f65e4fd938ea7e4_7828096096202056509.jpg"
-        assertThat(imageUrl).isEqualTo(expectedUrl)
+        assertEquals(imageUrl, expectedUrl)
     }
 
 
@@ -27,6 +26,6 @@ class OfficialNewsListItemTest {
     fun getDate() {
         val officialNewsListItem = stubNewsListItem
         val date = officialNewsListItem.getDate()
-        assertThat(date).isEqualTo("2024-09-21")
+        assertEquals(date, "2024-09-21")
     }
 }

@@ -6,13 +6,13 @@
 package app.wengine.data
 
 import app.wengine.model.stubWEnginesListResponse
-import assertk.assertThat
-import assertk.assertions.isEqualTo
-import assertk.assertions.isInstanceOf
+import io.ktor.util.reflect.instanceOf
 import kotlinx.coroutines.test.runTest
 import network.FakeZzzHttp
 import utils.ZzzResult
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class WEngineRepositoryImplTest {
     private val httpClient = FakeZzzHttp()
@@ -21,13 +21,13 @@ class WEngineRepositoryImplTest {
     @Test
     fun `Get W-Engines List Success`() = runTest {
         val result = repository.getWEnginesList() as ZzzResult.Success
-        assertThat(result.data).isEqualTo(stubWEnginesListResponse)
+        assertEquals(result.data, stubWEnginesListResponse)
     }
 
     @Test
     fun `Get W-Engines List Error`() = runTest {
         httpClient.setError(true)
         val result = repository.getWEnginesList() as ZzzResult.Error
-        assertThat(result.exception).isInstanceOf(Exception::class)
+        assertTrue(result.exception.instanceOf(Exception::class))
     }
 }

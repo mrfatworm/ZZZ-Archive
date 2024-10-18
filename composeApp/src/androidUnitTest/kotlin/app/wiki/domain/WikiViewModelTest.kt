@@ -19,11 +19,10 @@ import app.drive.model.stubDriveListResponse
 import app.wengine.data.FakeWEngineRepository
 import app.wengine.data.WEngineRepository
 import app.wengine.model.stubWEnginesListResponse
-import assertk.assertThat
-import assertk.assertions.isEqualTo
 import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class WikiViewModelTest {
 
@@ -53,9 +52,9 @@ class WikiViewModelTest {
     @Test
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
-        assertThat(state.agentsList).isEqualTo(stubAgentsListResponse.getAgentsNewToOld())
-        assertThat(state.wEnginesList).isEqualTo(stubWEnginesListResponse.getWEnginesNewToOld())
-        assertThat(state.bangbooList).isEqualTo(stubBangbooListResponse.getBangbooNewToOld())
-        assertThat(state.drivesList).isEqualTo(stubDriveListResponse.getDrivesNewToOld())
+        assertEquals(state.agentsList, stubAgentsListResponse.getAgentsNewToOld())
+        assertEquals(state.wEnginesList, stubWEnginesListResponse.getWEnginesNewToOld())
+        assertEquals(state.bangbooList, stubBangbooListResponse.getBangbooNewToOld())
+        assertEquals(state.drivesList, stubDriveListResponse.getDrivesNewToOld())
     }
 }

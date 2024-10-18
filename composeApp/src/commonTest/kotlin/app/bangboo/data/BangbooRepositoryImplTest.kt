@@ -6,13 +6,13 @@
 package app.bangboo.data
 
 import app.bangboo.model.stubBangbooListResponse
-import assertk.assertThat
-import assertk.assertions.isEqualTo
-import assertk.assertions.isInstanceOf
+import io.ktor.util.reflect.instanceOf
 import kotlinx.coroutines.test.runTest
 import network.FakeZzzHttp
 import utils.ZzzResult
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class BangbooRepositoryImplTest {
     private val httpClient = FakeZzzHttp()
@@ -21,13 +21,13 @@ class BangbooRepositoryImplTest {
     @Test
     fun `Get Bangboo List Success`() = runTest {
         val result = repository.getBangbooList() as ZzzResult.Success
-        assertThat(result.data).isEqualTo(stubBangbooListResponse)
+        assertEquals(result.data, stubBangbooListResponse)
     }
 
     @Test
     fun `Get Bangboo List Error`() = runTest {
         httpClient.setError(true)
         val result = repository.getBangbooList() as ZzzResult.Error
-        assertThat(result.exception).isInstanceOf(Exception::class)
+        assertTrue(result.exception.instanceOf(Exception::class))
     }
 }

@@ -1,12 +1,11 @@
-import assertk.assertThat
-import assertk.assertions.isEqualTo
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class TestDesktopDemoKtTest {
 
     @Test
     fun selectAiGender() {
         val result = selectAiGenderDesktop(0)
-        assertThat(result).isEqualTo("Female")
+        assertEquals(result, "Female")
     }
 }

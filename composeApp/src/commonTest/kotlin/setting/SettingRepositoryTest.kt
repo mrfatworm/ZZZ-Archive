@@ -1,10 +1,11 @@
 package setting
 
-import assertk.assertThat
-import assertk.assertions.isEqualTo
 import com.russhwolf.settings.MapSettings
 import utils.Language
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class SettingRepositoryTest {
     private val fakeSettings = MapSettings()
@@ -13,40 +14,40 @@ class SettingRepositoryTest {
     @Test
     fun `Get Default Color Theme`() {
         val isDarkTheme = settingsRepository.getIsDarkTheme()
-        assertThat(isDarkTheme).isEqualTo(true)
+        assertTrue(isDarkTheme)
     }
 
     @Test
     fun `Set Color Theme to Light`() {
         settingsRepository.setIsDarkTheme(false)
         val isDarkTheme = settingsRepository.getIsDarkTheme()
-        assertThat(isDarkTheme).isEqualTo(false)
+        assertFalse(isDarkTheme)
     }
 
     @Test
     fun `Get Default Language`() {
         val defaultLanguage = settingsRepository.getLanguage()
-        assertThat(defaultLanguage).isEqualTo(Language.En)
+        assertEquals(defaultLanguage, Language.En)
     }
 
     @Test
     fun `Set Language to Chinese`() {
         settingsRepository.setLanguage(Language.Zh)
         val language = settingsRepository.getLanguage()
-        assertThat(language).isEqualTo(Language.Zh)
+        assertEquals(language, Language.Zh)
     }
 
     @Test
     fun `Get Default Banner Ignore Id`() {
         val ignoreId = settingsRepository.getBannerIgnoreId()
-        assertThat(ignoreId).isEqualTo(0)
+        assertEquals(ignoreId, 0)
     }
 
     @Test
     fun `Set Banner Ignore Id`() {
         settingsRepository.setBannerIgnoreId(1)
         val ignoreId = settingsRepository.getBannerIgnoreId()
-        assertThat(ignoreId).isEqualTo(1)
+        assertEquals(ignoreId, 1)
     }
 
     @Test
@@ -54,7 +55,7 @@ class SettingRepositoryTest {
         settingsRepository.clear()
         val isDarkTheme = settingsRepository.getIsDarkTheme()
         val language = settingsRepository.getLanguage()
-        assertThat(isDarkTheme).isEqualTo(true)
-        assertThat(language).isEqualTo(Language.En)
+        assertTrue(isDarkTheme)
+        assertEquals(language, Language.En)
     }
 }
