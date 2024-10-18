@@ -96,4 +96,5 @@
     <string name="mindscape_cinema">意象影畫</string>
     <string name="suggest_w_engines">推薦音擎</string>
     <string name="suggest_drives">推薦驅動光碟</string>
+    <string name="agent_background">代理人設定</string>
 </resources>

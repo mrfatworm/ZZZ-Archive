@@ -13,9 +13,12 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import app.agent.model.AgentDetailState
+import org.jetbrains.compose.resources.stringResource
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
+import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.agent_background
 
 @Composable
 fun AgentDetailScreenSingle(
@@ -35,5 +38,6 @@ fun AgentDetailScreenSingle(
         CinemaCard(uiState.agentDetail)
         SuggestWEnginesCard(uiState.agentDetail.suggestWEngines)
         SuggestDrivesCard(uiState.agentDetail.suggestDrives)
+        TextCard(stringResource(Res.string.agent_background), uiState.agentDetail.agentBackground)
     }
 }
