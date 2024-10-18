@@ -18,9 +18,8 @@ kotlin {
     jvmToolchain(17)
     androidTarget {
         //https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-test.html
-        @OptIn(ExperimentalKotlinGradlePluginApi::class) instrumentedTestVariant.sourceSetTree.set(
-            KotlinSourceSetTree.test
-        )
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
     }
     
     jvm("desktop")
@@ -48,18 +47,18 @@ kotlin {
             implementation(libs.compose.adaptive)
             implementation(libs.kotlinx.coroutines)
             implementation(libs.coil.network.ktor)
+            implementation(libs.bundles.ktor)
             implementation(libs.coil.compose)
             api(libs.koin.core)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
-            implementation(libs.bundles.ktor)
             implementation(libs.okio)
             implementation(libs.multiplatformSettings.no.arg)
         }
         commonTest.dependencies {
-            implementation(libs.kotlin.test)
             implementation(kotlin("test-annotations-common"))
+            implementation(libs.kotlin.test)
             implementation(libs.multiplatformSettings.test)
             @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.uiTest)
@@ -71,7 +70,7 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
-            implementation(libs.koin.androidx.compose)
+            implementation(libs.koin.compose)
             implementation(libs.ktor.client.okhttp)
         }
 
@@ -84,7 +83,6 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.swing)
         }
-
     }
 }
 
