@@ -15,13 +15,12 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,7 +46,8 @@ fun FactionItem(faction: Faction, isSelected: Boolean = false, onFactionClick: (
     val isPressed = interactionSource.collectIsPressedAsState()
     val isHovered = interactionSource.collectIsHoveredAsState()
 
-    BoxWithConstraints(modifier = Modifier.aspectRatio(1.8f).fillMaxWidth()
+    Box(
+        modifier = Modifier.aspectRatio(1.8f).fillMaxWidth()
         .clip(RoundedCornerShape(16.dp)).border(
             AppTheme.dimens.borderWidth,
             if (isSelected) AppTheme.colors.primary else Color.Transparent,
@@ -66,7 +66,7 @@ fun FactionItem(faction: Faction, isSelected: Boolean = false, onFactionClick: (
             alpha = 0.7f
         )
         AsyncImage(
-            modifier = Modifier.align(Alignment.Center).size(maxWidth / 3)
+            modifier = Modifier.align(Alignment.Center).fillMaxSize(0.3f).aspectRatio(1f)
                 .blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
             model = faction.getFactionIconUrl(),
             contentDescription = null,

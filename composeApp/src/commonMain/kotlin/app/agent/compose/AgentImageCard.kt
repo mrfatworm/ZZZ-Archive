@@ -6,11 +6,12 @@
 package app.agent.compose
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -44,13 +45,12 @@ fun AgentImageCard(agentDetail: AgentDetailResponse, onBackClick: () -> Unit) {
         ) {
             onBackClick()
         }
-        BoxWithConstraints(
+        Box(
             modifier = Modifier.aspectRatio(1.33f).drawBottomMask(AppTheme.colors)
                 .verticalScroll(state = rememberScrollState(), enabled = false)
         ) {
-
             AsyncImage(
-                modifier = Modifier.align(Alignment.TopCenter).size(maxWidth * 0.8f),
+                modifier = Modifier.align(Alignment.TopCenter).fillMaxSize(0.8f),
                 model = agentDetail.getFactionIconUrl(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
