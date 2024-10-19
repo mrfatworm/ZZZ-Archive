@@ -27,13 +27,19 @@ fun SettingScreenDual(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
                 .contentPadding(adaptiveLayoutType, AppTheme.dimens),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
-        ) { SettingCard(uiState = uiState, onLanguageChange = {}, onColorChange = {}) }
+        ) {
+            SettingCard(uiState = uiState, onLanguageChange = {}, onColorChange = {})
+            OtherInfoCard(onFeedbackClick = {})
+            LicenseCard()
+        }
 
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
                 .contentPadding(adaptiveLayoutType, AppTheme.dimens),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
-        ) {}
+        ) {
+            ContributorsCard(uiState)
+        }
     }
 }
 

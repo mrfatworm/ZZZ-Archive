@@ -28,5 +28,8 @@ fun SettingScreenSingle(
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         SettingCard(uiState = uiState, onLanguageChange = {}, onColorChange = {})
+        OtherInfoCard(onFeedbackClick = {})
+        LicenseCard()
+        ContributorsCard(uiState)
     }
 }

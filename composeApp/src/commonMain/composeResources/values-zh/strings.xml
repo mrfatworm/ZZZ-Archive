@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
-    <string name="app_name">繩匠檔案</string>
+    <string name="app_name">ZZZ Archive</string>
     <string name="unknown">未知 ?</string>
 
     <!-- Common -->
@@ -104,12 +104,13 @@
     <string name="feedback">意見回饋</string>
     <string name="privacy_policy">隱私政策</string>
     <string name="open_source">開放原始碼</string>
-    <string name="resource_licence">App 中使用的遊戲圖片、動畫、音訊和文本原文，僅為更好地展示遊戲資料，大多來自 Zenless Zone Zero Wiki（Fandom），其版權歸 絕區零/米哈遊所有。除非另有聲明，網站其他內容均採用「署名-非商業性使用-相同方式共享 4.0 國際」（CC BY-NC-SA 4.0）授權。</string>
+    <string name="resource_licence">App 中使用的遊戲圖片、動畫、音訊和文本原文，僅為更好地展示遊戲資料，大多來自 Zenless Zone Zero Wiki（Fandom），其版權歸 絕區零/米哈遊所有。除非另有聲明，其他內容均採用「姓名標示─相同方式分享 4.0 國際」（CC BY-SA 4.0）授權。</string>
+    <string name="code_licence">GitHub 上的開源程式碼採用 MIT 授權條款。</string>
     <string name="contributors">貢獻者</string>
     <string name="author">作者</string>
     <string name="developer">開發者</string>
     <string name="ui_ux_designers">UI / UX 設計師</string>
-    <string name="translations">翻譯</string>
+    <string name="translation">翻譯</string>
     <string name="data_integration">資料整合</string>
     <string name="banner_artists">封面畫師</string>
     <string name="special_thanks">銘謝</string>

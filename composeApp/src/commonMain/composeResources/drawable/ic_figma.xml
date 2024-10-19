@@ -1,0 +1,26 @@
+<!--
+  ~ Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+  ~ License: CC BY-SA 4.0
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:pathData="M9.5,22C11.437,22 13,20.437 13,18.5V15H9.5C7.563,15 6,16.563 6,18.5C6,20.437 7.563,22 9.5,22Z"
+        android:fillColor="#0ACF83" />
+    <path
+        android:pathData="M6,12C6,10.34 7.563,9 9.5,9H13V15H9.5C7.563,15 6,13.66 6,12Z"
+        android:fillColor="#A259FF" />
+    <path
+        android:pathData="M6,5.5C6,3.563 7.563,2 9.5,2H13V9H9.5C7.563,9 6,7.437 6,5.5Z"
+        android:fillColor="#F24E1E" />
+    <path
+        android:pathData="M13,2H16C17.66,2 19,3.563 19,5.5C19,7.437 17.66,9 16,9H13V2Z"
+        android:fillColor="#FF7262" />
+    <path
+        android:pathData="M19,12C19,13.66 17.66,15 16,15C14.34,15 13,13.66 13,12C13,10.34 14.34,9 16,9C17.66,9 19,10.34 19,12Z"
+        android:fillColor="#1ABCFE" />
+</vector>

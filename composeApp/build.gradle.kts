@@ -148,18 +148,21 @@ buildkonfig {
         buildConfigField(FieldSpec.Type.STRING, "variant", "Beta")
         buildConfigField(FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset")
         buildConfigField(FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api")
+        buildConfigField(FieldSpec.Type.STRING, "VERSION", "0.0.0")
     }
 
     defaultConfigs("Dev") {
         buildConfigField(FieldSpec.Type.STRING, "variant", "Beta")
         buildConfigField(FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset")
         buildConfigField(FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api")
+        buildConfigField(FieldSpec.Type.STRING, "VERSION", "1.0.0-Beta01")
     }
 
     defaultConfigs("Live") {
         buildConfigField(FieldSpec.Type.STRING, "variant", "Stable")
         buildConfigField(FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Asset")
         buildConfigField(FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Api")
+        buildConfigField(FieldSpec.Type.STRING, "VERSION", "1.0.0")
     }
 }
 

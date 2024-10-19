@@ -7,7 +7,8 @@ package app.setting.model
 
 
 data class SettingState(
-    val author: String,
+    val contributorAmount: Int,
+    val author: List<Contributor>,
     val developer: List<Contributor>,
     val uiUxDesigner: List<Contributor>,
     val translation: List<Contributor>,
@@ -18,29 +19,32 @@ data class SettingState(
 
 data class Contributor(
     val name: String,
-    val description: String?,
+    val description: String = "",
 )
 
 val settingState = SettingState(
-    author = "mrfatworm",
+    contributorAmount = 1,
+    author = listOf(
+        Contributor("mrfatworm"),
+    ),
     developer = listOf(
-        Contributor("mrfatworm", null),
+        Contributor("mrfatworm"),
     ),
     uiUxDesigner = listOf(
-        Contributor("mrfatworm", null),
+        Contributor("mrfatworm"),
     ),
     translation = listOf(
         Contributor("mrfatworm", "zh, us"),
     ),
     dataIntegration = listOf(
-        Contributor("mrfatworm", null),
+        Contributor("mrfatworm"),
     ),
     bannerArtists = listOf(
-        Contributor("---", null),
+        Contributor("---"),
     ),
     specialThanks = listOf(
-        Contributor("Zenless Zone Zero", null),
-        Contributor("Zenless Zone Zero Wiki (Fandom)", null)
+        Contributor("Zenless Zone Zero"),
+        Contributor("Zenless Zone Zero Wiki (Fandom)")
     )
 )
 
