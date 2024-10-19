@@ -21,13 +21,14 @@ import ui.utils.contentPadding
 fun SettingScreenSingle(
     uiState: SettingState,
     adaptiveLayoutType: AdaptiveLayoutType,
+    onColorChange: (Boolean) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
             .contentPadding(adaptiveLayoutType, AppTheme.dimens),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
-        SettingCard(uiState = uiState, onLanguageChange = {}, onColorChange = {})
+        SettingCard(uiState = uiState, onLanguageChange = {}, onColorChange = onColorChange)
         OtherInfoCard(onFeedbackClick = {})
         LicenseCard()
         ContributorsCard(uiState)

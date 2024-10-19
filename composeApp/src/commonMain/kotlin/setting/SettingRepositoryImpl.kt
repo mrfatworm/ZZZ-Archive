@@ -46,7 +46,7 @@ class SettingsRepositoryImpl(private val settings: Settings) : SettingsRepositor
 
     override fun getLanguage(): Language {
         val code = language.get()
-        return Language.entries.find { it.code == code } ?: Language.En
+        return Language.entries.find { it.code == code } ?: Language.English
     }
 
     override fun setLanguage(value: Language) {

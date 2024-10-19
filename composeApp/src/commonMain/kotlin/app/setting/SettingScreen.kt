@@ -22,8 +22,12 @@ fun SettingScreen(
     val viewModel: SettingViewModel = koinViewModel()
     val uiState = viewModel.uiState.collectAsState()
     if (contentType == ContentType.Single) {
-        SettingScreenSingle(uiState.value, adaptiveLayoutType)
+        SettingScreenSingle(uiState.value, adaptiveLayoutType, onColorChange = { isDark ->
+            viewModel.setIsDarkTheme(isDark)
+        })
     } else {
-        SettingScreenDual(uiState.value, adaptiveLayoutType)
+        SettingScreenDual(uiState.value, adaptiveLayoutType, onColorChange = { isDark ->
+            viewModel.setIsDarkTheme(isDark)
+        })
     }
 }

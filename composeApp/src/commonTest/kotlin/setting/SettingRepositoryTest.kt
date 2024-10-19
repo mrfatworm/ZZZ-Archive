@@ -27,14 +27,14 @@ class SettingRepositoryTest {
     @Test
     fun `Get Default Language`() {
         val defaultLanguage = settingsRepository.getLanguage()
-        assertEquals(defaultLanguage, Language.En)
+        assertEquals(defaultLanguage, Language.English)
     }
 
     @Test
     fun `Set Language to Chinese`() {
-        settingsRepository.setLanguage(Language.Zh)
+        settingsRepository.setLanguage(Language.ChineseTraditional)
         val language = settingsRepository.getLanguage()
-        assertEquals(language, Language.Zh)
+        assertEquals(language, Language.ChineseTraditional)
     }
 
     @Test
@@ -56,6 +56,6 @@ class SettingRepositoryTest {
         val isDarkTheme = settingsRepository.getIsDarkTheme()
         val language = settingsRepository.getLanguage()
         assertTrue(isDarkTheme)
-        assertEquals(language, Language.En)
+        assertEquals(language, Language.English)
     }
 }

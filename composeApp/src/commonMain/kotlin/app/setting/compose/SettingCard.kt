@@ -98,14 +98,16 @@ private fun ColorSettingItem(onColorChange: (Boolean) -> Unit) {
     var showColorThemeList by remember { mutableStateOf(false) }
     SettingItem(title = stringResource(Res.string.language), content = {
         Column(horizontalAlignment = Alignment.End) {
-            val isDark by AppTheme.isDark
+            var isDarkTheme by AppTheme.isDark
             val colorThemeList = listOf(Res.string.dark_theme, Res.string.light_theme)
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
-                    text = if (isDark) stringResource(Res.string.dark_theme) else stringResource(Res.string.light_theme),
+                    text = if (isDarkTheme) stringResource(Res.string.dark_theme) else stringResource(
+                        Res.string.light_theme
+                    ),
                     style = AppTheme.typography.labelMedium,
                     color = AppTheme.colors.onSurface
                 )
@@ -127,7 +129,9 @@ private fun ColorSettingItem(onColorChange: (Boolean) -> Unit) {
                             color = AppTheme.colors.onSurface
                         )
                     }, onClick = {
-                        onColorChange(colorTheme == Res.string.dark_theme)
+                        val isDark = colorTheme == Res.string.dark_theme
+                        onColorChange(isDark)
+                        isDarkTheme = isDark
                         showColorThemeList = false
                     })
                 }
@@ -155,6 +159,5 @@ private fun HoYoLabSettingItem() {
                 tint = AppTheme.colors.onSurfaceVariant
             )
         }
-
     }, onClick = { })
 }

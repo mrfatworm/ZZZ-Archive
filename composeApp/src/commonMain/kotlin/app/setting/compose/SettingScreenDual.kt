@@ -21,6 +21,7 @@ import ui.utils.contentPadding
 fun SettingScreenDual(
     uiState: SettingState,
     adaptiveLayoutType: AdaptiveLayoutType,
+    onColorChange: (Boolean) -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
         Column(
@@ -28,7 +29,7 @@ fun SettingScreenDual(
                 .contentPadding(adaptiveLayoutType, AppTheme.dimens),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
-            SettingCard(uiState = uiState, onLanguageChange = {}, onColorChange = {})
+            SettingCard(uiState = uiState, onLanguageChange = {}, onColorChange = onColorChange)
             OtherInfoCard(onFeedbackClick = {})
             LicenseCard()
         }

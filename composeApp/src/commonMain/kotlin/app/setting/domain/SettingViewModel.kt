@@ -6,11 +6,9 @@
 package app.setting.domain
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import app.setting.model.settingState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 import setting.SettingsRepository
 
 class SettingViewModel(
@@ -19,9 +17,15 @@ class SettingViewModel(
 
     private var _uiState = MutableStateFlow(settingState)
     val uiState = _uiState.asStateFlow()
+    private val _isDark = MutableStateFlow(false)
+    val isDark = _isDark.asStateFlow()
 
     init {
-        viewModelScope.launch {
-        }
+        _isDark.value = settingsRepository.getIsDarkTheme()
+    }
+
+    fun setIsDarkTheme(isDark: Boolean) {
+        _isDark.value = isDark
+        settingsRepository.setIsDarkTheme(isDark)
     }
 }
