@@ -13,10 +13,12 @@ import app.setting.SettingScreen
 import ui.navigation.MainFlow
 import ui.navigation.NavActions
 import ui.navigation.Screen
+import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
 
 fun NavGraphBuilder.settingNavGraph(
     contentType: ContentType,
+    adaptiveLayoutType: AdaptiveLayoutType,
     navActions: NavActions
 ) {
     navigation(
@@ -24,7 +26,8 @@ fun NavGraphBuilder.settingNavGraph(
     ) {
         composable(Screen.Setting.route) {
             SettingScreen(contentType = contentType,
-                onFeedbackClicked = { navActions.navigationTo(Screen.Feedback) })
+                adaptiveLayoutType = adaptiveLayoutType
+            )
         }
         composable(Screen.Feedback.route) {
             FeedbackScreen()

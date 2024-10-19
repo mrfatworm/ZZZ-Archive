@@ -5,65 +5,25 @@
 
 package app.setting
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import ui.component.ZzzOutlineButton
-import ui.theme.AppTheme
+import androidx.compose.runtime.collectAsState
+import app.setting.compose.SettingScreenDual
+import app.setting.compose.SettingScreenSingle
+import app.setting.domain.SettingViewModel
+import org.koin.compose.viewmodel.koinViewModel
+import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
 
 @Composable
 fun SettingScreen(
-    contentType: ContentType, onFeedbackClicked: () -> Unit
+    contentType: ContentType,
+    adaptiveLayoutType: AdaptiveLayoutType
 ) {
+    val viewModel: SettingViewModel = koinViewModel()
+    val uiState = viewModel.uiState.collectAsState()
     if (contentType == ContentType.Single) {
-        SettingScreenSingle(onFeedbackClicked)
+        SettingScreenSingle(uiState.value, adaptiveLayoutType)
     } else {
-        SettingScreenDual()
-    }
-}
-
-@Composable
-fun SettingScreenSingle(
-    onFeedbackClicked: () -> Unit
-) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(
-            16.dp, alignment = Alignment.CenterVertically
-        )
-    ) {
-        Text(
-            text = "Setting",
-            textAlign = TextAlign.Center,
-            style = AppTheme.typography.headlineMedium,
-            color = AppTheme.colors.onSurface
-        )
-        ZzzOutlineButton(text = "Feedback", onClick = { onFeedbackClicked() })
-    }
-}
-
-@Composable
-fun SettingScreenDual() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(
-            16.dp, alignment = Alignment.CenterVertically
-        )
-    ) {
-        Text(
-            text = "Setting",
-            textAlign = TextAlign.Center,
-            style = AppTheme.typography.headlineMedium,
-            color = AppTheme.colors.onSurface
-        )
+        SettingScreenDual(uiState.value, adaptiveLayoutType)
     }
 }

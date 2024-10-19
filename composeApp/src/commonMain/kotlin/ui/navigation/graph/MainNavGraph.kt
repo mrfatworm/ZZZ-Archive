@@ -44,7 +44,7 @@ fun MainNavGraph(
         driveNavGraph(contentType, adaptiveLayoutType, navActions)
         wikiNavGraph(contentType, adaptiveLayoutType, navActions)
         functionNavGraph(contentType, adaptiveLayoutType, navActions)
-        settingNavGraph(contentType, navActions)
+        settingNavGraph(contentType, adaptiveLayoutType, navActions)
         feedbackNavGraph()
     }
 }

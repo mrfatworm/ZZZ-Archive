@@ -20,6 +20,7 @@ import app.home.data.NewsRepositoryImpl
 import app.home.data.PixivRepository
 import app.home.data.PixivRepositoryImpl
 import app.home.domain.HomeViewModel
+import app.setting.domain.SettingViewModel
 import app.splash.SplashViewModel
 import app.wengine.data.WEngineRepository
 import app.wengine.data.WEngineRepositoryImpl
@@ -54,4 +55,5 @@ val sharedModule = module {
     viewModelOf(::WikiViewModel)
     viewModelOf(::AgentListViewModel)
     viewModelOf(::AgentDetailViewModel)
+    viewModelOf(::SettingViewModel)
 }
