@@ -22,7 +22,6 @@ package setting
 import com.russhwolf.settings.ObservableSettings
 import com.russhwolf.settings.Settings
 import com.russhwolf.settings.SettingsListener
-import utils.Language
 
 /**
  * This class demonstrates common code exercising all of the functionality of the [Settings] class.
@@ -32,7 +31,7 @@ class SettingsRepositoryImpl(private val settings: Settings) : SettingsRepositor
 
     private val isDarkTheme: SettingConfig<Boolean> =
         BooleanSettingConfig(settings, "IS_DARK_THEME", true)
-    private val language: SettingConfig<String> = StringSettingConfig(settings, "LANGUAGE", "en")
+    private val language: SettingConfig<String> = StringSettingConfig(settings, "LANGUAGE", "")
     private val bannerIgnoreId: SettingConfig<Int> =
         IntSettingConfig(settings, "BANNER_IGNORE_ID", 0)
 
@@ -44,13 +43,12 @@ class SettingsRepositoryImpl(private val settings: Settings) : SettingsRepositor
         isDarkTheme.set(value.toString())
     }
 
-    override fun getLanguage(): Language {
-        val code = language.get()
-        return Language.entries.find { it.code == code } ?: Language.English
+    override fun getLanguage(): String {
+        return language.get()
     }
 
-    override fun setLanguage(value: Language) {
-        language.set(value.code)
+    override fun setLanguage(langCode: String) {
+        language.set(langCode)
     }
 
     override fun getBannerIgnoreId(): Int {

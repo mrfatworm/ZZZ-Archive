@@ -5,8 +5,15 @@
 
 package app.setting.model
 
+import utils.Language
+
 
 data class SettingState(
+    val language: Language = Language.English,
+    val contributors: Contributors
+)
+
+data class Contributors(
     val contributorAmount: Int,
     val author: List<Contributor>,
     val developer: List<Contributor>,
@@ -23,28 +30,22 @@ data class Contributor(
 )
 
 val settingState = SettingState(
-    contributorAmount = 1,
-    author = listOf(
-        Contributor("mrfatworm"),
-    ),
-    developer = listOf(
-        Contributor("mrfatworm"),
-    ),
-    uiUxDesigner = listOf(
-        Contributor("mrfatworm"),
-    ),
-    translation = listOf(
-        Contributor("mrfatworm", "zh, us"),
-    ),
-    dataIntegration = listOf(
-        Contributor("mrfatworm"),
-    ),
-    bannerArtists = listOf(
-        Contributor("---"),
-    ),
-    specialThanks = listOf(
-        Contributor("Zenless Zone Zero"),
-        Contributor("Zenless Zone Zero Wiki (Fandom)")
+    contributors = Contributors(
+        contributorAmount = 1, author = listOf(
+            Contributor("mrfatworm"),
+        ), developer = listOf(
+            Contributor("mrfatworm"),
+        ), uiUxDesigner = listOf(
+            Contributor("mrfatworm"),
+        ), translation = listOf(
+            Contributor("mrfatworm", "zh, us"),
+        ), dataIntegration = listOf(
+            Contributor("mrfatworm"),
+        ), bannerArtists = listOf(
+            Contributor("---"),
+        ), specialThanks = listOf(
+            Contributor("Zenless Zone Zero"), Contributor("Zenless Zone Zero Wiki (Fandom)")
+        )
     )
 )
 

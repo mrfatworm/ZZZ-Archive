@@ -11,14 +11,12 @@ import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.agents
 import zzzarchive.composeapp.generated.resources.bangboo
 import zzzarchive.composeapp.generated.resources.drives
-import zzzarchive.composeapp.generated.resources.feedback
 import zzzarchive.composeapp.generated.resources.function
 import zzzarchive.composeapp.generated.resources.home
 import zzzarchive.composeapp.generated.resources.ic_article_scroll
 import zzzarchive.composeapp.generated.resources.ic_bangboo
 import zzzarchive.composeapp.generated.resources.ic_cd
 import zzzarchive.composeapp.generated.resources.ic_function
-import zzzarchive.composeapp.generated.resources.ic_happy
 import zzzarchive.composeapp.generated.resources.ic_help
 import zzzarchive.composeapp.generated.resources.ic_home
 import zzzarchive.composeapp.generated.resources.ic_people
@@ -77,13 +75,6 @@ sealed class MainFlow(
         textRes = Res.string.setting
     )
 
-    data object Feedback : MainFlow(
-        route = "feedback_flow",
-        startScreen = Screen.Feedback,
-        iconRes = Res.drawable.ic_happy,
-        textRes = Res.string.feedback
-    )
-
     data object Wiki : MainFlow(
         route = "wiki_flow",
         startScreen = Screen.Wiki,
@@ -106,7 +97,6 @@ val ALL_MAIN_FLOW = listOf(
     MainFlow.Drive,
     MainFlow.Bangboo,
     MainFlow.Setting,
-    MainFlow.Feedback,
     MainFlow.Wiki,
     MainFlow.Function
 )
@@ -118,7 +108,6 @@ val NAV_RAIL_MAIN_FLOW = listOf(
     MainFlow.Drive,
     MainFlow.Bangboo,
     MainFlow.Setting,
-    MainFlow.Feedback
 )
 
 val NAV_BOTTOM_MAIN_FLOW = listOf(

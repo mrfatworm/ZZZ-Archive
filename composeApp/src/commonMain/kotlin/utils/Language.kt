@@ -1,7 +1,9 @@
 package utils
 
-enum class Language(var localName: String, var code: String, var folderSuffix: String) {
-    Auto("Auto", "", ""),
-    English("English", "en", "en"),
-    ChineseTraditional("繁體中文", "zh-TW", "zh")
+
+enum class Language(val localName: String, val project: String, val officialNews: String) {
+    English("English", "en", "en-us"),
+    ChineseTraditional("繁體中文", "zh", "zh-tw")
 }
+
+expect fun changeLanguage(langCode: String)

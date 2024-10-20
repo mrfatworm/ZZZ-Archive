@@ -21,6 +21,7 @@ import ui.utils.contentPadding
 fun SettingScreenSingle(
     uiState: SettingState,
     adaptiveLayoutType: AdaptiveLayoutType,
+    onLanguageChange: (String) -> Unit,
     onColorChange: (Boolean) -> Unit
 ) {
     Column(
@@ -28,9 +29,13 @@ fun SettingScreenSingle(
             .contentPadding(adaptiveLayoutType, AppTheme.dimens),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
-        SettingCard(uiState = uiState, onLanguageChange = {}, onColorChange = onColorChange)
+        SettingCard(
+            uiState = uiState,
+            onLanguageChange = onLanguageChange,
+            onColorChange = onColorChange
+        )
         OtherInfoCard(onFeedbackClick = {})
         LicenseCard()
-        ContributorsCard(uiState)
+        ContributorsCard(uiState.contributors)
     }
 }

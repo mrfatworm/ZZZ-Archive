@@ -24,10 +24,14 @@ fun SettingScreen(
     if (contentType == ContentType.Single) {
         SettingScreenSingle(uiState.value, adaptiveLayoutType, onColorChange = { isDark ->
             viewModel.setIsDarkTheme(isDark)
+        }, onLanguageChange = { langCode ->
+            viewModel.setLanguage(langCode)
         })
     } else {
         SettingScreenDual(uiState.value, adaptiveLayoutType, onColorChange = { isDark ->
             viewModel.setIsDarkTheme(isDark)
+        }, onLanguageChange = { langCode ->
+            viewModel.setLanguage(langCode)
         })
     }
 }

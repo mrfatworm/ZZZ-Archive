@@ -14,7 +14,6 @@ import ui.navigation.NavActions
 import ui.navigation.graph.app.agentNavGraph
 import ui.navigation.graph.app.bangbooNavGraph
 import ui.navigation.graph.app.driveNavGraph
-import ui.navigation.graph.app.feedbackNavGraph
 import ui.navigation.graph.app.functionNavGraph
 import ui.navigation.graph.app.homeNavGraph
 import ui.navigation.graph.app.settingNavGraph
@@ -45,7 +44,6 @@ fun MainNavGraph(
         wikiNavGraph(contentType, adaptiveLayoutType, navActions)
         functionNavGraph(contentType, adaptiveLayoutType, navActions)
         settingNavGraph(contentType, adaptiveLayoutType, navActions)
-        feedbackNavGraph()
     }
 }
 

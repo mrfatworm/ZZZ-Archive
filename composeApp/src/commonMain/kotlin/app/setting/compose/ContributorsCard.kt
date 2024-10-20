@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.setting.model.Contributor
-import app.setting.model.SettingState
+import app.setting.model.Contributors
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.component.ContentCard
@@ -36,7 +36,7 @@ import zzzarchive.composeapp.generated.resources.translation
 import zzzarchive.composeapp.generated.resources.ui_ux_designers
 
 @Composable
-fun ContributorsCard(settingState: SettingState) {
+fun ContributorsCard(contributors: Contributors) {
     ContentCard {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(
@@ -58,20 +58,20 @@ fun ContributorsCard(settingState: SettingState) {
                     tint = AppTheme.colors.onSurfaceVariant
                 )
                 Text(
-                    text = settingState.contributorAmount.toString(),
+                    text = contributors.contributorAmount.toString(),
                     style = AppTheme.typography.labelSmall,
                     color = AppTheme.colors.onSurfaceVariant
                 )
             }
-            ContributorItem(stringResource(Res.string.author), settingState.author)
-            ContributorItem(stringResource(Res.string.developer), settingState.developer)
-            ContributorItem(stringResource(Res.string.ui_ux_designers), settingState.uiUxDesigner)
-            ContributorItem(stringResource(Res.string.translation), settingState.translation)
+            ContributorItem(stringResource(Res.string.author), contributors.author)
+            ContributorItem(stringResource(Res.string.developer), contributors.developer)
+            ContributorItem(stringResource(Res.string.ui_ux_designers), contributors.uiUxDesigner)
+            ContributorItem(stringResource(Res.string.translation), contributors.translation)
             ContributorItem(
-                stringResource(Res.string.data_integration), settingState.dataIntegration
+                stringResource(Res.string.data_integration), contributors.dataIntegration
             )
-            ContributorItem(stringResource(Res.string.banner_artists), settingState.bannerArtists)
-            ContributorItem(stringResource(Res.string.special_thanks), settingState.specialThanks)
+            ContributorItem(stringResource(Res.string.banner_artists), contributors.bannerArtists)
+            ContributorItem(stringResource(Res.string.special_thanks), contributors.specialThanks)
         }
     }
 }

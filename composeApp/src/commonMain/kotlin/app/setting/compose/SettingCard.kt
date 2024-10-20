@@ -28,6 +28,7 @@ import ui.component.ContentCard
 import ui.theme.AppTheme
 import utils.Language
 import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.color_theme
 import zzzarchive.composeapp.generated.resources.dark_theme
 import zzzarchive.composeapp.generated.resources.hoyolab_account
 import zzzarchive.composeapp.generated.resources.ic_arrow_down_ios
@@ -43,25 +44,24 @@ fun SettingCard(
     onColorChange: (Boolean) -> Unit
 ) {
     ContentCard(hasDefaultPadding = false) {
-        LanguageSettingItem(onLanguageChange)
+        LanguageSettingItem(uiState.language, onLanguageChange)
         ColorSettingItem(onColorChange)
         HoYoLabSettingItem()
     }
 }
 
 @Composable
-private fun LanguageSettingItem(onLanguageChange: (String) -> Unit) {
+private fun LanguageSettingItem(language: Language, onLanguageChange: (String) -> Unit) {
     var showLanguageList by remember { mutableStateOf(false) }
     SettingItem(title = stringResource(Res.string.language), content = {
         Column(horizontalAlignment = Alignment.End) {
             val languagesList = Language.entries.toList()
-            var currentLanguage by remember { mutableStateOf(languagesList.first().localName) }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
-                    text = currentLanguage,
+                    text = language.localName,
                     style = AppTheme.typography.labelMedium,
                     color = AppTheme.colors.onSurface
                 )
@@ -83,8 +83,7 @@ private fun LanguageSettingItem(onLanguageChange: (String) -> Unit) {
                             color = AppTheme.colors.onSurface
                         )
                     }, onClick = {
-                        onLanguageChange(language.code)
-                        currentLanguage = language.localName
+                        onLanguageChange(language.project)
                         showLanguageList = false
                     })
                 }
@@ -96,7 +95,7 @@ private fun LanguageSettingItem(onLanguageChange: (String) -> Unit) {
 @Composable
 private fun ColorSettingItem(onColorChange: (Boolean) -> Unit) {
     var showColorThemeList by remember { mutableStateOf(false) }
-    SettingItem(title = stringResource(Res.string.language), content = {
+    SettingItem(title = stringResource(Res.string.color_theme), content = {
         Column(horizontalAlignment = Alignment.End) {
             var isDarkTheme by AppTheme.isDark
             val colorThemeList = listOf(Res.string.dark_theme, Res.string.light_theme)

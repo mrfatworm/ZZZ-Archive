@@ -12,6 +12,7 @@ import setting.FakeSettingRepository
 import setting.SettingsRepository
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -32,7 +33,9 @@ class SettingViewModelTest {
     @Test
     fun `Init Data Success`() {
         val isDark = viewModel.isDark.value
+        val state = viewModel.uiState.value
         assertTrue(isDark)
+        assertEquals("en", state.language.project)
     }
 
     @Test
@@ -40,5 +43,12 @@ class SettingViewModelTest {
         viewModel.setIsDarkTheme(false)
         val state = viewModel.isDark.value
         assertFalse(state)
+    }
+
+    @Test
+    fun `Set Language`() {
+        viewModel.setLanguage("zh")
+        val state = viewModel.uiState.value
+        assertEquals("zh", state.language.project)
     }
 }
