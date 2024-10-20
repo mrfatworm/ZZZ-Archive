@@ -13,12 +13,15 @@ import io.ktor.client.request.parameter
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.path
+import utils.LanguageHandler
 
-class OfficialWebHttpImpl(engine: HttpClientEngine) : OfficialWebHttp {
+class OfficialWebHttpImpl(engine: HttpClientEngine, languageHandler: LanguageHandler) :
+    OfficialWebHttp {
     override val timeout = 5000L
+    override val languagePath = languageHandler.getLanguage().assetLang
     private val client = createOfficialWebHttpClient(engine)
 
-    override suspend fun requestNews(amount: Int, langKey: String): OfficialNewsResponse =
+    override suspend fun requestNews(amount: Int): OfficialNewsResponse =
         client.get {
             url {
                 path("/content_v2_user/app/3e9196a4b9274bd7/getContentList")
@@ -27,7 +30,7 @@ class OfficialWebHttpImpl(engine: HttpClientEngine) : OfficialWebHttp {
             parameter("iPageSize", amount)
             parameter("iPage", 1)
             parameter("iChanId", 288)
-            parameter("sLangKey", langKey)
+            parameter("sLangKey", languagePath)
         }.body()
 }
 

@@ -18,7 +18,7 @@ import org.koin.dsl.module
 
 actual val platformModule = module {
     singleOf(::ZzzDatabase)
-    single<ZzzHttp> { ZzzHttpImpl(Darwin.create()) }
-    single<OfficialWebHttp> { OfficialWebHttpImpl(Darwin.create()) }
+    single<ZzzHttp> { ZzzHttpImpl(Darwin.create(), get()) }
+    single<OfficialWebHttp> { OfficialWebHttpImpl(Darwin.create(), get()) }
     single<PixivHttp> { PixivHttpImpl(Darwin.create()) }
 }

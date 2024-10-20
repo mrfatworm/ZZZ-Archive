@@ -23,27 +23,27 @@ class NewsRepositoryTest {
 
     @Test
     fun `Get News Success`() = runTest {
-        val result = repository.getNews(0, "") as ZzzResult.Success
+        val result = repository.getNews(0) as ZzzResult.Success
         assertEquals(result.data, stubOfficialNewsDataResponse)
     }
 
     @Test
     fun `Get News Error`() = runTest {
         httpClient.setError(true)
-        val result = repository.getNews(0, "") as ZzzResult.Error
+        val result = repository.getNews(0) as ZzzResult.Error
         assertTrue(result.exception.instanceOf(Exception::class))
     }
 
     @Test
     fun `Get New Every 10 Minutes`() = runTest {
-        val result = repository.getNewsPeriodically(10, 0, "").first() as ZzzResult.Success
+        val result = repository.getNewsPeriodically(10, 0).first() as ZzzResult.Success
         assertEquals(result.data, stubOfficialNewsDataResponse)
     }
 
     @Test
     fun `Get New Every 10 Minutes Fail`() = runTest {
         httpClient.setError(true)
-        val result = repository.getNewsPeriodically(10, 0, "").first() as ZzzResult.Error
+        val result = repository.getNewsPeriodically(10, 0).first() as ZzzResult.Error
         assertTrue(result.exception.instanceOf(Exception::class))
     }
 }

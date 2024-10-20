@@ -18,7 +18,7 @@ class FakeNewsRepository : NewsRepository {
         this.isError = isError
     }
 
-    override suspend fun getNews(amount: Int, langKey: String): ZzzResult<OfficialNewsResponse> {
+    override suspend fun getNews(amount: Int): ZzzResult<OfficialNewsResponse> {
         return if (isError) {
             ZzzResult.Error(Exception())
         } else {
@@ -28,8 +28,7 @@ class FakeNewsRepository : NewsRepository {
 
     override fun getNewsPeriodically(
         perMinutes: Int,
-        amount: Int,
-        langKey: String
+        amount: Int
     ): Flow<ZzzResult<OfficialNewsResponse>> {
         return if (isError) {
             flowOf(ZzzResult.Error(Exception()))

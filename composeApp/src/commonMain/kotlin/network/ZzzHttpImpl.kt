@@ -12,10 +12,12 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.appendPathSegments
 import kotlinx.serialization.json.Json
 import mainfunc.model.BannerResponse
+import utils.LanguageHandler
 
-class ZzzHttpImpl(engine: HttpClientEngine) : ZzzHttp {
+class ZzzHttpImpl(engine: HttpClientEngine, languageHandler: LanguageHandler) : ZzzHttp {
     override val defaultTimeout = 5000L
     override val longTimeout = 10000L
+    override val languagePath = languageHandler.getLanguage().assetLang
 
     private val client = createZzzHttpClient(engine)
 
@@ -27,7 +29,7 @@ class ZzzHttpImpl(engine: HttpClientEngine) : ZzzHttp {
     }
 
     override suspend fun requestBanner(): BannerResponse {
-        return requestData("Banner/zh-tw/Banner.json")
+        return requestData("Banner/$languagePath/Banner.json")
     }
 
     override suspend fun requestImageBanner(): ImageBannerResponse {
@@ -35,23 +37,23 @@ class ZzzHttpImpl(engine: HttpClientEngine) : ZzzHttp {
     }
 
     override suspend fun requestAgentList(): AgentsListResponse {
-        return requestData("Agent/zh-tw/List.json")
+        return requestData("Agent/$languagePath/List.json")
     }
 
     override suspend fun requestAgentDetail(id: Int): AgentDetailResponse {
-        return requestData("Agent/zh-tw/Detail/$id.json")
+        return requestData("Agent/$languagePath/Detail/$id.json")
     }
 
     override suspend fun requestWEngineList(): WEnginesListResponse {
-        return requestData("W-Engine/zh-tw/List.json")
+        return requestData("W-Engine/$languagePath/List.json")
     }
 
     override suspend fun requestBangbooList(): BangbooListResponse {
-        return requestData("Bangboo/zh-tw/List.json")
+        return requestData("Bangboo/$languagePath/List.json")
     }
 
     override suspend fun requestDriveList(): DriveListResponse {
-        return requestData("Drive/zh-tw/List.json")
+        return requestData("Drive/$languagePath/List.json")
     }
 }
 

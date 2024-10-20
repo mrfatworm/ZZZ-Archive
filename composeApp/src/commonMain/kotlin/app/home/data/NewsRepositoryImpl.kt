@@ -17,10 +17,10 @@ import network.OfficialWebHttp
 import utils.ZzzResult
 
 class NewsRepositoryImpl(private val httpClient: OfficialWebHttp) : NewsRepository {
-    override suspend fun getNews(amount: Int, langKey: String): ZzzResult<OfficialNewsResponse> {
+    override suspend fun getNews(amount: Int): ZzzResult<OfficialNewsResponse> {
         return try {
             val result = withTimeout(httpClient.timeout) {
-                httpClient.requestNews(amount, langKey)
+                httpClient.requestNews(amount)
             }
             ZzzResult.Success(result)
         } catch (e: Exception) {
@@ -30,11 +30,10 @@ class NewsRepositoryImpl(private val httpClient: OfficialWebHttp) : NewsReposito
 
     override fun getNewsPeriodically(
         perMinutes: Int,
-        amount: Int,
-        langKey: String
+        amount: Int
     ): Flow<ZzzResult<OfficialNewsResponse>> = flow {
         while (true) {
-            emit(getNews(amount, langKey))
+            emit(getNews(amount))
             delay(perMinutes * 60 * 1000L)
         }
     }.flowOn(Dispatchers.IO)

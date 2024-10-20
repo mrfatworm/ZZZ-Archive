@@ -93,7 +93,7 @@ class HomeViewModel(
     }
 
     private suspend fun fetchZzzOfficialNewsEveryTenMinutes() {
-        newsRepository.getNewsPeriodically(1, 5, "en-us").collect { result ->
+        newsRepository.getNewsPeriodically(1, 5).collect { result ->
             when (result) {
                 is ZzzResult.Success -> {
                     _uiState.update { state ->

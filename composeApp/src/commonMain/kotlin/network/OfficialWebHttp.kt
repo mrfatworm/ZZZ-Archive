@@ -10,5 +10,6 @@ import app.home.model.OfficialNewsResponse
 
 interface OfficialWebHttp {
     val timeout: Long
-    suspend fun requestNews(amount: Int, langKey: String): OfficialNewsResponse
+    val languagePath: String
+    suspend fun requestNews(amount: Int): OfficialNewsResponse
 }

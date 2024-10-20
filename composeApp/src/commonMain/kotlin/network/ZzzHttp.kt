@@ -16,6 +16,7 @@ import mainfunc.model.BannerResponse
 interface ZzzHttp {
     val defaultTimeout: Long
     val longTimeout: Long
+    val languagePath: String
     suspend fun requestBanner(): BannerResponse
     suspend fun requestImageBanner(): ImageBannerResponse
     suspend fun requestAgentList(): AgentsListResponse

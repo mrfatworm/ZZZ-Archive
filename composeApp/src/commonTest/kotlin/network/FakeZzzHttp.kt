@@ -24,6 +24,7 @@ import mainfunc.model.stubBannerResponse
 class FakeZzzHttp : ZzzHttp {
     override val defaultTimeout = 5000L
     override val longTimeout = 10000L
+    override val languagePath = "zh"
 
     private var isError = false
 

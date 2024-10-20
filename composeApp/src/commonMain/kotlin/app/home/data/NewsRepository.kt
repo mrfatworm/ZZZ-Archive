@@ -10,10 +10,9 @@ import kotlinx.coroutines.flow.Flow
 import utils.ZzzResult
 
 interface NewsRepository {
-    suspend fun getNews(amount: Int, langKey: String): ZzzResult<OfficialNewsResponse>
+    suspend fun getNews(amount: Int): ZzzResult<OfficialNewsResponse>
     fun getNewsPeriodically(
         perMinutes: Int,
-        amount: Int,
-        langKey: String
+        amount: Int
     ): Flow<ZzzResult<OfficialNewsResponse>>
 }

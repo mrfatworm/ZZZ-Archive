@@ -34,11 +34,14 @@ import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import setting.SettingsRepository
 import setting.SettingsRepositoryImpl
+import utils.LanguageHandler
+import utils.LanguageHandlerImpl
 
 expect val platformModule: Module
 
 val sharedModule = module {
     single<Settings> { Settings() }
+    single<LanguageHandler> { LanguageHandlerImpl(get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(get()) }
     single<BannerRepository> { BannerRepositoryImpl(get()) }
     single<NewsRepository> { NewsRepositoryImpl(get()) }
