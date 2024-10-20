@@ -114,4 +114,7 @@
     <string name="data_integration">Data Integration</string>
     <string name="banner_artists">Banner Artists</string>
     <string name="special_thanks">Special Thanks</string>
+    <string name="restart_hint">An app restart is required to apply the changes.\nWould you like to restart now?</string>
+    <string name="restart">Restart</string>
+    <string name="later">Later</string>
 </resources>

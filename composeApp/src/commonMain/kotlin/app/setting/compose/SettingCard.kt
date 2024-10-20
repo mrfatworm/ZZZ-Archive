@@ -25,6 +25,7 @@ import app.setting.model.SettingState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.component.ContentCard
+import ui.component.RestartDialog
 import ui.theme.AppTheme
 import utils.Language
 import zzzarchive.composeapp.generated.resources.Res
@@ -53,6 +54,7 @@ fun SettingCard(
 @Composable
 private fun LanguageSettingItem(language: Language, onLanguageChange: (String) -> Unit) {
     var showLanguageList by remember { mutableStateOf(false) }
+    val openRestartDialog = remember { mutableStateOf(false) }
     SettingItem(title = stringResource(Res.string.language), content = {
         Column(horizontalAlignment = Alignment.End) {
             val languagesList = Language.entries.toList()
@@ -75,21 +77,29 @@ private fun LanguageSettingItem(language: Language, onLanguageChange: (String) -
             DropdownMenu(expanded = showLanguageList,
                 containerColor = AppTheme.colors.surface,
                 onDismissRequest = { showLanguageList = false }) {
-                languagesList.forEach { language ->
+                languagesList.forEach { languageItem ->
                     DropdownMenuItem(text = {
                         Text(
-                            text = language.localName,
+                            text = languageItem.localName,
                             style = AppTheme.typography.labelMedium,
                             color = AppTheme.colors.onSurface
                         )
                     }, onClick = {
-                        onLanguageChange(language.project)
+                        if (languageItem.name != language.name) {
+                            openRestartDialog.value = true
+                        }
+                        onLanguageChange(languageItem.project)
                         showLanguageList = false
                     })
                 }
             }
         }
     }, onClick = { showLanguageList = true })
+    when {
+        openRestartDialog.value -> {
+            RestartDialog(onRestart = {}, onDismiss = { openRestartDialog.value = false })
+        }
+    }
 }
 
 @Composable

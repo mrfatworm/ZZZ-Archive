@@ -114,4 +114,7 @@
     <string name="data_integration">資料整合</string>
     <string name="banner_artists">封面畫師</string>
     <string name="special_thanks">銘謝</string>
+    <string name="restart_hint">需要重新啟動應用程式以套用變更\n是否立即重新啟動？</string>
+    <string name="restart">重新啟動</string>
+    <string name="later">稍後</string>
 </resources>
