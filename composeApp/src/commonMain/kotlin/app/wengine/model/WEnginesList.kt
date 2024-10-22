@@ -43,18 +43,18 @@ data class WEngineListItem(
 val stubWEnginesListResponse = WEnginesListResponse(
     wEngines = listOf(
         WEngineListItem(
-            id = 1,
-            name = "「月相」-望",
+            id = 44,
+            name = "好鬥的阿炮",
             isLeak = false,
-            rarity = 3,
-            specialty = "attack",
+            rarity = 4,
+            specialty = "support",
         ),
         WEngineListItem(
-            id = 2,
-            name = "「月相」-晦",
+            id = 47,
+            name = "玉壺青冰",
             isLeak = false,
-            rarity = 3,
-            specialty = "attack",
+            rarity = 5,
+            specialty = "stun",
         )
     )
 )

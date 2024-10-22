@@ -39,10 +39,12 @@ fun NavGraphBuilder.sharedComposable(
     }
 
     composable(Screen.WEnginesList.route) {
-        WEnginesListScreen(onWEngineClick = {
+        WEnginesListScreen(adaptiveLayoutType = adaptiveLayoutType, onWEngineClick = {
             navActions.navigationTo(
                 Screen.WEngineDetail
             )
+        }, onBackClick = {
+            navActions.back()
         })
     }
 

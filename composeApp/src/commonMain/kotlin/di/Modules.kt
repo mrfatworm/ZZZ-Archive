@@ -24,6 +24,7 @@ import app.setting.domain.SettingViewModel
 import app.splash.SplashViewModel
 import app.wengine.data.WEngineRepository
 import app.wengine.data.WEngineRepositoryImpl
+import app.wengine.domain.WEnginesListViewModel
 import app.wiki.domain.WikiViewModel
 import com.russhwolf.settings.Settings
 import mainfunc.MainFuncViewModel
@@ -58,5 +59,6 @@ val sharedModule = module {
     viewModelOf(::WikiViewModel)
     viewModelOf(::AgentListViewModel)
     viewModelOf(::AgentDetailViewModel)
+    viewModelOf(::WEnginesListViewModel)
     viewModelOf(::SettingViewModel)
 }
