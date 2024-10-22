@@ -43,7 +43,7 @@ class WEnginesListViewModel(
             }
 
             is ZzzResult.Error -> {
-                println("get agents error: ${result.exception}")
+                println("get W-Engines error: ${result.exception}")
             }
         }
     }

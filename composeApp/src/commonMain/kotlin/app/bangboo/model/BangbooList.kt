@@ -8,6 +8,8 @@ package app.bangboo.model
 import com.mrfatworm.zzzarchive.ZzzConfig
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import utils.AgentAttribute
+import kotlin.enums.EnumEntries
 
 @Serializable
 data class BangbooListResponse(
@@ -29,6 +31,11 @@ data class BangbooListItem(
     fun getProfileUrl(): String {
         return "https://raw.githubusercontent.com/${ZzzConfig.ASSET_PATH}/Bangboo/Profile/$id.webp"
     }
+
+    fun getAttributeEnum(agentAttribute: EnumEntries<AgentAttribute> = AgentAttribute.entries) =
+        agentAttribute.find {
+            it.name.lowercase() == attribute.lowercase()
+        } ?: AgentAttribute.None
 }
 
 val stubBangbooListResponse = BangbooListResponse(
@@ -37,14 +44,14 @@ val stubBangbooListResponse = BangbooListResponse(
             id = 1,
             name = "企鵝布",
             isLeak = false,
-            rarity = 5,
+            rarity = 4,
             attribute = "ice",
         ), BangbooListItem(
             id = 2,
             name = "巴特勒",
             isLeak = false,
-            rarity = 4,
-            attribute = "electric",
+            rarity = 5,
+            attribute = "physical",
         )
     )
 )

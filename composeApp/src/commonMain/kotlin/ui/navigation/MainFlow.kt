@@ -94,8 +94,8 @@ val ALL_MAIN_FLOW = listOf(
     MainFlow.Home,
     MainFlow.Agent,
     MainFlow.WEngine,
-    MainFlow.Drive,
     MainFlow.Bangboo,
+    MainFlow.Drive,
     MainFlow.Setting,
     MainFlow.Wiki,
     MainFlow.Function
@@ -105,8 +105,8 @@ val NAV_RAIL_MAIN_FLOW = listOf(
     MainFlow.Home,
     MainFlow.Agent,
     MainFlow.WEngine,
-    MainFlow.Drive,
     MainFlow.Bangboo,
+    MainFlow.Drive,
     MainFlow.Setting,
 )
 

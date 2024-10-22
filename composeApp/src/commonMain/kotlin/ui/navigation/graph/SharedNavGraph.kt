@@ -52,6 +52,18 @@ fun NavGraphBuilder.sharedComposable(
         WEngineDetailScreen(onAgentClick = { navActions.navigationTo(Screen.AgentDetail) })
     }
 
+    composable(Screen.BangbooList.route) {
+        BangbooListScreen(adaptiveLayoutType = adaptiveLayoutType, onBangbooClick = {
+            navActions.navigationTo(Screen.BangbooDetail)
+        }, onBackClick = {
+            navActions.back()
+        })
+    }
+
+    composable(Screen.BangbooDetail.route) {
+        BangbooDetailScreen(onAgentClick = { navActions.navigationTo(Screen.AgentDetail) })
+    }
+
     composable(Screen.DrivesList.route) {
         DrivesListScreen(onDriveClick = {
             navActions.navigationTo(
@@ -64,13 +76,5 @@ fun NavGraphBuilder.sharedComposable(
         DriveDetailScreen(onAgentClick = { navActions.navigationTo(Screen.AgentDetail) })
     }
 
-    composable(Screen.BangbooList.route) {
-        BangbooListScreen(onBangbooClick = {
-            navActions.navigationTo(Screen.BangbooDetail)
-        })
-    }
 
-    composable(Screen.BangbooDetail.route) {
-        BangbooDetailScreen(onAgentClick = { navActions.navigationTo(Screen.AgentDetail) })
-    }
 }

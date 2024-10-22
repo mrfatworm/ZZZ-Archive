@@ -5,47 +5,46 @@
 
 package app.bangboo
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import ui.component.ZzzOutlineButton
-import ui.theme.AppTheme
-import ui.theme.ZzzArchiveTheme
+import androidx.compose.runtime.collectAsState
+import app.bangboo.compose.BangbooListScreenDual
+import app.bangboo.compose.BangbooListScreenSingle
+import app.bangboo.domain.BangbooListViewModel
+import org.koin.compose.viewmodel.koinViewModel
+import ui.utils.AdaptiveLayoutType
 
 @Composable
-fun BangbooListScreen(onBangbooClick: (String) -> Unit = {}) {
-    Text(
-        modifier = Modifier.fillMaxWidth().padding(16.dp),
-        text = "邦布清單",
-        textAlign = TextAlign.Center,
-        style = AppTheme.typography.headlineMedium,
-        color = AppTheme.colors.onSurface
-    )
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceAround
-    ) {
-        ZzzOutlineButton(text = "破抹布", onClick = { onBangbooClick("破抹布") })
-    }
-}
-
-@Preview
-@Composable
-fun PreviewBangbooListScreen() {
-    ZzzArchiveTheme {
-        BangbooListScreen()
+fun BangbooListScreen(
+    adaptiveLayoutType: AdaptiveLayoutType,
+    onBangbooClick: (Int) -> Unit,
+    onBackClick: () -> Unit
+) {
+    val viewModel: BangbooListViewModel = koinViewModel()
+    val uiState = viewModel.uiState.collectAsState()
+    if (adaptiveLayoutType == AdaptiveLayoutType.Compact) {
+        BangbooListScreenSingle(
+            uiState = uiState.value,
+            adaptiveLayoutType = adaptiveLayoutType,
+            onRarityChipSelectionChanged = {
+                viewModel.rarityFilterChanged(it)
+            },
+            onAttributeChipSelectionChanged = {
+                viewModel.attributeFilterChanged(it)
+            },
+            onBangbooClick = onBangbooClick,
+            onBackClick = onBackClick
+        )
+    } else {
+        BangbooListScreenDual(
+            uiState = uiState.value,
+            adaptiveLayoutType = adaptiveLayoutType,
+            onRarityChipSelectionChanged = {
+                viewModel.rarityFilterChanged(it)
+            },
+            onAttributeChipSelectionChanged = {
+                viewModel.attributeFilterChanged(it)
+            },
+            onBangbooClick = onBangbooClick
+        )
     }
 }
