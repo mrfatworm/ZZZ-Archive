@@ -22,7 +22,8 @@ fun SettingScreenDual(
     uiState: SettingState,
     adaptiveLayoutType: AdaptiveLayoutType,
     onLanguageChange: (String) -> Unit,
-    onColorChange: (Boolean) -> Unit
+    onColorChange: (Boolean) -> Unit,
+    onRestart: () -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
         Column(
@@ -33,7 +34,8 @@ fun SettingScreenDual(
             SettingCard(
                 uiState = uiState,
                 onLanguageChange = onLanguageChange,
-                onColorChange = onColorChange
+                onColorChange = onColorChange,
+                onRestart = onRestart
             )
             OtherInfoCard(onFeedbackClick = {})
             LicenseCard()

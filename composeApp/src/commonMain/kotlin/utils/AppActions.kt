@@ -3,7 +3,9 @@
  * License: CC BY-SA 4.0
  */
 
-package database
+package utils
 
-actual class ZzzDatabase {
+// Issue: Cannot restart on Desktop and iOS
+expect class AppActions {
+    fun restart()
 }

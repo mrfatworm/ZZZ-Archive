@@ -74,6 +74,10 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
         }
 
+        androidUnitTest.dependencies {
+            implementation(libs.mockk)
+        }
+
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }

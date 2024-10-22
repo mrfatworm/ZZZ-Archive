@@ -26,12 +26,16 @@ fun SettingScreen(
             viewModel.setIsDarkTheme(isDark)
         }, onLanguageChange = { langCode ->
             viewModel.setLanguage(langCode)
+        }, onRestart = {
+            viewModel.restartApp()
         })
     } else {
         SettingScreenDual(uiState.value, adaptiveLayoutType, onColorChange = { isDark ->
             viewModel.setIsDarkTheme(isDark)
         }, onLanguageChange = { langCode ->
             viewModel.setLanguage(langCode)
+        }, onRestart = {
+            viewModel.restartApp()
         })
     }
 }

@@ -5,9 +5,10 @@
 
 package utils
 
-import coil3.PlatformContext
 import kotlin.system.exitProcess
 
-actual fun restartApp(platformContext: PlatformContext) {
-    exitProcess(0)
+actual class AppActions {
+    actual fun restart() {
+        exitProcess(0)
+    }
 }

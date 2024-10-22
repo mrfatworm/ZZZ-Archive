@@ -5,7 +5,6 @@
 
 package di
 
-import database.ZzzDatabase
 import io.ktor.client.engine.darwin.Darwin
 import network.OfficialWebHttp
 import network.OfficialWebHttpImpl
@@ -15,9 +14,10 @@ import network.ZzzHttp
 import network.ZzzHttpImpl
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
+import utils.AppActions
 
 actual val platformModule = module {
-    singleOf(::ZzzDatabase)
+    singleOf(::AppActions)
     single<ZzzHttp> { ZzzHttpImpl(Darwin.create(), get()) }
     single<OfficialWebHttp> { OfficialWebHttpImpl(Darwin.create(), get()) }
     single<PixivHttp> { PixivHttpImpl(Darwin.create()) }

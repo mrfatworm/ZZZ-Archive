@@ -8,7 +8,6 @@ package app.agent.domain
 
 import MainDispatcherRule
 import androidx.lifecycle.SavedStateHandle
-import app.agent.data.AgentRepository
 import app.agent.data.FakeAgentRepository
 import app.agent.model.stubAgentDetailResponse
 import org.junit.Rule
@@ -21,16 +20,14 @@ class AgentDetailViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private lateinit var savedStateHandle: SavedStateHandle
-    private lateinit var agentRepository: AgentRepository
+    private val savedStateHandle = SavedStateHandle().apply {
+        set("agentId", 20)
+    }
+    private val agentRepository = FakeAgentRepository()
     private lateinit var viewModel: AgentDetailViewModel
 
     @BeforeTest
     fun setup() {
-        savedStateHandle = SavedStateHandle().apply {
-            set("agentId", 20)
-        }
-        agentRepository = FakeAgentRepository()
         viewModel = AgentDetailViewModel(savedStateHandle, agentRepository)
     }
 

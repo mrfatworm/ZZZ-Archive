@@ -42,17 +42,22 @@ import zzzarchive.composeapp.generated.resources.under_development
 fun SettingCard(
     uiState: SettingState,
     onLanguageChange: (String) -> Unit,
-    onColorChange: (Boolean) -> Unit
+    onColorChange: (Boolean) -> Unit,
+    onRestart: () -> Unit = {}
 ) {
     ContentCard(hasDefaultPadding = false) {
-        LanguageSettingItem(uiState.language, onLanguageChange)
+        LanguageSettingItem(uiState.language, onLanguageChange, onRestart)
         ColorSettingItem(onColorChange)
         HoYoLabSettingItem()
     }
 }
 
 @Composable
-private fun LanguageSettingItem(language: Language, onLanguageChange: (String) -> Unit) {
+private fun LanguageSettingItem(
+    language: Language,
+    onLanguageChange: (String) -> Unit,
+    onRestart: () -> Unit = {}
+) {
     var showLanguageList by remember { mutableStateOf(false) }
     val openRestartDialog = remember { mutableStateOf(false) }
     SettingItem(title = stringResource(Res.string.language), content = {
@@ -97,7 +102,7 @@ private fun LanguageSettingItem(language: Language, onLanguageChange: (String) -
     }, onClick = { showLanguageList = true })
     when {
         openRestartDialog.value -> {
-            RestartDialog(onRestart = {}, onDismiss = { openRestartDialog.value = false })
+            RestartDialog(onRestart = onRestart, onDismiss = { openRestartDialog.value = false })
         }
     }
 }

@@ -20,10 +20,8 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import coil3.compose.LocalPlatformContext
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.AppTheme
-import utils.restartApp
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.announcement
 import zzzarchive.composeapp.generated.resources.close
@@ -108,12 +106,11 @@ fun RestartDialog(onDismiss: () -> Unit, onRestart: () -> Unit) {
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    val platformContext = LocalPlatformContext.current
                     ZzzOutlineButton(text = stringResource(Res.string.later)) {
                         onDismiss()
                     }
                     ZzzPrimaryButton(text = stringResource(Res.string.restart)) {
-                        restartApp(platformContext)
+                        onRestart()
                     }
                 }
             }

@@ -7,7 +7,6 @@ package app.agent.domain
 
 
 import MainDispatcherRule
-import app.agent.data.AgentRepository
 import app.agent.data.FakeAgentRepository
 import app.agent.model.stubAgentsListResponse
 import org.junit.Rule
@@ -23,12 +22,11 @@ class AgentListViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private lateinit var agentRepository: AgentRepository
+    private val agentRepository = FakeAgentRepository()
     private lateinit var viewModel: AgentListViewModel
 
     @BeforeTest
     fun setup() {
-        agentRepository = FakeAgentRepository()
         viewModel = AgentListViewModel(agentRepository)
     }
 

@@ -22,7 +22,8 @@ fun SettingScreenSingle(
     uiState: SettingState,
     adaptiveLayoutType: AdaptiveLayoutType,
     onLanguageChange: (String) -> Unit,
-    onColorChange: (Boolean) -> Unit
+    onColorChange: (Boolean) -> Unit,
+    onRestart: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
@@ -32,7 +33,8 @@ fun SettingScreenSingle(
         SettingCard(
             uiState = uiState,
             onLanguageChange = onLanguageChange,
-            onColorChange = onColorChange
+            onColorChange = onColorChange,
+            onRestart = onRestart
         )
         OtherInfoCard(onFeedbackClick = {})
         LicenseCard()

@@ -12,11 +12,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import setting.SettingsRepository
+import utils.AppActions
 import utils.Language
 import utils.changeLanguage
 
 class SettingViewModel(
-    private val settingsRepository: SettingsRepository
+    private val settingsRepository: SettingsRepository,
+    private val appActions: AppActions
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(settingState)
@@ -53,5 +55,9 @@ class SettingViewModel(
         updateLanguageState(langCode)
         settingsRepository.setLanguage(langCode)
         changeLanguage(langCode)
+    }
+
+    fun restartApp() {
+        appActions.restart()
     }
 }

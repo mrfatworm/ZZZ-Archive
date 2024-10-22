@@ -7,9 +7,11 @@ package app.setting.domain
 
 
 import MainDispatcherRule
+import android.content.Context
+import io.mockk.mockk
 import org.junit.Rule
 import setting.FakeSettingRepository
-import setting.SettingsRepository
+import utils.AppActions
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -21,13 +23,14 @@ class SettingViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private lateinit var settingsRepository: SettingsRepository
+    private val mockContext = mockk<Context>(relaxed = true)
+    private val settingsRepository = FakeSettingRepository()
+    private val appActions = AppActions(mockContext)
     private lateinit var viewModel: SettingViewModel
 
     @BeforeTest
     fun setup() {
-        settingsRepository = FakeSettingRepository()
-        viewModel = SettingViewModel(settingsRepository)
+        viewModel = SettingViewModel(settingsRepository, appActions)
     }
 
     @Test
@@ -51,4 +54,5 @@ class SettingViewModelTest {
         val state = viewModel.uiState.value
         assertEquals("zh", state.language.project)
     }
+
 }
