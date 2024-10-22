@@ -20,11 +20,8 @@ import ui.navigation.Screen
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
 
-
 fun NavGraphBuilder.sharedComposable(
-    contentType: ContentType,
-    adaptiveLayoutType: AdaptiveLayoutType,
-    navActions: NavActions
+    contentType: ContentType, adaptiveLayoutType: AdaptiveLayoutType, navActions: NavActions
 ) {
     composable(Screen.AgentsList.route) {
         AgentsListScreen(contentType, adaptiveLayoutType, onAgentClick = { id ->
@@ -65,16 +62,16 @@ fun NavGraphBuilder.sharedComposable(
     }
 
     composable(Screen.DrivesList.route) {
-        DrivesListScreen(onDriveClick = {
+        DrivesListScreen(adaptiveLayoutType = adaptiveLayoutType, onDriveClick = {
             navActions.navigationTo(
                 Screen.DriveDetail
             )
+        }, onBackClick = {
+            navActions.back()
         })
     }
 
     composable(Screen.DriveDetail.route) {
         DriveDetailScreen(onAgentClick = { navActions.navigationTo(Screen.AgentDetail) })
     }
-
-
 }

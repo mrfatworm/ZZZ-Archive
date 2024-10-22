@@ -3,36 +3,30 @@
  * License: CC BY-SA 4.0
  */
 
-package app.wengine.compose
+package app.drive.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import app.wengine.model.WEnginesListState
+import app.drive.model.DrivesListState
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
-import utils.AgentSpecialty
-import utils.ZzzRarity
 
 @Composable
-fun WEnginesListScreenDual(
-    uiState: WEnginesListState,
+fun DrivesListScreenDual(
+    uiState: DrivesListState,
     adaptiveLayoutType: AdaptiveLayoutType,
-    onWEngineClick: (Int) -> Unit = {},
-    onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
-    onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit,
+    onDriveClick: (Int) -> Unit = {}
 ) {
     Row(
         modifier = Modifier.contentPadding(adaptiveLayoutType, AppTheme.dimens),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
-        WEnginesListFilterCard(
+        DrivesListCard(
             uiState = uiState,
-            onWEngineClick = onWEngineClick,
-            onRarityChipSelectionChanged = onRarityChipSelectionChanged,
-            onSpecialtyChipSelectionChanged = onSpecialtyChipSelectionChanged
+            onDriveClick = onDriveClick
         )
     }
 }

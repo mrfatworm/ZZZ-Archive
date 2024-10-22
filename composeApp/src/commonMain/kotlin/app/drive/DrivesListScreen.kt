@@ -5,49 +5,32 @@
 
 package app.drive
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import ui.component.ZzzOutlineButton
-import ui.theme.AppTheme
-import ui.theme.ZzzArchiveTheme
+import androidx.compose.runtime.collectAsState
+import app.drive.compose.DrivesListScreenDual
+import app.drive.compose.DrivesListScreenSingle
+import app.drive.domain.DrivesListViewModel
+import org.koin.compose.viewmodel.koinViewModel
+import ui.utils.AdaptiveLayoutType
 
 @Composable
-fun DrivesListScreen(onDriveClick: (String) -> Unit = {}) {
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            text = "驅動光碟清單",
-            textAlign = TextAlign.Center,
-            style = AppTheme.typography.headlineMedium,
-            color = AppTheme.colors.onSurface
+fun DrivesListScreen(
+    adaptiveLayoutType: AdaptiveLayoutType, onDriveClick: (Int) -> Unit, onBackClick: () -> Unit
+) {
+    val viewModel: DrivesListViewModel = koinViewModel()
+    val uiState = viewModel.uiState.collectAsState()
+    if (adaptiveLayoutType == AdaptiveLayoutType.Compact) {
+        DrivesListScreenSingle(
+            uiState = uiState.value,
+            adaptiveLayoutType = adaptiveLayoutType,
+            onDriveClick = onDriveClick,
+            onBackClick = onBackClick
         )
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceAround
-        ) {
-            ZzzOutlineButton(text = "震星迪斯可", onClick = { onDriveClick("震星迪斯可") })
-        }
-}
-
-@Preview
-@Composable
-fun PreviewDrivesListScreen() {
-    ZzzArchiveTheme {
-        DrivesListScreen()
+    } else {
+        DrivesListScreenDual(
+            uiState = uiState.value,
+            adaptiveLayoutType = adaptiveLayoutType,
+            onDriveClick = onDriveClick
+        )
     }
 }

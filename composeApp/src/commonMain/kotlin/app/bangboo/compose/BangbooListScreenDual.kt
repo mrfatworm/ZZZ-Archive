@@ -29,7 +29,6 @@ fun BangbooListScreenDual(
         horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         BangbooListFilterCard(
-            modifier = Modifier.weight(0.7f),
             uiState = uiState,
             onBangbooClick = onBangbooClick,
             onRarityChipSelectionChanged = onRarityChipSelectionChanged,

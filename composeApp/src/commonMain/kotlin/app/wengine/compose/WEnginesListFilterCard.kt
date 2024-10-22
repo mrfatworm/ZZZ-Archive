@@ -30,7 +30,7 @@ import utils.ZzzRarity
 
 @Composable
 fun WEnginesListFilterCard(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     uiState: WEnginesListState,
     lazyGridState: LazyGridState = rememberLazyGridState(),
     invisibleFilter: Boolean = false,
