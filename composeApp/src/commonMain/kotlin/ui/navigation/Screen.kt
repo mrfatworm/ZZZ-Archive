@@ -52,10 +52,10 @@ sealed class Screen(
 
     data object WEngineDetail : Screen(
         route = "wEngineDetail/{wEngineId}", navArguments = listOf(navArgument("wEngineId") {
-            type = NavType.StringType
+            type = NavType.IntType
         })
     ) {
-        fun createRoute(wEngineId: String) = "wEngineDetail/${wEngineId}"
+        fun createRoute(wEngineId: Int) = "wEngineDetail/$wEngineId"
     }
 
     data object DrivesList : Screen(
@@ -64,21 +64,23 @@ sealed class Screen(
 
     data object DriveDetail : Screen(
         route = "driveDetail/{driverId}", navArguments = listOf(navArgument("driveId") {
-            type = NavType.StringType
+            type = NavType.IntType
         })
     ) {
-        fun createRoute(driveId: String) = "driveDetail/${driveId}"
+        fun createRoute(driveId: String) = "driveDetail/$driveId"
     }
 
     data object BangbooList : Screen(
-        route = "bangBooList", textRes = Res.string.bangboo
+        route = "bangbooList", textRes = Res.string.bangboo
     )
 
     data object BangbooDetail : Screen(
-        route = "bangbooDetail/{bangBooId}", navArguments = listOf(navArgument("bangbooId") {
-            type = NavType.StringType
+        route = "bangbooDetail/{bangbooId}", navArguments = listOf(navArgument("bangbooId") {
+            type = NavType.IntType
         })
-    )
+    ) {
+        fun createRoute(bangbooId: Int) = "bangbooDetail/$bangbooId"
+    }
 
     data object Setting : Screen(
         route = "setting", textRes = Res.string.setting

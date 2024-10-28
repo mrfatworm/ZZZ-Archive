@@ -5,6 +5,7 @@ import app.agent.model.AgentsListResponse
 import app.bangboo.model.BangbooListResponse
 import app.drive.model.DriveListResponse
 import app.home.model.ImageBannerResponse
+import app.wengine.model.WEngineDetailResponse
 import app.wengine.model.WEnginesListResponse
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.get
@@ -46,6 +47,10 @@ class ZzzHttpImpl(engine: HttpClientEngine, languageHandler: LanguageHandler) : 
 
     override suspend fun requestWEngineList(): WEnginesListResponse {
         return requestData("W-Engine/$languagePath/List.json")
+    }
+
+    override suspend fun requestWEngineDetail(id: Int): WEngineDetailResponse {
+        return requestData("W-Engine/$languagePath/Detail/$id.json")
     }
 
     override suspend fun requestBangbooList(): BangbooListResponse {

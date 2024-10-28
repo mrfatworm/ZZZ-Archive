@@ -5,9 +5,11 @@
 
 package app.wengine.data
 
+import app.wengine.model.WEngineDetailResponse
 import app.wengine.model.WEnginesListResponse
 import utils.ZzzResult
 
 interface WEngineRepository {
     suspend fun getWEnginesList(): ZzzResult<WEnginesListResponse>
+    suspend fun getWEngineDetail(id: Int): ZzzResult<WEngineDetailResponse>
 }

@@ -95,6 +95,11 @@
     <string name="suggest_drives">Recommended Drives</string>
     <string name="agent_background">Agent Background</string>
 
+    <!-- W-Engine Detail -->
+    <string name="atk">ATK</string>
+    <string name="w_engine_effect">W-Engine Effect</string>
+    <string name="additional_info">Additional Info</string>
+
     <!-- Setting -->
     <string name="language">Language</string>
     <string name="color_theme">Color Theme</string>

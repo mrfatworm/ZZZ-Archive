@@ -22,7 +22,7 @@ val emptyAgentDetailResponse = AgentDetailResponse(
     factionId = 0,
     agentBackground = "---",
     basicData = AgentBasicData(
-        hp = 0, atk = 0, def = 0, coreSkillEnhancements = emptyList()
+        hp = 0, atk = 0, def = 0, nameAndValues = emptyList()
     ),
     skills = AgentSkill(
         basicAttack = emptyList(),

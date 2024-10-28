@@ -5,7 +5,9 @@
 
 package app.wengine.data
 
+import app.wengine.model.WEngineDetailResponse
 import app.wengine.model.WEnginesListResponse
+import app.wengine.model.stubWEngineDetailResponse
 import app.wengine.model.stubWEnginesListResponse
 import utils.ZzzResult
 
@@ -21,6 +23,14 @@ class FakeWEngineRepository : WEngineRepository {
             ZzzResult.Error(Exception())
         } else {
             ZzzResult.Success(stubWEnginesListResponse)
+        }
+    }
+
+    override suspend fun getWEngineDetail(id: Int): ZzzResult<WEngineDetailResponse> {
+        return if (isError) {
+            ZzzResult.Error(Exception())
+        } else {
+            ZzzResult.Success(stubWEngineDetailResponse)
         }
     }
 }

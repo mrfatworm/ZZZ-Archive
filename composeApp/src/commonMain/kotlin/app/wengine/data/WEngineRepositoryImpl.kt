@@ -5,6 +5,7 @@
 
 package app.wengine.data
 
+import app.wengine.model.WEngineDetailResponse
 import app.wengine.model.WEnginesListResponse
 import kotlinx.coroutines.withTimeout
 import network.ZzzHttp
@@ -15,6 +16,17 @@ class WEngineRepositoryImpl(private val httpClient: ZzzHttp) : WEngineRepository
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
                 httpClient.requestWEngineList()
+            }
+            ZzzResult.Success(result)
+        } catch (e: Exception) {
+            ZzzResult.Error(e)
+        }
+    }
+
+    override suspend fun getWEngineDetail(id: Int): ZzzResult<WEngineDetailResponse> {
+        return try {
+            val result = withTimeout(httpClient.defaultTimeout) {
+                httpClient.requestWEngineDetail(id)
             }
             ZzzResult.Success(result)
         } catch (e: Exception) {

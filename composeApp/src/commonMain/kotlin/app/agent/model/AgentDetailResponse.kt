@@ -92,11 +92,11 @@ data class AgentBasicData(
     val hp: Int,
     val atk: Int,
     val def: Int,
-    @SerialName("core_skill_enhancements") val coreSkillEnhancements: List<CoreSkillEnhancement>
+    @SerialName("core_skill_enhancements") val nameAndValues: List<NameAndValue>
 )
 
 @Serializable
-data class CoreSkillEnhancement(
+data class NameAndValue(
     val name: String, val value: String
 )
 
@@ -178,10 +178,10 @@ val stubAgentDetailResponse = AgentDetailResponse(
     attackType = "strike",
     factionId = 6, agentBackground = "青衣背景",
     basicData = AgentBasicData(
-        hp = 8250, atk = 683, def = 612, coreSkillEnhancements = listOf(
-            CoreSkillEnhancement(
+        hp = 8250, atk = 683, def = 612, nameAndValues = listOf(
+            NameAndValue(
                 name = "攻擊力", value = "+75"
-            ), CoreSkillEnhancement(
+            ), NameAndValue(
                 name = "衝擊力", value = "+18"
             )
         )

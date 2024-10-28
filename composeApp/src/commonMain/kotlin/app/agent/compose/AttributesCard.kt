@@ -35,7 +35,7 @@ fun AttributesCard(agentDetail: AgentDetailResponse) {
             title = stringResource(Res.string.hp_atk_def),
             content = agentDetail.getHpAtkDef()
         )
-        agentDetail.basicData.coreSkillEnhancements.forEach {
+        agentDetail.basicData.nameAndValues.forEach {
             AttributeItem(title = it.name, content = it.value)
         }
         Spacer(Modifier.size(4.dp))

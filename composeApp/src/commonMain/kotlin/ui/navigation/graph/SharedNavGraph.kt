@@ -36,17 +36,17 @@ fun NavGraphBuilder.sharedComposable(
     }
 
     composable(Screen.WEnginesList.route) {
-        WEnginesListScreen(adaptiveLayoutType = adaptiveLayoutType, onWEngineClick = {
-            navActions.navigationTo(
-                Screen.WEngineDetail
+        WEnginesListScreen(adaptiveLayoutType = adaptiveLayoutType, onWEngineClick = { id ->
+            navActions.navigationToRoute(
+                Screen.WEngineDetail.createRoute(id)
             )
         }, onBackClick = {
             navActions.back()
         })
     }
 
-    composable(Screen.WEngineDetail.route) {
-        WEngineDetailScreen(onAgentClick = { navActions.navigationTo(Screen.AgentDetail) })
+    composable(Screen.WEngineDetail.route, arguments = Screen.WEngineDetail.navArguments) {
+        WEngineDetailScreen(contentType, adaptiveLayoutType, onBackClick = { navActions.back() })
     }
 
     composable(Screen.BangbooList.route) {

@@ -15,7 +15,9 @@ import app.drive.model.DriveListResponse
 import app.drive.model.stubDriveListResponse
 import app.home.model.ImageBannerResponse
 import app.home.model.stubImageBannerResponse
+import app.wengine.model.WEngineDetailResponse
 import app.wengine.model.WEnginesListResponse
+import app.wengine.model.stubWEngineDetailResponse
 import app.wengine.model.stubWEnginesListResponse
 import mainfunc.model.BannerResponse
 import mainfunc.model.stubBannerResponse
@@ -69,6 +71,14 @@ class FakeZzzHttp : ZzzHttp {
             throw Exception()
         } else {
             stubWEnginesListResponse
+        }
+    }
+
+    override suspend fun requestWEngineDetail(id: Int): WEngineDetailResponse {
+        return if (isError) {
+            throw Exception()
+        } else {
+            stubWEngineDetailResponse
         }
     }
 

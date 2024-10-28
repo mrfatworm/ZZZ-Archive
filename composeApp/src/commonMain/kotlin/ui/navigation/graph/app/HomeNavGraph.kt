@@ -37,8 +37,13 @@ fun NavGraphBuilder.homeNavGraph(
                             id
                         )
                     )
+                }, onWEngineDetailClick = { id ->
+                    navActions.navigationToRoute(
+                        Screen.WEngineDetail.createRoute(
+                            id
+                        )
+                    )
                 },
-                onWEngineDetailClick = { navActions.navigationTo(Screen.WEngineDetail) },
                 onBangbooDetailClick = { navActions.navigationTo(Screen.BangbooDetail) },
                 onDriveDetailClick = { navActions.navigationTo(Screen.DriveDetail) })
         }

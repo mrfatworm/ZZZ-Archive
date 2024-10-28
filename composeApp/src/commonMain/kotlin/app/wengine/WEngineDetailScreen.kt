@@ -5,47 +5,31 @@
 
 package app.wengine
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import ui.component.ZzzOutlineButton
-import ui.theme.AppTheme
-import ui.theme.ZzzArchiveTheme
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import app.wengine.compose.WEngineDetailScreenDual
+import app.wengine.compose.WEngineDetailScreenSingle
+import app.wengine.domain.WEngineDetailViewModel
+import org.koin.compose.viewmodel.koinViewModel
+import ui.utils.AdaptiveLayoutType
+import ui.utils.ContentType
 
 @Composable
-fun WEngineDetailScreen(onAgentClick: (String) -> Unit = {}) {
-    Text(
-        modifier = Modifier.fillMaxWidth().padding(16.dp),
-        text = "硫磺石",
-        textAlign = TextAlign.Center,
-        style = AppTheme.typography.headlineMedium,
-        color = AppTheme.colors.onSurface
-    )
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceAround
-    ) {
-        ZzzOutlineButton(text = "推薦角色: 11號", onClick = { onAgentClick("11號") })
-    }
-}
-
-@Preview
-@Composable
-fun PreviewWEngineDetailScreen() {
-    ZzzArchiveTheme {
-        WEngineDetailScreen()
+fun WEngineDetailScreen(
+    contentType: ContentType, adaptiveLayoutType: AdaptiveLayoutType, onBackClick: () -> Unit
+) {
+    val viewModel: WEngineDetailViewModel = koinViewModel()
+    val uiState by viewModel.uiState.collectAsState()
+    if (contentType == ContentType.Single) {
+        WEngineDetailScreenSingle(
+            uiState = uiState, adaptiveLayoutType = adaptiveLayoutType, onBackClick = onBackClick
+        )
+    } else {
+        WEngineDetailScreenDual(
+            uiState = uiState,
+            adaptiveLayoutType = adaptiveLayoutType,
+            onBackClick = onBackClick
+        )
     }
 }

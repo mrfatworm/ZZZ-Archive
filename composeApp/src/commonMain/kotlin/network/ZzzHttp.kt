@@ -10,6 +10,7 @@ import app.agent.model.AgentsListResponse
 import app.bangboo.model.BangbooListResponse
 import app.drive.model.DriveListResponse
 import app.home.model.ImageBannerResponse
+import app.wengine.model.WEngineDetailResponse
 import app.wengine.model.WEnginesListResponse
 import mainfunc.model.BannerResponse
 
@@ -22,6 +23,7 @@ interface ZzzHttp {
     suspend fun requestAgentList(): AgentsListResponse
     suspend fun requestAgentDetail(id: Int): AgentDetailResponse
     suspend fun requestWEngineList(): WEnginesListResponse
+    suspend fun requestWEngineDetail(id: Int): WEngineDetailResponse
     suspend fun requestBangbooList(): BangbooListResponse
     suspend fun requestDriveList(): DriveListResponse
 }

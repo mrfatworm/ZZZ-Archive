@@ -68,14 +68,14 @@ fun WEnginesListFilterCard(
             items(
                 count = uiState.wEnginesList.size,
                 key = { index -> uiState.wEnginesList[index].id }) { index ->
-                val agent = uiState.wEnginesList[index]
+                val wEngine = uiState.wEnginesList[index]
                 RarityItem(modifier = Modifier.animateItem(),
-                    rarityLevel = agent.rarity,
-                    name = agent.name,
-                    specialty = agent.getSpecialtyEnum(),
-                    imgUrl = agent.getImageUrl(),
+                    rarityLevel = wEngine.rarity,
+                    name = wEngine.name,
+                    specialty = wEngine.getSpecialtyEnum(),
+                    imgUrl = wEngine.getImageUrl(),
                     onClick = {
-                        onWEngineClick(agent.id)
+                        onWEngineClick(wEngine.id)
                     })
             }
         }

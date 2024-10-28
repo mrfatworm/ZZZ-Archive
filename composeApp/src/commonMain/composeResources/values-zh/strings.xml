@@ -95,6 +95,11 @@
     <string name="suggest_drives">推薦驅動光碟</string>
     <string name="agent_background">代理人設定</string>
 
+    <!-- W-Engine Detail -->
+    <string name="atk">攻擊力</string>
+    <string name="w_engine_effect">音擎效果</string>
+    <string name="additional_info">更多訊息</string>
+
     <!-- Setting -->
     <string name="language">語言</string>
     <string name="color_theme">顏色主題</string>

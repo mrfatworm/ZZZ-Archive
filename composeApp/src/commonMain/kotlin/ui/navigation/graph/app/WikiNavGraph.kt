@@ -31,8 +31,9 @@ fun NavGraphBuilder.wikiNavGraph(
                 onDrivesOverviewClick = { navActions.navigationTo(Screen.DrivesList) },
                 onAgentDetailClick = { id ->
                     navActions.navigationToRoute(Screen.AgentDetail.createRoute(id))
+                }, onWEngineDetailClick = { id ->
+                    navActions.navigationToRoute(Screen.WEngineDetail.createRoute(id))
                 },
-                onWEngineDetailClick = { navActions.navigationTo(Screen.WEngineDetail) },
                 onBangbooDetailClick = { navActions.navigationTo(Screen.BangbooDetail) },
                 onDriveDetailClick = { navActions.navigationTo(Screen.DriveDetail) })
         }

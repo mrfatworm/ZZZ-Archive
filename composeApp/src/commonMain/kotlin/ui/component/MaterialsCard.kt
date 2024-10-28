@@ -3,7 +3,7 @@
  * License: CC BY-SA 4.0
  */
 
-package app.agent.compose
+package ui.component
 
 import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -11,24 +11,23 @@ import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import app.agent.model.DriveItem
+import app.agent.model.LevelMaterial
 import org.jetbrains.compose.resources.stringResource
-import ui.component.ContentCard
-import ui.component.HoveredIndicatorHeader
-import ui.component.RarityItemMini
 import ui.theme.AppTheme
 import ui.utils.drawRowListMask
 import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.suggest_drives
+import zzzarchive.composeapp.generated.resources.materials
 
 @Composable
-fun SuggestDrivesCard(drivesList: List<DriveItem>) {
+fun MaterialsCard(materials: List<LevelMaterial>) {
     val lazyListState = rememberLazyListState()
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered = interactionSource.collectIsHoveredAsState()
@@ -36,11 +35,7 @@ fun SuggestDrivesCard(drivesList: List<DriveItem>) {
         modifier = Modifier.hoverable(interactionSource = interactionSource),
         hasDefaultPadding = false
     ) {
-        HoveredIndicatorHeader(
-            title = stringResource(Res.string.suggest_drives),
-            isHovered = isHovered.value && (lazyListState.canScrollForward || lazyListState.canScrollBackward),
-            lazyListState = lazyListState
-        )
+        Header(isHovered, lazyListState)
         LazyRow(
             modifier = Modifier.drawRowListMask(
                 colorScheme = AppTheme.colors,
@@ -53,14 +48,26 @@ fun SuggestDrivesCard(drivesList: List<DriveItem>) {
                 bottom = AppTheme.dimens.paddingCard
             )
         ) {
-            items(items = drivesList) { drive ->
+            items(items = materials, key = { it.id }) { material ->
                 RarityItemMini(
                     modifier = Modifier.animateItem(),
-                    imgUrl = drive.getDriveIconUrl(),
-                    text = drive.getSuitString()
+                    text = material.getAmountText(),
+                    imgUrl = material.getProfileUrl()
                 )
                 Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
             }
         }
     }
+}
+
+@Composable
+private fun Header(
+    isHovered: State<Boolean>,
+    lazyListState: LazyListState
+) {
+    HoveredIndicatorHeader(
+        title = stringResource(Res.string.materials),
+        isHovered = isHovered.value,
+        lazyListState = lazyListState
+    )
 }

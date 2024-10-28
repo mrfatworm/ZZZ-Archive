@@ -36,7 +36,7 @@ import zzzarchive.composeapp.generated.resources.w_engines
 fun WEnginesListScreenSingle(
     uiState: WEnginesListState,
     adaptiveLayoutType: AdaptiveLayoutType,
-    onWEngineClick: (Int) -> Unit = {},
+    onWEngineClick: (Int) -> Unit,
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit,
     onBackClick: () -> Unit
