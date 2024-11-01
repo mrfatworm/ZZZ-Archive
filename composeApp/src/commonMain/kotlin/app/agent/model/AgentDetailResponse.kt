@@ -92,7 +92,7 @@ data class AgentBasicData(
     val hp: Int,
     val atk: Int,
     val def: Int,
-    @SerialName("core_skill_enhancements") val nameAndValues: List<NameAndValue>
+    @SerialName("core_skill_enhancements") val nameAndValues: List<NameAndValue> = emptyList()
 )
 
 @Serializable

@@ -9,7 +9,9 @@ import app.agent.model.AgentDetailResponse
 import app.agent.model.AgentsListResponse
 import app.agent.model.stubAgentDetailResponse
 import app.agent.model.stubAgentsListResponse
+import app.bangboo.model.BangbooDetailResponse
 import app.bangboo.model.BangbooListResponse
+import app.bangboo.model.stubBangbooDetailResponse
 import app.bangboo.model.stubBangbooListResponse
 import app.drive.model.DriveListResponse
 import app.drive.model.stubDriveListResponse
@@ -87,6 +89,14 @@ class FakeZzzHttp : ZzzHttp {
             throw Exception()
         } else {
             stubBangbooListResponse
+        }
+    }
+
+    override suspend fun requestBangbooDetail(id: Int): BangbooDetailResponse {
+        return if (isError) {
+            throw Exception()
+        } else {
+            stubBangbooDetailResponse
         }
     }
 

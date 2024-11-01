@@ -44,7 +44,13 @@ fun NavGraphBuilder.homeNavGraph(
                         )
                     )
                 },
-                onBangbooDetailClick = { navActions.navigationTo(Screen.BangbooDetail) },
+                onBangbooDetailClick = { id ->
+                    navActions.navigationToRoute(
+                        Screen.BangbooDetail.createRoute(
+                            id
+                        )
+                    )
+                },
                 onDriveDetailClick = { navActions.navigationTo(Screen.DriveDetail) })
         }
         sharedComposable(contentType, adaptiveLayoutType, navActions)

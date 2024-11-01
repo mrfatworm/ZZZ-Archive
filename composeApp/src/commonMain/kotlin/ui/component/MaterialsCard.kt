@@ -16,7 +16,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import app.agent.model.LevelMaterial
@@ -35,7 +34,7 @@ fun MaterialsCard(materials: List<LevelMaterial>) {
         modifier = Modifier.hoverable(interactionSource = interactionSource),
         hasDefaultPadding = false
     ) {
-        Header(isHovered, lazyListState)
+        Header(isHovered.value, lazyListState)
         LazyRow(
             modifier = Modifier.drawRowListMask(
                 colorScheme = AppTheme.colors,
@@ -62,12 +61,12 @@ fun MaterialsCard(materials: List<LevelMaterial>) {
 
 @Composable
 private fun Header(
-    isHovered: State<Boolean>,
+    isHovered: Boolean,
     lazyListState: LazyListState
 ) {
     HoveredIndicatorHeader(
         title = stringResource(Res.string.materials),
-        isHovered = isHovered.value,
+        isHovered = isHovered && (lazyListState.canScrollForward || lazyListState.canScrollBackward),
         lazyListState = lazyListState
     )
 }

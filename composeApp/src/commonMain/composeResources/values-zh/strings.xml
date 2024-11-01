@@ -73,6 +73,9 @@
 
     <!-- Agent Detail -->
     <string name="attributes">屬性</string>
+    <string name="hp">生命值</string>
+    <string name="atk">攻擊力</string>
+    <string name="def">防禦力</string>
     <string name="hp_atk_def">生命 / 攻擊 / 防禦</string>
     <string name="materials">素材</string>
     <string name="skills">技能</string>
@@ -96,9 +99,11 @@
     <string name="agent_background">代理人設定</string>
 
     <!-- W-Engine Detail -->
-    <string name="atk">攻擊力</string>
     <string name="w_engine_effect">音擎效果</string>
     <string name="additional_info">更多訊息</string>
+
+    <!-- Bangboo Detail -->
+    <string name="active_skill">主動技</string>
 
     <!-- Setting -->
     <string name="language">語言</string>

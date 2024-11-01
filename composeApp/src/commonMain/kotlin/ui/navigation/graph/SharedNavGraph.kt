@@ -50,15 +50,17 @@ fun NavGraphBuilder.sharedComposable(
     }
 
     composable(Screen.BangbooList.route) {
-        BangbooListScreen(adaptiveLayoutType = adaptiveLayoutType, onBangbooClick = {
-            navActions.navigationTo(Screen.BangbooDetail)
+        BangbooListScreen(adaptiveLayoutType = adaptiveLayoutType, onBangbooClick = { id ->
+            navActions.navigationToRoute(
+                Screen.BangbooDetail.createRoute(id)
+            )
         }, onBackClick = {
             navActions.back()
         })
     }
 
-    composable(Screen.BangbooDetail.route) {
-        BangbooDetailScreen(onAgentClick = { navActions.navigationTo(Screen.AgentDetail) })
+    composable(Screen.BangbooDetail.route, arguments = Screen.BangbooDetail.navArguments) {
+        BangbooDetailScreen(contentType, adaptiveLayoutType, onBackClick = { navActions.back() })
     }
 
     composable(Screen.DrivesList.route) {

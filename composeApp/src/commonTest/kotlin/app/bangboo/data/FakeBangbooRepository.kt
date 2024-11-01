@@ -5,7 +5,9 @@
 
 package app.bangboo.data
 
+import app.bangboo.model.BangbooDetailResponse
 import app.bangboo.model.BangbooListResponse
+import app.bangboo.model.stubBangbooDetailResponse
 import app.bangboo.model.stubBangbooListResponse
 import utils.ZzzResult
 
@@ -21,6 +23,14 @@ class FakeBangbooRepository : BangbooRepository {
             ZzzResult.Error(Exception())
         } else {
             ZzzResult.Success(stubBangbooListResponse)
+        }
+    }
+
+    override suspend fun getBangbooDetail(id: Int): ZzzResult<BangbooDetailResponse> {
+        return if (isError) {
+            ZzzResult.Error(Exception())
+        } else {
+            ZzzResult.Success(stubBangbooDetailResponse)
         }
     }
 }

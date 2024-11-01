@@ -30,4 +30,18 @@ class BangbooRepositoryImplTest {
         val result = repository.getBangbooList() as ZzzResult.Error
         assertTrue(result.exception.instanceOf(Exception::class))
     }
+
+    @Test
+    fun `Get Bangboo Detail Success`() = runTest {
+        val result = repository.getBangbooDetail(6) as ZzzResult.Success
+        assertEquals(result.data.id, 6)
+    }
+
+    @Test
+    fun `Get Bangboo Detail Error`() = runTest {
+        httpClient.setError(true)
+        val result = repository.getBangbooDetail(6) as ZzzResult.Error
+        assertTrue(result.exception.instanceOf(Exception::class))
+
+    }
 }

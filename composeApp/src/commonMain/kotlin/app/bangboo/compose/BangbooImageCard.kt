@@ -3,7 +3,7 @@
  * License: CC BY-SA 4.0
  */
 
-package app.wengine.compose
+package app.bangboo.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,7 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import app.wengine.model.WEngineDetailResponse
+import app.bangboo.model.BangbooDetailResponse
 import coil3.compose.AsyncImage
 import org.jetbrains.compose.resources.stringResource
 import ui.component.ContentCard
@@ -32,7 +32,7 @@ import zzzarchive.composeapp.generated.resources.ic_arrow_back
 import zzzarchive.composeapp.generated.resources.ic_rare
 
 @Composable
-fun WEngineImageCard(wEngineDetail: WEngineDetailResponse, onBackClick: () -> Unit) {
+fun BangbooImageCard(bangbooDetail: BangbooDetailResponse, onBackClick: () -> Unit) {
     ContentCard {
         ZzzIconButton(
             iconRes = Res.drawable.ic_arrow_back, contentDescriptionRes = Res.string.back
@@ -43,16 +43,16 @@ fun WEngineImageCard(wEngineDetail: WEngineDetailResponse, onBackClick: () -> Un
             modifier = Modifier.fillMaxWidth().drawBottomMask(AppTheme.colors)
         ) {
             AsyncImage(
-                modifier = Modifier.widthIn(min = 120.dp, max = 240.dp).aspectRatio(1f)
+                modifier = Modifier.widthIn(min = 120.dp, max = 320.dp).aspectRatio(1f)
                     .align(Alignment.TopCenter),
-                model = wEngineDetail.getWEngineImageUrl(),
+                model = bangbooDetail.getBangbooPortraitUrl(),
                 contentDescription = null,
             )
         }
 
         Spacer(Modifier.size(8.dp))
         Text(
-            text = wEngineDetail.name,
+            text = bangbooDetail.name,
             style = AppTheme.typography.headlineLarge,
             color = AppTheme.colors.onSurface
         )
@@ -60,10 +60,10 @@ fun WEngineImageCard(wEngineDetail: WEngineDetailResponse, onBackClick: () -> Un
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            ZzzTag(text = wEngineDetail.getRarity().code, iconRes = Res.drawable.ic_rare)
+            ZzzTag(text = bangbooDetail.getRarity().code, iconRes = Res.drawable.ic_rare)
             ZzzTag(
-                text = stringResource(wEngineDetail.getSpecialty().textRes),
-                iconRes = wEngineDetail.getSpecialty().iconRes
+                text = stringResource(bangbooDetail.getAttribute().textRes),
+                iconRes = bangbooDetail.getAttribute().iconRes
             )
         }
     }

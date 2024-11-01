@@ -15,13 +15,19 @@ import ui.component.ContentCard
 import ui.theme.AppTheme
 
 @Composable
-fun TextCard(title: String, content: String) {
+fun TextCard(title: String, content: String, subTitle: String = "") {
     ContentCard(
         hasDefaultPadding = false
     ) {
         CardHeader(
             title = title
-        )
+        ) {
+            Text(
+                text = subTitle,
+                color = AppTheme.colors.onSurfaceVariant,
+                style = AppTheme.typography.labelMedium
+            )
+        }
         Text(
             modifier = Modifier.fillMaxWidth().padding(horizontal = AppTheme.dimens.paddingCard)
                 .padding(bottom = AppTheme.dimens.paddingCard),

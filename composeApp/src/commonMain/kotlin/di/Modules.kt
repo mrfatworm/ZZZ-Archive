@@ -11,6 +11,7 @@ import app.agent.domain.AgentDetailViewModel
 import app.agent.domain.AgentListViewModel
 import app.bangboo.data.BangbooRepository
 import app.bangboo.data.BangbooRepositoryImpl
+import app.bangboo.domain.BangbooDetailViewModel
 import app.bangboo.domain.BangbooListViewModel
 import app.drive.data.DriveRepository
 import app.drive.data.DriveRepositoryImpl
@@ -65,6 +66,7 @@ val sharedModule = module {
     viewModelOf(::WEnginesListViewModel)
     viewModelOf(::WEngineDetailViewModel)
     viewModelOf(::BangbooListViewModel)
+    viewModelOf(::BangbooDetailViewModel)
     viewModelOf(::DrivesListViewModel)
     viewModelOf(::SettingViewModel)
 }

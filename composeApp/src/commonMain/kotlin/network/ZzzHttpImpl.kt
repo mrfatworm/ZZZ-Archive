@@ -2,6 +2,7 @@ package network
 
 import app.agent.model.AgentDetailResponse
 import app.agent.model.AgentsListResponse
+import app.bangboo.model.BangbooDetailResponse
 import app.bangboo.model.BangbooListResponse
 import app.drive.model.DriveListResponse
 import app.home.model.ImageBannerResponse
@@ -55,6 +56,10 @@ class ZzzHttpImpl(engine: HttpClientEngine, languageHandler: LanguageHandler) : 
 
     override suspend fun requestBangbooList(): BangbooListResponse {
         return requestData("Bangboo/$languagePath/List.json")
+    }
+
+    override suspend fun requestBangbooDetail(id: Int): BangbooDetailResponse {
+        return requestData("Bangboo/$languagePath/Detail/$id.json")
     }
 
     override suspend fun requestDriveList(): DriveListResponse {

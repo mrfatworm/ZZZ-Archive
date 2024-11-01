@@ -73,6 +73,9 @@
 
     <!-- Agent Detail -->
     <string name="attributes">Attributes</string>
+    <string name="hp">HP</string>
+    <string name="atk">ATK</string>
+    <string name="def">DEF</string>
     <string name="hp_atk_def">HP / ATK / DEF</string>
     <string name="materials">Materials</string>
     <string name="skills">Skills</string>
@@ -96,9 +99,11 @@
     <string name="agent_background">Agent Background</string>
 
     <!-- W-Engine Detail -->
-    <string name="atk">ATK</string>
     <string name="w_engine_effect">W-Engine Effect</string>
     <string name="additional_info">Additional Info</string>
+
+    <!-- Bangboo Detail -->
+    <string name="active_skill">Active Skill</string>
 
     <!-- Setting -->
     <string name="language">Language</string>
