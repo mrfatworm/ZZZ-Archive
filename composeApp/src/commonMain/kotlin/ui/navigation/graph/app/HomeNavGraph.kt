@@ -50,8 +50,7 @@ fun NavGraphBuilder.homeNavGraph(
                             id
                         )
                     )
-                },
-                onDriveDetailClick = { navActions.navigationTo(Screen.DriveDetail) })
+                })
         }
         sharedComposable(contentType, adaptiveLayoutType, navActions)
     }

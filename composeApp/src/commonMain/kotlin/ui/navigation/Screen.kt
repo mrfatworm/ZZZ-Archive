@@ -62,14 +62,6 @@ sealed class Screen(
         route = "drivesList", textRes = Res.string.drives
     )
 
-    data object DriveDetail : Screen(
-        route = "driveDetail/{driverId}", navArguments = listOf(navArgument("driveId") {
-            type = NavType.IntType
-        })
-    ) {
-        fun createRoute(driveId: String) = "driveDetail/$driveId"
-    }
-
     data object BangbooList : Screen(
         route = "bangbooList", textRes = Res.string.bangboo
     )

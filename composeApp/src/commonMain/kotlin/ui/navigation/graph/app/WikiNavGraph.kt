@@ -35,8 +35,7 @@ fun NavGraphBuilder.wikiNavGraph(
                     navActions.navigationToRoute(Screen.WEngineDetail.createRoute(id))
                 }, onBangbooDetailClick = { id ->
                     navActions.navigationToRoute(Screen.BangbooDetail.createRoute(id))
-                },
-                onDriveDetailClick = { navActions.navigationTo(Screen.DriveDetail) })
+                })
         }
         sharedComposable(contentType, adaptiveLayoutType, navActions)
     }

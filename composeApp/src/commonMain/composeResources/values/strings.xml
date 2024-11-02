@@ -105,6 +105,9 @@
     <!-- Bangboo Detail -->
     <string name="active_skill">Active Skill</string>
 
+    <!-- Drive Detail -->
+    <string name="piece_set">Piece Set %1$d</string>
+
     <!-- Setting -->
     <string name="language">Language</string>
     <string name="color_theme">Color Theme</string>

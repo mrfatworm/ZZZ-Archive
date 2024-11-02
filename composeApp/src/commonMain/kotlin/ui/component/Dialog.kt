@@ -20,6 +20,8 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import app.drive.compose.DriveDetailCard
+import app.drive.model.DriveListItem
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
@@ -115,5 +117,16 @@ fun RestartDialog(onDismiss: () -> Unit, onRestart: () -> Unit) {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun DriveDetailDialog(driveListItem: DriveListItem, onDismiss: () -> Unit) {
+    Dialog(onDismissRequest = onDismiss) {
+        DriveDetailCard(
+            modifier = Modifier.widthIn(max = 512.dp, min = 240.dp).heightIn(max = 512.dp),
+            driveListItem = driveListItem,
+            onDismiss = onDismiss
+        )
     }
 }

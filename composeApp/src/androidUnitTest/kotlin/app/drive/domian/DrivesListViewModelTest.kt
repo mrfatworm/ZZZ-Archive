@@ -33,4 +33,20 @@ class DrivesListViewModelTest {
         val state = viewModel.uiState.value
         assertEquals(state.drivesList, stubDriveListResponse.getDrivesNewToOld())
     }
+
+    @Test
+    fun `Select Drive`() {
+        viewModel.onDriveClick(1)
+        val state = viewModel.uiState.value
+        assertEquals(state.selectedDrive?.id, 1)
+    }
+
+    @Test
+    fun `Dismiss Detail`() {
+        viewModel.onDriveClick(1)
+        viewModel.onDetailDismiss()
+        val state = viewModel.uiState.value
+        assertEquals(state.selectedDrive, null)
+
+    }
 }

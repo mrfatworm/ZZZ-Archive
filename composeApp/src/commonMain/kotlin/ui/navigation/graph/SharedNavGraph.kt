@@ -11,7 +11,6 @@ import app.agent.AgentDetailScreen
 import app.agent.AgentsListScreen
 import app.bangboo.BangbooDetailScreen
 import app.bangboo.BangbooListScreen
-import app.drive.DriveDetailScreen
 import app.drive.DrivesListScreen
 import app.wengine.WEngineDetailScreen
 import app.wengine.WEnginesListScreen
@@ -64,16 +63,8 @@ fun NavGraphBuilder.sharedComposable(
     }
 
     composable(Screen.DrivesList.route) {
-        DrivesListScreen(adaptiveLayoutType = adaptiveLayoutType, onDriveClick = {
-            navActions.navigationTo(
-                Screen.DriveDetail
-            )
-        }, onBackClick = {
+        DrivesListScreen(adaptiveLayoutType = adaptiveLayoutType, onBackClick = {
             navActions.back()
         })
-    }
-
-    composable(Screen.DriveDetail.route) {
-        DriveDetailScreen(onAgentClick = { navActions.navigationTo(Screen.AgentDetail) })
     }
 }

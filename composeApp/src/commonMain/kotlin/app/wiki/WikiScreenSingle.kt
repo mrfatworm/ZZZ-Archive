@@ -32,7 +32,6 @@ fun WikiScreenSingle(
     onAgentDetailClick: (Int) -> Unit,
     onWEngineDetailClick: (Int) -> Unit,
     onBangbooDetailClick: (Int) -> Unit,
-    onDriveDetailClick: (Int) -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
@@ -60,8 +59,7 @@ fun WikiScreenSingle(
         DrivesListCard(
             drivesList = uiState.drivesList,
             showViewAll = true,
-            onDrivesOverviewClick = onDrivesOverviewClick,
-            onDriveDetailClick = onDriveDetailClick
+            onDrivesOverviewClick = onDrivesOverviewClick
         )
     }
 }

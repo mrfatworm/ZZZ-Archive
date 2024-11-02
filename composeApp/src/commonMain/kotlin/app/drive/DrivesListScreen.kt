@@ -15,7 +15,7 @@ import ui.utils.AdaptiveLayoutType
 
 @Composable
 fun DrivesListScreen(
-    adaptiveLayoutType: AdaptiveLayoutType, onDriveClick: (Int) -> Unit, onBackClick: () -> Unit
+    adaptiveLayoutType: AdaptiveLayoutType, onBackClick: () -> Unit
 ) {
     val viewModel: DrivesListViewModel = koinViewModel()
     val uiState = viewModel.uiState.collectAsState()
@@ -23,14 +23,21 @@ fun DrivesListScreen(
         DrivesListScreenSingle(
             uiState = uiState.value,
             adaptiveLayoutType = adaptiveLayoutType,
-            onDriveClick = onDriveClick,
+            onDriveClick = {
+                viewModel.onDriveClick(it)
+            },
             onBackClick = onBackClick
         )
     } else {
         DrivesListScreenDual(
             uiState = uiState.value,
             adaptiveLayoutType = adaptiveLayoutType,
-            onDriveClick = onDriveClick
+            onDriveClick = { id ->
+                viewModel.onDriveClick(id)
+            },
+            onDetailDismiss = {
+                viewModel.onDetailDismiss()
+            }
         )
     }
 }

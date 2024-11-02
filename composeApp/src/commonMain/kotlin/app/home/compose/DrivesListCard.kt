@@ -22,6 +22,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,8 +30,10 @@ import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import app.drive.model.DriveListItem
+import app.drive.model.emptyDriveListItem
 import org.jetbrains.compose.resources.stringResource
 import ui.component.ContentCard
+import ui.component.DriveDetailDialog
 import ui.component.HoveredIndicatorHeader
 import ui.component.RarityItem
 import ui.component.RowListFooterItem
@@ -43,10 +46,10 @@ import zzzarchive.composeapp.generated.resources.drives
 
 @Composable
 fun DrivesListCard(
-    drivesList: List<DriveListItem>, showViewAll: Boolean = false,
-    onDrivesOverviewClick: () -> Unit,
-    onDriveDetailClick: (Int) -> Unit
+    drivesList: List<DriveListItem>, showViewAll: Boolean = false, onDrivesOverviewClick: () -> Unit
 ) {
+    val openDetailDialog = remember { mutableStateOf(false) }
+    val selectedDriveId = remember { mutableStateOf(0) }
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered = interactionSource.collectIsHoveredAsState()
     val lazyListState = rememberLazyListState()
@@ -91,7 +94,8 @@ fun DrivesListCard(
                     name = drive.name,
                     imgUrl = drive.getProfileUrl(),
                     onClick = {
-                        onDriveDetailClick(drive.id)
+                        openDetailDialog.value = true
+                        selectedDriveId.value = drive.id
                     })
                 Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
             }
@@ -100,6 +104,14 @@ fun DrivesListCard(
                     onDrivesOverviewClick()
                 }
             }
+        }
+    }
+    when {
+        openDetailDialog.value -> {
+            DriveDetailDialog(driveListItem = drivesList.find { it.id == selectedDriveId.value }
+                ?: emptyDriveListItem, onDismiss = {
+                openDetailDialog.value = false
+            })
         }
     }
 }

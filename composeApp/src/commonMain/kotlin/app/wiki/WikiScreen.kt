@@ -21,7 +21,6 @@ fun WikiScreen(
     onAgentDetailClick: (Int) -> Unit,
     onWEngineDetailClick: (Int) -> Unit,
     onBangbooDetailClick: (Int) -> Unit,
-    onDriveDetailClick: (Int) -> Unit,
 ) {
     val viewModel: WikiViewModel = koinViewModel()
     val uiState = viewModel.uiState.collectAsState()
@@ -36,6 +35,5 @@ fun WikiScreen(
         onAgentDetailClick = onAgentDetailClick,
         onWEngineDetailClick = onWEngineDetailClick,
         onBangbooDetailClick = onBangbooDetailClick,
-        onDriveDetailClick = onDriveDetailClick,
     )
 }

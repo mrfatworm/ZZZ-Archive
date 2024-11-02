@@ -105,6 +105,9 @@
     <!-- Bangboo Detail -->
     <string name="active_skill">主動技</string>
 
+    <!-- Drive Detail -->
+    <string name="piece_set">%1$d 件套裝</string>
+
     <!-- Setting -->
     <string name="language">語言</string>
     <string name="color_theme">顏色主題</string>

@@ -37,7 +37,6 @@ fun HomeScreen(
     onAgentDetailClick: (Int) -> Unit,
     onWEngineDetailClick: (Int) -> Unit,
     onBangbooDetailClick: (Int) -> Unit,
-    onDriveDetailClick: (Int) -> Unit,
 ) {
     val viewModel: HomeViewModel = koinViewModel()
     val uiState = viewModel.uiState.collectAsState()
@@ -70,7 +69,6 @@ fun HomeScreen(
             onAgentDetailClick = onAgentDetailClick,
             onWEngineDetailClick = onWEngineDetailClick,
             onBangbooDetailClick = onBangbooDetailClick,
-            onDriveDetailClick = onDriveDetailClick,
             onPixivTagChange = {
                 coroutineScope.launch {
                     viewModel.fetchPixivTopic(it)

@@ -37,7 +37,6 @@ fun HomeScreenDual(
     onAgentDetailClick: (Int) -> Unit = {},
     onWEngineDetailClick: (Int) -> Unit = {},
     onBangbooDetailClick: (Int) -> Unit = {},
-    onDriveDetailClick: (Int) -> Unit = {},
     onPixivTagChange: (String) -> Unit,
     onActionClicked: () -> Unit,
     onClosed: (Int) -> Unit,
@@ -85,7 +84,6 @@ fun HomeScreenDual(
                 DrivesListCard(
                     drivesList = uiState.drivesList,
                     onDrivesOverviewClick = onDrivesOverviewClick,
-                    onDriveDetailClick = onDriveDetailClick
                 )
             }
         }

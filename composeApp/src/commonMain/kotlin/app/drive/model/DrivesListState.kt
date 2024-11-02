@@ -7,5 +7,6 @@ package app.drive.model
 
 
 data class DrivesListState(
-    val drivesList: List<DriveListItem> = emptyList()
+    val drivesList: List<DriveListItem> = emptyList(),
+    val selectedDrive: DriveListItem? = null
 )

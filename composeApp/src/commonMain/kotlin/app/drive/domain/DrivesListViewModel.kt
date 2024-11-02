@@ -43,4 +43,18 @@ class DrivesListViewModel(
             }
         }
     }
+
+    fun onDriveClick(driveId: Int) {
+        _uiState.update { currentState ->
+            currentState.copy(selectedDrive = currentState.drivesList.find { it.id == driveId })
+        }
+    }
+
+    fun onDetailDismiss() {
+        _uiState.update {
+            it.copy(
+                selectedDrive = null
+            )
+        }
+    }
 }
