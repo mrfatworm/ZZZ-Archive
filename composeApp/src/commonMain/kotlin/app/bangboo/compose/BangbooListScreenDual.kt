@@ -20,7 +20,7 @@ import utils.ZzzRarity
 fun BangbooListScreenDual(
     uiState: BangbooListState,
     adaptiveLayoutType: AdaptiveLayoutType,
-    onBangbooClick: (Int) -> Unit = {},
+    onBangbooClick: (Int) -> Unit,
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit
 ) {

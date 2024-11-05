@@ -15,7 +15,7 @@ import app.bangboo.data.FakeBangbooRepository
 import app.bangboo.model.stubBangbooListResponse
 import app.drive.data.DriveRepository
 import app.drive.data.FakeDriveRepository
-import app.drive.model.stubDriveListResponse
+import app.drive.model.stubDrivesListResponse
 import app.wengine.data.FakeWEngineRepository
 import app.wengine.data.WEngineRepository
 import app.wengine.model.stubWEnginesListResponse
@@ -55,6 +55,6 @@ class WikiViewModelTest {
         assertEquals(state.agentsList, stubAgentsListResponse.getAgentsNewToOld())
         assertEquals(state.wEnginesList, stubWEnginesListResponse.getWEnginesNewToOld())
         assertEquals(state.bangbooList, stubBangbooListResponse.getBangbooNewToOld())
-        assertEquals(state.drivesList, stubDriveListResponse.getDrivesNewToOld())
+        assertEquals(state.drivesList, stubDrivesListResponse.getDrivesNewToOld())
     }
 }

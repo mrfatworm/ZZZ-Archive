@@ -19,9 +19,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import app.agent.model.DriveItem
 import org.jetbrains.compose.resources.stringResource
-import ui.component.ContentCard
-import ui.component.HoveredIndicatorHeader
-import ui.component.RarityItemMini
+import ui.components.cards.ContentCard
+import ui.components.cards.HoveredIndicatorHeader
+import ui.components.items.RarityMiniItem
 import ui.theme.AppTheme
 import ui.utils.drawRowListMask
 import zzzarchive.composeapp.generated.resources.Res
@@ -54,7 +54,7 @@ fun SuggestDrivesCard(drivesList: List<DriveItem>) {
             )
         ) {
             items(items = drivesList) { drive ->
-                RarityItemMini(
+                RarityMiniItem(
                     imgUrl = drive.getDriveIconUrl(),
                     text = drive.getSuitString()
                 )

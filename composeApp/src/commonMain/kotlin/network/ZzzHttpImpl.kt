@@ -4,7 +4,7 @@ import app.agent.model.AgentDetailResponse
 import app.agent.model.AgentsListResponse
 import app.bangboo.model.BangbooDetailResponse
 import app.bangboo.model.BangbooListResponse
-import app.drive.model.DriveListResponse
+import app.drive.model.DrivesListResponse
 import app.home.model.ImageBannerResponse
 import app.wengine.model.WEngineDetailResponse
 import app.wengine.model.WEnginesListResponse
@@ -38,7 +38,7 @@ class ZzzHttpImpl(engine: HttpClientEngine, languageHandler: LanguageHandler) : 
         return requestData("ImageBanner.json")
     }
 
-    override suspend fun requestAgentList(): AgentsListResponse {
+    override suspend fun requestAgentsList(): AgentsListResponse {
         return requestData("Agent/$languagePath/List.json")
     }
 
@@ -46,7 +46,7 @@ class ZzzHttpImpl(engine: HttpClientEngine, languageHandler: LanguageHandler) : 
         return requestData("Agent/$languagePath/Detail/$id.json")
     }
 
-    override suspend fun requestWEngineList(): WEnginesListResponse {
+    override suspend fun requestWEnginesList(): WEnginesListResponse {
         return requestData("W-Engine/$languagePath/List.json")
     }
 
@@ -62,7 +62,7 @@ class ZzzHttpImpl(engine: HttpClientEngine, languageHandler: LanguageHandler) : 
         return requestData("Bangboo/$languagePath/Detail/$id.json")
     }
 
-    override suspend fun requestDriveList(): DriveListResponse {
+    override suspend fun requestDrivesList(): DrivesListResponse {
         return requestData("Drive/$languagePath/List.json")
     }
 }

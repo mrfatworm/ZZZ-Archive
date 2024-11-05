@@ -15,8 +15,8 @@ File will publish to Community in future
 
 ## How to run on desktop / 如何執行桌面板
 Android Studio > Run > Edit Configurations > New > Gradle
-Run: `desktopRun -DmainClass=MainKt --quiet`
-Env Variables: `VARIANT=Dev`
+- Run: `desktopRun -DmainClass=MainKt --quiet`
+- Env Variables: `VARIANT=Dev`
 
 ## Tech Stack / 使用技術
 - KMP (Kotlin Multiplatform)
@@ -37,8 +37,11 @@ Env Variables: `VARIANT=Dev`
 - BuildKonfig
 
 ## Special Thanks / 鳴謝
-* Resource from Zenless Zone Zero
+* Resource from [Zenless Zone Zero](https://zenless.hoyoverse.com/)
+* Resource from [Zenless Zone Zero Wiki](https://zenless-zone-zero.fandom.com/wiki/Zenless_Zone_Zero_Wiki)
 * [JetBrains KMP Guideline](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
-* Android Open Source Project
+* [Android Developer Guideline](https://developer.android.com/)
+* [Android Open Source Project](https://github.com/android)
+* [Philipp Lackner](https://www.youtube.com/@PhilippLackner)
 * [Compose Multiplatform Wizard](https://github.com/terrakok/Compose-Multiplatform-Wizard)
 * [BuildKonfig for KMP](https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/)

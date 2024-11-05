@@ -11,9 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.bangboo.model.BangbooListState
-import ui.component.AttributeFilterChips
-import ui.component.RarityFilterChips
-import ui.component.ZzzBottomSheet
+import ui.components.ZzzBottomSheet
+import ui.components.chips.AttributeFilterChipsList
+import ui.components.chips.RarityFilterChipsList
 import utils.AgentAttribute
 import utils.ZzzRarity
 
@@ -31,11 +31,11 @@ fun BangbooFilterBottomSheet(
             modifier = Modifier.padding(horizontal = 8.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            RarityFilterChips(
+            RarityFilterChipsList(
                 selectedRarity = uiState.selectedRarity,
                 onSelectionChanged = onRarityChipSelectionChanged
             )
-            AttributeFilterChips(
+            AttributeFilterChipsList(
                 selectedAttributes = uiState.selectedAttributes,
                 onSelectionChanged = onAttributeChipSelectionChanged
             )

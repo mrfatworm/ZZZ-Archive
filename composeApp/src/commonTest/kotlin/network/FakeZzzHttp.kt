@@ -13,8 +13,8 @@ import app.bangboo.model.BangbooDetailResponse
 import app.bangboo.model.BangbooListResponse
 import app.bangboo.model.stubBangbooDetailResponse
 import app.bangboo.model.stubBangbooListResponse
-import app.drive.model.DriveListResponse
-import app.drive.model.stubDriveListResponse
+import app.drive.model.DrivesListResponse
+import app.drive.model.stubDrivesListResponse
 import app.home.model.ImageBannerResponse
 import app.home.model.stubImageBannerResponse
 import app.wengine.model.WEngineDetailResponse
@@ -52,7 +52,7 @@ class FakeZzzHttp : ZzzHttp {
         }
     }
 
-    override suspend fun requestAgentList(): AgentsListResponse {
+    override suspend fun requestAgentsList(): AgentsListResponse {
         return if (isError) {
             throw Exception()
         } else {
@@ -68,7 +68,7 @@ class FakeZzzHttp : ZzzHttp {
         }
     }
 
-    override suspend fun requestWEngineList(): WEnginesListResponse {
+    override suspend fun requestWEnginesList(): WEnginesListResponse {
         return if (isError) {
             throw Exception()
         } else {
@@ -100,11 +100,11 @@ class FakeZzzHttp : ZzzHttp {
         }
     }
 
-    override suspend fun requestDriveList(): DriveListResponse {
+    override suspend fun requestDrivesList(): DrivesListResponse {
         return if (isError) {
             throw Exception()
         } else {
-            stubDriveListResponse
+            stubDrivesListResponse
         }
     }
 }

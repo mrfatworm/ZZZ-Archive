@@ -24,11 +24,11 @@ import androidx.compose.ui.unit.dp
 import app.agent.model.AgentsListState
 import coil3.compose.AsyncImage
 import org.jetbrains.compose.resources.stringResource
-import ui.component.AttributeFilterChips
-import ui.component.ContentCard
-import ui.component.RarityFilterChips
-import ui.component.RarityItem
-import ui.component.SpecialtyFilterChips
+import ui.components.cards.ContentCard
+import ui.components.chips.AttributeFilterChipsList
+import ui.components.chips.RarityFilterChipsList
+import ui.components.chips.SpecialtyFilterChips
+import ui.components.items.RarityItem
 import ui.theme.AppTheme
 import ui.utils.drawColumnListMask
 import utils.AgentAttribute
@@ -55,8 +55,12 @@ fun AgentsListFilterCard(
                 modifier = Modifier.padding(top = AppTheme.dimens.paddingCard),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                RarityFilterChips(uiState.selectedRarity, onRarityChipSelectionChanged)
-                AttributeFilterChips(uiState.selectedAttributes, 1, onAttributeChipSelectionChanged)
+                RarityFilterChipsList(uiState.selectedRarity, onRarityChipSelectionChanged)
+                AttributeFilterChipsList(
+                    uiState.selectedAttributes,
+                    1,
+                    onAttributeChipSelectionChanged
+                )
                 SpecialtyFilterChips(
                     uiState.selectedSpecialties,
                     1,

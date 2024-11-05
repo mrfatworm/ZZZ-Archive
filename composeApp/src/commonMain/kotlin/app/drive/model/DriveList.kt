@@ -10,7 +10,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class DriveListResponse(
+data class DrivesListResponse(
     val drives: List<DriveListItem>
 ) {
     fun getDrivesNewToOld(): List<DriveListItem> {
@@ -41,7 +41,7 @@ val emptyDriveListItem = DriveListItem(
     pieceSetFour = "---"
 )
 
-val stubDriveListResponse = DriveListResponse(
+val stubDrivesListResponse = DrivesListResponse(
     drives = listOf(
         DriveListItem(
             id = 1,

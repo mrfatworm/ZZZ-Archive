@@ -6,7 +6,7 @@
 package app.function
 
 import androidx.compose.runtime.Composable
-import ui.component.UnderDevelopScreen
+import ui.components.UnderDevelopScreen
 import ui.utils.AdaptiveLayoutType
 
 @Composable

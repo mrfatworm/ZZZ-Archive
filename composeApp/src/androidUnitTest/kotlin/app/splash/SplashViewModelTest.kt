@@ -7,9 +7,9 @@ package app.splash
 
 
 import MainDispatcherRule
+import app.setting.data.FakeSettingRepository
+import app.setting.data.SettingsRepository
 import org.junit.Rule
-import setting.FakeSettingRepository
-import setting.SettingsRepository
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertTrue

@@ -7,11 +7,11 @@ package app.setting.domain
 
 import androidx.compose.ui.text.intl.Locale
 import androidx.lifecycle.ViewModel
+import app.setting.data.SettingsRepository
 import app.setting.model.settingState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import setting.SettingsRepository
 import utils.AppActions
 import utils.Language
 import utils.changeLanguage

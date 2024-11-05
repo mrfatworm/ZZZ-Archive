@@ -22,7 +22,7 @@ import app.setting.model.Contributor
 import app.setting.model.Contributors
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
-import ui.component.ContentCard
+import ui.components.cards.ContentCard
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.author

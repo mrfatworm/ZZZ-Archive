@@ -19,8 +19,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import app.bangboo.model.BangbooListState
 import org.jetbrains.compose.resources.stringResource
-import ui.component.ZzzIconButton
-import ui.component.ZzzTopBar
+import ui.components.ZzzTopBar
+import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import utils.AgentAttribute
@@ -36,7 +36,7 @@ import zzzarchive.composeapp.generated.resources.ic_filter_filled
 fun BangbooListScreenSingle(
     uiState: BangbooListState,
     adaptiveLayoutType: AdaptiveLayoutType,
-    onBangbooClick: (Int) -> Unit = {},
+    onBangbooClick: (Int) -> Unit,
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
     onBackClick: () -> Unit

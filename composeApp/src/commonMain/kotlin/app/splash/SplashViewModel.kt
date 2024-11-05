@@ -1,9 +1,9 @@
 package app.splash
 
 import androidx.lifecycle.ViewModel
+import app.setting.data.SettingsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import setting.SettingsRepository
 import utils.changeLanguage
 
 class SplashViewModel(private val settingsRepository: SettingsRepository) : ViewModel() {

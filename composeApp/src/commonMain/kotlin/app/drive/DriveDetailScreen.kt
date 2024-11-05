@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import ui.component.ZzzOutlineButton
+import ui.components.buttons.ZzzOutlineButton
 import ui.theme.AppTheme
 import ui.theme.ZzzArchiveTheme
 

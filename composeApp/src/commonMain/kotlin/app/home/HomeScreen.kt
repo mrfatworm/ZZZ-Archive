@@ -18,8 +18,8 @@ import app.home.domain.HomeViewModel
 import kotlinx.coroutines.launch
 import mainfunc.model.BannerResponse
 import org.koin.compose.viewmodel.koinViewModel
-import ui.component.Banner
-import ui.component.BannerDialog
+import ui.components.Banner
+import ui.components.dialogs.BannerDialog
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType

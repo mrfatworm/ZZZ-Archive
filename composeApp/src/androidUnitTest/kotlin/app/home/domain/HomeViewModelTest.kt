@@ -12,19 +12,19 @@ import app.agent.model.stubAgentsListResponse
 import app.bangboo.data.FakeBangbooRepository
 import app.bangboo.model.stubBangbooListResponse
 import app.drive.data.FakeDriveRepository
-import app.drive.model.stubDriveListResponse
+import app.drive.model.stubDrivesListResponse
 import app.home.data.FakeImageBannerRepository
 import app.home.data.FakeNewsRepository
 import app.home.data.FakePixivRepository
 import app.home.model.stubImageBannerResponse
 import app.home.model.stubOfficialNewsDataResponse
 import app.home.model.stubPixivZzzTopic
+import app.setting.data.FakeSettingRepository
 import app.wengine.data.FakeWEngineRepository
 import app.wengine.model.stubWEnginesListResponse
 import mainfunc.data.FakeBannerRepository
 import mainfunc.model.stubBannerResponse
 import org.junit.Rule
-import setting.FakeSettingRepository
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -70,7 +70,7 @@ class HomeViewModelTest {
         assertEquals(state.agentsList, stubAgentsListResponse.getAgentsNewToOld())
         assertEquals(state.wEnginesList, stubWEnginesListResponse.getWEnginesNewToOld())
         assertEquals(state.bangbooList, stubBangbooListResponse.getBangbooNewToOld())
-        assertEquals(state.drivesList, stubDriveListResponse.getDrivesNewToOld())
+        assertEquals(state.drivesList, stubDrivesListResponse.getDrivesNewToOld())
     }
 
     @Test

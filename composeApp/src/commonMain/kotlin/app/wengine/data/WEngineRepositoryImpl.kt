@@ -15,7 +15,7 @@ class WEngineRepositoryImpl(private val httpClient: ZzzHttp) : WEngineRepository
     override suspend fun getWEnginesList(): ZzzResult<WEnginesListResponse> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestWEngineList()
+                httpClient.requestWEnginesList()
             }
             ZzzResult.Success(result)
         } catch (e: Exception) {

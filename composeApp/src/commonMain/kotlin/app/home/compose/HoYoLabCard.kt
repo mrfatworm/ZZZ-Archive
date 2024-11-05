@@ -33,8 +33,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
-import ui.component.ContentCard
-import ui.component.ImageNotFound
+import ui.components.ImageNotFound
+import ui.components.cards.ContentCard
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.bounty_commissions

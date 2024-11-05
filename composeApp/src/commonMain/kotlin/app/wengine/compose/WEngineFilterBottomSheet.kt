@@ -11,9 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.wengine.model.WEnginesListState
-import ui.component.RarityFilterChips
-import ui.component.SpecialtyFilterChips
-import ui.component.ZzzBottomSheet
+import ui.components.ZzzBottomSheet
+import ui.components.chips.RarityFilterChipsList
+import ui.components.chips.SpecialtyFilterChips
 import utils.AgentSpecialty
 import utils.ZzzRarity
 
@@ -31,7 +31,7 @@ fun WEngineFilterBottomSheet(
             modifier = Modifier.padding(horizontal = 8.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            RarityFilterChips(
+            RarityFilterChipsList(
                 selectedRarity = uiState.selectedRarity,
                 onSelectionChanged = onRarityChipSelectionChanged
             )

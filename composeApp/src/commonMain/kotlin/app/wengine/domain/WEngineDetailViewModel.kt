@@ -42,7 +42,7 @@ class WEngineDetailViewModel(
             }
 
             is ZzzResult.Error -> {
-                println("get w-engine $id error: ${result.exception}")
+                println("get W-Engine $id error: ${result.exception}")
             }
         }
     }

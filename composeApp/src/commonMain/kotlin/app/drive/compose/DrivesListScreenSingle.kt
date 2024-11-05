@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import app.drive.model.DrivesListState
 import app.drive.model.emptyDriveListItem
 import org.jetbrains.compose.resources.stringResource
-import ui.component.DriveDetailDialog
-import ui.component.ZzzTopBar
+import ui.components.ZzzTopBar
+import ui.components.dialogs.DriveDetailDialog
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import zzzarchive.composeapp.generated.resources.Res

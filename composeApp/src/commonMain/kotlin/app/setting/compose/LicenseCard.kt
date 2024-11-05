@@ -15,7 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.mrfatworm.zzzarchive.ZzzConfig
 import org.jetbrains.compose.resources.stringResource
-import ui.component.ContentCard
+import ui.components.cards.ContentCard
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.app_name

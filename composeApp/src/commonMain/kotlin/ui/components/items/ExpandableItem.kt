@@ -1,0 +1,75 @@
+/*
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: MIT License
+ */
+
+package ui.components.items
+
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.resources.vectorResource
+import ui.theme.AppTheme
+import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.ic_arrow_down_ios
+
+@Composable
+fun ExpandableItem(title: String, subtitle: String, description: String) {
+    var expanded by remember { mutableStateOf(false) }
+    Column {
+        Row(
+            modifier = Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand)
+                .clickable { expanded = !expanded }.padding(horizontal = 16.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = title,
+                style = AppTheme.typography.titleSmall,
+                color = AppTheme.colors.onSurfaceVariant
+            )
+            Text(
+                modifier = Modifier.weight(1f),
+                text = subtitle,
+                textAlign = TextAlign.End,
+                style = AppTheme.typography.labelMedium,
+                color = AppTheme.colors.onSurfaceVariant
+            )
+            Icon(
+                modifier = Modifier.size(16.dp).graphicsLayer {
+                    rotationZ = if (expanded) 180f else 0f
+                },
+                imageVector = vectorResource(Res.drawable.ic_arrow_down_ios),
+                contentDescription = null,
+                tint = AppTheme.colors.onSurfaceVariant
+            )
+        }
+        AnimatedVisibility(visible = expanded) {
+            Text(
+                modifier = Modifier.padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 32.dp),
+                text = description,
+                style = AppTheme.typography.bodyMedium,
+                color = AppTheme.colors.onSurface
+            )
+        }
+    }
+}

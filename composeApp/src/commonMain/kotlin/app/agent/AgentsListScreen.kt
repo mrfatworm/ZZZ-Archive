@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import app.agent.compose.AgentsListScreenDual
 import app.agent.compose.AgentsListScreenSingle
-import app.agent.domain.AgentListViewModel
+import app.agent.domain.AgentsListViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
@@ -21,7 +21,7 @@ fun AgentsListScreen(
     onAgentClick: (Int) -> Unit,
     onBackClick: () -> Unit
 ) {
-    val viewModel: AgentListViewModel = koinViewModel()
+    val viewModel: AgentsListViewModel = koinViewModel()
     val uiState = viewModel.uiState.collectAsState()
     if (contentType == ContentType.Single) {
         AgentsListScreenSingle(

@@ -24,7 +24,7 @@ import utils.ZzzRarity
 fun AgentsListScreenDual(
     uiState: AgentsListState,
     adaptiveLayoutType: AdaptiveLayoutType,
-    onAgentClick: (Int) -> Unit = {},
+    onAgentClick: (Int) -> Unit,
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
     onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit,

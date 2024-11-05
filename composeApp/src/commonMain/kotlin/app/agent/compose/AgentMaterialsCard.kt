@@ -32,9 +32,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import app.agent.model.AgentLevelMaterial
 import org.jetbrains.compose.resources.stringResource
-import ui.component.ContentCard
-import ui.component.HoveredIndicatorHeader
-import ui.component.RarityItemMini
+import ui.components.cards.ContentCard
+import ui.components.cards.HoveredIndicatorHeader
+import ui.components.items.RarityMiniItem
 import ui.theme.AppTheme
 import ui.utils.drawRowListMask
 import zzzarchive.composeapp.generated.resources.Res
@@ -68,7 +68,7 @@ fun AgentMaterialsCard(material: AgentLevelMaterial) {
             )
         ) {
             items(items = materialsList, key = { it.id }) { material ->
-                RarityItemMini(
+                RarityMiniItem(
                     modifier = Modifier.animateItem(),
                     text = material.getAmountText(),
                     imgUrl = material.getProfileUrl()

@@ -1,9 +1,9 @@
 package mainfunc
 
 import androidx.lifecycle.ViewModel
+import app.setting.data.SettingsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import setting.SettingsRepository
 
 class MainFuncViewModel(
     private val settingsRepository: SettingsRepository

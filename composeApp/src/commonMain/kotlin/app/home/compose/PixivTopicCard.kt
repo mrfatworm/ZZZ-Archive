@@ -58,9 +58,9 @@ import coil3.size.Size
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
-import ui.component.ContentCard
-import ui.component.HoveredIndicatorHeader
-import ui.component.ImageNotFound
+import ui.components.ImageNotFound
+import ui.components.cards.ContentCard
+import ui.components.cards.HoveredIndicatorHeader
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import ui.utils.drawRowListMask

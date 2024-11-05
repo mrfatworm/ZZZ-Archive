@@ -6,7 +6,7 @@
 package utils
 
 import androidx.compose.ui.text.intl.Locale
-import setting.SettingsRepository
+import app.setting.data.SettingsRepository
 
 interface LanguageHandler {
     fun getLanguage(): Language

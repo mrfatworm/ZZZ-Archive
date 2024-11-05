@@ -15,13 +15,13 @@ import app.home.data.NewsRepository
 import app.home.data.PixivRepository
 import app.home.model.HomeState
 import app.home.model.pixivTagDropdownItems
+import app.setting.data.SettingsRepository
 import app.wengine.data.WEngineRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import mainfunc.data.BannerRepository
-import setting.SettingsRepository
 import utils.ZzzResult
 
 class HomeViewModel(

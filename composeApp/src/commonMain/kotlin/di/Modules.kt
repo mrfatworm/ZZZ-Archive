@@ -8,7 +8,7 @@ package di
 import app.agent.data.AgentRepository
 import app.agent.data.AgentRepositoryImpl
 import app.agent.domain.AgentDetailViewModel
-import app.agent.domain.AgentListViewModel
+import app.agent.domain.AgentsListViewModel
 import app.bangboo.data.BangbooRepository
 import app.bangboo.data.BangbooRepositoryImpl
 import app.bangboo.domain.BangbooDetailViewModel
@@ -23,6 +23,8 @@ import app.home.data.NewsRepositoryImpl
 import app.home.data.PixivRepository
 import app.home.data.PixivRepositoryImpl
 import app.home.domain.HomeViewModel
+import app.setting.data.SettingsRepository
+import app.setting.data.SettingsRepositoryImpl
 import app.setting.domain.SettingViewModel
 import app.splash.SplashViewModel
 import app.wengine.data.WEngineRepository
@@ -37,8 +39,6 @@ import mainfunc.data.BannerRepositoryImpl
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
-import setting.SettingsRepository
-import setting.SettingsRepositoryImpl
 import utils.LanguageHandler
 import utils.LanguageHandlerImpl
 
@@ -61,7 +61,7 @@ val sharedModule = module {
     viewModelOf(::MainFuncViewModel)
     viewModelOf(::HomeViewModel)
     viewModelOf(::WikiViewModel)
-    viewModelOf(::AgentListViewModel)
+    viewModelOf(::AgentsListViewModel)
     viewModelOf(::AgentDetailViewModel)
     viewModelOf(::WEnginesListViewModel)
     viewModelOf(::WEngineDetailViewModel)

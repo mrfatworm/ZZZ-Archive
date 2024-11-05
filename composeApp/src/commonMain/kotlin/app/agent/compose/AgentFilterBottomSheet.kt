@@ -11,11 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.agent.model.AgentsListState
-import ui.component.AttributeFilterChips
-import ui.component.FactionFilterChips
-import ui.component.RarityFilterChips
-import ui.component.SpecialtyFilterChips
-import ui.component.ZzzBottomSheet
+import ui.components.ZzzBottomSheet
+import ui.components.chips.AttributeFilterChipsList
+import ui.components.chips.FactionFilterChipsList
+import ui.components.chips.RarityFilterChipsList
+import ui.components.chips.SpecialtyFilterChips
 import utils.AgentAttribute
 import utils.AgentSpecialty
 import utils.ZzzRarity
@@ -36,11 +36,11 @@ fun AgentFilterBottomSheet(
             modifier = Modifier.padding(horizontal = 8.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            RarityFilterChips(
+            RarityFilterChipsList(
                 selectedRarity = uiState.selectedRarity,
                 onSelectionChanged = onRarityChipSelectionChanged
             )
-            AttributeFilterChips(
+            AttributeFilterChipsList(
                 selectedAttributes = uiState.selectedAttributes,
                 onSelectionChanged = onAttributeChipSelectionChanged
             )
@@ -48,7 +48,7 @@ fun AgentFilterBottomSheet(
                 selectedSpecialty = uiState.selectedSpecialties,
                 onSelectionChanged = onSpecialtyChipSelectionChanged
             )
-            FactionFilterChips(
+            FactionFilterChipsList(
                 selectedFactionId = uiState.selectedFactionId,
                 factionsList = uiState.factionsList,
                 onSelectionChanged = onFactionChipSelectionChanged

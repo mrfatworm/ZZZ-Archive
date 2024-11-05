@@ -19,8 +19,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import app.wengine.model.WEnginesListState
 import org.jetbrains.compose.resources.stringResource
-import ui.component.ZzzIconButton
-import ui.component.ZzzTopBar
+import ui.components.ZzzTopBar
+import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import utils.AgentSpecialty

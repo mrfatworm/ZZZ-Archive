@@ -12,11 +12,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import app.home.compose.AgentsListCard
-import app.home.compose.BangbooListCard
-import app.home.compose.DrivesListCard
-import app.home.compose.WEnginesListCard
 import app.wiki.model.WikiState
+import ui.components.cards.AgentsListCard
+import ui.components.cards.BangbooListCard
+import ui.components.cards.DrivesListCard
+import ui.components.cards.WEnginesListCard
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding

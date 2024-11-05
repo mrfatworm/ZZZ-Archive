@@ -12,10 +12,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import app.agent.compose.TextCard
 import app.wengine.model.WEngineDetailState
 import org.jetbrains.compose.resources.stringResource
-import ui.component.MaterialsCard
+import ui.components.cards.MaterialsListCard
+import ui.components.cards.TextCard
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
@@ -35,9 +35,9 @@ fun WEngineDetailScreenSingle(
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         WEngineImageCard(uiState.wEngineDetail, onBackClick)
-        AttributesCard(uiState.wEngineDetail)
+        WEngineAttributesCard(uiState.wEngineDetail)
         TextCard(stringResource(Res.string.w_engine_effect), uiState.wEngineDetail.skill)
-        MaterialsCard(uiState.wEngineDetail.levelMaterials)
+        MaterialsListCard(uiState.wEngineDetail.levelMaterials)
         TextCard(stringResource(Res.string.additional_info), uiState.wEngineDetail.background)
     }
 }

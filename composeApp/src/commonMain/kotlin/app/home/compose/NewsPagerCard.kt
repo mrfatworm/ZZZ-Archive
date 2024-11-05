@@ -43,8 +43,8 @@ import app.home.model.OfficialNewsListItem
 import coil3.compose.AsyncImage
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ui.component.ImageNotFound
-import ui.component.PagerIndicator
+import ui.components.ImageNotFound
+import ui.components.PagerIndicator
 import ui.theme.AppTheme
 
 

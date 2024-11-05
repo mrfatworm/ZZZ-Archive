@@ -12,10 +12,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import app.agent.compose.TextCard
 import app.bangboo.model.BangbooDetailState
 import org.jetbrains.compose.resources.stringResource
-import ui.component.MaterialsCard
+import ui.components.cards.MaterialsListCard
+import ui.components.cards.TextCard
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
@@ -36,8 +36,8 @@ fun BangbooDetailScreenSingle(
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         BangbooImageCard(uiState.bangbooDetail, onBackClick)
-        AttributesCard(uiState.bangbooDetail)
-        MaterialsCard(uiState.bangbooDetail.levelMaterials)
+        BangbooAttributesCard(uiState.bangbooDetail)
+        MaterialsListCard(uiState.bangbooDetail.levelMaterials)
         TextCard(
             stringResource(Res.string.active_skill),
             uiState.bangbooDetail.activeSkill.description,

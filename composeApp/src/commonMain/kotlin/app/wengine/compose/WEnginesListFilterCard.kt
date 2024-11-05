@@ -19,10 +19,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.wengine.model.WEnginesListState
-import ui.component.ContentCard
-import ui.component.RarityFilterChips
-import ui.component.RarityItem
-import ui.component.SpecialtyFilterChips
+import ui.components.cards.ContentCard
+import ui.components.chips.RarityFilterChipsList
+import ui.components.chips.SpecialtyFilterChips
+import ui.components.items.RarityItem
 import ui.theme.AppTheme
 import ui.utils.drawColumnListMask
 import utils.AgentSpecialty
@@ -47,7 +47,7 @@ fun WEnginesListFilterCard(
                 modifier = Modifier.padding(top = AppTheme.dimens.paddingCard),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                RarityFilterChips(uiState.selectedRarity, onRarityChipSelectionChanged)
+                RarityFilterChipsList(uiState.selectedRarity, onRarityChipSelectionChanged)
                 SpecialtyFilterChips(
                     uiState.selectedSpecialties, 1, onSpecialtyChipSelectionChanged
                 )

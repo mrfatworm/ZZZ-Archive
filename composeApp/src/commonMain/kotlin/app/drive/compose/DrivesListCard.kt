@@ -16,8 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.drive.model.DrivesListState
-import ui.component.ContentCard
-import ui.component.RarityItem
+import ui.components.cards.ContentCard
+import ui.components.items.RarityItem
 import ui.theme.AppTheme
 import ui.utils.drawColumnListMask
 

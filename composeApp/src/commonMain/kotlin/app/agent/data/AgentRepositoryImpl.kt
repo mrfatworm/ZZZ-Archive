@@ -15,7 +15,7 @@ class AgentRepositoryImpl(private val httpClient: ZzzHttp) : AgentRepository {
     override suspend fun getAgentsList(): ZzzResult<AgentsListResponse> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestAgentList()
+                httpClient.requestAgentsList()
             }
             ZzzResult.Success(result)
         } catch (e: Exception) {

@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
-import ui.component.ContentCard
+import ui.components.cards.ContentCard
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.feedback

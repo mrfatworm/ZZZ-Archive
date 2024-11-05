@@ -19,8 +19,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import app.agent.model.AgentsListState
 import org.jetbrains.compose.resources.stringResource
-import ui.component.ZzzIconButton
-import ui.component.ZzzTopBar
+import ui.components.ZzzTopBar
+import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import utils.AgentAttribute
@@ -37,7 +37,7 @@ import zzzarchive.composeapp.generated.resources.ic_filter_filled
 fun AgentsListScreenSingle(
     uiState: AgentsListState,
     adaptiveLayoutType: AdaptiveLayoutType,
-    onAgentClick: (Int) -> Unit = {},
+    onAgentClick: (Int) -> Unit,
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
     onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit,

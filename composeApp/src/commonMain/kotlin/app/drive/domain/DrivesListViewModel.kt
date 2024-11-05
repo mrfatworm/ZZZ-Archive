@@ -39,7 +39,7 @@ class DrivesListViewModel(
             }
 
             is ZzzResult.Error -> {
-                println("get bangboo error: ${result.exception}")
+                println("get drive error: ${result.exception}")
             }
         }
     }

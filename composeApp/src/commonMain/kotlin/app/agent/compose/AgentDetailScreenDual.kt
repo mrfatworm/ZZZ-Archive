@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import app.agent.model.AgentDetailState
 import org.jetbrains.compose.resources.stringResource
+import ui.components.cards.TextCard
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
@@ -33,7 +34,7 @@ fun AgentDetailScreenDual(
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             AgentImageCard(agentDetail = uiState.agentDetail, onBackClick = onBackClick)
-            AttributesCard(uiState.agentDetail)
+            AgentAttributesCard(uiState.agentDetail)
         }
 
         Column(

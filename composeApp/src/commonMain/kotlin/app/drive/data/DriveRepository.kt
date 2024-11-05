@@ -5,9 +5,9 @@
 
 package app.drive.data
 
-import app.drive.model.DriveListResponse
+import app.drive.model.DrivesListResponse
 import utils.ZzzResult
 
 interface DriveRepository {
-    suspend fun getDrivesList(): ZzzResult<DriveListResponse>
+    suspend fun getDrivesList(): ZzzResult<DrivesListResponse>
 }

@@ -8,9 +8,9 @@ package app.agent.compose
 import androidx.compose.runtime.Composable
 import app.agent.model.AgentDetailResponse
 import org.jetbrains.compose.resources.stringResource
-import ui.component.CardHeader
-import ui.component.ContentCard
-import ui.component.ExpandableItem
+import ui.components.cards.CardHeader
+import ui.components.cards.ContentCard
+import ui.components.items.ExpandableItem
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.additional_ability
 import zzzarchive.composeapp.generated.resources.assist_follow_up

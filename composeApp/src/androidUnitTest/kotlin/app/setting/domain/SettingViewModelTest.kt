@@ -8,9 +8,9 @@ package app.setting.domain
 
 import MainDispatcherRule
 import android.content.Context
+import app.setting.data.FakeSettingRepository
 import io.mockk.mockk
 import org.junit.Rule
-import setting.FakeSettingRepository
 import utils.AppActions
 import kotlin.test.BeforeTest
 import kotlin.test.Test

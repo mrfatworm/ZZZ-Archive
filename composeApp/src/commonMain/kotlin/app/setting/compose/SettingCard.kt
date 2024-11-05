@@ -24,8 +24,8 @@ import androidx.compose.ui.unit.dp
 import app.setting.model.SettingState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
-import ui.component.ContentCard
-import ui.component.RestartDialog
+import ui.components.cards.ContentCard
+import ui.components.dialogs.RestartDialog
 import ui.theme.AppTheme
 import utils.Language
 import zzzarchive.composeapp.generated.resources.Res

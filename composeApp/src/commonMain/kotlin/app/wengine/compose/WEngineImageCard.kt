@@ -21,9 +21,9 @@ import androidx.compose.ui.unit.dp
 import app.wengine.model.WEngineDetailResponse
 import coil3.compose.AsyncImage
 import org.jetbrains.compose.resources.stringResource
-import ui.component.ContentCard
-import ui.component.ZzzIconButton
-import ui.component.ZzzTag
+import ui.components.ZzzTag
+import ui.components.buttons.ZzzIconButton
+import ui.components.cards.ContentCard
 import ui.theme.AppTheme
 import ui.utils.drawBottomMask
 import zzzarchive.composeapp.generated.resources.Res

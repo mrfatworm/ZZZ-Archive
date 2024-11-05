@@ -9,7 +9,7 @@ package app.drive.domian
 import MainDispatcherRule
 import app.drive.data.FakeDriveRepository
 import app.drive.domain.DrivesListViewModel
-import app.drive.model.stubDriveListResponse
+import app.drive.model.stubDrivesListResponse
 import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -31,7 +31,7 @@ class DrivesListViewModelTest {
     @Test
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.drivesList, stubDriveListResponse.getDrivesNewToOld())
+        assertEquals(state.drivesList, stubDrivesListResponse.getDrivesNewToOld())
     }
 
     @Test

@@ -29,13 +29,13 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
+import ui.components.navigation.ModalNavigationDrawerContent
+import ui.components.navigation.ZzzArchiveBottomNavigationBar
+import ui.components.navigation.ZzzArchiveNavigationRail
 import ui.navigation.ALL_MAIN_FLOW
 import ui.navigation.MainFlow
 import ui.navigation.NAV_BOTTOM_MAIN_FLOW
 import ui.navigation.NavActions
-import ui.navigation.component.ModalNavigationDrawerContent
-import ui.navigation.component.ZzzArchiveBottomNavigationBar
-import ui.navigation.component.ZzzArchiveNavigationRail
 import ui.navigation.graph.MainNavGraph
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType

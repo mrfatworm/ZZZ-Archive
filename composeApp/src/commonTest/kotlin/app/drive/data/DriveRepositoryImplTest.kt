@@ -5,7 +5,7 @@
 
 package app.drive.data
 
-import app.drive.model.stubDriveListResponse
+import app.drive.model.stubDrivesListResponse
 import io.ktor.util.reflect.instanceOf
 import kotlinx.coroutines.test.runTest
 import network.FakeZzzHttp
@@ -21,7 +21,7 @@ class DriveRepositoryImplTest {
     @Test
     fun `Get Drives List Success`() = runTest {
         val result = repository.getDrivesList() as ZzzResult.Success
-        assertEquals(result.data, stubDriveListResponse)
+        assertEquals(result.data, stubDrivesListResponse)
     }
 
     @Test

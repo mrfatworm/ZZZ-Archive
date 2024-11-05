@@ -30,7 +30,7 @@ import app.drive.model.DriveListItem
 import app.drive.model.DrivesListState
 import coil3.compose.AsyncImage
 import org.jetbrains.compose.resources.stringResource
-import ui.component.ZzzIconButton
+import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
