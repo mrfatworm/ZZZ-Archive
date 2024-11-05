@@ -34,10 +34,11 @@ fun AgentDetailScreenSingle(
         AgentImageCard(uiState.agentDetail, onBackClick)
         AttributesCard(uiState.agentDetail)
         AgentMaterialsCard(uiState.agentDetail.levelMaterial)
-        SkillsCard(uiState.agentDetail)
-        CinemaCard(uiState.agentDetail)
         SuggestWEnginesCard(uiState.agentDetail.suggestWEngines)
         SuggestDrivesCard(uiState.agentDetail.suggestDrives)
+        SkillsCard(uiState.agentDetail)
+        CinemaCard(uiState.agentDetail)
         TextCard(stringResource(Res.string.agent_background), uiState.agentDetail.agentBackground)
+        GalleryCard(uiState.agentDetail)
     }
 }

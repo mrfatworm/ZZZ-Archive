@@ -55,7 +55,6 @@ fun SuggestDrivesCard(drivesList: List<DriveItem>) {
         ) {
             items(items = drivesList) { drive ->
                 RarityItemMini(
-                    modifier = Modifier.animateItem(),
                     imgUrl = drive.getDriveIconUrl(),
                     text = drive.getSuitString()
                 )

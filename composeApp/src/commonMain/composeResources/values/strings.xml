@@ -97,6 +97,7 @@
     <string name="suggest_w_engines">Recommended W-Engines</string>
     <string name="suggest_drives">Recommended Drives</string>
     <string name="agent_background">Agent Background</string>
+    <string name="gallery">Gallery</string>
 
     <!-- W-Engine Detail -->
     <string name="w_engine_effect">W-Engine Effect</string>

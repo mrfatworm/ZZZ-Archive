@@ -55,7 +55,6 @@ fun SuggestWEnginesCard(wEnginesList: List<RarityItem>) {
         ) {
             items(items = wEnginesList, key = { it.id }) { wEngine ->
                 RarityItemMini(
-                    modifier = Modifier.animateItem(),
                     imgUrl = wEngine.getWEngineIconUrl(),
                     rarity = wEngine.getRarity()
                 )

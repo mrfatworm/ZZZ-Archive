@@ -85,6 +85,14 @@ data class AgentDetailResponse(
     fun getHpAtkDef(): String {
         return "${basicData.hp} / ${basicData.atk} / ${basicData.def}"
     }
+
+    fun getAgentMindScapePartialImageUrl(path: String = ZzzConfig.ASSET_PATH): String {
+        return "https://raw.githubusercontent.com/$path/Agent/Mindscape/Partial/$id.webp"
+    }
+
+    fun getAgentMindScapeFullImageUrl(path: String = ZzzConfig.ASSET_PATH): String {
+        return "https://raw.githubusercontent.com/$path/Agent/Mindscape/Full/$id.webp"
+    }
 }
 
 @Serializable
