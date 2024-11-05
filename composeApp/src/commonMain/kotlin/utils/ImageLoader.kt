@@ -2,7 +2,7 @@
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
  * Modify from Coil3 sample
  * Ref: https://proandroiddev.com/coil-for-compose-multiplatform-5745ea76356f
- * License: CC BY-SA 4.0
+ * License: MIT License
  */
 
 package utils

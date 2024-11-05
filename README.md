@@ -15,7 +15,8 @@ File will publish to Community in future
 
 ## How to run on desktop / 如何執行桌面板
 Android Studio > Run > Edit Configurations > New > Gradle
-> desktopRun -DmainClass=MainKt --quiet
+Run: `desktopRun -DmainClass=MainKt --quiet`
+Env Variables: `VARIANT=Dev`
 
 ## Tech Stack / 使用技術
 - KMP (Kotlin Multiplatform)

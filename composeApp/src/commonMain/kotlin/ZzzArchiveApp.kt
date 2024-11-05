@@ -1,6 +1,6 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: CC BY-SA 4.0
+ * License: MIT License
  */
 
 
@@ -14,8 +14,8 @@ import coil3.compose.setSingletonImageLoaderFactory
 import ui.navigation.NavActions
 import ui.navigation.graph.RootNavGraph
 import ui.theme.ZzzArchiveTheme
-import ui.utils.ContentType
 import ui.utils.AdaptiveLayoutType
+import ui.utils.ContentType
 import utils.imageLoaderDiskCache
 
 
