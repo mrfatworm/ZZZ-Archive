@@ -5,9 +5,13 @@
 
 package app.agent.model
 
+import app.drive.model.DriveListItem
+
 
 data class AgentDetailState(
     val agentDetail: AgentDetailResponse = emptyAgentDetailResponse,
+    val drivesList: List<DriveListItem> = emptyList(),
+    val selectedDrive: DriveListItem? = null
 )
 
 val emptyAgentDetailResponse = AgentDetailResponse(

@@ -28,7 +28,7 @@ import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.suggest_w_engines
 
 @Composable
-fun SuggestWEnginesCard(wEnginesList: List<RarityItem>) {
+fun SuggestWEnginesCard(wEnginesList: List<RarityItem>, wEngineClick: (Int) -> Unit) {
     val lazyListState = rememberLazyListState()
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered = interactionSource.collectIsHoveredAsState()
@@ -57,7 +57,9 @@ fun SuggestWEnginesCard(wEnginesList: List<RarityItem>) {
                 RarityMiniItem(
                     imgUrl = wEngine.getWEngineIconUrl(),
                     rarity = wEngine.getRarity()
-                )
+                ) {
+                    wEngineClick(wEngine.id)
+                }
                 Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
             }
         }

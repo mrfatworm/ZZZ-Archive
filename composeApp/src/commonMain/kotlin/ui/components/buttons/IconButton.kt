@@ -34,7 +34,7 @@ fun ZzzIconButton(
     size: Dp = 40.dp,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit
 ) {
     Surface(modifier = modifier.pointerHoverIcon(if (enabled) PointerIcon.Hand else PointerIcon.Default).size(size),
         color = AppTheme.colors.surface,

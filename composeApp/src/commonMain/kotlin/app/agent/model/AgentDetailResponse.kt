@@ -40,7 +40,7 @@ data class AgentDetailResponse(
     @SerialName("mindscape_cinema") val mindscapeCinema: List<NameAndDesc>,
     @SerialName("level_material") val levelMaterial: AgentLevelMaterial,
     @SerialName("suggest_w_engines") val suggestWEngines: List<RarityItem>,
-    @SerialName("suggest_drives") val suggestDrives: List<DriveItem>,
+    @SerialName("suggest_drives") val suggestDrives: List<AgentDriveItem>,
 ) {
     fun getAgentPortraitImageUrl(path: String = ZzzConfig.ASSET_PATH): String {
         return "https://raw.githubusercontent.com/$path/Agent/Portrait/$id.webp"
@@ -141,7 +141,7 @@ data class RarityItem(
 }
 
 @Serializable
-data class DriveItem(
+data class AgentDriveItem(
     val id: Int, val suit: Int
 ) {
     fun getDriveIconUrl(path: String = ZzzConfig.ASSET_PATH): String {
@@ -301,6 +301,6 @@ val stubAgentDetailResponse = AgentDetailResponse(
         RarityItem(47, 5), RarityItem(19, 4)
     ),
     suggestDrives = listOf(
-        DriveItem(5, 4), DriveItem(1, 2), DriveItem(7, 2)
+        AgentDriveItem(5, 4), AgentDriveItem(1, 2), AgentDriveItem(7, 2)
     )
 )

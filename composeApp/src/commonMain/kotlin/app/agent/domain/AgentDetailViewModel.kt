@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.agent.data.AgentRepository
 import app.agent.model.AgentDetailState
+import app.drive.data.DriveRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -19,6 +20,7 @@ import utils.ZzzResult
 class AgentDetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val agentRepository: AgentRepository,
+    private val driveRepository: DriveRepository
 ) : ViewModel() {
     private var agentId: Int = checkNotNull(savedStateHandle["agentId"])
 
@@ -28,6 +30,7 @@ class AgentDetailViewModel(
     init {
         viewModelScope.launch {
             fetchAgentsDetail(agentId)
+            fetchDrivesList()
         }
     }
 
@@ -43,6 +46,22 @@ class AgentDetailViewModel(
 
             is ZzzResult.Error -> {
                 println("get agent $id error: ${result.exception}")
+            }
+        }
+    }
+
+    private suspend fun fetchDrivesList() {
+        when (val result = driveRepository.getDrivesList()) {
+            is ZzzResult.Success -> {
+                _uiState.update {
+                    it.copy(
+                        drivesList = result.data.drives
+                    )
+                }
+            }
+
+            is ZzzResult.Error -> {
+                println("get drives list error: ${result.exception}")
             }
         }
     }

@@ -15,12 +15,16 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import app.agent.model.DriveItem
+import app.agent.model.AgentDriveItem
+import app.drive.model.DriveListItem
+import app.drive.model.emptyDriveListItem
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.ContentCard
 import ui.components.cards.HoveredIndicatorHeader
+import ui.components.dialogs.DriveDetailDialog
 import ui.components.items.RarityMiniItem
 import ui.theme.AppTheme
 import ui.utils.drawRowListMask
@@ -28,10 +32,15 @@ import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.suggest_drives
 
 @Composable
-fun SuggestDrivesCard(drivesList: List<DriveItem>) {
+fun SuggestDrivesCard(
+    agentDrivesList: List<AgentDriveItem>,
+    drivesList: List<DriveListItem>,
+) {
     val lazyListState = rememberLazyListState()
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered = interactionSource.collectIsHoveredAsState()
+    val openDetailDialog = remember { mutableStateOf(false) }
+    val selectedDriveId = remember { mutableStateOf(0) }
     ContentCard(
         modifier = Modifier.hoverable(interactionSource = interactionSource),
         hasDefaultPadding = false
@@ -53,12 +62,24 @@ fun SuggestDrivesCard(drivesList: List<DriveItem>) {
                 bottom = AppTheme.dimens.paddingCard
             )
         ) {
-            items(items = drivesList) { drive ->
+            items(items = agentDrivesList) { drive ->
                 RarityMiniItem(
                     imgUrl = drive.getDriveIconUrl(),
                     text = drive.getSuitString()
-                )
+                ) {
+                    selectedDriveId.value = drive.id
+                    openDetailDialog.value = true
+                }
                 Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
+            }
+        }
+
+        when {
+            openDetailDialog.value -> {
+                DriveDetailDialog(driveListItem = drivesList.find { it.id == selectedDriveId.value }
+                    ?: emptyDriveListItem, onDismiss = {
+                    openDetailDialog.value = false
+                })
             }
         }
     }

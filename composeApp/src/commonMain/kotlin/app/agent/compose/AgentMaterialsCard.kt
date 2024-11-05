@@ -84,7 +84,7 @@ private fun Header(
     isHovered: State<Boolean>,
     lazyListState: LazyListState,
     checkState: Boolean,
-    onCheckChange: (Boolean) -> Unit = {}
+    onCheckChange: (Boolean) -> Unit
 ) {
     val levelLabel = if (checkState) " Lv.12" else " Lv.10"
     HoveredIndicatorHeader(

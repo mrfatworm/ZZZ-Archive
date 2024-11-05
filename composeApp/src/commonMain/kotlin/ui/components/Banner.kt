@@ -34,7 +34,7 @@ fun Banner(
     bannerLevel: BannerLevel,
     closable: Boolean,
     actionTextRes: StringResource? = null,
-    onActionClicked: () -> Unit = {},
+    onActionClicked: () -> Unit,
     onClosed: () -> Unit
 ) {
     val containerColor = when (bannerLevel) {

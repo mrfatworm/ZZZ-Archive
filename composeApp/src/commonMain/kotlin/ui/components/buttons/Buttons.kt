@@ -37,7 +37,7 @@ fun ZzzPrimaryButton(
     enabled: Boolean = true,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    onClick: () -> Unit = {}
+    onClick: () -> Unit
 ) {
     ZzzButton(
         modifier = modifier,
@@ -62,7 +62,7 @@ fun ZzzOutlineButton(
     enabled: Boolean = true,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    onClick: () -> Unit = {}
+    onClick: () -> Unit
 ) {
     ZzzButton(
         modifier = modifier,
@@ -93,7 +93,7 @@ fun ZzzButton(
     enabled: Boolean = true,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     interactionSource: MutableInteractionSource,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit,
 ) {
     Button(
         modifier = modifier.pointerHoverIcon(if (enabled) PointerIcon.Hand else PointerIcon.Default)

@@ -231,7 +231,7 @@ private fun PixivTopicItem(
 
 @Composable
 private fun AuthorInfo(
-    profileName: String, profileUrl: String?, header: NetworkHeaders, onClick: () -> Unit = {}
+    profileName: String, profileUrl: String?, header: NetworkHeaders, onClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val imageState = rememberAsyncImagePainter(

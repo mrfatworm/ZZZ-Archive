@@ -43,7 +43,7 @@ fun SettingCard(
     uiState: SettingState,
     onLanguageChange: (String) -> Unit,
     onColorChange: (Boolean) -> Unit,
-    onRestart: () -> Unit = {}
+    onRestart: () -> Unit
 ) {
     ContentCard(hasDefaultPadding = false) {
         LanguageSettingItem(uiState.language, onLanguageChange, onRestart)
@@ -56,7 +56,7 @@ fun SettingCard(
 private fun LanguageSettingItem(
     language: Language,
     onLanguageChange: (String) -> Unit,
-    onRestart: () -> Unit = {}
+    onRestart: () -> Unit
 ) {
     var showLanguageList by remember { mutableStateOf(false) }
     val openRestartDialog = remember { mutableStateOf(false) }

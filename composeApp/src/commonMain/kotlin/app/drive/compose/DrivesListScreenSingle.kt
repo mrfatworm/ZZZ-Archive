@@ -27,7 +27,7 @@ import zzzarchive.composeapp.generated.resources.drives
 fun DrivesListScreenSingle(
     uiState: DrivesListState,
     adaptiveLayoutType: AdaptiveLayoutType,
-    onDriveClick: (Int) -> Unit = {},
+    onDriveClick: (Int) -> Unit,
     onBackClick: () -> Unit
 ) {
     val openDetailDialog = remember { mutableStateOf(false) }

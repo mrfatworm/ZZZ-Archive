@@ -25,6 +25,7 @@ import zzzarchive.composeapp.generated.resources.agent_background
 fun AgentDetailScreenDual(
     uiState: AgentDetailState,
     adaptiveLayoutType: AdaptiveLayoutType,
+    wEngineClick: (Int) -> Unit,
     onBackClick: () -> Unit,
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
@@ -43,8 +44,8 @@ fun AgentDetailScreenDual(
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             AgentMaterialsCard(uiState.agentDetail.levelMaterial)
-            SuggestWEnginesCard(uiState.agentDetail.suggestWEngines)
-            SuggestDrivesCard(uiState.agentDetail.suggestDrives)
+            SuggestWEnginesCard(uiState.agentDetail.suggestWEngines, wEngineClick)
+            SuggestDrivesCard(uiState.agentDetail.suggestDrives, uiState.drivesList)
             SkillsCard(uiState.agentDetail)
             CinemaCard(uiState.agentDetail)
             TextCard(stringResource(Res.string.agent_background), uiState.agentDetail.agentBackground)

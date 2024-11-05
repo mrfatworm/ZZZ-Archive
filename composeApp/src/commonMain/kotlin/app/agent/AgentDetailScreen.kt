@@ -17,19 +17,26 @@ import ui.utils.ContentType
 
 @Composable
 fun AgentDetailScreen(
-    contentType: ContentType, adaptiveLayoutType: AdaptiveLayoutType, onBackClick: () -> Unit
+    contentType: ContentType,
+    adaptiveLayoutType: AdaptiveLayoutType,
+    wEngineClick: (Int) -> Unit,
+    onBackClick: () -> Unit
 ) {
     val viewModel: AgentDetailViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsState()
     if (contentType == ContentType.Single) {
         AgentDetailScreenSingle(
-            uiState = uiState, adaptiveLayoutType = adaptiveLayoutType, onBackClick = onBackClick
+            uiState = uiState,
+            adaptiveLayoutType = adaptiveLayoutType,
+            onBackClick = onBackClick,
+            wEngineClick = wEngineClick
         )
     } else {
         AgentDetailScreenDual(
             uiState = uiState,
             adaptiveLayoutType = adaptiveLayoutType,
-            onBackClick = onBackClick
+            onBackClick = onBackClick,
+            wEngineClick = wEngineClick
         )
     }
 
