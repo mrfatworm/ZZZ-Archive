@@ -12,6 +12,8 @@ import app.agent.AgentsListScreen
 import app.bangboo.BangbooDetailScreen
 import app.bangboo.BangbooListScreen
 import app.drive.DrivesListScreen
+import app.setting.FeedbackScreen
+import app.setting.SettingScreen
 import app.wengine.WEngineDetailScreen
 import app.wengine.WEnginesListScreen
 import ui.navigation.NavActions
@@ -19,7 +21,7 @@ import ui.navigation.Screen
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
 
-fun NavGraphBuilder.sharedComposable(
+fun NavGraphBuilder.sharedNavGraph(
     contentType: ContentType, adaptiveLayoutType: AdaptiveLayoutType, navActions: NavActions
 ) {
     composable(Screen.AgentsList.route) {
@@ -68,5 +70,14 @@ fun NavGraphBuilder.sharedComposable(
         DrivesListScreen(adaptiveLayoutType = adaptiveLayoutType, onBackClick = {
             navActions.back()
         })
+    }
+    composable(Screen.Setting.route) {
+        SettingScreen(
+            contentType = contentType,
+            adaptiveLayoutType = adaptiveLayoutType
+        )
+    }
+    composable(Screen.Feedback.route) {
+        FeedbackScreen()
     }
 }

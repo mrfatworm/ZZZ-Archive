@@ -6,13 +6,10 @@
 package ui.navigation.graph.app
 
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import app.setting.FeedbackScreen
-import app.setting.SettingScreen
 import ui.navigation.MainFlow
 import ui.navigation.NavActions
-import ui.navigation.Screen
+import ui.navigation.graph.sharedNavGraph
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
 
@@ -24,13 +21,6 @@ fun NavGraphBuilder.settingNavGraph(
     navigation(
         route = MainFlow.Setting.route, startDestination = MainFlow.Setting.startScreen.route
     ) {
-        composable(Screen.Setting.route) {
-            SettingScreen(contentType = contentType,
-                adaptiveLayoutType = adaptiveLayoutType
-            )
-        }
-        composable(Screen.Feedback.route) {
-            FeedbackScreen()
-        }
+        sharedNavGraph(contentType, adaptiveLayoutType, navActions)
     }
 }

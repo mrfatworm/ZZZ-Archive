@@ -37,6 +37,7 @@ fun HomeScreen(
     onAgentDetailClick: (Int) -> Unit,
     onWEngineDetailClick: (Int) -> Unit,
     onBangbooDetailClick: (Int) -> Unit,
+    onBannerNavigate: (String) -> Unit
 ) {
     val viewModel: HomeViewModel = koinViewModel()
     val uiState = viewModel.uiState.collectAsState()
@@ -87,6 +88,12 @@ fun HomeScreen(
         openBannerDialog.value -> {
             BannerDialog(message = banner?.title ?: "",
                 url = banner?.url ?: "",
+                urlDesc = banner?.urlDesc ?: "",
+                route = banner?.route ?: "",
+                routeDesc = banner?.routeDesc ?: "",
+                onNavigate = {
+                    onBannerNavigate(it)
+                },
                 onDismiss = { openBannerDialog.value = false })
         }
     }

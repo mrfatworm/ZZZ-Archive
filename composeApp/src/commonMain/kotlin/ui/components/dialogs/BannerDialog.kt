@@ -5,6 +5,7 @@
 
 package ui.components.dialogs
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,7 +34,15 @@ import zzzarchive.composeapp.generated.resources.ic_close
 import zzzarchive.composeapp.generated.resources.ic_link
 
 @Composable
-fun BannerDialog(message: String, url: String, onDismiss: () -> Unit) {
+fun BannerDialog(
+    message: String,
+    url: String,
+    urlDesc: String,
+    route: String,
+    routeDesc: String,
+    onNavigate: (String) -> Unit,
+    onDismiss: () -> Unit
+) {
     Dialog(onDismissRequest = onDismiss) {
         Card(
             modifier = Modifier.widthIn(max = 512.dp).heightIn(max = 512.dp),
@@ -59,7 +68,8 @@ fun BannerDialog(message: String, url: String, onDismiss: () -> Unit) {
             }
             Column(
                 Modifier.padding(start = 32.dp, end = 32.dp, bottom = 16.dp)
-                    .verticalScroll(rememberScrollState())
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
                     modifier = Modifier.fillMaxWidth().heightIn(min = 64.dp),
@@ -71,9 +81,19 @@ fun BannerDialog(message: String, url: String, onDismiss: () -> Unit) {
                     ZzzOutlineButton(
                         modifier = Modifier.fillMaxWidth(),
                         iconRes = Res.drawable.ic_link,
-                        text = url
+                        text = urlDesc
                     ) {
                         urlHandler.openUri(url)
+                    }
+                }
+
+                if (route != "") {
+                    ZzzOutlineButton(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = routeDesc
+                    ) {
+                        onNavigate(route)
+                        onDismiss()
                     }
                 }
             }

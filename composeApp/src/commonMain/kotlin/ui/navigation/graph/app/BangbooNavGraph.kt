@@ -9,7 +9,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.navigation
 import ui.navigation.MainFlow
 import ui.navigation.NavActions
-import ui.navigation.graph.sharedComposable
+import ui.navigation.graph.sharedNavGraph
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
 
@@ -21,6 +21,6 @@ fun NavGraphBuilder.bangbooNavGraph(
     navigation(
         route = MainFlow.Bangboo.route, startDestination = MainFlow.Bangboo.startScreen.route
     ) {
-        sharedComposable(contentType, adaptiveLayoutType, navActions)
+        sharedNavGraph(contentType, adaptiveLayoutType, navActions)
     }
 }

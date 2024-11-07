@@ -12,7 +12,7 @@ import app.function.FunctionScreen
 import ui.navigation.MainFlow
 import ui.navigation.NavActions
 import ui.navigation.Screen
-import ui.navigation.graph.sharedComposable
+import ui.navigation.graph.sharedNavGraph
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
 
@@ -27,6 +27,6 @@ fun NavGraphBuilder.functionNavGraph(
         composable(Screen.Function.route) {
             FunctionScreen(adaptiveLayoutType = adaptiveLayoutType)
         }
-        sharedComposable(contentType, adaptiveLayoutType, navActions)
+        sharedNavGraph(contentType, adaptiveLayoutType, navActions)
     }
 }
