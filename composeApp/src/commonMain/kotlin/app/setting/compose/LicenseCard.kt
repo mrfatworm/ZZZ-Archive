@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.mrfatworm.zzzarchive.ZzzConfig
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.ContentCard
 import ui.theme.AppTheme
@@ -23,7 +22,7 @@ import zzzarchive.composeapp.generated.resources.code_licence
 import zzzarchive.composeapp.generated.resources.resource_licence
 
 @Composable
-fun LicenseCard() {
+fun LicenseCard(appVersion: String) {
     ContentCard {
         Text(
             modifier = Modifier.fillMaxWidth(),
@@ -35,7 +34,7 @@ fun LicenseCard() {
         Spacer(Modifier.size(8.dp))
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = ZzzConfig.VERSION,
+            text = appVersion,
             textAlign = TextAlign.Center,
             style = AppTheme.typography.labelSmall,
             color = AppTheme.colors.onSurfaceVariant

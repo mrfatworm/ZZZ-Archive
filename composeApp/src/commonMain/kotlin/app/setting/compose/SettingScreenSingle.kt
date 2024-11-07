@@ -23,6 +23,7 @@ fun SettingScreenSingle(
     adaptiveLayoutType: AdaptiveLayoutType,
     onLanguageChange: (String) -> Unit,
     onColorChange: (Boolean) -> Unit,
+    onFeedbackClick: () -> Unit,
     onRestart: () -> Unit
 ) {
     Column(
@@ -36,8 +37,8 @@ fun SettingScreenSingle(
             onColorChange = onColorChange,
             onRestart = onRestart
         )
-        OtherInfoCard(onFeedbackClick = {})
-        LicenseCard()
+        OtherInfoCard(onFeedbackClick = onFeedbackClick)
+        LicenseCard(uiState.appVersion)
         ContributorsCard(uiState.contributors)
     }
 }

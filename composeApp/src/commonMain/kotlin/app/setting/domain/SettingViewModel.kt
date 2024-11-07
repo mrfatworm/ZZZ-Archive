@@ -7,6 +7,7 @@ package app.setting.domain
 
 import androidx.compose.ui.text.intl.Locale
 import androidx.lifecycle.ViewModel
+import app.setting.data.AppInfoRepository
 import app.setting.data.SettingsRepository
 import app.setting.model.settingState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,6 +19,7 @@ import utils.changeLanguage
 
 class SettingViewModel(
     private val settingsRepository: SettingsRepository,
+    private val appInfoRepository: AppInfoRepository,
     private val appActions: AppActions
 ) : ViewModel() {
 
@@ -34,6 +36,7 @@ class SettingViewModel(
         _isDark.value = settingsRepository.getIsDarkTheme()
         val langCode = settingsRepository.getLanguage()
         updateLanguageState(langCode)
+        getAppVersion()
     }
 
     private fun updateLanguageState(
@@ -44,6 +47,11 @@ class SettingViewModel(
                 ?: Language.English
             else Language.entries.firstOrNull { it.project == langCode } ?: Language.English
         _uiState.update { it.copy(language = language) }
+    }
+
+    private fun getAppVersion() {
+        _uiState.update { it.copy(appVersion = appInfoRepository.getAppVersion()) }
+
     }
 
     fun setIsDarkTheme(isDark: Boolean) {

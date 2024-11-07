@@ -7,8 +7,8 @@ package app.splash
 
 
 import MainDispatcherRule
+import app.setting.data.FakeAppInfoRepository
 import app.setting.data.FakeSettingRepository
-import app.setting.data.SettingsRepository
 import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -19,13 +19,13 @@ class SplashViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private lateinit var settingsRepository: SettingsRepository
+    private var settingsRepository = FakeSettingRepository()
+    private var appInfoRepository = FakeAppInfoRepository()
     private lateinit var viewModel: SplashViewModel
 
     @BeforeTest
     fun setup() {
-        settingsRepository = FakeSettingRepository()
-        viewModel = SplashViewModel(settingsRepository)
+        viewModel = SplashViewModel(settingsRepository, appInfoRepository)
     }
 
     @Test

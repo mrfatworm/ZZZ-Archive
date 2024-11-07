@@ -16,8 +16,7 @@ import ui.utils.ContentType
 
 @Composable
 fun SettingScreen(
-    contentType: ContentType,
-    adaptiveLayoutType: AdaptiveLayoutType
+    contentType: ContentType, adaptiveLayoutType: AdaptiveLayoutType, onFeedbackClick: () -> Unit
 ) {
     val viewModel: SettingViewModel = koinViewModel()
     val uiState = viewModel.uiState.collectAsState()
@@ -26,7 +25,7 @@ fun SettingScreen(
             viewModel.setIsDarkTheme(isDark)
         }, onLanguageChange = { langCode ->
             viewModel.setLanguage(langCode)
-        }, onRestart = {
+        }, onFeedbackClick = onFeedbackClick, onRestart = {
             viewModel.restartApp()
         })
     } else {
@@ -34,7 +33,7 @@ fun SettingScreen(
             viewModel.setIsDarkTheme(isDark)
         }, onLanguageChange = { langCode ->
             viewModel.setLanguage(langCode)
-        }, onRestart = {
+        }, onFeedbackClick = onFeedbackClick, onRestart = {
             viewModel.restartApp()
         })
     }

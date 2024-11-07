@@ -131,4 +131,18 @@
     <string name="restart_hint">An app restart is required to apply the changes.\nWould you like to restart now?</string>
     <string name="restart">Restart</string>
     <string name="later">Later</string>
+
+    <!-- Feedback -->
+    <string name="issue_type">Issue Type</string>
+    <string name="please_select">Please Select</string>
+    <string name="bug">Bug</string>
+    <string name="incorrect_content">Incorrect Content</string>
+    <string name="suggestion">Suggestion</string>
+    <string name="other">Other</string>
+    <string name="input_your_issue">Input your issue</string>
+    <string name="app_version">App Version</string>
+    <string name="device_name">Device Name</string>
+    <string name="operating_system">OS</string>
+    <string name="submit_form">Submit</string>
+
 </resources>

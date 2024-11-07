@@ -10,6 +10,7 @@ import utils.Language
 
 data class SettingState(
     val language: Language = Language.English,
+    val appVersion: String,
     val contributors: Contributors
 )
 
@@ -30,6 +31,7 @@ data class Contributor(
 )
 
 val settingState = SettingState(
+    appVersion = "Lucy 2024.11",
     contributors = Contributors(
         contributorAmount = 1, author = listOf(
             Contributor("mrfatworm"),

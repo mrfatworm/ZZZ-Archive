@@ -23,6 +23,7 @@ fun SettingScreenDual(
     adaptiveLayoutType: AdaptiveLayoutType,
     onLanguageChange: (String) -> Unit,
     onColorChange: (Boolean) -> Unit,
+    onFeedbackClick: () -> Unit,
     onRestart: () -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
@@ -37,8 +38,8 @@ fun SettingScreenDual(
                 onColorChange = onColorChange,
                 onRestart = onRestart
             )
-            OtherInfoCard(onFeedbackClick = {})
-            LicenseCard()
+            OtherInfoCard(onFeedbackClick = onFeedbackClick)
+            LicenseCard(uiState.appVersion)
         }
 
         Column(

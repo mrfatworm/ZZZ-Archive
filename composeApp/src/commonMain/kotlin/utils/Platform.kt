@@ -6,7 +6,8 @@
 package utils
 
 interface Platform {
-    val name: String
+    val operatingSystemName: String
+    val deviceName: String
 }
 
 expect fun getPlatform(): Platform

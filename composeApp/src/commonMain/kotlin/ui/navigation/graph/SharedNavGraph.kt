@@ -74,10 +74,15 @@ fun NavGraphBuilder.sharedNavGraph(
     composable(Screen.Setting.route) {
         SettingScreen(
             contentType = contentType,
-            adaptiveLayoutType = adaptiveLayoutType
+            adaptiveLayoutType = adaptiveLayoutType,
+            onFeedbackClick = {
+                navActions.navigationTo(Screen.Feedback)
+            }
         )
     }
     composable(Screen.Feedback.route) {
-        FeedbackScreen()
+        FeedbackScreen(adaptiveLayoutType) {
+            navActions.back()
+        }
     }
 }

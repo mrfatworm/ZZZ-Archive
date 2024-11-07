@@ -5,28 +5,30 @@
 
 package app.setting
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import ui.theme.AppTheme
+import app.setting.compose.FeedbackScreenCompact
+import app.setting.compose.FeedbackScreenMedium
+import app.setting.domain.FeedbackViewModel
+import org.koin.compose.viewmodel.koinViewModel
+import ui.utils.AdaptiveLayoutType
 
 @Composable
-fun FeedbackScreen() {
+fun FeedbackScreen(adaptiveLayoutType: AdaptiveLayoutType, onBackClick: () -> Unit) {
+    val viewModel: FeedbackViewModel = koinViewModel()
+    val uiState = viewModel.uiState.collectAsState()
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
     ) {
-        Text(
-            text = "Feedback",
-            textAlign = TextAlign.Center,
-            style = AppTheme.typography.headlineMedium,
-            color = AppTheme.colors.onSurface
-        )
+        if (adaptiveLayoutType == AdaptiveLayoutType.Compact) {
+            FeedbackScreenCompact(uiState.value, onBackClick = onBackClick)
+        } else {
+            FeedbackScreenMedium(uiState.value, adaptiveLayoutType, onBackClick)
+        }
     }
 }

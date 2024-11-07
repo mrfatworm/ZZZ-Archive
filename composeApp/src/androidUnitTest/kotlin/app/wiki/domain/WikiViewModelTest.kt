@@ -7,17 +7,13 @@ package app.wiki.domain
 
 
 import MainDispatcherRule
-import app.agent.data.AgentRepository
 import app.agent.data.FakeAgentRepository
 import app.agent.model.stubAgentsListResponse
-import app.bangboo.data.BangbooRepository
 import app.bangboo.data.FakeBangbooRepository
 import app.bangboo.model.stubBangbooListResponse
-import app.drive.data.DriveRepository
 import app.drive.data.FakeDriveRepository
 import app.drive.model.stubDrivesListResponse
 import app.wengine.data.FakeWEngineRepository
-import app.wengine.data.WEngineRepository
 import app.wengine.model.stubWEnginesListResponse
 import org.junit.Rule
 import kotlin.test.BeforeTest
@@ -29,18 +25,14 @@ class WikiViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private lateinit var agentRepository: AgentRepository
-    private lateinit var wEngineRepository: WEngineRepository
-    private lateinit var bangbooRepository: BangbooRepository
-    private lateinit var driveRepository: DriveRepository
+    private var agentRepository = FakeAgentRepository()
+    private var wEngineRepository = FakeWEngineRepository()
+    private var bangbooRepository = FakeBangbooRepository()
+    private var driveRepository = FakeDriveRepository()
     private lateinit var viewModel: WikiViewModel
 
     @BeforeTest
     fun setup() {
-        agentRepository = FakeAgentRepository()
-        wEngineRepository = FakeWEngineRepository()
-        bangbooRepository = FakeBangbooRepository()
-        driveRepository = FakeDriveRepository()
         viewModel = WikiViewModel(
             agentRepository,
             wEngineRepository,

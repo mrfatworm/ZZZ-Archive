@@ -23,8 +23,11 @@ import app.home.data.NewsRepositoryImpl
 import app.home.data.PixivRepository
 import app.home.data.PixivRepositoryImpl
 import app.home.domain.HomeViewModel
+import app.setting.data.AppInfoRepository
+import app.setting.data.AppInfoRepositoryImpl
 import app.setting.data.SettingsRepository
 import app.setting.data.SettingsRepositoryImpl
+import app.setting.domain.FeedbackViewModel
 import app.setting.domain.SettingViewModel
 import app.splash.SplashViewModel
 import app.wengine.data.WEngineRepository
@@ -48,6 +51,7 @@ val sharedModule = module {
     single<Settings> { Settings() }
     single<LanguageHandler> { LanguageHandlerImpl(get()) }
     single<SettingsRepository> { SettingsRepositoryImpl(get()) }
+    single<AppInfoRepository> { AppInfoRepositoryImpl() }
     single<BannerRepository> { BannerRepositoryImpl(get()) }
     single<NewsRepository> { NewsRepositoryImpl(get()) }
     single<PixivRepository> { PixivRepositoryImpl(get()) }
@@ -69,4 +73,5 @@ val sharedModule = module {
     viewModelOf(::BangbooDetailViewModel)
     viewModelOf(::DrivesListViewModel)
     viewModelOf(::SettingViewModel)
+    viewModelOf(::FeedbackViewModel)
 }

@@ -8,6 +8,7 @@ package app.setting.domain
 
 import MainDispatcherRule
 import android.content.Context
+import app.setting.data.FakeAppInfoRepository
 import app.setting.data.FakeSettingRepository
 import io.mockk.mockk
 import org.junit.Rule
@@ -25,12 +26,13 @@ class SettingViewModelTest {
 
     private val mockContext = mockk<Context>(relaxed = true)
     private val settingsRepository = FakeSettingRepository()
+    private val appInfoRepository = FakeAppInfoRepository()
     private val appActions = AppActions(mockContext)
     private lateinit var viewModel: SettingViewModel
 
     @BeforeTest
     fun setup() {
-        viewModel = SettingViewModel(settingsRepository, appActions)
+        viewModel = SettingViewModel(settingsRepository, appInfoRepository, appActions)
     }
 
     @Test

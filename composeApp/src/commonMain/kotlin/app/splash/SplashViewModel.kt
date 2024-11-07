@@ -1,19 +1,26 @@
 package app.splash
 
 import androidx.lifecycle.ViewModel
+import app.setting.data.AppInfoRepository
 import app.setting.data.SettingsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import utils.changeLanguage
 
-class SplashViewModel(private val settingsRepository: SettingsRepository) : ViewModel() {
+class SplashViewModel(
+    private val settingsRepository: SettingsRepository,
+    private val appInfoRepository: AppInfoRepository
+) : ViewModel() {
     private val _isDark = MutableStateFlow(true)
     val isDark: StateFlow<Boolean> = _isDark
+    private val _appVersion = MutableStateFlow("")
+    val appVersion: StateFlow<String> = _appVersion
 
     init {
         //settingsRepository.clear() // For test
         _isDark.value = settingsRepository.getIsDarkTheme()
         initLanguage(settingsRepository.getLanguage())
+        getAppVersion()
     }
 
 
@@ -21,5 +28,9 @@ class SplashViewModel(private val settingsRepository: SettingsRepository) : View
         if (langCode != "") {
             changeLanguage(langCode)
         }
+    }
+
+    private fun getAppVersion() {
+        _appVersion.value = appInfoRepository.getAppVersion()
     }
 }
