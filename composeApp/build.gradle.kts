@@ -89,6 +89,7 @@ kotlin {
         }
     }
 }
+val versionNameDate = "Lucy 2024.11"
 
 android {
     namespace = "com.mrfatworm.zzzarchive"
@@ -99,7 +100,7 @@ android {
         minSdk = 26
         targetSdk = 35
         versionCode = 1
-        versionName = "1.0"
+        versionName = versionNameDate
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -142,7 +143,6 @@ compose.desktop {
 
 // Ref: https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/
 project.extra.set("buildkonfig.flavor", currentBuildVariant())
-
 buildkonfig {
     packageName = "com.mrfatworm.zzzarchive"
     objectName = "ZzzConfig"
@@ -152,21 +152,21 @@ buildkonfig {
         buildConfigField(FieldSpec.Type.STRING, "variant", "Beta")
         buildConfigField(FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset")
         buildConfigField(FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api")
-        buildConfigField(FieldSpec.Type.STRING, "VERSION", "0.0.0")
+        buildConfigField(FieldSpec.Type.STRING, "VERSION", "$versionNameDate-Beta")
     }
 
     defaultConfigs("Dev") {
         buildConfigField(FieldSpec.Type.STRING, "variant", "Beta")
         buildConfigField(FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset")
         buildConfigField(FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api")
-        buildConfigField(FieldSpec.Type.STRING, "VERSION", "1.0.0-Beta01")
+        buildConfigField(FieldSpec.Type.STRING, "VERSION", "$versionNameDate-Beta")
     }
 
     defaultConfigs("Live") {
         buildConfigField(FieldSpec.Type.STRING, "variant", "Stable")
         buildConfigField(FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Asset")
         buildConfigField(FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Api")
-        buildConfigField(FieldSpec.Type.STRING, "VERSION", "1.0.0")
+        buildConfigField(FieldSpec.Type.STRING, "VERSION", versionNameDate)
     }
 }
 

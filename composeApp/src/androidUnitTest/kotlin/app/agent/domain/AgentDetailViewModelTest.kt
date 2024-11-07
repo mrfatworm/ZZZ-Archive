@@ -10,6 +10,7 @@ import MainDispatcherRule
 import androidx.lifecycle.SavedStateHandle
 import app.agent.data.FakeAgentRepository
 import app.agent.model.stubAgentDetailResponse
+import app.drive.data.FakeDriveRepository
 import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -24,11 +25,12 @@ class AgentDetailViewModelTest {
         set("agentId", 20)
     }
     private val agentRepository = FakeAgentRepository()
+    private val driveRepository = FakeDriveRepository()
     private lateinit var viewModel: AgentDetailViewModel
 
     @BeforeTest
     fun setup() {
-        viewModel = AgentDetailViewModel(savedStateHandle, agentRepository)
+        viewModel = AgentDetailViewModel(savedStateHandle, agentRepository, driveRepository)
     }
 
     @Test
