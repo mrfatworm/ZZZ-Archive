@@ -25,6 +25,8 @@ import app.home.data.PixivRepositoryImpl
 import app.home.domain.HomeViewModel
 import app.setting.data.AppInfoRepository
 import app.setting.data.AppInfoRepositoryImpl
+import app.setting.data.GoogleDocRepository
+import app.setting.data.GoogleDocRepositoryImpl
 import app.setting.data.SettingsRepository
 import app.setting.data.SettingsRepositoryImpl
 import app.setting.domain.FeedbackViewModel
@@ -60,6 +62,8 @@ val sharedModule = module {
     single<WEngineRepository> { WEngineRepositoryImpl(get()) }
     single<BangbooRepository> { BangbooRepositoryImpl(get()) }
     single<DriveRepository> { DriveRepositoryImpl(get()) }
+    single<GoogleDocRepository> { GoogleDocRepositoryImpl(get()) }
+
 
     viewModelOf(::SplashViewModel)
     viewModelOf(::MainFuncViewModel)

@@ -6,6 +6,8 @@
 package di
 
 import io.ktor.client.engine.darwin.Darwin
+import network.GoogleDocHttp
+import network.GoogleDocHttpImpl
 import network.OfficialWebHttp
 import network.OfficialWebHttpImpl
 import network.PixivHttp
@@ -21,4 +23,5 @@ actual val platformModule = module {
     single<ZzzHttp> { ZzzHttpImpl(Darwin.create(), get()) }
     single<OfficialWebHttp> { OfficialWebHttpImpl(Darwin.create(), get()) }
     single<PixivHttp> { PixivHttpImpl(Darwin.create()) }
+    single<GoogleDocHttp> { GoogleDocHttpImpl(Darwin.create()) }
 }

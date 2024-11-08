@@ -6,6 +6,8 @@
 package di
 
 import io.ktor.client.engine.okhttp.OkHttp
+import network.GoogleDocHttp
+import network.GoogleDocHttpImpl
 import network.OfficialWebHttp
 import network.OfficialWebHttpImpl
 import network.PixivHttp
@@ -21,4 +23,5 @@ actual val platformModule = module {
     single<ZzzHttp> { ZzzHttpImpl(OkHttp.create(), get()) }
     single<OfficialWebHttp> { OfficialWebHttpImpl(OkHttp.create(), get()) }
     single<PixivHttp> { PixivHttpImpl(OkHttp.create()) }
+    single<GoogleDocHttp> { GoogleDocHttpImpl(OkHttp.create()) }
 }

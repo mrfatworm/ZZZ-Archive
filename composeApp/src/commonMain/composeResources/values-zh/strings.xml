@@ -16,6 +16,8 @@
     <string name="view_all">查看全部</string>
     <string name="announcement">公告</string>
     <string name="filter">條件過濾</string>">
+    <string name="bangboo_speak">嗯嗯呢嗯呢！</string>
+    <string name="unknown_error">未知的錯誤</string>
 
     <!-- Sub System -->
     <string name="home">首頁</string>
@@ -135,14 +137,17 @@
     <!-- Feedback -->
     <string name="issue_type">問題類型</string>
     <string name="please_select">請選擇</string>
-    <string name="bug">Bug</string>
-    <string name="incorrect_content">文本問題</string>
+    <string name="crash_or_bug">閃退或 Bug</string>
+    <string name="incorrect_content">文本、內容錯誤</string>
     <string name="suggestion">建議</string>
     <string name="other">其他</string>
     <string name="input_your_issue">輸入您遇到的問題</string>
+    <string name="your_nickname_optional">您的暱稱（選填）</string>
     <string name="app_version">應用程式版本</string>
     <string name="device_name">裝置名稱</string>
     <string name="operating_system">作業系統</string>
     <string name="submit_form">提交表單</string>
+    <string name="invalid_form">問題類型未選擇或問題內容為空。</string>
+    <string name="form_submit_success">表單已送出\n感謝您的回饋！</string>
 
 </resources>

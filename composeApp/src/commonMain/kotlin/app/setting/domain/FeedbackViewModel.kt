@@ -5,22 +5,32 @@
 
 package app.setting.domain
 
+import androidx.compose.ui.text.intl.Locale
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import app.setting.data.AppInfoRepository
+import app.setting.data.GoogleDocRepository
 import app.setting.data.SettingsRepository
+import app.setting.model.FeedbackIssueType
 import app.setting.model.FeedbackState
+import app.setting.model.feedbackIssueTypes
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import utils.Language
+import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.invalid_form
+import zzzarchive.composeapp.generated.resources.unknown_error
 
 class FeedbackViewModel(
     private val settingsRepository: SettingsRepository,
-    private val appInfoRepository: AppInfoRepository
+    private val appInfoRepository: AppInfoRepository,
+    private val googleDocRepository: GoogleDocRepository
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(FeedbackState())
     val uiState = _uiState.asStateFlow()
-    private var language: String = "unknown"
 
     init {
         getLanguage()
@@ -29,9 +39,51 @@ class FeedbackViewModel(
         getDeviceOs()
     }
 
-    private fun getLanguage() {
-        val language = settingsRepository.getLanguage()
-        this.language = language
+    fun submitFeedback(issueTypeIndex: FeedbackIssueType, issueContent: String, nickname: String) {
+        if (issueTypeIndex == feedbackIssueTypes.first() || issueContent.isBlank()) {
+            _uiState.update {
+                it.copy(
+                    invalidForm = true,
+                    invalidMessage = Res.string.invalid_form
+                )
+            }
+        } else {
+            _uiState.update { it.copy(invalidForm = false) }
+            viewModelScope.launch {
+                val result = googleDocRepository.submitFeedbackForm(
+                    issueTypeIndex.chtString,
+                    uiState.value.language,
+                    issueContent,
+                    nickname,
+                    uiState.value.appVersion,
+                    uiState.value.deviceName,
+                    uiState.value.operatingSystem
+                )
+                if (result) {
+                    _uiState.update { it.copy(showSubmitSuccessDialog = true) }
+                } else {
+                    _uiState.update {
+                        it.copy(
+                            invalidForm = true,
+                            invalidMessage = Res.string.unknown_error
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    fun dismissSubmitSuccessDialog() {
+        _uiState.update { it.copy(showSubmitSuccessDialog = false) }
+    }
+
+    private fun getLanguage(defaultLanguage: String = Locale.current.language) {
+        val langCode = settingsRepository.getLanguage()
+        val language =
+            if (langCode == "") Language.entries.firstOrNull { it.project == defaultLanguage }
+                ?: Language.English
+            else Language.entries.firstOrNull { it.project == langCode } ?: Language.English
+        _uiState.update { it.copy(language = language.project) }
     }
 
     private fun getAppVersion() {

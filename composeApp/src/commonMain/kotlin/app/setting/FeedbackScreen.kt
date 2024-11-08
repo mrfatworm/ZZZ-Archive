@@ -14,8 +14,12 @@ import androidx.compose.ui.Modifier
 import app.setting.compose.FeedbackScreenCompact
 import app.setting.compose.FeedbackScreenMedium
 import app.setting.domain.FeedbackViewModel
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import ui.components.dialogs.ConfirmDialog
 import ui.utils.AdaptiveLayoutType
+import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.form_submit_success
 
 @Composable
 fun FeedbackScreen(adaptiveLayoutType: AdaptiveLayoutType, onBackClick: () -> Unit) {
@@ -26,9 +30,27 @@ fun FeedbackScreen(adaptiveLayoutType: AdaptiveLayoutType, onBackClick: () -> Un
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         if (adaptiveLayoutType == AdaptiveLayoutType.Compact) {
-            FeedbackScreenCompact(uiState.value, onBackClick = onBackClick)
+            FeedbackScreenCompact(
+                uiState.value, onFormSubmit = { issueIndex, issueContent, nickname ->
+                    viewModel.submitFeedback(issueIndex, issueContent, nickname)
+                }, onBackClick = onBackClick
+            )
         } else {
-            FeedbackScreenMedium(uiState.value, adaptiveLayoutType, onBackClick)
+            FeedbackScreenMedium(
+                uiState.value,
+                adaptiveLayoutType,
+                onFormSubmit = { issueIndex, issueContent, nickname ->
+                    viewModel.submitFeedback(issueIndex, issueContent, nickname)
+                },
+                onBackClick = onBackClick
+            )
+        }
+    }
+    when {
+        uiState.value.showSubmitSuccessDialog -> {
+            ConfirmDialog(stringResource(Res.string.form_submit_success), onDismiss = {
+                viewModel.dismissSubmitSuccessDialog()
+            })
         }
     }
 }
