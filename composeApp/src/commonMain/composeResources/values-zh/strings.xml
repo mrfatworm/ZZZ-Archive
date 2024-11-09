@@ -120,6 +120,7 @@
     <string name="feedback">意見回饋</string>
     <string name="privacy_policy">隱私政策</string>
     <string name="open_source">開放原始碼</string>
+    <string name="coming_soon">即將開放</string>
     <string name="resource_licence">App 中使用的遊戲圖片、動畫、音訊和文本原文，僅為更好地展示遊戲資料，大多來自 Zenless Zone Zero Wiki（Fandom），其版權歸 絕區零/米哈遊所有。除非另有聲明，其他內容均採用「姓名標示─相同方式分享 4.0 國際」（CC BY-SA 4.0）授權。</string>
     <string name="code_licence">GitHub 上的開源程式碼採用 MIT 授權條款。</string>
     <string name="contributors">貢獻者</string>

@@ -30,7 +30,7 @@ private val tagShape = RoundedCornerShape(8.dp)
 fun ZzzTag(
     modifier: Modifier = Modifier,
     text: String,
-    iconRes: DrawableResource,
+    iconRes: DrawableResource? = null,
 ) {
     Row(
         modifier = modifier.clip(tagShape).background(AppTheme.colors.surface).border(
@@ -41,12 +41,14 @@ fun ZzzTag(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(
-            modifier = Modifier.size(18.dp),
-            imageVector = vectorResource(iconRes),
-            contentDescription = null,
-            tint = AppTheme.colors.onSurface
-        )
+        iconRes?.let {
+            Icon(
+                modifier = Modifier.size(18.dp),
+                imageVector = vectorResource(iconRes),
+                contentDescription = null,
+                tint = AppTheme.colors.onSurface
+            )
+        }
         Text(
             text = text,
             color = AppTheme.colors.onSurface,

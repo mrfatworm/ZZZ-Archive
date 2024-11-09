@@ -33,7 +33,7 @@ data class Contributor(
 val settingState = SettingState(
     appVersion = "Lucy 2024.11",
     contributors = Contributors(
-        contributorAmount = 1, author = listOf(
+        contributorAmount = 2, author = listOf(
             Contributor("mrfatworm"),
         ), developer = listOf(
             Contributor("mrfatworm"),
@@ -44,7 +44,7 @@ val settingState = SettingState(
         ), dataIntegration = listOf(
             Contributor("mrfatworm"),
         ), bannerArtists = listOf(
-            Contributor("---"),
+            Contributor("EDIBLE", "リン　心象映画"),
         ), specialThanks = listOf(
             Contributor("Zenless Zone Zero"), Contributor("Zenless Zone Zero Wiki (Fandom)")
         )

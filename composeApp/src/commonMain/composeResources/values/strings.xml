@@ -120,6 +120,7 @@
     <string name="feedback">Feedback</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="open_source">Open Source</string>
+    <string name="coming_soon">Coming Soon</string>
     <string name="resource_licence">The game images, animations, audio, and original text used on this website are primarily sourced from the Zenless Zone Zero Wiki (Fandom) and are used solely to better present game information. The copyright for these materials belongs to Zenless Zone Zero/miHoYo. Unless otherwise stated, other content is licensed under the Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) license.</string>
     <string name="code_licence">The open-source code on GitHub is licensed under the MIT License.</string>
     <string name="contributors">Contributors</string>
