@@ -23,7 +23,7 @@ import zzzarchive.composeapp.generated.resources.hp_atk_def
 fun AgentAttributesCard(agentDetail: AgentDetailResponse) {
     ContentCard(hasDefaultPadding = false) {
         CardHeader(
-            title = stringResource(Res.string.attributes).uppercase() + " Lv.Max"
+            title = stringResource(Res.string.attributes) + " Lv.Max"
         )
         AttributeItem(
             title = stringResource(Res.string.hp_atk_def),

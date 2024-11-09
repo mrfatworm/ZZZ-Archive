@@ -23,7 +23,7 @@ import zzzarchive.composeapp.generated.resources.attributes
 fun WEngineAttributesCard(wEngineDetail: WEngineDetailResponse) {
     ContentCard(hasDefaultPadding = false) {
         CardHeader(
-            title = stringResource(Res.string.attributes).uppercase() + " Lv.Max"
+            title = stringResource(Res.string.attributes) + " Lv.Max"
         )
         AttributeItem(
             title = stringResource(Res.string.atk),

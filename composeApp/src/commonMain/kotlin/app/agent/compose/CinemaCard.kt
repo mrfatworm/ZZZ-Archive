@@ -20,7 +20,7 @@ val CinemaTitle = listOf("I", "II", "III", "IV", "V", "VI")
 fun CinemaCard(agentDetail: AgentDetailResponse) {
     ContentCard(hasDefaultPadding = false) {
         CardHeader(
-            title = stringResource(Res.string.mindscape_cinema).uppercase()
+            title = stringResource(Res.string.mindscape_cinema)
         )
         for (i in agentDetail.mindscapeCinema.indices) {
             ExpandableItem(

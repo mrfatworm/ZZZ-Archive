@@ -25,7 +25,7 @@ import zzzarchive.composeapp.generated.resources.hp
 fun BangbooAttributesCard(bangbooDetail: BangbooDetailResponse) {
     ContentCard(hasDefaultPadding = false) {
         CardHeader(
-            title = stringResource(Res.string.attributes).uppercase() + " Lv.Max"
+            title = stringResource(Res.string.attributes) + " Lv.Max"
         )
         AttributeItem(
             title = stringResource(Res.string.hp),

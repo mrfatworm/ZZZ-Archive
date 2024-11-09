@@ -31,7 +31,7 @@ import zzzarchive.composeapp.generated.resources.ultimate
 fun SkillsCard(agentDetail: AgentDetailResponse) {
     ContentCard(hasDefaultPadding = false) {
         CardHeader(
-            title = stringResource(Res.string.skills).uppercase()
+            title = stringResource(Res.string.skills)
         )
         agentDetail.skills.basicAttack.forEach {
             ExpandableItem(

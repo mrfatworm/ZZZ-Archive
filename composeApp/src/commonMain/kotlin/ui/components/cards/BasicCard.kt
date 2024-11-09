@@ -61,7 +61,7 @@ fun CardHeader(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = title,
+            text = title.uppercase(),
             color = AppTheme.colors.onSurfaceVariant,
             style = AppTheme.typography.titleMedium
         )

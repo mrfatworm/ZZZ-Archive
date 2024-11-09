@@ -29,6 +29,7 @@ import ui.components.items.RarityMiniItem
 import ui.theme.AppTheme
 import ui.utils.drawRowListMask
 import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.piece_set_short
 import zzzarchive.composeapp.generated.resources.suggest_drives
 
 @Composable
@@ -65,7 +66,7 @@ fun SuggestDrivesCard(
             items(items = agentDrivesList) { drive ->
                 RarityMiniItem(
                     imgUrl = drive.getDriveIconUrl(),
-                    text = drive.getSuitString()
+                    text = stringResource(Res.string.piece_set_short, drive.getSuitString())
                 ) {
                     selectedDriveId.value = drive.id
                     openDetailDialog.value = true

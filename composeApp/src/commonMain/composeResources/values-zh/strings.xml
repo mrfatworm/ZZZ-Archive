@@ -110,6 +110,7 @@
 
     <!-- Drive Detail -->
     <string name="piece_set">%1$d 件套裝</string>
+    <string name="piece_set_short">%1$d件套</string>
 
     <!-- Setting -->
     <string name="language">語言</string>

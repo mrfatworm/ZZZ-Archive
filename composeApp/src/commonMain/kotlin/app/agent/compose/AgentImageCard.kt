@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -63,11 +64,13 @@ fun AgentImageCard(agentDetail: AgentDetailResponse, onBackClick: () -> Unit) {
             )
         }
         Spacer(Modifier.size(8.dp))
-        Text(
-            text = agentDetail.fullName,
-            style = AppTheme.typography.headlineLarge,
-            color = AppTheme.colors.onSurface
-        )
+        SelectionContainer {
+            Text(
+                text = agentDetail.fullName,
+                style = AppTheme.typography.headlineLarge,
+                color = AppTheme.colors.onSurface
+            )
+        }
         Spacer(Modifier.size(16.dp))
         FlowRow(
             horizontalArrangement = Arrangement.spacedBy(8.dp),

@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -51,11 +52,13 @@ fun WEngineImageCard(wEngineDetail: WEngineDetailResponse, onBackClick: () -> Un
         }
 
         Spacer(Modifier.size(8.dp))
-        Text(
-            text = wEngineDetail.name,
-            style = AppTheme.typography.headlineLarge,
-            color = AppTheme.colors.onSurface
-        )
+        SelectionContainer {
+            Text(
+                text = wEngineDetail.name,
+                style = AppTheme.typography.headlineLarge,
+                color = AppTheme.colors.onSurface
+            )
+        }
         Spacer(Modifier.size(16.dp))
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp)

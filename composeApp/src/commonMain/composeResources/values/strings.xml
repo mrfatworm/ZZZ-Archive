@@ -110,6 +110,7 @@
 
     <!-- Drive Detail -->
     <string name="piece_set">Piece Set %1$d</string>
+    <string name="piece_set_short">%1$d pc</string>
 
     <!-- Setting -->
     <string name="language">Language</string>

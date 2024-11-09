@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -85,20 +86,22 @@ fun ContributorItem(title: String, contributorList: List<Contributor>) {
             color = AppTheme.colors.onSurfaceVariant
         )
         contributorList.forEach { contributor ->
-            Row(
-                modifier = Modifier.padding(vertical = 4.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Text(
-                    text = contributor.name,
-                    style = AppTheme.typography.labelMedium,
-                    color = AppTheme.colors.onSurfaceContainer
-                )
-                Text(
-                    text = contributor.description,
-                    style = AppTheme.typography.labelSmall,
-                    color = AppTheme.colors.onSurfaceVariant
-                )
+            SelectionContainer {
+                Row(
+                    modifier = Modifier.padding(vertical = 4.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        text = contributor.name,
+                        style = AppTheme.typography.labelMedium,
+                        color = AppTheme.colors.onSurfaceContainer
+                    )
+                    Text(
+                        text = contributor.description,
+                        style = AppTheme.typography.labelSmall,
+                        color = AppTheme.colors.onSurfaceVariant
+                    )
+                }
             }
         }
     }

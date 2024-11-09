@@ -8,6 +8,7 @@ package app.setting.compose
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,6 +24,7 @@ import zzzarchive.composeapp.generated.resources.resource_licence
 
 @Composable
 fun LicenseCard(appVersion: String) {
+    SelectionContainer {
     ContentCard {
         Text(
             modifier = Modifier.fillMaxWidth(),
@@ -53,5 +55,7 @@ fun LicenseCard(appVersion: String) {
             style = AppTheme.typography.bodySmall,
             color = AppTheme.colors.onSurfaceVariant
         )
+    }
+
     }
 }
