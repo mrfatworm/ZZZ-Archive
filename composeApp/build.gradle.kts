@@ -89,7 +89,7 @@ kotlin {
         }
     }
 }
-val versionNameDate = "Lucy 2024.11"
+val versionNameDate = "Luciana 2024.11"
 
 android {
     namespace = "com.mrfatworm.zzzarchive"
