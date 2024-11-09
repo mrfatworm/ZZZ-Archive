@@ -72,6 +72,7 @@ kotlin {
             implementation(libs.koin.android)
             implementation(libs.koin.compose)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.androidx.core.splashscreen)
         }
 
         androidUnitTest.dependencies {

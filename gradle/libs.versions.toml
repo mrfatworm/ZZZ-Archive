@@ -14,6 +14,7 @@ mockk = "1.13.13"
 multiplatformSettings = "1.2.0"
 navigation-compose = "2.8.0-alpha10"
 okio = "3.9.1"
+splashscreen = "1.0.1"
 
 [libraries]
 #===Jetbrains
@@ -26,6 +27,7 @@ androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycl
 
 #===Android
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
 
 #===Coil
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
