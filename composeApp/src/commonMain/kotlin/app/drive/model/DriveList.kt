@@ -26,7 +26,7 @@ data class DriveListItem(
     @SerialName("piece_set_two")
     val pieceSetTwo: String,
     @SerialName("piece_set_four")
-    val pieceSetFour: String,
+    val pieceSetFour: String
 ) {
     fun getProfileUrl(): String {
         return "https://raw.githubusercontent.com/${ZzzConfig.ASSET_PATH}/Drive/$id.webp"

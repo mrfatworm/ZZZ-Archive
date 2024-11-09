@@ -39,6 +39,7 @@ fun RootNavGraph(
                 rootNavActions = rootNavActions,
                 adaptiveLayoutType = adaptiveLayoutType,
                 contentType = contentType
+
             )
         }
     }

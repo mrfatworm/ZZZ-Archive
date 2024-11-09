@@ -19,7 +19,7 @@ import utils.ZzzRarity
 import utils.ZzzResult
 
 class WEnginesListViewModel(
-    private val wEngineRepository: WEngineRepository,
+    private val wEngineRepository: WEngineRepository
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(WEnginesListState())

@@ -29,12 +29,12 @@ fun MainNavGraph(
     contentType: ContentType,
     adaptiveLayoutType: AdaptiveLayoutType,
     navActions: NavActions,
-    rootNavActions: NavActions,
+    rootNavActions: NavActions
 ) {
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = MainFlow.Home.route,
+        startDestination = MainFlow.Home.route
     ) {
         homeNavGraph(contentType, adaptiveLayoutType, navActions)
         agentNavGraph(contentType, adaptiveLayoutType, navActions)

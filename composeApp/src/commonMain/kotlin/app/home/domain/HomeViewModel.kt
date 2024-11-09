@@ -33,7 +33,7 @@ class HomeViewModel(
     private val wEngineRepository: WEngineRepository,
     private val bangbooRepository: BangbooRepository,
     private val driveRepository: DriveRepository,
-    private val settingsRepository: SettingsRepository,
+    private val settingsRepository: SettingsRepository
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(HomeState())

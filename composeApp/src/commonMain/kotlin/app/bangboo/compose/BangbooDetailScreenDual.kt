@@ -28,7 +28,7 @@ import zzzarchive.composeapp.generated.resources.chain_attack
 fun BangbooDetailScreenDual(
     uiState: BangbooDetailState,
     adaptiveLayoutType: AdaptiveLayoutType,
-    onBackClick: () -> Unit,
+    onBackClick: () -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
         Column(

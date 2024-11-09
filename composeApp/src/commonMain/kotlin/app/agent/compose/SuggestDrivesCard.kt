@@ -35,7 +35,7 @@ import zzzarchive.composeapp.generated.resources.suggest_drives
 @Composable
 fun SuggestDrivesCard(
     agentDrivesList: List<AgentDriveItem>,
-    drivesList: List<DriveListItem>,
+    drivesList: List<DriveListItem>
 ) {
     val lazyListState = rememberLazyListState()
     val interactionSource = remember { MutableInteractionSource() }

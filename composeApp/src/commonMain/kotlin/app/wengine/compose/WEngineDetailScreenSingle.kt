@@ -27,7 +27,7 @@ import zzzarchive.composeapp.generated.resources.w_engine_effect
 fun WEngineDetailScreenSingle(
     uiState: WEngineDetailState,
     adaptiveLayoutType: AdaptiveLayoutType,
-    onBackClick: () -> Unit,
+    onBackClick: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())

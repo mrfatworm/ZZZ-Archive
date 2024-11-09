@@ -40,7 +40,7 @@ data class AgentDetailResponse(
     @SerialName("mindscape_cinema") val mindscapeCinema: List<NameAndDesc>,
     @SerialName("level_material") val levelMaterial: AgentLevelMaterial,
     @SerialName("suggest_w_engines") val suggestWEngines: List<RarityItem>,
-    @SerialName("suggest_drives") val suggestDrives: List<AgentDriveItem>,
+    @SerialName("suggest_drives") val suggestDrives: List<AgentDriveItem>
 ) {
     fun getAgentPortraitImageUrl(path: String = ZzzConfig.ASSET_PATH): String {
         return "https://raw.githubusercontent.com/$path/Agent/Portrait/$id.webp"

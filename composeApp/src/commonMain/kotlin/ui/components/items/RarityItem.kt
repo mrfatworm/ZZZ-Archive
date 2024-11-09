@@ -58,7 +58,7 @@ fun RarityItem(
     rarityLevel: Int? = null,
     attribute: AgentAttribute? = null,
     specialty: AgentSpecialty? = null,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed = interactionSource.collectIsPressedAsState()
@@ -66,7 +66,7 @@ fun RarityItem(
 
     Column(
         modifier = modifier.width(100.dp)
-            .pointerHoverIcon(if (onClick != {}) PointerIcon.Hand else PointerIcon.Default)
+            .pointerHoverIcon(PointerIcon.Hand)
             .clickable(interactionSource = interactionSource, indication = null) {
                 onClick()
         },

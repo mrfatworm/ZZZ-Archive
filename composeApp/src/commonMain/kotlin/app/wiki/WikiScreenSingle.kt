@@ -31,7 +31,7 @@ fun WikiScreenSingle(
     onDrivesOverviewClick: () -> Unit,
     onAgentDetailClick: (Int) -> Unit,
     onWEngineDetailClick: (Int) -> Unit,
-    onBangbooDetailClick: (Int) -> Unit,
+    onBangbooDetailClick: (Int) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())

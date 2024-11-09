@@ -26,7 +26,7 @@ fun AgentDetailScreenDual(
     uiState: AgentDetailState,
     adaptiveLayoutType: AdaptiveLayoutType,
     wEngineClick: (Int) -> Unit,
-    onBackClick: () -> Unit,
+    onBackClick: () -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
         Column(

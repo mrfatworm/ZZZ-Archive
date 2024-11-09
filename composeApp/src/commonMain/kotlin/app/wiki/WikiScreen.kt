@@ -20,7 +20,7 @@ fun WikiScreen(
     onDrivesOverviewClick: () -> Unit,
     onAgentDetailClick: (Int) -> Unit,
     onWEngineDetailClick: (Int) -> Unit,
-    onBangbooDetailClick: (Int) -> Unit,
+    onBangbooDetailClick: (Int) -> Unit
 ) {
     val viewModel: WikiViewModel = koinViewModel()
     val uiState = viewModel.uiState.collectAsState()

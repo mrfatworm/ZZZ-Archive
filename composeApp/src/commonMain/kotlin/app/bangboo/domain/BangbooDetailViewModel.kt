@@ -18,7 +18,7 @@ import utils.ZzzResult
 
 class BangbooDetailViewModel(
     savedStateHandle: SavedStateHandle,
-    private val bangbooRepository: BangbooRepository,
+    private val bangbooRepository: BangbooRepository
 ) : ViewModel() {
     private var bangbooId: Int = checkNotNull(savedStateHandle["bangbooId"])
 

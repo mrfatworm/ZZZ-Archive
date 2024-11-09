@@ -22,7 +22,7 @@ class WikiViewModel(
     private val agentRepository: AgentRepository,
     private val wEngineRepository: WEngineRepository,
     private val bangbooRepository: BangbooRepository,
-    private val driveRepository: DriveRepository,
+    private val driveRepository: DriveRepository
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(WikiState())

@@ -114,7 +114,7 @@ fun MainFuncContent(
     adaptiveLayoutType: AdaptiveLayoutType,
     contentType: ContentType,
     onDrawerClicked: () -> Unit,
-    onThemeChanged: () -> Unit,
+    onThemeChanged: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize()

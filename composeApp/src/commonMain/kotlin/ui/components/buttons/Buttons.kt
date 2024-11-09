@@ -93,7 +93,7 @@ fun ZzzButton(
     enabled: Boolean = true,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     interactionSource: MutableInteractionSource,
-    onClick: () -> Unit,
+    onClick: () -> Unit
 ) {
     Button(
         modifier = modifier.pointerHoverIcon(if (enabled) PointerIcon.Hand else PointerIcon.Default)

@@ -1,9 +1,9 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package app.home
+package app.home.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,10 +13,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import app.home.compose.HoYoLabCard
-import app.home.compose.ImageBannerCard
-import app.home.compose.NewsPagerCard
-import app.home.compose.PixivTopicCard
+import app.home.AnnouncementBanner
 import app.home.model.HomeState
 import ui.components.cards.AgentsListCard
 import ui.components.cards.BangbooListCard
@@ -39,7 +36,7 @@ fun HomeScreenDual(
     onBangbooDetailClick: (Int) -> Unit,
     onPixivTagChange: (String) -> Unit,
     onActionClicked: () -> Unit,
-    onClosed: (Int) -> Unit,
+    onClosed: (Int) -> Unit
 ) {
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState())

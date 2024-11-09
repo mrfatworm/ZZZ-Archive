@@ -45,5 +45,4 @@ val stubPixivZzzTopic = PixivZzzTopic(
             )
         )
     )
-
 )

@@ -26,7 +26,7 @@ fun AgentDetailScreenSingle(
     uiState: AgentDetailState,
     adaptiveLayoutType: AdaptiveLayoutType,
     wEngineClick: (Int) -> Unit,
-    onBackClick: () -> Unit,
+    onBackClick: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())

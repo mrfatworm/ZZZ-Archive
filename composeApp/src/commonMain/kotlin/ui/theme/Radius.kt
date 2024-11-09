@@ -12,5 +12,5 @@ data class Radius(
     val round: Dp = 1000.dp,
     val contentCard: Dp = 16.dp,
     val tag: Dp = 8.dp,
-    val imgProfile: Dp = 8.dp,
+    val imgProfile: Dp = 8.dp
 )

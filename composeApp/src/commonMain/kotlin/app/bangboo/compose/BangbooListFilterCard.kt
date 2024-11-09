@@ -72,7 +72,8 @@ fun BangbooListFilterCard(
                 count = uiState.bangbooList.size,
                 key = { index -> uiState.bangbooList[index].id }) { index ->
                 val bangboo = uiState.bangbooList[index]
-                RarityItem(modifier = Modifier.animateItem(),
+                RarityItem(
+                    modifier = Modifier.animateItem(),
                     rarityLevel = bangboo.rarity,
                     name = bangboo.name,
                     attribute = bangboo.getAttributeEnum(),

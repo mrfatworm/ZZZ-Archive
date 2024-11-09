@@ -107,12 +107,12 @@ val NAV_RAIL_MAIN_FLOW = listOf(
     MainFlow.WEngine,
     MainFlow.Bangboo,
     MainFlow.Drive,
-    MainFlow.Setting,
+    MainFlow.Setting
 )
 
 val NAV_BOTTOM_MAIN_FLOW = listOf(
     MainFlow.Home,
     MainFlow.Wiki,
     MainFlow.Function,
-    MainFlow.Setting,
+    MainFlow.Setting
 )

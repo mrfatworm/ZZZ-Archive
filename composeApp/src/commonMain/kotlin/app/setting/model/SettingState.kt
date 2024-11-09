@@ -22,12 +22,12 @@ data class Contributors(
     val translation: List<Contributor>,
     val dataIntegration: List<Contributor>,
     val bannerArtists: List<Contributor>,
-    val specialThanks: List<Contributor>,
+    val specialThanks: List<Contributor>
 )
 
 data class Contributor(
     val name: String,
-    val description: String = "",
+    val description: String = ""
 )
 
 val settingState = SettingState(

@@ -14,6 +14,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import app.home.compose.HomeScreenDual
+import app.home.compose.HomeScreenSingle
 import app.home.domain.HomeViewModel
 import kotlinx.coroutines.launch
 import mainfunc.model.BannerResponse
@@ -103,7 +105,7 @@ fun HomeScreen(
 internal fun ColumnScope.AnnouncementBanner(
     banner: BannerResponse?,
     onActionClicked: () -> Unit,
-    onClosed: (Int) -> Unit,
+    onClosed: (Int) -> Unit
 ) {
     AnimatedVisibility(visible = banner != null) {
         banner?.let {

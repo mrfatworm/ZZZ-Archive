@@ -18,7 +18,7 @@ import okio.FileSystem
 
 fun imageLoaderMemoryCache(
     context: PlatformContext,
-    debug: Boolean,
+    debug: Boolean
 ): ImageLoader {
     return ImageLoader.Builder(context).memoryCachePolicy(CachePolicy.ENABLED).memoryCache {
         MemoryCache.Builder()
@@ -36,7 +36,7 @@ fun imageLoaderMemoryCache(
 
 fun imageLoaderDiskCache(
     context: PlatformContext,
-    debug: Boolean,
+    debug: Boolean
 ): ImageLoader {
     return ImageLoader.Builder(context)
         .diskCachePolicy(CachePolicy.ENABLED)

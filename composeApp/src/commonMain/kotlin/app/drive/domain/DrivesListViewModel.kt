@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import utils.ZzzResult
 
 class DrivesListViewModel(
-    private val driveRepository: DriveRepository,
+    private val driveRepository: DriveRepository
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(DrivesListState())

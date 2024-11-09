@@ -21,7 +21,7 @@ data class ImageBannerResponse(
     @SerialName("author_url")
     val authorUrl: String,
     @SerialName("author_name")
-    val authorName: String,
+    val authorName: String
 ) {
     fun getImageUrl(): String {
         return "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Banner/$id.webp"

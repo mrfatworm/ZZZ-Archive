@@ -28,7 +28,7 @@ data class WEngineListItem(
     @SerialName("is_leak")
     val isLeak: Boolean,
     val rarity: Int,
-    val specialty: String,
+    val specialty: String
 ) {
     fun getImageUrl(): String {
         return "https://raw.githubusercontent.com/${ZzzConfig.ASSET_PATH}/W-Engine/Image/$id.webp"

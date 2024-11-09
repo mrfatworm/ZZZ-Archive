@@ -184,7 +184,7 @@ private fun PixivTopicItem(
     artworkUrl: String?,
     profileId: String,
     profileName: String,
-    profileUrl: String?,
+    profileUrl: String?
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val urlHandler = LocalUriHandler.current

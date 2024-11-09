@@ -28,7 +28,7 @@ import zzzarchive.composeapp.generated.resources.chain_attack
 fun BangbooDetailScreenSingle(
     uiState: BangbooDetailState,
     adaptiveLayoutType: AdaptiveLayoutType,
-    onBackClick: () -> Unit,
+    onBackClick: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())

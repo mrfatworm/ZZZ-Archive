@@ -36,7 +36,7 @@ data class DvdState(
     val offsetY: Float = 0f,
     var velocityX: Float = 3f,
     var velocityY: Float = 3f,
-    val size: Int = 24,
+    val size: Int = 24
 )
 
 @Composable

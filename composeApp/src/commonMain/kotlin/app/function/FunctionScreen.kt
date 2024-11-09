@@ -10,7 +10,7 @@ import ui.utils.AdaptiveLayoutType
 
 @Composable
 fun FunctionScreen(
-    adaptiveLayoutType: AdaptiveLayoutType,
+    adaptiveLayoutType: AdaptiveLayoutType
 ) {
     FunctionScreenSingle(adaptiveLayoutType)
 }

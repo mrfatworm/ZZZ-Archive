@@ -27,7 +27,7 @@ import zzzarchive.composeapp.generated.resources.w_engine_effect
 fun WEngineDetailScreenDual(
     uiState: WEngineDetailState,
     adaptiveLayoutType: AdaptiveLayoutType,
-    onBackClick: () -> Unit,
+    onBackClick: () -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
         Column(

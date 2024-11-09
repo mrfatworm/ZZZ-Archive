@@ -26,7 +26,7 @@ fun DrivesListCard(
     modifier: Modifier = Modifier,
     uiState: DrivesListState,
     lazyGridState: LazyGridState = rememberLazyGridState(),
-    onDriveClick: (Int) -> Unit,
+    onDriveClick: (Int) -> Unit
 ) {
     ContentCard(
         modifier = modifier,
@@ -48,7 +48,8 @@ fun DrivesListCard(
                 count = uiState.drivesList.size,
                 key = { index -> uiState.drivesList[index].id }) { index ->
                 val drive = uiState.drivesList[index]
-                RarityItem(modifier = Modifier.animateItem(),
+                RarityItem(
+                    modifier = Modifier.animateItem(),
                     name = drive.name,
                     imgUrl = drive.getProfileUrl(),
                     onClick = {

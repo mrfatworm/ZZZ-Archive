@@ -19,7 +19,7 @@ import utils.ZzzRarity
 import utils.ZzzResult
 
 class BangbooListViewModel(
-    private val bangbooRepository: BangbooRepository,
+    private val bangbooRepository: BangbooRepository
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(BangbooListState())

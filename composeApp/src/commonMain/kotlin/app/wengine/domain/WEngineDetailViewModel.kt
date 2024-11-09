@@ -18,7 +18,7 @@ import utils.ZzzResult
 
 class WEngineDetailViewModel(
     savedStateHandle: SavedStateHandle,
-    private val wEngineRepository: WEngineRepository,
+    private val wEngineRepository: WEngineRepository
 ) : ViewModel() {
     private var wEngineId: Int = checkNotNull(savedStateHandle["wEngineId"])
 

@@ -21,7 +21,7 @@ import utils.ZzzRarity
 import utils.ZzzResult
 
 class AgentsListViewModel(
-    private val agentRepository: AgentRepository,
+    private val agentRepository: AgentRepository
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(AgentsListState())

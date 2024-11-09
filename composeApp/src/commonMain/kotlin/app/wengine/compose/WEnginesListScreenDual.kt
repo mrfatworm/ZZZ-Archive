@@ -22,7 +22,7 @@ fun WEnginesListScreenDual(
     adaptiveLayoutType: AdaptiveLayoutType,
     onWEngineClick: (Int) -> Unit,
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
-    onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit,
+    onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit
 ) {
     Row(
         modifier = Modifier.contentPadding(adaptiveLayoutType, AppTheme.dimens),
