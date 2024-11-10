@@ -106,6 +106,20 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
+    buildTypes {
+        release {
+            ndk.debugSymbolLevel = "FULL"
+            isMinifyEnabled = true
+            isShrinkResources = true
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+
     flavorDimensions.add("variant")
     productFlavors {
         create("Dev") {
