@@ -90,18 +90,20 @@ kotlin {
         }
     }
 }
-val versionNameDate = "Luciana 2024.11"
+val zzzVersionName = "Luciana 2024.11"
+val windowsVersionName = "1.0.0"
+val zzzPackageId = "com.mrfatworm.zzzarchive"
 
 android {
     namespace = "com.mrfatworm.zzzarchive"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.mrfatworm.zzzarchive"
+        applicationId = zzzPackageId
         minSdk = 26
         targetSdk = 35
         versionCode = 1
-        versionName = versionNameDate
+        versionName = zzzVersionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -137,11 +139,20 @@ android {
 compose.desktop {
     application {
         mainClass = "MainKt"
+        var desktopPackageName = ""
+        var desktopPackageId = ""
+        if ((System.getenv("VARIANT") ?: "") == "Live") {
+            desktopPackageName = "ZZZ Archive"
+            desktopPackageId = zzzPackageId
+        } else {
+            desktopPackageName = "ZZZ Archive Dev"
+            desktopPackageId = "$zzzPackageId.dev"
+        }
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "Zzz Archive"
-            packageVersion = "1.0.0"
+            packageName = desktopPackageName
+            packageVersion = windowsVersionName
             linux {
                 iconFile.set(project.file("desktopLogo/Logo.png"))
             }
@@ -150,7 +161,7 @@ compose.desktop {
             }
             macOS {
                 iconFile.set(project.file("desktopLogo/Logo.icns"))
-                bundleID = "com.mrfatworm.zzzarchive"
+                bundleID = desktopPackageId
             }
         }
     }
@@ -159,7 +170,7 @@ compose.desktop {
 // Ref: https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/
 project.extra.set("buildkonfig.flavor", currentBuildVariant())
 buildkonfig {
-    packageName = "com.mrfatworm.zzzarchive"
+    packageName = zzzPackageId
     objectName = "ZzzConfig"
     exposeObjectWithName = "ZzzConfig"
 
@@ -167,21 +178,21 @@ buildkonfig {
         buildConfigField(FieldSpec.Type.STRING, "variant", "Beta")
         buildConfigField(FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset")
         buildConfigField(FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api")
-        buildConfigField(FieldSpec.Type.STRING, "VERSION", "$versionNameDate-Beta")
+        buildConfigField(FieldSpec.Type.STRING, "VERSION", "$zzzVersionName-Beta")
     }
 
     defaultConfigs("Dev") {
         buildConfigField(FieldSpec.Type.STRING, "variant", "Beta")
         buildConfigField(FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset")
         buildConfigField(FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api")
-        buildConfigField(FieldSpec.Type.STRING, "VERSION", "$versionNameDate-Beta")
+        buildConfigField(FieldSpec.Type.STRING, "VERSION", "$zzzVersionName-Beta")
     }
 
     defaultConfigs("Live") {
         buildConfigField(FieldSpec.Type.STRING, "variant", "Stable")
         buildConfigField(FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Asset")
         buildConfigField(FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Api")
-        buildConfigField(FieldSpec.Type.STRING, "VERSION", versionNameDate)
+        buildConfigField(FieldSpec.Type.STRING, "VERSION", zzzVersionName)
     }
 }
 
