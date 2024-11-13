@@ -32,8 +32,8 @@ import zzzarchive.composeapp.generated.resources.contributors
 import zzzarchive.composeapp.generated.resources.data_integration
 import zzzarchive.composeapp.generated.resources.developer
 import zzzarchive.composeapp.generated.resources.ic_people
+import zzzarchive.composeapp.generated.resources.localization
 import zzzarchive.composeapp.generated.resources.special_thanks
-import zzzarchive.composeapp.generated.resources.translation
 import zzzarchive.composeapp.generated.resources.ui_ux_designers
 
 @Composable
@@ -67,7 +67,7 @@ fun ContributorsCard(contributors: Contributors) {
             ContributorItem(stringResource(Res.string.author), contributors.author)
             ContributorItem(stringResource(Res.string.developer), contributors.developer)
             ContributorItem(stringResource(Res.string.ui_ux_designers), contributors.uiUxDesigner)
-            ContributorItem(stringResource(Res.string.translation), contributors.translation)
+            ContributorItem(stringResource(Res.string.localization), contributors.translation)
             ContributorItem(
                 stringResource(Res.string.data_integration), contributors.dataIntegration
             )

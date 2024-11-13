@@ -7,6 +7,7 @@ package app.setting.compose
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.stringResource
@@ -32,7 +34,6 @@ import ui.components.ZzzTag
 import ui.components.cards.ContentCard
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.coming_soon
 import zzzarchive.composeapp.generated.resources.feedback
 import zzzarchive.composeapp.generated.resources.ic_arrow_next_ios
 import zzzarchive.composeapp.generated.resources.ic_figma
@@ -71,6 +72,7 @@ private fun FeedbackItem(onClick: () -> Unit) {
 
 @Composable
 private fun PrivacyPolicyItem() {
+    val urlHandler = LocalUriHandler.current
     SettingItem(title = stringResource(Res.string.privacy_policy), content = {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -83,13 +85,15 @@ private fun PrivacyPolicyItem() {
                 tint = AppTheme.colors.onSurfaceVariant
             )
         }
-
-    }, onClick = { })
+    }, onClick = {
+        urlHandler.openUri("https://hackmd.io/p3BDitRVTF2GQpawLRylRA")
+    })
 }
 
 @Composable
 private fun OpenSourceItem() {
     var isExpanded by remember { mutableStateOf(false) }
+    val urlHandler = LocalUriHandler.current
     Column {
         SettingItem(title = stringResource(Res.string.open_source), content = {
             Row(
@@ -118,19 +122,21 @@ private fun OpenSourceItem() {
                 modifier = Modifier.padding(16.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                OpenSourceItem(
-                    modifier = Modifier.weight(1f),
+                OpenSourceItem(modifier = Modifier.weight(1f),
                     iconRes = Res.drawable.ic_figma,
                     title = "Figma",
-                    label = stringResource(Res.string.coming_soon),
-                    isTintIcon = false
-                )
-                OpenSourceItem(
-                    modifier = Modifier.weight(1f),
+                    label = "CC-BY-SA 4.0",
+                    isTintIcon = false,
+                    onClick = {
+                        urlHandler.openUri("https://www.figma.com/@mrfatworm")
+                    })
+                OpenSourceItem(modifier = Modifier.weight(1f),
                     iconRes = Res.drawable.ic_github,
                     title = "GitHub",
-                    label = stringResource(Res.string.coming_soon)
-                )
+                    label = "MIT",
+                    onClick = {
+                        urlHandler.openUri("https://github.com/mrfatworm/ZZZ-Archive")
+                    })
             }
         }
 
@@ -143,10 +149,13 @@ fun OpenSourceItem(
     iconRes: DrawableResource,
     title: String,
     label: String,
-    isTintIcon: Boolean = true
+    isTintIcon: Boolean = true,
+    onClick: () -> Unit
 ) {
     Column(
-        modifier = modifier.clip(RoundedCornerShape(AppTheme.radius.contentCard)).border(
+        modifier = modifier.clip(RoundedCornerShape(AppTheme.radius.contentCard)).clickable {
+            onClick()
+        }.border(
             AppTheme.dimens.borderWidth,
             AppTheme.colors.buttonBorder,
             RoundedCornerShape(AppTheme.radius.contentCard)

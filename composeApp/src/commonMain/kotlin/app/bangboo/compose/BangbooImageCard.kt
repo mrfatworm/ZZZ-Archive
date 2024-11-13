@@ -26,7 +26,6 @@ import ui.components.ZzzTag
 import ui.components.buttons.ZzzIconButton
 import ui.components.cards.ContentCard
 import ui.theme.AppTheme
-import ui.utils.drawBottomMask
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.back
 import zzzarchive.composeapp.generated.resources.ic_arrow_back
@@ -41,7 +40,7 @@ fun BangbooImageCard(bangbooDetail: BangbooDetailResponse, onBackClick: () -> Un
             onBackClick()
         }
         Box(
-            modifier = Modifier.fillMaxWidth().drawBottomMask(AppTheme.colors)
+            modifier = Modifier.fillMaxWidth()
         ) {
             AsyncImage(
                 modifier = Modifier.widthIn(min = 120.dp, max = 320.dp).aspectRatio(1f)

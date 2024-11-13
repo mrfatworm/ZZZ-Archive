@@ -128,7 +128,7 @@
     <string name="author">Author</string>
     <string name="developer">Developers</string>
     <string name="ui_ux_designers">UI/UX Designers</string>
-    <string name="translation">Translation</string>
+    <string name="localization">Localization</string>
     <string name="data_integration">Data Integration</string>
     <string name="banner_artists">Banner Artists</string>
     <string name="special_thanks">Special Thanks</string>

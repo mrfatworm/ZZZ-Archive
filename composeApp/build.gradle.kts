@@ -90,7 +90,7 @@ kotlin {
         }
     }
 }
-val zzzVersionName = "Luciana 2024.11"
+val zzzVersionName = "Luciana 2024.11.13"
 val windowsVersionName = "1.0.0"
 val zzzPackageId = "com.mrfatworm.zzzarchive"
 
@@ -139,8 +139,8 @@ android {
 compose.desktop {
     application {
         mainClass = "MainKt"
-        var desktopPackageName = ""
-        var desktopPackageId = ""
+        val desktopPackageName: String
+        val desktopPackageId: String
         if ((System.getenv("VARIANT") ?: "") == "Live") {
             desktopPackageName = "ZZZ Archive"
             desktopPackageId = zzzPackageId

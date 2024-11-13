@@ -62,7 +62,6 @@ import ui.components.ImageNotFound
 import ui.components.cards.ContentCard
 import ui.components.cards.HoveredIndicatorHeader
 import ui.theme.AppTheme
-import ui.utils.AdaptiveLayoutType
 import ui.utils.drawRowListMask
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_favorite
@@ -72,7 +71,6 @@ import zzzarchive.composeapp.generated.resources.unknown
 @Composable
 fun PixivTopicCard(
     recentArticlesList: List<RecentArticle>,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onPixivTagChange: (String) -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -97,7 +95,6 @@ fun PixivTopicCard(
         ) {
             items(items = recentArticlesList, key = { it.id }) { item ->
                 PixivTopicItem(
-                    adaptiveLayoutType,
                     artworkId = item.id,
                     artworkName = item.title ?: stringResource(Res.string.unknown),
                     artworkUrl = item.url,
@@ -178,7 +175,6 @@ private fun TagDropDownButton(onPixivTagChange: (String) -> Unit) {
 
 @Composable
 private fun PixivTopicItem(
-    adaptiveLayoutType: AdaptiveLayoutType,
     artworkId: String,
     artworkName: String,
     artworkUrl: String?,
@@ -194,7 +190,7 @@ private fun PixivTopicItem(
             .data(artworkUrl).size(Size.ORIGINAL).build()
     )
     Column(
-        modifier = Modifier.width(if (adaptiveLayoutType == AdaptiveLayoutType.Compact) 120.dp else 160.dp),
+        modifier = Modifier.width(120.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {

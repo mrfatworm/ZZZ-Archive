@@ -6,13 +6,11 @@
 package app.splash
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -55,7 +53,7 @@ fun SplashScreen(
         SplashScreenDual(appVersion)
     }
 }
-val splashColor = Color(0xFFB78B07)
+val splashColor = Color(0xFF3C3C3C)
 
 @Composable
 private fun AppInfo(modifier: Modifier, appVersion: String) {
@@ -65,8 +63,7 @@ private fun AppInfo(modifier: Modifier, appVersion: String) {
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Image(
-            modifier = Modifier.size(240.dp)
-                .border(8.dp, splashColor.copy(alpha = 0.3f), shape = RoundedCornerShape(32.dp)),
+            modifier = Modifier.size(200.dp),
             painter = painterResource(Res.drawable.splash_logo),
             contentDescription = null
         )

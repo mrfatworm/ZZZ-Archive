@@ -128,7 +128,7 @@
     <string name="author">作者</string>
     <string name="developer">開發者</string>
     <string name="ui_ux_designers">UI / UX 設計師</string>
-    <string name="translation">翻譯</string>
+    <string name="localization">多語系</string>
     <string name="data_integration">資料整合</string>
     <string name="banner_artists">封面畫師</string>
     <string name="special_thanks">銘謝</string>

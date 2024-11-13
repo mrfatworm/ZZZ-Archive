@@ -38,6 +38,6 @@ fun HomeScreenSingle(
         )
         ImageBannerCard(uiState.imageBanner)
         NewsPagerCard(uiState.news?.data)
-        PixivTopicCard(uiState.pixivPuppiesList, adaptiveLayoutType, onPixivTagChange)
+        PixivTopicCard(uiState.pixivPuppiesList, onPixivTagChange)
     }
 }

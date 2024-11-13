@@ -55,7 +55,7 @@ fun HomeScreenDual(
             ) {
                 ImageBannerCard(uiState.imageBanner)
                 HoYoLabCard()
-                PixivTopicCard(uiState.pixivPuppiesList, adaptiveLayoutType, onPixivTagChange)
+                PixivTopicCard(uiState.pixivPuppiesList, onPixivTagChange)
             }
 
             Column(
