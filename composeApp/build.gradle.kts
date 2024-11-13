@@ -18,23 +18,22 @@ kotlin {
     jvmToolchain(17)
     androidTarget {
         //https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-test.html
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
+        @OptIn(ExperimentalKotlinGradlePluginApi::class) instrumentedTestVariant.sourceSetTree.set(
+            KotlinSourceSetTree.test
+        )
     }
-    
+
     jvm("desktop")
-    
+
     listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
+        iosX64(), iosArm64(), iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
         }
     }
-    
+
     sourceSets {
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -60,8 +59,7 @@ kotlin {
             implementation(kotlin("test-annotations-common"))
             implementation(libs.kotlin.test)
             implementation(libs.multiplatformSettings.test)
-            @OptIn(ExperimentalComposeLibrary::class)
-            implementation(compose.uiTest)
+            @OptIn(ExperimentalComposeLibrary::class) implementation(compose.uiTest)
         }
 
         val desktopMain by getting
@@ -92,6 +90,7 @@ kotlin {
 }
 val zzzVersionName = "Luciana 2024.11.13"
 val windowsVersionName = "1.0.0"
+val androidVersionCode = 1
 val zzzPackageId = "com.mrfatworm.zzzarchive"
 
 android {
@@ -102,8 +101,9 @@ android {
         applicationId = zzzPackageId
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
+        versionCode = androidVersionCode
         versionName = zzzVersionName
+
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -111,13 +111,10 @@ android {
 
     buildTypes {
         release {
-            ndk.debugSymbolLevel = "FULL"
             isMinifyEnabled = true
             isShrinkResources = true
-
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -129,9 +126,12 @@ android {
             isDefault = true
             applicationIdSuffix = ".dev"
             versionNameSuffix = " Beta"
+            resValue("string", "app_name_variant", "ZZZ Archive-Beta")
         }
+
         create("Live") {
             dimension = "variant"
+            resValue("string", "app_name_variant", "ZZZ Archive")
         }
     }
 }
@@ -175,23 +175,32 @@ buildkonfig {
     exposeObjectWithName = "ZzzConfig"
 
     defaultConfigs {
-        buildConfigField(FieldSpec.Type.STRING, "variant", "Beta")
-        buildConfigField(FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset")
-        buildConfigField(FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api")
+        buildConfigField(
+            FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset"
+        )
+        buildConfigField(
+            FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api"
+        )
         buildConfigField(FieldSpec.Type.STRING, "VERSION", "$zzzVersionName-Beta")
     }
 
     defaultConfigs("Dev") {
-        buildConfigField(FieldSpec.Type.STRING, "variant", "Beta")
-        buildConfigField(FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset")
-        buildConfigField(FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api")
+        buildConfigField(
+            FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset"
+        )
+        buildConfigField(
+            FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api"
+        )
         buildConfigField(FieldSpec.Type.STRING, "VERSION", "$zzzVersionName-Beta")
     }
 
     defaultConfigs("Live") {
-        buildConfigField(FieldSpec.Type.STRING, "variant", "Stable")
-        buildConfigField(FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Asset")
-        buildConfigField(FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Api")
+        buildConfigField(
+            FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Asset"
+        )
+        buildConfigField(
+            FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Api"
+        )
         buildConfigField(FieldSpec.Type.STRING, "VERSION", zzzVersionName)
     }
 }
@@ -206,7 +215,7 @@ fun Project.getAndroidBuildVariantOrNull(): String? {
     }
 
     val matcher = pattern.matcher(taskRequestsStr)
-    val variant = if (matcher.find()) matcher.group(1).lowercase() else null
+    val variant = if (matcher.find()) matcher.group(1) else null
     return if (variant in variants) {
         variant
     } else {
@@ -216,8 +225,6 @@ fun Project.getAndroidBuildVariantOrNull(): String? {
 
 private fun Project.currentBuildVariant(): String {
     val variants = setOf("Dev", "Live")
-    return getAndroidBuildVariantOrNull()
-        ?: System.getenv()["VARIANT"]
-            .toString()
-            .takeIf { it in variants } ?: "Dev"
+    return getAndroidBuildVariantOrNull() ?: System.getenv()["VARIANT"].toString()
+        .takeIf { it in variants } ?: "Dev"
 }
