@@ -69,10 +69,10 @@
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Dev Debug">
+      buildConfiguration = "Dev Release">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Dev Debug"
+      buildConfiguration = "Dev Release"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

@@ -48,7 +48,7 @@ fun SettingCard(
     ContentCard(hasDefaultPadding = false) {
         LanguageSettingItem(uiState.language, onLanguageChange, onRestart)
         ColorSettingItem(onColorChange)
-        HoYoLabSettingItem()
+        // HoYoLabSettingItem()
     }
 }
 
