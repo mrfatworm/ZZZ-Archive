@@ -1,6 +1,7 @@
-name: On Feature Branch Update
+name: On Pull Request
 
-on: [push, pull_request]
+on:
+  pull_request:
 
 jobs:
   lint:

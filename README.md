@@ -57,3 +57,4 @@
 - [Philipp Lackner’s YouTube Channel](https://www.youtube.com/@PhilippLackner)
 - [Compose Multiplatform Wizard](https://github.com/terrakok/Compose-Multiplatform-Wizard)
 - [BuildKonfig for KMP](https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/)
+- [Release macOS App](https://www.marcogomiero.com/posts/2024/compose-macos-app-store/)

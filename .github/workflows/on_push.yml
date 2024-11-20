@@ -1,0 +1,9 @@
+name: On Feature Branch Update
+
+on:
+  push:
+
+jobs:
+
+  unit_test:
+    uses: ./.github/workflows/job_test_debug.yml

@@ -54,7 +54,7 @@ fun HomeScreenDual(
                 verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
             ) {
                 ImageBannerCard(uiState.imageBanner)
-                HoYoLabCard()
+                // HoYoLabCard()
                 PixivTopicCard(uiState.pixivPuppiesList, onPixivTagChange)
             }
 

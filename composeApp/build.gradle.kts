@@ -90,8 +90,8 @@ kotlin {
     }
 }
 val zzzVersionName = "Luciana 2024.11.13"
-val windowsVersionName = "1.0.0"
-val androidVersionCode = 1
+val bundleVersionName = "1.0.5"
+val versionCode = 1
 val zzzPackageId = "com.mrfatworm.zzzarchive"
 
 android {
@@ -102,7 +102,7 @@ android {
         applicationId = zzzPackageId
         minSdk = 26
         targetSdk = 35
-        versionCode = androidVersionCode
+        versionCode = this@Build_gradle.versionCode
         versionName = zzzVersionName
 
 
@@ -124,13 +124,13 @@ android {
     productFlavors {
         create("Dev") {
             dimension = "variant"
-            isDefault = true
             applicationIdSuffix = ".dev"
             versionNameSuffix = " Beta"
             resValue("string", "app_name_variant", "ZZZ Archive-Beta")
         }
 
         create("Live") {
+            isDefault = true
             dimension = "variant"
             resValue("string", "app_name_variant", "ZZZ Archive")
         }
@@ -140,6 +140,7 @@ android {
 compose.desktop {
     application {
         mainClass = "MainKt"
+
         val desktopPackageName: String
         val desktopPackageId: String
         if ((System.getenv("VARIANT") ?: "") == "Live") {
@@ -150,19 +151,37 @@ compose.desktop {
             desktopPackageId = "$zzzPackageId.dev"
         }
 
+        val isAppStoreRelease = project.property("macOsAppStoreRelease").toString().toBoolean()
+
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            targetFormats(TargetFormat.Dmg, TargetFormat.Pkg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = desktopPackageName
-            packageVersion = windowsVersionName
+            packageVersion = bundleVersionName
+            description = "Zenless Zone Zero Wiki App"
+            copyright = "© 2024 mrfatworm. All rights reserved."
             linux {
                 iconFile.set(project.file("desktopLogo/Logo.png"))
             }
             windows {
                 iconFile.set(project.file("desktopLogo/Logo.ico"))
             }
+            // Ref: https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/
             macOS {
                 iconFile.set(project.file("desktopLogo/Logo.icns"))
                 bundleID = desktopPackageId
+                signing {
+                    sign.set(true)
+                    identity.set("JHAN CHENG LI")
+                }
+                minimumSystemVersion = "12.0"
+                appStore = isAppStoreRelease
+
+                if (isAppStoreRelease) {
+                    provisioningProfile.set(project.file("config/macos/embedded.provisionprofile"))
+                    runtimeProvisioningProfile.set(project.file("config/macos/runtime.provisionprofile"))
+                    entitlementsFile.set(project.file("config/macos/entitlements.plist"))
+                    runtimeEntitlementsFile.set(project.file("config/macos/runtime-entitlements.plist"))
+                }
             }
         }
     }
