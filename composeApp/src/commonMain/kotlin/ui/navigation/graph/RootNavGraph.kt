@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import app.splash.SplashScreen
-import mainfunc.MainFuncScreen
+import feature.splash.SplashScreen
+import root.MainContainer
 import ui.navigation.NavActions
 import ui.navigation.RootFlow
 import ui.utils.AdaptiveLayoutType
@@ -32,10 +32,10 @@ fun RootNavGraph(
     ) {
         composable(RootFlow.Splash.route) {
             SplashScreen(contentType = contentType,
-                startMainFlow = { rootNavActions.popAndNavigation(RootFlow.ZzzArchive) })
+                startMainFlow = { rootNavActions.popAndNavigation(RootFlow.MainContainer) })
         }
-        composable(RootFlow.ZzzArchive.route) {
-            MainFuncScreen(
+        composable(RootFlow.MainContainer.route) {
+            MainContainer(
                 rootNavActions = rootNavActions,
                 adaptiveLayoutType = adaptiveLayoutType,
                 contentType = contentType

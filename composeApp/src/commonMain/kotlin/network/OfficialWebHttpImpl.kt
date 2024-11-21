@@ -5,7 +5,7 @@
 
 package network
 
-import app.home.model.OfficialNewsResponse
+import feature.home.model.OfficialNewsResponse
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.get

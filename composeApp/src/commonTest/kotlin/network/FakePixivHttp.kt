@@ -5,8 +5,8 @@
 
 package network
 
-import app.home.model.PixivZzzTopic
-import app.home.model.stubPixivZzzTopic
+import feature.home.model.PixivZzzTopic
+import feature.home.model.stubPixivZzzTopic
 
 class FakePixivHttp : PixivHttp {
     override val timeout = 5000L

@@ -11,8 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import app.drive.compose.DriveDetailCard
-import app.drive.model.DriveListItem
+import feature.drive.compose.DriveDetailCard
+import feature.drive.model.DriveListItem
 
 @Composable
 fun DriveDetailDialog(driveListItem: DriveListItem, onDismiss: () -> Unit) {

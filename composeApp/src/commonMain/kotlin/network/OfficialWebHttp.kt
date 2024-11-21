@@ -5,7 +5,7 @@
 
 package network
 
-import app.home.model.OfficialNewsResponse
+import feature.home.model.OfficialNewsResponse
 
 
 interface OfficialWebHttp {

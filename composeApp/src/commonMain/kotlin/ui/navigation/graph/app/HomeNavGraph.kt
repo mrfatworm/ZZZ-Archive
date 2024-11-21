@@ -8,7 +8,7 @@ package ui.navigation.graph.app
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import app.home.HomeScreen
+import feature.home.HomeScreen
 import ui.navigation.MainFlow
 import ui.navigation.NavActions
 import ui.navigation.Screen

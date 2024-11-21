@@ -29,8 +29,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
-import app.drive.model.DriveListItem
-import app.drive.model.emptyDriveListItem
+import feature.drive.model.DriveListItem
+import feature.drive.model.emptyDriveListItem
 import org.jetbrains.compose.resources.stringResource
 import ui.components.dialogs.DriveDetailDialog
 import ui.components.items.RarityItem

@@ -5,7 +5,7 @@
 
 package network
 
-import app.home.model.PixivZzzTopic
+import feature.home.model.PixivZzzTopic
 
 
 interface PixivHttp {

@@ -5,24 +5,24 @@
 
 package network
 
-import app.agent.model.AgentDetailResponse
-import app.agent.model.AgentsListResponse
-import app.agent.model.stubAgentDetailResponse
-import app.agent.model.stubAgentsListResponse
-import app.bangboo.model.BangbooDetailResponse
-import app.bangboo.model.BangbooListResponse
-import app.bangboo.model.stubBangbooDetailResponse
-import app.bangboo.model.stubBangbooListResponse
-import app.drive.model.DrivesListResponse
-import app.drive.model.stubDrivesListResponse
-import app.home.model.ImageBannerResponse
-import app.home.model.stubImageBannerResponse
-import app.wengine.model.WEngineDetailResponse
-import app.wengine.model.WEnginesListResponse
-import app.wengine.model.stubWEngineDetailResponse
-import app.wengine.model.stubWEnginesListResponse
-import mainfunc.model.BannerResponse
-import mainfunc.model.stubBannerResponse
+import feature.agent.model.AgentDetailResponse
+import feature.agent.model.AgentsListResponse
+import feature.agent.model.stubAgentDetailResponse
+import feature.agent.model.stubAgentsListResponse
+import feature.bangboo.model.BangbooDetailResponse
+import feature.bangboo.model.BangbooListResponse
+import feature.bangboo.model.stubBangbooDetailResponse
+import feature.bangboo.model.stubBangbooListResponse
+import feature.drive.model.DrivesListResponse
+import feature.drive.model.stubDrivesListResponse
+import feature.home.model.ImageBannerResponse
+import feature.home.model.stubImageBannerResponse
+import feature.wengine.model.WEngineDetailResponse
+import feature.wengine.model.WEnginesListResponse
+import feature.wengine.model.stubWEngineDetailResponse
+import feature.wengine.model.stubWEnginesListResponse
+import root.model.BannerResponse
+import root.model.stubBannerResponse
 
 
 class FakeZzzHttp : ZzzHttp {

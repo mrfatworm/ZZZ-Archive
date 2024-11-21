@@ -5,7 +5,7 @@
 
 package network
 
-import app.home.model.PixivZzzTopic
+import feature.home.model.PixivZzzTopic
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.get

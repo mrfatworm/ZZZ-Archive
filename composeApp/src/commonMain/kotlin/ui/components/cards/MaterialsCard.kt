@@ -18,7 +18,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import app.agent.model.LevelMaterial
+import feature.agent.model.LevelMaterial
 import org.jetbrains.compose.resources.stringResource
 import ui.components.items.RarityMiniItem
 import ui.theme.AppTheme

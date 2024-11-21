@@ -28,7 +28,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
-import app.agent.model.AgentListItem
+import feature.agent.model.AgentListItem
 import org.jetbrains.compose.resources.stringResource
 import ui.components.items.RarityItem
 import ui.components.items.RowListEndItem

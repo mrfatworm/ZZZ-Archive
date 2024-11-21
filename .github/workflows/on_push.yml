@@ -1,4 +1,4 @@
-name: On Feature Branch Update
+name: On Push
 
 on:
   push:

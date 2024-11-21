@@ -5,45 +5,45 @@
 
 package di
 
-import app.agent.data.AgentRepository
-import app.agent.data.AgentRepositoryImpl
-import app.agent.domain.AgentDetailViewModel
-import app.agent.domain.AgentsListViewModel
-import app.bangboo.data.BangbooRepository
-import app.bangboo.data.BangbooRepositoryImpl
-import app.bangboo.domain.BangbooDetailViewModel
-import app.bangboo.domain.BangbooListViewModel
-import app.drive.data.DriveRepository
-import app.drive.data.DriveRepositoryImpl
-import app.drive.domain.DrivesListViewModel
-import app.home.data.ImageBannerRepository
-import app.home.data.ImageBannerRepositoryImpl
-import app.home.data.NewsRepository
-import app.home.data.NewsRepositoryImpl
-import app.home.data.PixivRepository
-import app.home.data.PixivRepositoryImpl
-import app.home.domain.HomeViewModel
-import app.setting.data.AppInfoRepository
-import app.setting.data.AppInfoRepositoryImpl
-import app.setting.data.GoogleDocRepository
-import app.setting.data.GoogleDocRepositoryImpl
-import app.setting.data.SettingsRepository
-import app.setting.data.SettingsRepositoryImpl
-import app.setting.domain.FeedbackViewModel
-import app.setting.domain.SettingViewModel
-import app.splash.SplashViewModel
-import app.wengine.data.WEngineRepository
-import app.wengine.data.WEngineRepositoryImpl
-import app.wengine.domain.WEngineDetailViewModel
-import app.wengine.domain.WEnginesListViewModel
-import app.wiki.domain.WikiViewModel
 import com.russhwolf.settings.Settings
-import mainfunc.MainFuncViewModel
-import mainfunc.data.BannerRepository
-import mainfunc.data.BannerRepositoryImpl
+import feature.agent.data.AgentRepository
+import feature.agent.data.AgentRepositoryImpl
+import feature.agent.domain.AgentDetailViewModel
+import feature.agent.domain.AgentsListViewModel
+import feature.bangboo.data.BangbooRepository
+import feature.bangboo.data.BangbooRepositoryImpl
+import feature.bangboo.domain.BangbooDetailViewModel
+import feature.bangboo.domain.BangbooListViewModel
+import feature.drive.data.DriveRepository
+import feature.drive.data.DriveRepositoryImpl
+import feature.drive.domain.DrivesListViewModel
+import feature.home.data.ImageBannerRepository
+import feature.home.data.ImageBannerRepositoryImpl
+import feature.home.data.NewsRepository
+import feature.home.data.NewsRepositoryImpl
+import feature.home.data.PixivRepository
+import feature.home.data.PixivRepositoryImpl
+import feature.home.domain.HomeViewModel
+import feature.setting.data.AppInfoRepository
+import feature.setting.data.AppInfoRepositoryImpl
+import feature.setting.data.GoogleDocRepository
+import feature.setting.data.GoogleDocRepositoryImpl
+import feature.setting.data.SettingsRepository
+import feature.setting.data.SettingsRepositoryImpl
+import feature.setting.domain.FeedbackViewModel
+import feature.setting.domain.SettingViewModel
+import feature.splash.SplashViewModel
+import feature.wengine.data.WEngineRepository
+import feature.wengine.data.WEngineRepositoryImpl
+import feature.wengine.domain.WEngineDetailViewModel
+import feature.wengine.domain.WEnginesListViewModel
+import feature.wiki.domain.WikiViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
+import root.MainContainerViewModel
+import root.data.BannerRepository
+import root.data.BannerRepositoryImpl
 import utils.LanguageHandler
 import utils.LanguageHandlerImpl
 
@@ -66,7 +66,7 @@ val sharedModule = module {
 
 
     viewModelOf(::SplashViewModel)
-    viewModelOf(::MainFuncViewModel)
+    viewModelOf(::MainContainerViewModel)
     viewModelOf(::HomeViewModel)
     viewModelOf(::WikiViewModel)
     viewModelOf(::AgentsListViewModel)

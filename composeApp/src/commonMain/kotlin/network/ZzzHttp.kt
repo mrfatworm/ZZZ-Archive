@@ -5,15 +5,15 @@
 
 package network
 
-import app.agent.model.AgentDetailResponse
-import app.agent.model.AgentsListResponse
-import app.bangboo.model.BangbooDetailResponse
-import app.bangboo.model.BangbooListResponse
-import app.drive.model.DrivesListResponse
-import app.home.model.ImageBannerResponse
-import app.wengine.model.WEngineDetailResponse
-import app.wengine.model.WEnginesListResponse
-import mainfunc.model.BannerResponse
+import feature.agent.model.AgentDetailResponse
+import feature.agent.model.AgentsListResponse
+import feature.bangboo.model.BangbooDetailResponse
+import feature.bangboo.model.BangbooListResponse
+import feature.drive.model.DrivesListResponse
+import feature.home.model.ImageBannerResponse
+import feature.wengine.model.WEngineDetailResponse
+import feature.wengine.model.WEnginesListResponse
+import root.model.BannerResponse
 
 interface ZzzHttp {
     val defaultTimeout: Long
