@@ -1,15 +1,15 @@
 [versions]
 agp = "8.6.1"
 androidx-activityCompose = "1.9.3"
-androidx-lifecycle = "2.8.3"
+androidx-lifecycle = "2.8.4"
 buildKonfig = "0.15.2"
-coil = "3.0.0-rc01"
-compose-adaptive = "1.0.0"
-compose-plugin = "1.7.0"
+coil = "3.0.3"
+compose-adaptive = "1.0.1"
+compose-plugin = "1.7.1"
 kotlin = "2.0.20"
 kotlinx-coroutines = "1.9.0"
-koin = "4.0.0"
-ktor = "3.0.0"
+koin = "4.1.0-Beta1"
+ktor = "3.0.1"
 mockk = "1.13.13"
 multiplatformSettings = "1.2.0"
 navigation-compose = "2.8.0-alpha10"
@@ -18,12 +18,12 @@ splashscreen = "1.0.1"
 
 [libraries]
 #===Jetbrains
-navigation-compose = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref ="navigation-compose" }
-compose-adaptive = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive", version.ref = "compose-adaptive"}
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 androidx-lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+navigation-compose = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref ="navigation-compose" }
+compose-adaptive = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive", version.ref = "compose-adaptive"}
 
 #===Android
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
