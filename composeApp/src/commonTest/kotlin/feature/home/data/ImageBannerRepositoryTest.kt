@@ -5,7 +5,7 @@
 
 package feature.home.data
 
-import feature.home.model.stubImageBannerResponse
+import feature.home.model.response.stubImageBannerResponse
 import io.ktor.util.reflect.instanceOf
 import kotlinx.coroutines.test.runTest
 import network.FakeZzzHttp

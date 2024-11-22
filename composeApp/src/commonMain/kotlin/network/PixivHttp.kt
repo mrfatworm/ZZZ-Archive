@@ -5,10 +5,10 @@
 
 package network
 
-import feature.home.model.PixivZzzTopic
+import feature.home.model.response.PixivTopicResponse
 
 
 interface PixivHttp {
     val timeout: Long
-    suspend fun requestZzzTopic(zzzTag: String): PixivZzzTopic
+    suspend fun requestZzzTopic(zzzTag: String): PixivTopicResponse
 }

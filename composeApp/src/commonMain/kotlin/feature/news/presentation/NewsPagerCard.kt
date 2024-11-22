@@ -1,9 +1,9 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.home.compose
+package feature.news.presentation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -39,18 +39,15 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import feature.home.model.OfficialNewsData
-import feature.home.model.OfficialNewsListItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ui.components.ImageNotFound
 import ui.components.PagerIndicator
 import ui.theme.AppTheme
 
 
 @Composable
-fun NewsPagerCard(newsData: OfficialNewsData?) {
-    val pagerState = rememberPagerState(pageCount = { newsData?.list?.size ?: 0 })
+fun NewsPagerCard(newsList: List<OfficialNewsState>) {
+    val pagerState = rememberPagerState(pageCount = { newsList.size })
     val coroutineScope = rememberCoroutineScope()
     Column(
         Modifier.background(
@@ -60,7 +57,7 @@ fun NewsPagerCard(newsData: OfficialNewsData?) {
         ), verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         HorizontalPager(modifier = Modifier, state = pagerState) { currentPager ->
-            NewsPagerCardItem(newsData?.list?.get(currentPager))
+            NewsPagerCardItem(newsList[currentPager])
         }
         PagerIndicator(modifier = Modifier,
             pageCount = pagerState.pageCount,
@@ -85,54 +82,53 @@ fun NewsPagerCard(newsData: OfficialNewsData?) {
 
 
 @Composable
-fun NewsPagerCardItem(news: OfficialNewsListItem?) {
+fun NewsPagerCardItem(newsState: OfficialNewsState) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed = interactionSource.collectIsPressedAsState()
     val isHovered = interactionSource.collectIsHoveredAsState()
     Box(
         modifier = Modifier.fillMaxWidth().aspectRatio(1.7f).pointerHoverIcon(PointerIcon.Hand)
     ) {
-        if (news == null) {
-            ImageNotFound()
-        } else {
-            val urlHandler = LocalUriHandler.current
-            AsyncImage(
-                modifier = Modifier.fillMaxSize().clickable(
-                    interactionSource = interactionSource, indication = null
-                ) {
-                    urlHandler.openUri("https://zenless.hoyoverse.com/en-us/news/${news.getNewsId()}")
-                }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
-                model = news.getImageUrl(),
-                contentDescription = news.getDescription(),
-                contentScale = ContentScale.Crop
-            )
-            AnimatedVisibility (visible = isPressed.value || isHovered.value, enter = fadeIn(), exit = fadeOut()) {
-                NewsInfo(Modifier.align(Alignment.BottomCenter), news)
-            }
+
+        val urlHandler = LocalUriHandler.current
+        AsyncImage(
+            modifier = Modifier.fillMaxSize().clickable(
+                interactionSource = interactionSource, indication = null
+            ) {
+                urlHandler.openUri(newsState.newsUrl)
+            }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
+            model = newsState.imageUrl,
+            contentDescription = newsState.title,
+            contentScale = ContentScale.Crop
+        )
+        AnimatedVisibility(
+            visible = isPressed.value || isHovered.value, enter = fadeIn(), exit = fadeOut()
+        ) {
+            NewsInfo(Modifier.align(Alignment.BottomCenter), newsState)
         }
     }
 }
 
 @Composable
-private fun NewsInfo(modifier: Modifier, news: OfficialNewsListItem) {
+private fun NewsInfo(modifier: Modifier, newsState: OfficialNewsState) {
     Column(
-        modifier.fillMaxWidth().background(AppTheme.colors.hoveredMask)
-            .padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier.fillMaxWidth().background(AppTheme.colors.hoveredMask).padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
-            text = news.getTitle(),
+            text = newsState.title,
             color = AppTheme.colors.onHoveredMask,
             style = AppTheme.typography.titleMedium
         )
         Text(
             modifier = Modifier.weight(1f),
-            text = news.getDescription(),
+            text = newsState.description,
             color = AppTheme.colors.onHoveredMaskVariant,
             style = AppTheme.typography.bodyMedium
         )
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = news.getDate(),
+            text = newsState.date,
             color = AppTheme.colors.onHoveredMaskVariant,
             style = AppTheme.typography.labelMedium,
             textAlign = TextAlign.End

@@ -1,9 +1,9 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.home.model
+package feature.home.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

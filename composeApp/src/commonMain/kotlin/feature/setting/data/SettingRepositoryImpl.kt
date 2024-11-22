@@ -30,7 +30,7 @@ class SettingsRepositoryImpl(private val settings: Settings) : SettingsRepositor
         isDarkTheme.set(value.toString())
     }
 
-    override fun getLanguage(): String {
+    override fun getLanguageCode(): String {
         return language.get()
     }
 

@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.home.AnnouncementBanner
 import feature.home.model.HomeState
+import feature.news.presentation.NewsPagerCard
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
@@ -37,7 +38,7 @@ fun HomeScreenSingle(
             onClosed = onClosed
         )
         ImageBannerCard(uiState.imageBanner)
-        NewsPagerCard(uiState.news?.data)
+        NewsPagerCard(uiState.newsList)
         PixivTopicCard(uiState.pixivPuppiesList, onPixivTagChange)
     }
 }

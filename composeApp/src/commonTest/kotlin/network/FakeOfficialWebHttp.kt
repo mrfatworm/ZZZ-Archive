@@ -5,8 +5,8 @@
 
 package network
 
-import feature.home.model.OfficialNewsResponse
-import feature.home.model.stubOfficialNewsDataResponse
+import feature.news.data.OfficialNewsResponse
+import feature.news.data.stubOfficialNewsDataResponse
 
 class FakeOfficialWebHttp : OfficialWebHttp {
     override val timeout = 5000L

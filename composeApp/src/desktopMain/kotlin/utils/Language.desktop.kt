@@ -7,7 +7,7 @@ package utils
 
 import java.util.Locale
 
-actual fun changeLanguage(langCode: String) {
+actual fun changePlatformLanguage(langCode: String) {
     val locale = if (langCode == "") Locale.getDefault() else Locale(langCode)
     Locale.setDefault(locale)
 }

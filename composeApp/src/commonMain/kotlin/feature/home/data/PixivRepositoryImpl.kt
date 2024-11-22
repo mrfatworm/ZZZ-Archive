@@ -5,13 +5,13 @@
 
 package feature.home.data
 
-import feature.home.model.PixivZzzTopic
+import feature.home.model.response.PixivTopicResponse
 import kotlinx.coroutines.withTimeout
 import network.PixivHttp
 import utils.ZzzResult
 
 class PixivRepositoryImpl(private val httpClient: PixivHttp) : PixivRepository {
-    override suspend fun getZzzTopic(zzzTag: String): ZzzResult<PixivZzzTopic> {
+    override suspend fun getZzzTopic(zzzTag: String): ZzzResult<PixivTopicResponse> {
         return try {
             val result = withTimeout(httpClient.timeout) {
                 httpClient.requestZzzTopic(zzzTag)

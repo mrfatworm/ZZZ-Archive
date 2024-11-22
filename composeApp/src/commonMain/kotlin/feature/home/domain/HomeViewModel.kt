@@ -11,10 +11,10 @@ import feature.agent.data.AgentRepository
 import feature.bangboo.data.BangbooRepository
 import feature.drive.data.DriveRepository
 import feature.home.data.ImageBannerRepository
-import feature.home.data.NewsRepository
 import feature.home.data.PixivRepository
 import feature.home.model.HomeState
 import feature.home.model.pixivTagDropdownItems
+import feature.news.domain.OfficialNewsUseCase
 import feature.setting.data.SettingsRepository
 import feature.wengine.data.WEngineRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,7 +28,7 @@ class HomeViewModel(
     private val bannerRepository: BannerRepository,
     private val imageBannerRepository: ImageBannerRepository,
     private val pixivRepository: PixivRepository,
-    private val newsRepository: NewsRepository,
+    private val newsUseCase: OfficialNewsUseCase,
     private val agentRepository: AgentRepository,
     private val wEngineRepository: WEngineRepository,
     private val bangbooRepository: BangbooRepository,
@@ -93,11 +93,11 @@ class HomeViewModel(
     }
 
     private suspend fun fetchZzzOfficialNewsEveryTenMinutes() {
-        newsRepository.getNewsPeriodically(1, 5).collect { result ->
+        newsUseCase.getNewsPeriodically(10, 5).collect { result ->
             when (result) {
                 is ZzzResult.Success -> {
                     _uiState.update { state ->
-                        state.copy(news = result.data)
+                        state.copy(newsList = newsUseCase.convertToOfficialNewsState(result.data))
                     }
                 }
 
@@ -177,5 +177,4 @@ class HomeViewModel(
             }
         }
     }
-
 }

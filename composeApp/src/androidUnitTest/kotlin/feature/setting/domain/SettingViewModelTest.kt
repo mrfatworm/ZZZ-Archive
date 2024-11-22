@@ -28,11 +28,13 @@ class SettingViewModelTest {
     private val settingsRepository = FakeSettingRepository()
     private val appInfoRepository = FakeAppInfoRepository()
     private val appActions = AppActions(mockContext)
+    private val languageUseCase = FakeLanguageUseCase()
     private lateinit var viewModel: SettingViewModel
 
     @BeforeTest
     fun setup() {
-        viewModel = SettingViewModel(settingsRepository, appInfoRepository, appActions)
+        viewModel =
+            SettingViewModel(settingsRepository, appInfoRepository, appActions, languageUseCase)
     }
 
     @Test
@@ -40,7 +42,7 @@ class SettingViewModelTest {
         val isDark = viewModel.isDark.value
         val state = viewModel.uiState.value
         assertTrue(isDark)
-        assertEquals("en", state.language.project)
+        assertEquals("en", state.language.code)
     }
 
     @Test
@@ -54,7 +56,7 @@ class SettingViewModelTest {
     fun `Set Language`() {
         viewModel.setLanguage("zh")
         val state = viewModel.uiState.value
-        assertEquals("zh", state.language.project)
+        assertEquals("zh", state.language.code)
     }
 
 }

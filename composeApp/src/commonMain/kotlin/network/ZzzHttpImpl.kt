@@ -5,7 +5,8 @@ import feature.agent.model.AgentsListResponse
 import feature.bangboo.model.BangbooDetailResponse
 import feature.bangboo.model.BangbooListResponse
 import feature.drive.model.DrivesListResponse
-import feature.home.model.ImageBannerResponse
+import feature.home.model.response.ImageBannerResponse
+import feature.setting.domain.LanguageUseCase
 import feature.wengine.model.WEngineDetailResponse
 import feature.wengine.model.WEnginesListResponse
 import io.ktor.client.engine.HttpClientEngine
@@ -14,12 +15,11 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.appendPathSegments
 import kotlinx.serialization.json.Json
 import root.model.BannerResponse
-import utils.LanguageHandler
 
-class ZzzHttpImpl(engine: HttpClientEngine, languageHandler: LanguageHandler) : ZzzHttp {
+class ZzzHttpImpl(engine: HttpClientEngine, languageUsecase: LanguageUseCase) : ZzzHttp {
     override val defaultTimeout = 5000L
     override val longTimeout = 10000L
-    override val languagePath = languageHandler.getLanguage().assetLang
+    override val languagePath = languageUsecase.getLanguage().officialNewsCode
 
     private val client = createZzzHttpClient(engine)
 

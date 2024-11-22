@@ -5,7 +5,7 @@
 
 package feature.home.data
 
-import feature.home.model.stubPixivZzzTopic
+import feature.home.model.response.stubPixivTopicResponse
 import io.ktor.util.reflect.instanceOf
 import kotlinx.coroutines.test.runTest
 import network.FakePixivHttp
@@ -23,7 +23,7 @@ class PixivRepositoryTest {
     @Test
     fun `Get News Success`() = runTest {
         val result = repository.getZzzTopic("") as ZzzResult.Success
-        assertEquals(result.data, stubPixivZzzTopic)
+        assertEquals(result.data, stubPixivTopicResponse)
     }
 
     @Test
@@ -36,7 +36,7 @@ class PixivRepositoryTest {
     @Test
     fun `Get New Every 10 Minutes`() = runTest {
         val result = repository.getZzzTopic("") as ZzzResult.Success
-        assertEquals(result.data, stubPixivZzzTopic)
+        assertEquals(result.data, stubPixivTopicResponse)
     }
 
     @Test

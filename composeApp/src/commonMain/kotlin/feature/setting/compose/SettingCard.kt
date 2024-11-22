@@ -93,7 +93,7 @@ private fun LanguageSettingItem(
                         if (languageItem.name != language.name) {
                             openRestartDialog.value = true
                         }
-                        onLanguageChange(languageItem.project)
+                        onLanguageChange(languageItem.code)
                         showLanguageList = false
                     })
                 }

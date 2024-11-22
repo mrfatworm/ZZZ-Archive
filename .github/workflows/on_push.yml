@@ -2,6 +2,10 @@ name: On Push
 
 on:
   push:
+    branches-ignore:
+      - "doc/**"
+    paths-ignore:
+      - "**/*.md"
 
 jobs:
 

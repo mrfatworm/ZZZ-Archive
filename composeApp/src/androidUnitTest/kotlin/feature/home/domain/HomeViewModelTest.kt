@@ -14,11 +14,11 @@ import feature.bangboo.model.stubBangbooListResponse
 import feature.drive.data.FakeDriveRepository
 import feature.drive.model.stubDrivesListResponse
 import feature.home.data.FakeImageBannerRepository
-import feature.home.data.FakeNewsRepository
 import feature.home.data.FakePixivRepository
-import feature.home.model.stubImageBannerResponse
-import feature.home.model.stubOfficialNewsDataResponse
-import feature.home.model.stubPixivZzzTopic
+import feature.home.model.response.stubImageBannerResponse
+import feature.home.model.response.stubPixivTopicResponse
+import feature.news.presentation.FakeOfficialNewsUseCase
+import feature.news.presentation.stubOfficialNewsState
 import feature.setting.data.FakeSettingRepository
 import feature.wengine.data.FakeWEngineRepository
 import feature.wengine.model.stubWEnginesListResponse
@@ -37,7 +37,7 @@ class HomeViewModelTest {
     private val bannerRepository = FakeBannerRepository()
     private val imageBannerRepository = FakeImageBannerRepository()
     private val pixivRepository = FakePixivRepository()
-    private val newsRepository = FakeNewsRepository()
+    private val officialNewsUseCase = FakeOfficialNewsUseCase()
     private val agentRepository = FakeAgentRepository()
     private val wEngineRepository = FakeWEngineRepository()
     private val bangbooRepository = FakeBangbooRepository()
@@ -51,12 +51,12 @@ class HomeViewModelTest {
             bannerRepository,
             imageBannerRepository,
             pixivRepository,
-            newsRepository,
+            officialNewsUseCase,
             agentRepository,
             wEngineRepository,
             bangbooRepository,
             driveRepository,
-            settingsRepository
+            settingsRepository,
         )
     }
 
@@ -65,8 +65,8 @@ class HomeViewModelTest {
         val state = viewModel.uiState.value
         assertEquals(state.banner, stubBannerResponse)
         assertEquals(state.imageBanner, stubImageBannerResponse)
-        assertEquals(state.pixivPuppiesList, stubPixivZzzTopic.getPopularArticles())
-        assertEquals(state.news, stubOfficialNewsDataResponse)
+        assertEquals(state.pixivPuppiesList, stubPixivTopicResponse.getPopularArticles())
+        assertEquals(state.newsList.first(), stubOfficialNewsState)
         assertEquals(state.agentsList, stubAgentsListResponse.getAgentsNewToOld())
         assertEquals(state.wEnginesList, stubWEnginesListResponse.getWEnginesNewToOld())
         assertEquals(state.bangbooList, stubBangbooListResponse.getBangbooNewToOld())

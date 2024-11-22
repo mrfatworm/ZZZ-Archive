@@ -5,7 +5,6 @@
 
 package feature.setting.domain
 
-import androidx.compose.ui.text.intl.Locale
 import androidx.lifecycle.ViewModel
 import feature.setting.data.AppInfoRepository
 import feature.setting.data.SettingsRepository
@@ -14,13 +13,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import utils.AppActions
-import utils.Language
-import utils.changeLanguage
 
 class SettingViewModel(
     private val settingsRepository: SettingsRepository,
     private val appInfoRepository: AppInfoRepository,
-    private val appActions: AppActions
+    private val appActions: AppActions,
+    private val languageUseCase: LanguageUseCase
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(settingState)
@@ -34,19 +32,13 @@ class SettingViewModel(
 
     private fun initSetting() {
         _isDark.value = settingsRepository.getIsDarkTheme()
-        val langCode = settingsRepository.getLanguage()
-        updateLanguageState(langCode)
+        updateLanguageState()
         getAppVersion()
     }
 
-    private fun updateLanguageState(
-        langCode: String, defaultLanguage: String = Locale.current.language
-    ) {
-        val language =
-            if (langCode == "") Language.entries.firstOrNull { it.project == defaultLanguage }
-                ?: Language.English
-            else Language.entries.firstOrNull { it.project == langCode } ?: Language.English
-        _uiState.update { it.copy(language = language) }
+    private fun updateLanguageState() {
+        val newLanguage = languageUseCase.getLanguage()
+        _uiState.update { it.copy(language = newLanguage) }
     }
 
     private fun getAppVersion() {
@@ -60,9 +52,8 @@ class SettingViewModel(
     }
 
     fun setLanguage(langCode: String) {
-        updateLanguageState(langCode)
-        settingsRepository.setLanguage(langCode)
-        changeLanguage(langCode)
+        languageUseCase.setLanguage(langCode)
+        updateLanguageState()
     }
 
     fun restartApp() {

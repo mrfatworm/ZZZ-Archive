@@ -1,13 +1,12 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.home.model
+package feature.news.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 
 @Serializable
 data class OfficialNewsResponse(
@@ -20,35 +19,13 @@ data class OfficialNewsData(
 )
 
 @Serializable
-class OfficialNewsListItem(
-    private val sTitle: String,
-    private val sIntro: String,
-    private val sExt: String,
-    private val dtStartTime: String,
-    private val iInfoId: Int
-) {
-    fun getTitle(): String {
-        return sTitle
-    }
-
-    fun getDescription(): String {
-        return sIntro
-    }
-
-    fun getImageUrl(): String {
-        val json = Json { ignoreUnknownKeys = true }
-        val newsBannerResponse = json.decodeFromString<NewsBannerResponse>(sExt)
-        return newsBannerResponse.newsBanner.firstOrNull()?.url ?: ""
-    }
-
-    fun getDate(): String {
-        return dtStartTime.split(" ")[0]
-    }
-
-    fun getNewsId(): Int {
-        return iInfoId
-    }
-}
+data class OfficialNewsListItem(
+    val sTitle: String,
+    val sIntro: String,
+    val sExt: String,
+    val dtStartTime: String,
+    val iInfoId: Int
+)
 
 @Serializable
 data class NewsBannerItem(val name: String, val url: String)

@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import feature.home.AnnouncementBanner
 import feature.home.model.HomeState
+import feature.news.presentation.NewsPagerCard
 import ui.components.cards.AgentsListCard
 import ui.components.cards.BangbooListCard
 import ui.components.cards.DrivesListCard
@@ -62,7 +63,7 @@ fun HomeScreenDual(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
             ) {
-                NewsPagerCard(uiState.news?.data)
+                NewsPagerCard(uiState.newsList)
                 AgentsListCard(
                     agentsList = uiState.agentsList,
                     onAgentsOverviewClick = onAgentsOverviewClick,

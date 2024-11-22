@@ -5,8 +5,8 @@
 
 package feature.home.data
 
-import feature.home.model.ImageBannerResponse
-import feature.home.model.stubImageBannerResponse
+import feature.home.model.response.ImageBannerResponse
+import feature.home.model.response.stubImageBannerResponse
 import utils.ZzzResult
 
 class FakeImageBannerRepository : ImageBannerRepository {

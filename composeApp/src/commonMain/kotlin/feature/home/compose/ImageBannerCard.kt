@@ -34,7 +34,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import feature.home.model.ImageBannerResponse
+import feature.home.model.response.ImageBannerResponse
 import ui.components.ImageNotFound
 import ui.theme.AppTheme
 

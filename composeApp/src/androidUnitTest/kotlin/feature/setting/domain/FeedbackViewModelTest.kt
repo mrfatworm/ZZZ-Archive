@@ -9,7 +9,6 @@ package feature.setting.domain
 import MainDispatcherRule
 import feature.setting.data.FakeAppInfoRepository
 import feature.setting.data.FakeGoogleDocRepository
-import feature.setting.data.FakeSettingRepository
 import feature.setting.model.feedbackIssueTypes
 import org.junit.Rule
 import kotlin.test.BeforeTest
@@ -22,14 +21,14 @@ class FeedbackViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private val settingsRepository = FakeSettingRepository()
     private val appInfoRepository = FakeAppInfoRepository()
     private val googleDocRepository = FakeGoogleDocRepository()
+    private val languageUseCase = FakeLanguageUseCase()
     private lateinit var viewModel: FeedbackViewModel
 
     @BeforeTest
     fun setup() {
-        viewModel = FeedbackViewModel(settingsRepository, appInfoRepository, googleDocRepository)
+        viewModel = FeedbackViewModel(appInfoRepository, googleDocRepository, languageUseCase)
     }
 
     @Test

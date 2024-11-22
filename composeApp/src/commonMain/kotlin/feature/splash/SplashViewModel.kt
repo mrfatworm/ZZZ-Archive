@@ -5,7 +5,7 @@ import feature.setting.data.AppInfoRepository
 import feature.setting.data.SettingsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import utils.changeLanguage
+import utils.changePlatformLanguage
 
 class SplashViewModel(
     private val settingsRepository: SettingsRepository,
@@ -19,14 +19,14 @@ class SplashViewModel(
     init {
         //settingsRepository.clear() // For test
         _isDark.value = settingsRepository.getIsDarkTheme()
-        initLanguage(settingsRepository.getLanguage())
+        initLanguage(settingsRepository.getLanguageCode())
         getAppVersion()
     }
 
 
     private fun initLanguage(langCode: String) {
         if (langCode != "") {
-            changeLanguage(langCode)
+            changePlatformLanguage(langCode)
         }
     }
 

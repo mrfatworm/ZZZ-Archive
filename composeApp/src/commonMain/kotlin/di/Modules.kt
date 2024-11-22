@@ -19,11 +19,13 @@ import feature.drive.data.DriveRepositoryImpl
 import feature.drive.domain.DrivesListViewModel
 import feature.home.data.ImageBannerRepository
 import feature.home.data.ImageBannerRepositoryImpl
-import feature.home.data.NewsRepository
-import feature.home.data.NewsRepositoryImpl
 import feature.home.data.PixivRepository
 import feature.home.data.PixivRepositoryImpl
 import feature.home.domain.HomeViewModel
+import feature.news.data.OfficialNewsRepository
+import feature.news.data.OfficialNewsRepositoryImpl
+import feature.news.domain.OfficialNewsUseCase
+import feature.news.domain.OfficialNewsUseCaseImpl
 import feature.setting.data.AppInfoRepository
 import feature.setting.data.AppInfoRepositoryImpl
 import feature.setting.data.GoogleDocRepository
@@ -31,6 +33,8 @@ import feature.setting.data.GoogleDocRepositoryImpl
 import feature.setting.data.SettingsRepository
 import feature.setting.data.SettingsRepositoryImpl
 import feature.setting.domain.FeedbackViewModel
+import feature.setting.domain.LanguageUseCase
+import feature.setting.domain.LanguageUseCaseImpl
 import feature.setting.domain.SettingViewModel
 import feature.splash.SplashViewModel
 import feature.wengine.data.WEngineRepository
@@ -44,18 +48,17 @@ import org.koin.dsl.module
 import root.MainContainerViewModel
 import root.data.BannerRepository
 import root.data.BannerRepositoryImpl
-import utils.LanguageHandler
-import utils.LanguageHandlerImpl
 
 expect val platformModule: Module
 
 val sharedModule = module {
     single<Settings> { Settings() }
-    single<LanguageHandler> { LanguageHandlerImpl(get()) }
+
+    // Repositories
     single<SettingsRepository> { SettingsRepositoryImpl(get()) }
     single<AppInfoRepository> { AppInfoRepositoryImpl() }
     single<BannerRepository> { BannerRepositoryImpl(get()) }
-    single<NewsRepository> { NewsRepositoryImpl(get()) }
+    single<OfficialNewsRepository> { OfficialNewsRepositoryImpl(get()) }
     single<PixivRepository> { PixivRepositoryImpl(get()) }
     single<ImageBannerRepository> { ImageBannerRepositoryImpl(get()) }
     single<AgentRepository> { AgentRepositoryImpl(get()) }
@@ -64,7 +67,11 @@ val sharedModule = module {
     single<DriveRepository> { DriveRepositoryImpl(get()) }
     single<GoogleDocRepository> { GoogleDocRepositoryImpl(get()) }
 
+    // Use cases
+    single<LanguageUseCase> { LanguageUseCaseImpl(get()) }
+    single<OfficialNewsUseCase> { OfficialNewsUseCaseImpl(get(), get()) }
 
+// ViewModels
     viewModelOf(::SplashViewModel)
     viewModelOf(::MainContainerViewModel)
     viewModelOf(::HomeViewModel)

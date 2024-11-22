@@ -1,10 +1,15 @@
-package feature.home.model
+/*
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: MIT
+ */
+
+package feature.home.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PixivZzzTopic(val body: Body) {
+data class PixivTopicResponse(val body: Body) {
     fun getPopularArticles(): List<RecentArticle> {
         return body.illustManga.data
     }
@@ -30,7 +35,7 @@ data class RecentArticle(
     val profileImageUrl: String
 )
 
-val stubPixivZzzTopic = PixivZzzTopic(
+val stubPixivTopicResponse = PixivTopicResponse(
     Body(
         IllustManga(
             listOf(

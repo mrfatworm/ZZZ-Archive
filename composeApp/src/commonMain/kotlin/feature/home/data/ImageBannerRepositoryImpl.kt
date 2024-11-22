@@ -5,7 +5,7 @@
 
 package feature.home.data
 
-import feature.home.model.ImageBannerResponse
+import feature.home.model.response.ImageBannerResponse
 import kotlinx.coroutines.withTimeout
 import network.ZzzHttp
 import utils.ZzzResult

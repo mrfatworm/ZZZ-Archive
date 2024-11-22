@@ -5,8 +5,8 @@
 
 package feature.home.data
 
-import feature.home.model.PixivZzzTopic
-import feature.home.model.stubPixivZzzTopic
+import feature.home.model.response.PixivTopicResponse
+import feature.home.model.response.stubPixivTopicResponse
 import utils.ZzzResult
 
 class FakePixivRepository : PixivRepository {
@@ -16,11 +16,11 @@ class FakePixivRepository : PixivRepository {
         this.isError = isError
     }
 
-    override suspend fun getZzzTopic(zzzTag: String): ZzzResult<PixivZzzTopic> {
+    override suspend fun getZzzTopic(zzzTag: String): ZzzResult<PixivTopicResponse> {
         return if (isError) {
             ZzzResult.Error(Exception())
         } else {
-            ZzzResult.Success(stubPixivZzzTopic)
+            ZzzResult.Success(stubPixivTopicResponse)
         }
     }
 }

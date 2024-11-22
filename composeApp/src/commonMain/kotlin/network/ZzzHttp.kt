@@ -10,7 +10,7 @@ import feature.agent.model.AgentsListResponse
 import feature.bangboo.model.BangbooDetailResponse
 import feature.bangboo.model.BangbooListResponse
 import feature.drive.model.DrivesListResponse
-import feature.home.model.ImageBannerResponse
+import feature.home.model.response.ImageBannerResponse
 import feature.wengine.model.WEngineDetailResponse
 import feature.wengine.model.WEnginesListResponse
 import root.model.BannerResponse

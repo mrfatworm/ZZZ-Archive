@@ -5,7 +5,7 @@
 
 package feature.home.data
 
-import feature.home.model.ImageBannerResponse
+import feature.home.model.response.ImageBannerResponse
 import utils.ZzzResult
 
 interface ImageBannerRepository {

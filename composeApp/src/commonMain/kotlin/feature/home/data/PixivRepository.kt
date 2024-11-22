@@ -5,9 +5,9 @@
 
 package feature.home.data
 
-import feature.home.model.PixivZzzTopic
+import feature.home.model.response.PixivTopicResponse
 import utils.ZzzResult
 
 interface PixivRepository {
-    suspend fun getZzzTopic(zzzTag: String): ZzzResult<PixivZzzTopic>
+    suspend fun getZzzTopic(zzzTag: String): ZzzResult<PixivTopicResponse>
 }

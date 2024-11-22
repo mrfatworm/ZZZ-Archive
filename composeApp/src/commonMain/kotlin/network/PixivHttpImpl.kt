@@ -5,7 +5,7 @@
 
 package network
 
-import feature.home.model.PixivZzzTopic
+import feature.home.model.response.PixivTopicResponse
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.get
@@ -18,7 +18,7 @@ class PixivHttpImpl(engine: HttpClientEngine) : PixivHttp {
     override val timeout = 5000L
     private val client = createPixivHttpClient(engine)
 
-    override suspend fun requestZzzTopic(zzzTag: String): PixivZzzTopic = client.get {
+    override suspend fun requestZzzTopic(zzzTag: String): PixivTopicResponse = client.get {
         url {
             path("/ajax/search/artworks/$zzzTag")
         }
