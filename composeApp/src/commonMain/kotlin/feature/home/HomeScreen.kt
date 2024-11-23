@@ -16,7 +16,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import feature.home.compose.HomeScreenDual
 import feature.home.compose.HomeScreenSingle
-import feature.home.domain.HomeViewModel
+import feature.home.presentation.HomeViewModel
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 import root.model.BannerResponse

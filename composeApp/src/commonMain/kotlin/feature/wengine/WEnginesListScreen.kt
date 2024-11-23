@@ -7,8 +7,8 @@ package feature.wengine
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import feature.wengine.compose.WEnginesListScreenDual
-import feature.wengine.compose.WEnginesListScreenSingle
+import feature.wengine.components.WEnginesListScreenDual
+import feature.wengine.components.WEnginesListScreenSingle
 import feature.wengine.domain.WEnginesListViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import ui.utils.AdaptiveLayoutType

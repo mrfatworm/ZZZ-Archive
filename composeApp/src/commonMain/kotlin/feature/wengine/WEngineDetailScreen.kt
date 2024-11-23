@@ -8,8 +8,8 @@ package feature.wengine
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import feature.wengine.compose.WEngineDetailScreenDual
-import feature.wengine.compose.WEngineDetailScreenSingle
+import feature.wengine.components.WEngineDetailScreenDual
+import feature.wengine.components.WEngineDetailScreenSingle
 import feature.wengine.domain.WEngineDetailViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import ui.utils.AdaptiveLayoutType

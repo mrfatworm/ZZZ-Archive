@@ -14,18 +14,18 @@ import feature.bangboo.data.BangbooRepository
 import feature.bangboo.data.BangbooRepositoryImpl
 import feature.bangboo.domain.BangbooDetailViewModel
 import feature.bangboo.domain.BangbooListViewModel
+import feature.cover.data.CoverImageRepository
+import feature.cover.data.CoverImageRepositoryImpl
 import feature.drive.data.DriveRepository
 import feature.drive.data.DriveRepositoryImpl
 import feature.drive.domain.DrivesListViewModel
-import feature.home.data.ImageBannerRepository
-import feature.home.data.ImageBannerRepositoryImpl
-import feature.home.data.PixivRepository
-import feature.home.data.PixivRepositoryImpl
-import feature.home.domain.HomeViewModel
+import feature.home.presentation.HomeViewModel
 import feature.news.data.OfficialNewsRepository
 import feature.news.data.OfficialNewsRepositoryImpl
 import feature.news.domain.OfficialNewsUseCase
 import feature.news.domain.OfficialNewsUseCaseImpl
+import feature.pixiv.data.PixivRepository
+import feature.pixiv.data.PixivRepositoryImpl
 import feature.setting.data.AppInfoRepository
 import feature.setting.data.AppInfoRepositoryImpl
 import feature.setting.data.GoogleDocRepository
@@ -60,7 +60,7 @@ val sharedModule = module {
     single<BannerRepository> { BannerRepositoryImpl(get()) }
     single<OfficialNewsRepository> { OfficialNewsRepositoryImpl(get()) }
     single<PixivRepository> { PixivRepositoryImpl(get()) }
-    single<ImageBannerRepository> { ImageBannerRepositoryImpl(get()) }
+    single<CoverImageRepository> { CoverImageRepositoryImpl(get()) }
     single<AgentRepository> { AgentRepositoryImpl(get()) }
     single<WEngineRepository> { WEngineRepositoryImpl(get()) }
     single<BangbooRepository> { BangbooRepositoryImpl(get()) }

@@ -7,8 +7,8 @@ package feature.agent
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import feature.agent.compose.AgentsListScreenDual
-import feature.agent.compose.AgentsListScreenSingle
+import feature.agent.components.AgentsListScreenDual
+import feature.agent.components.AgentsListScreenSingle
 import feature.agent.domain.AgentsListViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import ui.utils.AdaptiveLayoutType

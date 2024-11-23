@@ -7,8 +7,8 @@ package feature.bangboo
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import feature.bangboo.compose.BangbooDetailScreenDual
-import feature.bangboo.compose.BangbooDetailScreenSingle
+import feature.bangboo.components.BangbooDetailScreenDual
+import feature.bangboo.components.BangbooDetailScreenSingle
 import feature.bangboo.domain.BangbooDetailViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import ui.utils.AdaptiveLayoutType

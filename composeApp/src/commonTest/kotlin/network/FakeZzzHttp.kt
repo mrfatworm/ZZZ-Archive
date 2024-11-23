@@ -13,10 +13,10 @@ import feature.bangboo.model.BangbooDetailResponse
 import feature.bangboo.model.BangbooListResponse
 import feature.bangboo.model.stubBangbooDetailResponse
 import feature.bangboo.model.stubBangbooListResponse
+import feature.cover.data.CoverImageResponse
+import feature.cover.data.stubCoverImageResponse
 import feature.drive.model.DrivesListResponse
 import feature.drive.model.stubDrivesListResponse
-import feature.home.model.response.ImageBannerResponse
-import feature.home.model.response.stubImageBannerResponse
 import feature.wengine.model.WEngineDetailResponse
 import feature.wengine.model.WEnginesListResponse
 import feature.wengine.model.stubWEngineDetailResponse
@@ -44,11 +44,11 @@ class FakeZzzHttp : ZzzHttp {
         }
     }
 
-    override suspend fun requestImageBanner(): ImageBannerResponse {
+    override suspend fun requestImageBanner(): CoverImageResponse {
         return if (isError) {
             throw Exception()
         } else {
-            stubImageBannerResponse
+            stubCoverImageResponse
         }
     }
 

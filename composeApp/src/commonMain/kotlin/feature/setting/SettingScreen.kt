@@ -7,8 +7,8 @@ package feature.setting
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import feature.setting.compose.SettingScreenDual
-import feature.setting.compose.SettingScreenSingle
+import feature.setting.components.SettingScreenDual
+import feature.setting.components.SettingScreenSingle
 import feature.setting.domain.SettingViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import ui.utils.AdaptiveLayoutType

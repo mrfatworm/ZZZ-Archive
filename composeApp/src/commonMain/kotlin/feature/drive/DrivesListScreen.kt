@@ -7,8 +7,8 @@ package feature.drive
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import feature.drive.compose.DrivesListScreenDual
-import feature.drive.compose.DrivesListScreenSingle
+import feature.drive.components.DrivesListScreenDual
+import feature.drive.components.DrivesListScreenSingle
 import feature.drive.domain.DrivesListViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import ui.utils.AdaptiveLayoutType

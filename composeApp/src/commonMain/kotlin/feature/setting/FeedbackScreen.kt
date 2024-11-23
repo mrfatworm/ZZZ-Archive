@@ -11,8 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import feature.setting.compose.FeedbackScreenCompact
-import feature.setting.compose.FeedbackScreenMedium
+import feature.setting.components.FeedbackScreenCompact
+import feature.setting.components.FeedbackScreenMedium
 import feature.setting.domain.FeedbackViewModel
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
