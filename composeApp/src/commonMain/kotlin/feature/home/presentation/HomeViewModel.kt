@@ -8,7 +8,7 @@ package feature.home.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.agent.domain.AgentsListUseCase
-import feature.bangboo.data.BangbooRepository
+import feature.bangboo.domain.BangbooListUseCase
 import feature.cover.data.CoverImageRepository
 import feature.drive.data.DriveRepository
 import feature.home.model.HomeState
@@ -31,7 +31,7 @@ class HomeViewModel(
     private val newsUseCase: OfficialNewsUseCase,
     private val agentsListUseCase: AgentsListUseCase,
     private val wEngineRepository: WEngineRepository,
-    private val bangbooRepository: BangbooRepository,
+    private val bangbooListUseCase: BangbooListUseCase,
     private val driveRepository: DriveRepository,
     private val settingsRepository: SettingsRepository
 ) : ViewModel() {
@@ -148,17 +148,14 @@ class HomeViewModel(
     }
 
     private suspend fun fetchBangbooList() {
-        when (val result = bangbooRepository.getBangbooList()) {
-            is ZzzResult.Success -> {
-                _uiState.update { state ->
-                    state.copy(bangbooList = result.data.getBangbooNewToOld())
-                }
+        val result = bangbooListUseCase.invoke()
+        result.fold(onSuccess = { bangbooList ->
+            _uiState.update {
+                it.copy(bangbooList = bangbooList)
             }
-
-            is ZzzResult.Error -> {
-                println("get bangboo error: ${result.exception}")
-            }
-        }
+        }, onFailure = {
+            println("get bangboos error: ${it.message}")
+        })
     }
 
     private suspend fun fetchDrivesList() {

@@ -14,8 +14,10 @@ import feature.agent.presentation.AgentDetailViewModel
 import feature.agent.presentation.AgentsListViewModel
 import feature.bangboo.data.BangbooRepository
 import feature.bangboo.data.BangbooRepositoryImpl
-import feature.bangboo.domain.BangbooDetailViewModel
-import feature.bangboo.domain.BangbooListViewModel
+import feature.bangboo.domain.BangbooDetailUseCase
+import feature.bangboo.domain.BangbooListUseCase
+import feature.bangboo.presentation.BangbooDetailViewModel
+import feature.bangboo.presentation.BangbooListViewModel
 import feature.cover.data.CoverImageRepository
 import feature.cover.data.CoverImageRepositoryImpl
 import feature.drive.data.DriveRepository
@@ -74,6 +76,9 @@ val sharedModule = module {
     single<OfficialNewsUseCase> { OfficialNewsUseCaseImpl(get(), get()) }
     single<AgentsListUseCase> { AgentsListUseCase(get()) }
     single<AgentDetailUseCase> { AgentDetailUseCase(get()) }
+    single<BangbooListUseCase> { BangbooListUseCase(get()) }
+    single<BangbooDetailUseCase> { BangbooDetailUseCase(get()) }
+
 
     // ViewModels
     viewModelOf(::SplashViewModel)

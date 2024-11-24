@@ -69,9 +69,9 @@ fun BangbooListFilterCard(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(
-                count = uiState.bangbooList.size,
-                key = { index -> uiState.bangbooList[index].id }) { index ->
-                val bangboo = uiState.bangbooList[index]
+                count = uiState.filteredBangbooList.size,
+                key = { index -> uiState.filteredBangbooList[index].id }) { index ->
+                val bangboo = uiState.filteredBangbooList[index]
                 RarityItem(
                     modifier = Modifier.animateItem(),
                     rarityLevel = bangboo.rarity,

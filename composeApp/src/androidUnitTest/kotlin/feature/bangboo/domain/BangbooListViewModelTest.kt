@@ -7,8 +7,12 @@ package feature.bangboo.domain
 
 
 import MainDispatcherRule
-import feature.bangboo.data.FakeBangbooRepository
 import feature.bangboo.model.stubBangbooListResponse
+import feature.bangboo.presentation.BangbooListAction
+import feature.bangboo.presentation.BangbooListViewModel
+import io.mockk.coEvery
+import io.mockk.every
+import io.mockk.mockk
 import org.junit.Rule
 import utils.AgentAttribute
 import utils.ZzzRarity
@@ -21,33 +25,37 @@ class BangbooListViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private val bangbooRepository = FakeBangbooRepository()
+    private val bangbooListUseCase = mockk<BangbooListUseCase>()
     private lateinit var viewModel: BangbooListViewModel
 
     @BeforeTest
     fun setup() {
-        viewModel = BangbooListViewModel(bangbooRepository)
+        coEvery { bangbooListUseCase.invoke() } returns Result.success(stubBangbooListResponse.bangboo)
+        every { bangbooListUseCase.filterBangbooList(any(), any(), any()) } returns listOf(
+            stubBangbooListResponse.bangboo.first()
+        ) // Penguinboo
+        viewModel = BangbooListViewModel(bangbooListUseCase)
     }
 
     @Test
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.bangbooList, stubBangbooListResponse.getBangbooNewToOld())
+        assertEquals(state.bangbooList, stubBangbooListResponse.bangboo)
     }
 
     @Test
-    fun `Filter Rarity S Success`() {
-        viewModel.rarityFilterChanged(setOf(ZzzRarity.RANK_S))
+    fun `Filter Rarity Success`() {
+        viewModel.onAction(BangbooListAction.OnRarityFilterChanged(setOf(ZzzRarity.RANK_S)))
         val state = viewModel.uiState.value
-        assertEquals(state.bangbooList.first().id, 2)
-        assertEquals(state.bangbooList.size, 1)
+        assertEquals(state.filteredBangbooList.first().id, 1) // Penguinboo
+        assertEquals(state.filteredBangbooList.size, 1)
     }
 
     @Test
-    fun `Filter Attribute Ice Success`() {
-        viewModel.attributeFilterChanged(setOf(AgentAttribute.Ice))
+    fun `Filter Attribute Success`() {
+        viewModel.onAction(BangbooListAction.OnAttributeFilterChanged(setOf(AgentAttribute.Ice)))
         val state = viewModel.uiState.value
-        assertEquals(state.bangbooList.first().id, 1)
-        assertEquals(state.bangbooList.size, 1)
+        assertEquals(state.filteredBangbooList.first().id, 1) // Penguinboo
+        assertEquals(state.filteredBangbooList.size, 1)
     }
 }

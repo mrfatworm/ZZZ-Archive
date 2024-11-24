@@ -17,11 +17,7 @@ class AgentsListUseCase(
     private val agentRepository: AgentRepository
 ) {
 
-    suspend fun invoke(): Result<List<AgentListItem>> {
-        return agentRepository.getAgentsList().map {
-            getAgentsNewToOld(it.agents)
-        }
-    }
+    suspend fun invoke() = agentRepository.getAgentsList().map { getAgentsNewToOld(it.agents) }
 
     private fun getAgentsNewToOld(agentsList: List<AgentListItem>): List<AgentListItem> {
         return agentsList.reversed()

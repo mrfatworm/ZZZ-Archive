@@ -9,7 +9,7 @@ package feature.wiki.domain
 import MainDispatcherRule
 import feature.agent.domain.AgentsListUseCase
 import feature.agent.model.stubAgentsListResponse
-import feature.bangboo.data.FakeBangbooRepository
+import feature.bangboo.domain.BangbooListUseCase
 import feature.bangboo.model.stubBangbooListResponse
 import feature.drive.data.FakeDriveRepository
 import feature.drive.model.stubDrivesListResponse
@@ -29,17 +29,18 @@ class WikiViewModelTest {
 
     private val agentsListUseCase = mockk<AgentsListUseCase>()
     private var wEngineRepository = FakeWEngineRepository()
-    private var bangbooRepository = FakeBangbooRepository()
+    private var bangbooListUseCase = mockk<BangbooListUseCase>()
     private var driveRepository = FakeDriveRepository()
     private lateinit var viewModel: WikiViewModel
 
     @BeforeTest
     fun setup() {
         coEvery { agentsListUseCase.invoke() } returns Result.success(stubAgentsListResponse.agents)
+        coEvery { bangbooListUseCase.invoke() } returns Result.success(stubBangbooListResponse.bangboo)
         viewModel = WikiViewModel(
             agentsListUseCase,
             wEngineRepository,
-            bangbooRepository,
+            bangbooListUseCase,
             driveRepository,
         )
     }
@@ -49,7 +50,7 @@ class WikiViewModelTest {
         val state = viewModel.uiState.value
         assertEquals(state.agentsList, stubAgentsListResponse.agents)
         assertEquals(state.wEnginesList, stubWEnginesListResponse.getWEnginesNewToOld())
-        assertEquals(state.bangbooList, stubBangbooListResponse.getBangbooNewToOld())
+        assertEquals(state.bangbooList, stubBangbooListResponse.bangboo)
         assertEquals(state.drivesList, stubDrivesListResponse.getDrivesNewToOld())
     }
 }

@@ -9,28 +9,27 @@ import feature.bangboo.model.BangbooDetailResponse
 import feature.bangboo.model.BangbooListResponse
 import kotlinx.coroutines.withTimeout
 import network.ZzzHttp
-import utils.ZzzResult
 
 class BangbooRepositoryImpl(private val httpClient: ZzzHttp) : BangbooRepository {
-    override suspend fun getBangbooList(): ZzzResult<BangbooListResponse> {
+    override suspend fun getBangbooList(): Result<BangbooListResponse> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
                 httpClient.requestBangbooList()
             }
-            ZzzResult.Success(result)
+            Result.success(result)
         } catch (e: Exception) {
-            ZzzResult.Error(e)
+            Result.failure(e)
         }
     }
 
-    override suspend fun getBangbooDetail(id: Int): ZzzResult<BangbooDetailResponse> {
+    override suspend fun getBangbooDetail(id: Int): Result<BangbooDetailResponse> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
                 httpClient.requestBangbooDetail(id)
             }
-            ZzzResult.Success(result)
+            Result.success(result)
         } catch (e: Exception) {
-            ZzzResult.Error(e)
+            Result.failure(e)
         }
     }
 }

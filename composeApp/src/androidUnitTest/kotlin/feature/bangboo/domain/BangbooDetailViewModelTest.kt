@@ -8,8 +8,10 @@ package feature.bangboo.domain
 
 import MainDispatcherRule
 import androidx.lifecycle.SavedStateHandle
-import feature.bangboo.data.FakeBangbooRepository
 import feature.bangboo.model.stubBangbooDetailResponse
+import feature.bangboo.presentation.BangbooDetailViewModel
+import io.mockk.coEvery
+import io.mockk.mockk
 import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -23,12 +25,15 @@ class BangbooDetailViewModelTest {
     private val savedStateHandle = SavedStateHandle().apply {
         set("bangbooId", 6)
     }
-    private val bangbooRepository = FakeBangbooRepository()
+    private val bangbooDetailUseCase = mockk<BangbooDetailUseCase>()
     private lateinit var viewModel: BangbooDetailViewModel
 
     @BeforeTest
     fun setup() {
-        viewModel = BangbooDetailViewModel(savedStateHandle, bangbooRepository)
+        coEvery { bangbooDetailUseCase.invoke(any()) } returns Result.success(
+            stubBangbooDetailResponse
+        )
+        viewModel = BangbooDetailViewModel(savedStateHandle, bangbooDetailUseCase)
     }
 
     @Test

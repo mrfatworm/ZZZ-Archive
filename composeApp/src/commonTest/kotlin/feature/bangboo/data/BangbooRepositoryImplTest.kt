@@ -6,13 +6,11 @@
 package feature.bangboo.data
 
 import feature.bangboo.model.stubBangbooListResponse
-import io.ktor.util.reflect.instanceOf
 import kotlinx.coroutines.test.runTest
 import network.FakeZzzHttp
-import utils.ZzzResult
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import kotlin.test.assertNull
 
 class BangbooRepositoryImplTest {
     private val httpClient = FakeZzzHttp()
@@ -20,28 +18,28 @@ class BangbooRepositoryImplTest {
 
     @Test
     fun `Get Bangboo List Success`() = runTest {
-        val result = repository.getBangbooList() as ZzzResult.Success
-        assertEquals(result.data, stubBangbooListResponse)
+        val result = repository.getBangbooList().getOrNull()
+        assertEquals(result, stubBangbooListResponse)
     }
 
     @Test
     fun `Get Bangboo List Error`() = runTest {
         httpClient.setError(true)
-        val result = repository.getBangbooList() as ZzzResult.Error
-        assertTrue(result.exception.instanceOf(Exception::class))
+        val result = repository.getBangbooList().getOrNull()
+        assertNull(result)
     }
 
     @Test
     fun `Get Bangboo Detail Success`() = runTest {
-        val result = repository.getBangbooDetail(6) as ZzzResult.Success
-        assertEquals(result.data.id, 6)
+        val result = repository.getBangbooDetail(6).getOrNull()
+        assertEquals(result?.id, 6)
     }
 
     @Test
     fun `Get Bangboo Detail Error`() = runTest {
         httpClient.setError(true)
-        val result = repository.getBangbooDetail(6) as ZzzResult.Error
-        assertTrue(result.exception.instanceOf(Exception::class))
+        val result = repository.getBangbooDetail(6).getOrNull()
+        assertNull(result)
 
     }
 }

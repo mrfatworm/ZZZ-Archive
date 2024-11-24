@@ -9,7 +9,7 @@ package feature.home.presentation
 import MainDispatcherRule
 import feature.agent.domain.AgentsListUseCase
 import feature.agent.model.stubAgentsListResponse
-import feature.bangboo.data.FakeBangbooRepository
+import feature.bangboo.domain.BangbooListUseCase
 import feature.bangboo.model.stubBangbooListResponse
 import feature.cover.data.FakeCoverImageRepository
 import feature.cover.data.stubCoverImageResponse
@@ -42,7 +42,7 @@ class HomeViewModelTest {
     private val officialNewsUseCase = FakeOfficialNewsUseCase()
     private val agentsListUseCase = mockk<AgentsListUseCase>()
     private val wEngineRepository = FakeWEngineRepository()
-    private val bangbooRepository = FakeBangbooRepository()
+    private val bangbooListUseCase = mockk<BangbooListUseCase>()
     private val driveRepository = FakeDriveRepository()
     private val settingsRepository = FakeSettingRepository()
     private lateinit var viewModel: HomeViewModel
@@ -50,6 +50,7 @@ class HomeViewModelTest {
     @BeforeTest
     fun setup() {
         coEvery { agentsListUseCase.invoke() } returns Result.success(stubAgentsListResponse.agents)
+        coEvery { bangbooListUseCase.invoke() } returns Result.success(stubBangbooListResponse.bangboo)
         viewModel = HomeViewModel(
             bannerRepository,
             imageBannerRepository,
@@ -57,7 +58,7 @@ class HomeViewModelTest {
             officialNewsUseCase,
             agentsListUseCase,
             wEngineRepository,
-            bangbooRepository,
+            bangbooListUseCase,
             driveRepository,
             settingsRepository,
         )
@@ -72,7 +73,7 @@ class HomeViewModelTest {
         assertEquals(state.newsList.first(), stubOfficialNewsState)
         assertEquals(state.agentsList, stubAgentsListResponse.agents)
         assertEquals(state.wEnginesList, stubWEnginesListResponse.getWEnginesNewToOld())
-        assertEquals(state.bangbooList, stubBangbooListResponse.getBangbooNewToOld())
+        assertEquals(state.bangbooList, stubBangbooListResponse.bangboo)
         assertEquals(state.drivesList, stubDrivesListResponse.getDrivesNewToOld())
     }
 
