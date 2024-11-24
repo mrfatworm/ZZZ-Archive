@@ -66,9 +66,9 @@ fun WEnginesListFilterCard(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(
-                count = uiState.wEnginesList.size,
-                key = { index -> uiState.wEnginesList[index].id }) { index ->
-                val wEngine = uiState.wEnginesList[index]
+                count = uiState.filteredWEnginesList.size,
+                key = { index -> uiState.filteredWEnginesList[index].id }) { index ->
+                val wEngine = uiState.filteredWEnginesList[index]
                 RarityItem(
                     modifier = Modifier.animateItem(),
                     rarityLevel = wEngine.rarity,

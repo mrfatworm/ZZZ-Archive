@@ -17,11 +17,7 @@ class AgentsListUseCase(
     private val agentRepository: AgentRepository
 ) {
 
-    suspend fun invoke() = agentRepository.getAgentsList().map { getAgentsNewToOld(it.agents) }
-
-    private fun getAgentsNewToOld(agentsList: List<AgentListItem>): List<AgentListItem> {
-        return agentsList.reversed()
-    }
+    suspend fun invoke() = agentRepository.getAgentsList().map { it.agents.reversed() }
 
     fun getFactionsList(agentsList: List<AgentListItem>): List<Faction> {
         val maxFactionId = agentsList.maxOfOrNull { it.factionId } ?: 0

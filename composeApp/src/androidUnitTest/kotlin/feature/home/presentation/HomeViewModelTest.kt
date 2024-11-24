@@ -20,7 +20,7 @@ import feature.news.presentation.stubOfficialNewsState
 import feature.pixiv.data.FakePixivRepository
 import feature.pixiv.data.stubPixivTopicResponse
 import feature.setting.data.FakeSettingRepository
-import feature.wengine.data.FakeWEngineRepository
+import feature.wengine.domain.WEnginesListUseCase
 import feature.wengine.model.stubWEnginesListResponse
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -41,7 +41,7 @@ class HomeViewModelTest {
     private val pixivRepository = FakePixivRepository()
     private val officialNewsUseCase = FakeOfficialNewsUseCase()
     private val agentsListUseCase = mockk<AgentsListUseCase>()
-    private val wEngineRepository = FakeWEngineRepository()
+    private val wEngineListUseCase = mockk<WEnginesListUseCase>()
     private val bangbooListUseCase = mockk<BangbooListUseCase>()
     private val driveRepository = FakeDriveRepository()
     private val settingsRepository = FakeSettingRepository()
@@ -50,6 +50,7 @@ class HomeViewModelTest {
     @BeforeTest
     fun setup() {
         coEvery { agentsListUseCase.invoke() } returns Result.success(stubAgentsListResponse.agents)
+        coEvery { wEngineListUseCase.invoke() } returns Result.success(stubWEnginesListResponse.wEngines)
         coEvery { bangbooListUseCase.invoke() } returns Result.success(stubBangbooListResponse.bangboo)
         viewModel = HomeViewModel(
             bannerRepository,
@@ -57,7 +58,7 @@ class HomeViewModelTest {
             pixivRepository,
             officialNewsUseCase,
             agentsListUseCase,
-            wEngineRepository,
+            wEngineListUseCase,
             bangbooListUseCase,
             driveRepository,
             settingsRepository,
@@ -72,7 +73,7 @@ class HomeViewModelTest {
         assertEquals(state.pixivPuppiesList, stubPixivTopicResponse.getPopularArticles())
         assertEquals(state.newsList.first(), stubOfficialNewsState)
         assertEquals(state.agentsList, stubAgentsListResponse.agents)
-        assertEquals(state.wEnginesList, stubWEnginesListResponse.getWEnginesNewToOld())
+        assertEquals(state.wEnginesList, stubWEnginesListResponse.wEngines)
         assertEquals(state.bangbooList, stubBangbooListResponse.bangboo)
         assertEquals(state.drivesList, stubDrivesListResponse.getDrivesNewToOld())
     }

@@ -11,5 +11,5 @@ import feature.agent.data.AgentRepository
 class AgentDetailUseCase(
     private val agentRepository: AgentRepository
 ) {
-    suspend fun invoke(id: Int) = agentRepository.getAgentDetail(id)
+    suspend operator fun invoke(id: Int) = agentRepository.getAgentDetail(id)
 }

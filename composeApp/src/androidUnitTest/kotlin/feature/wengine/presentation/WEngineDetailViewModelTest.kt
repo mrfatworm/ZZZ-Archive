@@ -1,15 +1,17 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.wengine.domain
+package feature.wengine.presentation
 
 
 import MainDispatcherRule
 import androidx.lifecycle.SavedStateHandle
-import feature.wengine.data.FakeWEngineRepository
+import feature.wengine.domain.WEngineDetailUseCase
 import feature.wengine.model.stubWEngineDetailResponse
+import io.mockk.coEvery
+import io.mockk.mockk
 import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -23,12 +25,15 @@ class WEngineDetailViewModelTest {
     private val savedStateHandle = SavedStateHandle().apply {
         set("wEngineId", 47)
     }
-    private val agentRepository = FakeWEngineRepository()
+    private val wEngineDetailUseCase = mockk<WEngineDetailUseCase>()
     private lateinit var viewModel: WEngineDetailViewModel
 
     @BeforeTest
     fun setup() {
-        viewModel = WEngineDetailViewModel(savedStateHandle, agentRepository)
+        coEvery { wEngineDetailUseCase.invoke(any()) } returns Result.success(
+            stubWEngineDetailResponse
+        )
+        viewModel = WEngineDetailViewModel(savedStateHandle, wEngineDetailUseCase)
     }
 
     @Test

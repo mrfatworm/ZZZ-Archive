@@ -10,7 +10,7 @@ import androidx.lifecycle.viewModelScope
 import feature.agent.domain.AgentsListUseCase
 import feature.bangboo.domain.BangbooListUseCase
 import feature.drive.data.DriveRepository
-import feature.wengine.data.WEngineRepository
+import feature.wengine.domain.WEnginesListUseCase
 import feature.wiki.model.WikiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,7 +20,7 @@ import utils.ZzzResult
 
 class WikiViewModel(
     private val agentsListUseCase: AgentsListUseCase,
-    private val wEngineRepository: WEngineRepository,
+    private val wEnginesListUseCase: WEnginesListUseCase,
     private val bangbooListUseCase: BangbooListUseCase,
     private val driveRepository: DriveRepository
 ) : ViewModel() {
@@ -49,17 +49,14 @@ class WikiViewModel(
     }
 
     private suspend fun fetchWEnginesList() {
-        when (val result = wEngineRepository.getWEnginesList()) {
-            is ZzzResult.Success -> {
-                _uiState.update { state ->
-                    state.copy(wEnginesList = result.data.getWEnginesNewToOld())
-                }
+        val result = wEnginesListUseCase.invoke()
+        result.fold(onSuccess = { wEnginesList ->
+            _uiState.update {
+                it.copy(wEnginesList = wEnginesList)
             }
-
-            is ZzzResult.Error -> {
-                println("get w-engines error: ${result.exception}")
-            }
-        }
+        }, onFailure = {
+            println("get wEngines error: ${it.message}")
+        })
     }
 
     private suspend fun fetchBangbooList() {

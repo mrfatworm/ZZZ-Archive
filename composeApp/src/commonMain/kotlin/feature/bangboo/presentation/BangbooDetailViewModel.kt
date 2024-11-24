@@ -50,7 +50,7 @@ class BangbooDetailViewModel(
 
     fun onAction(action: BangbooDetailAction) {
         when (action) {
-            BangbooDetailAction.OnBackClick -> TODO()
+            BangbooDetailAction.OnBackClick -> {}
             BangbooDetailAction.OnRetry -> {
                 viewModelScope.launch {
                     fetchBangbooDetail(bangbooId)

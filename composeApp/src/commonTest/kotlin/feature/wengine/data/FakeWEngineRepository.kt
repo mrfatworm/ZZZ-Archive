@@ -9,7 +9,6 @@ import feature.wengine.model.WEngineDetailResponse
 import feature.wengine.model.WEnginesListResponse
 import feature.wengine.model.stubWEngineDetailResponse
 import feature.wengine.model.stubWEnginesListResponse
-import utils.ZzzResult
 
 class FakeWEngineRepository : WEngineRepository {
     private var isError = false
@@ -18,19 +17,19 @@ class FakeWEngineRepository : WEngineRepository {
         this.isError = isError
     }
 
-    override suspend fun getWEnginesList(): ZzzResult<WEnginesListResponse> {
+    override suspend fun getWEnginesList(): Result<WEnginesListResponse> {
         return if (isError) {
-            ZzzResult.Error(Exception())
+            Result.failure(Exception())
         } else {
-            ZzzResult.Success(stubWEnginesListResponse)
+            Result.success(stubWEnginesListResponse)
         }
     }
 
-    override suspend fun getWEngineDetail(id: Int): ZzzResult<WEngineDetailResponse> {
+    override suspend fun getWEngineDetail(id: Int): Result<WEngineDetailResponse> {
         return if (isError) {
-            ZzzResult.Error(Exception())
+            Result.failure(Exception())
         } else {
-            ZzzResult.Success(stubWEngineDetailResponse)
+            Result.success(stubWEngineDetailResponse)
         }
     }
 }

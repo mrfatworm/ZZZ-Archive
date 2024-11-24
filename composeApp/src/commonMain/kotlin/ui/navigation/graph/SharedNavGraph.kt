@@ -14,8 +14,8 @@ import feature.bangboo.BangbooListScreen
 import feature.drive.DrivesListScreen
 import feature.setting.FeedbackScreen
 import feature.setting.SettingScreen
-import feature.wengine.WEngineDetailScreen
-import feature.wengine.WEnginesListScreen
+import feature.wengine.presentation.WEngineDetailScreen
+import feature.wengine.presentation.WEnginesListScreen
 import ui.navigation.NavActions
 import ui.navigation.Screen
 import ui.utils.AdaptiveLayoutType

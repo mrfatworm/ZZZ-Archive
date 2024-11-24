@@ -16,7 +16,7 @@ import feature.home.model.pixivTagDropdownItems
 import feature.news.domain.OfficialNewsUseCase
 import feature.pixiv.data.PixivRepository
 import feature.setting.data.SettingsRepository
-import feature.wengine.data.WEngineRepository
+import feature.wengine.domain.WEnginesListUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -30,7 +30,7 @@ class HomeViewModel(
     private val pixivRepository: PixivRepository,
     private val newsUseCase: OfficialNewsUseCase,
     private val agentsListUseCase: AgentsListUseCase,
-    private val wEngineRepository: WEngineRepository,
+    private val wEnginesListUseCase: WEnginesListUseCase,
     private val bangbooListUseCase: BangbooListUseCase,
     private val driveRepository: DriveRepository,
     private val settingsRepository: SettingsRepository
@@ -134,17 +134,14 @@ class HomeViewModel(
     }
 
     private suspend fun fetchWEnginesList() {
-        when (val result = wEngineRepository.getWEnginesList()) {
-            is ZzzResult.Success -> {
-                _uiState.update { state ->
-                    state.copy(wEnginesList = result.data.getWEnginesNewToOld())
-                }
+        val result = wEnginesListUseCase.invoke()
+        result.fold(onSuccess = { wEnginesList ->
+            _uiState.update {
+                it.copy(wEnginesList = wEnginesList)
             }
-
-            is ZzzResult.Error -> {
-                println("get w-engines error: ${result.exception}")
-            }
-        }
+        }, onFailure = {
+            println("get wEngines error: ${it.message}")
+        })
     }
 
     private suspend fun fetchBangbooList() {

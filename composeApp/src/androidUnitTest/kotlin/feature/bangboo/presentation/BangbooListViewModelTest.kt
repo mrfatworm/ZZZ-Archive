@@ -1,15 +1,14 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.bangboo.domain
+package feature.bangboo.presentation
 
 
 import MainDispatcherRule
+import feature.bangboo.domain.BangbooListUseCase
 import feature.bangboo.model.stubBangbooListResponse
-import feature.bangboo.presentation.BangbooListAction
-import feature.bangboo.presentation.BangbooListViewModel
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk

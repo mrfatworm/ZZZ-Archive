@@ -1,14 +1,16 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.setting.domain
+package feature.setting.presentation
 
 
 import MainDispatcherRule
 import feature.setting.data.FakeAppInfoRepository
 import feature.setting.data.FakeGoogleDocRepository
+import feature.setting.domain.FakeLanguageUseCase
+import feature.setting.domain.FeedbackViewModel
 import feature.setting.model.feedbackIssueTypes
 import org.junit.Rule
 import kotlin.test.BeforeTest

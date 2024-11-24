@@ -43,8 +43,10 @@ import feature.setting.domain.SettingViewModel
 import feature.splash.SplashViewModel
 import feature.wengine.data.WEngineRepository
 import feature.wengine.data.WEngineRepositoryImpl
-import feature.wengine.domain.WEngineDetailViewModel
-import feature.wengine.domain.WEnginesListViewModel
+import feature.wengine.domain.WEngineDetailUseCase
+import feature.wengine.domain.WEnginesListUseCase
+import feature.wengine.presentation.WEngineDetailViewModel
+import feature.wengine.presentation.WEnginesListViewModel
 import feature.wiki.domain.WikiViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModelOf
@@ -78,7 +80,8 @@ val sharedModule = module {
     single<AgentDetailUseCase> { AgentDetailUseCase(get()) }
     single<BangbooListUseCase> { BangbooListUseCase(get()) }
     single<BangbooDetailUseCase> { BangbooDetailUseCase(get()) }
-
+    single<WEnginesListUseCase> { WEnginesListUseCase(get()) }
+    single<WEngineDetailUseCase> { WEngineDetailUseCase(get()) }
 
     // ViewModels
     viewModelOf(::SplashViewModel)

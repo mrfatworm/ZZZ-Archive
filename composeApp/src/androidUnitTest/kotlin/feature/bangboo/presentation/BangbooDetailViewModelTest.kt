@@ -1,15 +1,15 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.bangboo.domain
+package feature.bangboo.presentation
 
 
 import MainDispatcherRule
 import androidx.lifecycle.SavedStateHandle
+import feature.bangboo.domain.BangbooDetailUseCase
 import feature.bangboo.model.stubBangbooDetailResponse
-import feature.bangboo.presentation.BangbooDetailViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
 import org.junit.Rule
