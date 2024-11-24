@@ -13,7 +13,7 @@ import feature.bangboo.domain.BangbooListUseCase
 import feature.bangboo.model.stubBangbooListResponse
 import feature.cover.data.FakeCoverImageRepository
 import feature.cover.data.stubCoverImageResponse
-import feature.drive.data.FakeDriveRepository
+import feature.drive.domain.DrivesListUseCase
 import feature.drive.model.stubDrivesListResponse
 import feature.news.domain.FakeOfficialNewsUseCase
 import feature.news.presentation.stubOfficialNewsState
@@ -43,7 +43,7 @@ class HomeViewModelTest {
     private val agentsListUseCase = mockk<AgentsListUseCase>()
     private val wEngineListUseCase = mockk<WEnginesListUseCase>()
     private val bangbooListUseCase = mockk<BangbooListUseCase>()
-    private val driveRepository = FakeDriveRepository()
+    private val drivesListUseCase = mockk<DrivesListUseCase>()
     private val settingsRepository = FakeSettingRepository()
     private lateinit var viewModel: HomeViewModel
 
@@ -52,6 +52,7 @@ class HomeViewModelTest {
         coEvery { agentsListUseCase.invoke() } returns Result.success(stubAgentsListResponse.agents)
         coEvery { wEngineListUseCase.invoke() } returns Result.success(stubWEnginesListResponse.wEngines)
         coEvery { bangbooListUseCase.invoke() } returns Result.success(stubBangbooListResponse.bangboo)
+        coEvery { drivesListUseCase.invoke() } returns Result.success(stubDrivesListResponse.drives)
         viewModel = HomeViewModel(
             bannerRepository,
             imageBannerRepository,
@@ -60,7 +61,7 @@ class HomeViewModelTest {
             agentsListUseCase,
             wEngineListUseCase,
             bangbooListUseCase,
-            driveRepository,
+            drivesListUseCase,
             settingsRepository,
         )
     }
@@ -75,7 +76,7 @@ class HomeViewModelTest {
         assertEquals(state.agentsList, stubAgentsListResponse.agents)
         assertEquals(state.wEnginesList, stubWEnginesListResponse.wEngines)
         assertEquals(state.bangbooList, stubBangbooListResponse.bangboo)
-        assertEquals(state.drivesList, stubDrivesListResponse.getDrivesNewToOld())
+        assertEquals(state.drivesList, stubDrivesListResponse.drives)
     }
 
     @Test

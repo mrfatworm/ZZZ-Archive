@@ -6,13 +6,11 @@
 package feature.drive.data
 
 import feature.drive.model.stubDrivesListResponse
-import io.ktor.util.reflect.instanceOf
 import kotlinx.coroutines.test.runTest
 import network.FakeZzzHttp
-import utils.ZzzResult
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import kotlin.test.assertNull
 
 class DriveRepositoryImplTest {
     private val httpClient = FakeZzzHttp()
@@ -20,14 +18,14 @@ class DriveRepositoryImplTest {
 
     @Test
     fun `Get Drives List Success`() = runTest {
-        val result = repository.getDrivesList() as ZzzResult.Success
-        assertEquals(result.data, stubDrivesListResponse)
+        val result = repository.getDrivesList().getOrNull()
+        assertEquals(result, stubDrivesListResponse)
     }
 
     @Test
     fun `Get Drives List Error`() = runTest {
         httpClient.setError(true)
-        val result = repository.getDrivesList() as ZzzResult.Error
-        assertTrue(result.exception.instanceOf(Exception::class))
+        val result = repository.getDrivesList().getOrNull()
+        assertNull(result)
     }
 }

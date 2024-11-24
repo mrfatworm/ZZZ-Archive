@@ -10,7 +10,7 @@ import androidx.lifecycle.viewModelScope
 import feature.agent.domain.AgentsListUseCase
 import feature.bangboo.domain.BangbooListUseCase
 import feature.cover.data.CoverImageRepository
-import feature.drive.data.DriveRepository
+import feature.drive.domain.DrivesListUseCase
 import feature.home.model.HomeState
 import feature.home.model.pixivTagDropdownItems
 import feature.news.domain.OfficialNewsUseCase
@@ -32,7 +32,7 @@ class HomeViewModel(
     private val agentsListUseCase: AgentsListUseCase,
     private val wEnginesListUseCase: WEnginesListUseCase,
     private val bangbooListUseCase: BangbooListUseCase,
-    private val driveRepository: DriveRepository,
+    private val drivesListUseCase: DrivesListUseCase,
     private val settingsRepository: SettingsRepository
 ) : ViewModel() {
 
@@ -151,21 +151,18 @@ class HomeViewModel(
                 it.copy(bangbooList = bangbooList)
             }
         }, onFailure = {
-            println("get bangboos error: ${it.message}")
+            println("get bangboo error: ${it.message}")
         })
     }
 
     private suspend fun fetchDrivesList() {
-        when (val result = driveRepository.getDrivesList()) {
-            is ZzzResult.Success -> {
-                _uiState.update { state ->
-                    state.copy(drivesList = result.data.getDrivesNewToOld())
-                }
+        val result = drivesListUseCase.invoke()
+        result.fold(onSuccess = { drivesList ->
+            _uiState.update {
+                it.copy(drivesList = drivesList)
             }
-
-            is ZzzResult.Error -> {
-                println("get drives error: ${result.exception}")
-            }
-        }
+        }, onFailure = {
+            println("get drives error: ${it.message}")
+        })
     }
 }

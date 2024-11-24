@@ -10,18 +10,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.agent.domain.AgentDetailUseCase
 import feature.agent.model.AgentDetailState
-import feature.drive.data.DriveRepository
+import feature.drive.domain.DrivesListUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import utils.UiResult
-import utils.ZzzResult
 
 class AgentDetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val agentDetailUseCase: AgentDetailUseCase,
-    private val driveRepository: DriveRepository
+    private val drivesListUseCase: DrivesListUseCase
 ) : ViewModel() {
     private var agentId: Int = checkNotNull(savedStateHandle["agentId"])
 
@@ -52,19 +51,14 @@ class AgentDetailViewModel(
     }
 
     private suspend fun fetchDrivesList() {
-        when (val result = driveRepository.getDrivesList()) {
-            is ZzzResult.Success -> {
-                _uiState.update {
-                    it.copy(
-                        drivesList = result.data.drives
-                    )
-                }
+        val result = drivesListUseCase.invoke()
+        result.fold(onSuccess = { drivesList ->
+            _uiState.update {
+                it.copy(drivesList = drivesList)
             }
-
-            is ZzzResult.Error -> {
-                println("get drives list error: ${result.exception}")
-            }
-        }
+        }, onFailure = {
+            println("fetchDrivesList error: ${it.message}")
+        })
     }
 
     fun onAction(action: AgentDetailAction) {

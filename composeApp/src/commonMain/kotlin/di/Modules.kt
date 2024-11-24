@@ -22,7 +22,8 @@ import feature.cover.data.CoverImageRepository
 import feature.cover.data.CoverImageRepositoryImpl
 import feature.drive.data.DriveRepository
 import feature.drive.data.DriveRepositoryImpl
-import feature.drive.domain.DrivesListViewModel
+import feature.drive.domain.DrivesListUseCase
+import feature.drive.presentation.DrivesListViewModel
 import feature.home.presentation.HomeViewModel
 import feature.news.data.OfficialNewsRepository
 import feature.news.data.OfficialNewsRepositoryImpl
@@ -47,7 +48,7 @@ import feature.wengine.domain.WEngineDetailUseCase
 import feature.wengine.domain.WEnginesListUseCase
 import feature.wengine.presentation.WEngineDetailViewModel
 import feature.wengine.presentation.WEnginesListViewModel
-import feature.wiki.domain.WikiViewModel
+import feature.wiki.presentation.WikiViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
@@ -82,6 +83,7 @@ val sharedModule = module {
     single<BangbooDetailUseCase> { BangbooDetailUseCase(get()) }
     single<WEnginesListUseCase> { WEnginesListUseCase(get()) }
     single<WEngineDetailUseCase> { WEngineDetailUseCase(get()) }
+    single<DrivesListUseCase> { DrivesListUseCase(get()) }
 
     // ViewModels
     viewModelOf(::SplashViewModel)

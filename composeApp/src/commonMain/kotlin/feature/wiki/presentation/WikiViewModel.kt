@@ -1,28 +1,27 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.wiki.domain
+package feature.wiki.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.agent.domain.AgentsListUseCase
 import feature.bangboo.domain.BangbooListUseCase
-import feature.drive.data.DriveRepository
+import feature.drive.domain.DrivesListUseCase
 import feature.wengine.domain.WEnginesListUseCase
 import feature.wiki.model.WikiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import utils.ZzzResult
 
 class WikiViewModel(
     private val agentsListUseCase: AgentsListUseCase,
     private val wEnginesListUseCase: WEnginesListUseCase,
     private val bangbooListUseCase: BangbooListUseCase,
-    private val driveRepository: DriveRepository
+    private val drivesListUseCase: DrivesListUseCase
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(WikiState())
@@ -71,17 +70,14 @@ class WikiViewModel(
     }
 
     private suspend fun fetchDrivesList() {
-        when (val result = driveRepository.getDrivesList()) {
-            is ZzzResult.Success -> {
-                _uiState.update { state ->
-                    state.copy(drivesList = result.data.getDrivesNewToOld())
-                }
+        val result = drivesListUseCase.invoke()
+        result.fold(onSuccess = { drivesList ->
+            _uiState.update {
+                it.copy(drivesList = drivesList)
             }
-
-            is ZzzResult.Error -> {
-                println("get drives error: ${result.exception}")
-            }
-        }
+        }, onFailure = {
+            println("get drives error: ${it.message}")
+        })
     }
 
 }

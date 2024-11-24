@@ -7,9 +7,10 @@ package feature.drive.presentation
 
 
 import MainDispatcherRule
-import feature.drive.data.FakeDriveRepository
-import feature.drive.domain.DrivesListViewModel
+import feature.drive.domain.DrivesListUseCase
 import feature.drive.model.stubDrivesListResponse
+import io.mockk.coEvery
+import io.mockk.mockk
 import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -20,18 +21,19 @@ class DrivesListViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private val driveRepository = FakeDriveRepository()
+    private val drivesListUseCase = mockk<DrivesListUseCase>()
     private lateinit var viewModel: DrivesListViewModel
 
     @BeforeTest
     fun setup() {
-        viewModel = DrivesListViewModel(driveRepository)
+        coEvery { drivesListUseCase.invoke() } returns Result.success(stubDrivesListResponse.drives)
+        viewModel = DrivesListViewModel(drivesListUseCase)
     }
 
     @Test
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.drivesList, stubDrivesListResponse.getDrivesNewToOld())
+        assertEquals(state.drivesList, stubDrivesListResponse.drives)
     }
 
     @Test

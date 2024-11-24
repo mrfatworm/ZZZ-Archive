@@ -3,7 +3,7 @@
  * License: MIT License
  */
 
-package feature.wiki
+package feature.wiki.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

@@ -7,7 +7,6 @@ package feature.drive.data
 
 import feature.drive.model.DrivesListResponse
 import feature.drive.model.stubDrivesListResponse
-import utils.ZzzResult
 
 class FakeDriveRepository : DriveRepository {
     private var isError = false
@@ -16,11 +15,11 @@ class FakeDriveRepository : DriveRepository {
         this.isError = isError
     }
 
-    override suspend fun getDrivesList(): ZzzResult<DrivesListResponse> {
+    override suspend fun getDrivesList(): Result<DrivesListResponse> {
         return if (isError) {
-            ZzzResult.Error(Exception())
+            Result.failure(Exception())
         } else {
-            ZzzResult.Success(stubDrivesListResponse)
+            Result.success(stubDrivesListResponse)
         }
     }
 }
