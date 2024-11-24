@@ -3,7 +3,7 @@
  * License: MIT License
  */
 
-package feature.home.compose
+package feature.hoyolab.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

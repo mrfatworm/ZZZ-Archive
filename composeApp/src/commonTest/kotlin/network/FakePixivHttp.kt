@@ -5,8 +5,8 @@
 
 package network
 
-import feature.home.model.response.PixivTopicResponse
-import feature.home.model.response.stubPixivTopicResponse
+import feature.pixiv.data.PixivTopicResponse
+import feature.pixiv.data.stubPixivTopicResponse
 
 class FakePixivHttp : PixivHttp {
     override val timeout = 5000L

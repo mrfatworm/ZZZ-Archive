@@ -7,8 +7,8 @@ package ui.navigation.graph
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import feature.agent.AgentDetailScreen
-import feature.agent.AgentsListScreen
+import feature.agent.presentation.AgentDetailScreen
+import feature.agent.presentation.AgentsListScreen
 import feature.bangboo.BangbooDetailScreen
 import feature.bangboo.BangbooListScreen
 import feature.drive.DrivesListScreen

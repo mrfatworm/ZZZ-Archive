@@ -8,8 +8,10 @@ package di
 import com.russhwolf.settings.Settings
 import feature.agent.data.AgentRepository
 import feature.agent.data.AgentRepositoryImpl
-import feature.agent.domain.AgentDetailViewModel
-import feature.agent.domain.AgentsListViewModel
+import feature.agent.domain.AgentDetailUseCase
+import feature.agent.domain.AgentsListUseCase
+import feature.agent.presentation.AgentDetailViewModel
+import feature.agent.presentation.AgentsListViewModel
 import feature.bangboo.data.BangbooRepository
 import feature.bangboo.data.BangbooRepositoryImpl
 import feature.bangboo.domain.BangbooDetailViewModel
@@ -70,8 +72,10 @@ val sharedModule = module {
     // Use cases
     single<LanguageUseCase> { LanguageUseCaseImpl(get()) }
     single<OfficialNewsUseCase> { OfficialNewsUseCaseImpl(get(), get()) }
+    single<AgentsListUseCase> { AgentsListUseCase(get()) }
+    single<AgentDetailUseCase> { AgentDetailUseCase(get()) }
 
-// ViewModels
+    // ViewModels
     viewModelOf(::SplashViewModel)
     viewModelOf(::MainContainerViewModel)
     viewModelOf(::HomeViewModel)

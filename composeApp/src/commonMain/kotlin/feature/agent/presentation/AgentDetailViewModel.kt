@@ -1,31 +1,35 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.agent.domain
+package feature.agent.presentation
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import feature.agent.data.AgentRepository
+import feature.agent.domain.AgentDetailUseCase
 import feature.agent.model.AgentDetailState
 import feature.drive.data.DriveRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import utils.UiResult
 import utils.ZzzResult
 
 class AgentDetailViewModel(
     savedStateHandle: SavedStateHandle,
-    private val agentRepository: AgentRepository,
+    private val agentDetailUseCase: AgentDetailUseCase,
     private val driveRepository: DriveRepository
 ) : ViewModel() {
     private var agentId: Int = checkNotNull(savedStateHandle["agentId"])
 
     private var _uiState = MutableStateFlow(AgentDetailState())
     val uiState = _uiState.asStateFlow()
+
+    private var _agentDetailState = MutableStateFlow<UiResult<AgentDetailState>>(UiResult.Loading)
+    val agentDetailState = _agentDetailState.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -35,19 +39,16 @@ class AgentDetailViewModel(
     }
 
     private suspend fun fetchAgentsDetail(id: Int) {
-        when (val result = agentRepository.getAgentDetail(id)) {
-            is ZzzResult.Success -> {
-                _uiState.update {
-                    it.copy(
-                        agentDetail = result.data
-                    )
-                }
+        _agentDetailState.value = UiResult.Loading
+        val result = agentDetailUseCase.invoke(id)
+        _agentDetailState.value = result.fold(onSuccess = { agentDetail ->
+            _uiState.update {
+                it.copy(agentDetail = agentDetail)
             }
-
-            is ZzzResult.Error -> {
-                println("get agent $id error: ${result.exception}")
-            }
-        }
+            UiResult.Success(AgentDetailState(agentDetail))
+        }, onFailure = {
+            UiResult.Error(it.message ?: "Unknown error: AgentId = $id")
+        })
     }
 
     private suspend fun fetchDrivesList() {
@@ -62,6 +63,18 @@ class AgentDetailViewModel(
 
             is ZzzResult.Error -> {
                 println("get drives list error: ${result.exception}")
+            }
+        }
+    }
+
+    fun onAction(action: AgentDetailAction) {
+        when (action) {
+            is AgentDetailAction.OnWEngineClick -> {}
+            AgentDetailAction.OnBackClick -> {}
+            AgentDetailAction.OnRetry -> {
+                viewModelScope.launch {
+                    fetchAgentsDetail(agentId)
+                }
             }
         }
     }

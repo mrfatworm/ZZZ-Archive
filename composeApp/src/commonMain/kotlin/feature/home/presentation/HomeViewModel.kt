@@ -7,7 +7,7 @@ package feature.home.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import feature.agent.data.AgentRepository
+import feature.agent.domain.AgentsListUseCase
 import feature.bangboo.data.BangbooRepository
 import feature.cover.data.CoverImageRepository
 import feature.drive.data.DriveRepository
@@ -29,7 +29,7 @@ class HomeViewModel(
     private val coverImageRepository: CoverImageRepository,
     private val pixivRepository: PixivRepository,
     private val newsUseCase: OfficialNewsUseCase,
-    private val agentRepository: AgentRepository,
+    private val agentsListUseCase: AgentsListUseCase,
     private val wEngineRepository: WEngineRepository,
     private val bangbooRepository: BangbooRepository,
     private val driveRepository: DriveRepository,
@@ -123,17 +123,14 @@ class HomeViewModel(
     }
 
     private suspend fun fetchAgentsList() {
-        when (val result = agentRepository.getAgentsList()) {
-            is ZzzResult.Success -> {
-                _uiState.update { state ->
-                    state.copy(agentsList = result.data.getAgentsNewToOld())
-                }
+        val result = agentsListUseCase.invoke()
+        result.fold(onSuccess = { agentsList ->
+            _uiState.update {
+                it.copy(agentsList = agentsList)
             }
-
-            is ZzzResult.Error -> {
-                println("get agents error: ${result.exception}")
-            }
-        }
+        }, onFailure = {
+            println("get agents error: ${it.message}")
+        })
     }
 
     private suspend fun fetchWEnginesList() {

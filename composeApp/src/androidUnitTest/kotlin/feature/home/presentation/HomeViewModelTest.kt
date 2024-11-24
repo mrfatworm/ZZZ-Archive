@@ -7,7 +7,7 @@ package feature.home.presentation
 
 
 import MainDispatcherRule
-import feature.agent.data.FakeAgentRepository
+import feature.agent.domain.AgentsListUseCase
 import feature.agent.model.stubAgentsListResponse
 import feature.bangboo.data.FakeBangbooRepository
 import feature.bangboo.model.stubBangbooListResponse
@@ -15,13 +15,15 @@ import feature.cover.data.FakeCoverImageRepository
 import feature.cover.data.stubCoverImageResponse
 import feature.drive.data.FakeDriveRepository
 import feature.drive.model.stubDrivesListResponse
-import feature.home.model.response.stubPixivTopicResponse
 import feature.news.domain.FakeOfficialNewsUseCase
 import feature.news.presentation.stubOfficialNewsState
 import feature.pixiv.data.FakePixivRepository
+import feature.pixiv.data.stubPixivTopicResponse
 import feature.setting.data.FakeSettingRepository
 import feature.wengine.data.FakeWEngineRepository
 import feature.wengine.model.stubWEnginesListResponse
+import io.mockk.coEvery
+import io.mockk.mockk
 import org.junit.Rule
 import root.data.FakeBannerRepository
 import root.model.stubBannerResponse
@@ -38,7 +40,7 @@ class HomeViewModelTest {
     private val imageBannerRepository = FakeCoverImageRepository()
     private val pixivRepository = FakePixivRepository()
     private val officialNewsUseCase = FakeOfficialNewsUseCase()
-    private val agentRepository = FakeAgentRepository()
+    private val agentsListUseCase = mockk<AgentsListUseCase>()
     private val wEngineRepository = FakeWEngineRepository()
     private val bangbooRepository = FakeBangbooRepository()
     private val driveRepository = FakeDriveRepository()
@@ -47,12 +49,13 @@ class HomeViewModelTest {
 
     @BeforeTest
     fun setup() {
+        coEvery { agentsListUseCase.invoke() } returns Result.success(stubAgentsListResponse.agents)
         viewModel = HomeViewModel(
             bannerRepository,
             imageBannerRepository,
             pixivRepository,
             officialNewsUseCase,
-            agentRepository,
+            agentsListUseCase,
             wEngineRepository,
             bangbooRepository,
             driveRepository,
@@ -67,7 +70,7 @@ class HomeViewModelTest {
         assertEquals(state.imageBanner, stubCoverImageResponse)
         assertEquals(state.pixivPuppiesList, stubPixivTopicResponse.getPopularArticles())
         assertEquals(state.newsList.first(), stubOfficialNewsState)
-        assertEquals(state.agentsList, stubAgentsListResponse.getAgentsNewToOld())
+        assertEquals(state.agentsList, stubAgentsListResponse.agents)
         assertEquals(state.wEnginesList, stubWEnginesListResponse.getWEnginesNewToOld())
         assertEquals(state.bangbooList, stubBangbooListResponse.getBangbooNewToOld())
         assertEquals(state.drivesList, stubDrivesListResponse.getDrivesNewToOld())

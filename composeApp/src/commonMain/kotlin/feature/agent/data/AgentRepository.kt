@@ -7,9 +7,8 @@ package feature.agent.data
 
 import feature.agent.model.AgentDetailResponse
 import feature.agent.model.AgentsListResponse
-import utils.ZzzResult
 
 interface AgentRepository {
-    suspend fun getAgentsList(): ZzzResult<AgentsListResponse>
-    suspend fun getAgentDetail(id: Int): ZzzResult<AgentDetailResponse>
+    suspend fun getAgentsList(): Result<AgentsListResponse>
+    suspend fun getAgentDetail(id: Int): Result<AgentDetailResponse>
 }

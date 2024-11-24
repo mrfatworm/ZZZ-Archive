@@ -9,8 +9,8 @@ import feature.agent.model.AgentListItem
 import feature.bangboo.model.BangbooListItem
 import feature.cover.data.CoverImageResponse
 import feature.drive.model.DriveListItem
-import feature.home.model.response.RecentArticle
 import feature.news.presentation.OfficialNewsState
+import feature.pixiv.data.RecentArticle
 import feature.wengine.model.WEngineListItem
 import root.model.BannerResponse
 

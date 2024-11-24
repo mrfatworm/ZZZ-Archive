@@ -5,7 +5,6 @@
 
 package feature.pixiv.data
 
-import feature.home.model.response.stubPixivTopicResponse
 import io.ktor.util.reflect.instanceOf
 import kotlinx.coroutines.test.runTest
 import network.FakePixivHttp

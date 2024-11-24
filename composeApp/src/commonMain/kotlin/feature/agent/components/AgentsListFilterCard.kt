@@ -91,9 +91,9 @@ fun AgentsListFilterCard(
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                items(count = uiState.agentsList.size,
-                    key = { index -> uiState.agentsList[index].id }) { index ->
-                    val agent = uiState.agentsList[index]
+                items(count = uiState.filteredAgentsList.size,
+                    key = { index -> uiState.filteredAgentsList[index].id }) { index ->
+                    val agent = uiState.filteredAgentsList[index]
                     RarityItem(
                         modifier = Modifier.animateItem(),
                         rarityLevel = agent.rarity,

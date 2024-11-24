@@ -5,7 +5,6 @@
 
 package feature.pixiv.data
 
-import feature.home.model.response.PixivTopicResponse
 import utils.ZzzResult
 
 interface PixivRepository {

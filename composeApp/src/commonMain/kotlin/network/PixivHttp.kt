@@ -5,7 +5,7 @@
 
 package network
 
-import feature.home.model.response.PixivTopicResponse
+import feature.pixiv.data.PixivTopicResponse
 
 
 interface PixivHttp {

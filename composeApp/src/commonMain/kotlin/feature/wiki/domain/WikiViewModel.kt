@@ -7,7 +7,7 @@ package feature.wiki.domain
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import feature.agent.data.AgentRepository
+import feature.agent.domain.AgentsListUseCase
 import feature.bangboo.data.BangbooRepository
 import feature.drive.data.DriveRepository
 import feature.wengine.data.WEngineRepository
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import utils.ZzzResult
 
 class WikiViewModel(
-    private val agentRepository: AgentRepository,
+    private val agentsListUseCase: AgentsListUseCase,
     private val wEngineRepository: WEngineRepository,
     private val bangbooRepository: BangbooRepository,
     private val driveRepository: DriveRepository
@@ -38,17 +38,14 @@ class WikiViewModel(
     }
 
     private suspend fun fetchAgentsList() {
-        when (val result = agentRepository.getAgentsList()) {
-            is ZzzResult.Success -> {
-                _uiState.update { state ->
-                    state.copy(agentsList = result.data.getAgentsNewToOld())
-                }
+        val result = agentsListUseCase.invoke()
+        result.fold(onSuccess = { agentsList ->
+            _uiState.update {
+                it.copy(agentsList = agentsList)
             }
-
-            is ZzzResult.Error -> {
-                println("get agents error: ${result.exception}")
-            }
-        }
+        }, onFailure = {
+            println("get agents error: ${it.message}")
+        })
     }
 
     private suspend fun fetchWEnginesList() {

@@ -54,7 +54,7 @@ import coil3.network.httpHeaders
 import coil3.request.ImageRequest
 import coil3.size.Size
 import feature.home.model.pixivTagDropdownItems
-import feature.home.model.response.RecentArticle
+import feature.pixiv.data.RecentArticle
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource

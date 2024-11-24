@@ -5,8 +5,6 @@
 
 package feature.pixiv.data
 
-import feature.home.model.response.PixivTopicResponse
-import feature.home.model.response.stubPixivTopicResponse
 import utils.ZzzResult
 
 class FakePixivRepository : PixivRepository {

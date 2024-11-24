@@ -3,7 +3,7 @@
  * License: MIT
  */
 
-package feature.home.model.response
+package feature.pixiv.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
