@@ -18,8 +18,12 @@ import feature.bangboo.domain.BangbooDetailUseCase
 import feature.bangboo.domain.BangbooListUseCase
 import feature.bangboo.presentation.BangbooDetailViewModel
 import feature.bangboo.presentation.BangbooListViewModel
-import feature.cover.data.CoverImageRepository
-import feature.cover.data.CoverImageRepositoryImpl
+import feature.banner.data.BannerRepository
+import feature.banner.data.BannerRepositoryImpl
+import feature.banner.domain.BannerUseCase
+import feature.cover_image.data.CoverImageRepository
+import feature.cover_image.data.CoverImageRepositoryImpl
+import feature.cover_image.domain.CoverImageUseCase
 import feature.drive.data.DriveRepository
 import feature.drive.data.DriveRepositoryImpl
 import feature.drive.domain.DrivesListUseCase
@@ -28,9 +32,9 @@ import feature.home.presentation.HomeViewModel
 import feature.news.data.OfficialNewsRepository
 import feature.news.data.OfficialNewsRepositoryImpl
 import feature.news.domain.OfficialNewsUseCase
-import feature.news.domain.OfficialNewsUseCaseImpl
 import feature.pixiv.data.PixivRepository
 import feature.pixiv.data.PixivRepositoryImpl
+import feature.pixiv.domain.PixivUseCase
 import feature.setting.data.AppInfoRepository
 import feature.setting.data.AppInfoRepositoryImpl
 import feature.setting.data.GoogleDocRepository
@@ -53,8 +57,6 @@ import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import root.MainContainerViewModel
-import root.data.BannerRepository
-import root.data.BannerRepositoryImpl
 
 expect val platformModule: Module
 
@@ -75,8 +77,11 @@ val sharedModule = module {
     single<GoogleDocRepository> { GoogleDocRepositoryImpl(get()) }
 
     // Use cases
+    single<CoverImageUseCase> { CoverImageUseCase(get()) }
+    single<PixivUseCase> { PixivUseCase(get()) }
+    single<BannerUseCase> { BannerUseCase(get()) }
     single<LanguageUseCase> { LanguageUseCaseImpl(get()) }
-    single<OfficialNewsUseCase> { OfficialNewsUseCaseImpl(get(), get()) }
+    single<OfficialNewsUseCase> { OfficialNewsUseCase(get(), get()) }
     single<AgentsListUseCase> { AgentsListUseCase(get()) }
     single<AgentDetailUseCase> { AgentDetailUseCase(get()) }
     single<BangbooListUseCase> { BangbooListUseCase(get()) }

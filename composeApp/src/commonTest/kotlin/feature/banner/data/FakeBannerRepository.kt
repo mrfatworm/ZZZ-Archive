@@ -1,13 +1,9 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package root.data
-
-import root.model.BannerResponse
-import root.model.stubBannerResponse
-import utils.ZzzResult
+package feature.banner.data
 
 class FakeBannerRepository : BannerRepository {
     private var isError = false
@@ -16,11 +12,11 @@ class FakeBannerRepository : BannerRepository {
         this.isError = isError
     }
 
-    override suspend fun getBanner(): ZzzResult<BannerResponse> {
+    override suspend fun getBanner(): Result<BannerResponse> {
         return if (isError) {
-            ZzzResult.Error(Exception())
+            Result.failure(Exception())
         } else {
-            ZzzResult.Success(stubBannerResponse)
+            Result.success(stubBannerResponse)
         }
     }
 }

@@ -3,7 +3,7 @@
  * License: MIT License
  */
 
-package feature.cover.components
+package feature.cover_image.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -34,7 +34,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import feature.cover.data.CoverImageResponse
+import feature.cover_image.data.CoverImageResponse
 import ui.components.ImageNotFound
 import ui.theme.AppTheme
 

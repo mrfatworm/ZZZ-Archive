@@ -3,7 +3,7 @@
  * License: MIT
  */
 
-package feature.home.compose
+package feature.home.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,9 +13,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import feature.cover.components.CoverImageCard
+import feature.cover_image.components.CoverImageCard
 import feature.home.AnnouncementBanner
-import feature.home.model.HomeState
 import feature.news.presentation.NewsPagerCard
 import feature.pixiv.components.PixivTopicCard
 import ui.components.cards.AgentsListCard
@@ -56,9 +55,9 @@ fun HomeScreenDual(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
             ) {
-                CoverImageCard(uiState.imageBanner)
+                CoverImageCard(uiState.coverImage)
                 // HoYoLabCard()
-                PixivTopicCard(uiState.pixivPuppiesList, onPixivTagChange)
+                PixivTopicCard(uiState.pixivTopics, onPixivTagChange)
             }
 
             Column(

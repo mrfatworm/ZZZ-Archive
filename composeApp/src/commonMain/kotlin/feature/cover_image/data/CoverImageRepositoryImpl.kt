@@ -3,21 +3,20 @@
  * License: MIT License
  */
 
-package feature.cover.data
+package feature.cover_image.data
 
 import kotlinx.coroutines.withTimeout
 import network.ZzzHttp
-import utils.ZzzResult
 
 class CoverImageRepositoryImpl(private val httpClient: ZzzHttp) : CoverImageRepository {
-    override suspend fun getImageBanner(): ZzzResult<CoverImageResponse> {
+    override suspend fun getImageBanner(): Result<CoverImageResponse> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
                 httpClient.requestImageBanner()
             }
-            ZzzResult.Success(result)
+            Result.success(result)
         } catch (e: Exception) {
-            ZzzResult.Error(e)
+            Result.failure(e)
         }
     }
 }

@@ -3,22 +3,22 @@
  * License: MIT License
  */
 
-package feature.home.model
+package feature.home.presentation
 
 import feature.agent.model.AgentListItem
 import feature.bangboo.model.BangbooListItem
-import feature.cover.data.CoverImageResponse
+import feature.banner.data.BannerResponse
+import feature.cover_image.data.CoverImageResponse
 import feature.drive.model.DriveListItem
 import feature.news.presentation.OfficialNewsState
 import feature.pixiv.data.RecentArticle
 import feature.wengine.model.WEngineListItem
-import root.model.BannerResponse
 
 data class HomeState(
     val banner: BannerResponse? = null,
-    val imageBanner: CoverImageResponse? = null,
+    val coverImage: CoverImageResponse? = null,
     val newsList: List<OfficialNewsState> = emptyList(),
-    val pixivPuppiesList: List<RecentArticle> = emptyList(),
+    val pixivTopics: List<RecentArticle> = emptyList(),
     val agentsList: List<AgentListItem> = emptyList(),
     val wEnginesList: List<WEngineListItem> = emptyList(),
     val bangbooList: List<BangbooListItem> = emptyList(),

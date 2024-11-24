@@ -9,25 +9,23 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.agent.domain.AgentsListUseCase
 import feature.bangboo.domain.BangbooListUseCase
-import feature.cover.data.CoverImageRepository
+import feature.banner.domain.BannerUseCase
+import feature.cover_image.domain.CoverImageUseCase
 import feature.drive.domain.DrivesListUseCase
-import feature.home.model.HomeState
 import feature.home.model.pixivTagDropdownItems
 import feature.news.domain.OfficialNewsUseCase
-import feature.pixiv.data.PixivRepository
+import feature.pixiv.domain.PixivUseCase
 import feature.setting.data.SettingsRepository
 import feature.wengine.domain.WEnginesListUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import root.data.BannerRepository
-import utils.ZzzResult
 
 class HomeViewModel(
-    private val bannerRepository: BannerRepository,
-    private val coverImageRepository: CoverImageRepository,
-    private val pixivRepository: PixivRepository,
+    private val bannerUseCase: BannerUseCase,
+    private val coverImageUseCase: CoverImageUseCase,
+    private val pixivUseCase: PixivUseCase,
     private val newsUseCase: OfficialNewsUseCase,
     private val agentsListUseCase: AgentsListUseCase,
     private val wEnginesListUseCase: WEnginesListUseCase,
@@ -63,64 +61,52 @@ class HomeViewModel(
     }
 
     private suspend fun fetchBanner() {
-        when (val result = bannerRepository.getBanner()) {
-            is ZzzResult.Success -> {
-                if (result.data.id > ignoreBannerId) {
-                    _uiState.update { state ->
-                        state.copy(banner = result.data)
-                    }
+        val result = bannerUseCase.invoke()
+        result.fold(onSuccess = { banner ->
+            if (banner.id != ignoreBannerId) {
+                _uiState.update {
+                    it.copy(banner = banner)
                 }
             }
-
-            is ZzzResult.Error -> {
-                println("get banner error: ${result.exception}")
-            }
-        }
+        }, onFailure = {
+            println("get banner error: ${it.message}")
+        })
     }
 
     private suspend fun fetchBannerImage() {
-        when (val result = coverImageRepository.getImageBanner()) {
-            is ZzzResult.Success -> {
-                _uiState.update { state ->
-                    state.copy(imageBanner = result.data)
-                }
+        val result = coverImageUseCase.invoke()
+        result.fold(onSuccess = { coverImage ->
+            _uiState.update {
+                it.copy(coverImage = coverImage)
             }
-
-            is ZzzResult.Error -> {
-                println("get banner error: ${result.exception}")
-            }
-        }
+        }, onFailure = {
+            println("get banner image error: ${it.message}")
+        })
     }
 
     private suspend fun fetchZzzOfficialNewsEveryTenMinutes() {
         newsUseCase.getNewsPeriodically(10, 5).collect { result ->
-            when (result) {
-                is ZzzResult.Success -> {
-                    _uiState.update { state ->
-                        state.copy(newsList = newsUseCase.convertToOfficialNewsState(result.data))
-                    }
+            result.fold(onSuccess = { newsList ->
+                _uiState.update { state ->
+                    state.copy(newsList = newsUseCase.convertToOfficialNewsState(newsList))
                 }
-
-                is ZzzResult.Error -> {
-                    println("get news error: ${result.exception}")
-                }
-            }
+            }, onFailure = {
+                println("get news error: ${it.message}")
+            })
         }
     }
 
     suspend fun fetchPixivTopic(zzzTag: String = pixivTagDropdownItems.first().tagOnPixiv) {
-        when (val result = pixivRepository.getZzzTopic(zzzTag)) {
-            is ZzzResult.Success -> {
-                _uiState.update { state ->
-                    state.copy(pixivPuppiesList = result.data.getPopularArticles())
-                }
+        val result = pixivUseCase.invoke(zzzTag)
+        result.fold(onSuccess = { pixivTopic ->
+            _uiState.update {
+                it.copy(pixivTopics = pixivTopic)
             }
-
-            is ZzzResult.Error -> {
-                println("get pixiv error: ${result.exception}")
-            }
-        }
+        }, onFailure = {
+            println("get pixiv topic error: ${it.message}")
+        })
     }
+
 
     private suspend fun fetchAgentsList() {
         val result = agentsListUseCase.invoke()

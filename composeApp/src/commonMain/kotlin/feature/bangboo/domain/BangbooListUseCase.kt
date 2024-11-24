@@ -11,7 +11,7 @@ import utils.AgentAttribute
 import utils.ZzzRarity
 
 class BangbooListUseCase(private val bangbooRepository: BangbooRepository) {
-    suspend operator fun invoke() = bangbooRepository.getBangbooList().map { it.bangboo.reversed() }
+    suspend fun invoke() = bangbooRepository.getBangbooList().map { it.bangboo.reversed() }
 
     fun filterBangbooList(
         bangbooList: List<BangbooListItem>,

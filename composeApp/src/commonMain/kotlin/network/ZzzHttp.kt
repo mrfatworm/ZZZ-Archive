@@ -9,11 +9,11 @@ import feature.agent.model.AgentDetailResponse
 import feature.agent.model.AgentsListResponse
 import feature.bangboo.model.BangbooDetailResponse
 import feature.bangboo.model.BangbooListResponse
-import feature.cover.data.CoverImageResponse
+import feature.banner.data.BannerResponse
+import feature.cover_image.data.CoverImageResponse
 import feature.drive.model.DrivesListResponse
 import feature.wengine.model.WEngineDetailResponse
 import feature.wengine.model.WEnginesListResponse
-import root.model.BannerResponse
 
 interface ZzzHttp {
     val defaultTimeout: Long

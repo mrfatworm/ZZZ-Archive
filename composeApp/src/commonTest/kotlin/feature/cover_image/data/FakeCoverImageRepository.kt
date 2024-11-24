@@ -3,9 +3,7 @@
  * License: MIT
  */
 
-package feature.cover.data
-
-import utils.ZzzResult
+package feature.cover_image.data
 
 class FakeCoverImageRepository : CoverImageRepository {
     private var isError = false
@@ -14,11 +12,11 @@ class FakeCoverImageRepository : CoverImageRepository {
         this.isError = isError
     }
 
-    override suspend fun getImageBanner(): ZzzResult<CoverImageResponse> {
+    override suspend fun getImageBanner(): Result<CoverImageResponse> {
         return if (isError) {
-            ZzzResult.Error(Exception())
+            Result.failure(Exception())
         } else {
-            ZzzResult.Success(stubCoverImageResponse)
+            Result.success(stubCoverImageResponse)
         }
     }
 }

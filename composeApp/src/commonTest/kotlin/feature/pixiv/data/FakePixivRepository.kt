@@ -5,8 +5,6 @@
 
 package feature.pixiv.data
 
-import utils.ZzzResult
-
 class FakePixivRepository : PixivRepository {
     private var isError = false
 
@@ -14,11 +12,11 @@ class FakePixivRepository : PixivRepository {
         this.isError = isError
     }
 
-    override suspend fun getZzzTopic(zzzTag: String): ZzzResult<PixivTopicResponse> {
+    override suspend fun getZzzTopic(zzzTag: String): Result<PixivTopicResponse> {
         return if (isError) {
-            ZzzResult.Error(Exception())
+            Result.failure(Exception())
         } else {
-            ZzzResult.Success(stubPixivTopicResponse)
+            Result.success(stubPixivTopicResponse)
         }
     }
 }

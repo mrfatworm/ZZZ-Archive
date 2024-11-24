@@ -5,8 +5,6 @@
 
 package feature.news.data
 
-import utils.ZzzResult
-
 class FakeOfficialOfficialNewsRepository : OfficialNewsRepository {
     private var isError = false
 
@@ -14,11 +12,11 @@ class FakeOfficialOfficialNewsRepository : OfficialNewsRepository {
         this.isError = isError
     }
 
-    override suspend fun getNews(amount: Int): ZzzResult<List<OfficialNewsListItem>> {
+    override suspend fun getNews(amount: Int): Result<List<OfficialNewsListItem>> {
         return if (isError) {
-            ZzzResult.Error(Exception())
+            Result.failure(Exception())
         } else {
-            ZzzResult.Success(listOf(stubNewsListItem))
+            Result.success(listOf(stubNewsListItem))
         }
     }
 }

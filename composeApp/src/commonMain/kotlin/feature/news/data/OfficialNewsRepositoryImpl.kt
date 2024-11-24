@@ -7,17 +7,16 @@ package feature.news.data
 
 import kotlinx.coroutines.withTimeout
 import network.OfficialWebHttp
-import utils.ZzzResult
 
 class OfficialNewsRepositoryImpl(private val httpClient: OfficialWebHttp) : OfficialNewsRepository {
-    override suspend fun getNews(amount: Int): ZzzResult<List<OfficialNewsListItem>> {
+    override suspend fun getNews(amount: Int): Result<List<OfficialNewsListItem>> {
         return try {
             val result = withTimeout(httpClient.timeout) {
                 httpClient.requestNews(amount)
             }
-            ZzzResult.Success(result.data.list)
+            Result.success(result.data.list)
         } catch (e: Exception) {
-            ZzzResult.Error(e)
+            Result.failure(e)
         }
     }
 

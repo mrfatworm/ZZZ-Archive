@@ -17,31 +17,22 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.serialization.json.Json
-import utils.ZzzResult
 
-interface OfficialNewsUseCase {
-    fun getNewsPeriodically(
-        perMinutes: Int, amount: Int
-    ): Flow<ZzzResult<List<OfficialNewsListItem>>>
-
-    fun convertToOfficialNewsState(newsList: List<OfficialNewsListItem>): List<OfficialNewsState>
-}
-
-class OfficialNewsUseCaseImpl(
+class OfficialNewsUseCase(
     private val officialNewsRepository: OfficialNewsRepository,
     private val languageUseCase: LanguageUseCase
-) : OfficialNewsUseCase {
+) {
 
-    override fun getNewsPeriodically(
+    fun getNewsPeriodically(
         perMinutes: Int, amount: Int
-    ): Flow<ZzzResult<List<OfficialNewsListItem>>> = flow {
+    ): Flow<Result<List<OfficialNewsListItem>>> = flow {
         while (true) {
             emit(officialNewsRepository.getNews(amount))
             delay(perMinutes * 60 * 1000L)
         }
     }.flowOn(Dispatchers.IO)
 
-    override fun convertToOfficialNewsState(newsList: List<OfficialNewsListItem>): List<OfficialNewsState> {
+    fun convertToOfficialNewsState(newsList: List<OfficialNewsListItem>): List<OfficialNewsState> {
         val languageNewsCode = languageUseCase.getLanguage().officialNewsCode
         return newsList.map {
             OfficialNewsState(

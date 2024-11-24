@@ -1,4 +1,9 @@
-package root.model
+/*
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: MIT
+ */
+
+package feature.banner.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

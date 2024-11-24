@@ -4,7 +4,8 @@ import feature.agent.model.AgentDetailResponse
 import feature.agent.model.AgentsListResponse
 import feature.bangboo.model.BangbooDetailResponse
 import feature.bangboo.model.BangbooListResponse
-import feature.cover.data.CoverImageResponse
+import feature.banner.data.BannerResponse
+import feature.cover_image.data.CoverImageResponse
 import feature.drive.model.DrivesListResponse
 import feature.setting.domain.LanguageUseCase
 import feature.wengine.model.WEngineDetailResponse
@@ -14,7 +15,6 @@ import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.appendPathSegments
 import kotlinx.serialization.json.Json
-import root.model.BannerResponse
 
 class ZzzHttpImpl(engine: HttpClientEngine, languageUsecase: LanguageUseCase) : ZzzHttp {
     override val defaultTimeout = 5000L

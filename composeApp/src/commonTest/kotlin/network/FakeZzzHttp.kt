@@ -13,16 +13,16 @@ import feature.bangboo.model.BangbooDetailResponse
 import feature.bangboo.model.BangbooListResponse
 import feature.bangboo.model.stubBangbooDetailResponse
 import feature.bangboo.model.stubBangbooListResponse
-import feature.cover.data.CoverImageResponse
-import feature.cover.data.stubCoverImageResponse
+import feature.banner.data.BannerResponse
+import feature.banner.data.stubBannerResponse
+import feature.cover_image.data.CoverImageResponse
+import feature.cover_image.data.stubCoverImageResponse
 import feature.drive.model.DrivesListResponse
 import feature.drive.model.stubDrivesListResponse
 import feature.wengine.model.WEngineDetailResponse
 import feature.wengine.model.WEnginesListResponse
 import feature.wengine.model.stubWEngineDetailResponse
 import feature.wengine.model.stubWEnginesListResponse
-import root.model.BannerResponse
-import root.model.stubBannerResponse
 
 
 class FakeZzzHttp : ZzzHttp {

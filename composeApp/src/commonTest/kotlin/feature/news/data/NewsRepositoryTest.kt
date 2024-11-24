@@ -5,13 +5,11 @@
 
 package feature.news.data
 
-import io.ktor.util.reflect.instanceOf
 import kotlinx.coroutines.test.runTest
 import network.FakeOfficialWebHttp
-import utils.ZzzResult
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import kotlin.test.assertNull
 
 
 class NewsRepositoryTest {
@@ -21,14 +19,14 @@ class NewsRepositoryTest {
 
     @Test
     fun `Get News Success`() = runTest {
-        val result = repository.getNews(0) as ZzzResult.Success
-        assertEquals(result.data, stubOfficialNewsDataResponse.data.list)
+        val result = repository.getNews(0).getOrNull()
+        assertEquals(result, stubOfficialNewsDataResponse.data.list)
     }
 
     @Test
     fun `Get News Error`() = runTest {
         httpClient.setError(true)
-        val result = repository.getNews(0) as ZzzResult.Error
-        assertTrue(result.exception.instanceOf(Exception::class))
+        val result = repository.getNews(0).getOrNull()
+        assertNull(result)
     }
 }

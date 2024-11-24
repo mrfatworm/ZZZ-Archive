@@ -3,10 +3,8 @@
  * License: MIT License
  */
 
-package feature.cover.data
-
-import utils.ZzzResult
+package feature.cover_image.data
 
 interface CoverImageRepository {
-    suspend fun getImageBanner(): ZzzResult<CoverImageResponse>
+    suspend fun getImageBanner(): Result<CoverImageResponse>
 }

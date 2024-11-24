@@ -3,15 +3,13 @@
  * License: MIT
  */
 
-package feature.cover.data
+package feature.cover_image.data
 
-import io.ktor.util.reflect.instanceOf
 import kotlinx.coroutines.test.runTest
 import network.FakeZzzHttp
-import utils.ZzzResult
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import kotlin.test.assertNull
 
 
 class CoverImageRepositoryTest {
@@ -21,14 +19,14 @@ class CoverImageRepositoryTest {
 
     @Test
     fun `Get Banner Success`() = runTest {
-        val result = repository.getImageBanner() as ZzzResult.Success
-        assertEquals(result.data, stubCoverImageResponse)
+        val result = repository.getImageBanner().getOrNull()
+        assertEquals(result, stubCoverImageResponse)
     }
 
     @Test
     fun `Get Banner Error`() = runTest {
         httpClient.setError(true)
-        val result = repository.getImageBanner() as ZzzResult.Error
-        assertTrue(result.exception.instanceOf(Exception::class))
+        val result = repository.getImageBanner().getOrNull()
+        assertNull(result)
     }
 }

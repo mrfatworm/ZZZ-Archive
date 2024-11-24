@@ -5,13 +5,11 @@
 
 package feature.pixiv.data
 
-import io.ktor.util.reflect.instanceOf
 import kotlinx.coroutines.test.runTest
 import network.FakePixivHttp
-import utils.ZzzResult
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import kotlin.test.assertNull
 
 
 class PixivRepositoryTest {
@@ -20,28 +18,15 @@ class PixivRepositoryTest {
     private val repository = PixivRepositoryImpl(httpClient)
 
     @Test
-    fun `Get News Success`() = runTest {
-        val result = repository.getZzzTopic("") as ZzzResult.Success
-        assertEquals(result.data, stubPixivTopicResponse)
+    fun `Get Pixiv Topic Success`() = runTest {
+        val result = repository.getZzzTopic("").getOrNull()
+        assertEquals(result, stubPixivTopicResponse)
     }
 
     @Test
-    fun `Get News Error`() = runTest {
+    fun `Get Pixiv Topic Fail`() = runTest {
         httpClient.setError(true)
-        val result = repository.getZzzTopic("") as ZzzResult.Error
-        assertTrue(result.exception.instanceOf(Exception::class))
-    }
-
-    @Test
-    fun `Get New Every 10 Minutes`() = runTest {
-        val result = repository.getZzzTopic("") as ZzzResult.Success
-        assertEquals(result.data, stubPixivTopicResponse)
-    }
-
-    @Test
-    fun `Get New Every 10 Minutes Fail`() = runTest {
-        httpClient.setError(true)
-        val result = repository.getZzzTopic("") as ZzzResult.Error
-        assertTrue(result.exception.instanceOf(Exception::class))
+        val result = repository.getZzzTopic("").getOrNull()
+        assertNull(result)
     }
 }

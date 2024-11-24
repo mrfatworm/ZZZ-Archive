@@ -3,7 +3,7 @@
  * License: MIT
  */
 
-package feature.home.compose
+package feature.home.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,9 +12,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import feature.cover.components.CoverImageCard
+import feature.cover_image.components.CoverImageCard
 import feature.home.AnnouncementBanner
-import feature.home.model.HomeState
 import feature.news.presentation.NewsPagerCard
 import feature.pixiv.components.PixivTopicCard
 import ui.theme.AppTheme
@@ -39,8 +38,8 @@ fun HomeScreenSingle(
             onActionClicked = onActionClicked,
             onClosed = onClosed
         )
-        CoverImageCard(uiState.imageBanner)
+        CoverImageCard(uiState.coverImage)
         NewsPagerCard(uiState.newsList)
-        PixivTopicCard(uiState.pixivPuppiesList, onPixivTagChange)
+        PixivTopicCard(uiState.pixivTopics, onPixivTagChange)
     }
 }

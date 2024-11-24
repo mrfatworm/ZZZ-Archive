@@ -8,5 +8,5 @@ package feature.bangboo.domain
 import feature.bangboo.data.BangbooRepository
 
 class BangbooDetailUseCase(private val bangbooRepository: BangbooRepository) {
-    suspend operator fun invoke(id: Int) = bangbooRepository.getBangbooDetail(id)
+    suspend fun invoke(id: Int) = bangbooRepository.getBangbooDetail(id)
 }

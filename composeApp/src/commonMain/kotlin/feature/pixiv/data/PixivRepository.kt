@@ -5,8 +5,6 @@
 
 package feature.pixiv.data
 
-import utils.ZzzResult
-
 interface PixivRepository {
-    suspend fun getZzzTopic(zzzTag: String): ZzzResult<PixivTopicResponse>
+    suspend fun getZzzTopic(zzzTag: String): Result<PixivTopicResponse>
 }

@@ -5,8 +5,6 @@
 
 package feature.news.data
 
-import utils.ZzzResult
-
 interface OfficialNewsRepository {
-    suspend fun getNews(amount: Int): ZzzResult<List<OfficialNewsListItem>>
+    suspend fun getNews(amount: Int): Result<List<OfficialNewsListItem>>
 }

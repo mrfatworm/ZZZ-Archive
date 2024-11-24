@@ -3,7 +3,7 @@
  * License: MIT
  */
 
-package feature.cover.data
+package feature.cover_image.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
