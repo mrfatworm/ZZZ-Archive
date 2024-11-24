@@ -1,9 +1,9 @@
 /*
- *  Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- *  License: MIT License
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: MIT
  */
 
-package feature.setting
+package feature.setting.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import feature.setting.components.FeedbackScreenCompact
 import feature.setting.components.FeedbackScreenMedium
-import feature.setting.domain.FeedbackViewModel
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.dialogs.ConfirmDialog

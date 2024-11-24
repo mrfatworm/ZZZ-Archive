@@ -5,7 +5,7 @@
 
 package feature.news.domain
 
-import feature.news.data.FakeOfficialOfficialNewsRepository
+import feature.news.data.FakeOfficialNewsRepository
 import feature.news.data.stubOfficialNewsDataResponse
 import feature.setting.domain.FakeLanguageUseCase
 import kotlinx.coroutines.flow.first
@@ -17,7 +17,7 @@ import kotlin.test.assertNull
 
 class OfficialNewsUseCaseTest {
 
-    private val newsRepository = FakeOfficialOfficialNewsRepository()
+    private val newsRepository = FakeOfficialNewsRepository()
     private val languageUseCase = FakeLanguageUseCase()
     private val officialNewsUseCase = OfficialNewsUseCase(newsRepository, languageUseCase)
 

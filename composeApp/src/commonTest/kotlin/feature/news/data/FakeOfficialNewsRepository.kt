@@ -5,7 +5,7 @@
 
 package feature.news.data
 
-class FakeOfficialOfficialNewsRepository : OfficialNewsRepository {
+class FakeOfficialNewsRepository : OfficialNewsRepository {
     private var isError = false
 
     fun setError(isError: Boolean) {

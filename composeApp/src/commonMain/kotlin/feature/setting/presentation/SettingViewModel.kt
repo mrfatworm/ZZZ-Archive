@@ -1,23 +1,24 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.setting.domain
+package feature.setting.presentation
 
 import androidx.lifecycle.ViewModel
-import feature.setting.data.AppInfoRepository
-import feature.setting.data.SettingsRepository
+import feature.setting.domain.AppInfoUseCase
+import feature.setting.domain.LanguageUseCase
+import feature.setting.domain.ThemeUseCase
 import feature.setting.model.settingState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import utils.AppActions
+import utils.AppActionsUseCase
 
 class SettingViewModel(
-    private val settingsRepository: SettingsRepository,
-    private val appInfoRepository: AppInfoRepository,
-    private val appActions: AppActions,
+    private val themeUseCase: ThemeUseCase,
+    private val appInfoUseCase: AppInfoUseCase,
+    private val appActionsUseCase: AppActionsUseCase,
     private val languageUseCase: LanguageUseCase
 ) : ViewModel() {
 
@@ -31,7 +32,7 @@ class SettingViewModel(
     }
 
     private fun initSetting() {
-        _isDark.value = settingsRepository.getIsDarkTheme()
+        _isDark.value = themeUseCase.getIsDarkTheme()
         updateLanguageState()
         getAppVersion()
     }
@@ -42,13 +43,13 @@ class SettingViewModel(
     }
 
     private fun getAppVersion() {
-        _uiState.update { it.copy(appVersion = appInfoRepository.getAppVersion()) }
+        _uiState.update { it.copy(appVersion = appInfoUseCase.getAppVersion()) }
 
     }
 
     fun setIsDarkTheme(isDark: Boolean) {
         _isDark.value = isDark
-        settingsRepository.setIsDarkTheme(isDark)
+        themeUseCase.setIsDarkTheme(isDark)
     }
 
     fun setLanguage(langCode: String) {
@@ -57,6 +58,6 @@ class SettingViewModel(
     }
 
     fun restartApp() {
-        appActions.restart()
+        appActionsUseCase.restart()
     }
 }

@@ -35,16 +35,17 @@ import feature.news.domain.OfficialNewsUseCase
 import feature.pixiv.data.PixivRepository
 import feature.pixiv.data.PixivRepositoryImpl
 import feature.pixiv.domain.PixivUseCase
-import feature.setting.data.AppInfoRepository
-import feature.setting.data.AppInfoRepositoryImpl
 import feature.setting.data.GoogleDocRepository
 import feature.setting.data.GoogleDocRepositoryImpl
 import feature.setting.data.SettingsRepository
 import feature.setting.data.SettingsRepositoryImpl
-import feature.setting.domain.FeedbackViewModel
+import feature.setting.domain.AppInfoUseCase
+import feature.setting.domain.GoogleDocUseCase
 import feature.setting.domain.LanguageUseCase
 import feature.setting.domain.LanguageUseCaseImpl
-import feature.setting.domain.SettingViewModel
+import feature.setting.domain.ThemeUseCase
+import feature.setting.presentation.FeedbackViewModel
+import feature.setting.presentation.SettingViewModel
 import feature.splash.SplashViewModel
 import feature.wengine.data.WEngineRepository
 import feature.wengine.data.WEngineRepositoryImpl
@@ -65,7 +66,6 @@ val sharedModule = module {
 
     // Repositories
     single<SettingsRepository> { SettingsRepositoryImpl(get()) }
-    single<AppInfoRepository> { AppInfoRepositoryImpl() }
     single<BannerRepository> { BannerRepositoryImpl(get()) }
     single<OfficialNewsRepository> { OfficialNewsRepositoryImpl(get()) }
     single<PixivRepository> { PixivRepositoryImpl(get()) }
@@ -89,6 +89,9 @@ val sharedModule = module {
     single<WEnginesListUseCase> { WEnginesListUseCase(get()) }
     single<WEngineDetailUseCase> { WEngineDetailUseCase(get()) }
     single<DrivesListUseCase> { DrivesListUseCase(get()) }
+    single<AppInfoUseCase> { AppInfoUseCase() }
+    single<GoogleDocUseCase> { GoogleDocUseCase(get()) }
+    single<ThemeUseCase> { ThemeUseCase(get()) }
 
     // ViewModels
     viewModelOf(::SplashViewModel)

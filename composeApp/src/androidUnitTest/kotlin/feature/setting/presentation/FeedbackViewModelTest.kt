@@ -7,11 +7,13 @@ package feature.setting.presentation
 
 
 import MainDispatcherRule
-import feature.setting.data.FakeAppInfoRepository
-import feature.setting.data.FakeGoogleDocRepository
-import feature.setting.domain.FakeLanguageUseCase
-import feature.setting.domain.FeedbackViewModel
+import feature.setting.domain.AppInfoUseCase
+import feature.setting.domain.GoogleDocUseCase
+import feature.setting.domain.LanguageUseCase
 import feature.setting.model.feedbackIssueTypes
+import io.mockk.coEvery
+import io.mockk.every
+import io.mockk.mockk
 import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -23,21 +25,31 @@ class FeedbackViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private val appInfoRepository = FakeAppInfoRepository()
-    private val googleDocRepository = FakeGoogleDocRepository()
-    private val languageUseCase = FakeLanguageUseCase()
+    private val appInfoUseCase = mockk<AppInfoUseCase>()
+    private val googleDocUseCase = mockk<GoogleDocUseCase>()
+    private val languageUseCase = mockk<LanguageUseCase>()
     private lateinit var viewModel: FeedbackViewModel
 
     @BeforeTest
     fun setup() {
-        viewModel = FeedbackViewModel(appInfoRepository, googleDocRepository, languageUseCase)
+        every { appInfoUseCase.getAppVersion() } returns "Luciana 2024.11.13"
+        every { appInfoUseCase.getDeviceInfo() } returns "Pixel 9 Pro"
+        every { appInfoUseCase.getDeviceOs() } returns "Android 35"
+        every { languageUseCase.getLanguage().code } returns "en"
+        coEvery {
+            googleDocUseCase.submitFeedbackForm(
+                any(), any(), any(), any(), any(), any(), any()
+            )
+        } returns Result.success(Unit)
+
+        viewModel = FeedbackViewModel(appInfoUseCase, googleDocUseCase, languageUseCase)
     }
 
     @Test
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
         assertEquals(state.language, "en")
-        assertEquals(state.appVersion, "Lucy 2024.11")
+        assertEquals(state.appVersion, "Luciana 2024.11.13")
         assertEquals(state.deviceName, "Pixel 9 Pro")
         assertEquals(state.operatingSystem, "Android 35")
     }

@@ -12,8 +12,8 @@ import feature.agent.presentation.AgentsListScreen
 import feature.bangboo.BangbooDetailScreen
 import feature.bangboo.BangbooListScreen
 import feature.drive.presentation.DrivesListScreen
-import feature.setting.FeedbackScreen
-import feature.setting.SettingScreen
+import feature.setting.presentation.FeedbackScreen
+import feature.setting.presentation.SettingScreen
 import feature.wengine.presentation.WEngineDetailScreen
 import feature.wengine.presentation.WEnginesListScreen
 import ui.navigation.NavActions

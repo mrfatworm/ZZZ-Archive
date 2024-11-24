@@ -3,21 +3,21 @@
  * License: MIT
  */
 
-package feature.setting.data
+package feature.setting.domain
 
 import com.mrfatworm.zzzarchive.ZzzConfig
 import utils.getPlatform
 
-class AppInfoRepositoryImpl : AppInfoRepository {
-    override fun getAppVersion(): String {
+class AppInfoUseCase {
+    fun getAppVersion(): String {
         return ZzzConfig.VERSION
     }
 
-    override fun getDeviceInfo(): String {
+    fun getDeviceInfo(): String {
         return getPlatform().deviceName
     }
 
-    override fun getDeviceOs(): String {
+    fun getDeviceOs(): String {
         return getPlatform().operatingSystemName
     }
 }

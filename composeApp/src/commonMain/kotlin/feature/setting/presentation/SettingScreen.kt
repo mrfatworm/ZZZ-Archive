@@ -1,15 +1,14 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.setting
+package feature.setting.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import feature.setting.components.SettingScreenDual
 import feature.setting.components.SettingScreenSingle
-import feature.setting.domain.SettingViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType

@@ -18,7 +18,7 @@ class GoogleDocRepositoryImpl(private val httpClient: GoogleDocHttp) : GoogleDoc
         appVersion: String,
         deviceName: String,
         operatingSystem: String
-    ): Boolean {
+    ): Result<Unit> {
         return try {
             withTimeout(httpClient.timeout) {
                 httpClient.submitFeedbackForm(
@@ -31,10 +31,9 @@ class GoogleDocRepositoryImpl(private val httpClient: GoogleDocHttp) : GoogleDoc
                     operatingSystem
                 )
             }
-            true
+            Result.success(Unit)
         } catch (e: Exception) {
-            println("Send Google Form Failed: $e")
-            false
+            Result.failure(e)
         }
     }
 }

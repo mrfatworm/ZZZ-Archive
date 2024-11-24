@@ -1,14 +1,15 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.setting.domain
+package feature.setting.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import feature.setting.data.AppInfoRepository
-import feature.setting.data.GoogleDocRepository
+import feature.setting.domain.AppInfoUseCase
+import feature.setting.domain.GoogleDocUseCase
+import feature.setting.domain.LanguageUseCase
 import feature.setting.model.FeedbackIssueType
 import feature.setting.model.FeedbackState
 import feature.setting.model.feedbackIssueTypes
@@ -21,8 +22,8 @@ import zzzarchive.composeapp.generated.resources.invalid_form
 import zzzarchive.composeapp.generated.resources.unknown_error
 
 class FeedbackViewModel(
-    private val appInfoRepository: AppInfoRepository,
-    private val googleDocRepository: GoogleDocRepository,
+    private val appInfoUseCase: AppInfoUseCase,
+    private val googleDocUseCase: GoogleDocUseCase,
     private val languageUseCase: LanguageUseCase
 ) : ViewModel() {
 
@@ -40,34 +41,38 @@ class FeedbackViewModel(
         if (issueTypeIndex == feedbackIssueTypes.first() || issueContent.isBlank()) {
             _uiState.update {
                 it.copy(
-                    invalidForm = true,
-                    invalidMessage = Res.string.invalid_form
+                    invalidForm = true, invalidMessage = Res.string.invalid_form
                 )
             }
         } else {
             _uiState.update { it.copy(invalidForm = false) }
             viewModelScope.launch {
-                val result = googleDocRepository.submitFeedbackForm(
-                    issueTypeIndex.chtString,
-                    uiState.value.language,
-                    issueContent,
-                    nickname,
-                    uiState.value.appVersion,
-                    uiState.value.deviceName,
-                    uiState.value.operatingSystem
-                )
-                if (result) {
-                    _uiState.update { it.copy(showSubmitSuccessDialog = true) }
-                } else {
-                    _uiState.update {
-                        it.copy(
-                            invalidForm = true,
-                            invalidMessage = Res.string.unknown_error
-                        )
-                    }
-                }
+                postGoogleDoc(issueTypeIndex, issueContent, nickname)
             }
         }
+    }
+
+    private suspend fun postGoogleDoc(
+        issueTypeIndex: FeedbackIssueType, issueContent: String, nickname: String
+    ) {
+        val result = googleDocUseCase.submitFeedbackForm(
+            issueTypeIndex.chtString,
+            uiState.value.language,
+            issueContent,
+            nickname,
+            uiState.value.appVersion,
+            uiState.value.deviceName,
+            uiState.value.operatingSystem
+        )
+        result.fold(onSuccess = {
+            _uiState.update { it.copy(showSubmitSuccessDialog = true) }
+        }, onFailure = {
+            _uiState.update {
+                it.copy(
+                    invalidForm = true, invalidMessage = Res.string.unknown_error
+                )
+            }
+        })
     }
 
     fun dismissSubmitSuccessDialog() {
@@ -80,17 +85,17 @@ class FeedbackViewModel(
     }
 
     private fun getAppVersion() {
-        val appVersion = appInfoRepository.getAppVersion()
+        val appVersion = appInfoUseCase.getAppVersion()
         _uiState.update { it.copy(appVersion = appVersion) }
     }
 
     private fun getDeviceInfo() {
-        val deviceName = appInfoRepository.getDeviceInfo()
+        val deviceName = appInfoUseCase.getDeviceInfo()
         _uiState.update { it.copy(deviceName = deviceName) }
     }
 
     private fun getDeviceOs() {
-        val deviceOs = appInfoRepository.getDeviceOs()
+        val deviceOs = appInfoUseCase.getDeviceOs()
         _uiState.update { it.copy(operatingSystem = deviceOs) }
     }
 }
