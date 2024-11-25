@@ -24,7 +24,7 @@ class PixivRepositoryTest {
     }
 
     @Test
-    fun `Get Pixiv Topic Fail`() = runTest {
+    fun `Get Pixiv Topic Failure`() = runTest {
         httpClient.setError(true)
         val result = repository.getZzzTopic("").getOrNull()
         assertNull(result)

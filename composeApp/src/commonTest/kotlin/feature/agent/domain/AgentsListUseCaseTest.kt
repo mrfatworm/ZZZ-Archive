@@ -30,7 +30,7 @@ class AgentsListUseCaseTest {
     }
 
     @Test
-    fun `Get Agents List Fail`() = runTest {
+    fun `Get Agents List Failure`() = runTest {
         agentRepository.setError(true)
         val result = agentsListUseCase.invoke().getOrNull()
         assertNull(result)

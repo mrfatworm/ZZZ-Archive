@@ -109,7 +109,7 @@ private fun LanguageSettingItem(
 
 @Composable
 private fun ColorSettingItem(onColorChange: (Boolean) -> Unit) {
-    var showColorThemeList by remember { mutableStateOf(false) }
+    var showColorThemeDropdown by remember { mutableStateOf(false) }
     SettingItem(title = stringResource(Res.string.color_theme), content = {
         Column(horizontalAlignment = Alignment.End) {
             var isDarkTheme by AppTheme.isDark
@@ -132,9 +132,9 @@ private fun ColorSettingItem(onColorChange: (Boolean) -> Unit) {
                     tint = AppTheme.colors.onSurfaceVariant
                 )
             }
-            DropdownMenu(expanded = showColorThemeList,
+            DropdownMenu(expanded = showColorThemeDropdown,
                 containerColor = AppTheme.colors.surface,
-                onDismissRequest = { showColorThemeList = false }) {
+                onDismissRequest = { showColorThemeDropdown = false }) {
                 colorThemeList.forEach { colorTheme ->
                     DropdownMenuItem(text = {
                         Text(
@@ -146,12 +146,12 @@ private fun ColorSettingItem(onColorChange: (Boolean) -> Unit) {
                         val isDark = colorTheme == Res.string.dark_theme
                         onColorChange(isDark)
                         isDarkTheme = isDark
-                        showColorThemeList = false
+                        showColorThemeDropdown = false
                     })
                 }
             }
         }
-    }, onClick = { showColorThemeList = true })
+    }, onClick = { showColorThemeDropdown = true })
 }
 
 @Composable

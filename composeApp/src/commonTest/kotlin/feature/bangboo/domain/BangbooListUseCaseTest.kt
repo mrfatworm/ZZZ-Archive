@@ -28,7 +28,7 @@ class BangbooListUseCaseTest {
     }
 
     @Test
-    fun `Get Bangboo List Fail`() = runTest {
+    fun `Get Bangboo List Failure`() = runTest {
         banRepository.setError(true)
         val result = bangBangbooListUseCase.invoke().getOrNull()
         assertNull(result)

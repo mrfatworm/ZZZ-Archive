@@ -28,9 +28,9 @@ class WikiViewModelTest {
     val mainDispatcherRule = MainDispatcherRule()
 
     private val agentsListUseCase = mockk<AgentsListUseCase>()
-    private var wEnginesListUseCase = mockk<WEnginesListUseCase>()
-    private var bangbooListUseCase = mockk<BangbooListUseCase>()
-    private var drivesListUseCase = mockk<DrivesListUseCase>()
+    private val wEnginesListUseCase = mockk<WEnginesListUseCase>()
+    private val bangbooListUseCase = mockk<BangbooListUseCase>()
+    private val drivesListUseCase = mockk<DrivesListUseCase>()
     private lateinit var viewModel: WikiViewModel
 
     @BeforeTest

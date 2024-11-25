@@ -21,7 +21,7 @@ class WEngineDetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val wEngineDetailUseCase: WEngineDetailUseCase
 ) : ViewModel() {
-    private var wEngineId: Int = checkNotNull(savedStateHandle["wEngineId"])
+    private val wEngineId: Int = checkNotNull(savedStateHandle["wEngineId"])
 
     private var _uiState = MutableStateFlow(WEngineDetailState())
     val uiState = _uiState.asStateFlow()

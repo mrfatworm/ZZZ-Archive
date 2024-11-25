@@ -29,7 +29,7 @@ class OfficialNewsUseCaseTest {
     }
 
     @Test
-    fun `Get New Every 10 Minutes Fail`() = runTest {
+    fun `Get New Every 10 Minutes Failure`() = runTest {
         newsRepository.setError(true)
         val result = officialNewsUseCase.getNewsPeriodically(10, 0).first().getOrNull()
         assertNull(result)

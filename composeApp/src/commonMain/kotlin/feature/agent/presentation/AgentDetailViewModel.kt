@@ -22,7 +22,7 @@ class AgentDetailViewModel(
     private val agentDetailUseCase: AgentDetailUseCase,
     private val drivesListUseCase: DrivesListUseCase
 ) : ViewModel() {
-    private var agentId: Int = checkNotNull(savedStateHandle["agentId"])
+    private val agentId: Int = checkNotNull(savedStateHandle["agentId"])
 
     private var _uiState = MutableStateFlow(AgentDetailState())
     val uiState = _uiState.asStateFlow()

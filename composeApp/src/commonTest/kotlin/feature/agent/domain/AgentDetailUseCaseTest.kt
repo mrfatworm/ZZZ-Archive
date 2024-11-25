@@ -26,7 +26,7 @@ class AgentDetailUseCaseTest {
     }
 
     @Test
-    fun `Get Agents List Fail`() = runTest {
+    fun `Get Agents List Failure`() = runTest {
         agentRepository.setError(true)
         val result = agentsDetailUseCase.invoke(1).getOrNull()
         assertNull(result)

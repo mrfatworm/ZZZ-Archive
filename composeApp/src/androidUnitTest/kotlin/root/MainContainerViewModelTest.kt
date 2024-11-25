@@ -7,11 +7,13 @@ package root
 
 
 import MainDispatcherRule
-import feature.setting.data.FakeSettingRepository
+import feature.setting.domain.ThemeUseCase
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
 import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
-import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class MainContainerViewModelTest {
@@ -19,12 +21,14 @@ class MainContainerViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private var settingsRepository = FakeSettingRepository()
+    private val themeUseCase = mockk<ThemeUseCase>()
     private lateinit var viewModel: MainContainerViewModel
 
     @BeforeTest
     fun setup() {
-        viewModel = MainContainerViewModel(settingsRepository)
+        every { themeUseCase.getIsDarkTheme() } returns true
+        every { themeUseCase.setIsDarkTheme(any()) } returns Unit
+        viewModel = MainContainerViewModel(themeUseCase)
     }
 
     @Test
@@ -36,7 +40,6 @@ class MainContainerViewModelTest {
     @Test
     fun `Set Dark Theme`() {
         viewModel.setIsDarkTheme(false)
-        val state = viewModel.isDark.value
-        assertFalse(state)
+        verify { themeUseCase.setIsDarkTheme(false) }
     }
 }

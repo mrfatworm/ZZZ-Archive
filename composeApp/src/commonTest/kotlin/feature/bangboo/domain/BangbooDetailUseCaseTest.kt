@@ -26,7 +26,7 @@ class BangbooDetailUseCaseTest {
     }
 
     @Test
-    fun `Get Agents List Fail`() = runTest {
+    fun `Get Agents List Failure`() = runTest {
         bangbooRepository.setError(true)
         val result = bangbooDetailUseCase.invoke(1).getOrNull()
         assertNull(result)

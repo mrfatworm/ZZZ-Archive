@@ -28,7 +28,7 @@ class WEnginesListUseCaseTest {
     }
 
     @Test
-    fun `Get W-Engine List Fail`() = runTest {
+    fun `Get W-Engine List Failure`() = runTest {
         wEngineRepository.setError(true)
         val result = wEnginesListUseCase.invoke().getOrNull()
         assertNull(result)

@@ -21,7 +21,7 @@ class BangbooDetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val bangbooDetailUseCase: BangbooDetailUseCase
 ) : ViewModel() {
-    private var bangbooId: Int = checkNotNull(savedStateHandle["bangbooId"])
+    private val bangbooId: Int = checkNotNull(savedStateHandle["bangbooId"])
 
     private var _uiState = MutableStateFlow(BangbooDetailState())
     val uiState = _uiState.asStateFlow()

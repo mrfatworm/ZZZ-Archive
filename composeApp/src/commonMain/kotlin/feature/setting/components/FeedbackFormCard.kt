@@ -109,7 +109,7 @@ private fun IssueTypeItem(
     onIssueSelected: (FeedbackIssueType) -> Unit
 ) {
     var selectedIssueType by remember { mutableStateOf(Res.string.please_select) }
-    var showIssueTypes by remember { mutableStateOf(false) }
+    var showIssueTypesDropdown by remember { mutableStateOf(false) }
     SettingItem(title = stringResource(Res.string.issue_type), content = {
         Column(horizontalAlignment = Alignment.End) {
             Row(
@@ -128,9 +128,9 @@ private fun IssueTypeItem(
                     tint = AppTheme.colors.onSurfaceVariant
                 )
             }
-            DropdownMenu(expanded = showIssueTypes,
+            DropdownMenu(expanded = showIssueTypesDropdown,
                 containerColor = AppTheme.colors.surface,
-                onDismissRequest = { showIssueTypes = false }) {
+                onDismissRequest = { showIssueTypesDropdown = false }) {
                 feedbackIssueTypes.forEach { issueType ->
                     DropdownMenuItem(text = {
                         Text(
@@ -141,13 +141,13 @@ private fun IssueTypeItem(
                     }, onClick = {
                         selectedIssueType = issueType.localStringRes
                         onIssueSelected(issueType)
-                        showIssueTypes = false
+                        showIssueTypesDropdown = false
                     })
                 }
             }
         }
     }, onClick = {
-        showIssueTypes = true
+        showIssueTypesDropdown = true
     })
 }
 

@@ -26,7 +26,7 @@ class WEngineDetailUseCaseTest {
     }
 
     @Test
-    fun `Get Agents List Fail`() = runTest {
+    fun `Get Agents List Failure`() = runTest {
         wEngineRepository.setError(true)
         val result = wEngineDetailUseCase.invoke(1).getOrNull()
         assertNull(result)
