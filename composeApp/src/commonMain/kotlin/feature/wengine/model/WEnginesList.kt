@@ -15,11 +15,7 @@ import kotlin.enums.EnumEntries
 data class WEnginesListResponse(
     @SerialName("w-engines")
     val wEngines: List<WEngineListItem>
-) {
-    fun getWEnginesNewToOld(): List<WEngineListItem> {
-        return wEngines.reversed()
-    }
-}
+)
 
 @Serializable
 data class WEngineListItem(

@@ -14,5 +14,5 @@ interface GoogleDocRepository {
         appVersion: String,
         deviceName: String,
         operatingSystem: String
-    ): Boolean
+    ): Result<Unit>
 }

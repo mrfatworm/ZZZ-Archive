@@ -7,9 +7,8 @@ package feature.wengine.data
 
 import feature.wengine.model.WEngineDetailResponse
 import feature.wengine.model.WEnginesListResponse
-import utils.ZzzResult
 
 interface WEngineRepository {
-    suspend fun getWEnginesList(): ZzzResult<WEnginesListResponse>
-    suspend fun getWEngineDetail(id: Int): ZzzResult<WEngineDetailResponse>
+    suspend fun getWEnginesList(): Result<WEnginesListResponse>
+    suspend fun getWEngineDetail(id: Int): Result<WEngineDetailResponse>
 }

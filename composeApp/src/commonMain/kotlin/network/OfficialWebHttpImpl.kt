@@ -5,7 +5,8 @@
 
 package network
 
-import feature.home.model.OfficialNewsResponse
+import feature.news.data.OfficialNewsResponse
+import feature.setting.domain.LanguageUseCase
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.get
@@ -13,12 +14,11 @@ import io.ktor.client.request.parameter
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.path
-import utils.LanguageHandler
 
-class OfficialWebHttpImpl(engine: HttpClientEngine, languageHandler: LanguageHandler) :
+class OfficialWebHttpImpl(engine: HttpClientEngine, languageUsecase: LanguageUseCase) :
     OfficialWebHttp {
     override val timeout = 5000L
-    override val languagePath = languageHandler.getLanguage().assetLang
+    override val languagePath = languageUsecase.getLanguage().officialNewsCode
     private val client = createOfficialWebHttpClient(engine)
 
     override suspend fun requestNews(amount: Int): OfficialNewsResponse =

@@ -21,7 +21,11 @@ class FakeGoogleDocRepository : GoogleDocRepository {
         appVersion: String,
         deviceName: String,
         operatingSystem: String
-    ): Boolean {
-        return !isError
+    ): Result<Unit> {
+        return if (isError) {
+            Result.failure(Exception("Fake Error"))
+        } else {
+            Result.success(Unit)
+        }
     }
 }

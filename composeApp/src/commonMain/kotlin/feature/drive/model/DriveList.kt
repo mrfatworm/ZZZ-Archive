@@ -12,11 +12,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class DrivesListResponse(
     val drives: List<DriveListItem>
-) {
-    fun getDrivesNewToOld(): List<DriveListItem> {
-        return drives.reversed()
-    }
-}
+)
 
 @Serializable
 data class DriveListItem(

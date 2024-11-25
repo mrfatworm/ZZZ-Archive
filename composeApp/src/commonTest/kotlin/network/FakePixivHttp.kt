@@ -5,8 +5,8 @@
 
 package network
 
-import feature.home.model.PixivZzzTopic
-import feature.home.model.stubPixivZzzTopic
+import feature.pixiv.data.PixivTopicResponse
+import feature.pixiv.data.stubPixivTopicResponse
 
 class FakePixivHttp : PixivHttp {
     override val timeout = 5000L
@@ -16,11 +16,11 @@ class FakePixivHttp : PixivHttp {
         this.isError = isError
     }
 
-    override suspend fun requestZzzTopic(zzzTag: String): PixivZzzTopic {
+    override suspend fun requestZzzTopic(zzzTag: String): PixivTopicResponse {
         return if (isError) {
             throw Exception()
         } else {
-            stubPixivZzzTopic
+            stubPixivTopicResponse
         }
     }
 }

@@ -9,7 +9,6 @@ import feature.agent.model.AgentDetailResponse
 import feature.agent.model.AgentsListResponse
 import feature.agent.model.stubAgentDetailResponse
 import feature.agent.model.stubAgentsListResponse
-import utils.ZzzResult
 
 class FakeAgentRepository : AgentRepository {
     private var isError = false
@@ -18,19 +17,19 @@ class FakeAgentRepository : AgentRepository {
         this.isError = isError
     }
 
-    override suspend fun getAgentsList(): ZzzResult<AgentsListResponse> {
+    override suspend fun getAgentsList(): Result<AgentsListResponse> {
         return if (isError) {
-            ZzzResult.Error(Exception())
+            Result.failure(Exception())
         } else {
-            ZzzResult.Success(stubAgentsListResponse)
+            Result.success(stubAgentsListResponse)
         }
     }
 
-    override suspend fun getAgentDetail(id: Int): ZzzResult<AgentDetailResponse> {
+    override suspend fun getAgentDetail(id: Int): Result<AgentDetailResponse> {
         return if (isError) {
-            ZzzResult.Error(Exception())
+            Result.failure(Exception())
         } else {
-            ZzzResult.Success(stubAgentDetailResponse)
+            Result.success(stubAgentDetailResponse)
         }
     }
 }

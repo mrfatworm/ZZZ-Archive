@@ -9,7 +9,6 @@ import feature.bangboo.model.BangbooDetailResponse
 import feature.bangboo.model.BangbooListResponse
 import feature.bangboo.model.stubBangbooDetailResponse
 import feature.bangboo.model.stubBangbooListResponse
-import utils.ZzzResult
 
 class FakeBangbooRepository : BangbooRepository {
     private var isError = false
@@ -18,19 +17,19 @@ class FakeBangbooRepository : BangbooRepository {
         this.isError = isError
     }
 
-    override suspend fun getBangbooList(): ZzzResult<BangbooListResponse> {
+    override suspend fun getBangbooList(): Result<BangbooListResponse> {
         return if (isError) {
-            ZzzResult.Error(Exception())
+            Result.failure(Exception())
         } else {
-            ZzzResult.Success(stubBangbooListResponse)
+            Result.success(stubBangbooListResponse)
         }
     }
 
-    override suspend fun getBangbooDetail(id: Int): ZzzResult<BangbooDetailResponse> {
+    override suspend fun getBangbooDetail(id: Int): Result<BangbooDetailResponse> {
         return if (isError) {
-            ZzzResult.Error(Exception())
+            Result.failure(Exception())
         } else {
-            ZzzResult.Success(stubBangbooDetailResponse)
+            Result.success(stubBangbooDetailResponse)
         }
     }
 }

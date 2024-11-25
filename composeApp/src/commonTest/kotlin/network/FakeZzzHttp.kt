@@ -13,21 +13,20 @@ import feature.bangboo.model.BangbooDetailResponse
 import feature.bangboo.model.BangbooListResponse
 import feature.bangboo.model.stubBangbooDetailResponse
 import feature.bangboo.model.stubBangbooListResponse
+import feature.banner.data.BannerResponse
+import feature.banner.data.stubBannerResponse
+import feature.cover_image.data.CoverImageResponse
+import feature.cover_image.data.stubCoverImageResponse
 import feature.drive.model.DrivesListResponse
 import feature.drive.model.stubDrivesListResponse
-import feature.home.model.ImageBannerResponse
-import feature.home.model.stubImageBannerResponse
 import feature.wengine.model.WEngineDetailResponse
 import feature.wengine.model.WEnginesListResponse
 import feature.wengine.model.stubWEngineDetailResponse
 import feature.wengine.model.stubWEnginesListResponse
-import root.model.BannerResponse
-import root.model.stubBannerResponse
 
 
 class FakeZzzHttp : ZzzHttp {
     override val defaultTimeout = 5000L
-    override val longTimeout = 10000L
     override val languagePath = "zh"
 
     private var isError = false
@@ -44,11 +43,11 @@ class FakeZzzHttp : ZzzHttp {
         }
     }
 
-    override suspend fun requestImageBanner(): ImageBannerResponse {
+    override suspend fun requestImageBanner(): CoverImageResponse {
         return if (isError) {
             throw Exception()
         } else {
-            stubImageBannerResponse
+            stubCoverImageResponse
         }
     }
 

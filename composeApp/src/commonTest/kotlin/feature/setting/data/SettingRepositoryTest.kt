@@ -31,15 +31,15 @@ class SettingRepositoryTest {
 
     @Test
     fun `Get Default Language`() {
-        val defaultLanguage = settingsRepository.getLanguage()
+        val defaultLanguage = settingsRepository.getLanguageCode()
         assertEquals(defaultLanguage, "")
     }
 
     @Test
     fun `Set Language to Chinese`() {
-        settingsRepository.setLanguage(Language.ChineseTraditional.project)
-        val language = settingsRepository.getLanguage()
-        assertEquals(language, Language.ChineseTraditional.project)
+        settingsRepository.setLanguage(Language.ChineseTraditional.code)
+        val language = settingsRepository.getLanguageCode()
+        assertEquals(language, Language.ChineseTraditional.code)
     }
 
     @Test
@@ -59,7 +59,7 @@ class SettingRepositoryTest {
     fun `Delete All Setting and Get Default Value`() {
         settingsRepository.clear()
         val isDarkTheme = settingsRepository.getIsDarkTheme()
-        val language = settingsRepository.getLanguage()
+        val language = settingsRepository.getLanguageCode()
         assertTrue(isDarkTheme)
         assertEquals(language, "")
     }

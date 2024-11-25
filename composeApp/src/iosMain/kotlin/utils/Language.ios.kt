@@ -7,7 +7,7 @@ package utils
 
 import platform.Foundation.NSUserDefaults
 
-actual fun changeLanguage(langCode: String) {
+actual fun changePlatformLanguage(langCode: String) {
     if (langCode == "") {
         NSUserDefaults.standardUserDefaults.setObject(null, "AppleLanguages")
     } else {

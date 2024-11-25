@@ -16,10 +16,10 @@ import network.ZzzHttp
 import network.ZzzHttpImpl
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
-import utils.AppActions
+import utils.AppActionsUseCase
 
 actual val platformModule = module {
-    singleOf(::AppActions)
+    singleOf(::AppActionsUseCase)
     single<ZzzHttp> { ZzzHttpImpl(OkHttp.create(), get()) }
     single<OfficialWebHttp> { OfficialWebHttpImpl(OkHttp.create(), get()) }
     single<PixivHttp> { PixivHttpImpl(OkHttp.create()) }

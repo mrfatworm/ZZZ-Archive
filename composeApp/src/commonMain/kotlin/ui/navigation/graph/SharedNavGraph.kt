@@ -7,15 +7,15 @@ package ui.navigation.graph
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import feature.agent.AgentDetailScreen
-import feature.agent.AgentsListScreen
+import feature.agent.presentation.AgentDetailScreen
+import feature.agent.presentation.AgentsListScreen
 import feature.bangboo.BangbooDetailScreen
 import feature.bangboo.BangbooListScreen
-import feature.drive.DrivesListScreen
-import feature.setting.FeedbackScreen
-import feature.setting.SettingScreen
-import feature.wengine.WEngineDetailScreen
-import feature.wengine.WEnginesListScreen
+import feature.drive.presentation.DrivesListScreen
+import feature.setting.presentation.FeedbackScreen
+import feature.setting.presentation.SettingScreen
+import feature.wengine.presentation.WEngineDetailScreen
+import feature.wengine.presentation.WEnginesListScreen
 import ui.navigation.NavActions
 import ui.navigation.Screen
 import ui.utils.AdaptiveLayoutType

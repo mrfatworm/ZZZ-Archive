@@ -14,11 +14,7 @@ import kotlin.enums.EnumEntries
 @Serializable
 data class AgentsListResponse(
     val agents: List<AgentListItem>
-) {
-    fun getAgentsNewToOld(): List<AgentListItem> {
-        return agents.reversed()
-    }
-}
+)
 
 @Serializable
 data class AgentListItem(
@@ -54,7 +50,7 @@ val stubAgentsListResponse = AgentsListResponse(
             fullName = "貓宮 又奈",
             isLeak = false,
             rarity = 5,
-            specialty = "strike",
+            specialty = "attack",
             attribute = "physical",
             attackType = "slash",
             factionId = 1

@@ -11,6 +11,7 @@ import utils.ZzzRarity
 
 data class BangbooListState(
     val bangbooList: List<BangbooListItem> = emptyList(),
+    val filteredBangbooList: List<BangbooListItem> = emptyList(),
     val selectedRarity: Set<ZzzRarity> = emptySet(),
     val selectedAttributes: Set<AgentAttribute> = emptySet()
 )

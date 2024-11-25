@@ -7,9 +7,8 @@ package feature.bangboo.data
 
 import feature.bangboo.model.BangbooDetailResponse
 import feature.bangboo.model.BangbooListResponse
-import utils.ZzzResult
 
 interface BangbooRepository {
-    suspend fun getBangbooList(): ZzzResult<BangbooListResponse>
-    suspend fun getBangbooDetail(id: Int): ZzzResult<BangbooDetailResponse>
+    suspend fun getBangbooList(): Result<BangbooListResponse>
+    suspend fun getBangbooDetail(id: Int): Result<BangbooDetailResponse>
 }

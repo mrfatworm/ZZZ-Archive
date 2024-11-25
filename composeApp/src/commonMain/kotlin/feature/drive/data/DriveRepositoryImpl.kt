@@ -8,17 +8,16 @@ package feature.drive.data
 import feature.drive.model.DrivesListResponse
 import kotlinx.coroutines.withTimeout
 import network.ZzzHttp
-import utils.ZzzResult
 
 class DriveRepositoryImpl(private val httpClient: ZzzHttp) : DriveRepository {
-    override suspend fun getDrivesList(): ZzzResult<DrivesListResponse> {
+    override suspend fun getDrivesList(): Result<DrivesListResponse> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
                 httpClient.requestDrivesList()
             }
-            ZzzResult.Success(result)
+            Result.success(result)
         } catch (e: Exception) {
-            ZzzResult.Error(e)
+            Result.failure(e)
         }
     }
 }

@@ -8,63 +8,92 @@ package di
 import com.russhwolf.settings.Settings
 import feature.agent.data.AgentRepository
 import feature.agent.data.AgentRepositoryImpl
-import feature.agent.domain.AgentDetailViewModel
-import feature.agent.domain.AgentsListViewModel
+import feature.agent.domain.AgentDetailUseCase
+import feature.agent.domain.AgentsListUseCase
+import feature.agent.presentation.AgentDetailViewModel
+import feature.agent.presentation.AgentsListViewModel
 import feature.bangboo.data.BangbooRepository
 import feature.bangboo.data.BangbooRepositoryImpl
-import feature.bangboo.domain.BangbooDetailViewModel
-import feature.bangboo.domain.BangbooListViewModel
+import feature.bangboo.domain.BangbooDetailUseCase
+import feature.bangboo.domain.BangbooListUseCase
+import feature.bangboo.presentation.BangbooDetailViewModel
+import feature.bangboo.presentation.BangbooListViewModel
+import feature.banner.data.BannerRepository
+import feature.banner.data.BannerRepositoryImpl
+import feature.banner.domain.BannerUseCase
+import feature.cover_image.data.CoverImageRepository
+import feature.cover_image.data.CoverImageRepositoryImpl
+import feature.cover_image.domain.CoverImageUseCase
 import feature.drive.data.DriveRepository
 import feature.drive.data.DriveRepositoryImpl
-import feature.drive.domain.DrivesListViewModel
-import feature.home.data.ImageBannerRepository
-import feature.home.data.ImageBannerRepositoryImpl
-import feature.home.data.NewsRepository
-import feature.home.data.NewsRepositoryImpl
-import feature.home.data.PixivRepository
-import feature.home.data.PixivRepositoryImpl
-import feature.home.domain.HomeViewModel
-import feature.setting.data.AppInfoRepository
-import feature.setting.data.AppInfoRepositoryImpl
+import feature.drive.domain.DrivesListUseCase
+import feature.drive.presentation.DrivesListViewModel
+import feature.home.presentation.HomeViewModel
+import feature.news.data.OfficialNewsRepository
+import feature.news.data.OfficialNewsRepositoryImpl
+import feature.news.domain.OfficialNewsUseCase
+import feature.pixiv.data.PixivRepository
+import feature.pixiv.data.PixivRepositoryImpl
+import feature.pixiv.domain.PixivUseCase
 import feature.setting.data.GoogleDocRepository
 import feature.setting.data.GoogleDocRepositoryImpl
 import feature.setting.data.SettingsRepository
 import feature.setting.data.SettingsRepositoryImpl
-import feature.setting.domain.FeedbackViewModel
-import feature.setting.domain.SettingViewModel
+import feature.setting.domain.AppInfoUseCase
+import feature.setting.domain.GoogleDocUseCase
+import feature.setting.domain.LanguageUseCase
+import feature.setting.domain.LanguageUseCaseImpl
+import feature.setting.domain.ThemeUseCase
+import feature.setting.presentation.FeedbackViewModel
+import feature.setting.presentation.SettingViewModel
 import feature.splash.SplashViewModel
 import feature.wengine.data.WEngineRepository
 import feature.wengine.data.WEngineRepositoryImpl
-import feature.wengine.domain.WEngineDetailViewModel
-import feature.wengine.domain.WEnginesListViewModel
-import feature.wiki.domain.WikiViewModel
+import feature.wengine.domain.WEngineDetailUseCase
+import feature.wengine.domain.WEnginesListUseCase
+import feature.wengine.presentation.WEngineDetailViewModel
+import feature.wengine.presentation.WEnginesListViewModel
+import feature.wiki.presentation.WikiViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import root.MainContainerViewModel
-import root.data.BannerRepository
-import root.data.BannerRepositoryImpl
-import utils.LanguageHandler
-import utils.LanguageHandlerImpl
 
 expect val platformModule: Module
 
 val sharedModule = module {
     single<Settings> { Settings() }
-    single<LanguageHandler> { LanguageHandlerImpl(get()) }
+
+    // Repositories
     single<SettingsRepository> { SettingsRepositoryImpl(get()) }
-    single<AppInfoRepository> { AppInfoRepositoryImpl() }
     single<BannerRepository> { BannerRepositoryImpl(get()) }
-    single<NewsRepository> { NewsRepositoryImpl(get()) }
+    single<OfficialNewsRepository> { OfficialNewsRepositoryImpl(get()) }
     single<PixivRepository> { PixivRepositoryImpl(get()) }
-    single<ImageBannerRepository> { ImageBannerRepositoryImpl(get()) }
+    single<CoverImageRepository> { CoverImageRepositoryImpl(get()) }
     single<AgentRepository> { AgentRepositoryImpl(get()) }
     single<WEngineRepository> { WEngineRepositoryImpl(get()) }
     single<BangbooRepository> { BangbooRepositoryImpl(get()) }
     single<DriveRepository> { DriveRepositoryImpl(get()) }
     single<GoogleDocRepository> { GoogleDocRepositoryImpl(get()) }
 
+    // Use cases
+    single<CoverImageUseCase> { CoverImageUseCase(get()) }
+    single<PixivUseCase> { PixivUseCase(get()) }
+    single<BannerUseCase> { BannerUseCase(get()) }
+    single<LanguageUseCase> { LanguageUseCaseImpl(get()) }
+    single<OfficialNewsUseCase> { OfficialNewsUseCase(get(), get()) }
+    single<AgentsListUseCase> { AgentsListUseCase(get()) }
+    single<AgentDetailUseCase> { AgentDetailUseCase(get()) }
+    single<BangbooListUseCase> { BangbooListUseCase(get()) }
+    single<BangbooDetailUseCase> { BangbooDetailUseCase(get()) }
+    single<WEnginesListUseCase> { WEnginesListUseCase(get()) }
+    single<WEngineDetailUseCase> { WEngineDetailUseCase(get()) }
+    single<DrivesListUseCase> { DrivesListUseCase(get()) }
+    single<AppInfoUseCase> { AppInfoUseCase() }
+    single<GoogleDocUseCase> { GoogleDocUseCase(get()) }
+    single<ThemeUseCase> { ThemeUseCase(get()) }
 
+    // ViewModels
     viewModelOf(::SplashViewModel)
     viewModelOf(::MainContainerViewModel)
     viewModelOf(::HomeViewModel)

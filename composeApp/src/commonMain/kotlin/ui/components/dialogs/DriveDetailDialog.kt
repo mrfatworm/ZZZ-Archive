@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import feature.drive.compose.DriveDetailCard
+import feature.drive.components.DriveDetailCard
 import feature.drive.model.DriveListItem
 
 @Composable

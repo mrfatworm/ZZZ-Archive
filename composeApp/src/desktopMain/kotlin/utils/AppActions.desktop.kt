@@ -7,7 +7,7 @@ package utils
 
 import kotlin.system.exitProcess
 
-actual class AppActions {
+actual class AppActionsUseCase {
     actual fun restart() {
         exitProcess(0)
     }

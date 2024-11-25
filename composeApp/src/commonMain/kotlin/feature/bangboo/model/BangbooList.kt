@@ -14,11 +14,7 @@ import kotlin.enums.EnumEntries
 @Serializable
 data class BangbooListResponse(
     val bangboo: List<BangbooListItem>
-) {
-    fun getBangbooNewToOld(): List<BangbooListItem> {
-        return bangboo.reversed()
-    }
-}
+)
 
 @Serializable
 data class BangbooListItem(

@@ -9,28 +9,27 @@ import feature.wengine.model.WEngineDetailResponse
 import feature.wengine.model.WEnginesListResponse
 import kotlinx.coroutines.withTimeout
 import network.ZzzHttp
-import utils.ZzzResult
 
 class WEngineRepositoryImpl(private val httpClient: ZzzHttp) : WEngineRepository {
-    override suspend fun getWEnginesList(): ZzzResult<WEnginesListResponse> {
+    override suspend fun getWEnginesList(): Result<WEnginesListResponse> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
                 httpClient.requestWEnginesList()
             }
-            ZzzResult.Success(result)
+            Result.success(result)
         } catch (e: Exception) {
-            ZzzResult.Error(e)
+            Result.failure(e)
         }
     }
 
-    override suspend fun getWEngineDetail(id: Int): ZzzResult<WEngineDetailResponse> {
+    override suspend fun getWEngineDetail(id: Int): Result<WEngineDetailResponse> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
                 httpClient.requestWEngineDetail(id)
             }
-            ZzzResult.Success(result)
+            Result.success(result)
         } catch (e: Exception) {
-            ZzzResult.Error(e)
+            Result.failure(e)
         }
     }
 }

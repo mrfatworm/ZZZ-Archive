@@ -14,12 +14,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import feature.home.compose.HomeScreenDual
-import feature.home.compose.HomeScreenSingle
-import feature.home.domain.HomeViewModel
+import feature.banner.data.BannerResponse
+import feature.home.presentation.HomeScreenDual
+import feature.home.presentation.HomeScreenSingle
+import feature.home.presentation.HomeViewModel
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
-import root.model.BannerResponse
 import ui.components.Banner
 import ui.components.dialogs.BannerDialog
 import ui.theme.AppTheme
