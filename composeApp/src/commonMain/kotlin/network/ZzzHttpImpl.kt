@@ -16,10 +16,9 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.appendPathSegments
 import kotlinx.serialization.json.Json
 
-class ZzzHttpImpl(engine: HttpClientEngine, languageUsecase: LanguageUseCase) : ZzzHttp {
+class ZzzHttpImpl(engine: HttpClientEngine, languageUseCase: LanguageUseCase) : ZzzHttp {
     override val defaultTimeout = 5000L
-    override val longTimeout = 10000L
-    override val languagePath = languageUsecase.getLanguage().officialNewsCode
+    override val languagePath = languageUseCase.getLanguage().officialNewsCode
 
     private val client = createZzzHttpClient(engine)
 
