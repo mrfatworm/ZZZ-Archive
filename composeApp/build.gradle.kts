@@ -141,6 +141,11 @@ compose.desktop {
     application {
         mainClass = "MainKt"
 
+        buildTypes.release.proguard {
+            obfuscate.set(true)
+            configurationFiles.from(project.file("compose-desktop.pro"))
+        }
+
         val desktopPackageName: String
         val desktopPackageId: String
         if ((System.getenv("VARIANT") ?: "") == "Live") {

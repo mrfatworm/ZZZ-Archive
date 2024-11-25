@@ -8,8 +8,6 @@ package network
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
-import io.ktor.http.ContentType
-import io.ktor.http.contentType
 import io.ktor.http.path
 
 class GoogleDocHttpImpl(engine: HttpClientEngine) : GoogleDocHttp {
@@ -37,7 +35,6 @@ class GoogleDocHttpImpl(engine: HttpClientEngine) : GoogleDocHttp {
             parameter("entry.58201369", appVersion)
             parameter("entry.1615440715", deviceName)
             parameter("entry.1501925155", operatingSystem)
-            contentType(ContentType.Application.Json)
         }
     }
 }

@@ -5,7 +5,6 @@
 
 package feature.pixiv.data
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -16,12 +15,12 @@ data class PixivTopicResponse(val body: Body) {
 }
 
 @Serializable
-@SerialName("illustManga")
-data class Body(val illustManga: IllustManga)
+data class Body(
+    val illustManga: IllustManga
+)
 
 @Serializable
 data class IllustManga(
-    @SerialName("data")
     val data: List<RecentArticle>
 )
 

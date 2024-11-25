@@ -6,27 +6,29 @@
 package network
 
 import feature.pixiv.data.PixivTopicResponse
-import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
-import io.ktor.http.ContentType
-import io.ktor.http.contentType
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.path
+import kotlinx.serialization.json.Json
 
 class PixivHttpImpl(engine: HttpClientEngine) : PixivHttp {
     override val timeout = 5000L
     private val client = createPixivHttpClient(engine)
 
-    override suspend fun requestZzzTopic(zzzTag: String): PixivTopicResponse = client.get {
-        url {
-            path("/ajax/search/artworks/$zzzTag")
-        }
-        parameter("word", zzzTag)
-        parameter("mode", "safe")
-        parameter("lang", "zh")
-        contentType(ContentType.Application.Json)
-    }.body()
+    override suspend fun requestZzzTopic(zzzTag: String): PixivTopicResponse {
+        val response = client.get {
+            url {
+                path("/ajax/search/artworks/$zzzTag")
+            }
+            parameter("word", zzzTag)
+            parameter("mode", "safe")
+            parameter("lang", "zh")
+        }.bodyAsText()
+        val json = Json { ignoreUnknownKeys = true }
+        return json.decodeFromString(response)
+    }
 }
 
 
