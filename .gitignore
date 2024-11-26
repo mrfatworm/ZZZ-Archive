@@ -22,3 +22,4 @@ captures
 /composeApp/config/macos/runtime.provisionprofile
 /composeApp/config/macos/entitlements.plist
 /composeApp/config/macos/runtime-entitlements.plist
+/composeApp/schemas/*

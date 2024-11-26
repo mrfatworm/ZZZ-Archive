@@ -91,16 +91,17 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.swing)
         }
+
+        dependencies {
+            ksp(libs.androidx.room.compiler)
+        }
+
+        room {
+            schemaDirectory("$projectDir/schemas")
+        }
     }
 }
 
-dependencies {
-    ksp(libs.androidx.room.compiler)
-}
-
-room {
-    schemaDirectory("$projectDir/schemas")
-}
 
 val zzzVersionName = "Luciana 2024.11.13"
 val bundleVersionName = "1.0.5"

@@ -5,6 +5,7 @@
 
 package feature.agent.data
 
+import feature.agent.data.database.FakeAgentListDao
 import feature.agent.model.stubAgentDetail
 import feature.agent.model.stubAgentsList
 import kotlinx.coroutines.test.runTest
@@ -15,12 +16,13 @@ import kotlin.test.assertNull
 
 class AgentRepositoryImplTest {
     private val httpClient = FakeZzzHttp()
-    private val repository = AgentRepositoryImpl(httpClient)
+    private val agentsListDB = FakeAgentListDao()
+    private val repository = AgentRepositoryImpl(httpClient, agentsListDB)
 
     @Test
     fun `Get Agents List Success`() = runTest {
         val result = repository.getAgentsList().getOrNull()
-        assertEquals(result, stubAgentsList)
+        assertEquals(result, stubAgentsList.reversed())
     }
 
     @Test

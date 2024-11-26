@@ -5,20 +5,29 @@
 
 package feature.agent.data
 
+import feature.agent.data.database.AgentsListDao
 import feature.agent.data.mapper.toAgentDetail
 import feature.agent.data.mapper.toAgentListItem
+import feature.agent.data.mapper.toAgentsListItemEntity
 import feature.agent.model.AgentDetail
 import feature.agent.model.AgentListItem
 import kotlinx.coroutines.withTimeout
 import network.ZzzHttp
 
-class AgentRepositoryImpl(private val httpClient: ZzzHttp) : AgentRepository {
+class AgentRepositoryImpl(
+    private val httpClient: ZzzHttp, private val agentsListDB: AgentsListDao
+) : AgentRepository {
+
     override suspend fun getAgentsList(): Result<List<AgentListItem>> {
         return try {
-            val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestAgentsList()
+            val localAgentsList = agentsListDB.getAgentsList()
+            if (localAgentsList.isEmpty()) {
+                val result = withTimeout(httpClient.defaultTimeout) {
+                    httpClient.requestAgentsList()
+                }
+                agentsListDB.setAgentsList(result.agents.map { it.toAgentsListItemEntity() })
             }
-            Result.success(result.agents.map { it.toAgentListItem() })
+            Result.success(agentsListDB.getAgentsList().map { it.toAgentListItem() }.reversed())
         } catch (e: Exception) {
             Result.failure(e)
         }

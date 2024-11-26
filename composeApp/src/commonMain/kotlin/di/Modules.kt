@@ -5,9 +5,12 @@
 
 package di
 
+import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import com.russhwolf.settings.Settings
+import database.RoomDBFactory
 import feature.agent.data.AgentRepository
 import feature.agent.data.AgentRepositoryImpl
+import feature.agent.data.database.AgentsListDB
 import feature.agent.domain.AgentDetailUseCase
 import feature.agent.domain.AgentsListUseCase
 import feature.agent.presentation.AgentDetailViewModel
@@ -63,6 +66,12 @@ expect val platformModule: Module
 
 val sharedModule = module {
     single<Settings> { Settings() }
+    single {
+        get<RoomDBFactory>().create()
+            .setDriver(BundledSQLiteDriver())
+            .build()
+    }
+    single { get<AgentsListDB>().agentsListDao }
 
     // Repositories
     single<SettingsRepository> { SettingsRepositoryImpl(get()) }
@@ -70,7 +79,7 @@ val sharedModule = module {
     single<OfficialNewsRepository> { OfficialNewsRepositoryImpl(get()) }
     single<PixivRepository> { PixivRepositoryImpl(get()) }
     single<CoverImageRepository> { CoverImageRepositoryImpl(get()) }
-    single<AgentRepository> { AgentRepositoryImpl(get()) }
+    single<AgentRepository> { AgentRepositoryImpl(get(), get()) }
     single<WEngineRepository> { WEngineRepositoryImpl(get()) }
     single<BangbooRepository> { BangbooRepositoryImpl(get()) }
     single<DriveRepository> { DriveRepositoryImpl(get()) }

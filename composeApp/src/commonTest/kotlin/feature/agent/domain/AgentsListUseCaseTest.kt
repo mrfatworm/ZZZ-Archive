@@ -26,7 +26,7 @@ class AgentsListUseCaseTest {
     @Test
     fun `Get Agents List Success`() = runTest {
         val result = agentsListUseCase.invoke().getOrNull()
-        assertEquals(result, stubAgentsList.reversed())
+        assertEquals(result, stubAgentsList)
     }
 
     @Test
