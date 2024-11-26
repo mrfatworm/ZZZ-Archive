@@ -8,7 +8,7 @@ package feature.wiki.presentation
 
 import MainDispatcherRule
 import feature.agent.domain.AgentsListUseCase
-import feature.agent.model.stubAgentsListResponse
+import feature.agent.model.stubAgentsList
 import feature.bangboo.domain.BangbooListUseCase
 import feature.bangboo.model.stubBangbooListResponse
 import feature.drive.domain.DrivesListUseCase
@@ -35,7 +35,7 @@ class WikiViewModelTest {
 
     @BeforeTest
     fun setup() {
-        coEvery { agentsListUseCase.invoke() } returns Result.success(stubAgentsListResponse.agents)
+        coEvery { agentsListUseCase.invoke() } returns Result.success(stubAgentsList)
         coEvery { wEnginesListUseCase.invoke() } returns Result.success(stubWEnginesListResponse.wEngines)
         coEvery { bangbooListUseCase.invoke() } returns Result.success(stubBangbooListResponse.bangboo)
         coEvery { drivesListUseCase.invoke() } returns Result.success(stubDrivesListResponse.drives)
@@ -50,7 +50,7 @@ class WikiViewModelTest {
     @Test
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.agentsList, stubAgentsListResponse.agents)
+        assertEquals(state.agentsList, stubAgentsList)
         assertEquals(state.wEnginesList, stubWEnginesListResponse.wEngines)
         assertEquals(state.bangbooList, stubBangbooListResponse.bangboo)
         assertEquals(state.drivesList, stubDrivesListResponse.drives)

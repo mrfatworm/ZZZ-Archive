@@ -24,3 +24,8 @@ enum class AgentAttackType(val textRes: StringResource, val iconRes: DrawableRes
     Strike(Res.string.strike, Res.drawable.ic_attack_type_strike),
     None(Res.string.unknown, Res.drawable.ic_help)
 }
+
+fun findAgentAttackType(attackType: String): AgentAttackType {
+    return AgentAttackType.entries.find { it.name.lowercase() == attackType }
+        ?: AgentAttackType.None
+}

@@ -12,6 +12,8 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.buildKonfig)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
 }
 
 kotlin {
@@ -55,6 +57,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.okio)
             implementation(libs.multiplatformSettings.no.arg)
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.sqlite.bundled)
         }
         commonTest.dependencies {
             implementation(kotlin("test-annotations-common"))
@@ -89,6 +93,15 @@ kotlin {
         }
     }
 }
+
+dependencies {
+    ksp(libs.androidx.room.compiler)
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
+}
+
 val zzzVersionName = "Luciana 2024.11.13"
 val bundleVersionName = "1.0.5"
 val versionCode = 1

@@ -34,6 +34,7 @@ import ui.components.items.RarityItem
 import ui.components.items.RowListEndItem
 import ui.theme.AppTheme
 import ui.utils.drawRowListMask
+import utils.ZzzRarity
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.all_w_engines
 import zzzarchive.composeapp.generated.resources.w_engines
@@ -85,7 +86,8 @@ fun WEnginesListCard(
             items(items = wEnginesList, key = { it.id }) { wEngine ->
                 RarityItem(
                     modifier = Modifier.animateItem(),
-                    rarityLevel = wEngine.rarity,
+                    rarity = ZzzRarity.entries.find { it.level == wEngine.rarity }
+                        ?: ZzzRarity.RANK_D,
                     name = wEngine.name,
                     imgUrl = wEngine.getImageUrl(),
                     specialty = wEngine.getSpecialtyEnum(),

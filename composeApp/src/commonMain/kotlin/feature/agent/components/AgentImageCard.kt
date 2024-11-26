@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import feature.agent.model.AgentDetailResponse
+import feature.agent.model.AgentDetail
 import org.jetbrains.compose.resources.stringResource
 import ui.components.ZzzTag
 import ui.components.buttons.ZzzIconButton
@@ -39,7 +39,7 @@ import zzzarchive.composeapp.generated.resources.ic_rare
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun AgentImageCard(agentDetail: AgentDetailResponse, onBackClick: () -> Unit) {
+fun AgentImageCard(agentDetail: AgentDetail, onBackClick: () -> Unit) {
     ContentCard {
         ZzzIconButton(
             iconRes = Res.drawable.ic_arrow_back, contentDescriptionRes = Res.string.back
@@ -52,14 +52,14 @@ fun AgentImageCard(agentDetail: AgentDetailResponse, onBackClick: () -> Unit) {
         ) {
             AsyncImage(
                 modifier = Modifier.align(Alignment.TopCenter).fillMaxSize(0.8f),
-                model = agentDetail.getFactionIconUrl(),
+                model = agentDetail.faction.getFactionIconUrl(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 alpha = 0.15f
             )
             AsyncImage(
                 modifier = Modifier.fillMaxWidth(),
-                model = agentDetail.getAgentPortraitImageUrl(),
+                model = agentDetail.portraitUrl,
                 contentDescription = null,
             )
         }
@@ -76,21 +76,21 @@ fun AgentImageCard(agentDetail: AgentDetailResponse, onBackClick: () -> Unit) {
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            ZzzTag(text = agentDetail.getRarity().code, iconRes = Res.drawable.ic_rare)
+            ZzzTag(text = agentDetail.rarity.code, iconRes = Res.drawable.ic_rare)
             ZzzTag(
-                text = stringResource(agentDetail.getAttribute().textRes),
-                iconRes = agentDetail.getAttribute().iconRes
+                text = stringResource(agentDetail.attribute.textRes),
+                iconRes = agentDetail.attribute.iconRes
             )
             ZzzTag(
-                text = stringResource(agentDetail.getSpecialty().textRes),
-                iconRes = agentDetail.getSpecialty().iconRes
+                text = stringResource(agentDetail.specialty.textRes),
+                iconRes = agentDetail.specialty.iconRes
             )
             ZzzTag(
-                text = stringResource(agentDetail.getAttackType().textRes),
-                iconRes = agentDetail.getAttackType().iconRes
+                text = stringResource(agentDetail.attackType.textRes),
+                iconRes = agentDetail.attackType.iconRes
             )
             ZzzTag(
-                text = stringResource(agentDetail.getFactionNameRes()),
+                text = stringResource(agentDetail.faction.getFactionNameRes()),
                 iconRes = Res.drawable.ic_award_star
             )
         }

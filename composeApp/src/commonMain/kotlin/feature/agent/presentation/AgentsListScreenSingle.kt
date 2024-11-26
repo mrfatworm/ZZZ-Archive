@@ -1,9 +1,9 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.agent.components
+package feature.agent.presentation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
@@ -17,6 +17,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import feature.agent.components.AgentFilterBottomSheet
+import feature.agent.components.AgentsListFilterCard
 import feature.agent.model.AgentsListState
 import org.jetbrains.compose.resources.stringResource
 import ui.components.ZzzTopBar

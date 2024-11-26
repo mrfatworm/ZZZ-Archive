@@ -71,7 +71,8 @@ fun WEnginesListFilterCard(
                 val wEngine = uiState.filteredWEnginesList[index]
                 RarityItem(
                     modifier = Modifier.animateItem(),
-                    rarityLevel = wEngine.rarity,
+                    rarity = ZzzRarity.entries.find { it.level == wEngine.rarity }
+                        ?: ZzzRarity.RANK_D,
                     name = wEngine.name,
                     specialty = wEngine.getSpecialtyEnum(),
                     imgUrl = wEngine.getImageUrl(),

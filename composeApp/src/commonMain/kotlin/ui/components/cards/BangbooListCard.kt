@@ -34,6 +34,7 @@ import ui.components.items.RarityItem
 import ui.components.items.RowListEndItem
 import ui.theme.AppTheme
 import ui.utils.drawRowListMask
+import utils.ZzzRarity
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.all_bangboo
 import zzzarchive.composeapp.generated.resources.bangboo
@@ -85,7 +86,8 @@ fun BangbooListCard(
             items(items = bangbooList, key = { it.id }) { bangboo ->
                 RarityItem(
                     modifier = Modifier.animateItem(),
-                    rarityLevel = bangboo.rarity,
+                    rarity = ZzzRarity.entries.find { it.level == bangboo.rarity }
+                        ?: ZzzRarity.RANK_D,
                     name = bangboo.name,
                     imgUrl = bangboo.getProfileUrl(),
                     onClick = {

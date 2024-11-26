@@ -5,29 +5,31 @@
 
 package feature.agent.data
 
-import feature.agent.model.AgentDetailResponse
-import feature.agent.model.AgentsListResponse
+import feature.agent.data.mapper.toAgentDetail
+import feature.agent.data.mapper.toAgentListItem
+import feature.agent.model.AgentDetail
+import feature.agent.model.AgentListItem
 import kotlinx.coroutines.withTimeout
 import network.ZzzHttp
 
 class AgentRepositoryImpl(private val httpClient: ZzzHttp) : AgentRepository {
-    override suspend fun getAgentsList(): Result<AgentsListResponse> {
+    override suspend fun getAgentsList(): Result<List<AgentListItem>> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
                 httpClient.requestAgentsList()
             }
-            Result.success(result)
+            Result.success(result.agents.map { it.toAgentListItem() })
         } catch (e: Exception) {
             Result.failure(e)
         }
     }
 
-    override suspend fun getAgentDetail(id: Int): Result<AgentDetailResponse> {
+    override suspend fun getAgentDetail(id: Int): Result<AgentDetail> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
                 httpClient.requestAgentDetail(id)
             }
-            Result.success(result)
+            Result.success(result.toAgentDetail())
         } catch (e: Exception) {
             Result.failure(e)
         }

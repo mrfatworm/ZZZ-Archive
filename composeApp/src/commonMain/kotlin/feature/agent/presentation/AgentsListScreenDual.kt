@@ -1,9 +1,9 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.agent.components
+package feature.agent.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -12,6 +12,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import feature.agent.components.AgentsListFilterCard
+import feature.agent.components.FactionItem
 import feature.agent.model.AgentsListState
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType

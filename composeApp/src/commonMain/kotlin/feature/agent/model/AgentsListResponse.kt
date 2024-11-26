@@ -5,19 +5,16 @@
 
 package feature.agent.model
 
-import com.mrfatworm.zzzarchive.ZzzConfig
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import utils.AgentAttribute
-import kotlin.enums.EnumEntries
 
 @Serializable
 data class AgentsListResponse(
-    val agents: List<AgentListItem>
+    val agents: List<AgentListItemResponse>
 )
 
 @Serializable
-data class AgentListItem(
+data class AgentListItemResponse(
     val id: Int,
     val name: String,
     @SerialName("full_name")
@@ -31,20 +28,11 @@ data class AgentListItem(
     val attackType: String,
     @SerialName("faction_id")
     val factionId: Int
-) {
-    fun getProfileUrl(path: String = ZzzConfig.ASSET_PATH): String {
-        return "https://raw.githubusercontent.com/$path/Agent/Profile/$id.webp"
-    }
-
-    fun getAttributeEnum(agentAttribute: EnumEntries<AgentAttribute> = AgentAttribute.entries) =
-        agentAttribute.find {
-            it.name.lowercase() == attribute.lowercase()
-        } ?: AgentAttribute.None
-}
+)
 
 val stubAgentsListResponse = AgentsListResponse(
     agents = listOf(
-        AgentListItem(
+        AgentListItemResponse(
             id = 3,
             name = "貓又",
             fullName = "貓宮 又奈",
@@ -55,7 +43,7 @@ val stubAgentsListResponse = AgentsListResponse(
             attackType = "slash",
             factionId = 1
         ),
-        AgentListItem(
+        AgentListItemResponse(
             id = 4,
             name = "安比",
             fullName = "安比·德瑪拉",
@@ -66,7 +54,7 @@ val stubAgentsListResponse = AgentsListResponse(
             attackType = "slash",
             factionId = 1
         ),
-        AgentListItem(
+        AgentListItemResponse(
             id = 16,
             name = "可琳",
             fullName = "可琳·威克斯",

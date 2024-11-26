@@ -30,3 +30,8 @@ enum class AgentAttribute(val textRes: StringResource, val iconRes: DrawableReso
     Physical(Res.string.physical, Res.drawable.ic_attribute_physical),
     None(Res.string.unknown, Res.drawable.ic_help)
 }
+
+fun findAgentAttribute(attribute: String): AgentAttribute {
+    return AgentAttribute.entries.find { it.name.lowercase().lowercase() == attribute }
+        ?: AgentAttribute.None
+}

@@ -6,16 +6,14 @@
 package feature.agent.presentation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import feature.agent.components.AgentsListScreenDual
-import feature.agent.components.AgentsListScreenSingle
 import feature.agent.model.AgentsListState
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.ErrorScreen
 import ui.components.LoadingScreen
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
-import utils.UiResult
 
 @Composable
 fun AgentsListScreen(
@@ -25,36 +23,32 @@ fun AgentsListScreen(
     onBackClick: () -> Unit
 ) {
     val viewModel: AgentsListViewModel = koinViewModel()
-    val agentsList = viewModel.agentsList.collectAsStateWithLifecycle()
-    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
-    when (agentsList.value) {
-        UiResult.Loading -> LoadingScreen()
-        is UiResult.Error -> {
-            ErrorScreen(
-                message = (agentsList.value as UiResult.Error).message,
-                onAction = {
-                    viewModel.onAction(AgentsListAction.OnRetry)
-                }
-            )
-        }
-
-        is UiResult.Success -> {
-            AgentsListContent(
-                uiState = uiState.value,
-                contentType = contentType,
-                adaptiveLayoutType = adaptiveLayoutType,
-                onAction = { action ->
-                    when (action) {
-                        is AgentsListAction.OnAgentClick -> {
-                            onAgentClick(action.agentId)
-                        }
-
-                        AgentsListAction.OnBackClick -> onBackClick()
-                        else -> viewModel.onAction(action)
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    if (uiState.isLoading) {
+        LoadingScreen()
+    } else if (uiState.error != null) {
+        ErrorScreen(
+            message = uiState.error!!,
+            onAction = {
+                viewModel.onAction(AgentsListAction.OnRetry)
+            }
+        )
+    } else {
+        AgentsListContent(
+            uiState = uiState,
+            contentType = contentType,
+            adaptiveLayoutType = adaptiveLayoutType,
+            onAction = { action ->
+                when (action) {
+                    is AgentsListAction.OnAgentClick -> {
+                        onAgentClick(action.agentId)
                     }
+
+                    AgentsListAction.OnBackClick -> onBackClick()
+                    else -> viewModel.onAction(action)
                 }
-            )
-        }
+            }
+        )
     }
 }
 

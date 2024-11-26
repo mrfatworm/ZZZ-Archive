@@ -96,10 +96,10 @@ fun AgentsListFilterCard(
                     val agent = uiState.filteredAgentsList[index]
                     RarityItem(
                         modifier = Modifier.animateItem(),
-                        rarityLevel = agent.rarity,
+                        rarity = agent.rarity,
                         name = agent.name,
-                        attribute = agent.getAttributeEnum(),
-                        imgUrl = agent.getProfileUrl(),
+                        attribute = agent.attribute,
+                        imgUrl = agent.imageUrl,
                         onClick = {
                             onAgentClick(agent.id)
                         })

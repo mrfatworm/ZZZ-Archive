@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import feature.agent.model.AgentDetailResponse
+import feature.agent.model.AgentDetail
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.CardHeader
 import ui.components.cards.ContentCard
@@ -20,7 +20,7 @@ import zzzarchive.composeapp.generated.resources.attributes
 import zzzarchive.composeapp.generated.resources.hp_atk_def
 
 @Composable
-fun AgentAttributesCard(agentDetail: AgentDetailResponse) {
+fun AgentAttributesCard(agentDetail: AgentDetail) {
     ContentCard(hasDefaultPadding = false) {
         CardHeader(
             title = stringResource(Res.string.attributes) + " Lv.Max"

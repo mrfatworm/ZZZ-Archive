@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import utils.UiResult
 
 class AgentDetailViewModel(
     savedStateHandle: SavedStateHandle,
@@ -27,9 +26,6 @@ class AgentDetailViewModel(
     private var _uiState = MutableStateFlow(AgentDetailState())
     val uiState = _uiState.asStateFlow()
 
-    private var _agentDetailState = MutableStateFlow<UiResult<AgentDetailState>>(UiResult.Loading)
-    val agentDetailState = _agentDetailState.asStateFlow()
-
     init {
         viewModelScope.launch {
             fetchAgentsDetail(agentId)
@@ -38,15 +34,19 @@ class AgentDetailViewModel(
     }
 
     private suspend fun fetchAgentsDetail(id: Int) {
-        _agentDetailState.value = UiResult.Loading
+        _uiState.update { it.copy(isLoading = true, error = null) }
         val result = agentDetailUseCase.invoke(id)
-        _agentDetailState.value = result.fold(onSuccess = { agentDetail ->
+        result.fold(onSuccess = { agentDetail ->
             _uiState.update {
-                it.copy(agentDetail = agentDetail)
+                it.copy(agentDetail = agentDetail, isLoading = false)
             }
-            UiResult.Success(AgentDetailState(agentDetail))
-        }, onFailure = {
-            UiResult.Error(it.message ?: "Unknown error: AgentId = $id")
+        }, onFailure = { throwable ->
+            _uiState.update {
+                it.copy(
+                    isLoading = false,
+                    error = throwable.message ?: "Unknown error: AgentId = $id"
+                )
+            }
         })
     }
 

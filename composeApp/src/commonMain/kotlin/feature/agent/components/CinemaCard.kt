@@ -6,7 +6,7 @@
 package feature.agent.components
 
 import androidx.compose.runtime.Composable
-import feature.agent.model.AgentDetailResponse
+import feature.agent.model.AgentDetail
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.CardHeader
 import ui.components.cards.ContentCard
@@ -17,7 +17,7 @@ import zzzarchive.composeapp.generated.resources.mindscape_cinema
 val CinemaTitle = listOf("I", "II", "III", "IV", "V", "VI")
 
 @Composable
-fun CinemaCard(agentDetail: AgentDetailResponse) {
+fun CinemaCard(agentDetail: AgentDetail) {
     ContentCard(hasDefaultPadding = false) {
         CardHeader(
             title = stringResource(Res.string.mindscape_cinema)

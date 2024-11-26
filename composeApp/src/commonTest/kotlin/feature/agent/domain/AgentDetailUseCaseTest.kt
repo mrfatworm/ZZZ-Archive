@@ -6,7 +6,7 @@
 package feature.agent.domain
 
 import feature.agent.data.FakeAgentRepository
-import feature.agent.model.stubAgentDetailResponse
+import feature.agent.model.stubAgentDetail
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -22,7 +22,7 @@ class AgentDetailUseCaseTest {
     @Test
     fun `Get Agents List Success`() = runTest {
         val result = agentsDetailUseCase.invoke(1).getOrNull()
-        assertEquals(result, stubAgentDetailResponse)
+        assertEquals(result, stubAgentDetail)
     }
 
     @Test

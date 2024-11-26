@@ -10,3 +10,7 @@ enum class ZzzRarity(val level: Int, val code: String, val color: Color) {
     RANK_A(4, "A", ColorScheme().imageRarity4),
     RANK_S(5, "S", ColorScheme().imageRarity5)
 }
+
+fun findRarity(level: Int): ZzzRarity {
+    return ZzzRarity.entries.find { it.level == level } ?: ZzzRarity.RANK_D
+}

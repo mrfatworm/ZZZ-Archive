@@ -18,7 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import feature.agent.model.AgentDetailResponse
+import feature.agent.model.AgentDetail
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.ContentCard
 import ui.components.cards.HoveredIndicatorHeader
@@ -30,11 +30,11 @@ import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.gallery
 
 @Composable
-fun GalleryCard(agentDetail: AgentDetailResponse) {
+fun GalleryCard(agentDetail: AgentDetail) {
     val galleryUrlList = listOf(
-        agentDetail.getAgentPortraitImageUrl(),
-        agentDetail.getAgentMindScapePartialImageUrl(),
-        agentDetail.getAgentMindScapeFullImageUrl()
+        agentDetail.portraitUrl,
+        agentDetail.mindscapePartialUrl,
+        agentDetail.mindscapeFullUrl
     )
     val openGalleryDialog = remember { mutableStateOf(false) }
     val galleryDialogUrl = remember { mutableStateOf("") }

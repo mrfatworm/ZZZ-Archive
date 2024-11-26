@@ -8,13 +8,11 @@ package feature.agent.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.agent.domain.AgentsListUseCase
-import feature.agent.model.AgentListItem
 import feature.agent.model.AgentsListState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import utils.UiResult
 
 class AgentsListViewModel(
     private val agentsListUseCase: AgentsListUseCase
@@ -22,8 +20,6 @@ class AgentsListViewModel(
 
     private var _uiState = MutableStateFlow(AgentsListState())
     val uiState = _uiState.asStateFlow()
-    private var _agentsList = MutableStateFlow<UiResult<List<AgentListItem>>>(UiResult.Loading)
-    val agentsList = _agentsList.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -32,19 +28,24 @@ class AgentsListViewModel(
     }
 
     private suspend fun fetchAgentsList() {
-        _agentsList.value = UiResult.Loading
+        _uiState.update { it.copy(isLoading = true, error = null) }
         val result = agentsListUseCase.invoke()
-        _agentsList.value = result.fold(onSuccess = { agentsList ->
+        result.fold(onSuccess = { agentsList ->
             _uiState.update {
                 it.copy(
                     agentsList = agentsList,
                     filteredAgentsList = agentsList,
-                    factionsList = agentsListUseCase.getFactionsList(agentsList)
+                    factionsList = agentsListUseCase.getFactionsList(agentsList),
+                    isLoading = false
                 )
             }
-            UiResult.Success(agentsList)
-        }, onFailure = {
-            UiResult.Error(it.message ?: "Unknown error")
+        }, onFailure = { throwable ->
+            _uiState.update {
+                it.copy(
+                    isLoading = false,
+                    error = throwable.message ?: "Get Agents List Unknown error"
+                )
+            }
         })
     }
 

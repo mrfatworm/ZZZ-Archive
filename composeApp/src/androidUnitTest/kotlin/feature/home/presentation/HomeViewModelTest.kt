@@ -8,7 +8,7 @@ package feature.home.presentation
 
 import MainDispatcherRule
 import feature.agent.domain.AgentsListUseCase
-import feature.agent.model.stubAgentsListResponse
+import feature.agent.model.stubAgentsList
 import feature.bangboo.domain.BangbooListUseCase
 import feature.bangboo.model.stubBangbooListResponse
 import feature.banner.data.stubBannerResponse
@@ -63,7 +63,7 @@ class HomeViewModelTest {
         every { officialNewsUseCase.convertToOfficialNewsState(any()) } returns listOf(
             stubOfficialNewsState
         )
-        coEvery { agentsListUseCase.invoke() } returns Result.success(stubAgentsListResponse.agents)
+        coEvery { agentsListUseCase.invoke() } returns Result.success(stubAgentsList)
         coEvery { wEngineListUseCase.invoke() } returns Result.success(stubWEnginesListResponse.wEngines)
         coEvery { bangbooListUseCase.invoke() } returns Result.success(stubBangbooListResponse.bangboo)
         coEvery { drivesListUseCase.invoke() } returns Result.success(stubDrivesListResponse.drives)
@@ -87,7 +87,7 @@ class HomeViewModelTest {
         assertEquals(state.coverImage, stubCoverImageResponse)
         assertEquals(state.pixivTopics, stubPixivTopicResponse.getPopularArticles())
         assertEquals(state.newsList.first(), stubOfficialNewsState)
-        assertEquals(state.agentsList, stubAgentsListResponse.agents)
+        assertEquals(state.agentsList, stubAgentsList)
         assertEquals(state.wEnginesList, stubWEnginesListResponse.wEngines)
         assertEquals(state.bangbooList, stubBangbooListResponse.bangboo)
         assertEquals(state.drivesList, stubDrivesListResponse.drives)

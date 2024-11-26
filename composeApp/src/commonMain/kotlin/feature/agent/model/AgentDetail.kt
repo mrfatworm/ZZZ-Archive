@@ -1,125 +1,56 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
 package feature.agent.model
 
-import com.mrfatworm.zzzarchive.ZzzConfig
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import utils.AgentAttackType
+import utils.AgentAttribute
+import utils.AgentSpecialty
 import utils.ZzzRarity
 
-@Serializable
-data class AgentDetailResponse(
+
+data class AgentDetail(
     val id: Int,
     val name: String,
-    @SerialName("full_name") val fullName: String,
-    @SerialName("is_leak") val isLeak: Boolean,
-    val rarity: Int,
-    val specialty: String,
-    val attribute: String,
-    @SerialName("attack_type") val attackType: String,
-    @SerialName("faction_id") val factionId: Int,
-    @SerialName("agent_background") val agentBackground: String,
-    @SerialName("basic_data") val basicData: AgentBasicData,
+    val fullName: String,
+    val isLeak: Boolean,
+    val portraitUrl: String,
+    val mindscapePartialUrl: String,
+    val mindscapeFullUrl: String,
+    val rarity: ZzzRarity,
+    val attribute: AgentAttribute,
+    val specialty: AgentSpecialty,
+    val attackType: AgentAttackType,
+    val faction: Faction,
+    val agentBackground: String,
+    val basicData: AgentBasicData,
     val skills: AgentSkill,
-    @SerialName("mindscape_cinema") val mindscapeCinema: List<NameAndDesc>,
-    @SerialName("level_material") val levelMaterial: AgentLevelMaterial,
-    @SerialName("suggest_w_engines") val suggestWEngines: List<RarityItem>,
-    @SerialName("suggest_drives") val suggestDrives: List<AgentDriveItem>
-)
-
-@Serializable
-data class AgentBasicData(
-    val hp: Int,
-    val atk: Int,
-    val def: Int,
-    @SerialName("core_skill_enhancements") val nameAndValues: List<NameAndValue> = emptyList()
-)
-
-@Serializable
-data class NameAndValue(
-    val name: String, val value: String
-)
-
-@Serializable
-data class AgentLevelMaterial(
-    @SerialName("skill_ten") val skillTen: List<LevelMaterial>,
-    @SerialName("skill_max") val skillMax: List<LevelMaterial>
-)
-
-@Serializable
-data class LevelMaterial(
-    val id: Int, val amount: Int
+    val mindscapeCinema: List<NameAndDesc>,
+    val levelMaterial: AgentLevelMaterial,
+    val suggestWEngines: List<RarityItem>,
+    val suggestDrives: List<AgentDriveItem>
 ) {
-    fun getAmountText(): String {
-        return amount.toString()
-    }
-
-    fun getProfileUrl(path: String = ZzzConfig.ASSET_PATH): String {
-        return "https://raw.githubusercontent.com/$path/Material/$id.webp"
+    fun getHpAtkDef(): String {
+        return "${basicData.hp} / ${basicData.atk} / ${basicData.def}"
     }
 }
 
-@Serializable
-data class RarityItem(
-    val id: Int, val rarity: Int
-) {
-    fun getWEngineIconUrl(path: String = ZzzConfig.ASSET_PATH): String {
-        return "https://raw.githubusercontent.com/$path/W-Engine/Image/$id.webp"
-    }
-
-    fun getRarity(): ZzzRarity {
-        return ZzzRarity.entries.find { it.level == rarity } ?: ZzzRarity.RANK_A
-    }
-}
-
-@Serializable
-data class AgentDriveItem(
-    val id: Int, val suit: Int
-) {
-    fun getDriveIconUrl(path: String = ZzzConfig.ASSET_PATH): String {
-        return "https://raw.githubusercontent.com/$path/Drive/$id.webp"
-    }
-
-    fun getSuitString(): String {
-        return suit.toString()
-    }
-}
-
-@Serializable
-data class AgentSkill(
-    @SerialName("basic_attack") val basicAttack: List<NameAndDesc>,
-    val dodge: List<NameAndDesc>,
-    @SerialName("dash_attack") val dashAttack: List<NameAndDesc>,
-    @SerialName("dodge_counter") val dodgeCounter: List<NameAndDesc>,
-    @SerialName("quick_assist") val quickAssist: List<NameAndDesc>,
-    @SerialName("defensive_assist") val defensiveAssist: List<NameAndDesc>,
-    @SerialName("assist_follow_up") val assistFollowUp: List<NameAndDesc>,
-    @SerialName("special_attack") val specialAttack: List<NameAndDesc>,
-    @SerialName("ex_special_attack") val exSpecialAttack: List<NameAndDesc>,
-    @SerialName("chain_attack") val chainAttack: List<NameAndDesc>,
-    val ultimate: List<NameAndDesc>,
-    @SerialName("core_passive") val corePassive: List<NameAndDesc>,
-    @SerialName("additional_ability") val additionalAbility: List<NameAndDesc>
-)
-
-@Serializable
-data class NameAndDesc(
-    val name: String, val description: String
-)
-
-val stubAgentDetailResponse = AgentDetailResponse(
+val stubAgentDetail = AgentDetail(
     id = 20,
     name = "青衣",
     fullName = "青衣",
     isLeak = false,
-    rarity = 5,
-    specialty = "stun",
-    attribute = "electric",
-    attackType = "strike",
-    factionId = 6, agentBackground = "青衣背景",
+    portraitUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Agent/Portrait/20.webp",
+    mindscapePartialUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Agent/Mindscape/Partial/20.webp",
+    mindscapeFullUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Agent/Mindscape/Full/20.webp",
+    rarity = ZzzRarity.RANK_S,
+    attribute = AgentAttribute.Electric,
+    specialty = AgentSpecialty.Stun,
+    attackType = AgentAttackType.Strike,
+    faction = Faction(6),
+    agentBackground = "青衣背景",
     basicData = AgentBasicData(
         hp = 8250, atk = 683, def = 612, nameAndValues = listOf(
             NameAndValue(

@@ -85,10 +85,10 @@ fun AgentsListCard(
             items(items = agentsList, key = { it.id }) { agent ->
                 RarityItem(
                     modifier = Modifier.animateItem(),
-                    rarityLevel = agent.rarity,
+                    rarity = agent.rarity,
                     name = agent.name,
-                    attribute = agent.getAttributeEnum(),
-                    imgUrl = agent.getProfileUrl(),
+                    attribute = agent.attribute,
+                    imgUrl = agent.imageUrl,
                     onClick = {
                         onAgentDetailClick(agent.id)
                     })

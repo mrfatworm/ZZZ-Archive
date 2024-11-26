@@ -1,9 +1,9 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.agent.components
+package feature.agent.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,6 +12,14 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import feature.agent.components.AgentAttributesCard
+import feature.agent.components.AgentImageCard
+import feature.agent.components.AgentMaterialsCard
+import feature.agent.components.CinemaCard
+import feature.agent.components.GalleryCard
+import feature.agent.components.SkillsCard
+import feature.agent.components.SuggestDrivesCard
+import feature.agent.components.SuggestWEnginesCard
 import feature.agent.model.AgentDetailState
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.TextCard

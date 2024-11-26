@@ -55,7 +55,7 @@ fun RarityItem(
     modifier: Modifier = Modifier,
     name: String,
     imgUrl: String? = null,
-    rarityLevel: Int? = null,
+    rarity: ZzzRarity? = null,
     attribute: AgentAttribute? = null,
     specialty: AgentSpecialty? = null,
     onClick: () -> Unit
@@ -91,10 +91,10 @@ fun RarityItem(
                 AttributeTag(Modifier.align(Alignment.TopEnd), specialty.textRes, specialty.iconRes)
             }
 
-            rarityLevel?.let {
+            rarity?.let {
                 RarityIndicator(
                     Modifier.align(Alignment.BottomStart),
-                    rarityLevel,
+                    rarity,
                     isHovered.value || isPressed.value
                 )
             }
@@ -124,9 +124,8 @@ private fun AttributeTag(modifier: Modifier, textRes: StringResource, iconRes: D
 }
 
 @Composable
-private fun RarityIndicator(modifier: Modifier, rarityLevel: Int, isFocus: Boolean = false) {
+private fun RarityIndicator(modifier: Modifier, rarity: ZzzRarity, isFocus: Boolean = false) {
     val animatedHeight by animateDpAsState(targetValue = if (isFocus) 8.dp else 0.dp)
-    val rarityEnum = ZzzRarity.entries.find { it.level == rarityLevel } ?: ZzzRarity.RANK_D
 
-    Spacer(modifier.fillMaxWidth().height(animatedHeight).background(rarityEnum.color))
+    Spacer(modifier.fillMaxWidth().height(animatedHeight).background(rarity.color))
 }

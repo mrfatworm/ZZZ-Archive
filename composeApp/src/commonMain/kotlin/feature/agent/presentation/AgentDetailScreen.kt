@@ -8,15 +8,12 @@ package feature.agent.presentation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import feature.agent.components.AgentDetailScreenDual
-import feature.agent.components.AgentDetailScreenSingle
 import feature.agent.model.AgentDetailState
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.ErrorScreen
 import ui.components.LoadingScreen
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
-import utils.UiResult
 
 @Composable
 fun AgentDetailScreen(
@@ -26,26 +23,22 @@ fun AgentDetailScreen(
     onBackClick: () -> Unit
 ) {
     val viewModel: AgentDetailViewModel = koinViewModel()
-    val agentDetailState by viewModel.agentDetailState.collectAsStateWithLifecycle()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    when (agentDetailState) {
-        UiResult.Loading -> LoadingScreen()
-        is UiResult.Error -> ErrorScreen(
-            (agentDetailState as UiResult.Error).message,
-            onAction = {
-                viewModel.onAction(AgentDetailAction.OnRetry)
-            })
-
-        is UiResult.Success -> {
-            AgentDetailContent(contentType, uiState, adaptiveLayoutType, onAction = { action ->
-                when (action) {
-                    is AgentDetailAction.OnWEngineClick -> wEngineClick(action.wEngineId)
-                    AgentDetailAction.OnBackClick -> onBackClick()
-                    else -> viewModel.onAction(action)
-                }
-            })
-        }
+    if (uiState.isLoading) {
+        LoadingScreen()
+    } else if (uiState.error != null) {
+        ErrorScreen(uiState.error!!, onAction = {
+            viewModel.onAction(AgentDetailAction.OnRetry)
+        })
+    } else {
+        AgentDetailContent(contentType, uiState, adaptiveLayoutType, onAction = { action ->
+            when (action) {
+                is AgentDetailAction.OnWEngineClick -> wEngineClick(action.wEngineId)
+                AgentDetailAction.OnBackClick -> onBackClick()
+                else -> viewModel.onAction(action)
+            }
+        })
     }
 }
 

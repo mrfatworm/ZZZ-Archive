@@ -6,24 +6,33 @@
 package feature.agent.model
 
 import feature.drive.model.DriveListItem
+import utils.AgentAttackType
+import utils.AgentAttribute
+import utils.AgentSpecialty
+import utils.ZzzRarity
 
 
 data class AgentDetailState(
-    val agentDetail: AgentDetailResponse = emptyAgentDetailResponse,
+    val agentDetail: AgentDetail = emptyAgentDetail,
     val drivesList: List<DriveListItem> = emptyList(),
-    val selectedDrive: DriveListItem? = null
+    val selectedDrive: DriveListItem? = null,
+    val isLoading: Boolean = true,
+    val error: String? = null
 )
 
-val emptyAgentDetailResponse = AgentDetailResponse(
+val emptyAgentDetail = AgentDetail(
     id = 0,
     name = "",
     fullName = "",
     isLeak = false,
-    rarity = 5,
-    specialty = "",
-    attribute = "",
-    attackType = "",
-    factionId = 0,
+    portraitUrl = "",
+    mindscapePartialUrl = "",
+    mindscapeFullUrl = "",
+    rarity = ZzzRarity.RANK_D,
+    specialty = AgentSpecialty.None,
+    attribute = AgentAttribute.None,
+    attackType = AgentAttackType.None,
+    faction = Faction(0),
     agentBackground = "---",
     basicData = AgentBasicData(
         hp = 0, atk = 0, def = 0, nameAndValues = emptyList()

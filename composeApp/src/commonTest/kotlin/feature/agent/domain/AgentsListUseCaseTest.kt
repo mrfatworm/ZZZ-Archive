@@ -7,7 +7,7 @@ package feature.agent.domain
 
 import feature.agent.data.FakeAgentRepository
 import feature.agent.model.Faction
-import feature.agent.model.stubAgentsListResponse
+import feature.agent.model.stubAgentsList
 import kotlinx.coroutines.test.runTest
 import utils.AgentAttribute
 import utils.AgentSpecialty
@@ -26,7 +26,7 @@ class AgentsListUseCaseTest {
     @Test
     fun `Get Agents List Success`() = runTest {
         val result = agentsListUseCase.invoke().getOrNull()
-        assertEquals(result, stubAgentsListResponse.agents.reversed())
+        assertEquals(result, stubAgentsList.reversed())
     }
 
     @Test
@@ -38,14 +38,14 @@ class AgentsListUseCaseTest {
 
     @Test
     fun `Get Factions List`() {
-        val result = agentsListUseCase.getFactionsList(stubAgentsListResponse.agents)
+        val result = agentsListUseCase.getFactionsList(stubAgentsList)
         assertEquals(result, listOf(Faction(1), Faction(2)))
     }
 
     @Test
     fun `Filter Default`() {
         val result = agentsListUseCase.filterAgentsList(
-            agentsList = stubAgentsListResponse.agents,
+            agentsList = stubAgentsList,
             selectedRarities = emptySet(),
             selectedAttributes = emptySet(),
             selectedSpecialties = emptySet(),
@@ -58,7 +58,7 @@ class AgentsListUseCaseTest {
     @Test
     fun `Filter Nekomiya`() {
         val result = agentsListUseCase.filterAgentsList(
-            agentsList = stubAgentsListResponse.agents,
+            agentsList = stubAgentsList,
             selectedRarities = setOf(ZzzRarity.RANK_S),
             selectedAttributes = setOf(AgentAttribute.Physical),
             selectedSpecialties = setOf(AgentSpecialty.Attack),
@@ -71,7 +71,7 @@ class AgentsListUseCaseTest {
     @Test
     fun `Filter Faction Gentle House`() {
         val result = agentsListUseCase.filterAgentsList(
-            agentsList = stubAgentsListResponse.agents,
+            agentsList = stubAgentsList,
             selectedRarities = emptySet(),
             selectedAttributes = emptySet(),
             selectedSpecialties = emptySet(),
@@ -84,7 +84,7 @@ class AgentsListUseCaseTest {
     @Test
     fun `Filter Faction Gentle House And Nekomiya`() {
         val result = agentsListUseCase.filterAgentsList(
-            agentsList = stubAgentsListResponse.agents,
+            agentsList = stubAgentsList,
             selectedRarities = setOf(ZzzRarity.RANK_S),
             selectedAttributes = setOf(AgentAttribute.Physical),
             selectedSpecialties = setOf(AgentSpecialty.Attack),
@@ -97,7 +97,7 @@ class AgentsListUseCaseTest {
     @Test
     fun `Filter Colin`() {
         val result = agentsListUseCase.filterAgentsList(
-            agentsList = stubAgentsListResponse.agents,
+            agentsList = stubAgentsList,
             selectedRarities = setOf(ZzzRarity.RANK_A),
             selectedAttributes = setOf(AgentAttribute.Physical),
             selectedSpecialties = setOf(AgentSpecialty.Attack),
@@ -110,7 +110,7 @@ class AgentsListUseCaseTest {
     @Test
     fun `Filter Not Match`() {
         val result = agentsListUseCase.filterAgentsList(
-            agentsList = stubAgentsListResponse.agents,
+            agentsList = stubAgentsList,
             selectedRarities = setOf(ZzzRarity.RANK_S),
             selectedAttributes = setOf(AgentAttribute.Ether),
             selectedSpecialties = setOf(AgentSpecialty.Support),

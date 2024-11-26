@@ -6,14 +6,17 @@ buildKonfig = "0.15.2"
 coil = "3.0.3"
 compose-adaptive = "1.0.1"
 compose-plugin = "1.7.1"
-kotlin = "2.0.20"
+kotlin = "2.0.21"
 kotlinx-coroutines = "1.9.0"
 koin = "4.1.0-Beta1"
+ksp = "2.0.21-1.0.27"
 ktor = "3.0.1"
 mockk = "1.13.13"
 multiplatformSettings = "1.2.0"
 navigation-compose = "2.8.0-alpha10"
 okio = "3.9.1"
+room = "2.7.0-alpha11"
+sqlite = "2.5.0-alpha11"
 splashscreen = "1.0.1"
 
 [libraries]
@@ -54,6 +57,11 @@ okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
 multiplatformSettings-no-arg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatformSettings" }
 multiplatformSettings-test = { module = "com.russhwolf:multiplatform-settings-test", version.ref = "multiplatformSettings" }
 
+#===Room
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+
 #===Test
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
@@ -66,6 +74,8 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "room" }
 
 [bundles]
 ktor = [

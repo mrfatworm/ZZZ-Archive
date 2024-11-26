@@ -24,3 +24,8 @@ enum class AgentSpecialty(val textRes: StringResource, val iconRes: DrawableReso
     Defense(Res.string.defense, Res.drawable.ic_specialty_defense),
     None(Res.string.unknown, Res.drawable.ic_help)
 }
+
+fun findAgentSpecialty(specialty: String): AgentSpecialty {
+    return AgentSpecialty.entries.find { it.name.lowercase() == specialty }
+        ?: AgentSpecialty.None
+}

@@ -9,7 +9,7 @@ package feature.agent.presentation
 import MainDispatcherRule
 import androidx.lifecycle.SavedStateHandle
 import feature.agent.domain.AgentDetailUseCase
-import feature.agent.model.stubAgentDetailResponse
+import feature.agent.model.stubAgentDetail
 import feature.drive.domain.DrivesListUseCase
 import feature.drive.model.stubDrivesListResponse
 import io.mockk.coEvery
@@ -33,7 +33,7 @@ class AgentDetailViewModelTest {
 
     @BeforeTest
     fun setup() {
-        coEvery { agentDetailUseCase.invoke(any()) } returns Result.success(stubAgentDetailResponse)
+        coEvery { agentDetailUseCase.invoke(any()) } returns Result.success(stubAgentDetail)
         coEvery { drivesListUseCase.invoke() } returns Result.success(stubDrivesListResponse.drives)
         viewModel = AgentDetailViewModel(savedStateHandle, agentDetailUseCase, drivesListUseCase)
     }
@@ -41,7 +41,7 @@ class AgentDetailViewModelTest {
     @Test
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.agentDetail, stubAgentDetailResponse)
+        assertEquals(state.agentDetail, stubAgentDetail)
         assertEquals(state.drivesList, stubDrivesListResponse.drives)
     }
 }

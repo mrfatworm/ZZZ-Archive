@@ -5,10 +5,10 @@
 
 package feature.agent.data
 
-import feature.agent.model.AgentDetailResponse
-import feature.agent.model.AgentsListResponse
-import feature.agent.model.stubAgentDetailResponse
-import feature.agent.model.stubAgentsListResponse
+import feature.agent.model.AgentDetail
+import feature.agent.model.AgentListItem
+import feature.agent.model.stubAgentDetail
+import feature.agent.model.stubAgentsList
 
 class FakeAgentRepository : AgentRepository {
     private var isError = false
@@ -17,19 +17,19 @@ class FakeAgentRepository : AgentRepository {
         this.isError = isError
     }
 
-    override suspend fun getAgentsList(): Result<AgentsListResponse> {
+    override suspend fun getAgentsList(): Result<List<AgentListItem>> {
         return if (isError) {
             Result.failure(Exception())
         } else {
-            Result.success(stubAgentsListResponse)
+            Result.success(stubAgentsList)
         }
     }
 
-    override suspend fun getAgentDetail(id: Int): Result<AgentDetailResponse> {
+    override suspend fun getAgentDetail(id: Int): Result<AgentDetail> {
         return if (isError) {
             Result.failure(Exception())
         } else {
-            Result.success(stubAgentDetailResponse)
+            Result.success(stubAgentDetail)
         }
     }
 }

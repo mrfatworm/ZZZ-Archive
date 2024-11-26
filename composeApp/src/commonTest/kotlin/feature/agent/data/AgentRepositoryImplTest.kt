@@ -5,8 +5,8 @@
 
 package feature.agent.data
 
-import feature.agent.model.stubAgentDetailResponse
-import feature.agent.model.stubAgentsListResponse
+import feature.agent.model.stubAgentDetail
+import feature.agent.model.stubAgentsList
 import kotlinx.coroutines.test.runTest
 import network.FakeZzzHttp
 import kotlin.test.Test
@@ -20,7 +20,7 @@ class AgentRepositoryImplTest {
     @Test
     fun `Get Agents List Success`() = runTest {
         val result = repository.getAgentsList().getOrNull()
-        assertEquals(result, stubAgentsListResponse)
+        assertEquals(result, stubAgentsList)
     }
 
     @Test
@@ -33,7 +33,7 @@ class AgentRepositoryImplTest {
     @Test
     fun `Get Agent Detail Success`() = runTest {
         val result = repository.getAgentDetail(20).getOrNull()
-        assertEquals(result, stubAgentDetailResponse)
+        assertEquals(result, stubAgentDetail)
     }
 
     @Test

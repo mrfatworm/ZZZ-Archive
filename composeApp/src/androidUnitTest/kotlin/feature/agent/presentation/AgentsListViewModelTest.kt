@@ -9,7 +9,7 @@ package feature.agent.presentation
 import MainDispatcherRule
 import feature.agent.domain.AgentsListUseCase
 import feature.agent.model.Faction
-import feature.agent.model.stubAgentsListResponse
+import feature.agent.model.stubAgentsList
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -31,7 +31,7 @@ class AgentsListViewModelTest {
 
     @BeforeTest
     fun setup() {
-        coEvery { agentsListUseCase.invoke() } returns Result.success(stubAgentsListResponse.agents)
+        coEvery { agentsListUseCase.invoke() } returns Result.success(stubAgentsList)
         every { agentsListUseCase.getFactionsList(any()) } returns listOf(Faction(1), Faction(2))
         every {
             agentsListUseCase.filterAgentsList(
@@ -41,15 +41,15 @@ class AgentsListViewModelTest {
                 any(),
                 any()
             )
-        } returns listOf(stubAgentsListResponse.agents.first())
+        } returns listOf(stubAgentsList.first())
         viewModel = AgentsListViewModel(agentsListUseCase)
     }
 
     @Test
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.agentsList, stubAgentsListResponse.agents)
-        assertEquals(state.filteredAgentsList, stubAgentsListResponse.agents)
+        assertEquals(state.agentsList, stubAgentsList)
+        assertEquals(state.filteredAgentsList, stubAgentsList)
         assertEquals(state.factionsList.size, 2)
     }
 

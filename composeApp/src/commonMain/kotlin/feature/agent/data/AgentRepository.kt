@@ -5,10 +5,10 @@
 
 package feature.agent.data
 
-import feature.agent.model.AgentDetailResponse
-import feature.agent.model.AgentsListResponse
+import feature.agent.model.AgentDetail
+import feature.agent.model.AgentListItem
 
 interface AgentRepository {
-    suspend fun getAgentsList(): Result<AgentsListResponse>
-    suspend fun getAgentDetail(id: Int): Result<AgentDetailResponse>
+    suspend fun getAgentsList(): Result<List<AgentListItem>>
+    suspend fun getAgentDetail(id: Int): Result<AgentDetail>
 }
