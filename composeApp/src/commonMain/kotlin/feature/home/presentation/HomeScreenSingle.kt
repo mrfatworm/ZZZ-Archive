@@ -13,7 +13,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.cover_image.components.CoverImageCard
-import feature.home.AnnouncementBanner
 import feature.news.presentation.NewsPagerCard
 import feature.pixiv.components.PixivTopicCard
 import ui.theme.AppTheme

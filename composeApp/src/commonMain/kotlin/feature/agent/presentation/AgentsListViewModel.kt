@@ -23,30 +23,20 @@ class AgentsListViewModel(
 
     init {
         viewModelScope.launch {
-            fetchAgentsList()
+            observeAgentsList()
         }
     }
 
-    private suspend fun fetchAgentsList() {
-        _uiState.update { it.copy(isLoading = true, error = null) }
-        val result = agentsListUseCase.invoke()
-        result.fold(onSuccess = { agentsList ->
+    private suspend fun observeAgentsList() {
+        agentsListUseCase.invoke().collect { agentsList ->
             _uiState.update {
                 it.copy(
                     agentsList = agentsList,
                     filteredAgentsList = agentsList,
-                    factionsList = agentsListUseCase.getFactionsList(agentsList),
-                    isLoading = false
+                    factionsList = agentsListUseCase.getFactionsList(agentsList)
                 )
             }
-        }, onFailure = { throwable ->
-            _uiState.update {
-                it.copy(
-                    isLoading = false,
-                    error = throwable.message ?: "Get Agents List Unknown error"
-                )
-            }
-        })
+        }
     }
 
     fun onAction(action: AgentsListAction) {
@@ -83,12 +73,6 @@ class AgentsListViewModel(
             is AgentsListAction.OnAgentClick -> {}
 
             AgentsListAction.OnBackClick -> {}
-
-            AgentsListAction.OnRetry -> {
-                viewModelScope.launch {
-                    fetchAgentsList()
-                }
-            }
         }
     }
 

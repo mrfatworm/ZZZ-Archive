@@ -21,3 +21,16 @@ data class AgentsListItemEntity(
     val attackType: String,
     val factionId: Int
 )
+
+val stubAgentsListItemEntity = AgentsListItemEntity(
+    id = 3,
+    name = "貓又",
+    fullName = "貓宮 又奈",
+    imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Agent/Profile/3.webp",
+    isLeak = false,
+    rarity = 5,
+    specialty = "attack",
+    attribute = "physical",
+    attackType = "slash",
+    factionId = 1
+)

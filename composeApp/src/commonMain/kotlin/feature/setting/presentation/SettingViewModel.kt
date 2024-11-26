@@ -6,6 +6,8 @@
 package feature.setting.presentation
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import database.DataBaseUseCase
 import feature.setting.domain.AppInfoUseCase
 import feature.setting.domain.LanguageUseCase
 import feature.setting.domain.ThemeUseCase
@@ -13,13 +15,15 @@ import feature.setting.model.settingState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import utils.AppActionsUseCase
 
 class SettingViewModel(
     private val themeUseCase: ThemeUseCase,
     private val appInfoUseCase: AppInfoUseCase,
     private val appActionsUseCase: AppActionsUseCase,
-    private val languageUseCase: LanguageUseCase
+    private val languageUseCase: LanguageUseCase,
+    private val dataBaseUseCase: DataBaseUseCase
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(settingState)
@@ -53,6 +57,9 @@ class SettingViewModel(
     }
 
     fun setLanguage(langCode: String) {
+        viewModelScope.launch {
+            dataBaseUseCase.deleteAllDatabase()
+        }
         languageUseCase.setLanguage(langCode)
         updateLanguageState()
     }

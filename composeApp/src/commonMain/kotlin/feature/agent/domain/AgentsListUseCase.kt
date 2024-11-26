@@ -5,7 +5,7 @@
 
 package feature.agent.domain
 
-import feature.agent.data.AgentRepository
+import feature.agent.data.repository.AgentRepository
 import feature.agent.model.AgentListItem
 import feature.agent.model.Faction
 import utils.AgentAttribute
@@ -18,6 +18,7 @@ class AgentsListUseCase(
 ) {
 
     suspend fun invoke() = agentRepository.getAgentsList()
+    suspend fun updateAgentsList() = agentRepository.requestAndUpdateAgentsListDB()
 
     fun getFactionsList(agentsList: List<AgentListItem>): List<Faction> {
         val maxFactionId = agentsList.maxOfOrNull { it.factionId } ?: 0

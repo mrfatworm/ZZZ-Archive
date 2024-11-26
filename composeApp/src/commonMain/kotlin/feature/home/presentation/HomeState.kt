@@ -5,7 +5,6 @@
 
 package feature.home.presentation
 
-import feature.agent.model.AgentListItem
 import feature.bangboo.model.BangbooListItem
 import feature.banner.data.BannerResponse
 import feature.cover_image.data.CoverImageResponse
@@ -19,7 +18,6 @@ data class HomeState(
     val coverImage: CoverImageResponse? = null,
     val newsList: List<OfficialNewsState> = emptyList(),
     val pixivTopics: List<RecentArticle> = emptyList(),
-    val agentsList: List<AgentListItem> = emptyList(),
     val wEnginesList: List<WEngineListItem> = emptyList(),
     val bangbooList: List<BangbooListItem> = emptyList(),
     val drivesList: List<DriveListItem> = emptyList()

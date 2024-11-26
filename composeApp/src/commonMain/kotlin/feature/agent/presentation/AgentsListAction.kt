@@ -12,5 +12,4 @@ sealed interface AgentsListAction {
     data class OnFactionFilterChanged(val factionId: Int) : AgentsListAction
     data class OnAgentClick(val agentId: Int) : AgentsListAction
     data object OnBackClick : AgentsListAction
-    data object OnRetry : AgentsListAction
 }

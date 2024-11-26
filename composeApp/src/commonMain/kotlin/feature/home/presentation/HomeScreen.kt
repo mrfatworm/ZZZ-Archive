@@ -1,23 +1,22 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.home
+package feature.home.presentation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import feature.banner.data.BannerResponse
-import feature.home.presentation.HomeScreenDual
-import feature.home.presentation.HomeScreenSingle
-import feature.home.presentation.HomeViewModel
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.Banner
@@ -44,6 +43,7 @@ fun HomeScreen(
     val viewModel: HomeViewModel = koinViewModel()
     val uiState = viewModel.uiState.collectAsState()
     val banner = uiState.value.banner
+    val agentsList by viewModel.agentsListState.collectAsStateWithLifecycle()
     val openBannerDialog = remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
     if (contentType == ContentType.Single) {
@@ -64,6 +64,7 @@ fun HomeScreen(
             })
     } else {
         HomeScreenDual(uiState = uiState.value,
+            agentsList = agentsList,
             adaptiveLayoutType = adaptiveLayoutType,
             onAgentsOverviewClick = onAgentsOverviewClick,
             onWEnginesOverviewClick = onWEnginesOverviewClick,

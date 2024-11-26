@@ -17,6 +17,7 @@ import feature.wengine.domain.WEnginesListUseCase
 import feature.wengine.model.stubWEnginesListResponse
 import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -35,7 +36,7 @@ class WikiViewModelTest {
 
     @BeforeTest
     fun setup() {
-        coEvery { agentsListUseCase.invoke() } returns Result.success(stubAgentsList)
+        coEvery { agentsListUseCase.invoke() } returns flowOf(stubAgentsList)
         coEvery { wEnginesListUseCase.invoke() } returns Result.success(stubWEnginesListResponse.wEngines)
         coEvery { bangbooListUseCase.invoke() } returns Result.success(stubBangbooListResponse.bangboo)
         coEvery { drivesListUseCase.invoke() } returns Result.success(stubDrivesListResponse.drives)
@@ -50,7 +51,8 @@ class WikiViewModelTest {
     @Test
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.agentsList, stubAgentsList)
+        val agentsList = viewModel.agentsList.value
+        assertEquals(agentsList, stubAgentsList)
         assertEquals(state.wEnginesList, stubWEnginesListResponse.wEngines)
         assertEquals(state.bangbooList, stubBangbooListResponse.bangboo)
         assertEquals(state.drivesList, stubDrivesListResponse.drives)

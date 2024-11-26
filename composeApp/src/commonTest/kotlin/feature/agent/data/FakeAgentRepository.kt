@@ -5,10 +5,13 @@
 
 package feature.agent.data
 
+import feature.agent.data.repository.AgentRepository
 import feature.agent.model.AgentDetail
 import feature.agent.model.AgentListItem
 import feature.agent.model.stubAgentDetail
 import feature.agent.model.stubAgentsList
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class FakeAgentRepository : AgentRepository {
     private var isError = false
@@ -17,11 +20,16 @@ class FakeAgentRepository : AgentRepository {
         this.isError = isError
     }
 
-    override suspend fun getAgentsList(): Result<List<AgentListItem>> {
+    override suspend fun getAgentsList(): Flow<List<AgentListItem>> = flow {
+        emit(stubAgentsList)
+    }
+
+
+    override suspend fun requestAndUpdateAgentsListDB(): Result<Unit> {
         return if (isError) {
             Result.failure(Exception())
         } else {
-            Result.success(stubAgentsList)
+            Result.success(Unit)
         }
     }
 

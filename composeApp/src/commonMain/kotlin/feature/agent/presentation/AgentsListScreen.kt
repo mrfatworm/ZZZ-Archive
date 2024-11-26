@@ -10,8 +10,6 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import feature.agent.model.AgentsListState
 import org.koin.compose.viewmodel.koinViewModel
-import ui.components.ErrorScreen
-import ui.components.LoadingScreen
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
 
@@ -24,32 +22,19 @@ fun AgentsListScreen(
 ) {
     val viewModel: AgentsListViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    if (uiState.isLoading) {
-        LoadingScreen()
-    } else if (uiState.error != null) {
-        ErrorScreen(
-            message = uiState.error!!,
-            onAction = {
-                viewModel.onAction(AgentsListAction.OnRetry)
-            }
-        )
-    } else {
-        AgentsListContent(
-            uiState = uiState,
-            contentType = contentType,
-            adaptiveLayoutType = adaptiveLayoutType,
-            onAction = { action ->
-                when (action) {
-                    is AgentsListAction.OnAgentClick -> {
-                        onAgentClick(action.agentId)
-                    }
-
-                    AgentsListAction.OnBackClick -> onBackClick()
-                    else -> viewModel.onAction(action)
+    AgentsListContent(uiState = uiState,
+        contentType = contentType,
+        adaptiveLayoutType = adaptiveLayoutType,
+        onAction = { action ->
+            when (action) {
+                is AgentsListAction.OnAgentClick -> {
+                    onAgentClick(action.agentId)
                 }
+
+                AgentsListAction.OnBackClick -> onBackClick()
+                else -> viewModel.onAction(action)
             }
-        )
-    }
+        })
 }
 
 @Composable
@@ -60,39 +45,43 @@ fun AgentsListContent(
     onAction: (AgentsListAction) -> Unit,
 ) {
     if (contentType == ContentType.Single) {
-        AgentsListScreenSingle(
-            uiState = uiState,
+        AgentsListScreenSingle(uiState = uiState,
             adaptiveLayoutType = adaptiveLayoutType,
             onAgentClick = { id ->
                 onAction(AgentsListAction.OnAgentClick(id))
-            }, onRarityChipSelectionChanged = { newSelection ->
+            },
+            onRarityChipSelectionChanged = { newSelection ->
                 onAction(AgentsListAction.OnRarityFilterChanged(newSelection))
-            }, onAttributeChipSelectionChanged = { newSelection ->
+            },
+            onAttributeChipSelectionChanged = { newSelection ->
                 onAction(AgentsListAction.OnAttributeFilterChanged(newSelection))
-            }, onSpecialtyChipSelectionChanged = { newSelection ->
+            },
+            onSpecialtyChipSelectionChanged = { newSelection ->
                 onAction(AgentsListAction.OnSpecialtyFilterChanged(newSelection))
-            }, onFactionChipSelectionChanged = {
+            },
+            onFactionChipSelectionChanged = {
                 onAction(AgentsListAction.OnFactionFilterChanged(it))
             },
             onBackClick = {
                 onAction(AgentsListAction.OnBackClick)
-            }
-        )
+            })
     } else {
-        AgentsListScreenDual(
-            uiState = uiState,
+        AgentsListScreenDual(uiState = uiState,
             adaptiveLayoutType = adaptiveLayoutType,
             onAgentClick = { id ->
                 onAction(AgentsListAction.OnAgentClick(id))
-            }, onRarityChipSelectionChanged = { newSelection ->
+            },
+            onRarityChipSelectionChanged = { newSelection ->
                 onAction(AgentsListAction.OnRarityFilterChanged(newSelection))
-            }, onAttributeChipSelectionChanged = { newSelection ->
+            },
+            onAttributeChipSelectionChanged = { newSelection ->
                 onAction(AgentsListAction.OnAttributeFilterChanged(newSelection))
-            }, onSpecialtyChipSelectionChanged = { newSelection ->
+            },
+            onSpecialtyChipSelectionChanged = { newSelection ->
                 onAction(AgentsListAction.OnSpecialtyFilterChanged(newSelection))
-            }, onFactionClick = {
+            },
+            onFactionClick = {
                 onAction(AgentsListAction.OnFactionFilterChanged(it))
-            }
-        )
+            })
     }
 }

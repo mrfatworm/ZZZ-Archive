@@ -29,6 +29,7 @@ import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -63,7 +64,8 @@ class HomeViewModelTest {
         every { officialNewsUseCase.convertToOfficialNewsState(any()) } returns listOf(
             stubOfficialNewsState
         )
-        coEvery { agentsListUseCase.invoke() } returns Result.success(stubAgentsList)
+        coEvery { agentsListUseCase.invoke() } returns flowOf(stubAgentsList)
+        coEvery { agentsListUseCase.updateAgentsList() } returns Result.success(Unit)
         coEvery { wEngineListUseCase.invoke() } returns Result.success(stubWEnginesListResponse.wEngines)
         coEvery { bangbooListUseCase.invoke() } returns Result.success(stubBangbooListResponse.bangboo)
         coEvery { drivesListUseCase.invoke() } returns Result.success(stubDrivesListResponse.drives)
@@ -81,13 +83,14 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `Init Data Success`() {
+    fun `Init Data Success`() = runTest {
         val state = viewModel.uiState.value
+        val agentsList = viewModel.agentsListState.value
         assertEquals(state.banner, stubBannerResponse)
         assertEquals(state.coverImage, stubCoverImageResponse)
         assertEquals(state.pixivTopics, stubPixivTopicResponse.getPopularArticles())
         assertEquals(state.newsList.first(), stubOfficialNewsState)
-        assertEquals(state.agentsList, stubAgentsList)
+        assertEquals(agentsList, stubAgentsList)
         assertEquals(state.wEnginesList, stubWEnginesListResponse.wEngines)
         assertEquals(state.bangbooList, stubBangbooListResponse.bangboo)
         assertEquals(state.drivesList, stubDrivesListResponse.drives)

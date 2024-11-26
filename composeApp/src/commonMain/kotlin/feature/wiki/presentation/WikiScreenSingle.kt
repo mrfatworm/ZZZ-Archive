@@ -12,6 +12,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import feature.agent.model.AgentListItem
 import feature.wiki.model.WikiState
 import ui.components.cards.AgentsListCard
 import ui.components.cards.BangbooListCard
@@ -24,6 +25,7 @@ import ui.utils.contentPadding
 @Composable
 fun WikiScreenSingle(
     uiState: WikiState,
+    agentsList: List<AgentListItem>,
     adaptiveLayoutType: AdaptiveLayoutType,
     onAgentsOverviewClick: () -> Unit,
     onWEnginesOverviewClick: () -> Unit,
@@ -39,7 +41,7 @@ fun WikiScreenSingle(
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         AgentsListCard(
-            agentsList = uiState.agentsList,
+            agentsList = agentsList,
             showViewAll = true,
             onAgentsOverviewClick = onAgentsOverviewClick,
             onAgentDetailClick = onAgentDetailClick

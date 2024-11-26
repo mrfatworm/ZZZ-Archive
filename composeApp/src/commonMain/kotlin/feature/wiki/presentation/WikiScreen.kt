@@ -7,6 +7,8 @@ package feature.wiki.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
 import ui.utils.AdaptiveLayoutType
 
@@ -23,9 +25,11 @@ fun WikiScreen(
 ) {
     val viewModel: WikiViewModel = koinViewModel()
     val uiState = viewModel.uiState.collectAsState()
+    val agentsList by viewModel.agentsList.collectAsStateWithLifecycle()
 
     WikiScreenSingle(
         uiState = uiState.value,
+        agentsList = agentsList,
         adaptiveLayoutType = adaptiveLayoutType,
         onAgentsOverviewClick = onAgentsOverviewClick,
         onWEnginesOverviewClick = onWEnginesOverviewClick,

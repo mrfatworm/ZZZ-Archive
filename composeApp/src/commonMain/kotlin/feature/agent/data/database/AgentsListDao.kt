@@ -9,6 +9,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AgentsListDao {
@@ -17,7 +18,7 @@ interface AgentsListDao {
     suspend fun setAgentsList(agentsList: List<AgentsListItemEntity>)
 
     @Query("SELECT * FROM AgentsListItemEntity")
-    suspend fun getAgentsList(): List<AgentsListItemEntity>
+    fun getAgentsList(): Flow<List<AgentsListItemEntity>>
 
     @Query("DELETE FROM AgentsListItemEntity")
     suspend fun deleteAgentsList()

@@ -5,7 +5,7 @@
 
 package feature.agent.domain
 
-import feature.agent.data.AgentRepository
+import feature.agent.data.repository.AgentRepository
 
 
 class AgentDetailUseCase(

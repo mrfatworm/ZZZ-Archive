@@ -8,6 +8,7 @@ package feature.wiki.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.agent.domain.AgentsListUseCase
+import feature.agent.model.AgentListItem
 import feature.bangboo.domain.BangbooListUseCase
 import feature.drive.domain.DrivesListUseCase
 import feature.wengine.domain.WEnginesListUseCase
@@ -26,25 +27,22 @@ class WikiViewModel(
 
     private var _uiState = MutableStateFlow(WikiState())
     val uiState = _uiState.asStateFlow()
+    private var _agentsList = MutableStateFlow<List<AgentListItem>>(emptyList())
+    val agentsList = _agentsList.asStateFlow()
 
     init {
         viewModelScope.launch {
-            launch { fetchAgentsList() }
+            observeAgentsList()
             launch { fetchWEnginesList() }
             launch { fetchBangbooList() }
             launch { fetchDrivesList() }
         }
     }
 
-    private suspend fun fetchAgentsList() {
-        val result = agentsListUseCase.invoke()
-        result.fold(onSuccess = { agentsList ->
-            _uiState.update {
-                it.copy(agentsList = agentsList)
-            }
-        }, onFailure = {
-            println("get agents error: ${it.message}")
-        })
+    private suspend fun observeAgentsList() {
+        agentsListUseCase.invoke().collect { agentsList ->
+            _agentsList.value = agentsList
+        }
     }
 
     private suspend fun fetchWEnginesList() {

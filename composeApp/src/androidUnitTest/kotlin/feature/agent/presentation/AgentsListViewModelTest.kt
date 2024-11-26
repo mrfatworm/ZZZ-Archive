@@ -13,6 +13,7 @@ import feature.agent.model.stubAgentsList
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import utils.AgentAttribute
 import utils.AgentSpecialty
@@ -31,7 +32,7 @@ class AgentsListViewModelTest {
 
     @BeforeTest
     fun setup() {
-        coEvery { agentsListUseCase.invoke() } returns Result.success(stubAgentsList)
+        coEvery { agentsListUseCase.invoke() } returns flowOf(stubAgentsList)
         every { agentsListUseCase.getFactionsList(any()) } returns listOf(Faction(1), Faction(2))
         every {
             agentsListUseCase.filterAgentsList(

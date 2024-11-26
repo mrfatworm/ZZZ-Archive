@@ -8,13 +8,13 @@ package feature.agent.domain
 import feature.agent.data.FakeAgentRepository
 import feature.agent.model.Faction
 import feature.agent.model.stubAgentsList
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import utils.AgentAttribute
 import utils.AgentSpecialty
 import utils.ZzzRarity
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNull
 
 
 class AgentsListUseCaseTest {
@@ -25,15 +25,8 @@ class AgentsListUseCaseTest {
 
     @Test
     fun `Get Agents List Success`() = runTest {
-        val result = agentsListUseCase.invoke().getOrNull()
+        val result = agentsListUseCase.invoke().first()
         assertEquals(result, stubAgentsList)
-    }
-
-    @Test
-    fun `Get Agents List Failure`() = runTest {
-        agentRepository.setError(true)
-        val result = agentsListUseCase.invoke().getOrNull()
-        assertNull(result)
     }
 
     @Test

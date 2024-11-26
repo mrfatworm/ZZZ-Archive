@@ -13,8 +13,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import feature.agent.model.AgentListItem
 import feature.cover_image.components.CoverImageCard
-import feature.home.AnnouncementBanner
 import feature.news.presentation.NewsPagerCard
 import feature.pixiv.components.PixivTopicCard
 import ui.components.cards.AgentsListCard
@@ -28,6 +28,7 @@ import ui.utils.contentPadding
 @Composable
 fun HomeScreenDual(
     uiState: HomeState,
+    agentsList: List<AgentListItem>,
     adaptiveLayoutType: AdaptiveLayoutType,
     onAgentsOverviewClick: () -> Unit,
     onWEnginesOverviewClick: () -> Unit,
@@ -66,7 +67,7 @@ fun HomeScreenDual(
             ) {
                 NewsPagerCard(uiState.newsList)
                 AgentsListCard(
-                    agentsList = uiState.agentsList,
+                    agentsList = agentsList,
                     onAgentsOverviewClick = onAgentsOverviewClick,
                     onAgentDetailClick = onAgentDetailClick
                 )

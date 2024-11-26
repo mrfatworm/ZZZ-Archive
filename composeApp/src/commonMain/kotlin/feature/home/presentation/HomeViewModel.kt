@@ -8,6 +8,7 @@ package feature.home.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.agent.domain.AgentsListUseCase
+import feature.agent.model.AgentListItem
 import feature.bangboo.domain.BangbooListUseCase
 import feature.banner.domain.BannerUseCase
 import feature.cover_image.domain.CoverImageUseCase
@@ -34,18 +35,21 @@ class HomeViewModel(
     private val settingsRepository: SettingsRepository
 ) : ViewModel() {
 
+    private var ignoreBannerId = 0
     private var _uiState = MutableStateFlow(HomeState())
     val uiState = _uiState.asStateFlow()
-    private var ignoreBannerId = 0
+    private var _agentsListState = MutableStateFlow<List<AgentListItem>>(emptyList())
+    val agentsListState = _agentsListState.asStateFlow()
+
 
     init {
         ignoreBannerId = settingsRepository.getBannerIgnoreId()
         viewModelScope.launch {
+            observeAgentsList()
             launch { fetchBanner() }
             launch { fetchBannerImage() }
             launch { fetchZzzOfficialNewsEveryTenMinutes() }
             launch { fetchPixivTopic() }
-            launch { fetchAgentsList() }
             launch { fetchWEnginesList() }
             launch { fetchBangbooList() }
             launch { fetchDrivesList() }
@@ -107,16 +111,10 @@ class HomeViewModel(
         })
     }
 
-
-    private suspend fun fetchAgentsList() {
-        val result = agentsListUseCase.invoke()
-        result.fold(onSuccess = { agentsList ->
-            _uiState.update {
-                it.copy(agentsList = agentsList)
-            }
-        }, onFailure = {
-            println("get agents error: ${it.message}")
-        })
+    private suspend fun observeAgentsList() {
+        agentsListUseCase.invoke().collect { agentsList ->
+            _agentsListState.value = agentsList
+        }
     }
 
     private suspend fun fetchWEnginesList() {
