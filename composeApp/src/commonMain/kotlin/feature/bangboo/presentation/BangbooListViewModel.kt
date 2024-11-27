@@ -8,13 +8,11 @@ package feature.bangboo.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.bangboo.domain.BangbooListUseCase
-import feature.bangboo.model.BangbooListItem
 import feature.bangboo.model.BangbooListState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import utils.UiResult
 
 class BangbooListViewModel(
     private val bangbooListUseCase: BangbooListUseCase
@@ -22,26 +20,22 @@ class BangbooListViewModel(
 
     private var _uiState = MutableStateFlow(BangbooListState())
     val uiState = _uiState.asStateFlow()
-    private var _bangbooList = MutableStateFlow<UiResult<List<BangbooListItem>>>(UiResult.Loading)
-    val bangbooList = _bangbooList.asStateFlow()
 
     init {
         viewModelScope.launch {
-            fetchBangbooList()
+            observeBangbooList()
         }
     }
 
-    private suspend fun fetchBangbooList() {
-        _bangbooList.value = UiResult.Loading
-        val result = bangbooListUseCase.invoke()
-        _bangbooList.value = result.fold(onSuccess = { bangbooList ->
+    private suspend fun observeBangbooList() {
+        bangbooListUseCase.invoke().collect { bangbooList ->
             _uiState.update {
                 it.copy(
-                    bangbooList = bangbooList, filteredBangbooList = bangbooList
+                    bangbooList = bangbooList,
+                    filteredBangbooList = bangbooList
                 )
             }
-            UiResult.Success(bangbooList)
-        }, onFailure = { UiResult.Error(it.message ?: "Unknown Error") })
+        }
     }
 
     fun onAction(action: BangbooListAction) {
@@ -60,20 +54,13 @@ class BangbooListViewModel(
                 filterBangbooList()
             }
 
-            BangbooListAction.OnRetry -> {
-                viewModelScope.launch {
-                    fetchBangbooList()
-                }
-            }
-
             BangbooListAction.OnBackClick -> {}
             is BangbooListAction.OnBangbooClick -> {}
         }
     }
 
 
-    private fun filterBangbooList(
-    ) {
+    private fun filterBangbooList() {
         _uiState.update {
             it.copy(
                 filteredBangbooList = bangbooListUseCase.filterBangbooList(

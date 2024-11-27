@@ -5,13 +5,11 @@
 
 package feature.wiki.model
 
-import feature.bangboo.model.BangbooListItem
-import feature.drive.model.DriveListItem
+import feature.drive.model.DriveListItemResponse
 import feature.wengine.model.WEngineListItem
 
 data class WikiState(
     val wEnginesList: List<WEngineListItem> = emptyList(),
-    val bangbooList: List<BangbooListItem> = emptyList(),
-    val drivesList: List<DriveListItem> = emptyList()
+    val drivesList: List<DriveListItemResponse> = emptyList()
 )
 

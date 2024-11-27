@@ -11,7 +11,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import feature.agent.model.AgentDetailState
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.ErrorScreen
-import ui.components.LoadingScreen
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
 
@@ -25,9 +24,7 @@ fun AgentDetailScreen(
     val viewModel: AgentDetailViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    if (uiState.isLoading) {
-        LoadingScreen()
-    } else if (uiState.error != null) {
+    if (uiState.error != null) {
         ErrorScreen(uiState.error!!, onAction = {
             viewModel.onAction(AgentDetailAction.OnRetry)
         })

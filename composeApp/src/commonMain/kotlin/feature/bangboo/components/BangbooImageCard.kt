@@ -20,7 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import feature.bangboo.model.BangbooDetailResponse
+import feature.bangboo.model.BangbooDetail
 import org.jetbrains.compose.resources.stringResource
 import ui.components.ZzzTag
 import ui.components.buttons.ZzzIconButton
@@ -32,7 +32,7 @@ import zzzarchive.composeapp.generated.resources.ic_arrow_back
 import zzzarchive.composeapp.generated.resources.ic_rare
 
 @Composable
-fun BangbooImageCard(bangbooDetail: BangbooDetailResponse, onBackClick: () -> Unit) {
+fun BangbooImageCard(bangbooDetail: BangbooDetail, onBackClick: () -> Unit) {
     ContentCard {
         ZzzIconButton(
             iconRes = Res.drawable.ic_arrow_back, contentDescriptionRes = Res.string.back
@@ -45,7 +45,7 @@ fun BangbooImageCard(bangbooDetail: BangbooDetailResponse, onBackClick: () -> Un
             AsyncImage(
                 modifier = Modifier.widthIn(min = 120.dp, max = 320.dp).aspectRatio(1f)
                     .align(Alignment.TopCenter),
-                model = bangbooDetail.getBangbooPortraitUrl(),
+                model = bangbooDetail.imageUrl,
                 contentDescription = null,
             )
         }
@@ -62,10 +62,10 @@ fun BangbooImageCard(bangbooDetail: BangbooDetailResponse, onBackClick: () -> Un
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            ZzzTag(text = bangbooDetail.getRarity().code, iconRes = Res.drawable.ic_rare)
+            ZzzTag(text = bangbooDetail.rarity.code, iconRes = Res.drawable.ic_rare)
             ZzzTag(
-                text = stringResource(bangbooDetail.getAttribute().textRes),
-                iconRes = bangbooDetail.getAttribute().iconRes
+                text = stringResource(bangbooDetail.attribute.textRes),
+                iconRes = bangbooDetail.attribute.iconRes
             )
         }
     }

@@ -29,8 +29,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
-import feature.drive.model.DriveListItem
-import feature.drive.model.emptyDriveListItem
+import feature.drive.data.database.DrivesListItemEntity
+import feature.drive.data.database.emptyDriveListItemEntity
 import org.jetbrains.compose.resources.stringResource
 import ui.components.dialogs.DriveDetailDialog
 import ui.components.items.RarityItem
@@ -44,7 +44,9 @@ import zzzarchive.composeapp.generated.resources.drives
 
 @Composable
 fun DrivesListCard(
-    drivesList: List<DriveListItem>, showViewAll: Boolean = false, onDrivesOverviewClick: () -> Unit
+    drivesList: List<DrivesListItemEntity>,
+    showViewAll: Boolean = false,
+    onDrivesOverviewClick: () -> Unit
 ) {
     val openDetailDialog = remember { mutableStateOf(false) }
     val selectedDriveId = remember { mutableStateOf(0) }
@@ -89,7 +91,7 @@ fun DrivesListCard(
                 RarityItem(
                     modifier = Modifier.animateItem(),
                     name = drive.name,
-                    imgUrl = drive.getProfileUrl(),
+                    imgUrl = drive.imageUrl,
                     onClick = {
                         openDetailDialog.value = true
                         selectedDriveId.value = drive.id
@@ -105,8 +107,8 @@ fun DrivesListCard(
     }
     when {
         openDetailDialog.value -> {
-            DriveDetailDialog(driveListItem = drivesList.find { it.id == selectedDriveId.value }
-                ?: emptyDriveListItem, onDismiss = {
+            DriveDetailDialog(drivesListItemEntity = drivesList.find { it.id == selectedDriveId.value }
+                ?: emptyDriveListItemEntity, onDismiss = {
                 openDetailDialog.value = false
             })
         }

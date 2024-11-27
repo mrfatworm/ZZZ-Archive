@@ -8,13 +8,11 @@ package feature.drive.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.drive.domain.DrivesListUseCase
-import feature.drive.model.DriveListItem
 import feature.drive.model.DrivesListState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import utils.UiResult
 
 class DrivesListViewModel(
     private val drivesListUseCase: DrivesListUseCase
@@ -22,29 +20,20 @@ class DrivesListViewModel(
 
     private var _uiState = MutableStateFlow(DrivesListState())
     val uiState = _uiState.asStateFlow()
-    private var _drivesList = MutableStateFlow<UiResult<List<DriveListItem>>>(UiResult.Loading)
-    val drivesList = _drivesList.asStateFlow()
 
     init {
         viewModelScope.launch {
-            fetchAgentsList()
+            observeDrivesList()
         }
     }
 
-    private suspend fun fetchAgentsList() {
-        _drivesList.value = UiResult.Loading
-        val result = drivesListUseCase.invoke()
-        _drivesList.value = result.fold(onSuccess = {
+    private suspend fun observeDrivesList() {
+        drivesListUseCase.invoke().collect { drivesList ->
             _uiState.update { currentState ->
-                currentState.copy(drivesList = it)
-                }
-            UiResult.Success(it)
-        }, onFailure = { UiResult.Error(it.message ?: "Unknown Error") })
-    }
-
-    fun onRetryClick() {
-        viewModelScope.launch {
-            fetchAgentsList()
+                currentState.copy(
+                    drivesList = drivesList
+                )
+            }
         }
     }
 

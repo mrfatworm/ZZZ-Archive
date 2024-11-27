@@ -5,8 +5,9 @@
 
 package feature.drive.domain
 
-import feature.drive.data.DriveRepository
+import feature.drive.data.respository.DriveRepository
 
 class DrivesListUseCase(private val driveRepository: DriveRepository) {
-    suspend fun invoke() = driveRepository.getDrivesList().map { it.drives }
+    suspend fun invoke() = driveRepository.getDrivesList()
+    suspend fun requestAndUpdateDrivesListDB() = driveRepository.requestAndUpdateDrivesListDB()
 }

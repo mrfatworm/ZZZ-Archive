@@ -1,11 +1,10 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.agent.data
+package feature.agent.data.repository
 
-import feature.agent.data.repository.AgentRepository
 import feature.agent.model.AgentDetail
 import feature.agent.model.AgentListItem
 import feature.agent.model.stubAgentDetail

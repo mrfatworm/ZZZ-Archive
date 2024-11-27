@@ -38,7 +38,8 @@ class AgentRepositoryImpl(
                 println("Lance: requestAgentsList")
                 httpClient.requestAgentsList()
             }
-            return Result.success(agentsListDB.setAgentsList(result.agents.map { it.toAgentsListItemEntity() }))
+            agentsListDB.setAgentsList(result.agents.map { it.toAgentsListItemEntity() })
+            return Result.success(Unit)
         } catch (e: Exception) {
             return Result.failure(e)
         }

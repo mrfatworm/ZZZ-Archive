@@ -9,8 +9,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import feature.agent.presentation.AgentDetailScreen
 import feature.agent.presentation.AgentsListScreen
-import feature.bangboo.BangbooDetailScreen
-import feature.bangboo.BangbooListScreen
+import feature.bangboo.presentation.BangbooDetailScreen
+import feature.bangboo.presentation.BangbooListScreen
 import feature.drive.presentation.DrivesListScreen
 import feature.setting.presentation.FeedbackScreen
 import feature.setting.presentation.SettingScreen

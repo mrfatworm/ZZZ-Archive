@@ -19,8 +19,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import feature.agent.model.AgentDriveItem
-import feature.drive.model.DriveListItem
-import feature.drive.model.emptyDriveListItem
+import feature.drive.data.database.DrivesListItemEntity
+import feature.drive.data.database.emptyDriveListItemEntity
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.ContentCard
 import ui.components.cards.HoveredIndicatorHeader
@@ -35,7 +35,7 @@ import zzzarchive.composeapp.generated.resources.suggest_drives
 @Composable
 fun SuggestDrivesCard(
     agentDrivesList: List<AgentDriveItem>,
-    drivesList: List<DriveListItem>
+    drivesList: List<DrivesListItemEntity>
 ) {
     val lazyListState = rememberLazyListState()
     val interactionSource = remember { MutableInteractionSource() }
@@ -77,8 +77,8 @@ fun SuggestDrivesCard(
 
         when {
             openDetailDialog.value -> {
-                DriveDetailDialog(driveListItem = drivesList.find { it.id == selectedDriveId.value }
-                    ?: emptyDriveListItem, onDismiss = {
+                DriveDetailDialog(drivesListItemEntity = drivesList.find { it.id == selectedDriveId.value }
+                    ?: emptyDriveListItemEntity, onDismiss = {
                     openDetailDialog.value = false
                 })
             }

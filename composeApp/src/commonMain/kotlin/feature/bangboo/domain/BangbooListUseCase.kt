@@ -5,13 +5,14 @@
 
 package feature.bangboo.domain
 
-import feature.bangboo.data.BangbooRepository
+import feature.bangboo.data.repository.BangbooRepository
 import feature.bangboo.model.BangbooListItem
 import utils.AgentAttribute
 import utils.ZzzRarity
 
 class BangbooListUseCase(private val bangbooRepository: BangbooRepository) {
-    suspend fun invoke() = bangbooRepository.getBangbooList().map { it.bangboo.reversed() }
+    suspend fun invoke() = bangbooRepository.getBangbooList()
+    suspend fun updateBangbooList() = bangbooRepository.requestAndUpdateBangbooListDB()
 
     fun filterBangbooList(
         bangbooList: List<BangbooListItem>,
@@ -20,9 +21,9 @@ class BangbooListUseCase(private val bangbooRepository: BangbooRepository) {
     ): List<BangbooListItem> {
         return bangbooList.filter { bangboo ->
             val matchRarity =
-                selectedRarities.isEmpty() || selectedRarities.any { it.level == bangboo.rarity }
+                selectedRarities.isEmpty() || selectedRarities.any { it == bangboo.rarity }
             val matchAttribute =
-                selectedAttributes.isEmpty() || selectedAttributes.any { it.name.lowercase() == bangboo.attribute }
+                selectedAttributes.isEmpty() || selectedAttributes.any { it == bangboo.attribute }
             matchRarity && matchAttribute
         }
     }

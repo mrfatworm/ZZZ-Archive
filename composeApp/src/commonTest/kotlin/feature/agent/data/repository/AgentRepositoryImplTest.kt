@@ -1,12 +1,11 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.agent.data
+package feature.agent.data.repository
 
 import feature.agent.data.database.FakeAgentListDao
-import feature.agent.data.repository.AgentRepositoryImpl
 import feature.agent.model.stubAgentDetail
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest

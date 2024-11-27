@@ -14,7 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import feature.agent.model.AgentListItem
+import feature.bangboo.model.BangbooListItem
 import feature.cover_image.components.CoverImageCard
+import feature.drive.data.database.DrivesListItemEntity
 import feature.news.presentation.NewsPagerCard
 import feature.pixiv.components.PixivTopicCard
 import ui.components.cards.AgentsListCard
@@ -29,6 +31,8 @@ import ui.utils.contentPadding
 fun HomeScreenDual(
     uiState: HomeState,
     agentsList: List<AgentListItem>,
+    bangbooList: List<BangbooListItem>,
+    drivesList: List<DrivesListItemEntity>,
     adaptiveLayoutType: AdaptiveLayoutType,
     onAgentsOverviewClick: () -> Unit,
     onWEnginesOverviewClick: () -> Unit,
@@ -77,12 +81,12 @@ fun HomeScreenDual(
                     onWEngineDetailClick = onWEngineDetailClick
                 )
                 BangbooListCard(
-                    bangbooList = uiState.bangbooList,
+                    bangbooList = bangbooList,
                     onBangbooOverviewClick = onBangbooOverviewClick,
                     onBangbooDetailClick = onBangbooDetailClick
                 )
                 DrivesListCard(
-                    drivesList = uiState.drivesList,
+                    drivesList = drivesList,
                     onDrivesOverviewClick = onDrivesOverviewClick,
                 )
             }

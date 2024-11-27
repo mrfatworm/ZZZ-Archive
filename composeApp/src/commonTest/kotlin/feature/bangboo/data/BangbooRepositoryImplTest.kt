@@ -5,6 +5,7 @@
 
 package feature.bangboo.data
 
+import feature.bangboo.data.repository.BangbooRepositoryImpl
 import feature.bangboo.model.stubBangbooListResponse
 import kotlinx.coroutines.test.runTest
 import network.FakeZzzHttp

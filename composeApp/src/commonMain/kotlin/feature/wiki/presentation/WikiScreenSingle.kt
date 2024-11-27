@@ -13,6 +13,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.agent.model.AgentListItem
+import feature.bangboo.model.BangbooListItem
+import feature.drive.data.database.DrivesListItemEntity
 import feature.wiki.model.WikiState
 import ui.components.cards.AgentsListCard
 import ui.components.cards.BangbooListCard
@@ -26,6 +28,8 @@ import ui.utils.contentPadding
 fun WikiScreenSingle(
     uiState: WikiState,
     agentsList: List<AgentListItem>,
+    bangbooList: List<BangbooListItem>,
+    drivesList: List<DrivesListItemEntity>,
     adaptiveLayoutType: AdaptiveLayoutType,
     onAgentsOverviewClick: () -> Unit,
     onWEnginesOverviewClick: () -> Unit,
@@ -53,13 +57,13 @@ fun WikiScreenSingle(
             onWEngineDetailClick = onWEngineDetailClick
         )
         BangbooListCard(
-            bangbooList = uiState.bangbooList,
+            bangbooList = bangbooList,
             showViewAll = true,
             onBangbooOverviewClick = onBangbooOverviewClick,
             onBangbooDetailClick = onBangbooDetailClick
         )
         DrivesListCard(
-            drivesList = uiState.drivesList,
+            drivesList = drivesList,
             showViewAll = true,
             onDrivesOverviewClick = onDrivesOverviewClick
         )

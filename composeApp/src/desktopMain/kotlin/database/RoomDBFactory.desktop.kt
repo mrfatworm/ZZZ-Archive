@@ -8,10 +8,13 @@ package database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import feature.agent.data.database.AgentsListDB
+import feature.bangboo.data.database.BangbooListDB
+import feature.drive.data.database.DrivesListDB
 import java.io.File
 
 actual class RoomDBFactory {
-    actual fun create(): RoomDatabase.Builder<AgentsListDB> {
+
+    private inline fun <reified T : RoomDatabase> createDB(databaseName: String): RoomDatabase.Builder<T> {
         val os = System.getProperty("os.name").lowercase()
         val userHome = System.getProperty("user.home")
         val appDataDir = when {
@@ -24,7 +27,19 @@ actual class RoomDBFactory {
             appDataDir.mkdirs()
         }
 
-        val dbFile = File(appDataDir, AgentsListDB.DATABASE_NAME)
+        val dbFile = File(appDataDir, databaseName)
         return Room.databaseBuilder(dbFile.absolutePath)
+    }
+
+    actual fun createAgentListDB(): RoomDatabase.Builder<AgentsListDB> {
+        return createDB(AgentsListDB.DATABASE_NAME)
+    }
+
+    actual fun createBangbooListDB(): RoomDatabase.Builder<BangbooListDB> {
+        return createDB(BangbooListDB.DATABASE_NAME)
+    }
+
+    actual fun createDrivesListDB(): RoomDatabase.Builder<DrivesListDB> {
+        return createDB(DrivesListDB.DATABASE_NAME)
     }
 }

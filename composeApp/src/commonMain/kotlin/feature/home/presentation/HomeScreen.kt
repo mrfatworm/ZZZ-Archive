@@ -44,6 +44,8 @@ fun HomeScreen(
     val uiState = viewModel.uiState.collectAsState()
     val banner = uiState.value.banner
     val agentsList by viewModel.agentsListState.collectAsStateWithLifecycle()
+    val bangbooList by viewModel.bangbooListState.collectAsStateWithLifecycle()
+    val driveList by viewModel.driveListState.collectAsStateWithLifecycle()
     val openBannerDialog = remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
     if (contentType == ContentType.Single) {
@@ -65,6 +67,8 @@ fun HomeScreen(
     } else {
         HomeScreenDual(uiState = uiState.value,
             agentsList = agentsList,
+            bangbooList = bangbooList,
+            drivesList = driveList,
             adaptiveLayoutType = adaptiveLayoutType,
             onAgentsOverviewClick = onAgentsOverviewClick,
             onWEnginesOverviewClick = onWEnginesOverviewClick,

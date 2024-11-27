@@ -25,7 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import feature.drive.model.DriveListItem
+import feature.drive.data.database.DrivesListItemEntity
 import org.jetbrains.compose.resources.stringResource
 import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
@@ -36,7 +36,7 @@ import zzzarchive.composeapp.generated.resources.piece_set
 
 @Composable
 fun DriveDetailCard(
-    modifier: Modifier = Modifier, driveListItem: DriveListItem, onDismiss: () -> Unit
+    modifier: Modifier = Modifier, drivesListItemEntity: DrivesListItemEntity, onDismiss: () -> Unit
 ) {
     Card(
         modifier = modifier, colors = CardDefaults.cardColors(
@@ -47,7 +47,7 @@ fun DriveDetailCard(
         Box(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp)) {
             Text(
                 modifier = Modifier.align(Alignment.Center),
-                text = driveListItem.name,
+                text = drivesListItemEntity.name,
                 color = AppTheme.colors.onSurfaceVariant,
                 style = AppTheme.typography.titleMedium
             )
@@ -67,7 +67,7 @@ fun DriveDetailCard(
         ) {
             AsyncImage(
                 modifier = Modifier.widthIn(max = 160.dp, min = 120.dp).aspectRatio(1f),
-                model = driveListItem.getProfileUrl(),
+                model = drivesListItemEntity.imageUrl,
                 contentDescription = null
             )
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -82,7 +82,7 @@ fun DriveDetailCard(
                         .clip(RoundedCornerShape(AppTheme.radius.contentCard))
                         .background(AppTheme.colors.surface)
                         .padding(horizontal = 16.dp, vertical = 8.dp),
-                    text = driveListItem.pieceSetTwo,
+                    text = drivesListItemEntity.pieceSetTwo,
                     style = AppTheme.typography.bodyMedium,
                     color = AppTheme.colors.onSurface
                 )
@@ -99,7 +99,7 @@ fun DriveDetailCard(
                         .clip(RoundedCornerShape(AppTheme.radius.contentCard))
                         .background(AppTheme.colors.surface)
                         .padding(horizontal = 16.dp, vertical = 8.dp),
-                    text = driveListItem.pieceSetFour,
+                    text = drivesListItemEntity.pieceSetFour,
                     style = AppTheme.typography.bodyMedium,
                     color = AppTheme.colors.onSurface
                 )

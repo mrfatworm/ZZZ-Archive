@@ -5,7 +5,7 @@
 
 package feature.bangboo.domain
 
-import feature.bangboo.data.BangbooRepository
+import feature.bangboo.data.repository.BangbooRepository
 
 class BangbooDetailUseCase(private val bangbooRepository: BangbooRepository) {
     suspend fun invoke(id: Int) = bangbooRepository.getBangbooDetail(id)

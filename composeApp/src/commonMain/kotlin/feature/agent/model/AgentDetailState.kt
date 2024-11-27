@@ -5,7 +5,8 @@
 
 package feature.agent.model
 
-import feature.drive.model.DriveListItem
+import feature.drive.data.database.DrivesListItemEntity
+import feature.drive.model.DriveListItemResponse
 import utils.AgentAttackType
 import utils.AgentAttribute
 import utils.AgentSpecialty
@@ -14,9 +15,9 @@ import utils.ZzzRarity
 
 data class AgentDetailState(
     val agentDetail: AgentDetail = emptyAgentDetail,
-    val drivesList: List<DriveListItem> = emptyList(),
-    val selectedDrive: DriveListItem? = null,
-    val isLoading: Boolean = true,
+    val drivesList: List<DrivesListItemEntity> = emptyList(),
+    val selectedDrive: DriveListItemResponse? = null,
+    val isLoading: Boolean = false,
     val error: String? = null
 )
 

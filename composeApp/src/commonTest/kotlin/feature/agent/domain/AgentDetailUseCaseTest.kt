@@ -5,7 +5,7 @@
 
 package feature.agent.domain
 
-import feature.agent.data.FakeAgentRepository
+import feature.agent.data.repository.FakeAgentRepository
 import feature.agent.model.stubAgentDetail
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test

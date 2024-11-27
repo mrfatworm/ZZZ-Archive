@@ -13,8 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import feature.drive.data.database.emptyDriveListItemEntity
 import feature.drive.model.DrivesListState
-import feature.drive.model.emptyDriveListItem
 import org.jetbrains.compose.resources.stringResource
 import ui.components.ZzzTopBar
 import ui.components.dialogs.DriveDetailDialog
@@ -56,7 +56,7 @@ fun DrivesListScreenSingle(
     when {
         openDetailDialog.value -> {
             DriveDetailDialog(
-                driveListItem = uiState.selectedDrive ?: emptyDriveListItem,
+                drivesListItemEntity = uiState.selectedDrive ?: emptyDriveListItemEntity,
                 onDismiss = {
                     openDetailDialog.value = false
                 })

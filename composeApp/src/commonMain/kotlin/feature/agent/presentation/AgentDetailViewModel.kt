@@ -29,7 +29,7 @@ class AgentDetailViewModel(
     init {
         viewModelScope.launch {
             fetchAgentsDetail(agentId)
-            fetchDrivesList()
+            observeDrivesList()
         }
     }
 
@@ -50,15 +50,12 @@ class AgentDetailViewModel(
         })
     }
 
-    private suspend fun fetchDrivesList() {
-        val result = drivesListUseCase.invoke()
-        result.fold(onSuccess = { drivesList ->
+    private suspend fun observeDrivesList() {
+        drivesListUseCase.invoke().collect { drivesList ->
             _uiState.update {
                 it.copy(drivesList = drivesList)
             }
-        }, onFailure = {
-            println("fetchDrivesList error: ${it.message}")
-        })
+        }
     }
 
     fun onAction(action: AgentDetailAction) {

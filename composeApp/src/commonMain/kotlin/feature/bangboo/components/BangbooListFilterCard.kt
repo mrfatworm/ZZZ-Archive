@@ -74,11 +74,10 @@ fun BangbooListFilterCard(
                 val bangboo = uiState.filteredBangbooList[index]
                 RarityItem(
                     modifier = Modifier.animateItem(),
-                    rarity = ZzzRarity.entries.find { it.level == bangboo.rarity }
-                        ?: ZzzRarity.RANK_D,
+                    rarity = bangboo.rarity,
                     name = bangboo.name,
-                    attribute = bangboo.getAttributeEnum(),
-                    imgUrl = bangboo.getProfileUrl(),
+                    attribute = bangboo.attribute,
+                    imgUrl = bangboo.imageUrl,
                     onClick = {
                         onBangbooClick(bangboo.id)
                     })

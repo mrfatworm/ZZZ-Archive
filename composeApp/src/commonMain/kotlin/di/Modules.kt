@@ -16,8 +16,9 @@ import feature.agent.domain.AgentDetailUseCase
 import feature.agent.domain.AgentsListUseCase
 import feature.agent.presentation.AgentDetailViewModel
 import feature.agent.presentation.AgentsListViewModel
-import feature.bangboo.data.BangbooRepository
-import feature.bangboo.data.BangbooRepositoryImpl
+import feature.bangboo.data.database.BangbooListDB
+import feature.bangboo.data.repository.BangbooRepository
+import feature.bangboo.data.repository.BangbooRepositoryImpl
 import feature.bangboo.domain.BangbooDetailUseCase
 import feature.bangboo.domain.BangbooListUseCase
 import feature.bangboo.presentation.BangbooDetailViewModel
@@ -28,8 +29,9 @@ import feature.banner.domain.BannerUseCase
 import feature.cover_image.data.CoverImageRepository
 import feature.cover_image.data.CoverImageRepositoryImpl
 import feature.cover_image.domain.CoverImageUseCase
-import feature.drive.data.DriveRepository
-import feature.drive.data.DriveRepositoryImpl
+import feature.drive.data.database.DrivesListDB
+import feature.drive.data.respository.DriveRepository
+import feature.drive.data.respository.DriveRepositoryImpl
 import feature.drive.domain.DrivesListUseCase
 import feature.drive.presentation.DrivesListViewModel
 import feature.home.presentation.HomeViewModel
@@ -67,12 +69,14 @@ expect val platformModule: Module
 
 val sharedModule = module {
     single<Settings> { Settings() }
-    single {
-        get<RoomDBFactory>().create()
-            .setDriver(BundledSQLiteDriver())
-            .build()
-    }
+
+    // Database
+    single { get<RoomDBFactory>().createAgentListDB().setDriver(BundledSQLiteDriver()).build() }
+    single { get<RoomDBFactory>().createBangbooListDB().setDriver(BundledSQLiteDriver()).build() }
+    single { get<RoomDBFactory>().createDrivesListDB().setDriver(BundledSQLiteDriver()).build() }
     single { get<AgentsListDB>().agentsListDao }
+    single { get<BangbooListDB>().bangbooListDao }
+    single { get<DrivesListDB>().drivesListDao }
 
     // Repositories
     single<SettingsRepository> { SettingsRepositoryImpl(get()) }
@@ -82,8 +86,8 @@ val sharedModule = module {
     single<CoverImageRepository> { CoverImageRepositoryImpl(get()) }
     single<AgentRepository> { AgentRepositoryImpl(get(), get()) }
     single<WEngineRepository> { WEngineRepositoryImpl(get()) }
-    single<BangbooRepository> { BangbooRepositoryImpl(get()) }
-    single<DriveRepository> { DriveRepositoryImpl(get()) }
+    single<BangbooRepository> { BangbooRepositoryImpl(get(), get()) }
+    single<DriveRepository> { DriveRepositoryImpl(get(), get()) }
     single<GoogleDocRepository> { GoogleDocRepositoryImpl(get()) }
 
     // Use cases

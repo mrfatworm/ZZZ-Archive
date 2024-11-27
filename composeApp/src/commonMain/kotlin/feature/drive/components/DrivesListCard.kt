@@ -51,7 +51,7 @@ fun DrivesListCard(
                 RarityItem(
                     modifier = Modifier.animateItem(),
                     name = drive.name,
-                    imgUrl = drive.getProfileUrl(),
+                    imgUrl = drive.imageUrl,
                     onClick = {
                         onDriveClick(drive.id)
                     })

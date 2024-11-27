@@ -5,8 +5,10 @@
 
 package feature.drive.data
 
-import feature.drive.model.DrivesListResponse
+import feature.drive.data.database.DrivesListItemEntity
+import feature.drive.data.respository.DriveRepository
 import feature.drive.model.stubDrivesListResponse
+import kotlinx.coroutines.flow.Flow
 
 class FakeDriveRepository : DriveRepository {
     private var isError = false
@@ -15,7 +17,7 @@ class FakeDriveRepository : DriveRepository {
         this.isError = isError
     }
 
-    override suspend fun getDrivesList(): Result<DrivesListResponse> {
+    override suspend fun getDrivesList(): Flow<List<DrivesListItemEntity>> {
         return if (isError) {
             Result.failure(Exception())
         } else {

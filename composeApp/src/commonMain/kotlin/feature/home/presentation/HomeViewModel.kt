@@ -10,8 +10,10 @@ import androidx.lifecycle.viewModelScope
 import feature.agent.domain.AgentsListUseCase
 import feature.agent.model.AgentListItem
 import feature.bangboo.domain.BangbooListUseCase
+import feature.bangboo.model.BangbooListItem
 import feature.banner.domain.BannerUseCase
 import feature.cover_image.domain.CoverImageUseCase
+import feature.drive.data.database.DrivesListItemEntity
 import feature.drive.domain.DrivesListUseCase
 import feature.home.model.pixivTagDropdownItems
 import feature.news.domain.OfficialNewsUseCase
@@ -40,19 +42,23 @@ class HomeViewModel(
     val uiState = _uiState.asStateFlow()
     private var _agentsListState = MutableStateFlow<List<AgentListItem>>(emptyList())
     val agentsListState = _agentsListState.asStateFlow()
+    private var _bangbooListState = MutableStateFlow<List<BangbooListItem>>(emptyList())
+    val bangbooListState = _bangbooListState.asStateFlow()
+    private var _driveListState = MutableStateFlow<List<DrivesListItemEntity>>(emptyList())
+    val driveListState = _driveListState.asStateFlow()
 
 
     init {
         ignoreBannerId = settingsRepository.getBannerIgnoreId()
         viewModelScope.launch {
-            observeAgentsList()
             launch { fetchBanner() }
             launch { fetchBannerImage() }
             launch { fetchZzzOfficialNewsEveryTenMinutes() }
             launch { fetchPixivTopic() }
+            launch { observeAgentsList() }
             launch { fetchWEnginesList() }
-            launch { fetchBangbooList() }
-            launch { fetchDrivesList() }
+            launch { observeBangbooList() }
+            launch { observeDrivesList() }
         }
     }
 
@@ -128,25 +134,15 @@ class HomeViewModel(
         })
     }
 
-    private suspend fun fetchBangbooList() {
-        val result = bangbooListUseCase.invoke()
-        result.fold(onSuccess = { bangbooList ->
-            _uiState.update {
-                it.copy(bangbooList = bangbooList)
-            }
-        }, onFailure = {
-            println("get bangboo error: ${it.message}")
-        })
+    private suspend fun observeBangbooList() {
+        bangbooListUseCase.invoke().collect { bangbooList ->
+            _bangbooListState.value = bangbooList
+        }
     }
 
-    private suspend fun fetchDrivesList() {
-        val result = drivesListUseCase.invoke()
-        result.fold(onSuccess = { drivesList ->
-            _uiState.update {
-                it.copy(drivesList = drivesList)
-            }
-        }, onFailure = {
-            println("get drives error: ${it.message}")
-        })
+    private suspend fun observeDrivesList() {
+        drivesListUseCase.invoke().collect { drivesList ->
+            _driveListState.value = drivesList
+        }
     }
 }

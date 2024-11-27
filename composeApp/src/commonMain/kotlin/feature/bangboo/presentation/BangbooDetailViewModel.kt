@@ -9,13 +9,11 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.bangboo.domain.BangbooDetailUseCase
-import feature.bangboo.model.BangbooDetailResponse
 import feature.bangboo.model.BangbooDetailState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import utils.UiResult
 
 class BangbooDetailViewModel(
     savedStateHandle: SavedStateHandle,
@@ -25,8 +23,6 @@ class BangbooDetailViewModel(
 
     private var _uiState = MutableStateFlow(BangbooDetailState())
     val uiState = _uiState.asStateFlow()
-    private var _bangbooDetail = MutableStateFlow<UiResult<BangbooDetailResponse>>(UiResult.Loading)
-    val bangbooDetail = _bangbooDetail.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -35,16 +31,17 @@ class BangbooDetailViewModel(
     }
 
     private suspend fun fetchBangbooDetail(id: Int) {
-        _bangbooDetail.value = UiResult.Loading
-        val result = bangbooDetailUseCase.invoke(id)
-        _bangbooDetail.value = result.fold(
+        _uiState.update { it.copy(isLoading = true, error = null) }
+        val result = bangbooDetailUseCase.invoke(id).fold(
             onSuccess = { bangbooDetail ->
                 _uiState.update {
                     it.copy(bangbooDetail = bangbooDetail)
                 }
-                UiResult.Success(bangbooDetail)
-            },
-            onFailure = { UiResult.Error(it.message ?: "Unknown Error") }
+            }, onFailure = { throwable ->
+                _uiState.update {
+                    it.copy(isLoading = false, error = throwable.message ?: "Unknown Error")
+                }
+            }
         )
     }
 

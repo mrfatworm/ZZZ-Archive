@@ -5,17 +5,16 @@
 
 package feature.drive.model
 
-import com.mrfatworm.zzzarchive.ZzzConfig
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class DrivesListResponse(
-    val drives: List<DriveListItem>
+    val drives: List<DriveListItemResponse>
 )
 
 @Serializable
-data class DriveListItem(
+data class DriveListItemResponse(
     val id: Int,
     val name: String,
     @SerialName("is_leak") val isLeak: Boolean,
@@ -23,29 +22,17 @@ data class DriveListItem(
     val pieceSetTwo: String,
     @SerialName("piece_set_four")
     val pieceSetFour: String
-) {
-    fun getProfileUrl(): String {
-        return "https://raw.githubusercontent.com/${ZzzConfig.ASSET_PATH}/Drive/$id.webp"
-    }
-}
-
-val emptyDriveListItem = DriveListItem(
-    id = 0,
-    name = "---",
-    isLeak = false,
-    pieceSetTwo = "---",
-    pieceSetFour = "---"
 )
 
 val stubDrivesListResponse = DrivesListResponse(
     drives = listOf(
-        DriveListItem(
+        DriveListItemResponse(
             id = 1,
             name = "搖擺爵士",
             isLeak = false,
             pieceSetTwo = "能量自動回復提升20%。",
             pieceSetFour = "發動[連攜技]或[終結技]時，全隊造成的傷害提升15%，持續12秒，同名被動效果之間不可疊加。"
-        ), DriveListItem(
+        ), DriveListItemResponse(
             id = 2,
             name = "混沌重金屬",
             isLeak = false,

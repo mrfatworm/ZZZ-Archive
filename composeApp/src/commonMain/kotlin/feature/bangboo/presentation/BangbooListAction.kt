@@ -9,5 +9,4 @@ sealed interface BangbooListAction {
     data class OnAttributeFilterChanged(val attributes: Set<AgentAttribute>) : BangbooListAction
     data class OnBangbooClick(val bangbooId: Int) : BangbooListAction
     data object OnBackClick : BangbooListAction
-    data object OnRetry : BangbooListAction
 }

@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import feature.bangboo.model.BangbooDetailResponse
+import feature.bangboo.model.BangbooDetail
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.CardHeader
 import ui.components.cards.ContentCard
@@ -22,7 +22,7 @@ import zzzarchive.composeapp.generated.resources.def
 import zzzarchive.composeapp.generated.resources.hp
 
 @Composable
-fun BangbooAttributesCard(bangbooDetail: BangbooDetailResponse) {
+fun BangbooAttributesCard(bangbooDetail: BangbooDetail) {
     ContentCard(hasDefaultPadding = false) {
         CardHeader(
             title = stringResource(Res.string.attributes) + " Lv.Max"

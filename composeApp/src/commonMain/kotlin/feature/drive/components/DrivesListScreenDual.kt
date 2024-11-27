@@ -35,7 +35,7 @@ fun DrivesListScreenDual(
         uiState.selectedDrive?.let { driveListItem ->
             DriveDetailCard(
                 modifier = Modifier.width(360.dp),
-                driveListItem = driveListItem,
+                drivesListItemEntity = driveListItem,
                 onDismiss = onDetailDismiss
             )
         }

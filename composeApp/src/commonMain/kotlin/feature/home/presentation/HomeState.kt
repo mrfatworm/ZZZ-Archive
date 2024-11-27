@@ -5,10 +5,10 @@
 
 package feature.home.presentation
 
-import feature.bangboo.model.BangbooListItem
+import feature.bangboo.model.BangbooListItemResponse
 import feature.banner.data.BannerResponse
 import feature.cover_image.data.CoverImageResponse
-import feature.drive.model.DriveListItem
+import feature.drive.model.DriveListItemResponse
 import feature.news.presentation.OfficialNewsState
 import feature.pixiv.data.RecentArticle
 import feature.wengine.model.WEngineListItem
@@ -19,7 +19,7 @@ data class HomeState(
     val newsList: List<OfficialNewsState> = emptyList(),
     val pixivTopics: List<RecentArticle> = emptyList(),
     val wEnginesList: List<WEngineListItem> = emptyList(),
-    val bangbooList: List<BangbooListItem> = emptyList(),
-    val drivesList: List<DriveListItem> = emptyList()
+    val bangbooList: List<BangbooListItemResponse> = emptyList(),
+    val drivesList: List<DriveListItemResponse> = emptyList()
 )
 

@@ -5,14 +5,11 @@
 
 package feature.bangboo.model
 
-import com.mrfatworm.zzzarchive.ZzzConfig
 import feature.agent.model.AgentBasicData
 import feature.agent.model.LevelMaterial
 import feature.agent.model.NameAndDesc
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import utils.AgentAttribute
-import utils.ZzzRarity
 
 @Serializable
 data class BangbooDetailResponse(
@@ -29,21 +26,7 @@ data class BangbooDetailResponse(
     val additionalAbility: NameAndDesc,
     @SerialName("chain_attack")
     val chainAttack: NameAndDesc? = null,
-    val levelMaterials: List<LevelMaterial> = bangbooLevelMaterials
-) {
-    fun getBangbooPortraitUrl(path: String = ZzzConfig.ASSET_PATH): String {
-        return "https://raw.githubusercontent.com/$path/Bangboo/Portrait/$id.webp"
-    }
-
-    fun getRarity(): ZzzRarity {
-        return ZzzRarity.entries.find { it.level == rarity } ?: ZzzRarity.RANK_A
-    }
-
-    fun getAttribute(): AgentAttribute {
-        return AgentAttribute.entries.find { it.name.lowercase() == attribute }
-            ?: AgentAttribute.None
-    }
-}
+)
 
 val bangbooLevelMaterials = listOf(
     LevelMaterial(

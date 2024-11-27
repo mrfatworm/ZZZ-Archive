@@ -7,17 +7,22 @@ package feature.bangboo.model
 
 import feature.agent.model.AgentBasicData
 import feature.agent.model.NameAndDesc
+import utils.AgentAttribute
+import utils.ZzzRarity
 
 data class BangbooDetailState(
-    val bangbooDetail: BangbooDetailResponse = emptyBangbooDetailResponse
+    val bangbooDetail: BangbooDetail = emptyBangbooDetail,
+    val isLoading: Boolean = false,
+    val error: String? = null
 )
 
-val emptyBangbooDetailResponse = BangbooDetailResponse(
+val emptyBangbooDetail = BangbooDetail(
     id = 0,
     name = "",
+    imageUrl = "",
     isLeak = false,
-    rarity = 5,
-    attribute = "",
+    rarity = ZzzRarity.RANK_D,
+    attribute = AgentAttribute.None,
     basicData = AgentBasicData(
         hp = 0, atk = 0, def = 0
     ),
@@ -29,5 +34,6 @@ val emptyBangbooDetailResponse = BangbooDetailResponse(
     ),
     chainAttack = NameAndDesc(
         name = "", description = ""
-    )
+    ),
+    levelMaterials = emptyList()
 )
