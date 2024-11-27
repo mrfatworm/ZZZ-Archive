@@ -6,16 +6,16 @@
 package feature.banner.domain
 
 import feature.banner.data.BannerRepository
-import feature.setting.data.SettingsRepository
+import feature.setting.data.SystemConfigRepository
 
 class BannerUseCase(
     private val bannerRepository: BannerRepository,
-    private val settingsRepository: SettingsRepository
+    private val systemConfigRepository: SystemConfigRepository
 ) {
     suspend fun invoke() = bannerRepository.getBanner()
 
-    fun getBannerIgnoreId() = settingsRepository.getBannerIgnoreId()
+    fun getBannerIgnoreId() = systemConfigRepository.getBannerIgnoreId()
 
-    fun setBannerIgnoreId(id: Int) = settingsRepository.setBannerIgnoreId(id)
+    fun setBannerIgnoreId(id: Int) = systemConfigRepository.setBannerIgnoreId(id)
 
 }

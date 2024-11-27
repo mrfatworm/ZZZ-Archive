@@ -22,36 +22,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import feature.splash.model.SplashState
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import ui.theme.AppTheme
-import ui.utils.ContentType
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.app_name
 import zzzarchive.composeapp.generated.resources.splash_background
 import zzzarchive.composeapp.generated.resources.splash_logo
 
 @Composable
-fun SplashScreen(
-    contentType: ContentType, startMainFlow: () -> Unit
-) {
+fun SplashScreen(startMainFlow: () -> Unit) {
     val viewModel: SplashViewModel = koinViewModel()
-    val isDark by viewModel.isDark.collectAsState()
-    val appVersion by viewModel.appVersion.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
     var isDarkComposeState by AppTheme.isDark
-    isDarkComposeState = isDark
+    isDarkComposeState = uiState.isDark
 
     LaunchedEffect(true) {
         delay(1000)
         startMainFlow()
     }
-    if (contentType == ContentType.Single) {
-        SplashScreenSingle(appVersion)
-    } else {
-        SplashScreenDual(appVersion)
-    }
+    SplashScreenSingle(uiState)
 }
 val splashColor = Color(0xFF3C3C3C)
 
@@ -74,7 +67,7 @@ private fun AppInfo(modifier: Modifier, appVersion: String) {
         )
         Text(
             text = appVersion,
-            style = AppTheme.typography.headlineMedium,
+            style = AppTheme.typography.titleSmall,
             color = splashColor.copy(alpha = 0.8f)
         )
     }
@@ -83,7 +76,7 @@ private fun AppInfo(modifier: Modifier, appVersion: String) {
 
 @Composable
 fun SplashScreenSingle(
-    appVersion: String
+    uiState: SplashState,
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -94,21 +87,8 @@ fun SplashScreenSingle(
             contentDescription = null,
             contentScale = ContentScale.Crop
         )
-        AppInfo(modifier = Modifier.align(Alignment.Center), appVersion)
-    }
-}
-
-@Composable
-fun SplashScreenDual(appVersion: String) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-    ) {
-        Image(
-            modifier = Modifier.fillMaxSize(),
-            painter = painterResource(Res.drawable.splash_background),
-            contentDescription = null,
-            contentScale = ContentScale.Crop
+        AppInfo(
+            modifier = Modifier.align(Alignment.Center), uiState.appVersion
         )
-        AppInfo(modifier = Modifier.align(Alignment.Center), appVersion)
     }
 }

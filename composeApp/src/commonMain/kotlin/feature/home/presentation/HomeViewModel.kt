@@ -7,6 +7,7 @@ package feature.home.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import database.UpdateDatabaseUseCase
 import feature.agent.domain.AgentsListUseCase
 import feature.bangboo.domain.BangbooListUseCase
 import feature.banner.domain.BannerUseCase
@@ -30,6 +31,7 @@ class HomeViewModel(
     private val wEnginesListUseCase: WEnginesListUseCase,
     private val bangbooListUseCase: BangbooListUseCase,
     private val drivesListUseCase: DrivesListUseCase,
+    private val updateDatabaseUseCase: UpdateDatabaseUseCase
 ) : ViewModel() {
 
     private var ignoreBannerId = 0
@@ -37,8 +39,10 @@ class HomeViewModel(
     val uiState = _uiState.asStateFlow()
 
     init {
+
         ignoreBannerId = bannerUseCase.getBannerIgnoreId()
         viewModelScope.launch {
+            launch { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() }
             launch { fetchBanner() }
             launch { observeCoverImage() }
             launch { fetchZzzOfficialNewsEveryTenMinutes() }

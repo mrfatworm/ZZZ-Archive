@@ -8,7 +8,7 @@ package di
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import com.russhwolf.settings.Settings
 import database.RoomDatabaseFactory
-import database.WikiDatabaseUseCase
+import database.UpdateDatabaseUseCase
 import feature.agent.data.database.AgentsListDB
 import feature.agent.data.repository.AgentRepository
 import feature.agent.data.repository.AgentRepositoryImpl
@@ -35,6 +35,8 @@ import feature.drive.data.respository.DriveRepository
 import feature.drive.data.respository.DriveRepositoryImpl
 import feature.drive.domain.DrivesListUseCase
 import feature.drive.presentation.DrivesListViewModel
+import feature.home.data.AssetVersionRepository
+import feature.home.data.AssetVersionRepositoryImpl
 import feature.home.presentation.HomeViewModel
 import feature.news.data.OfficialNewsRepository
 import feature.news.data.OfficialNewsRepositoryImpl
@@ -44,8 +46,10 @@ import feature.pixiv.data.PixivRepositoryImpl
 import feature.pixiv.domain.PixivUseCase
 import feature.setting.data.GoogleDocRepository
 import feature.setting.data.GoogleDocRepositoryImpl
-import feature.setting.data.SettingsRepository
-import feature.setting.data.SettingsRepositoryImpl
+import feature.setting.data.PreferencesRepository
+import feature.setting.data.PreferencesRepositoryImpl
+import feature.setting.data.SystemConfigRepository
+import feature.setting.data.SystemConfigRepositoryImpl
 import feature.setting.domain.AppInfoUseCase
 import feature.setting.domain.GoogleDocUseCase
 import feature.setting.domain.LanguageUseCase
@@ -100,7 +104,9 @@ val sharedModule = module {
     single { get<CoverImagesListDB>().coverImagesListDao }
 
     // Repositories
-    single<SettingsRepository> { SettingsRepositoryImpl(get()) }
+    single<SystemConfigRepository> { SystemConfigRepositoryImpl(get()) }
+    single<PreferencesRepository> { PreferencesRepositoryImpl(get()) }
+    single<AssetVersionRepository> { AssetVersionRepositoryImpl(get()) }
     single<BannerRepository> { BannerRepositoryImpl(get()) }
     single<OfficialNewsRepository> { OfficialNewsRepositoryImpl(get()) }
     single<PixivRepository> { PixivRepositoryImpl(get()) }
@@ -127,7 +133,17 @@ val sharedModule = module {
     single<AppInfoUseCase> { AppInfoUseCase() }
     single<GoogleDocUseCase> { GoogleDocUseCase(get()) }
     single<ThemeUseCase> { ThemeUseCase(get()) }
-    single<WikiDatabaseUseCase> { WikiDatabaseUseCase(get(), get(), get(), get()) }
+    single<UpdateDatabaseUseCase> {
+        UpdateDatabaseUseCase(
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
+    }
 
     // ViewModels
     viewModelOf(::SplashViewModel)

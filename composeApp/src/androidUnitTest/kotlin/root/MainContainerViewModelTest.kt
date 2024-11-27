@@ -26,8 +26,8 @@ class MainContainerViewModelTest {
 
     @BeforeTest
     fun setup() {
-        every { themeUseCase.getIsDarkTheme() } returns true
-        every { themeUseCase.setIsDarkTheme(any()) } returns Unit
+        every { themeUseCase.getPreferenceIsDarkTheme() } returns true
+        every { themeUseCase.setPreferenceIsDarkTheme(any()) } returns Unit
         viewModel = MainContainerViewModel(themeUseCase)
     }
 
@@ -40,6 +40,6 @@ class MainContainerViewModelTest {
     @Test
     fun `Set Dark Theme`() {
         viewModel.setIsDarkTheme(false)
-        verify { themeUseCase.setIsDarkTheme(false) }
+        verify { themeUseCase.setPreferenceIsDarkTheme(false) }
     }
 }

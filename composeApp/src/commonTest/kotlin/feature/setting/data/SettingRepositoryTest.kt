@@ -14,7 +14,7 @@ import kotlin.test.assertTrue
 
 class SettingRepositoryTest {
     private val fakeSettings = MapSettings()
-    private val settingsRepository = SettingsRepositoryImpl(fakeSettings)
+    private val settingsRepository = PreferencesRepositoryImpl(fakeSettings)
 
     @Test
     fun `Get default color theme`() {
@@ -40,19 +40,6 @@ class SettingRepositoryTest {
         settingsRepository.setLanguage(Language.ChineseTraditional.code)
         val language = settingsRepository.getLanguageCode()
         assertEquals(language, Language.ChineseTraditional.code)
-    }
-
-    @Test
-    fun `Get default banner ignore id`() {
-        val ignoreId = settingsRepository.getBannerIgnoreId()
-        assertEquals(ignoreId, 0)
-    }
-
-    @Test
-    fun `Set banner ignore id`() {
-        settingsRepository.setBannerIgnoreId(1)
-        val ignoreId = settingsRepository.getBannerIgnoreId()
-        assertEquals(ignoreId, 1)
     }
 
     @Test

@@ -5,7 +5,7 @@
 
 package feature.setting.domain
 
-import feature.setting.data.FakeSettingRepository
+import feature.setting.data.FakePreferenceRepository
 import utils.Language
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -13,7 +13,7 @@ import kotlin.test.assertEquals
 
 class LanguageUseCaseTest {
 
-    private val settingRepository = FakeSettingRepository()
+    private val settingRepository = FakePreferenceRepository()
     private val languageUseCase = LanguageUseCaseImpl(settingRepository)
 
     @Test

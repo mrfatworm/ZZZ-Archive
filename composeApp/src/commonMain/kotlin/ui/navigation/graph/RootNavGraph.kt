@@ -31,7 +31,7 @@ fun RootNavGraph(
         startDestination = RootFlow.Splash.route,
     ) {
         composable(RootFlow.Splash.route) {
-            SplashScreen(contentType = contentType,
+            SplashScreen(
                 startMainFlow = { rootNavActions.popAndNavigation(RootFlow.MainContainer) })
         }
         composable(RootFlow.MainContainer.route) {

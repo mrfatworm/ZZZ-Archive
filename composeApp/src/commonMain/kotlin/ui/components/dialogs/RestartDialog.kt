@@ -7,7 +7,6 @@ package ui.components.dialogs
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -22,11 +21,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import org.jetbrains.compose.resources.stringResource
-import ui.components.buttons.ZzzOutlineButton
 import ui.components.buttons.ZzzPrimaryButton
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.later
 import zzzarchive.composeapp.generated.resources.restart
 import zzzarchive.composeapp.generated.resources.restart_hint
 
@@ -53,15 +50,8 @@ fun RestartDialog(onDismiss: () -> Unit, onRestart: () -> Unit) {
                     textAlign = TextAlign.Center,
                     style = AppTheme.typography.bodyMedium
                 )
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    ZzzOutlineButton(text = stringResource(Res.string.later)) {
-                        onDismiss()
-                    }
-                    ZzzPrimaryButton(text = stringResource(Res.string.restart)) {
-                        onRestart()
-                    }
+                ZzzPrimaryButton(text = stringResource(Res.string.restart)) {
+                    onRestart()
                 }
             }
         }

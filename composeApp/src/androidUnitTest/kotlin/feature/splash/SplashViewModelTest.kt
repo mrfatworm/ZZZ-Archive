@@ -30,7 +30,7 @@ class SplashViewModelTest {
 
     @BeforeTest
     fun setup() {
-        every { themeUseCase.getIsDarkTheme() } returns true
+        every { themeUseCase.getPreferenceIsDarkTheme() } returns true
         every { languageUseCase.getLanguage().code } returns "en"
         every { appInfoUseCase.getAppVersion() } returns "Luciana 2024.11.13"
         viewModel = SplashViewModel(themeUseCase, languageUseCase, appInfoUseCase)
@@ -38,9 +38,8 @@ class SplashViewModelTest {
 
     @Test
     fun `Init Data Success`() {
-        val isDark = viewModel.isDark.value
-        val appVersion = viewModel.appVersion.value
-        assertTrue(isDark)
-        assertEquals("Luciana 2024.11.13", appVersion)
+        val uiState = viewModel.uiState.value
+        assertTrue(uiState.isDark)
+        assertEquals("Luciana 2024.11.13", uiState.appVersion)
     }
 }

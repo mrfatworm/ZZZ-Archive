@@ -19,6 +19,8 @@ import feature.cover_image.model.CoverImageListResponse
 import feature.cover_image.model.stubCoverImageResponse
 import feature.drive.model.DrivesListResponse
 import feature.drive.model.stubDrivesListResponse
+import feature.home.model.AssetVersionResponse
+import feature.home.model.stubAssetVersionResponse
 import feature.wengine.model.WEngineDetailResponse
 import feature.wengine.model.WEnginesListResponse
 import feature.wengine.model.stubWEngineDetailResponse
@@ -33,6 +35,14 @@ class FakeZzzHttp : ZzzHttp {
 
     fun setError(isError: Boolean) {
         this.isError = isError
+    }
+
+    override suspend fun requestAssetVersion(): AssetVersionResponse {
+        return if (isError) {
+            throw Exception()
+        } else {
+            stubAssetVersionResponse
+        }
     }
 
     override suspend fun requestBanner(): BannerResponse {

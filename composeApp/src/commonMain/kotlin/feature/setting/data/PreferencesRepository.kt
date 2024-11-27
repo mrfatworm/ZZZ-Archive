@@ -5,12 +5,10 @@
 
 package feature.setting.data
 
-interface SettingsRepository {
+interface PreferencesRepository {
     fun getIsDarkTheme(): Boolean
     fun setIsDarkTheme(value: Boolean)
     fun getLanguageCode(): String
     fun setLanguage(langCode: String)
-    fun getBannerIgnoreId(): Int
-    fun setBannerIgnoreId(value: Int)
     fun clear()
 }

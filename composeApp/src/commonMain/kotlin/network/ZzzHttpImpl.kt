@@ -7,6 +7,7 @@ import feature.bangboo.model.BangbooListResponse
 import feature.banner.data.BannerResponse
 import feature.cover_image.model.CoverImageListResponse
 import feature.drive.model.DrivesListResponse
+import feature.home.model.AssetVersionResponse
 import feature.setting.domain.LanguageUseCase
 import feature.wengine.model.WEngineDetailResponse
 import feature.wengine.model.WEnginesListResponse
@@ -27,6 +28,10 @@ class ZzzHttpImpl(engine: HttpClientEngine, languageUseCase: LanguageUseCase) : 
             url.appendPathSegments(path)
         }.bodyAsText()
         return Json.decodeFromString(result)
+    }
+
+    override suspend fun requestAssetVersion(): AssetVersionResponse {
+        return requestData("Version.json")
     }
 
     override suspend fun requestBanner(): BannerResponse {

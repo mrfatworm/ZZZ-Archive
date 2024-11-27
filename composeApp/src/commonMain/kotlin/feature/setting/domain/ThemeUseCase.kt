@@ -5,14 +5,14 @@
 
 package feature.setting.domain
 
-import feature.setting.data.SettingsRepository
+import feature.setting.data.PreferencesRepository
 
-class ThemeUseCase(private val settingsRepository: SettingsRepository) {
-    fun getIsDarkTheme(): Boolean {
-        return settingsRepository.getIsDarkTheme()
+class ThemeUseCase(private val preferencesRepository: PreferencesRepository) {
+    fun getPreferenceIsDarkTheme(): Boolean {
+        return preferencesRepository.getIsDarkTheme()
     }
 
-    fun setIsDarkTheme(isDark: Boolean) {
-        settingsRepository.setIsDarkTheme(isDark)
+    fun setPreferenceIsDarkTheme(isDark: Boolean) {
+        preferencesRepository.setIsDarkTheme(isDark)
     }
 }

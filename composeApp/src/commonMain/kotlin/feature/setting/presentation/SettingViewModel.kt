@@ -7,7 +7,7 @@ package feature.setting.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import database.WikiDatabaseUseCase
+import database.UpdateDatabaseUseCase
 import feature.setting.domain.AppInfoUseCase
 import feature.setting.domain.LanguageUseCase
 import feature.setting.domain.ThemeUseCase
@@ -23,7 +23,7 @@ class SettingViewModel(
     private val appInfoUseCase: AppInfoUseCase,
     private val appActionsUseCase: AppActionsUseCase,
     private val languageUseCase: LanguageUseCase,
-    private val wikiDatabaseUseCase: WikiDatabaseUseCase
+    private val updateDatabaseUseCase: UpdateDatabaseUseCase
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(settingState)
@@ -36,7 +36,7 @@ class SettingViewModel(
     }
 
     private fun initSetting() {
-        _isDark.value = themeUseCase.getIsDarkTheme()
+        _isDark.value = themeUseCase.getPreferenceIsDarkTheme()
         updateLanguageState()
         getAppVersion()
     }
@@ -53,12 +53,12 @@ class SettingViewModel(
 
     fun setIsDarkTheme(isDark: Boolean) {
         _isDark.value = isDark
-        themeUseCase.setIsDarkTheme(isDark)
+        themeUseCase.setPreferenceIsDarkTheme(isDark)
     }
 
     fun setLanguage(langCode: String) {
         viewModelScope.launch {
-            wikiDatabaseUseCase.deleteAllDatabase()
+            updateDatabaseUseCase.resetWikiDatabaseVersion()
         }
         languageUseCase.setLanguage(langCode)
         updateLanguageState()

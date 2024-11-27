@@ -7,6 +7,7 @@ package feature.home.presentation
 
 
 import MainDispatcherRule
+import database.UpdateDatabaseUseCase
 import feature.agent.domain.AgentsListUseCase
 import feature.agent.model.stubAgentsList
 import feature.bangboo.domain.BangbooListUseCase
@@ -25,6 +26,7 @@ import feature.pixiv.domain.PixivUseCase
 import feature.wengine.domain.WEnginesListUseCase
 import feature.wengine.model.stubWEnginesList
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -48,10 +50,12 @@ class HomeViewModelTest {
     private val wEnginesListUseCase = mockk<WEnginesListUseCase>()
     private val bangbooListUseCase = mockk<BangbooListUseCase>()
     private val drivesListUseCase = mockk<DrivesListUseCase>()
+    private val updateDatabaseUseCase = mockk<UpdateDatabaseUseCase>()
     private lateinit var viewModel: HomeViewModel
 
     @BeforeTest
     fun setup() {
+        coEvery { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() } returns Unit
         coEvery { bannerUseCase.invoke() } returns Result.success(stubBannerResponse)
         every { bannerUseCase.getBannerIgnoreId() } returns 0
         every { bannerUseCase.setBannerIgnoreId(any()) } returns Unit
@@ -76,6 +80,7 @@ class HomeViewModelTest {
             wEnginesListUseCase,
             bangbooListUseCase,
             drivesListUseCase,
+            updateDatabaseUseCase
         )
     }
 
@@ -90,6 +95,7 @@ class HomeViewModelTest {
         assertEquals(state.wEnginesList, stubWEnginesList)
         assertEquals(state.bangbooList, stubBangbooList)
         assertEquals(state.drivesList, listOf(stubDrivesListItemEntity))
+        coVerify { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() }
     }
 
     @Test

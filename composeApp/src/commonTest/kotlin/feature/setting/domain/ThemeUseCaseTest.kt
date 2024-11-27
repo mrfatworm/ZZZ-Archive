@@ -5,17 +5,17 @@
 
 package feature.setting.domain
 
-import feature.setting.data.FakeSettingRepository
+import feature.setting.data.FakePreferenceRepository
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
 class ThemeUseCaseTest {
-    private val settingsRepository = FakeSettingRepository()
+    private val settingsRepository = FakePreferenceRepository()
     private val themeUseCase = ThemeUseCase(settingsRepository)
 
     @Test
     fun `Set dark theme`() {
-        themeUseCase.setIsDarkTheme(true)
+        themeUseCase.setPreferenceIsDarkTheme(true)
         assertTrue(settingsRepository.getIsDarkTheme())
     }
 }

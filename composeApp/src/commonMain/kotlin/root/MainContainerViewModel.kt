@@ -12,11 +12,11 @@ class MainContainerViewModel(
     val isDark = _isDark.asStateFlow()
 
     init {
-        _isDark.value = themeUseCase.getIsDarkTheme()
+        _isDark.value = themeUseCase.getPreferenceIsDarkTheme()
     }
 
     fun setIsDarkTheme(isDark: Boolean) {
         _isDark.value = isDark
-        themeUseCase.setIsDarkTheme(isDark)
+        themeUseCase.setPreferenceIsDarkTheme(isDark)
     }
 }

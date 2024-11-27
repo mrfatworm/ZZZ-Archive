@@ -102,7 +102,7 @@ private fun LanguageSettingItem(
     }, onClick = { showLanguageList = true })
     when {
         openRestartDialog.value -> {
-            RestartDialog(onRestart = onRestart, onDismiss = { openRestartDialog.value = false })
+            RestartDialog(onRestart = onRestart, onDismiss = { })
         }
     }
 }

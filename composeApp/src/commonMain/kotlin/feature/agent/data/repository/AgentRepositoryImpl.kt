@@ -22,7 +22,6 @@ class AgentRepositoryImpl(
 ) : AgentRepository {
 
     override suspend fun getAgentsList(): Flow<List<AgentListItem>> {
-        println("Lance: getAgentsList Flow")
         val cachedAgentsList = agentsListDB.getAgentsList()
         if (cachedAgentsList.first().isEmpty()) {
             requestAndUpdateAgentsListDB()
@@ -35,7 +34,6 @@ class AgentRepositoryImpl(
     override suspend fun requestAndUpdateAgentsListDB(): Result<Unit> {
         try {
             val result = withTimeout(httpClient.defaultTimeout) {
-                println("Lance: requestAgentsList")
                 httpClient.requestAgentsList()
             }
             agentsListDB.setAgentsList(result.agents.map { it.toAgentsListItemEntity() })

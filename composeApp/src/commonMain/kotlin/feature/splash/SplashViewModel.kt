@@ -4,35 +4,45 @@ import androidx.lifecycle.ViewModel
 import feature.setting.domain.AppInfoUseCase
 import feature.setting.domain.LanguageUseCase
 import feature.setting.domain.ThemeUseCase
+import feature.splash.model.SplashState
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import utils.changePlatformLanguage
 
 class SplashViewModel(
-    themeUseCase: ThemeUseCase,
-    languageUseCase: LanguageUseCase,
+    private val themeUseCase: ThemeUseCase,
+    private val languageUseCase: LanguageUseCase,
     private val appInfoUseCase: AppInfoUseCase
 ) : ViewModel() {
-    private val _isDark = MutableStateFlow(true)
-    val isDark: StateFlow<Boolean> = _isDark
-    private val _appVersion = MutableStateFlow("")
-    val appVersion: StateFlow<String> = _appVersion
+    private val _uiState = MutableStateFlow(SplashState())
+    val uiState = _uiState.asStateFlow()
 
     init {
         //settingsRepository.clear() // For test
-        _isDark.value = themeUseCase.getIsDarkTheme()
-        initLanguage(languageUseCase.getLanguage().code)
+        getPreferenceTheme()
+        initLanguage()
         getAppVersion()
     }
 
+    private fun getPreferenceTheme() {
+        val isDark = themeUseCase.getPreferenceIsDarkTheme()
+        _uiState.update {
+            it.copy(isDark = isDark)
+        }
+    }
 
-    private fun initLanguage(langCode: String) {
-        if (langCode != "") {
-            changePlatformLanguage(langCode)
+    private fun initLanguage() {
+        val preferenceLangCode = languageUseCase.getLanguage().code
+        if (preferenceLangCode != "") {
+            changePlatformLanguage(preferenceLangCode)
         }
     }
 
     private fun getAppVersion() {
-        _appVersion.value = appInfoUseCase.getAppVersion()
+        val appInfo = appInfoUseCase.getAppVersion()
+        _uiState.update {
+            it.copy(appVersion = appInfo)
+        }
     }
 }

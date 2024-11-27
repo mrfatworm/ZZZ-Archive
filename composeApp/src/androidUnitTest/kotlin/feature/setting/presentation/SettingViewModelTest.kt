@@ -8,7 +8,7 @@ package feature.setting.presentation
 
 import MainDispatcherRule
 import android.content.Context
-import database.WikiDatabaseUseCase
+import database.UpdateDatabaseUseCase
 import feature.setting.domain.AppInfoUseCase
 import feature.setting.domain.LanguageUseCase
 import feature.setting.domain.ThemeUseCase
@@ -32,15 +32,15 @@ class SettingViewModelTest {
     private val languageUseCase = mockk<LanguageUseCase>()
     private val appInfoUseCase = mockk<AppInfoUseCase>()
     private val appActionsUseCase = AppActionsUseCase(mockContext)
-    private val wikiDatabaseUseCase = mockk<WikiDatabaseUseCase>()
+    private val updateDatabaseUseCase = mockk<UpdateDatabaseUseCase>()
     private lateinit var viewModel: SettingViewModel
 
     @BeforeTest
     fun setup() {
         every { languageUseCase.getLanguage().code } returns "en"
         every { languageUseCase.setLanguage(any()) } returns Unit
-        every { themeUseCase.getIsDarkTheme() } returns true
-        every { themeUseCase.setIsDarkTheme(any()) } returns Unit
+        every { themeUseCase.getPreferenceIsDarkTheme() } returns true
+        every { themeUseCase.setPreferenceIsDarkTheme(any()) } returns Unit
         every { appInfoUseCase.getAppVersion() } returns "Luciana 2024.11.13"
 
         viewModel =
@@ -49,7 +49,7 @@ class SettingViewModelTest {
                 appInfoUseCase,
                 appActionsUseCase,
                 languageUseCase,
-                wikiDatabaseUseCase
+                updateDatabaseUseCase
             )
     }
 
@@ -65,7 +65,7 @@ class SettingViewModelTest {
     @Test
     fun `Set Dark Theme`() {
         viewModel.setIsDarkTheme(false)
-        verify { themeUseCase.setIsDarkTheme(false) }
+        verify { themeUseCase.setPreferenceIsDarkTheme(false) }
     }
 
 //    Issue: kotlinx.coroutines.test.UncaughtExceptionsBeforeTest
