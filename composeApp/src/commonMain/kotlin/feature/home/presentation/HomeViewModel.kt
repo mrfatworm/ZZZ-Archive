@@ -65,7 +65,7 @@ class HomeViewModel(
     private suspend fun fetchBanner() {
         val result = bannerUseCase.invoke()
         result.fold(onSuccess = { banner ->
-            if (banner.id != ignoreBannerId) {
+            if (banner.id > ignoreBannerId) {
                 _uiState.update {
                     it.copy(banner = banner)
                 }
