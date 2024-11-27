@@ -9,5 +9,5 @@ import feature.drive.data.respository.DriveRepository
 
 class DrivesListUseCase(private val driveRepository: DriveRepository) {
     suspend fun invoke() = driveRepository.getDrivesList()
-    suspend fun requestAndUpdateDrivesListDB() = driveRepository.requestAndUpdateDrivesListDB()
+    suspend fun updateDrivesList() = driveRepository.requestAndUpdateDrivesListDB()
 }

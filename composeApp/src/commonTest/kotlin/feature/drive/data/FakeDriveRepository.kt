@@ -6,9 +6,10 @@
 package feature.drive.data
 
 import feature.drive.data.database.DrivesListItemEntity
+import feature.drive.data.database.stubDrivesListItemEntity
 import feature.drive.data.respository.DriveRepository
-import feature.drive.model.stubDrivesListResponse
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class FakeDriveRepository : DriveRepository {
     private var isError = false
@@ -17,11 +18,15 @@ class FakeDriveRepository : DriveRepository {
         this.isError = isError
     }
 
-    override suspend fun getDrivesList(): Flow<List<DrivesListItemEntity>> {
+    override suspend fun getDrivesList(): Flow<List<DrivesListItemEntity>> = flow {
+        emit(listOf(stubDrivesListItemEntity))
+    }
+
+    override suspend fun requestAndUpdateDrivesListDB(): Result<Unit> {
         return if (isError) {
             Result.failure(Exception())
         } else {
-            Result.success(stubDrivesListResponse)
+            Result.success(Unit)
         }
     }
 }

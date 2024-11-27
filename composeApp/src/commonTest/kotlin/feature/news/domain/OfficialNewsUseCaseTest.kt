@@ -23,13 +23,13 @@ class OfficialNewsUseCaseTest {
 
 
     @Test
-    fun `Get New Every 10 Minutes`() = runTest {
+    fun `Get new every 10 minutes`() = runTest {
         val result = officialNewsUseCase.getNewsPeriodically(10, 0).first().getOrNull()
         assertEquals(result, stubOfficialNewsDataResponse.data.list)
     }
 
     @Test
-    fun `Get New Every 10 Minutes Failure`() = runTest {
+    fun `Get new every 10 minutes error`() = runTest {
         newsRepository.setError(true)
         val result = officialNewsUseCase.getNewsPeriodically(10, 0).first().getOrNull()
         assertNull(result)

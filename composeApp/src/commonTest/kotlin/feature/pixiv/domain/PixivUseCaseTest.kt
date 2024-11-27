@@ -17,13 +17,13 @@ class PixivUseCaseTest {
     private val pixivUseCase = PixivUseCase(pixivRepository)
 
     @Test
-    fun `Get Pixiv Topics Success`() = runTest {
+    fun `Get Pixiv topics success`() = runTest {
         val result = pixivUseCase.invoke("").getOrNull()
         assertEquals(result, stubPixivTopicResponse.getPopularArticles())
     }
 
     @Test
-    fun `Get Pixiv Topics Error`() = runTest {
+    fun `Get Pixiv topics error`() = runTest {
         pixivRepository.setError(true)
         val result = pixivUseCase.invoke("").getOrNull()
         assertNull(result)

@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.Flow
 interface BangbooListDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun setBangbooList(agentsList: List<BangbooListItemEntity>)
+    suspend fun setBangbooList(bangbooList: List<BangbooListItemEntity>)
 
     @Query("SELECT * FROM BangbooListItemEntity")
     fun getBangbooList(): Flow<List<BangbooListItemEntity>>

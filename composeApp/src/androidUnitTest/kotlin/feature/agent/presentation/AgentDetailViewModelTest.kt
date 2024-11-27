@@ -10,10 +10,11 @@ import MainDispatcherRule
 import androidx.lifecycle.SavedStateHandle
 import feature.agent.domain.AgentDetailUseCase
 import feature.agent.model.stubAgentDetail
+import feature.drive.data.database.stubDrivesListItemEntity
 import feature.drive.domain.DrivesListUseCase
-import feature.drive.model.stubDrivesListResponse
 import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -34,14 +35,14 @@ class AgentDetailViewModelTest {
     @BeforeTest
     fun setup() {
         coEvery { agentDetailUseCase.invoke(any()) } returns Result.success(stubAgentDetail)
-        coEvery { drivesListUseCase.invoke() } returns Result.success(stubDrivesListResponse.drives)
+        coEvery { drivesListUseCase.invoke() } returns flowOf(listOf(stubDrivesListItemEntity))
         viewModel = AgentDetailViewModel(savedStateHandle, agentDetailUseCase, drivesListUseCase)
     }
 
     @Test
-    fun `Init Data Success`() {
+    fun `Init data success`() {
         val state = viewModel.uiState.value
         assertEquals(state.agentDetail, stubAgentDetail)
-        assertEquals(state.drivesList, stubDrivesListResponse.drives)
+        assertEquals(state.drivesList, listOf(stubDrivesListItemEntity))
     }
 }

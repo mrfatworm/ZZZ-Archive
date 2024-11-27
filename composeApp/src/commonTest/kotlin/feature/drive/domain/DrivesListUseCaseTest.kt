@@ -6,7 +6,8 @@
 package feature.drive.domain
 
 import feature.drive.data.FakeDriveRepository
-import feature.drive.model.stubDrivesListResponse
+import feature.drive.data.database.stubDrivesListItemEntity
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,15 +18,21 @@ class DrivesListUseCaseTest {
     private val drivesListUseCase = DrivesListUseCase(driveRepository)
 
     @Test
-    fun `Get Drives List Success`() = runTest {
-        val result = drivesListUseCase.invoke().getOrNull()
-        assertEquals(result, stubDrivesListResponse.drives)
+    fun `Get drives list`() = runTest {
+        val result = drivesListUseCase.invoke().first()
+        assertEquals(result.first(), stubDrivesListItemEntity)
     }
 
     @Test
-    fun `Get Drives List Error`() = runTest {
+    fun `Request drives list success`() = runTest {
+        val result = drivesListUseCase.updateDrivesList().getOrNull()
+        assertEquals(result, Unit)
+    }
+
+    @Test
+    fun `Request drives list error`() = runTest {
         driveRepository.setError(true)
-        val result = drivesListUseCase.invoke().getOrNull()
+        val result = drivesListUseCase.updateDrivesList().getOrNull()
         assertNull(result)
     }
 }

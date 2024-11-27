@@ -6,7 +6,7 @@
 package feature.cover_image.domain
 
 import feature.cover_image.data.FakeCoverImageRepository
-import feature.cover_image.model.stubCoverImageResponse
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,15 +17,21 @@ class CoverImageUseCaseTest {
     private val coverImageUseCase = CoverImageUseCase(coverImageRepository)
 
     @Test
-    fun `Get Cover Image Success`() = runTest {
-        val result = coverImageUseCase.invoke().getOrNull()
-        assertEquals(result, stubCoverImageResponse)
+    fun `Get cover image list`() = runTest {
+        val result = coverImageUseCase.invoke().first()
+        assertEquals(result.first().authorName, "mrfatworm")
     }
 
     @Test
-    fun `Get Cover Image Error`() = runTest {
+    fun `Request cover image list success`() = runTest {
+        val result = coverImageUseCase.updateCoverImagesList().getOrNull()
+        assertEquals(result, Unit)
+    }
+
+    @Test
+    fun `Request cover image list error`() = runTest {
         coverImageRepository.setError(true)
-        val result = coverImageUseCase.invoke().getOrNull()
+        val result = coverImageUseCase.updateCoverImagesList().getOrNull()
         assertNull(result)
     }
 }

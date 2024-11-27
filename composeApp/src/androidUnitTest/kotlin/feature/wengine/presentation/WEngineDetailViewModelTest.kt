@@ -9,7 +9,7 @@ package feature.wengine.presentation
 import MainDispatcherRule
 import androidx.lifecycle.SavedStateHandle
 import feature.wengine.domain.WEngineDetailUseCase
-import feature.wengine.model.stubWEngineDetailResponse
+import feature.wengine.model.stubWEngineDetail
 import io.mockk.coEvery
 import io.mockk.mockk
 import org.junit.Rule
@@ -30,15 +30,13 @@ class WEngineDetailViewModelTest {
 
     @BeforeTest
     fun setup() {
-        coEvery { wEngineDetailUseCase.invoke(any()) } returns Result.success(
-            stubWEngineDetailResponse
-        )
+        coEvery { wEngineDetailUseCase.invoke(any()) } returns Result.success(stubWEngineDetail)
         viewModel = WEngineDetailViewModel(savedStateHandle, wEngineDetailUseCase)
     }
 
     @Test
-    fun `Init Data Success`() {
+    fun `Init data success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.wEngineDetail, stubWEngineDetailResponse)
+        assertEquals(state.wEngineDetail, stubWEngineDetail)
     }
 }

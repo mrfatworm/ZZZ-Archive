@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.Flow
 interface CoverImagesListDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun setCoverImagesList(agentsList: List<CoverImageListItemEntity>)
+    suspend fun setCoverImagesList(coverImagesList: List<CoverImageListItemEntity>)
 
     @Query("SELECT * FROM CoverImageListItemEntity")
     fun getCoverImagesList(): Flow<List<CoverImageListItemEntity>>

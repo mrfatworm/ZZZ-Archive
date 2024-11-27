@@ -17,11 +17,21 @@ data class WEnginesListItem(
     val specialty: AgentSpecialty
 )
 
-val stubWEnginesListItem = WEnginesListItem(
-    id = 44,
-    name = "好鬥的阿炮",
-    imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset//W-Engine/Image/44.webp",
-    isLeak = false,
-    rarity = ZzzRarity.RANK_A,
-    specialty = AgentSpecialty.Support,
+val stubWEnginesList = listOf(
+    WEnginesListItem(
+        id = 44,
+        name = "好鬥的阿炮",
+        imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset//W-Engine/Image/44.webp",
+        isLeak = false,
+        rarity = ZzzRarity.RANK_A,
+        specialty = AgentSpecialty.Support,
+    ),
+    WEnginesListItem(
+        id = 45,
+        name = "玉壺青冰",
+        imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset//W-Engine/Image/45.webp",
+        isLeak = false,
+        rarity = ZzzRarity.RANK_S,
+        specialty = AgentSpecialty.Stun,
+    )
 )

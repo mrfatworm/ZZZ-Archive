@@ -10,11 +10,11 @@ import MainDispatcherRule
 import feature.agent.domain.AgentsListUseCase
 import feature.agent.model.stubAgentsList
 import feature.bangboo.domain.BangbooListUseCase
-import feature.bangboo.model.stubBangbooListResponse
+import feature.bangboo.model.stubBangbooList
+import feature.drive.data.database.stubDrivesListItemEntity
 import feature.drive.domain.DrivesListUseCase
-import feature.drive.model.stubDrivesListResponse
 import feature.wengine.domain.WEnginesListUseCase
-import feature.wengine.model.stubWEnginesListResponse
+import feature.wengine.model.stubWEnginesList
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
@@ -37,9 +37,9 @@ class WikiViewModelTest {
     @BeforeTest
     fun setup() {
         coEvery { agentsListUseCase.invoke() } returns flowOf(stubAgentsList)
-        coEvery { wEnginesListUseCase.invoke() } returns Result.success(stubWEnginesListResponse.wEngines)
-        coEvery { bangbooListUseCase.invoke() } returns Result.success(stubBangbooListResponse.bangboo)
-        coEvery { drivesListUseCase.invoke() } returns Result.success(stubDrivesListResponse.drives)
+        coEvery { wEnginesListUseCase.invoke() } returns flowOf(stubWEnginesList)
+        coEvery { bangbooListUseCase.invoke() } returns flowOf(stubBangbooList)
+        coEvery { drivesListUseCase.invoke() } returns flowOf(listOf(stubDrivesListItemEntity))
         viewModel = WikiViewModel(
             agentsListUseCase,
             wEnginesListUseCase,
@@ -51,10 +51,9 @@ class WikiViewModelTest {
     @Test
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
-        val agentsList = viewModel.agentsList.value
-        assertEquals(agentsList, stubAgentsList)
-        assertEquals(state.wEnginesList, stubWEnginesListResponse.wEngines)
-        assertEquals(state.bangbooList, stubBangbooListResponse.bangboo)
-        assertEquals(state.drivesList, stubDrivesListResponse.drives)
+        assertEquals(state.agentsList, stubAgentsList)
+        assertEquals(state.wEnginesList, stubWEnginesList)
+        assertEquals(state.bangbooList, stubBangbooList)
+        assertEquals(state.drivesList, listOf(stubDrivesListItemEntity))
     }
 }

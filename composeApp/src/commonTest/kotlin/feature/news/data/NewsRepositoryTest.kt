@@ -18,13 +18,13 @@ class NewsRepositoryTest {
     private val repository = OfficialNewsRepositoryImpl(httpClient)
 
     @Test
-    fun `Get News Success`() = runTest {
+    fun `Get news success`() = runTest {
         val result = repository.getNews(0).getOrNull()
         assertEquals(result, stubOfficialNewsDataResponse.data.list)
     }
 
     @Test
-    fun `Get News Error`() = runTest {
+    fun `Get news error`() = runTest {
         httpClient.setError(true)
         val result = repository.getNews(0).getOrNull()
         assertNull(result)

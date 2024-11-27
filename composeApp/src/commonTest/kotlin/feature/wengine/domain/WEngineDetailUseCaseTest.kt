@@ -5,8 +5,8 @@
 
 package feature.wengine.domain
 
-import feature.wengine.data.FakeWEngineRepository
-import feature.wengine.model.stubWEngineDetailResponse
+import feature.wengine.data.repository.FakeWEngineRepository
+import feature.wengine.model.stubWEngineDetail
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -20,13 +20,13 @@ class WEngineDetailUseCaseTest {
 
 
     @Test
-    fun `Get Agents List Success`() = runTest {
+    fun `Get W-Engines list success`() = runTest {
         val result = wEngineDetailUseCase.invoke(1).getOrNull()
-        assertEquals(result, stubWEngineDetailResponse)
+        assertEquals(result, stubWEngineDetail)
     }
 
     @Test
-    fun `Get Agents List Failure`() = runTest {
+    fun `Get W-Engines list error`() = runTest {
         wEngineRepository.setError(true)
         val result = wEngineDetailUseCase.invoke(1).getOrNull()
         assertNull(result)

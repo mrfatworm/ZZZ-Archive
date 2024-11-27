@@ -10,24 +10,24 @@ import MainDispatcherRule
 import feature.agent.domain.AgentsListUseCase
 import feature.agent.model.stubAgentsList
 import feature.bangboo.domain.BangbooListUseCase
-import feature.bangboo.model.stubBangbooListResponse
+import feature.bangboo.model.stubBangbooList
 import feature.banner.data.stubBannerResponse
 import feature.banner.domain.BannerUseCase
+import feature.cover_image.data.database.stubCoverImageListItemEntity
 import feature.cover_image.domain.CoverImageUseCase
-import feature.cover_image.model.stubCoverImageResponse
+import feature.drive.data.database.stubDrivesListItemEntity
 import feature.drive.domain.DrivesListUseCase
-import feature.drive.model.stubDrivesListResponse
 import feature.news.data.stubOfficialNewsDataResponse
 import feature.news.domain.OfficialNewsUseCase
 import feature.news.presentation.stubOfficialNewsState
 import feature.pixiv.data.stubPixivTopicResponse
 import feature.pixiv.domain.PixivUseCase
-import feature.setting.data.FakeSettingRepository
 import feature.wengine.domain.WEnginesListUseCase
-import feature.wengine.model.stubWEnginesListResponse
+import feature.wengine.model.stubWEnginesList
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -45,61 +45,56 @@ class HomeViewModelTest {
     private val pixivUseCase = mockk<PixivUseCase>()
     private val officialNewsUseCase = mockk<OfficialNewsUseCase>()
     private val agentsListUseCase = mockk<AgentsListUseCase>()
-    private val wEngineListUseCase = mockk<WEnginesListUseCase>()
+    private val wEnginesListUseCase = mockk<WEnginesListUseCase>()
     private val bangbooListUseCase = mockk<BangbooListUseCase>()
     private val drivesListUseCase = mockk<DrivesListUseCase>()
-    private val settingsRepository = FakeSettingRepository()
     private lateinit var viewModel: HomeViewModel
 
     @BeforeTest
     fun setup() {
         coEvery { bannerUseCase.invoke() } returns Result.success(stubBannerResponse)
-        coEvery { coverImageUseCase.invoke() } returns Result.success(stubCoverImageResponse)
+        every { bannerUseCase.getBannerIgnoreId() } returns 0
+        every { bannerUseCase.setBannerIgnoreId(any()) } returns Unit
+        coEvery { coverImageUseCase.invoke() } returns flowOf(listOf(stubCoverImageListItemEntity))
         coEvery { pixivUseCase.invoke(any()) } returns Result.success(stubPixivTopicResponse.getPopularArticles())
         coEvery {
-            officialNewsUseCase.getNewsPeriodically(
-                any(), any()
-            )
+            officialNewsUseCase.getNewsPeriodically(any(), any())
         } returns flowOf(Result.success(stubOfficialNewsDataResponse.data.list))
         every { officialNewsUseCase.convertToOfficialNewsState(any()) } returns listOf(
             stubOfficialNewsState
         )
         coEvery { agentsListUseCase.invoke() } returns flowOf(stubAgentsList)
-        coEvery { agentsListUseCase.updateAgentsList() } returns Result.success(Unit)
-        coEvery { wEngineListUseCase.invoke() } returns Result.success(stubWEnginesListResponse.wEngines)
-        coEvery { bangbooListUseCase.invoke() } returns Result.success(stubBangbooListResponse.bangboo)
-        coEvery { drivesListUseCase.invoke() } returns Result.success(stubDrivesListResponse.drives)
+        coEvery { wEnginesListUseCase.invoke() } returns flowOf(stubWEnginesList)
+        coEvery { bangbooListUseCase.invoke() } returns flowOf(stubBangbooList)
+        coEvery { drivesListUseCase.invoke() } returns flowOf(listOf(stubDrivesListItemEntity))
         viewModel = HomeViewModel(
             bannerUseCase,
             coverImageUseCase,
             pixivUseCase,
             officialNewsUseCase,
             agentsListUseCase,
-            wEngineListUseCase,
+            wEnginesListUseCase,
             bangbooListUseCase,
             drivesListUseCase,
-            settingsRepository,
         )
     }
 
     @Test
     fun `Init Data Success`() = runTest {
         val state = viewModel.uiState.value
-        val agentsList = viewModel.agentsListState.value
         assertEquals(state.banner, stubBannerResponse)
-        assertEquals(state.coverImage, stubCoverImageResponse)
+        assertEquals(state.coverImage, listOf(stubCoverImageListItemEntity))
         assertEquals(state.pixivTopics, stubPixivTopicResponse.getPopularArticles())
         assertEquals(state.newsList.first(), stubOfficialNewsState)
-        assertEquals(agentsList, stubAgentsList)
-        assertEquals(state.wEnginesList, stubWEnginesListResponse.wEngines)
-        assertEquals(state.bangbooList, stubBangbooListResponse.bangboo)
-        assertEquals(state.drivesList, stubDrivesListResponse.drives)
+        assertEquals(state.agentsList, stubAgentsList)
+        assertEquals(state.wEnginesList, stubWEnginesList)
+        assertEquals(state.bangbooList, stubBangbooList)
+        assertEquals(state.drivesList, listOf(stubDrivesListItemEntity))
     }
 
     @Test
     fun `Set Banner Ignore Id as One than ignore banner data`() {
         viewModel.closeBannerAndIgnoreId(1)
-        val state = viewModel.uiState.value
-        assertEquals(state.banner, null)
+        verify { bannerUseCase.setBannerIgnoreId(1) }
     }
 }

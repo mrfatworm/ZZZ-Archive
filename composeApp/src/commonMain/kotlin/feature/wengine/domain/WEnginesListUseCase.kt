@@ -15,7 +15,7 @@ class WEnginesListUseCase(
     private val wEngineRepository: WEngineRepository
 ) {
     suspend fun invoke() = wEngineRepository.getWEnginesList()
-    suspend fun requestAndUpdateDB() = wEngineRepository.requestAndUpdateWEnginesListDB()
+    suspend fun updateWEnginesList() = wEngineRepository.requestAndUpdateWEnginesListDB()
 
     fun filterWEnginesList(
         wEnginesList: List<WEnginesListItem>,

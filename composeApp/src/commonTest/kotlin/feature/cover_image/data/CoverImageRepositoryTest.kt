@@ -5,30 +5,56 @@
 
 package feature.cover_image.data
 
+import feature.cover_image.data.database.FakeCoverImagesListDao
 import feature.cover_image.data.repository.CoverImageRepositoryImpl
-import feature.cover_image.model.stubCoverImageResponse
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import network.FakeZzzHttp
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNull
 
 
 class CoverImageRepositoryTest {
 
     private val httpClient = FakeZzzHttp()
-    private val repository = CoverImageRepositoryImpl(httpClient)
+    private val database = FakeCoverImagesListDao()
+    private val repository = CoverImageRepositoryImpl(httpClient, database)
+    // Remote: 2 Cover Images, Local: 1 Cover Image
 
     @Test
-    fun `Get Banner Success`() = runTest {
-        val result = repository.getCoverImagesList().getOrNull()
-        assertEquals(result, stubCoverImageResponse)
+    fun `WHEN Get cover images list success THAN return local DB`() = runTest {
+        val result = repository.getCoverImagesList().first()
+        assertEquals(result.size, 1)
     }
 
     @Test
-    fun `Get Banner Error`() = runTest {
+    fun `WHEN Request cover images list success THAN return updated DB`() = runTest {
+        repository.requestAndUpdateCoverImagesListDB()
+        val result = repository.getCoverImagesList().first()
+        assertEquals(result.size, 2)
+    }
+
+    @Test
+    fun `GIVEN cover images list DB is empty WHEN Get cover images list THAN Auto request and return updated DB`() =
+        runTest {
+            database.deleteCoverImagesList()
+            val result = repository.getCoverImagesList().first()
+            assertEquals(result.size, 2)
+        }
+
+    @Test
+    fun `WHEN Request cover images list error THAN return local DB`() = runTest {
         httpClient.setError(true)
-        val result = repository.getCoverImagesList().getOrNull()
-        assertNull(result)
+        val result = repository.getCoverImagesList().first()
+        assertEquals(result.size, 1)
+    }
+
+    @Test
+    fun `GIVEN cover images list DB is empty WHEN Request cover images list error THAN return empty DB`() =
+        runTest {
+        httpClient.setError(true)
+            database.deleteCoverImagesList()
+            val result = repository.getCoverImagesList().first()
+            assertEquals(result.size, 0)
     }
 }

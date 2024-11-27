@@ -36,6 +36,12 @@ val stubBangbooListResponse = BangbooListResponse(
             isLeak = false,
             rarity = 5,
             attribute = "physical",
+        ), BangbooListItemResponse(
+            id = 6,
+            name = "共鳴布",
+            isLeak = false,
+            rarity = 5,
+            attribute = "ether"
         )
     )
 )

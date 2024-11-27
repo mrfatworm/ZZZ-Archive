@@ -21,34 +21,36 @@ class AgentRepositoryImplTest {
     // Remote: 3 agents, Local: 1 agent
 
     @Test
-    fun `Get Agents List Success`() = runTest {
+    fun `WHEN Get agents list success THAN return local DB`() = runTest {
         val result = repository.getAgentsList().first()
         assertEquals(result.size, 1)
     }
 
     @Test
-    fun `Update Agents List Success`() = runTest {
+    fun `WHEN Request agents list success THAN return updated DB`() = runTest {
         repository.requestAndUpdateAgentsListDB()
         val result = repository.getAgentsList().first()
         assertEquals(result.size, 3)
     }
 
     @Test
-    fun `Get Agents List Empty DB `() = runTest {
+    fun `GIVEN Agents list DB is empty WHEN Get agents list THAN Auto request and return updated DB`() =
+        runTest {
         agentsListDao.deleteAgentsList()
         val result = repository.getAgentsList().first()
         assertEquals(result.size, 3)
     }
 
     @Test
-    fun `Get Agents List Network Error`() = runTest {
+    fun `WHEN Request agents list error THAN return local DB`() = runTest {
         httpClient.setError(true)
         val result = repository.getAgentsList().first()
         assertEquals(result.size, 1)
     }
 
     @Test
-    fun `Get Agents List Network Error and Empty DB`() = runTest {
+    fun `GIVEN Agents list DB is empty WHEN Request agents list error THAN return empty DB`() =
+        runTest {
         httpClient.setError(true)
         agentsListDao.deleteAgentsList()
         val result = repository.getAgentsList().first()
@@ -56,13 +58,13 @@ class AgentRepositoryImplTest {
     }
 
     @Test
-    fun `Get Agent Detail Success`() = runTest {
+    fun `Get agent detail success`() = runTest {
         val result = repository.getAgentDetail(20).getOrNull()
         assertEquals(result, stubAgentDetail)
     }
 
     @Test
-    fun `Get Agent Detail Error`() = runTest {
+    fun `Get agent detail error`() = runTest {
         httpClient.setError(true)
         val result = repository.getAgentDetail(20).getOrNull()
         assertNull(result)

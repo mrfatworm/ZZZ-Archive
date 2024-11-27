@@ -18,13 +18,13 @@ class PixivRepositoryTest {
     private val repository = PixivRepositoryImpl(httpClient)
 
     @Test
-    fun `Get Pixiv Topic Success`() = runTest {
+    fun `Get Pixiv topic success`() = runTest {
         val result = repository.getZzzTopic("").getOrNull()
         assertEquals(result, stubPixivTopicResponse)
     }
 
     @Test
-    fun `Get Pixiv Topic Failure`() = runTest {
+    fun `Get Pixiv topic error`() = runTest {
         httpClient.setError(true)
         val result = repository.getZzzTopic("").getOrNull()
         assertNull(result)

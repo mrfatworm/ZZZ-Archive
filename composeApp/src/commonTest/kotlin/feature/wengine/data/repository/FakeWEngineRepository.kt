@@ -1,16 +1,16 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.wengine.data
+package feature.wengine.data.repository
 
-import feature.wengine.data.repository.WEngineRepository
 import feature.wengine.model.WEngineDetail
 import feature.wengine.model.WEnginesListItem
-import feature.wengine.model.stubWEngineDetailResponse
-import feature.wengine.model.stubWEnginesListResponse
+import feature.wengine.model.stubWEngineDetail
+import feature.wengine.model.stubWEnginesList
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class FakeWEngineRepository : WEngineRepository {
     private var isError = false
@@ -19,11 +19,15 @@ class FakeWEngineRepository : WEngineRepository {
         this.isError = isError
     }
 
-    override suspend fun getWEnginesList(): Flow<List<WEnginesListItem>> {
+    override suspend fun getWEnginesList(): Flow<List<WEnginesListItem>> = flow {
+        emit(stubWEnginesList)
+    }
+
+    override suspend fun requestAndUpdateWEnginesListDB(): Result<Unit> {
         return if (isError) {
             Result.failure(Exception())
         } else {
-            Result.success(stubWEnginesListResponse)
+            Result.success(Unit)
         }
     }
 
@@ -31,7 +35,7 @@ class FakeWEngineRepository : WEngineRepository {
         return if (isError) {
             Result.failure(Exception())
         } else {
-            Result.success(stubWEngineDetailResponse)
+            Result.success(stubWEngineDetail)
         }
     }
 }

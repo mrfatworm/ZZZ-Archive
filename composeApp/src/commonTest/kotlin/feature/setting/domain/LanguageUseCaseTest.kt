@@ -17,13 +17,13 @@ class LanguageUseCaseTest {
     private val languageUseCase = LanguageUseCaseImpl(settingRepository)
 
     @Test
-    fun `Get Language`() {
+    fun `Get language`() {
         val result = languageUseCase.getLanguage()
         assertEquals(result, Language.English)
     }
 
     @Test
-    fun `Set Language`() {
+    fun `Set language`() {
         languageUseCase.setLanguage(Language.ChineseTraditional.code)
         val result = languageUseCase.getLanguage()
         assertEquals(result, Language.ChineseTraditional)

@@ -15,6 +15,7 @@ import utils.AgentSpecialty
 import utils.ZzzRarity
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 
 class AgentsListUseCaseTest {
@@ -24,19 +25,32 @@ class AgentsListUseCaseTest {
 
 
     @Test
-    fun `Get Agents List Success`() = runTest {
+    fun `Get agents list success`() = runTest {
         val result = agentsListUseCase.invoke().first()
         assertEquals(result, stubAgentsList)
     }
 
     @Test
-    fun `Get Factions List`() {
+    fun `Request agents list success`() = runTest {
+        val result = agentsListUseCase.updateAgentsList().getOrNull()
+        assertEquals(result, Unit)
+    }
+
+    @Test
+    fun `Request agents list error`() = runTest {
+        agentRepository.setError(true)
+        val result = agentsListUseCase.updateAgentsList().getOrNull()
+        assertNull(result)
+    }
+
+    @Test
+    fun `Get factions list`() {
         val result = agentsListUseCase.getFactionsList(stubAgentsList)
         assertEquals(result, listOf(Faction(1), Faction(2)))
     }
 
     @Test
-    fun `Filter Default`() {
+    fun `Filter default`() {
         val result = agentsListUseCase.filterAgentsList(
             agentsList = stubAgentsList,
             selectedRarities = emptySet(),
@@ -62,7 +76,7 @@ class AgentsListUseCaseTest {
     }
 
     @Test
-    fun `Filter Faction Gentle House`() {
+    fun `Filter faction Gentle House`() {
         val result = agentsListUseCase.filterAgentsList(
             agentsList = stubAgentsList,
             selectedRarities = emptySet(),
@@ -75,7 +89,7 @@ class AgentsListUseCaseTest {
     }
 
     @Test
-    fun `Filter Faction Gentle House And Nekomiya`() {
+    fun `Filter faction Gentle House and Nekomiya`() {
         val result = agentsListUseCase.filterAgentsList(
             agentsList = stubAgentsList,
             selectedRarities = setOf(ZzzRarity.RANK_S),
@@ -101,7 +115,7 @@ class AgentsListUseCaseTest {
     }
 
     @Test
-    fun `Filter Not Match`() {
+    fun `Filter not match`() {
         val result = agentsListUseCase.filterAgentsList(
             agentsList = stubAgentsList,
             selectedRarities = setOf(ZzzRarity.RANK_S),

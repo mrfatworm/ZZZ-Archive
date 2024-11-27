@@ -14,7 +14,7 @@ class ThemeUseCaseTest {
     private val themeUseCase = ThemeUseCase(settingsRepository)
 
     @Test
-    fun `Set Dark Theme`() {
+    fun `Set dark theme`() {
         themeUseCase.setIsDarkTheme(true)
         assertTrue(settingsRepository.getIsDarkTheme())
     }

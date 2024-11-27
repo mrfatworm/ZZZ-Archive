@@ -16,7 +16,7 @@ class GoogleDocRepositoryTest {
     private val repository = GoogleDocRepositoryImpl(client)
 
     @Test
-    fun `Submit Feedback Form Success`() = runTest {
+    fun `Submit feedback form success`() = runTest {
         val result = repository.submitFeedbackForm(
             "issueType",
             "language",
@@ -30,7 +30,7 @@ class GoogleDocRepositoryTest {
     }
 
     @Test
-    fun `Submit Feedback Form Failure`() = runTest {
+    fun `Submit feedback form error`() = runTest {
         client.setError(true)
         val result = repository.submitFeedbackForm(
             "issueType",

@@ -8,10 +8,11 @@ package feature.wengine.presentation
 
 import MainDispatcherRule
 import feature.wengine.domain.WEnginesListUseCase
-import feature.wengine.model.stubWEnginesListResponse
+import feature.wengine.model.stubWEnginesList
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import utils.AgentSpecialty
 import utils.ZzzRarity
@@ -29,21 +30,25 @@ class WEnginesListItemViewModelTest {
 
     @BeforeTest
     fun setup() {
-        coEvery { wEnginesListUseCase.invoke() } returns Result.success(stubWEnginesListResponse.wEngines)
-        every { wEnginesListUseCase.filterWEnginesList(any(), any(), any()) } returns listOf(
-            stubWEnginesListResponse.wEngines.first()
-        )
+        coEvery { wEnginesListUseCase.invoke() } returns flowOf(stubWEnginesList)
+        every {
+            wEnginesListUseCase.filterWEnginesList(
+                any(),
+                any(),
+                any()
+            )
+        } returns stubWEnginesList.take(1)
         viewModel = WEnginesListViewModel(wEnginesListUseCase)
     }
 
     @Test
-    fun `Init Data Success`() {
+    fun `Init data success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.wEnginesList, stubWEnginesListResponse.wEngines)
+        assertEquals(state.wEnginesList, stubWEnginesList)
     }
 
     @Test
-    fun `Filter Rarity Success`() {
+    fun `Filter rarity success`() {
         viewModel.onAction(WEnginesListAction.OnRarityFilterChanged(setOf(ZzzRarity.RANK_S)))
         val state = viewModel.uiState.value
         assertEquals(state.filteredWEnginesList.first().id, 44)
@@ -51,7 +56,7 @@ class WEnginesListItemViewModelTest {
     }
 
     @Test
-    fun `Filter Specialty Success`() {
+    fun `Filter specialty success`() {
         viewModel.onAction(WEnginesListAction.OnSpecialtyFilterChanged(setOf(AgentSpecialty.Support)))
         val state = viewModel.uiState.value
         assertEquals(state.filteredWEnginesList.first().id, 44)

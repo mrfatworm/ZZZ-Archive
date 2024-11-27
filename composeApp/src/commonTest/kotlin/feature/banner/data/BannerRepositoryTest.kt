@@ -18,13 +18,13 @@ class BannerRepositoryTest {
     private val repository = BannerRepositoryImpl(httpClient)
 
     @Test
-    fun `Get Banner Success`() = runTest {
+    fun `Get banner success`() = runTest {
         val result = repository.getBanner().getOrNull()
         assertEquals(result, stubBannerResponse)
     }
 
     @Test
-    fun `Get Banner Error`() = runTest {
+    fun `Get banner error`() = runTest {
         httpClient.setError(true)
         val result = repository.getBanner().getOrNull()
         assertNull(result)

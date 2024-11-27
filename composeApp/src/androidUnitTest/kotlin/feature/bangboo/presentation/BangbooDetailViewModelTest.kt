@@ -9,7 +9,7 @@ package feature.bangboo.presentation
 import MainDispatcherRule
 import androidx.lifecycle.SavedStateHandle
 import feature.bangboo.domain.BangbooDetailUseCase
-import feature.bangboo.model.stubBangbooDetailResponse
+import feature.bangboo.model.stubBangbooDetail
 import io.mockk.coEvery
 import io.mockk.mockk
 import org.junit.Rule
@@ -31,14 +31,14 @@ class BangbooDetailViewModelTest {
     @BeforeTest
     fun setup() {
         coEvery { bangbooDetailUseCase.invoke(any()) } returns Result.success(
-            stubBangbooDetailResponse
+            stubBangbooDetail
         )
         viewModel = BangbooDetailViewModel(savedStateHandle, bangbooDetailUseCase)
     }
 
     @Test
-    fun `Init Data Success`() {
+    fun `Init data success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.bangbooDetail, stubBangbooDetailResponse)
+        assertEquals(state.bangbooDetail, stubBangbooDetail)
     }
 }

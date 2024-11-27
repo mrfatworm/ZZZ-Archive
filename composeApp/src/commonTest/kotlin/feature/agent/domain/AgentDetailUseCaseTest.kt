@@ -20,13 +20,13 @@ class AgentDetailUseCaseTest {
 
 
     @Test
-    fun `Get Agents List Success`() = runTest {
+    fun `Get agents list success`() = runTest {
         val result = agentsDetailUseCase.invoke(1).getOrNull()
         assertEquals(result, stubAgentDetail)
     }
 
     @Test
-    fun `Get Agents List Failure`() = runTest {
+    fun `Get agents list error`() = runTest {
         agentRepository.setError(true)
         val result = agentsDetailUseCase.invoke(1).getOrNull()
         assertNull(result)

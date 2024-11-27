@@ -7,10 +7,11 @@ package feature.drive.presentation
 
 
 import MainDispatcherRule
+import feature.drive.data.database.stubDrivesListItemEntity
 import feature.drive.domain.DrivesListUseCase
-import feature.drive.model.stubDrivesListResponse
 import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -26,25 +27,25 @@ class DrivesListViewModelTest {
 
     @BeforeTest
     fun setup() {
-        coEvery { drivesListUseCase.invoke() } returns Result.success(stubDrivesListResponse.drives)
+        coEvery { drivesListUseCase.invoke() } returns flowOf(listOf(stubDrivesListItemEntity))
         viewModel = DrivesListViewModel(drivesListUseCase)
     }
 
     @Test
-    fun `Init Data Success`() {
+    fun `Init data success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.drivesList, stubDrivesListResponse.drives)
+        assertEquals(state.drivesList, listOf(stubDrivesListItemEntity))
     }
 
     @Test
-    fun `Select Drive`() {
+    fun `Select drive`() {
         viewModel.onDriveClick(1)
         val state = viewModel.uiState.value
         assertEquals(state.selectedDrive?.id, 1)
     }
 
     @Test
-    fun `Dismiss Detail`() {
+    fun `Dismiss detail THAN selectedDrive is null`() {
         viewModel.onDriveClick(1)
         viewModel.onDetailDismiss()
         val state = viewModel.uiState.value

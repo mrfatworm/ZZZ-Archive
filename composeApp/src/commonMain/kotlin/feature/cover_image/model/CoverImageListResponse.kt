@@ -30,12 +30,24 @@ data class CoverImageListItemResponse(
     val authorName: String
 )
 
-val stubCoverImageResponse = CoverImageListItemResponse(
-    id = 1,
-    artworkUrl = "https://www.pixiv.net/artworks/124677174",
-    artworkName = "Bangboo",
-    artworkDescription = "ZZZ Archive Logo",
-    authorUrl = "https://www.pixiv.net/users/9060892",
-    authorName = "mrfatworm"
+val stubCoverImageResponse = CoverImageListResponse(
+    listOf(
+        CoverImageListItemResponse(
+            id = 1,
+            artworkUrl = "https://www.pixiv.net/artworks/124677174",
+            artworkName = "Bangboo",
+            artworkDescription = "ZZZ Archive Logo",
+            authorUrl = "https://www.pixiv.net/users/9060892",
+            authorName = "mrfatworm"
+        ),
+        CoverImageListItemResponse(
+            id = 2,
+            artworkUrl = "https://www.pixiv.net/artworks/124677174",
+            artworkName = "banner2",
+            artworkDescription = "banner test2",
+            authorUrl = "https://www.pixiv.net/users/9060892",
+            authorName = "mrfatworm"
+        )
+    )
 )
 

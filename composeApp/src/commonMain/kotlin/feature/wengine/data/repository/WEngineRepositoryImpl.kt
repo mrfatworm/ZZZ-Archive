@@ -25,8 +25,8 @@ class WEngineRepositoryImpl(
         if (cachedWEnginesList.first().isEmpty()) {
             requestAndUpdateWEnginesListDB()
         }
-        return wEnginesListDao.getWEnginesList().map {
-            it.map { it.toWEnginesListItem() }.reversed()
+        return wEnginesListDao.getWEnginesList().map { wEnginesList ->
+            wEnginesList.map { it.toWEnginesListItem() }.reversed()
         }
     }
 

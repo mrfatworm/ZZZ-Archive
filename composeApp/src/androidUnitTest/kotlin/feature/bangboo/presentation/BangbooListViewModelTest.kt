@@ -8,10 +8,11 @@ package feature.bangboo.presentation
 
 import MainDispatcherRule
 import feature.bangboo.domain.BangbooListUseCase
-import feature.bangboo.model.stubBangbooListResponse
+import feature.bangboo.model.stubBangbooList
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import utils.AgentAttribute
 import utils.ZzzRarity
@@ -29,21 +30,21 @@ class BangbooListViewModelTest {
 
     @BeforeTest
     fun setup() {
-        coEvery { bangbooListUseCase.invoke() } returns Result.success(stubBangbooListResponse.bangboo)
-        every { bangbooListUseCase.filterBangbooList(any(), any(), any()) } returns listOf(
-            stubBangbooListResponse.bangboo.first()
-        ) // Penguinboo
+        coEvery { bangbooListUseCase.invoke() } returns flowOf(stubBangbooList)
+        every {
+            bangbooListUseCase.filterBangbooList(any(), any(), any())
+        } returns stubBangbooList.take(1) // Penguinboo
         viewModel = BangbooListViewModel(bangbooListUseCase)
     }
 
     @Test
-    fun `Init Data Success`() {
+    fun `Init data success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.bangbooList, stubBangbooListResponse.bangboo)
+        assertEquals(state.bangbooList, stubBangbooList)
     }
 
     @Test
-    fun `Filter Rarity Success`() {
+    fun `Filter rarity success`() {
         viewModel.onAction(BangbooListAction.OnRarityFilterChanged(setOf(ZzzRarity.RANK_S)))
         val state = viewModel.uiState.value
         assertEquals(state.filteredBangbooList.first().id, 1) // Penguinboo
@@ -51,7 +52,7 @@ class BangbooListViewModelTest {
     }
 
     @Test
-    fun `Filter Attribute Success`() {
+    fun `Filter attribute success`() {
         viewModel.onAction(BangbooListAction.OnAttributeFilterChanged(setOf(AgentAttribute.Ice)))
         val state = viewModel.uiState.value
         assertEquals(state.filteredBangbooList.first().id, 1) // Penguinboo

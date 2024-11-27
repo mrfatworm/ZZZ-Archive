@@ -1,16 +1,16 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.bangboo.data
+package feature.bangboo.data.repository
 
-import feature.bangboo.data.repository.BangbooRepository
 import feature.bangboo.model.BangbooDetail
 import feature.bangboo.model.BangbooListItem
-import feature.bangboo.model.stubBangbooDetailResponse
-import feature.bangboo.model.stubBangbooListResponse
+import feature.bangboo.model.stubBangbooDetail
+import feature.bangboo.model.stubBangbooList
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class FakeBangbooRepository : BangbooRepository {
     private var isError = false
@@ -19,11 +19,15 @@ class FakeBangbooRepository : BangbooRepository {
         this.isError = isError
     }
 
-    override suspend fun getBangbooList(): Flow<List<BangbooListItem>> {
+    override suspend fun getBangbooList(): Flow<List<BangbooListItem>> = flow {
+        emit(stubBangbooList)
+    }
+
+    override suspend fun requestAndUpdateBangbooListDB(): Result<Unit> {
         return if (isError) {
             Result.failure(Exception())
         } else {
-            Result.success(stubBangbooListResponse)
+            Result.success(Unit)
         }
     }
 
@@ -31,7 +35,7 @@ class FakeBangbooRepository : BangbooRepository {
         return if (isError) {
             Result.failure(Exception())
         } else {
-            Result.success(stubBangbooDetailResponse)
+            Result.success(stubBangbooDetail)
         }
     }
 }

@@ -16,13 +16,13 @@ class GoogleDocUseCaseTest {
     private val googleDocUseCase = GoogleDocUseCase(googleDocRepository)
 
     @Test
-    fun `Submit Feedback Form`() = runTest {
+    fun `Submit feedback form`() = runTest {
         val result = googleDocUseCase.submitFeedbackForm("", "", "", "", "", "", "").getOrNull()
         assertEquals(Unit, result)
     }
 
     @Test
-    fun `Submit Feedback Form Failed`() = runTest {
+    fun `Submit feedback form error`() = runTest {
         googleDocRepository.setError(true)
         val result = googleDocUseCase.submitFeedbackForm("", "", "", "", "", "", "").getOrNull()
         assertNull(result)

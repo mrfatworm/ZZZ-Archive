@@ -5,8 +5,9 @@
 
 package feature.wengine.domain
 
-import feature.wengine.data.FakeWEngineRepository
-import feature.wengine.model.stubWEnginesListResponse
+import feature.wengine.data.repository.FakeWEngineRepository
+import feature.wengine.model.stubWEnginesList
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import utils.AgentSpecialty
 import utils.ZzzRarity
@@ -20,24 +21,29 @@ class WEnginesListUseCaseTest {
     private val wEngineRepository = FakeWEngineRepository()
     private val wEnginesListUseCase = WEnginesListUseCase(wEngineRepository)
 
-
     @Test
-    fun `Get W-Engines List Success`() = runTest {
-        val result = wEnginesListUseCase.invoke().getOrNull()
-        assertEquals(result, stubWEnginesListResponse.wEngines.reversed())
+    fun `Get W-Engines list success`() = runTest {
+        val result = wEnginesListUseCase.invoke().first()
+        assertEquals(result, stubWEnginesList)
     }
 
     @Test
-    fun `Get W-Engine List Failure`() = runTest {
+    fun `Request W-Engines list success`() = runTest {
+        val result = wEnginesListUseCase.updateWEnginesList().getOrNull()
+        assertEquals(result, Unit)
+    }
+
+    @Test
+    fun `Request W-Engines list error`() = runTest {
         wEngineRepository.setError(true)
-        val result = wEnginesListUseCase.invoke().getOrNull()
+        val result = wEnginesListUseCase.updateWEnginesList().getOrNull()
         assertNull(result)
     }
 
     @Test
-    fun `Filter Default`() {
+    fun `Filter default`() {
         val result = wEnginesListUseCase.filterWEnginesList(
-            wEnginesList = stubWEnginesListResponse.wEngines,
+            wEnginesList = stubWEnginesList,
             selectedRarities = emptySet(),
             selectedSpecialties = emptySet(),
         )
@@ -48,7 +54,7 @@ class WEnginesListUseCaseTest {
     @Test
     fun `Filter Kaboom the Cannon`() {
         val result = wEnginesListUseCase.filterWEnginesList(
-            wEnginesList = stubWEnginesListResponse.wEngines,
+            wEnginesList = stubWEnginesList,
             selectedRarities = setOf(ZzzRarity.RANK_A),
             selectedSpecialties = setOf(AgentSpecialty.Support),
         )
@@ -59,7 +65,7 @@ class WEnginesListUseCaseTest {
     @Test
     fun `Filter Ice-Jade Teapot`() {
         val result = wEnginesListUseCase.filterWEnginesList(
-            wEnginesList = stubWEnginesListResponse.wEngines,
+            wEnginesList = stubWEnginesList,
             selectedRarities = setOf(ZzzRarity.RANK_S),
             selectedSpecialties = setOf(AgentSpecialty.Stun),
         )
@@ -68,9 +74,9 @@ class WEnginesListUseCaseTest {
     }
 
     @Test
-    fun `Filter Not Match`() {
+    fun `Filter not match`() {
         val result = wEnginesListUseCase.filterWEnginesList(
-            wEnginesList = stubWEnginesListResponse.wEngines,
+            wEnginesList = stubWEnginesList,
             selectedRarities = setOf(ZzzRarity.RANK_S),
             selectedSpecialties = setOf(AgentSpecialty.Attack),
         )

@@ -5,8 +5,9 @@
 
 package feature.bangboo.domain
 
-import feature.bangboo.data.FakeBangbooRepository
-import feature.bangboo.model.stubBangbooListResponse
+import feature.bangboo.data.repository.FakeBangbooRepository
+import feature.bangboo.model.stubBangbooList
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import utils.AgentAttribute
 import utils.ZzzRarity
@@ -17,27 +18,33 @@ import kotlin.test.assertNull
 
 class BangbooListUseCaseTest {
 
-    private val banRepository = FakeBangbooRepository()
-    private val bangBangbooListUseCase = BangbooListUseCase(banRepository)
+    private val bangbooRepository = FakeBangbooRepository()
+    private val bangbooListUseCase = BangbooListUseCase(bangbooRepository)
 
 
     @Test
-    fun `Get Bangboo List Success`() = runTest {
-        val result = bangBangbooListUseCase.invoke().getOrNull()
-        assertEquals(result, stubBangbooListResponse.bangboo.reversed())
+    fun `Get bangboo list success`() = runTest {
+        val result = bangbooListUseCase.invoke().first()
+        assertEquals(result, stubBangbooList)
     }
 
     @Test
-    fun `Get Bangboo List Failure`() = runTest {
-        banRepository.setError(true)
-        val result = bangBangbooListUseCase.invoke().getOrNull()
+    fun `Request bangboo list success`() = runTest {
+        val result = bangbooListUseCase.updateBangbooList().getOrNull()
+        assertEquals(result, Unit)
+    }
+
+    @Test
+    fun `Request bangboo list error`() = runTest {
+        bangbooRepository.setError(true)
+        val result = bangbooListUseCase.updateBangbooList().getOrNull()
         assertNull(result)
     }
 
     @Test
-    fun `Filter Default`() {
-        val result = bangBangbooListUseCase.filterBangbooList(
-            bangbooList = stubBangbooListResponse.bangboo,
+    fun `Filter default`() {
+        val result = bangbooListUseCase.filterBangbooList(
+            bangbooList = stubBangbooList,
             selectedRarities = emptySet(),
             selectedAttributes = emptySet(),
         )
@@ -47,8 +54,8 @@ class BangbooListUseCaseTest {
 
     @Test
     fun `Filter Penguinboo`() {
-        val result = bangBangbooListUseCase.filterBangbooList(
-            bangbooList = stubBangbooListResponse.bangboo,
+        val result = bangbooListUseCase.filterBangbooList(
+            bangbooList = stubBangbooList,
             selectedRarities = setOf(ZzzRarity.RANK_A),
             selectedAttributes = setOf(AgentAttribute.Ice),
         )
@@ -58,8 +65,8 @@ class BangbooListUseCaseTest {
 
     @Test
     fun `Filter Butler`() {
-        val result = bangBangbooListUseCase.filterBangbooList(
-            bangbooList = stubBangbooListResponse.bangboo,
+        val result = bangbooListUseCase.filterBangbooList(
+            bangbooList = stubBangbooList,
             selectedRarities = setOf(ZzzRarity.RANK_S),
             selectedAttributes = setOf(AgentAttribute.Physical)
         )
@@ -68,9 +75,9 @@ class BangbooListUseCaseTest {
     }
 
     @Test
-    fun `Filter Not Match`() {
-        val result = bangBangbooListUseCase.filterBangbooList(
-            bangbooList = stubBangbooListResponse.bangboo,
+    fun `Filter not match`() {
+        val result = bangbooListUseCase.filterBangbooList(
+            bangbooList = stubBangbooList,
             selectedRarities = setOf(ZzzRarity.RANK_S),
             selectedAttributes = setOf(AgentAttribute.Ether)
         )

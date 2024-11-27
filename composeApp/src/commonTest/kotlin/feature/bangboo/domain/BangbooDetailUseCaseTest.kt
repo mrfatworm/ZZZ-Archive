@@ -5,8 +5,8 @@
 
 package feature.bangboo.domain
 
-import feature.bangboo.data.FakeBangbooRepository
-import feature.bangboo.model.stubBangbooDetailResponse
+import feature.bangboo.data.repository.FakeBangbooRepository
+import feature.bangboo.model.stubBangbooDetail
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -20,13 +20,13 @@ class BangbooDetailUseCaseTest {
 
 
     @Test
-    fun `Get Agents List Success`() = runTest {
+    fun `Get bangboo detail success`() = runTest {
         val result = bangbooDetailUseCase.invoke(1).getOrNull()
-        assertEquals(result, stubBangbooDetailResponse)
+        assertEquals(result, stubBangbooDetail)
     }
 
     @Test
-    fun `Get Agents List Failure`() = runTest {
+    fun `Get bangboo detail error`() = runTest {
         bangbooRepository.setError(true)
         val result = bangbooDetailUseCase.invoke(1).getOrNull()
         assertNull(result)
