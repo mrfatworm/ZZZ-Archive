@@ -8,19 +8,14 @@ package feature.home.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.agent.domain.AgentsListUseCase
-import feature.agent.model.AgentListItem
 import feature.bangboo.domain.BangbooListUseCase
-import feature.bangboo.model.BangbooListItem
 import feature.banner.domain.BannerUseCase
 import feature.cover_image.domain.CoverImageUseCase
-import feature.drive.data.database.DrivesListItemEntity
 import feature.drive.domain.DrivesListUseCase
 import feature.home.model.pixivTagDropdownItems
 import feature.news.domain.OfficialNewsUseCase
 import feature.pixiv.domain.PixivUseCase
-import feature.setting.data.SettingsRepository
 import feature.wengine.domain.WEnginesListUseCase
-import feature.wengine.model.WEnginesListItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -35,27 +30,17 @@ class HomeViewModel(
     private val wEnginesListUseCase: WEnginesListUseCase,
     private val bangbooListUseCase: BangbooListUseCase,
     private val drivesListUseCase: DrivesListUseCase,
-    private val settingsRepository: SettingsRepository
 ) : ViewModel() {
 
     private var ignoreBannerId = 0
     private var _uiState = MutableStateFlow(HomeState())
     val uiState = _uiState.asStateFlow()
-    private var _agentsListState = MutableStateFlow<List<AgentListItem>>(emptyList())
-    val agentsListState = _agentsListState.asStateFlow()
-    private var _wEnginesListState = MutableStateFlow<List<WEnginesListItem>>(emptyList())
-    val wEnginesListState = _wEnginesListState.asStateFlow()
-    private var _bangbooListState = MutableStateFlow<List<BangbooListItem>>(emptyList())
-    val bangbooListState = _bangbooListState.asStateFlow()
-    private var _driveListState = MutableStateFlow<List<DrivesListItemEntity>>(emptyList())
-    val driveListState = _driveListState.asStateFlow()
-
 
     init {
-        ignoreBannerId = settingsRepository.getBannerIgnoreId()
+        ignoreBannerId = bannerUseCase.getBannerIgnoreId()
         viewModelScope.launch {
             launch { fetchBanner() }
-            launch { fetchBannerImage() }
+            launch { observeCoverImage() }
             launch { fetchZzzOfficialNewsEveryTenMinutes() }
             launch { fetchPixivTopic() }
             launch { observeAgentsList() }
@@ -67,7 +52,7 @@ class HomeViewModel(
 
     fun closeBannerAndIgnoreId(id: Int) {
         ignoreBannerId = id
-        settingsRepository.setBannerIgnoreId(id)
+        bannerUseCase.setBannerIgnoreId(id)
         _uiState.update { state ->
             state.copy(banner = null)
         }
@@ -86,15 +71,12 @@ class HomeViewModel(
         })
     }
 
-    private suspend fun fetchBannerImage() {
-        val result = coverImageUseCase.invoke()
-        result.fold(onSuccess = { coverImage ->
+    private suspend fun observeCoverImage() {
+        coverImageUseCase.invoke().collect { coverImagesList ->
             _uiState.update {
-                it.copy(coverImage = coverImage)
+                it.copy(coverImage = coverImagesList)
             }
-        }, onFailure = {
-            println("get banner image error: ${it.message}")
-        })
+        }
     }
 
     private suspend fun fetchZzzOfficialNewsEveryTenMinutes() {
@@ -122,25 +104,33 @@ class HomeViewModel(
 
     private suspend fun observeAgentsList() {
         agentsListUseCase.invoke().collect { agentsList ->
-            _agentsListState.value = agentsList
+            _uiState.update {
+                it.copy(agentsList = agentsList)
+            }
         }
     }
 
     private suspend fun observeWEnginesList() {
         wEnginesListUseCase.invoke().collect { wEnginesList ->
-            _wEnginesListState.value = wEnginesList
+            _uiState.update {
+                it.copy(wEnginesList = wEnginesList)
+            }
         }
     }
 
     private suspend fun observeBangbooList() {
         bangbooListUseCase.invoke().collect { bangbooList ->
-            _bangbooListState.value = bangbooList
+            _uiState.update {
+                it.copy(bangbooList = bangbooList)
+            }
         }
     }
 
     private suspend fun observeDrivesList() {
         drivesListUseCase.invoke().collect { drivesList ->
-            _driveListState.value = drivesList
+            _uiState.update {
+                it.copy(drivesList = drivesList)
+            }
         }
     }
 }

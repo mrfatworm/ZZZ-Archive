@@ -55,10 +55,10 @@
 ## Special Thanks / 鳴謝
 
 - Resources from [Zenless Zone Zero](https://zenless.hoyoverse.com/) and [Zenless Zone Zero Wiki](https://zenless-zone-zero.fandom.com/wiki/Zenless_Zone_Zero_Wiki)
+- [Philipp Lackner’s YouTube Channel](https://www.youtube.com/@PhilippLackner)
 - [JetBrains KMP Guidelines](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
 - [Android Developer Guidelines](https://developer.android.com/)
 - [Android Open Source Project](https://github.com/android)
-- [Philipp Lackner’s YouTube Channel](https://www.youtube.com/@PhilippLackner)
 - [Compose Multiplatform Wizard](https://github.com/terrakok/Compose-Multiplatform-Wizard)
 - [BuildKonfig for KMP](https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/)
 - [Release macOS App](https://www.marcogomiero.com/posts/2024/compose-macos-app-store/)

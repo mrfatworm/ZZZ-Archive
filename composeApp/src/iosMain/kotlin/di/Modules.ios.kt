@@ -5,7 +5,7 @@
 
 package di
 
-import database.RoomDBFactory
+import database.RoomDatabaseFactory
 import io.ktor.client.engine.darwin.Darwin
 import network.GoogleDocHttp
 import network.GoogleDocHttpImpl
@@ -21,7 +21,7 @@ import utils.AppActionsUseCase
 
 actual val platformModule = module {
     singleOf(::AppActionsUseCase)
-    singleOf(::RoomDBFactory)
+    singleOf(::RoomDatabaseFactory)
     single<ZzzHttp> { ZzzHttpImpl(Darwin.create(), get()) }
     single<OfficialWebHttp> { OfficialWebHttpImpl(Darwin.create(), get()) }
     single<PixivHttp> { PixivHttpImpl(Darwin.create()) }

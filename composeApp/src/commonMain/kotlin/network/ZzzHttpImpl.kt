@@ -5,7 +5,7 @@ import feature.agent.model.AgentsListResponse
 import feature.bangboo.model.BangbooDetailResponse
 import feature.bangboo.model.BangbooListResponse
 import feature.banner.data.BannerResponse
-import feature.cover_image.data.CoverImageResponse
+import feature.cover_image.model.CoverImageListResponse
 import feature.drive.model.DrivesListResponse
 import feature.setting.domain.LanguageUseCase
 import feature.wengine.model.WEngineDetailResponse
@@ -33,8 +33,8 @@ class ZzzHttpImpl(engine: HttpClientEngine, languageUseCase: LanguageUseCase) : 
         return requestData("Banner/$languagePath/Banner.json")
     }
 
-    override suspend fun requestImageBanner(): CoverImageResponse {
-        return requestData("ImageBanner.json")
+    override suspend fun requestCoverImage(): CoverImageListResponse {
+        return requestData("CoverImagesList.json")
     }
 
     override suspend fun requestAgentsList(): AgentsListResponse {

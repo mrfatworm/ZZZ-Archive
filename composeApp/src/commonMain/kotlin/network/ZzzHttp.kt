@@ -10,7 +10,7 @@ import feature.agent.model.AgentsListResponse
 import feature.bangboo.model.BangbooDetailResponse
 import feature.bangboo.model.BangbooListResponse
 import feature.banner.data.BannerResponse
-import feature.cover_image.data.CoverImageResponse
+import feature.cover_image.model.CoverImageListResponse
 import feature.drive.model.DrivesListResponse
 import feature.wengine.model.WEngineDetailResponse
 import feature.wengine.model.WEnginesListResponse
@@ -19,7 +19,7 @@ interface ZzzHttp {
     val defaultTimeout: Long
     val languagePath: String
     suspend fun requestBanner(): BannerResponse
-    suspend fun requestImageBanner(): CoverImageResponse
+    suspend fun requestCoverImage(): CoverImageListResponse
     suspend fun requestAgentsList(): AgentsListResponse
     suspend fun requestAgentDetail(id: Int): AgentDetailResponse
     suspend fun requestWEnginesList(): WEnginesListResponse

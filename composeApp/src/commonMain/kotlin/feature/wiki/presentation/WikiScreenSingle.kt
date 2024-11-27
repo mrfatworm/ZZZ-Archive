@@ -12,10 +12,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import feature.agent.model.AgentListItem
-import feature.bangboo.model.BangbooListItem
-import feature.drive.data.database.DrivesListItemEntity
-import feature.wengine.model.WEnginesListItem
 import ui.components.cards.AgentsListCard
 import ui.components.cards.BangbooListCard
 import ui.components.cards.DrivesListCard
@@ -26,10 +22,7 @@ import ui.utils.contentPadding
 
 @Composable
 fun WikiScreenSingle(
-    agentsList: List<AgentListItem>,
-    wEnginesList: List<WEnginesListItem>,
-    bangbooList: List<BangbooListItem>,
-    drivesList: List<DrivesListItemEntity>,
+    uiState: WikiState,
     adaptiveLayoutType: AdaptiveLayoutType,
     onAgentsOverviewClick: () -> Unit,
     onWEnginesOverviewClick: () -> Unit,
@@ -45,25 +38,25 @@ fun WikiScreenSingle(
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         AgentsListCard(
-            agentsList = agentsList,
+            agentsList = uiState.agentsList,
             showViewAll = true,
             onAgentsOverviewClick = onAgentsOverviewClick,
             onAgentDetailClick = onAgentDetailClick
         )
         WEnginesListCard(
-            wEnginesList = wEnginesList,
+            wEnginesList = uiState.wEnginesList,
             showViewAll = true,
             onWEnginesOverviewClick = onWEnginesOverviewClick,
             onWEngineDetailClick = onWEngineDetailClick
         )
         BangbooListCard(
-            bangbooList = bangbooList,
+            bangbooList = uiState.bangbooList,
             showViewAll = true,
             onBangbooOverviewClick = onBangbooOverviewClick,
             onBangbooDetailClick = onBangbooDetailClick
         )
         DrivesListCard(
-            drivesList = drivesList,
+            drivesList = uiState.drivesList,
             showViewAll = true,
             onDrivesOverviewClick = onDrivesOverviewClick
         )

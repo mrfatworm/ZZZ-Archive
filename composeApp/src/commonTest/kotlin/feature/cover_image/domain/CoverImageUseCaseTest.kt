@@ -6,7 +6,7 @@
 package feature.cover_image.domain
 
 import feature.cover_image.data.FakeCoverImageRepository
-import feature.cover_image.data.stubCoverImageResponse
+import feature.cover_image.model.stubCoverImageResponse
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals

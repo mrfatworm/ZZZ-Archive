@@ -7,7 +7,7 @@ package di
 
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import com.russhwolf.settings.Settings
-import database.RoomDBFactory
+import database.RoomDatabaseFactory
 import database.WikiDatabaseUseCase
 import feature.agent.data.database.AgentsListDB
 import feature.agent.data.repository.AgentRepository
@@ -26,8 +26,9 @@ import feature.bangboo.presentation.BangbooListViewModel
 import feature.banner.data.BannerRepository
 import feature.banner.data.BannerRepositoryImpl
 import feature.banner.domain.BannerUseCase
-import feature.cover_image.data.CoverImageRepository
-import feature.cover_image.data.CoverImageRepositoryImpl
+import feature.cover_image.data.database.CoverImagesListDB
+import feature.cover_image.data.repository.CoverImageRepository
+import feature.cover_image.data.repository.CoverImageRepositoryImpl
 import feature.cover_image.domain.CoverImageUseCase
 import feature.drive.data.database.DrivesListDB
 import feature.drive.data.respository.DriveRepository
@@ -72,21 +73,38 @@ val sharedModule = module {
     single<Settings> { Settings() }
 
     // Database
-    single { get<RoomDBFactory>().createAgentListDB().setDriver(BundledSQLiteDriver()).build() }
-    single { get<RoomDBFactory>().createWEnginesListDB().setDriver(BundledSQLiteDriver()).build() }
-    single { get<RoomDBFactory>().createBangbooListDB().setDriver(BundledSQLiteDriver()).build() }
-    single { get<RoomDBFactory>().createDrivesListDB().setDriver(BundledSQLiteDriver()).build() }
+    single {
+        get<RoomDatabaseFactory>().createAgentListDatabase().setDriver(BundledSQLiteDriver())
+            .build()
+    }
+    single {
+        get<RoomDatabaseFactory>().createWEnginesListDatabase().setDriver(BundledSQLiteDriver())
+            .build()
+    }
+    single {
+        get<RoomDatabaseFactory>().createBangbooListDatabase().setDriver(BundledSQLiteDriver())
+            .build()
+    }
+    single {
+        get<RoomDatabaseFactory>().createDrivesListDatabase().setDriver(BundledSQLiteDriver())
+            .build()
+    }
+    single {
+        get<RoomDatabaseFactory>().createCoverImagesListDatabase().setDriver(BundledSQLiteDriver())
+            .build()
+    }
     single { get<AgentsListDB>().agentsListDao }
     single { get<WEnginesListDB>().wEnginesListDao }
     single { get<BangbooListDB>().bangbooListDao }
     single { get<DrivesListDB>().drivesListDao }
+    single { get<CoverImagesListDB>().coverImagesListDao }
 
     // Repositories
     single<SettingsRepository> { SettingsRepositoryImpl(get()) }
     single<BannerRepository> { BannerRepositoryImpl(get()) }
     single<OfficialNewsRepository> { OfficialNewsRepositoryImpl(get()) }
     single<PixivRepository> { PixivRepositoryImpl(get()) }
-    single<CoverImageRepository> { CoverImageRepositoryImpl(get()) }
+    single<CoverImageRepository> { CoverImageRepositoryImpl(get(), get()) }
     single<AgentRepository> { AgentRepositoryImpl(get(), get()) }
     single<WEngineRepository> { WEngineRepositoryImpl(get(), get()) }
     single<BangbooRepository> { BangbooRepositoryImpl(get(), get()) }
@@ -96,7 +114,7 @@ val sharedModule = module {
     // Use cases
     single<CoverImageUseCase> { CoverImageUseCase(get()) }
     single<PixivUseCase> { PixivUseCase(get()) }
-    single<BannerUseCase> { BannerUseCase(get()) }
+    single<BannerUseCase> { BannerUseCase(get(), get()) }
     single<LanguageUseCase> { LanguageUseCaseImpl(get()) }
     single<OfficialNewsUseCase> { OfficialNewsUseCase(get(), get()) }
     single<AgentsListUseCase> { AgentsListUseCase(get()) }

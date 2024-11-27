@@ -10,11 +10,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import feature.agent.data.database.AgentsListDB
 import feature.bangboo.data.database.BangbooListDB
+import feature.cover_image.data.database.CoverImagesListDB
 import feature.drive.data.database.DrivesListDB
 import feature.wengine.data.database.WEnginesListDB
 
 
-actual class RoomDBFactory(
+actual class RoomDatabaseFactory(
     private val context: Context
 ) {
     private fun <T : RoomDatabase> createDB(
@@ -31,20 +32,24 @@ actual class RoomDBFactory(
         )
     }
 
-    actual fun createAgentListDB(): RoomDatabase.Builder<AgentsListDB> {
+    actual fun createAgentListDatabase(): RoomDatabase.Builder<AgentsListDB> {
         return createDB(AgentsListDB::class.java, AgentsListDB.DATABASE_NAME)
     }
 
-    actual fun createWEnginesListDB(): RoomDatabase.Builder<WEnginesListDB> {
+    actual fun createWEnginesListDatabase(): RoomDatabase.Builder<WEnginesListDB> {
         return createDB(WEnginesListDB::class.java, WEnginesListDB.DATABASE_NAME)
     }
 
-    actual fun createBangbooListDB(): RoomDatabase.Builder<BangbooListDB> {
+    actual fun createBangbooListDatabase(): RoomDatabase.Builder<BangbooListDB> {
         return createDB(BangbooListDB::class.java, BangbooListDB.DATABASE_NAME)
     }
 
-    actual fun createDrivesListDB(): RoomDatabase.Builder<DrivesListDB> {
+    actual fun createDrivesListDatabase(): RoomDatabase.Builder<DrivesListDB> {
         return createDB(DrivesListDB::class.java, DrivesListDB.DATABASE_NAME)
+    }
+
+    actual fun createCoverImagesListDatabase(): RoomDatabase.Builder<CoverImagesListDB> {
+        return createDB(CoverImagesListDB::class.java, CoverImagesListDB.DATABASE_NAME)
     }
 
 

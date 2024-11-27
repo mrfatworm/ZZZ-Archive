@@ -9,6 +9,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import feature.agent.data.database.AgentsListDB
 import feature.bangboo.data.database.BangbooListDB
+import feature.cover_image.data.database.CoverImagesListDB
 import feature.drive.data.database.DrivesListDB
 import feature.wengine.data.database.WEnginesListDB
 import kotlinx.cinterop.ExperimentalForeignApi
@@ -16,7 +17,7 @@ import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
 
-actual class RoomDBFactory {
+actual class RoomDatabaseFactory {
     @OptIn(ExperimentalForeignApi::class)
     private fun documentDirectory(): String {
         val documentDirectory = NSFileManager.defaultManager.URLForDirectory(
@@ -29,30 +30,37 @@ actual class RoomDBFactory {
         return requireNotNull(documentDirectory?.path)
     }
 
-    actual fun createAgentListDB(): RoomDatabase.Builder<AgentsListDB> {
+    actual fun createAgentListDatabase(): RoomDatabase.Builder<AgentsListDB> {
         val dbFile = documentDirectory() + "/${AgentsListDB.DATABASE_NAME}"
         return Room.databaseBuilder<AgentsListDB>(
             name = dbFile
         )
     }
 
-    actual fun createWEnginesListDB(): RoomDatabase.Builder<WEnginesListDB> {
+    actual fun createWEnginesListDatabase(): RoomDatabase.Builder<WEnginesListDB> {
         val dbFile = documentDirectory() + "/${WEnginesListDB.DATABASE_NAME}"
         return Room.databaseBuilder<WEnginesListDB>(
             name = dbFile
         )
     }
 
-    actual fun createBangbooListDB(): RoomDatabase.Builder<BangbooListDB> {
+    actual fun createBangbooListDatabase(): RoomDatabase.Builder<BangbooListDB> {
         val dbFile = documentDirectory() + "/${BangbooListDB.DATABASE_NAME}"
         return Room.databaseBuilder<BangbooListDB>(
             name = dbFile
         )
     }
 
-    actual fun createDrivesListDB(): RoomDatabase.Builder<DrivesListDB> {
+    actual fun createDrivesListDatabase(): RoomDatabase.Builder<DrivesListDB> {
         val dbFile = documentDirectory() + "/${DrivesListDB.DATABASE_NAME}"
         return Room.databaseBuilder<DrivesListDB>(
+            name = dbFile
+        )
+    }
+
+    actual fun createCoverImagesListDatabase(): RoomDatabase.Builder<CoverImagesListDB> {
+        val dbFile = documentDirectory() + "/${CoverImagesListDB.DATABASE_NAME}"
+        return Room.databaseBuilder<CoverImagesListDB>(
             name = dbFile
         )
     }

@@ -23,16 +23,10 @@ fun WikiScreen(
     onBangbooDetailClick: (Int) -> Unit
 ) {
     val viewModel: WikiViewModel = koinViewModel()
-    val agentsList by viewModel.agentsList.collectAsStateWithLifecycle()
-    val wEnginesList by viewModel.wEnginesList.collectAsStateWithLifecycle()
-    val bangbooList by viewModel.bangbooList.collectAsStateWithLifecycle()
-    val drivesList by viewModel.drivesList.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     WikiScreenSingle(
-        agentsList = agentsList,
-        wEnginesList = wEnginesList,
-        bangbooList = bangbooList,
-        drivesList = drivesList,
+        uiState = uiState,
         adaptiveLayoutType = adaptiveLayoutType,
         onAgentsOverviewClick = onAgentsOverviewClick,
         onWEnginesOverviewClick = onWEnginesOverviewClick,

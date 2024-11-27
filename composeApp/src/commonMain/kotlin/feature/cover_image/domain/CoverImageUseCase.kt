@@ -5,8 +5,8 @@
 
 package feature.cover_image.domain
 
-import feature.cover_image.data.CoverImageRepository
+import feature.cover_image.data.repository.CoverImageRepository
 
 class CoverImageUseCase(private val repository: CoverImageRepository) {
-    suspend fun invoke() = repository.getImageBanner()
+    suspend fun invoke() = repository.getCoverImagesList()
 }

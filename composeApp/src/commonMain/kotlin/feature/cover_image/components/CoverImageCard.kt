@@ -34,21 +34,22 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import feature.cover_image.data.CoverImageResponse
+import feature.cover_image.data.database.CoverImageListItemEntity
 import ui.components.ImageNotFound
 import ui.theme.AppTheme
 
 
 @Composable
-fun CoverImageCard(imageBanner: CoverImageResponse?) {
+fun CoverImageCard(coverImages: List<CoverImageListItemEntity>) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed = interactionSource.collectIsPressedAsState()
     val isHovered = interactionSource.collectIsHoveredAsState()
+    val coverImage = coverImages.firstOrNull()
 
     Box(
         modifier = Modifier.aspectRatio(1.7f).fillMaxWidth().clip(RoundedCornerShape(16.dp))
     ) {
-        if (imageBanner == null) {
+        if (coverImage == null) {
             ImageNotFound()
         } else {
             val urlHandler = LocalUriHandler.current
@@ -57,14 +58,18 @@ fun CoverImageCard(imageBanner: CoverImageResponse?) {
                     .clickable(
                         interactionSource = interactionSource, indication = null
                     ) {
-                        urlHandler.openUri(imageBanner.artworkUrl)
+                        urlHandler.openUri(coverImage.artworkUrl)
                     }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
-                model = imageBanner.getImageUrl(),
-                contentDescription = imageBanner.artworkName,
+                model = coverImage.imageUrl,
+                contentDescription = coverImage.artworkName,
                 contentScale = ContentScale.Crop
             )
-            AnimatedVisibility (visible = isPressed.value || isHovered.value, enter = fadeIn(), exit = fadeOut()) {
-                ArtworkInfo(Modifier.align(Alignment.BottomCenter), imageBanner)
+            AnimatedVisibility(
+                visible = isPressed.value || isHovered.value,
+                enter = fadeIn(),
+                exit = fadeOut()
+            ) {
+                ArtworkInfo(Modifier.align(Alignment.BottomCenter), coverImage)
             }
         }
     }
@@ -72,24 +77,24 @@ fun CoverImageCard(imageBanner: CoverImageResponse?) {
 
 
 @Composable
-private fun ArtworkInfo(modifier: Modifier, banner: CoverImageResponse) {
+private fun ArtworkInfo(modifier: Modifier, coverImage: CoverImageListItemEntity) {
     Column(
         modifier.fillMaxWidth().background(AppTheme.colors.hoveredMask).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
             modifier = Modifier,
-            text = banner.artworkName, color = AppTheme.colors.onHoveredMask,
+            text = coverImage.artworkName, color = AppTheme.colors.onHoveredMask,
             style = AppTheme.typography.titleMedium
         )
         Text(
             modifier = Modifier.weight(1f),
-            text = banner.artworkDescription,
+            text = coverImage.artworkDescription,
             color = AppTheme.colors.onHoveredMask,
             style = AppTheme.typography.bodyMedium
         )
         Text(
-            text = banner.authorName, color = AppTheme.colors.onHoveredMaskVariant,
+            text = coverImage.authorName, color = AppTheme.colors.onHoveredMaskVariant,
             style = AppTheme.typography.labelMedium
         )
     }

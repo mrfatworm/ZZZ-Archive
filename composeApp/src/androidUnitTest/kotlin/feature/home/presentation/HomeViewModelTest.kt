@@ -13,8 +13,8 @@ import feature.bangboo.domain.BangbooListUseCase
 import feature.bangboo.model.stubBangbooListResponse
 import feature.banner.data.stubBannerResponse
 import feature.banner.domain.BannerUseCase
-import feature.cover_image.data.stubCoverImageResponse
 import feature.cover_image.domain.CoverImageUseCase
+import feature.cover_image.model.stubCoverImageResponse
 import feature.drive.domain.DrivesListUseCase
 import feature.drive.model.stubDrivesListResponse
 import feature.news.data.stubOfficialNewsDataResponse

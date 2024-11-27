@@ -13,13 +13,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import feature.agent.model.AgentListItem
-import feature.bangboo.model.BangbooListItem
+import feature.banner.components.AnnouncementBanner
 import feature.cover_image.components.CoverImageCard
-import feature.drive.data.database.DrivesListItemEntity
 import feature.news.presentation.NewsPagerCard
 import feature.pixiv.components.PixivTopicCard
-import feature.wengine.model.WEnginesListItem
 import ui.components.cards.AgentsListCard
 import ui.components.cards.BangbooListCard
 import ui.components.cards.DrivesListCard
@@ -31,10 +28,6 @@ import ui.utils.contentPadding
 @Composable
 fun HomeScreenDual(
     uiState: HomeState,
-    agentsList: List<AgentListItem>,
-    wEnginesList: List<WEnginesListItem>,
-    bangbooList: List<BangbooListItem>,
-    drivesList: List<DrivesListItemEntity>,
     adaptiveLayoutType: AdaptiveLayoutType,
     onAgentsOverviewClick: () -> Unit,
     onWEnginesOverviewClick: () -> Unit,
@@ -73,22 +66,22 @@ fun HomeScreenDual(
             ) {
                 NewsPagerCard(uiState.newsList)
                 AgentsListCard(
-                    agentsList = agentsList,
+                    agentsList = uiState.agentsList,
                     onAgentsOverviewClick = onAgentsOverviewClick,
                     onAgentDetailClick = onAgentDetailClick
                 )
                 WEnginesListCard(
-                    wEnginesList = wEnginesList,
+                    wEnginesList = uiState.wEnginesList,
                     onWEnginesOverviewClick = onWEnginesOverviewClick,
                     onWEngineDetailClick = onWEngineDetailClick
                 )
                 BangbooListCard(
-                    bangbooList = bangbooList,
+                    bangbooList = uiState.bangbooList,
                     onBangbooOverviewClick = onBangbooOverviewClick,
                     onBangbooDetailClick = onBangbooDetailClick
                 )
                 DrivesListCard(
-                    drivesList = drivesList,
+                    drivesList = uiState.drivesList,
                     onDrivesOverviewClick = onDrivesOverviewClick,
                 )
             }

@@ -15,8 +15,8 @@ import feature.bangboo.model.stubBangbooDetailResponse
 import feature.bangboo.model.stubBangbooListResponse
 import feature.banner.data.BannerResponse
 import feature.banner.data.stubBannerResponse
-import feature.cover_image.data.CoverImageResponse
-import feature.cover_image.data.stubCoverImageResponse
+import feature.cover_image.model.CoverImageListResponse
+import feature.cover_image.model.stubCoverImageResponse
 import feature.drive.model.DrivesListResponse
 import feature.drive.model.stubDrivesListResponse
 import feature.wengine.model.WEngineDetailResponse
@@ -43,7 +43,7 @@ class FakeZzzHttp : ZzzHttp {
         }
     }
 
-    override suspend fun requestImageBanner(): CoverImageResponse {
+    override suspend fun requestCoverImage(): CoverImageListResponse {
         return if (isError) {
             throw Exception()
         } else {

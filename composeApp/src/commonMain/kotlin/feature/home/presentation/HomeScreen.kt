@@ -5,27 +5,16 @@
 
 package feature.home.presentation
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import feature.banner.data.BannerResponse
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
-import ui.components.Banner
 import ui.components.dialogs.BannerDialog
-import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
-import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.view_detail
 
 @Composable
 fun HomeScreen(
@@ -43,10 +32,6 @@ fun HomeScreen(
     val viewModel: HomeViewModel = koinViewModel()
     val uiState = viewModel.uiState.collectAsState()
     val banner = uiState.value.banner
-    val agentsList by viewModel.agentsListState.collectAsStateWithLifecycle()
-    val wEnginesList by viewModel.wEnginesListState.collectAsStateWithLifecycle()
-    val bangbooList by viewModel.bangbooListState.collectAsStateWithLifecycle()
-    val driveList by viewModel.driveListState.collectAsStateWithLifecycle()
     val openBannerDialog = remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
     if (contentType == ContentType.Single) {
@@ -67,10 +52,6 @@ fun HomeScreen(
             })
     } else {
         HomeScreenDual(uiState = uiState.value,
-            agentsList = agentsList,
-            wEnginesList = wEnginesList,
-            bangbooList = bangbooList,
-            drivesList = driveList,
             adaptiveLayoutType = adaptiveLayoutType,
             onAgentsOverviewClick = onAgentsOverviewClick,
             onWEnginesOverviewClick = onWEnginesOverviewClick,
@@ -108,23 +89,3 @@ fun HomeScreen(
     }
 }
 
-@Composable
-internal fun ColumnScope.AnnouncementBanner(
-    banner: BannerResponse?,
-    onActionClicked: () -> Unit,
-    onClosed: (Int) -> Unit
-) {
-    AnimatedVisibility(visible = banner != null) {
-        banner?.let {
-            Banner(modifier = Modifier.widthIn(max = AppTheme.dimens.maxContainerWidth),
-                title = banner.title,
-                bannerLevel = banner.getBannerLevel(),
-                closable = banner.ignorable,
-                actionTextRes = Res.string.view_detail,
-                onActionClicked = onActionClicked,
-                onClosed = {
-                    onClosed(banner.id)
-                })
-        }
-    }
-}

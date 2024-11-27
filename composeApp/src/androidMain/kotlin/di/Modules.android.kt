@@ -5,7 +5,7 @@
 
 package di
 
-import database.RoomDBFactory
+import database.RoomDatabaseFactory
 import io.ktor.client.engine.okhttp.OkHttp
 import network.GoogleDocHttp
 import network.GoogleDocHttpImpl
@@ -21,7 +21,7 @@ import utils.AppActionsUseCase
 
 actual val platformModule = module {
     singleOf(::AppActionsUseCase)
-    singleOf(::RoomDBFactory)
+    singleOf(::RoomDatabaseFactory)
     single<ZzzHttp> { ZzzHttpImpl(OkHttp.create(), get()) }
     single<OfficialWebHttp> { OfficialWebHttpImpl(OkHttp.create(), get()) }
     single<PixivHttp> { PixivHttpImpl(OkHttp.create()) }

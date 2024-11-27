@@ -3,14 +3,20 @@
  * License: MIT
  */
 
-package feature.cover_image.data
+package feature.cover_image.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CoverImageResponse(
-    @SerialName("img_id")
+data class CoverImageListResponse(
+    @SerialName("cover_images")
+    val coverImages: List<CoverImageListItemResponse>
+)
+
+@Serializable
+data class CoverImageListItemResponse(
+    @SerialName("id")
     val id: Int,
     @SerialName("artwork_url")
     val artworkUrl: String,
@@ -22,18 +28,14 @@ data class CoverImageResponse(
     val authorUrl: String,
     @SerialName("author_name")
     val authorName: String
-) {
-    fun getImageUrl(): String {
-        return "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Banner/$id.webp"
-    }
-}
+)
 
-val stubCoverImageResponse = CoverImageResponse(
+val stubCoverImageResponse = CoverImageListItemResponse(
     id = 1,
-    artworkUrl = "https://zzz-archive.com/mrfatworm/1",
-    artworkName = "banner",
-    artworkDescription = "banner test",
-    authorUrl = "https://zzz-archive.com/mrfatworm",
+    artworkUrl = "https://www.pixiv.net/artworks/124677174",
+    artworkName = "Bangboo",
+    artworkDescription = "ZZZ Archive Logo",
+    authorUrl = "https://www.pixiv.net/users/9060892",
     authorName = "mrfatworm"
 )
 
