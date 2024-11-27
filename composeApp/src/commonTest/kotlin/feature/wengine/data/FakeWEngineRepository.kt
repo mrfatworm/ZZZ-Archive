@@ -5,10 +5,12 @@
 
 package feature.wengine.data
 
-import feature.wengine.model.WEngineDetailResponse
-import feature.wengine.model.WEnginesListResponse
+import feature.wengine.data.repository.WEngineRepository
+import feature.wengine.model.WEngineDetail
+import feature.wengine.model.WEnginesListItem
 import feature.wengine.model.stubWEngineDetailResponse
 import feature.wengine.model.stubWEnginesListResponse
+import kotlinx.coroutines.flow.Flow
 
 class FakeWEngineRepository : WEngineRepository {
     private var isError = false
@@ -17,7 +19,7 @@ class FakeWEngineRepository : WEngineRepository {
         this.isError = isError
     }
 
-    override suspend fun getWEnginesList(): Result<WEnginesListResponse> {
+    override suspend fun getWEnginesList(): Flow<List<WEnginesListItem>> {
         return if (isError) {
             Result.failure(Exception())
         } else {
@@ -25,7 +27,7 @@ class FakeWEngineRepository : WEngineRepository {
         }
     }
 
-    override suspend fun getWEngineDetail(id: Int): Result<WEngineDetailResponse> {
+    override suspend fun getWEngineDetail(id: Int): Result<WEngineDetail> {
         return if (isError) {
             Result.failure(Exception())
         } else {

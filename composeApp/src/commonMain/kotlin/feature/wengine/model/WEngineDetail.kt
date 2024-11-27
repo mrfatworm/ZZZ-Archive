@@ -1,35 +1,36 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
 package feature.wengine.model
 
 import feature.agent.model.LevelMaterial
 import feature.agent.model.NameAndValue
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import utils.AgentSpecialty
+import utils.ZzzRarity
 
-@Serializable
-data class WEngineDetailResponse(
+data class WEngineDetail(
     val id: Int,
     val name: String,
-    @SerialName("is_leak") val isLeak: Boolean,
-    val rarity: Int,
-    val specialty: String,
+    val imageUrl: String,
+    val isLeak: Boolean,
+    val rarity: ZzzRarity,
+    val specialty: AgentSpecialty,
     val background: String,
     val atk: Int,
     val stat: NameAndValue,
     val skill: String,
-    @SerialName("level_material") val levelMaterials: List<LevelMaterial>
+    val levelMaterials: List<LevelMaterial>
 )
 
-val stubWEngineDetailResponse = WEngineDetailResponse(
+val stubWEngineDetail = WEngineDetail(
     id = 47,
     name = "玉壺青冰",
+    imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset//W-Engine/Image/47.webp",
     isLeak = false,
-    rarity = 5,
-    specialty = "stun",
+    rarity = ZzzRarity.RANK_S,
+    specialty = AgentSpecialty.Stun,
     background = "參考「 鈺偶 」的戰鬥方式與能力，為其量身訂製的擊破型音擎。其儲能內蘊，衍化後衝擊於外。\n質地模擬古文明追捧的珍貴工藝，燒成則溫潤清雅，碎裂則剛硬銳利。壺中神鳥花紋獨特、如名窯冰裂……但其實是手工繪製的。\n\n「保温效果很好，在空洞中也可以隨時喝上熱水。」一一青衣，面對研究者回訪時認真講述意見",
     atk = 713,
     stat = NameAndValue(

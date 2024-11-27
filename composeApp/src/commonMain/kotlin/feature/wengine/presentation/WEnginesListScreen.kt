@@ -6,49 +6,38 @@
 package feature.wengine.presentation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import feature.wengine.components.WEnginesListScreenDual
 import feature.wengine.components.WEnginesListScreenSingle
 import feature.wengine.model.WEnginesListState
 import org.koin.compose.viewmodel.koinViewModel
-import ui.components.ErrorScreen
-import ui.components.LoadingScreen
 import ui.utils.AdaptiveLayoutType
-import utils.UiResult
 
 @Composable
 fun WEnginesListScreen(
     adaptiveLayoutType: AdaptiveLayoutType, onWEngineClick: (Int) -> Unit, onBackClick: () -> Unit
 ) {
     val viewModel: WEnginesListViewModel = koinViewModel()
-    val wEnginesList = viewModel.wEnginesList.collectAsStateWithLifecycle()
-    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
-    when (wEnginesList.value) {
-        UiResult.Loading -> LoadingScreen()
-        is UiResult.Error -> ErrorScreen((wEnginesList.value as UiResult.Error).message,
-            onAction = { viewModel.onAction(WEnginesListAction.OnRetry) })
-
-        is UiResult.Success -> {
-            WEnginesListContent(adaptiveLayoutType, uiState, onAction = { action ->
-                when (action) {
-                    is WEnginesListAction.OnWEngineClick -> onWEngineClick(action.wEngineId)
-                    WEnginesListAction.OnBackClick -> onBackClick()
-                    else -> viewModel.onAction(action)
-                }
-            })
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    WEnginesListContent(adaptiveLayoutType, uiState, onAction = { action ->
+        when (action) {
+            is WEnginesListAction.OnWEngineClick -> onWEngineClick(action.wEngineId)
+            WEnginesListAction.OnBackClick -> onBackClick()
+            else -> viewModel.onAction(action)
         }
-    }
+    })
 }
 
 @Composable
 private fun WEnginesListContent(
     adaptiveLayoutType: AdaptiveLayoutType,
-    uiState: State<WEnginesListState>,
+    uiState: WEnginesListState,
     onAction: (WEnginesListAction) -> Unit
 ) {
     if (adaptiveLayoutType == AdaptiveLayoutType.Compact) {
-        WEnginesListScreenSingle(uiState = uiState.value,
+        WEnginesListScreenSingle(
+            uiState = uiState,
             adaptiveLayoutType = adaptiveLayoutType,
             onWEngineClick = {
                 onAction(WEnginesListAction.OnWEngineClick(it))
@@ -63,7 +52,8 @@ private fun WEnginesListContent(
                 onAction(WEnginesListAction.OnBackClick)
             })
     } else {
-        WEnginesListScreenDual(uiState = uiState.value,
+        WEnginesListScreenDual(
+            uiState = uiState,
             adaptiveLayoutType = adaptiveLayoutType,
             onWEngineClick = {
                 onAction(WEnginesListAction.OnWEngineClick(it))

@@ -10,6 +10,7 @@ import androidx.room.RoomDatabase
 import feature.agent.data.database.AgentsListDB
 import feature.bangboo.data.database.BangbooListDB
 import feature.drive.data.database.DrivesListDB
+import feature.wengine.data.database.WEnginesListDB
 import java.io.File
 
 actual class RoomDBFactory {
@@ -33,6 +34,10 @@ actual class RoomDBFactory {
 
     actual fun createAgentListDB(): RoomDatabase.Builder<AgentsListDB> {
         return createDB(AgentsListDB.DATABASE_NAME)
+    }
+
+    actual fun createWEnginesListDB(): RoomDatabase.Builder<WEnginesListDB> {
+        return createDB(WEnginesListDB.DATABASE_NAME)
     }
 
     actual fun createBangbooListDB(): RoomDatabase.Builder<BangbooListDB> {

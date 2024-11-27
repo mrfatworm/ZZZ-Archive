@@ -10,6 +10,7 @@ import androidx.room.RoomDatabase
 import feature.agent.data.database.AgentsListDB
 import feature.bangboo.data.database.BangbooListDB
 import feature.drive.data.database.DrivesListDB
+import feature.wengine.data.database.WEnginesListDB
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
@@ -31,6 +32,13 @@ actual class RoomDBFactory {
     actual fun createAgentListDB(): RoomDatabase.Builder<AgentsListDB> {
         val dbFile = documentDirectory() + "/${AgentsListDB.DATABASE_NAME}"
         return Room.databaseBuilder<AgentsListDB>(
+            name = dbFile
+        )
+    }
+
+    actual fun createWEnginesListDB(): RoomDatabase.Builder<WEnginesListDB> {
+        val dbFile = documentDirectory() + "/${WEnginesListDB.DATABASE_NAME}"
+        return Room.databaseBuilder<WEnginesListDB>(
             name = dbFile
         )
     }

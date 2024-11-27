@@ -18,6 +18,5 @@ data class AgentsListState(
     val selectedAttributes: Set<AgentAttribute> = emptySet(),
     val selectedSpecialties: Set<AgentSpecialty> = emptySet(),
     val selectedFactionId: Int = 0,
-    val isLoading: Boolean = false,
     val error: String? = null
 )

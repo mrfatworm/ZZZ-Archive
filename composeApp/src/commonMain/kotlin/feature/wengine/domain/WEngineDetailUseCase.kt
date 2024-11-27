@@ -5,7 +5,7 @@
 
 package feature.wengine.domain
 
-import feature.wengine.data.WEngineRepository
+import feature.wengine.data.repository.WEngineRepository
 
 class WEngineDetailUseCase(private val wEngineRepository: WEngineRepository) {
     suspend fun invoke(id: Int) = wEngineRepository.getWEngineDetail(id)

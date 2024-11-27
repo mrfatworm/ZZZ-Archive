@@ -5,6 +5,7 @@
 
 package feature.wengine.data
 
+import feature.wengine.data.repository.WEngineRepositoryImpl
 import feature.wengine.model.stubWEnginesListResponse
 import kotlinx.coroutines.test.runTest
 import network.FakeZzzHttp

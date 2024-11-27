@@ -32,7 +32,7 @@ class BangbooDetailViewModel(
 
     private suspend fun fetchBangbooDetail(id: Int) {
         _uiState.update { it.copy(isLoading = true, error = null) }
-        val result = bangbooDetailUseCase.invoke(id).fold(
+        bangbooDetailUseCase.invoke(id).fold(
             onSuccess = { bangbooDetail ->
                 _uiState.update {
                     it.copy(bangbooDetail = bangbooDetail)

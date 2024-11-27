@@ -6,18 +6,23 @@
 package feature.wengine.model
 
 import feature.agent.model.NameAndValue
+import utils.AgentSpecialty
+import utils.ZzzRarity
 
 data class WEngineDetailState(
-    val wEngineDetail: WEngineDetailResponse = emptyWEngineDetailResponse
+    val wEngineDetail: WEngineDetail = emptyWEngineDetail,
+    val isLoading: Boolean = false,
+    val error: String? = null
 )
 
-val emptyWEngineDetailResponse =
-    WEngineDetailResponse(
+val emptyWEngineDetail =
+    WEngineDetail(
         id = 0,
         name = "",
+        imageUrl = "",
         isLeak = false,
-        rarity = 5,
-        specialty = "",
+        rarity = ZzzRarity.RANK_D,
+        specialty = AgentSpecialty.None,
         background = "",
         atk = 0,
         stat = NameAndValue(

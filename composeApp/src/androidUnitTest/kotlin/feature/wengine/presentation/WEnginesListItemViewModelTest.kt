@@ -19,7 +19,7 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class WEnginesListViewModelTest {
+class WEnginesListItemViewModelTest {
 
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()

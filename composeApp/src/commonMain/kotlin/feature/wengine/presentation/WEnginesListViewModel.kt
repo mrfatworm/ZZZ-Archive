@@ -8,13 +8,11 @@ package feature.wengine.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.wengine.domain.WEnginesListUseCase
-import feature.wengine.model.WEngineListItem
 import feature.wengine.model.WEnginesListState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import utils.UiResult
 
 class WEnginesListViewModel(
     private val wEnginesListUseCase: WEnginesListUseCase
@@ -22,32 +20,19 @@ class WEnginesListViewModel(
 
     private var _uiState = MutableStateFlow(WEnginesListState())
     val uiState = _uiState.asStateFlow()
-    private var _wEnginesList = MutableStateFlow<UiResult<List<WEngineListItem>>>(UiResult.Loading)
-    val wEnginesList = _wEnginesList.asStateFlow()
 
     init {
         viewModelScope.launch {
-            fetchWEnginesList()
+            observeWEnginesList()
         }
     }
 
-    private suspend fun fetchWEnginesList() {
-        _wEnginesList.value = UiResult.Loading
-        val result = wEnginesListUseCase.invoke()
-        _wEnginesList.value = result.fold(
-            onSuccess = { wEngines ->
-                _uiState.update {
-                    it.copy(
-                        wEnginesList = wEngines,
-                        filteredWEnginesList = wEngines
-                    )
-                }
-                UiResult.Success(wEngines)
-            },
-            onFailure = {
-                UiResult.Error(it.message ?: "Unknown error")
+    private suspend fun observeWEnginesList() {
+        wEnginesListUseCase.invoke().collect { wEnginesList ->
+            _uiState.update {
+                it.copy(wEnginesList = wEnginesList, filteredWEnginesList = wEnginesList)
             }
-        )
+        }
     }
 
     fun onAction(action: WEnginesListAction) {
@@ -68,11 +53,6 @@ class WEnginesListViewModel(
 
             is WEnginesListAction.OnWEngineClick -> {}
             WEnginesListAction.OnBackClick -> {}
-            WEnginesListAction.OnRetry -> {
-                viewModelScope.launch {
-                    fetchWEnginesList()
-                }
-            }
         }
     }
 

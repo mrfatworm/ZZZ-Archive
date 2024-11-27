@@ -20,6 +20,7 @@ import feature.news.domain.OfficialNewsUseCase
 import feature.pixiv.domain.PixivUseCase
 import feature.setting.data.SettingsRepository
 import feature.wengine.domain.WEnginesListUseCase
+import feature.wengine.model.WEnginesListItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -42,6 +43,8 @@ class HomeViewModel(
     val uiState = _uiState.asStateFlow()
     private var _agentsListState = MutableStateFlow<List<AgentListItem>>(emptyList())
     val agentsListState = _agentsListState.asStateFlow()
+    private var _wEnginesListState = MutableStateFlow<List<WEnginesListItem>>(emptyList())
+    val wEnginesListState = _wEnginesListState.asStateFlow()
     private var _bangbooListState = MutableStateFlow<List<BangbooListItem>>(emptyList())
     val bangbooListState = _bangbooListState.asStateFlow()
     private var _driveListState = MutableStateFlow<List<DrivesListItemEntity>>(emptyList())
@@ -56,7 +59,7 @@ class HomeViewModel(
             launch { fetchZzzOfficialNewsEveryTenMinutes() }
             launch { fetchPixivTopic() }
             launch { observeAgentsList() }
-            launch { fetchWEnginesList() }
+            launch { observeWEnginesList() }
             launch { observeBangbooList() }
             launch { observeDrivesList() }
         }
@@ -123,15 +126,10 @@ class HomeViewModel(
         }
     }
 
-    private suspend fun fetchWEnginesList() {
-        val result = wEnginesListUseCase.invoke()
-        result.fold(onSuccess = { wEnginesList ->
-            _uiState.update {
-                it.copy(wEnginesList = wEnginesList)
-            }
-        }, onFailure = {
-            println("get wEngines error: ${it.message}")
-        })
+    private suspend fun observeWEnginesList() {
+        wEnginesListUseCase.invoke().collect { wEnginesList ->
+            _wEnginesListState.value = wEnginesList
+        }
     }
 
     private suspend fun observeBangbooList() {

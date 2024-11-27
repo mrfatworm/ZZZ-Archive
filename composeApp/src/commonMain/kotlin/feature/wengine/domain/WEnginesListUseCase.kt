@@ -5,8 +5,8 @@
 
 package feature.wengine.domain
 
-import feature.wengine.data.WEngineRepository
-import feature.wengine.model.WEngineListItem
+import feature.wengine.data.repository.WEngineRepository
+import feature.wengine.model.WEnginesListItem
 import utils.AgentSpecialty
 import utils.ZzzRarity
 
@@ -14,18 +14,19 @@ import utils.ZzzRarity
 class WEnginesListUseCase(
     private val wEngineRepository: WEngineRepository
 ) {
-    suspend fun invoke() = wEngineRepository.getWEnginesList().map { it.wEngines.reversed() }
+    suspend fun invoke() = wEngineRepository.getWEnginesList()
+    suspend fun requestAndUpdateDB() = wEngineRepository.requestAndUpdateWEnginesListDB()
 
     fun filterWEnginesList(
-        wEnginesList: List<WEngineListItem>,
+        wEnginesList: List<WEnginesListItem>,
         selectedRarities: Set<ZzzRarity>,
         selectedSpecialties: Set<AgentSpecialty>,
-    ): List<WEngineListItem> {
+    ): List<WEnginesListItem> {
         return wEnginesList.filter { wEngine ->
             val matchRarity =
-                selectedRarities.isEmpty() || selectedRarities.any { it.level == wEngine.rarity }
+                selectedRarities.isEmpty() || selectedRarities.any { it == wEngine.rarity }
             val matchSpecialty =
-                selectedSpecialties.isEmpty() || selectedSpecialties.any { it.name.lowercase() == wEngine.specialty }
+                selectedSpecialties.isEmpty() || selectedSpecialties.any { it == wEngine.specialty }
 
             matchRarity && matchSpecialty
         }

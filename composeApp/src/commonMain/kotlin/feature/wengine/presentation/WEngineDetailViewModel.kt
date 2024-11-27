@@ -9,13 +9,11 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.wengine.domain.WEngineDetailUseCase
-import feature.wengine.model.WEngineDetailResponse
 import feature.wengine.model.WEngineDetailState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import utils.UiResult
 
 class WEngineDetailViewModel(
     savedStateHandle: SavedStateHandle,
@@ -25,29 +23,29 @@ class WEngineDetailViewModel(
 
     private var _uiState = MutableStateFlow(WEngineDetailState())
     val uiState = _uiState.asStateFlow()
-    private var _wEngineDetail = MutableStateFlow<UiResult<WEngineDetailResponse>>(UiResult.Loading)
-    val wEngineDetail = _wEngineDetail.asStateFlow()
 
     init {
         viewModelScope.launch {
-            fetchWEngineDetail(wEngineId)
+            observeWEngineDetail(wEngineId)
         }
     }
 
-    private suspend fun fetchWEngineDetail(id: Int) {
-        _wEngineDetail.value = UiResult.Loading
-        val result = wEngineDetailUseCase.invoke(id)
-        _wEngineDetail.value = result.fold(
+    private suspend fun observeWEngineDetail(id: Int) {
+        _uiState.update { it.copy(isLoading = true, error = null) }
+        wEngineDetailUseCase.invoke(id).fold(
             onSuccess = { wEngine ->
                 _uiState.update {
                     it.copy(
+                        isLoading = false,
                         wEngineDetail = wEngine
                     )
                 }
-                UiResult.Success(wEngine)
-            },
-            onFailure = {
-                UiResult.Error(it.message ?: "Unknown error")
+            }, onFailure = { throwable ->
+                _uiState.update {
+                    it.copy(
+                        isLoading = false, error = throwable.message ?: "Unknown error"
+                    )
+                }
             }
         )
     }
@@ -57,7 +55,7 @@ class WEngineDetailViewModel(
             WEngineDetailAction.OnBackClick -> {}
             WEngineDetailAction.OnRetry -> {
                 viewModelScope.launch {
-                    fetchWEngineDetail(wEngineId)
+                    observeWEngineDetail(wEngineId)
                 }
             }
         }

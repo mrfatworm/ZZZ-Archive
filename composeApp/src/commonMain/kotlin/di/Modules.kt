@@ -7,8 +7,8 @@ package di
 
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import com.russhwolf.settings.Settings
-import database.DataBaseUseCase
 import database.RoomDBFactory
+import database.WikiDatabaseUseCase
 import feature.agent.data.database.AgentsListDB
 import feature.agent.data.repository.AgentRepository
 import feature.agent.data.repository.AgentRepositoryImpl
@@ -53,8 +53,9 @@ import feature.setting.domain.ThemeUseCase
 import feature.setting.presentation.FeedbackViewModel
 import feature.setting.presentation.SettingViewModel
 import feature.splash.SplashViewModel
-import feature.wengine.data.WEngineRepository
-import feature.wengine.data.WEngineRepositoryImpl
+import feature.wengine.data.database.WEnginesListDB
+import feature.wengine.data.repository.WEngineRepository
+import feature.wengine.data.repository.WEngineRepositoryImpl
 import feature.wengine.domain.WEngineDetailUseCase
 import feature.wengine.domain.WEnginesListUseCase
 import feature.wengine.presentation.WEngineDetailViewModel
@@ -72,9 +73,11 @@ val sharedModule = module {
 
     // Database
     single { get<RoomDBFactory>().createAgentListDB().setDriver(BundledSQLiteDriver()).build() }
+    single { get<RoomDBFactory>().createWEnginesListDB().setDriver(BundledSQLiteDriver()).build() }
     single { get<RoomDBFactory>().createBangbooListDB().setDriver(BundledSQLiteDriver()).build() }
     single { get<RoomDBFactory>().createDrivesListDB().setDriver(BundledSQLiteDriver()).build() }
     single { get<AgentsListDB>().agentsListDao }
+    single { get<WEnginesListDB>().wEnginesListDao }
     single { get<BangbooListDB>().bangbooListDao }
     single { get<DrivesListDB>().drivesListDao }
 
@@ -85,7 +88,7 @@ val sharedModule = module {
     single<PixivRepository> { PixivRepositoryImpl(get()) }
     single<CoverImageRepository> { CoverImageRepositoryImpl(get()) }
     single<AgentRepository> { AgentRepositoryImpl(get(), get()) }
-    single<WEngineRepository> { WEngineRepositoryImpl(get()) }
+    single<WEngineRepository> { WEngineRepositoryImpl(get(), get()) }
     single<BangbooRepository> { BangbooRepositoryImpl(get(), get()) }
     single<DriveRepository> { DriveRepositoryImpl(get(), get()) }
     single<GoogleDocRepository> { GoogleDocRepositoryImpl(get()) }
@@ -106,7 +109,7 @@ val sharedModule = module {
     single<AppInfoUseCase> { AppInfoUseCase() }
     single<GoogleDocUseCase> { GoogleDocUseCase(get()) }
     single<ThemeUseCase> { ThemeUseCase(get()) }
-    single<DataBaseUseCase> { DataBaseUseCase(get()) }
+    single<WikiDatabaseUseCase> { WikiDatabaseUseCase(get(), get(), get(), get()) }
 
     // ViewModels
     viewModelOf(::SplashViewModel)

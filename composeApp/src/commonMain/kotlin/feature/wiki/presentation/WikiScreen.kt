@@ -6,7 +6,6 @@
 package feature.wiki.presentation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
@@ -24,14 +23,14 @@ fun WikiScreen(
     onBangbooDetailClick: (Int) -> Unit
 ) {
     val viewModel: WikiViewModel = koinViewModel()
-    val uiState = viewModel.uiState.collectAsState()
     val agentsList by viewModel.agentsList.collectAsStateWithLifecycle()
+    val wEnginesList by viewModel.wEnginesList.collectAsStateWithLifecycle()
     val bangbooList by viewModel.bangbooList.collectAsStateWithLifecycle()
     val drivesList by viewModel.drivesList.collectAsStateWithLifecycle()
 
     WikiScreenSingle(
-        uiState = uiState.value,
         agentsList = agentsList,
+        wEnginesList = wEnginesList,
         bangbooList = bangbooList,
         drivesList = drivesList,
         adaptiveLayoutType = adaptiveLayoutType,

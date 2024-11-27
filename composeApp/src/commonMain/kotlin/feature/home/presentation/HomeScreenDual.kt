@@ -19,6 +19,7 @@ import feature.cover_image.components.CoverImageCard
 import feature.drive.data.database.DrivesListItemEntity
 import feature.news.presentation.NewsPagerCard
 import feature.pixiv.components.PixivTopicCard
+import feature.wengine.model.WEnginesListItem
 import ui.components.cards.AgentsListCard
 import ui.components.cards.BangbooListCard
 import ui.components.cards.DrivesListCard
@@ -31,6 +32,7 @@ import ui.utils.contentPadding
 fun HomeScreenDual(
     uiState: HomeState,
     agentsList: List<AgentListItem>,
+    wEnginesList: List<WEnginesListItem>,
     bangbooList: List<BangbooListItem>,
     drivesList: List<DrivesListItemEntity>,
     adaptiveLayoutType: AdaptiveLayoutType,
@@ -76,7 +78,7 @@ fun HomeScreenDual(
                     onAgentDetailClick = onAgentDetailClick
                 )
                 WEnginesListCard(
-                    wEnginesList = uiState.wEnginesList,
+                    wEnginesList = wEnginesList,
                     onWEnginesOverviewClick = onWEnginesOverviewClick,
                     onWEngineDetailClick = onWEngineDetailClick
                 )

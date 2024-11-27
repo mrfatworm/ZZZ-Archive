@@ -13,7 +13,7 @@ fun DriveListItemResponse.toDriveListEntity(path: String = ZzzConfig.ASSET_PATH)
     return DrivesListItemEntity(
         id = id,
         name = name,
-        imageUrl = "https://raw.githubusercontent.com/${ZzzConfig.ASSET_PATH}/Drive/$id.webp",
+        imageUrl = "https://raw.githubusercontent.com/$path/Drive/$id.webp",
         isLeak = isLeak,
         pieceSetTwo = pieceSetTwo,
         pieceSetFour = pieceSetFour

@@ -8,7 +8,7 @@ package feature.setting.presentation
 
 import MainDispatcherRule
 import android.content.Context
-import database.DataBaseUseCase
+import database.WikiDatabaseUseCase
 import feature.setting.domain.AppInfoUseCase
 import feature.setting.domain.LanguageUseCase
 import feature.setting.domain.ThemeUseCase
@@ -32,7 +32,7 @@ class SettingViewModelTest {
     private val languageUseCase = mockk<LanguageUseCase>()
     private val appInfoUseCase = mockk<AppInfoUseCase>()
     private val appActionsUseCase = AppActionsUseCase(mockContext)
-    private val dataBaseUseCase = mockk<DataBaseUseCase>()
+    private val wikiDatabaseUseCase = mockk<WikiDatabaseUseCase>()
     private lateinit var viewModel: SettingViewModel
 
     @BeforeTest
@@ -49,7 +49,7 @@ class SettingViewModelTest {
                 appInfoUseCase,
                 appActionsUseCase,
                 languageUseCase,
-                dataBaseUseCase
+                wikiDatabaseUseCase
             )
     }
 

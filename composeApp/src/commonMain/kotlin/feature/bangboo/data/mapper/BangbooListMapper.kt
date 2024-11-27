@@ -16,7 +16,7 @@ fun BangbooListItemResponse.toBangbooListItemEntity(path: String = ZzzConfig.ASS
     return BangbooListItemEntity(
         id = id,
         name = name,
-        imageUrl = "https://raw.githubusercontent.com/${ZzzConfig.ASSET_PATH}/Bangboo/Profile/$id.webp",
+        imageUrl = "https://raw.githubusercontent.com/$path/Bangboo/Profile/$id.webp",
         isLeak = isLeak,
         rarity = rarity,
         attribute = attribute

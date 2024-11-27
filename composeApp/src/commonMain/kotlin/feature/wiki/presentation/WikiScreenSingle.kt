@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import feature.agent.model.AgentListItem
 import feature.bangboo.model.BangbooListItem
 import feature.drive.data.database.DrivesListItemEntity
-import feature.wiki.model.WikiState
+import feature.wengine.model.WEnginesListItem
 import ui.components.cards.AgentsListCard
 import ui.components.cards.BangbooListCard
 import ui.components.cards.DrivesListCard
@@ -26,8 +26,8 @@ import ui.utils.contentPadding
 
 @Composable
 fun WikiScreenSingle(
-    uiState: WikiState,
     agentsList: List<AgentListItem>,
+    wEnginesList: List<WEnginesListItem>,
     bangbooList: List<BangbooListItem>,
     drivesList: List<DrivesListItemEntity>,
     adaptiveLayoutType: AdaptiveLayoutType,
@@ -51,7 +51,7 @@ fun WikiScreenSingle(
             onAgentDetailClick = onAgentDetailClick
         )
         WEnginesListCard(
-            wEnginesList = uiState.wEnginesList,
+            wEnginesList = wEnginesList,
             showViewAll = true,
             onWEnginesOverviewClick = onWEnginesOverviewClick,
             onWEngineDetailClick = onWEngineDetailClick

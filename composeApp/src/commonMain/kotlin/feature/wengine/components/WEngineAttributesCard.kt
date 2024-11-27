@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import feature.wengine.model.WEngineDetailResponse
+import feature.wengine.model.WEngineDetail
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.CardHeader
 import ui.components.cards.ContentCard
@@ -20,7 +20,7 @@ import zzzarchive.composeapp.generated.resources.atk
 import zzzarchive.composeapp.generated.resources.attributes
 
 @Composable
-fun WEngineAttributesCard(wEngineDetail: WEngineDetailResponse) {
+fun WEngineAttributesCard(wEngineDetail: WEngineDetail) {
     ContentCard(hasDefaultPadding = false) {
         CardHeader(
             title = stringResource(Res.string.attributes) + " Lv.Max"

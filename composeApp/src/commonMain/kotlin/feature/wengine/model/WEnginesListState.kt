@@ -10,8 +10,9 @@ import utils.ZzzRarity
 
 
 data class WEnginesListState(
-    val wEnginesList: List<WEngineListItem> = emptyList(),
-    val filteredWEnginesList: List<WEngineListItem> = emptyList(),
+    val wEnginesList: List<WEnginesListItem> = emptyList(),
+    val filteredWEnginesList: List<WEnginesListItem> = emptyList(),
     val selectedRarity: Set<ZzzRarity> = emptySet(),
-    val selectedSpecialties: Set<AgentSpecialty> = emptySet()
+    val selectedSpecialties: Set<AgentSpecialty> = emptySet(),
+    val error: String? = null
 )

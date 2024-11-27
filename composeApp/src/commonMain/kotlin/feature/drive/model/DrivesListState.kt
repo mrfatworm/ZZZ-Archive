@@ -11,6 +11,5 @@ import feature.drive.data.database.DrivesListItemEntity
 data class DrivesListState(
     val drivesList: List<DrivesListItemEntity> = emptyList(),
     val selectedDrive: DrivesListItemEntity? = null,
-    val isLoading: Boolean = false,
     val error: String? = null
 )
