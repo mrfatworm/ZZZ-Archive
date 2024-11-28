@@ -38,19 +38,22 @@
 
 - **Kotlin Multiplatform (KMP)**
 - **Compose Multiplatform (CMP)**
-- Adaptive Layout for dynamic screen adjustment
-- Compose Navigation
-- ViewModel Lifecycle Management (JetBrains Lifecycle ViewModel)
+- JetBrains Adaptive Layout
+- JetBrains Navigation Compose
+- JetBrains Lifecycle ViewModel
+- Androidx Room Database
 - Koin for Dependency Injection
 - Ktor for Networking
 - Localization support (English and Traditional Chinese)
-- Full-screen edge-to-edge layout
+- Full-screen layout (edge-to-edge)
+- BuildKonfig for environment configurations
+- Multiplatform Setting for preference
+- Okio I/O
 - **Design System**
   - Custom UI Components
   - Dark/Light Color Schemes
   - Noto Sans Typography
   - Spacing and Radius adjustments
-- BuildKonfig for environment configurations
 
 ## Special Thanks / 鳴謝
 
