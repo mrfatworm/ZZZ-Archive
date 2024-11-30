@@ -22,13 +22,11 @@ import ui.components.cards.BangbooListCard
 import ui.components.cards.DrivesListCard
 import ui.components.cards.WEnginesListCard
 import ui.theme.AppTheme
-import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
 
 @Composable
 fun HomeScreenDual(
     uiState: HomeState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onAgentsOverviewClick: () -> Unit,
     onWEnginesOverviewClick: () -> Unit,
     onBangbooOverviewClick: () -> Unit,
@@ -42,7 +40,7 @@ fun HomeScreenDual(
 ) {
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState())
-            .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+            .contentPadding(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         AnnouncementBanner(
@@ -87,5 +85,4 @@ fun HomeScreenDual(
             }
         }
     }
-
 }

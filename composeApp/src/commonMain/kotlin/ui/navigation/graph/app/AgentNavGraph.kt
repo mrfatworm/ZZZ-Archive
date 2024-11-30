@@ -10,17 +10,11 @@ import androidx.navigation.compose.navigation
 import ui.navigation.MainFlow
 import ui.navigation.NavActions
 import ui.navigation.graph.sharedNavGraph
-import ui.utils.AdaptiveLayoutType
-import ui.utils.ContentType
 
-fun NavGraphBuilder.agentNavGraph(
-    contentType: ContentType,
-    adaptiveLayoutType: AdaptiveLayoutType,
-    navActions: NavActions
-) {
+fun NavGraphBuilder.agentNavGraph(navActions: NavActions) {
     navigation(
         route = MainFlow.Agent.route, startDestination = MainFlow.Agent.startScreen.route
     ) {
-        sharedNavGraph(contentType, adaptiveLayoutType, navActions)
+        sharedNavGraph(navActions)
     }
 }

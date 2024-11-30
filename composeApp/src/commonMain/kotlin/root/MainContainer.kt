@@ -39,13 +39,12 @@ import ui.navigation.NavActions
 import ui.navigation.graph.MainNavGraph
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
-import ui.utils.ContentType
 import ui.utils.containerPadding
 import ui.utils.contentPadding
 
 @Composable
 fun MainContainer(
-    rootNavActions: NavActions, adaptiveLayoutType: AdaptiveLayoutType, contentType: ContentType
+    rootNavActions: NavActions
 ) {
     val mainFunNavController = rememberNavController()
     val mainFunNavActions = remember(mainFunNavController) {
@@ -90,8 +89,6 @@ fun MainContainer(
             rootNavActions = rootNavActions,
             selectedDestination = selectedDestination,
             selectedMainFlow = selectedMainFlow,
-            adaptiveLayoutType = adaptiveLayoutType,
-            contentType = contentType,
             onDrawerClicked = {
                 scope.launch {
                     drawerState.open()
@@ -111,8 +108,6 @@ fun MainFuncContent(
     rootNavActions: NavActions,
     selectedDestination: String,
     selectedMainFlow: String,
-    adaptiveLayoutType: AdaptiveLayoutType,
-    contentType: ContentType,
     onDrawerClicked: () -> Unit,
     onThemeChanged: () -> Unit
 ) {
@@ -120,15 +115,15 @@ fun MainFuncContent(
         modifier = Modifier.fillMaxSize()
     ) {
         Row(
-            modifier = Modifier.weight(1f).containerPadding(adaptiveLayoutType, AppTheme.dimens),
-            horizontalArrangement = horizontalParentGap(adaptiveLayoutType)
+            modifier = Modifier.weight(1f)
+                .containerPadding(AppTheme.adaptiveLayoutType, AppTheme.dimens),
+            horizontalArrangement = horizontalParentGap()
         ) {
             AnimatedVisibility(
-                visible = adaptiveLayoutType == AdaptiveLayoutType.Medium || adaptiveLayoutType == AdaptiveLayoutType.Expanded
+                visible = AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Medium || AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Expanded
             ) {
                 ZzzArchiveNavigationRail(
-                    modifier = Modifier.fillMaxHeight()
-                        .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+                    modifier = Modifier.fillMaxHeight().contentPadding(),
                     selectedMainFlow = selectedMainFlow,
                     navActions = mainNavActions,
                     onDrawerClicked = onDrawerClicked,
@@ -142,8 +137,6 @@ fun MainFuncContent(
                 MainNavGraph(
                     modifier = Modifier.widthIn(max = AppTheme.dimens.maxContainerWidth),
                     navController = mainFunNavController,
-                    contentType = contentType,
-                    adaptiveLayoutType = adaptiveLayoutType,
                     navActions = mainNavActions,
                     rootNavActions = rootNavActions
                 )
@@ -151,7 +144,7 @@ fun MainFuncContent(
         }
         val isBottomNavItem =
             NAV_BOTTOM_MAIN_FLOW.find { it.startScreen.route == selectedDestination }
-        AnimatedVisibility(visible = adaptiveLayoutType == AdaptiveLayoutType.Compact && isBottomNavItem != null) {
+        AnimatedVisibility(visible = AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact && isBottomNavItem != null) {
             ZzzArchiveBottomNavigationBar(
                 selectedMainFlow = selectedMainFlow, navigationActions = mainNavActions
             )
@@ -160,8 +153,8 @@ fun MainFuncContent(
 }
 
 @Composable
-private fun horizontalParentGap(adaptiveLayoutType: AdaptiveLayoutType) = Arrangement.spacedBy(
-    when (adaptiveLayoutType) {
+private fun horizontalParentGap() = Arrangement.spacedBy(
+    when (AppTheme.adaptiveLayoutType) {
         AdaptiveLayoutType.Expanded -> AppTheme.dimens.gapParentExpanded
         AdaptiveLayoutType.Medium -> AppTheme.dimens.gapParentMedium
         AdaptiveLayoutType.Compact -> 0.dp

@@ -16,7 +16,6 @@ import feature.agent.components.AgentsListFilterCard
 import feature.agent.components.FactionItem
 import feature.agent.model.AgentsListState
 import ui.theme.AppTheme
-import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
 import utils.AgentAttribute
 import utils.AgentSpecialty
@@ -25,7 +24,6 @@ import utils.ZzzRarity
 @Composable
 fun AgentsListScreenDual(
     uiState: AgentsListState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onAgentClick: (Int) -> Unit,
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
@@ -33,7 +31,7 @@ fun AgentsListScreenDual(
     onFactionClick: (Int) -> Unit
 ) {
     Row(
-        modifier = Modifier.contentPadding(adaptiveLayoutType, AppTheme.dimens),
+        modifier = Modifier.contentPadding(),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         AgentsListFilterCard(

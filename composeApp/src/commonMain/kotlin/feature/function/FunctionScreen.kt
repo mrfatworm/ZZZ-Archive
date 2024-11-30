@@ -6,11 +6,9 @@
 package feature.function
 
 import androidx.compose.runtime.Composable
-import ui.utils.AdaptiveLayoutType
 
 @Composable
 fun FunctionScreen(
-    adaptiveLayoutType: AdaptiveLayoutType
 ) {
-    FunctionScreenSingle(adaptiveLayoutType)
+    FunctionScreenSingle()
 }

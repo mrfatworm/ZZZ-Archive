@@ -13,39 +13,31 @@ import feature.bangboo.components.BangbooDetailScreenSingle
 import feature.bangboo.model.BangbooDetailState
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.ErrorScreen
-import ui.utils.AdaptiveLayoutType
+import ui.theme.AppTheme
 import ui.utils.ContentType
 
 @Composable
-fun BangbooDetailScreen(
-    contentType: ContentType, adaptiveLayoutType: AdaptiveLayoutType, onBackClick: () -> Unit
-) {
+fun BangbooDetailScreen(onBackClick: () -> Unit) {
     val viewModel: BangbooDetailViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     if (uiState.error != null) {
         ErrorScreen(message = uiState.error!!,
             onAction = { viewModel.onAction(BangbooDetailAction.OnRetry) })
     } else {
-        BangbooDetailContent(contentType, uiState, adaptiveLayoutType, onBackClick)
+        BangbooDetailContent(uiState, onBackClick)
     }
 }
 
 @Composable
-private fun BangbooDetailContent(
-    contentType: ContentType, uiState: BangbooDetailState,
-    adaptiveLayoutType: AdaptiveLayoutType,
-    onBackClick: () -> Unit
-) {
-    if (contentType == ContentType.Single) {
+private fun BangbooDetailContent(uiState: BangbooDetailState, onBackClick: () -> Unit) {
+    if (AppTheme.contentType == ContentType.Single) {
         BangbooDetailScreenSingle(
             uiState = uiState,
-            adaptiveLayoutType = adaptiveLayoutType,
             onBackClick = onBackClick
         )
     } else {
         BangbooDetailScreenDual(
             uiState = uiState,
-            adaptiveLayoutType = adaptiveLayoutType,
             onBackClick = onBackClick
         )
     }

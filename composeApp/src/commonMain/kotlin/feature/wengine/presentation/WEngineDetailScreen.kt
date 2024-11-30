@@ -13,13 +13,11 @@ import feature.wengine.components.WEngineDetailScreenSingle
 import feature.wengine.model.WEngineDetailState
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.ErrorScreen
-import ui.utils.AdaptiveLayoutType
+import ui.theme.AppTheme
 import ui.utils.ContentType
 
 @Composable
-fun WEngineDetailScreen(
-    contentType: ContentType, adaptiveLayoutType: AdaptiveLayoutType, onBackClick: () -> Unit
-) {
+fun WEngineDetailScreen(onBackClick: () -> Unit) {
     val viewModel: WEngineDetailViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     if (uiState.error != null) {
@@ -28,25 +26,22 @@ fun WEngineDetailScreen(
             onAction = { viewModel.onAction(WEngineDetailAction.OnRetry) }
         )
     } else {
-            WEngineDetailContent(contentType, uiState, adaptiveLayoutType, onBackClick)
+        WEngineDetailContent(uiState, onBackClick)
         }
 }
 
 @Composable
 private fun WEngineDetailContent(
-    contentType: ContentType,
     uiState: WEngineDetailState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onBackClick: () -> Unit
 ) {
-    if (contentType == ContentType.Single) {
+    if (AppTheme.contentType == ContentType.Single) {
         WEngineDetailScreenSingle(
-            uiState = uiState, adaptiveLayoutType = adaptiveLayoutType, onBackClick = onBackClick
+            uiState = uiState, onBackClick = onBackClick
         )
     } else {
         WEngineDetailScreenDual(
             uiState = uiState,
-            adaptiveLayoutType = adaptiveLayoutType,
             onBackClick = onBackClick
         )
     }

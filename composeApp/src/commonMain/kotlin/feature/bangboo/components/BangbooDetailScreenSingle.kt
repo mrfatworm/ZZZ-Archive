@@ -17,7 +17,6 @@ import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.MaterialsListCard
 import ui.components.cards.TextCard
 import ui.theme.AppTheme
-import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.active_skill
@@ -27,12 +26,11 @@ import zzzarchive.composeapp.generated.resources.chain_attack
 @Composable
 fun BangbooDetailScreenSingle(
     uiState: BangbooDetailState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onBackClick: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-            .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+            .contentPadding(),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         BangbooImageCard(uiState.bangbooDetail, onBackClick)

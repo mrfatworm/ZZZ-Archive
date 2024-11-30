@@ -10,21 +10,17 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import feature.agent.model.AgentsListState
 import org.koin.compose.viewmodel.koinViewModel
-import ui.utils.AdaptiveLayoutType
+import ui.theme.AppTheme
 import ui.utils.ContentType
 
 @Composable
 fun AgentsListScreen(
-    contentType: ContentType,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onAgentClick: (Int) -> Unit,
     onBackClick: () -> Unit
 ) {
     val viewModel: AgentsListViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     AgentsListContent(uiState = uiState,
-        contentType = contentType,
-        adaptiveLayoutType = adaptiveLayoutType,
         onAction = { action ->
             when (action) {
                 is AgentsListAction.OnAgentClick -> {
@@ -40,13 +36,10 @@ fun AgentsListScreen(
 @Composable
 fun AgentsListContent(
     uiState: AgentsListState,
-    contentType: ContentType,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onAction: (AgentsListAction) -> Unit,
 ) {
-    if (contentType == ContentType.Single) {
+    if (AppTheme.contentType == ContentType.Single) {
         AgentsListScreenSingle(uiState = uiState,
-            adaptiveLayoutType = adaptiveLayoutType,
             onAgentClick = { id ->
                 onAction(AgentsListAction.OnAgentClick(id))
             },
@@ -67,7 +60,6 @@ fun AgentsListContent(
             })
     } else {
         AgentsListScreenDual(uiState = uiState,
-            adaptiveLayoutType = adaptiveLayoutType,
             onAgentClick = { id ->
                 onAction(AgentsListAction.OnAgentClick(id))
             },

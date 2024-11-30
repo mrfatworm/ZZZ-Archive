@@ -26,13 +26,12 @@ import zzzarchive.composeapp.generated.resources.drives
 @Composable
 fun DrivesListScreenSingle(
     uiState: DrivesListState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onDriveClick: (Int) -> Unit,
     onBackClick: () -> Unit
 ) {
     val openDetailDialog = remember { mutableStateOf(false) }
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
-        AnimatedVisibility(adaptiveLayoutType == AdaptiveLayoutType.Compact) {
+        AnimatedVisibility(AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
             ZzzTopBar(
                 title = stringResource(Res.string.drives),
                 onBackClick = onBackClick

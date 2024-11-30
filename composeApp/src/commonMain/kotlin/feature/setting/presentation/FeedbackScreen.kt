@@ -16,19 +16,20 @@ import feature.setting.components.FeedbackScreenMedium
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.dialogs.ConfirmDialog
+import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.form_submit_success
 
 @Composable
-fun FeedbackScreen(adaptiveLayoutType: AdaptiveLayoutType, onBackClick: () -> Unit) {
+fun FeedbackScreen(onBackClick: () -> Unit) {
     val viewModel: FeedbackViewModel = koinViewModel()
     val uiState = viewModel.uiState.collectAsState()
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        if (adaptiveLayoutType == AdaptiveLayoutType.Compact) {
+        if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
             FeedbackScreenCompact(
                 uiState.value, onFormSubmit = { issueIndex, issueContent, nickname ->
                     viewModel.submitFeedback(issueIndex, issueContent, nickname)
@@ -37,7 +38,6 @@ fun FeedbackScreen(adaptiveLayoutType: AdaptiveLayoutType, onBackClick: () -> Un
         } else {
             FeedbackScreenMedium(
                 uiState.value,
-                adaptiveLayoutType,
                 onFormSubmit = { issueIndex, issueContent, nickname ->
                     viewModel.submitFeedback(issueIndex, issueContent, nickname)
                 },

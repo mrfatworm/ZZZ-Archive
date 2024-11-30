@@ -17,20 +17,18 @@ import feature.cover_image.components.CoverImageCard
 import feature.news.presentation.NewsPagerCard
 import feature.pixiv.components.PixivTopicCard
 import ui.theme.AppTheme
-import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
 
 @Composable
 fun HomeScreenSingle(
     uiState: HomeState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onPixivTagChange: (String) -> Unit,
     onActionClicked: () -> Unit,
     onClosed: (Int) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-            .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+            .contentPadding(),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         AnnouncementBanner(

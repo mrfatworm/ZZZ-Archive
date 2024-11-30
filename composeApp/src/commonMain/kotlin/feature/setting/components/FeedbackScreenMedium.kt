@@ -27,7 +27,6 @@ import org.jetbrains.compose.resources.stringResource
 import ui.components.buttons.ZzzIconButton
 import ui.components.buttons.ZzzPrimaryButton
 import ui.theme.AppTheme
-import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.back
@@ -39,7 +38,6 @@ import zzzarchive.composeapp.generated.resources.submit_form
 @Composable
 fun FeedbackScreenMedium(
     uiState: FeedbackState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onFormSubmit: (FeedbackIssueType, String, String) -> Unit,
     onBackClick: () -> Unit
 ) {
@@ -48,7 +46,7 @@ fun FeedbackScreenMedium(
     var selectedIssue by remember { mutableStateOf(feedbackIssueTypes.first()) }
     Column(
         modifier = Modifier.widthIn(max = 640.dp).verticalScroll(rememberScrollState())
-            .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+            .contentPadding(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         ZzzIconButton(

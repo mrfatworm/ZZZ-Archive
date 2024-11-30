@@ -14,13 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.setting.model.SettingState
 import ui.theme.AppTheme
-import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
 
 @Composable
 fun SettingScreenDual(
     uiState: SettingState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onLanguageChange: (String) -> Unit,
     onColorChange: (Boolean) -> Unit,
     onFeedbackClick: () -> Unit,
@@ -29,7 +27,7 @@ fun SettingScreenDual(
     Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
-                .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+                .contentPadding(),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             SettingCard(
@@ -44,7 +42,7 @@ fun SettingScreenDual(
 
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
-                .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+                .contentPadding(),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             ContributorsCard(uiState.contributors)

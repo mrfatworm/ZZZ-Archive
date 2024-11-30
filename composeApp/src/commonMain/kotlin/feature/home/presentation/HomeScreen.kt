@@ -13,13 +13,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.dialogs.BannerDialog
-import ui.utils.AdaptiveLayoutType
+import ui.theme.AppTheme
 import ui.utils.ContentType
 
 @Composable
 fun HomeScreen(
-    contentType: ContentType,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onAgentsOverviewClick: () -> Unit,
     onWEnginesOverviewClick: () -> Unit,
     onBangbooOverviewClick: () -> Unit,
@@ -34,9 +32,8 @@ fun HomeScreen(
     val banner = uiState.value.banner
     val openBannerDialog = remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
-    if (contentType == ContentType.Single) {
+    if (AppTheme.contentType == ContentType.Single) {
         HomeScreenSingle(uiState = uiState.value,
-            adaptiveLayoutType = adaptiveLayoutType,
             onPixivTagChange = {
                 coroutineScope.launch {
                     viewModel.fetchPixivTopic(it)
@@ -52,7 +49,6 @@ fun HomeScreen(
             })
     } else {
         HomeScreenDual(uiState = uiState.value,
-            adaptiveLayoutType = adaptiveLayoutType,
             onAgentsOverviewClick = onAgentsOverviewClick,
             onWEnginesOverviewClick = onWEnginesOverviewClick,
             onBangbooOverviewClick = onBangbooOverviewClick,

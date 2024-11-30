@@ -11,13 +11,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import feature.agent.model.AgentDetailState
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.ErrorScreen
-import ui.utils.AdaptiveLayoutType
+import ui.theme.AppTheme
 import ui.utils.ContentType
 
 @Composable
 fun AgentDetailScreen(
-    contentType: ContentType,
-    adaptiveLayoutType: AdaptiveLayoutType,
     wEngineClick: (Int) -> Unit,
     onBackClick: () -> Unit
 ) {
@@ -29,7 +27,7 @@ fun AgentDetailScreen(
             viewModel.onAction(AgentDetailAction.OnRetry)
         })
     } else {
-        AgentDetailContent(contentType, uiState, adaptiveLayoutType, onAction = { action ->
+        AgentDetailContent(uiState, onAction = { action ->
             when (action) {
                 is AgentDetailAction.OnWEngineClick -> wEngineClick(action.wEngineId)
                 AgentDetailAction.OnBackClick -> onBackClick()
@@ -41,14 +39,11 @@ fun AgentDetailScreen(
 
 @Composable
 private fun AgentDetailContent(
-    contentType: ContentType,
     uiState: AgentDetailState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onAction: (AgentDetailAction) -> Unit,
 ) {
-    if (contentType == ContentType.Single) {
+    if (AppTheme.contentType == ContentType.Single) {
         AgentDetailScreenSingle(uiState = uiState,
-            adaptiveLayoutType = adaptiveLayoutType,
             onBackClick = {
                 onAction(AgentDetailAction.OnBackClick)
             },
@@ -57,7 +52,6 @@ private fun AgentDetailContent(
             })
     } else {
         AgentDetailScreenDual(uiState = uiState,
-            adaptiveLayoutType = adaptiveLayoutType,
             onBackClick = {
                 onAction(AgentDetailAction.OnBackClick)
             },

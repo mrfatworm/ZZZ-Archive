@@ -12,15 +12,14 @@ import feature.wengine.components.WEnginesListScreenDual
 import feature.wengine.components.WEnginesListScreenSingle
 import feature.wengine.model.WEnginesListState
 import org.koin.compose.viewmodel.koinViewModel
+import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 
 @Composable
-fun WEnginesListScreen(
-    adaptiveLayoutType: AdaptiveLayoutType, onWEngineClick: (Int) -> Unit, onBackClick: () -> Unit
-) {
+fun WEnginesListScreen(onWEngineClick: (Int) -> Unit, onBackClick: () -> Unit) {
     val viewModel: WEnginesListViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    WEnginesListContent(adaptiveLayoutType, uiState, onAction = { action ->
+    WEnginesListContent(uiState, onAction = { action ->
         when (action) {
             is WEnginesListAction.OnWEngineClick -> onWEngineClick(action.wEngineId)
             WEnginesListAction.OnBackClick -> onBackClick()
@@ -31,14 +30,12 @@ fun WEnginesListScreen(
 
 @Composable
 private fun WEnginesListContent(
-    adaptiveLayoutType: AdaptiveLayoutType,
     uiState: WEnginesListState,
     onAction: (WEnginesListAction) -> Unit
 ) {
-    if (adaptiveLayoutType == AdaptiveLayoutType.Compact) {
+    if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
         WEnginesListScreenSingle(
             uiState = uiState,
-            adaptiveLayoutType = adaptiveLayoutType,
             onWEngineClick = {
                 onAction(WEnginesListAction.OnWEngineClick(it))
             },
@@ -54,7 +51,6 @@ private fun WEnginesListContent(
     } else {
         WEnginesListScreenDual(
             uiState = uiState,
-            adaptiveLayoutType = adaptiveLayoutType,
             onWEngineClick = {
                 onAction(WEnginesListAction.OnWEngineClick(it))
             },

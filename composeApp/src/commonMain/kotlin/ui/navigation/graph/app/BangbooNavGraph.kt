@@ -10,17 +10,11 @@ import androidx.navigation.compose.navigation
 import ui.navigation.MainFlow
 import ui.navigation.NavActions
 import ui.navigation.graph.sharedNavGraph
-import ui.utils.AdaptiveLayoutType
-import ui.utils.ContentType
 
-fun NavGraphBuilder.bangbooNavGraph(
-    contentType: ContentType,
-    adaptiveLayoutType: AdaptiveLayoutType,
-    navActions: NavActions
-) {
+fun NavGraphBuilder.bangbooNavGraph(navActions: NavActions) {
     navigation(
         route = MainFlow.Bangboo.route, startDestination = MainFlow.Bangboo.startScreen.route
     ) {
-        sharedNavGraph(contentType, adaptiveLayoutType, navActions)
+        sharedNavGraph(navActions)
     }
 }
