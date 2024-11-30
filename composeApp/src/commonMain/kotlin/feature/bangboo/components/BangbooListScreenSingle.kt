@@ -35,7 +35,6 @@ import zzzarchive.composeapp.generated.resources.ic_filter_filled
 @Composable
 fun BangbooListScreenSingle(
     uiState: BangbooListState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onBangbooClick: (Int) -> Unit,
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
@@ -46,7 +45,7 @@ fun BangbooListScreenSingle(
     val isFiltered =
         uiState.selectedRarity.isNotEmpty() || uiState.selectedAttributes.isNotEmpty()
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
-        AnimatedVisibility(adaptiveLayoutType == AdaptiveLayoutType.Compact) {
+        AnimatedVisibility(AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
             ZzzTopBar(title = stringResource(Res.string.bangboo),
                 onBackClick = onBackClick,
                 actions = {
@@ -66,7 +65,7 @@ fun BangbooListScreenSingle(
             BangbooListFilterCard(
                 modifier = Modifier.weight(1f),
                 uiState = uiState,
-                invisibleFilter = adaptiveLayoutType == AdaptiveLayoutType.Compact,
+                invisibleFilter = AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact,
                 onBangbooClick = onBangbooClick,
                 onRarityChipSelectionChanged = onRarityChipSelectionChanged,
                 onAttributeChipSelectionChanged = onAttributeChipSelectionChanged

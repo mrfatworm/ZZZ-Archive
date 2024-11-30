@@ -17,21 +17,24 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
+import ui.utils.AdaptiveLayoutType
+import ui.utils.ContentType
 
 /**
  * Ref:
  * [Building an Efficient UI Design System with Jetpack Compose and Compose Multiplatform](https://medium.com/@ahmednasser_12958/building-an-efficient-ui-design-system-0a049b6ee3f7)
  */
 
-private val LocalThemeIsDark = compositionLocalOf { mutableStateOf(true) }
 private val localColorScheme = staticCompositionLocalOf { ColorScheme() }
 private val localTypography = staticCompositionLocalOf { Typography() }
 private val localRadius = staticCompositionLocalOf { Radius() }
 private val localDimens = staticCompositionLocalOf { Dimens() }
+private val localAdaptiveLayoutType =
+    compositionLocalOf { mutableStateOf(AdaptiveLayoutType.Compact) }
+private val localContentType = compositionLocalOf { mutableStateOf(ContentType.Single) }
+private val localThemeIsDark = compositionLocalOf { mutableStateOf(true) }
 
 object AppTheme {
-    val isDark: MutableState<Boolean>
-        @Composable @ReadOnlyComposable get() = LocalThemeIsDark.current
 
     val colors: ColorScheme
         @Composable @ReadOnlyComposable get() = localColorScheme.current
@@ -44,23 +47,36 @@ object AppTheme {
 
     val dimens: Dimens
         @Composable @ReadOnlyComposable get() = localDimens.current
+
+    val adaptiveLayoutType: AdaptiveLayoutType
+        @Composable @ReadOnlyComposable get() = localAdaptiveLayoutType.current.value
+
+    val contentType: ContentType
+        @Composable @ReadOnlyComposable get() = localContentType.current.value
+
+    val isDark: MutableState<Boolean>
+        @Composable @ReadOnlyComposable get() = localThemeIsDark.current
 }
 
 @Composable
-fun ZzzArchiveTheme(
-    isDarkTheme: Boolean = true, content: @Composable () -> Unit
-) {
-    val isDarkState = remember { mutableStateOf(isDarkTheme) }
+fun ZzzArchiveTheme(content: @Composable () -> Unit) {
+    val adaptiveLayoutType = remember { mutableStateOf(AdaptiveLayoutType.Compact) }
+    val contentType = remember { mutableStateOf(ContentType.Single) }
+    val isDarkState = remember { mutableStateOf(true) }
     val colorScheme: ColorScheme = if (isDarkState.value) darkScheme else lightScheme
     val typography: Typography = provideTypography()
+
+    AdaptiveLayout(adaptiveLayoutType, contentType)
     SystemAppearance(!isDarkState.value)
 
     CompositionLocalProvider(
-        LocalThemeIsDark provides isDarkState,
         localColorScheme provides colorScheme,
         localTypography provides typography,
         localDimens provides Dimens(),
         localRadius provides Radius(),
+        localThemeIsDark provides isDarkState,
+        localAdaptiveLayoutType provides adaptiveLayoutType,
+        localContentType provides contentType
     ) {
         Box(
             modifier = Modifier
@@ -71,7 +87,6 @@ fun ZzzArchiveTheme(
         }
     }
 }
-
 
 @Composable
 internal expect fun SystemAppearance(isDark: Boolean)

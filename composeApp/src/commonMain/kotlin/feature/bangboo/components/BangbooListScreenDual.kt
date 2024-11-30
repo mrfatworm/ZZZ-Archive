@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.bangboo.model.BangbooListState
 import ui.theme.AppTheme
-import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
 import utils.AgentAttribute
 import utils.ZzzRarity
@@ -19,13 +18,12 @@ import utils.ZzzRarity
 @Composable
 fun BangbooListScreenDual(
     uiState: BangbooListState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onBangbooClick: (Int) -> Unit,
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit
 ) {
     Row(
-        modifier = Modifier.contentPadding(adaptiveLayoutType, AppTheme.dimens),
+        modifier = Modifier.contentPadding(),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         BangbooListFilterCard(

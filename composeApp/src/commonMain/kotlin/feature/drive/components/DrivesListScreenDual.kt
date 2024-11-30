@@ -13,18 +13,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import feature.drive.model.DrivesListState
 import ui.theme.AppTheme
-import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
 
 @Composable
 fun DrivesListScreenDual(
     uiState: DrivesListState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onDriveClick: (Int) -> Unit,
     onDetailDismiss: () -> Unit
 ) {
     Row(
-        modifier = Modifier.contentPadding(adaptiveLayoutType, AppTheme.dimens),
+        modifier = Modifier.contentPadding(),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         DrivesListCard(

@@ -18,14 +18,10 @@ import feature.wengine.presentation.WEngineDetailScreen
 import feature.wengine.presentation.WEnginesListScreen
 import ui.navigation.NavActions
 import ui.navigation.Screen
-import ui.utils.AdaptiveLayoutType
-import ui.utils.ContentType
 
-fun NavGraphBuilder.sharedNavGraph(
-    contentType: ContentType, adaptiveLayoutType: AdaptiveLayoutType, navActions: NavActions
-) {
+fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
     composable(Screen.AgentsList.route) {
-        AgentsListScreen(contentType, adaptiveLayoutType, onAgentClick = { id ->
+        AgentsListScreen(onAgentClick = { id ->
             navActions.navigationToRoute(Screen.AgentDetail.createRoute(id))
         }, onBackClick = {
             navActions.back()
@@ -33,13 +29,13 @@ fun NavGraphBuilder.sharedNavGraph(
     }
 
     composable(route = Screen.AgentDetail.route, arguments = Screen.AgentDetail.navArguments) {
-        AgentDetailScreen(contentType, adaptiveLayoutType, wEngineClick = { id ->
+        AgentDetailScreen(wEngineClick = { id ->
             navActions.navigationToRoute(Screen.WEngineDetail.createRoute(id))
         }, onBackClick = { navActions.back() })
     }
 
     composable(Screen.WEnginesList.route) {
-        WEnginesListScreen(adaptiveLayoutType = adaptiveLayoutType, onWEngineClick = { id ->
+        WEnginesListScreen(onWEngineClick = { id ->
             navActions.navigationToRoute(
                 Screen.WEngineDetail.createRoute(id)
             )
@@ -49,11 +45,11 @@ fun NavGraphBuilder.sharedNavGraph(
     }
 
     composable(Screen.WEngineDetail.route, arguments = Screen.WEngineDetail.navArguments) {
-        WEngineDetailScreen(contentType, adaptiveLayoutType, onBackClick = { navActions.back() })
+        WEngineDetailScreen(onBackClick = { navActions.back() })
     }
 
     composable(Screen.BangbooList.route) {
-        BangbooListScreen(adaptiveLayoutType = adaptiveLayoutType, onBangbooClick = { id ->
+        BangbooListScreen(onBangbooClick = { id ->
             navActions.navigationToRoute(
                 Screen.BangbooDetail.createRoute(id)
             )
@@ -63,25 +59,23 @@ fun NavGraphBuilder.sharedNavGraph(
     }
 
     composable(Screen.BangbooDetail.route, arguments = Screen.BangbooDetail.navArguments) {
-        BangbooDetailScreen(contentType, adaptiveLayoutType, onBackClick = { navActions.back() })
+        BangbooDetailScreen(onBackClick = { navActions.back() })
     }
 
     composable(Screen.DrivesList.route) {
-        DrivesListScreen(adaptiveLayoutType = adaptiveLayoutType, onBackClick = {
+        DrivesListScreen(onBackClick = {
             navActions.back()
         })
     }
     composable(Screen.Setting.route) {
         SettingScreen(
-            contentType = contentType,
-            adaptiveLayoutType = adaptiveLayoutType,
             onFeedbackClick = {
                 navActions.navigationTo(Screen.Feedback)
             }
         )
     }
     composable(Screen.Feedback.route) {
-        FeedbackScreen(adaptiveLayoutType) {
+        FeedbackScreen() {
             navActions.back()
         }
     }

@@ -13,18 +13,13 @@ import ui.navigation.MainFlow
 import ui.navigation.NavActions
 import ui.navigation.Screen
 import ui.navigation.graph.sharedNavGraph
-import ui.utils.AdaptiveLayoutType
-import ui.utils.ContentType
 
-fun NavGraphBuilder.wikiNavGraph(
-    contentType: ContentType, adaptiveLayoutType: AdaptiveLayoutType, navActions: NavActions
-) {
+fun NavGraphBuilder.wikiNavGraph(navActions: NavActions) {
     navigation(
         route = MainFlow.Wiki.route, startDestination = MainFlow.Wiki.startScreen.route
     ) {
         composable(Screen.Wiki.route) {
             WikiScreen(
-                adaptiveLayoutType = adaptiveLayoutType,
                 onAgentsOverviewClick = { navActions.navigationTo(Screen.AgentsList) },
                 onWEnginesOverviewClick = { navActions.navigationTo(Screen.WEnginesList) },
                 onBangbooOverviewClick = { navActions.navigationTo(Screen.BangbooList) },
@@ -37,6 +32,6 @@ fun NavGraphBuilder.wikiNavGraph(
                     navActions.navigationToRoute(Screen.BangbooDetail.createRoute(id))
                 })
         }
-        sharedNavGraph(contentType, adaptiveLayoutType, navActions)
+        sharedNavGraph(navActions)
     }
 }

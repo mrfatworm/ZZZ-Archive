@@ -17,7 +17,6 @@ import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.MaterialsListCard
 import ui.components.cards.TextCard
 import ui.theme.AppTheme
-import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.active_skill
@@ -27,13 +26,12 @@ import zzzarchive.composeapp.generated.resources.chain_attack
 @Composable
 fun BangbooDetailScreenDual(
     uiState: BangbooDetailState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onBackClick: () -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
-                .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+                .contentPadding(),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             BangbooImageCard(uiState.bangbooDetail, onBackClick)
@@ -42,7 +40,7 @@ fun BangbooDetailScreenDual(
 
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
-                .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+                .contentPadding(),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             MaterialsListCard(uiState.bangbooDetail.levelMaterials)

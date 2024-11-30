@@ -9,11 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
-import ui.utils.AdaptiveLayoutType
 
 @Composable
 fun WikiScreen(
-    adaptiveLayoutType: AdaptiveLayoutType,
     onAgentsOverviewClick: () -> Unit,
     onWEnginesOverviewClick: () -> Unit,
     onBangbooOverviewClick: () -> Unit,
@@ -27,7 +25,6 @@ fun WikiScreen(
 
     WikiScreenSingle(
         uiState = uiState,
-        adaptiveLayoutType = adaptiveLayoutType,
         onAgentsOverviewClick = onAgentsOverviewClick,
         onWEnginesOverviewClick = onWEnginesOverviewClick,
         onBangbooOverviewClick = onBangbooOverviewClick,

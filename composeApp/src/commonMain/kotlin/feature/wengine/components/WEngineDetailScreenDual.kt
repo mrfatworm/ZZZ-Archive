@@ -17,7 +17,6 @@ import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.MaterialsListCard
 import ui.components.cards.TextCard
 import ui.theme.AppTheme
-import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.additional_info
@@ -26,13 +25,12 @@ import zzzarchive.composeapp.generated.resources.w_engine_effect
 @Composable
 fun WEngineDetailScreenDual(
     uiState: WEngineDetailState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onBackClick: () -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
-                .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+                .contentPadding(),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             WEngineImageCard(uiState.wEngineDetail, onBackClick)
@@ -41,7 +39,7 @@ fun WEngineDetailScreenDual(
 
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
-                .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+                .contentPadding(),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             TextCard(stringResource(Res.string.w_engine_effect), uiState.wEngineDetail.skill)

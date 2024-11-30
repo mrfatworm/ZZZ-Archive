@@ -13,20 +13,13 @@ import ui.navigation.MainFlow
 import ui.navigation.NavActions
 import ui.navigation.Screen
 import ui.navigation.graph.sharedNavGraph
-import ui.utils.AdaptiveLayoutType
-import ui.utils.ContentType
 
-fun NavGraphBuilder.homeNavGraph(
-    contentType: ContentType,
-    adaptiveLayoutType: AdaptiveLayoutType,
-    navActions: NavActions
-) {
+fun NavGraphBuilder.homeNavGraph(navActions: NavActions) {
     navigation(
         route = MainFlow.Home.route, startDestination = MainFlow.Home.startScreen.route
     ) {
         composable(Screen.Home.route) {
-            HomeScreen(contentType = contentType,
-                adaptiveLayoutType = adaptiveLayoutType,
+            HomeScreen(
                 onAgentsOverviewClick = { navActions.navigationToMainScreen(MainFlow.Agent) },
                 onWEnginesOverviewClick = { navActions.navigationToMainScreen(MainFlow.WEngine) },
                 onBangbooOverviewClick = { navActions.navigationToMainScreen(MainFlow.Bangboo) },
@@ -56,6 +49,6 @@ fun NavGraphBuilder.homeNavGraph(
                 }
             )
         }
-        sharedNavGraph(contentType, adaptiveLayoutType, navActions)
+        sharedNavGraph(navActions)
     }
 }

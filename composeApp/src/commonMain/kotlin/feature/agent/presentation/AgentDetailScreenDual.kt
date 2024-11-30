@@ -24,7 +24,6 @@ import feature.agent.model.AgentDetailState
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.TextCard
 import ui.theme.AppTheme
-import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.agent_background
@@ -32,14 +31,13 @@ import zzzarchive.composeapp.generated.resources.agent_background
 @Composable
 fun AgentDetailScreenDual(
     uiState: AgentDetailState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     wEngineClick: (Int) -> Unit,
     onBackClick: () -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
-                .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+                .contentPadding(),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             AgentImageCard(agentDetail = uiState.agentDetail, onBackClick = onBackClick)
@@ -48,7 +46,7 @@ fun AgentDetailScreenDual(
 
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
-                .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+                .contentPadding(),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
             AgentMaterialsCard(uiState.agentDetail.levelMaterial)

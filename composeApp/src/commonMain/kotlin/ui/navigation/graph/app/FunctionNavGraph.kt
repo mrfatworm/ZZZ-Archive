@@ -13,20 +13,14 @@ import ui.navigation.MainFlow
 import ui.navigation.NavActions
 import ui.navigation.Screen
 import ui.navigation.graph.sharedNavGraph
-import ui.utils.AdaptiveLayoutType
-import ui.utils.ContentType
 
-fun NavGraphBuilder.functionNavGraph(
-    contentType: ContentType,
-    adaptiveLayoutType: AdaptiveLayoutType,
-    navActions: NavActions
-) {
+fun NavGraphBuilder.functionNavGraph(navActions: NavActions) {
     navigation(
         route = MainFlow.Function.route, startDestination = MainFlow.Function.startScreen.route
     ) {
         composable(Screen.Function.route) {
-            FunctionScreen(adaptiveLayoutType = adaptiveLayoutType)
+            FunctionScreen()
         }
-        sharedNavGraph(contentType, adaptiveLayoutType, navActions)
+        sharedNavGraph(navActions)
     }
 }

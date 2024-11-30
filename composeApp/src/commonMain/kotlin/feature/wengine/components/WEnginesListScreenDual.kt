@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.wengine.model.WEnginesListState
 import ui.theme.AppTheme
-import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
 import utils.AgentSpecialty
 import utils.ZzzRarity
@@ -19,13 +18,12 @@ import utils.ZzzRarity
 @Composable
 fun WEnginesListScreenDual(
     uiState: WEnginesListState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onWEngineClick: (Int) -> Unit,
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit
 ) {
     Row(
-        modifier = Modifier.contentPadding(adaptiveLayoutType, AppTheme.dimens),
+        modifier = Modifier.contentPadding(),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         WEnginesListFilterCard(

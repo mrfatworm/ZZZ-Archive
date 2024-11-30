@@ -38,7 +38,6 @@ import zzzarchive.composeapp.generated.resources.ic_filter_filled
 @Composable
 fun AgentsListScreenSingle(
     uiState: AgentsListState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onAgentClick: (Int) -> Unit,
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
@@ -51,7 +50,7 @@ fun AgentsListScreenSingle(
     val isFiltered =
         uiState.selectedRarity.isNotEmpty() || uiState.selectedAttributes.isNotEmpty() || uiState.selectedSpecialties.isNotEmpty() || uiState.selectedFactionId != 0
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
-        AnimatedVisibility(adaptiveLayoutType == AdaptiveLayoutType.Compact) {
+        AnimatedVisibility(AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
             ZzzTopBar(title = stringResource(Res.string.agents),
                 onBackClick = onBackClick,
                 actions = {
@@ -71,7 +70,7 @@ fun AgentsListScreenSingle(
             AgentsListFilterCard(
                 modifier = Modifier.weight(1f),
                 uiState = uiState,
-                invisibleFilter = adaptiveLayoutType == AdaptiveLayoutType.Compact,
+                invisibleFilter = AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact,
                 onAgentClick = onAgentClick,
                 onRarityChipSelectionChanged = onRarityChipSelectionChanged,
                 onAttributeChipSelectionChanged = onAttributeChipSelectionChanged,

@@ -35,7 +35,6 @@ import zzzarchive.composeapp.generated.resources.w_engines
 @Composable
 fun WEnginesListScreenSingle(
     uiState: WEnginesListState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onWEngineClick: (Int) -> Unit,
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit,
@@ -46,7 +45,7 @@ fun WEnginesListScreenSingle(
     val isFiltered =
         uiState.selectedRarity.isNotEmpty() || uiState.selectedSpecialties.isNotEmpty()
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
-        AnimatedVisibility(adaptiveLayoutType == AdaptiveLayoutType.Compact) {
+        AnimatedVisibility(AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
             ZzzTopBar(title = stringResource(Res.string.w_engines),
                 onBackClick = onBackClick,
                 actions = {
@@ -66,7 +65,7 @@ fun WEnginesListScreenSingle(
             WEnginesListFilterCard(
                 modifier = Modifier.weight(1f),
                 uiState = uiState,
-                invisibleFilter = adaptiveLayoutType == AdaptiveLayoutType.Compact,
+                invisibleFilter = AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact,
                 onWEngineClick = onWEngineClick,
                 onRarityChipSelectionChanged = onRarityChipSelectionChanged,
                 onSpecialtyChipSelectionChanged = onSpecialtyChipSelectionChanged

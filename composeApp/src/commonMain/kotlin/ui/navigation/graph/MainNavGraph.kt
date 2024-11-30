@@ -19,15 +19,11 @@ import ui.navigation.graph.app.homeNavGraph
 import ui.navigation.graph.app.settingNavGraph
 import ui.navigation.graph.app.wEngineNavGraph
 import ui.navigation.graph.app.wikiNavGraph
-import ui.utils.AdaptiveLayoutType
-import ui.utils.ContentType
 
 @Composable
 fun MainNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    contentType: ContentType,
-    adaptiveLayoutType: AdaptiveLayoutType,
     navActions: NavActions,
     rootNavActions: NavActions
 ) {
@@ -36,14 +32,14 @@ fun MainNavGraph(
         navController = navController,
         startDestination = MainFlow.Home.route
     ) {
-        homeNavGraph(contentType, adaptiveLayoutType, navActions)
-        agentNavGraph(contentType, adaptiveLayoutType, navActions)
-        wEngineNavGraph(contentType, adaptiveLayoutType, navActions)
-        bangbooNavGraph(contentType, adaptiveLayoutType, navActions)
-        driveNavGraph(contentType, adaptiveLayoutType, navActions)
-        wikiNavGraph(contentType, adaptiveLayoutType, navActions)
-        functionNavGraph(contentType, adaptiveLayoutType, navActions)
-        settingNavGraph(contentType, adaptiveLayoutType, navActions)
+        homeNavGraph(navActions)
+        agentNavGraph(navActions)
+        wEngineNavGraph(navActions)
+        bangbooNavGraph(navActions)
+        driveNavGraph(navActions)
+        wikiNavGraph(navActions)
+        functionNavGraph(navActions)
+        settingNavGraph(navActions)
     }
 }
 

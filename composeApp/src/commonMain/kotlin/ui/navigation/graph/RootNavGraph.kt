@@ -14,16 +14,12 @@ import feature.splash.SplashScreen
 import root.MainContainer
 import ui.navigation.NavActions
 import ui.navigation.RootFlow
-import ui.utils.AdaptiveLayoutType
-import ui.utils.ContentType
 
 @Composable
 fun RootNavGraph(
     modifier: Modifier = Modifier,
     rootNavController: NavHostController,
-    rootNavActions: NavActions,
-    adaptiveLayoutType: AdaptiveLayoutType,
-    contentType: ContentType
+    rootNavActions: NavActions
 ) {
     NavHost(
         modifier = modifier,
@@ -37,9 +33,6 @@ fun RootNavGraph(
         composable(RootFlow.MainContainer.route) {
             MainContainer(
                 rootNavActions = rootNavActions,
-                adaptiveLayoutType = adaptiveLayoutType,
-                contentType = contentType
-
             )
         }
     }

@@ -14,13 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.setting.model.SettingState
 import ui.theme.AppTheme
-import ui.utils.AdaptiveLayoutType
 import ui.utils.contentPadding
 
 @Composable
 fun SettingScreenSingle(
     uiState: SettingState,
-    adaptiveLayoutType: AdaptiveLayoutType,
     onLanguageChange: (String) -> Unit,
     onColorChange: (Boolean) -> Unit,
     onFeedbackClick: () -> Unit,
@@ -28,7 +26,7 @@ fun SettingScreenSingle(
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-            .contentPadding(adaptiveLayoutType, AppTheme.dimens),
+            .contentPadding(),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
     ) {
         SettingCard(
