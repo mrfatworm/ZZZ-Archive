@@ -1,44 +1,46 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.0.21-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
 [![ComposeMultiplatform](https://img.shields.io/badge/Compose_Multiplatform-1.7.1-blue.svg?style=flat)](https://www.jetbrains.com/compose-multiplatform/)
 
-![ZZZArchiveBanner](docs/screenshot/github_cover.webp)
+![ZZZArchiveBanner](/docs/screenshot/github_cover.webp)
 
-README Language: [中文](/docs/readme/README_CHT.md) | [English](/README.md)
+README 文件語言: [中文](/docs/readme/README_CHT.md) | [English](/README.md)
 
-# A Multiplatform Wiki for Zenless Zone Zero
+# 跨平台絕區零維基應用程式
 
-ZZZ Archive is a companion app for the action game Zenless Zone Zero, where users can explore in-game information and browse popular fan-made creations.
+ZZZ Archive 是動作遊戲 "絕區零" 的維基應用程式，使用者可查詢遊戲中相關資料、瀏覽熱門的二創作品。
 
-## Adaptive Layout
+### 響應式設計
 
-![ZZZArchiveBanner](docs/screenshot/adaptive_layout_demo.gif)
+![ZZZArchiveBanner](/docs/screenshot/adaptive_layout_demo.gif)
 
-## Download
+## 商店下載
 
 <a href="https://play.google.com/store/apps/details?id=com.mrfatworm.zzzarchive"><img alt="Get it on Google Play" src="screenshot/img_google_play.webp" height="56px"/></a>
 <a href="https://apps.apple.com/tw/app/zzz-archive/id6738107658"><img alt="Get it on App Store (iOS)" src="screenshot/img_app_store_ios.webp" height="56px"/></a>
 <a href="https://apps.microsoft.com/detail/9p5h3ccmzl9z"><img alt="Get it on Microsoft Store" src="screenshot/img_microoft_store.webp" height="56px"/></a>
 <a href="https://apps.apple.com/tw/app/zzz-archive/id6738107658"><img alt="Get it on App Store (macOS)" src="screenshot/img_app_store_mac.webp" height="56px"/></a>
 
-## UI Design
+## UI 設計
+
 <a href="https://www.figma.com/community/file/1441663496302710815/zzz-archive"><img alt="Screen Flow Chart (Figma Community)" src="screenshot/img_figma_screen_flow_chart.webp" height="64px"/></a>
 
-## Kanban (Realtime)
+## 即時進度看板
+
 <a href="https://www.figma.com/design/j8DMjEOYnDhlDrablx4JYZ/Kanban-ZZZ-Archive?node-id=0-1&t=sLbk3v7npmSm1ZLc-1"><img alt="Kanban (Figma Community)" src="screenshot/img_figma_kanban.webp" height="64px"/></a>
 
-## Design System
+## 設計系統
 
-![DesignSystem](docs/screenshot/img_design_system.webp)
+![DesignSystem](/docs/screenshot/img_design_system.webp)
 
-## Running on Desktop
+## 桌面端執行方法
 
 1. [Set up your environment](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-setup.html)
-2. In Android Studio, go to **Run** > **Edit Configurations** > **New** > **Gradle**.
-3. Configure as follows:
+2. 在 Android Studio 中, 選擇上排選單 **Run** > **Edit Configurations** > **New** > **Gradle**.
+3. 設定如下:
   - Run: `desktopRun -DmainClass=MainKt --quiet`
   - Environment Variables: `VARIANT=Dev`
 
-## Library
+## 使用套件
 
 - Kotlin Multiplatform (KMP)
 - Compose Multiplatform (CMP)
@@ -53,14 +55,14 @@ ZZZ Archive is a companion app for the action game Zenless Zone Zero, where user
 - Multiplatform Setting
 - Okio I/O
 
-## Localization Support
+## 多語系支援
 
-- English
-- Traditional Chinese
+- 英文
+- 繁體中文
 
-## Special Thanks
+## 銘謝
 
-- Resources from [Zenless Zone Zero](https://zenless.hoyoverse.com/) and [Zenless Zone Zero Wiki](https://zenless-zone-zero.fandom.com/wiki/Zenless_Zone_Zero_Wiki)
+- [Zenless Zone Zero](https://zenless.hoyoverse.com/)與 [Zenless Zone Zero Wiki](https://zenless-zone-zero.fandom.com/wiki/Zenless_Zone_Zero_Wiki)的圖形與資源
 - [Philipp Lackner’s YouTube Channel](https://www.youtube.com/@PhilippLackner)
 - [JetBrains KMP Guidelines](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
 - [Android Developer Guidelines](https://developer.android.com/)
@@ -68,4 +70,4 @@ ZZZ Archive is a companion app for the action game Zenless Zone Zero, where user
 - [Compose Multiplatform Wizard](https://github.com/terrakok/Compose-Multiplatform-Wizard)
 - [BuildKonfig for KMP](https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/)
 - [Release macOS App](https://www.marcogomiero.com/posts/2024/compose-macos-app-store/)
-- Cover Artist [EDIBLE](https://www.pixiv.net/users/75576278)
+- 封面繪師 [EDIBLE](https://www.pixiv.net/users/75576278)

@@ -3,7 +3,7 @@ name: On Push
 on:
   push:
     branches-ignore:
-      - "doc/**"
+      - "docs/**"
     paths-ignore:
       - "**/*.md"
 
