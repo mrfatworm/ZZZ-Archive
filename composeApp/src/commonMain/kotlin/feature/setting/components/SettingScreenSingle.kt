@@ -21,6 +21,7 @@ fun SettingScreenSingle(
     uiState: SettingState,
     onLanguageChange: (String) -> Unit,
     onColorChange: (Boolean) -> Unit,
+    onScaleChange: (Float, Float) -> Unit,
     onFeedbackClick: () -> Unit,
     onRestart: () -> Unit
 ) {
@@ -33,6 +34,7 @@ fun SettingScreenSingle(
             uiState = uiState,
             onLanguageChange = onLanguageChange,
             onColorChange = onColorChange,
+            onScaleChange = onScaleChange,
             onRestart = onRestart
         )
         OtherInfoCard(onFeedbackClick = onFeedbackClick)

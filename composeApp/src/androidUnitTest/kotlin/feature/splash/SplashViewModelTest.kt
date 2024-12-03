@@ -10,6 +10,7 @@ import MainDispatcherRule
 import feature.setting.domain.AppInfoUseCase
 import feature.setting.domain.LanguageUseCase
 import feature.setting.domain.ThemeUseCase
+import feature.setting.domain.UiScaleUseCase
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Rule
@@ -24,6 +25,7 @@ class SplashViewModelTest {
     val mainDispatcherRule = MainDispatcherRule()
 
     private val themeUseCase = mockk<ThemeUseCase>()
+    private val uiScaleUseCase = mockk<UiScaleUseCase>()
     private val languageUseCase = mockk<LanguageUseCase>()
     private val appInfoUseCase = mockk<AppInfoUseCase>()
     private lateinit var viewModel: SplashViewModel
@@ -33,13 +35,18 @@ class SplashViewModelTest {
         every { themeUseCase.getPreferenceIsDarkTheme() } returns true
         every { languageUseCase.getLanguage().code } returns "en"
         every { appInfoUseCase.getAppVersion() } returns "Luciana 2024.11.13"
-        viewModel = SplashViewModel(themeUseCase, languageUseCase, appInfoUseCase)
+        every { uiScaleUseCase.getUiScale() } returns 1f
+        every { uiScaleUseCase.getFontScale() } returns 1f
+
+        viewModel = SplashViewModel(themeUseCase, uiScaleUseCase, languageUseCase, appInfoUseCase)
     }
 
     @Test
     fun `Init Data Success`() {
         val uiState = viewModel.uiState.value
         assertTrue(uiState.isDark)
+        assertEquals(1f, uiState.uiScale)
+        assertEquals(1f, uiState.fontScale)
         assertEquals("Luciana 2024.11.13", uiState.appVersion)
     }
 }

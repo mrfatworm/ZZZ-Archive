@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import feature.setting.domain.AppInfoUseCase
 import feature.setting.domain.LanguageUseCase
 import feature.setting.domain.ThemeUseCase
+import feature.setting.domain.UiScaleUseCase
 import feature.splash.model.SplashState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,6 +13,7 @@ import utils.changePlatformLanguage
 
 class SplashViewModel(
     private val themeUseCase: ThemeUseCase,
+    private val uiScaleUseCase: UiScaleUseCase,
     private val languageUseCase: LanguageUseCase,
     private val appInfoUseCase: AppInfoUseCase
 ) : ViewModel() {
@@ -21,6 +23,7 @@ class SplashViewModel(
     init {
         //settingsRepository.clear() // For test
         getPreferenceTheme()
+        getPreferenceUiScale()
         initLanguage()
         getAppVersion()
     }
@@ -29,6 +32,14 @@ class SplashViewModel(
         val isDark = themeUseCase.getPreferenceIsDarkTheme()
         _uiState.update {
             it.copy(isDark = isDark)
+        }
+    }
+
+    private fun getPreferenceUiScale() {
+        val uiScale = uiScaleUseCase.getUiScale()
+        val fontScale = uiScaleUseCase.getFontScale()
+        _uiState.update {
+            it.copy(uiScale = uiScale, fontScale = fontScale)
         }
     }
 

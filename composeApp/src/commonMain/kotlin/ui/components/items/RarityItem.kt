@@ -36,7 +36,7 @@ import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
+import coil3.compose.SubcomposeAsyncImage
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -57,32 +57,33 @@ fun RarityItem(
     rarity: ZzzRarity? = null,
     attribute: AgentAttribute? = null,
     specialty: AgentSpecialty? = null,
-    onClick: () -> Unit
+    placeHolder: @Composable () -> Unit = { ImageNotFound() },
+    onClick: () -> Unit = {}
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered = interactionSource.collectIsHoveredAsState()
 
     Column(
-        modifier = modifier.width(100.dp)
+        modifier = modifier.width(AppTheme.fixedSize.rarityItemMediumSize)
             .pointerHoverIcon(PointerIcon.Hand)
             .clickable(interactionSource = interactionSource, indication = null) {
                 onClick()
-        },
+            },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(6.dp)
     ) {
         Box(
-            modifier = Modifier.fillMaxSize().aspectRatio(1f).background(
+            modifier = Modifier.aspectRatio(1f).fillMaxSize().background(
                 AppTheme.colors.imageBackground
             ).border(3.dp, AppTheme.colors.imageBorder, shape = itemShape).clip(itemShape)
         ) {
-            if (imgUrl == null) {
-                ImageNotFound()
-            } else {
-                AsyncImage(
-                    modifier = Modifier.fillMaxSize(), model = imgUrl, contentDescription = name
-                )
-            }
+            SubcomposeAsyncImage(modifier = Modifier.fillMaxSize(),
+                model = imgUrl,
+                contentDescription = name,
+                error = {
+                    placeHolder()
+                })
+
             if (attribute != null) {
                 AttributeTag(Modifier.align(Alignment.TopEnd), attribute.textRes, attribute.iconRes)
             } else if (specialty != null) {
@@ -91,9 +92,7 @@ fun RarityItem(
 
             rarity?.let {
                 RarityIndicator(
-                    Modifier.align(Alignment.BottomStart),
-                    rarity,
-                    isHovered.value
+                    Modifier.align(Alignment.BottomStart), rarity, isHovered.value
                 )
             }
         }

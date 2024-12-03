@@ -10,6 +10,8 @@ import utils.Language
 
 data class SettingState(
     val language: Language = Language.English,
+    val uiScale: Float = 1f,
+    val fontScale: Float = 1f,
     val appVersion: String,
     val contributors: Contributors
 )
@@ -31,9 +33,9 @@ data class Contributor(
 )
 
 val settingState = SettingState(
-    appVersion = "Lucy 2024.11",
+    appVersion = "Luciana 2024.11.13",
     contributors = Contributors(
-        contributorAmount = 2, author = listOf(
+        contributorAmount = 3, author = listOf(
             Contributor("mrfatworm"),
         ), developer = listOf(
             Contributor("mrfatworm"),
@@ -43,6 +45,7 @@ val settingState = SettingState(
             Contributor("mrfatworm", "zh, us"),
         ), dataIntegration = listOf(
             Contributor("mrfatworm"),
+            Contributor("rm6alalauau")
         ), bannerArtists = listOf(
             Contributor("EDIBLE", "リン　心象映画"),
         ), specialThanks = listOf(

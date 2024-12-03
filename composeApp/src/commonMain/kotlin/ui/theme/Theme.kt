@@ -29,10 +29,13 @@ private val localColorScheme = staticCompositionLocalOf { ColorScheme() }
 private val localTypography = staticCompositionLocalOf { Typography() }
 private val localRadius = staticCompositionLocalOf { Radius() }
 private val localDimens = staticCompositionLocalOf { Dimens() }
+private val localFixedSize = staticCompositionLocalOf { FixedSize() }
 private val localAdaptiveLayoutType =
     compositionLocalOf { mutableStateOf(AdaptiveLayoutType.Compact) }
 private val localContentType = compositionLocalOf { mutableStateOf(ContentType.Single) }
 private val localThemeIsDark = compositionLocalOf { mutableStateOf(true) }
+private val localFontScale = compositionLocalOf { mutableStateOf(1f) }
+private val localUiScale = compositionLocalOf { mutableStateOf(1f) }
 
 object AppTheme {
 
@@ -48,6 +51,9 @@ object AppTheme {
     val dimens: Dimens
         @Composable @ReadOnlyComposable get() = localDimens.current
 
+    val fixedSize: FixedSize
+        @Composable @ReadOnlyComposable get() = localFixedSize.current
+
     val adaptiveLayoutType: AdaptiveLayoutType
         @Composable @ReadOnlyComposable get() = localAdaptiveLayoutType.current.value
 
@@ -56,27 +62,39 @@ object AppTheme {
 
     val isDark: MutableState<Boolean>
         @Composable @ReadOnlyComposable get() = localThemeIsDark.current
+
+    val fontScale: MutableState<Float>
+        @Composable @ReadOnlyComposable get() = localFontScale.current
+
+    val uiScale: MutableState<Float>
+        @Composable @ReadOnlyComposable get() = localUiScale.current
 }
 
 @Composable
 fun ZzzArchiveTheme(content: @Composable () -> Unit) {
     val adaptiveLayoutType = remember { mutableStateOf(AdaptiveLayoutType.Compact) }
     val contentType = remember { mutableStateOf(ContentType.Single) }
-    val isDarkState = remember { mutableStateOf(true) }
-    val colorScheme: ColorScheme = if (isDarkState.value) darkScheme else lightScheme
-    val typography: Typography = provideTypography()
+    val isDark = remember { mutableStateOf(true) }
+    val colorScheme: ColorScheme = if (isDark.value) darkScheme else lightScheme
+    val fontScale = remember { mutableStateOf(1f) }
+    val typography = mutableStateOf(provideTypography(fontScale.value))
+    val uiScale = remember { mutableStateOf(1f) }
+    val fixedSize = mutableStateOf(provideFixedSize(uiScale.value))
 
     AdaptiveLayout(adaptiveLayoutType, contentType)
-    SystemAppearance(!isDarkState.value)
+    SystemAppearance(!isDark.value)
 
     CompositionLocalProvider(
         localColorScheme provides colorScheme,
-        localTypography provides typography,
+        localTypography provides typography.value,
         localDimens provides Dimens(),
+        localFixedSize provides fixedSize.value,
         localRadius provides Radius(),
-        localThemeIsDark provides isDarkState,
         localAdaptiveLayoutType provides adaptiveLayoutType,
-        localContentType provides contentType
+        localContentType provides contentType,
+        localThemeIsDark provides isDark,
+        localFontScale provides fontScale,
+        localUiScale provides uiScale,
     ) {
         Box(
             modifier = Modifier

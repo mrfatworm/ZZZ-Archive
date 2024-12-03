@@ -31,7 +31,8 @@ import zzzarchive.composeapp.generated.resources.restart_hint
 fun RestartDialog(onDismiss: () -> Unit, onRestart: () -> Unit) {
     Dialog(onDismissRequest = onDismiss) {
         Card(
-            modifier = Modifier.widthIn(max = 320.dp).heightIn(max = 320.dp),
+            modifier = Modifier.widthIn(max = AppTheme.fixedSize.maxDialogWidth)
+                .heightIn(max = AppTheme.fixedSize.maxDialogHeight),
             colors = CardDefaults.cardColors(
                 containerColor = AppTheme.colors.surfaceContainer,
                 contentColor = AppTheme.colors.onSurfaceContainer

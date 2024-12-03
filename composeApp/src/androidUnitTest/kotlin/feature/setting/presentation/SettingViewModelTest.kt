@@ -12,6 +12,7 @@ import database.UpdateDatabaseUseCase
 import feature.setting.domain.AppInfoUseCase
 import feature.setting.domain.LanguageUseCase
 import feature.setting.domain.ThemeUseCase
+import feature.setting.domain.UiScaleUseCase
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -29,6 +30,7 @@ class SettingViewModelTest {
 
     private val mockContext = mockk<Context>(relaxed = true)
     private val themeUseCase = mockk<ThemeUseCase>()
+    private val uiScaleUseCase = mockk<UiScaleUseCase>()
     private val languageUseCase = mockk<LanguageUseCase>()
     private val appInfoUseCase = mockk<AppInfoUseCase>()
     private val appActionsUseCase = AppActionsUseCase(mockContext)
@@ -42,10 +44,15 @@ class SettingViewModelTest {
         every { themeUseCase.getPreferenceIsDarkTheme() } returns true
         every { themeUseCase.setPreferenceIsDarkTheme(any()) } returns Unit
         every { appInfoUseCase.getAppVersion() } returns "Luciana 2024.11.13"
+        every { uiScaleUseCase.getUiScale() } returns 1f
+        every { uiScaleUseCase.getFontScale() } returns 1f
+        every { uiScaleUseCase.setUiScale(any()) } returns Unit
+        every { uiScaleUseCase.setFontScale(any()) } returns Unit
 
         viewModel =
             SettingViewModel(
                 themeUseCase,
+                uiScaleUseCase,
                 appInfoUseCase,
                 appActionsUseCase,
                 languageUseCase,
@@ -58,6 +65,8 @@ class SettingViewModelTest {
         val isDark = viewModel.isDark.value
         val state = viewModel.uiState.value
         assertTrue(isDark)
+        assertEquals(1f, state.uiScale)
+        assertEquals(1f, state.fontScale)
         assertEquals("en", state.language.code)
         assertEquals("Luciana 2024.11.13", state.appVersion)
     }
@@ -66,6 +75,18 @@ class SettingViewModelTest {
     fun `Set Dark Theme`() {
         viewModel.setIsDarkTheme(false)
         verify { themeUseCase.setPreferenceIsDarkTheme(false) }
+    }
+
+    @Test
+    fun `Set Ui Scale`() {
+        viewModel.setUiScale(2f)
+        verify { uiScaleUseCase.setUiScale(2f) }
+    }
+
+    @Test
+    fun `Set Font Scale`() {
+        viewModel.setFontScale(2f)
+        verify { uiScaleUseCase.setFontScale(2f) }
     }
 
 //    Issue: kotlinx.coroutines.test.UncaughtExceptionsBeforeTest

@@ -81,6 +81,20 @@ class IntSettingConfig(settings: Settings, key: String, defaultValue: Int) :
     ): SettingsListener = settings.addIntListener(key, defaultValue, callback)
 }
 
+class FloatSettingConfig(settings: Settings, key: String, defaultValue: Float) :
+    SettingConfig<Float>(settings, key, defaultValue) {
+
+    override fun getStringValue(settings: Settings, key: String, defaultValue: Float): String =
+        settings.getFloat(key, defaultValue).toString()
+
+    override fun setStringValue(settings: Settings, key: String, value: String) =
+        settings.putFloat(key, value.toFloat())
+
+    override fun addListener(
+        settings: ObservableSettings, key: String, defaultValue: Float, callback: (Float) -> Unit
+    ): SettingsListener = settings.addFloatListener(key, defaultValue, callback)
+}
+
 class BooleanSettingConfig(settings: Settings, key: String, defaultValue: Boolean) :
     SettingConfig<Boolean>(settings, key, defaultValue) {
 

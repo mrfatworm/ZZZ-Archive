@@ -21,6 +21,7 @@ fun SettingScreenDual(
     uiState: SettingState,
     onLanguageChange: (String) -> Unit,
     onColorChange: (Boolean) -> Unit,
+    onScaleChange: (Float, Float) -> Unit,
     onFeedbackClick: () -> Unit,
     onRestart: () -> Unit
 ) {
@@ -34,6 +35,7 @@ fun SettingScreenDual(
                 uiState = uiState,
                 onLanguageChange = onLanguageChange,
                 onColorChange = onColorChange,
+                onScaleChange = onScaleChange,
                 onRestart = onRestart
             )
             OtherInfoCard(onFeedbackClick = onFeedbackClick)

@@ -55,6 +55,7 @@ import feature.setting.domain.GoogleDocUseCase
 import feature.setting.domain.LanguageUseCase
 import feature.setting.domain.LanguageUseCaseImpl
 import feature.setting.domain.ThemeUseCase
+import feature.setting.domain.UiScaleUseCase
 import feature.setting.presentation.FeedbackViewModel
 import feature.setting.presentation.SettingViewModel
 import feature.splash.SplashViewModel
@@ -134,16 +135,9 @@ val sharedModule = module {
     single<GoogleDocUseCase> { GoogleDocUseCase(get()) }
     single<ThemeUseCase> { ThemeUseCase(get()) }
     single<UpdateDatabaseUseCase> {
-        UpdateDatabaseUseCase(
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get()
-        )
+        UpdateDatabaseUseCase(get(), get(), get(), get(), get(), get(), get())
     }
+    single<UiScaleUseCase> { UiScaleUseCase(get()) }
 
     // ViewModels
     viewModelOf(::SplashViewModel)

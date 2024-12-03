@@ -10,6 +10,8 @@ import utils.Language
 class FakePreferenceRepository : PreferencesRepository {
     private var isDarkTheme = true
     private var language = Language.English.code
+    private var uiScale = 1f
+    private var fontScale = 1f
 
     override fun getIsDarkTheme(): Boolean {
         return isDarkTheme
@@ -25,6 +27,22 @@ class FakePreferenceRepository : PreferencesRepository {
 
     override fun setLanguage(langCode: String) {
         language = langCode
+    }
+
+    override fun getUiScale(): Float {
+        return uiScale
+    }
+
+    override fun setUiScale(value: Float) {
+        uiScale = value
+    }
+
+    override fun getFontScale(): Float {
+        return fontScale
+    }
+
+    override fun setFontScale(value: Float) {
+        fontScale = value
     }
 
     override fun clear() {

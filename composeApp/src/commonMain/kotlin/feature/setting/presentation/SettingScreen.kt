@@ -23,6 +23,9 @@ fun SettingScreen(onFeedbackClick: () -> Unit) {
             viewModel.setIsDarkTheme(isDark)
         }, onLanguageChange = { langCode ->
             viewModel.setLanguage(langCode)
+        }, onScaleChange = { uiScale, fontScale ->
+            viewModel.setUiScale(uiScale)
+            viewModel.setFontScale(fontScale)
         }, onFeedbackClick = onFeedbackClick, onRestart = {
             viewModel.restartApp()
         })
@@ -31,6 +34,9 @@ fun SettingScreen(onFeedbackClick: () -> Unit) {
             viewModel.setIsDarkTheme(isDark)
         }, onLanguageChange = { langCode ->
             viewModel.setLanguage(langCode)
+        }, onScaleChange = { uiScale, fontScale ->
+            viewModel.setUiScale(uiScale)
+            viewModel.setFontScale(fontScale)
         }, onFeedbackClick = onFeedbackClick, onRestart = {
             viewModel.restartApp()
         })

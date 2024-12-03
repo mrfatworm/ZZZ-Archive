@@ -31,7 +31,7 @@ fun ZzzIconButton(
     iconRes: DrawableResource,
     contentDescriptionRes: StringResource? = null,
     tint: Color = AppTheme.colors.onSurface,
-    size: Dp = 40.dp,
+    size: Dp = AppTheme.fixedSize.iconButtonSize,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     onClick: () -> Unit

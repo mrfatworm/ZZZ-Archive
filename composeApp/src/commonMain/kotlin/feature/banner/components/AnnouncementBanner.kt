@@ -23,7 +23,8 @@ fun AnnouncementBanner(
 ) {
     AnimatedVisibility(visible = banner != null) {
         banner?.let {
-            Banner(modifier = Modifier.widthIn(max = AppTheme.dimens.maxContainerWidth),
+            Banner(
+                modifier = Modifier.widthIn(max = AppTheme.fixedSize.maxContainerWidth),
                 title = banner.title,
                 bannerLevel = banner.getBannerLevel(),
                 closable = banner.ignorable,

@@ -8,7 +8,6 @@ package ui.components.dialogs
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Card
@@ -30,7 +29,7 @@ import zzzarchive.composeapp.generated.resources.bangboo_speak
 fun ConfirmDialog(text: String, onDismiss: () -> Unit) {
     Dialog(onDismissRequest = onDismiss) {
         Card(
-            modifier = Modifier.widthIn(max = 320.dp).heightIn(max = 320.dp),
+            modifier = Modifier.widthIn(max = AppTheme.fixedSize.maxDialogWidth),
             colors = CardDefaults.cardColors(
                 containerColor = AppTheme.colors.surfaceContainer,
                 contentColor = AppTheme.colors.onSurfaceContainer
