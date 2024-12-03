@@ -47,12 +47,13 @@ fun SettingCard(
     uiState: SettingState,
     onLanguageChange: (String) -> Unit,
     onColorChange: (Boolean) -> Unit,
+    onScaleChange: (Float, Float) -> Unit,
     onRestart: () -> Unit
 ) {
     ContentCard(hasDefaultPadding = false) {
         LanguageSettingItem(uiState.language, onLanguageChange, onRestart)
         ColorSettingItem(onColorChange)
-        FontScaleItem(1f, {})
+        FontScaleItem(uiState.uiScale, uiState.fontScale, onScaleChange)
         // HoYoLabSettingItem()
     }
 }
@@ -114,11 +115,12 @@ private fun LanguageSettingItem(
 
 @Composable
 private fun FontScaleItem(
+    uiScaleValue: Float,
     fontScaleValue: Float,
-    onFontScaleChange: (Float) -> Unit,
+    onScaleChange: (Float, Float) -> Unit,
 ) {
-    val openAdjustDialog = remember { mutableStateOf(false) }
-    val actionText = if (fontScaleValue == 1f) {
+    val openUiScaleDialog = remember { mutableStateOf(false) }
+    val actionText = if (uiScaleValue == 1f && fontScaleValue == 1f) {
         stringResource(Res.string.default_value)
     } else {
         stringResource(Res.string.customize)
@@ -140,13 +142,17 @@ private fun FontScaleItem(
                 tint = AppTheme.colors.onSurfaceVariant
             )
         }
-    }, onClick = { openAdjustDialog.value = true })
+    }, onClick = { openUiScaleDialog.value = true })
     when {
-        openAdjustDialog.value -> {
-            ScaleFontSizeDialog(currentScaleValue = fontScaleValue,
-                onApply = { onFontScaleChange(0f) },
+        openUiScaleDialog.value -> {
+            ScaleFontSizeDialog(
+                uiScaleValue = uiScaleValue,
+                fontScaleValue = fontScaleValue,
+                onApply = { uiScale, fontScale ->
+                    onScaleChange(uiScale, fontScale)
+                },
                 onDismiss = {
-                    openAdjustDialog.value = false
+                    openUiScaleDialog.value = false
                 })
         }
     }

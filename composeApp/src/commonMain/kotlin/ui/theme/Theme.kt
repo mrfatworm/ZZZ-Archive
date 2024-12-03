@@ -29,11 +29,13 @@ private val localColorScheme = staticCompositionLocalOf { ColorScheme() }
 private val localTypography = staticCompositionLocalOf { Typography() }
 private val localRadius = staticCompositionLocalOf { Radius() }
 private val localDimens = staticCompositionLocalOf { Dimens() }
+private val localFixedSize = staticCompositionLocalOf { FixedSize() }
 private val localAdaptiveLayoutType =
     compositionLocalOf { mutableStateOf(AdaptiveLayoutType.Compact) }
 private val localContentType = compositionLocalOf { mutableStateOf(ContentType.Single) }
 private val localThemeIsDark = compositionLocalOf { mutableStateOf(true) }
 private val localFontScale = compositionLocalOf { mutableStateOf(1f) }
+private val localUiScale = compositionLocalOf { mutableStateOf(1f) }
 
 object AppTheme {
 
@@ -49,6 +51,9 @@ object AppTheme {
     val dimens: Dimens
         @Composable @ReadOnlyComposable get() = localDimens.current
 
+    val fixedSize: FixedSize
+        @Composable @ReadOnlyComposable get() = localFixedSize.current
+
     val adaptiveLayoutType: AdaptiveLayoutType
         @Composable @ReadOnlyComposable get() = localAdaptiveLayoutType.current.value
 
@@ -60,6 +65,9 @@ object AppTheme {
 
     val fontScale: MutableState<Float>
         @Composable @ReadOnlyComposable get() = localFontScale.current
+
+    val uiScale: MutableState<Float>
+        @Composable @ReadOnlyComposable get() = localUiScale.current
 }
 
 @Composable
@@ -70,6 +78,8 @@ fun ZzzArchiveTheme(content: @Composable () -> Unit) {
     val colorScheme: ColorScheme = if (isDark.value) darkScheme else lightScheme
     val fontScale = remember { mutableStateOf(1f) }
     val typography = mutableStateOf(provideTypography(fontScale.value))
+    val uiScale = remember { mutableStateOf(1f) }
+    val fixedSize = mutableStateOf(provideFixedSize(uiScale.value))
 
     AdaptiveLayout(adaptiveLayoutType, contentType)
     SystemAppearance(!isDark.value)
@@ -78,11 +88,13 @@ fun ZzzArchiveTheme(content: @Composable () -> Unit) {
         localColorScheme provides colorScheme,
         localTypography provides typography.value,
         localDimens provides Dimens(),
+        localFixedSize provides fixedSize.value,
         localRadius provides Radius(),
         localAdaptiveLayoutType provides adaptiveLayoutType,
         localContentType provides contentType,
         localThemeIsDark provides isDark,
-        localFontScale provides fontScale
+        localFontScale provides fontScale,
+        localUiScale provides uiScale,
     ) {
         Box(
             modifier = Modifier

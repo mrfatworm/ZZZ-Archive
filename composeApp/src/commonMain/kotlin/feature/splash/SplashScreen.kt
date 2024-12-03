@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -22,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import feature.splash.model.SplashState
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.painterResource
@@ -36,9 +36,13 @@ import zzzarchive.composeapp.generated.resources.splash_logo
 @Composable
 fun SplashScreen(startMainFlow: () -> Unit) {
     val viewModel: SplashViewModel = koinViewModel()
-    val uiState by viewModel.uiState.collectAsState()
-    var isDarkComposeState by AppTheme.isDark
-    isDarkComposeState = uiState.isDark
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    var isDark by AppTheme.isDark
+    isDark = uiState.isDark
+    var uiScale by AppTheme.uiScale
+    uiScale = uiState.uiScale
+    var fontScale by AppTheme.fontScale
+    fontScale = uiState.fontScale
 
     LaunchedEffect(true) {
         delay(1000)

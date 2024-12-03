@@ -190,7 +190,7 @@ private fun PixivTopicItem(
             .data(artworkUrl).size(Size.ORIGINAL).build()
     )
     Column(
-        modifier = Modifier.width(120.dp),
+        modifier = Modifier.width(AppTheme.fixedSize.galleryItemSize),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {

@@ -45,7 +45,8 @@ fun BannerDialog(
 ) {
     Dialog(onDismissRequest = onDismiss) {
         Card(
-            modifier = Modifier.widthIn(max = 512.dp).heightIn(max = 512.dp),
+            modifier = Modifier.widthIn(max = AppTheme.fixedSize.maxDialogWidth)
+                .heightIn(max = AppTheme.fixedSize.maxDialogHeight),
             colors = CardDefaults.cardColors(
                 containerColor = AppTheme.colors.surfaceContainer,
                 contentColor = AppTheme.colors.onSurfaceContainer

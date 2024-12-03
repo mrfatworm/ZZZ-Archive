@@ -123,7 +123,8 @@
     <string name="light_theme">亮色主題</string>
     <string name="dark_theme">暗色主題</string>
     <string name="ui_scale">介面縮放</string>
-    <string name="ui_scale_warning">調整文字大小（非預設大小可能導致介面跑版）</string>
+    <string name="font_scale">文字縮放</string>
+    <string name="ui_scale_warning">調整介面與文字大小\n\n注意：非預設大小可能導致介面跑版</string>
     <string name="hoyolab_account">HoYoLab 帳號</string>
     <string name="feedback">意見回饋</string>
     <string name="privacy_policy">隱私政策</string>

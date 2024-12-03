@@ -19,7 +19,7 @@ import ui.theme.AppTheme
 @Composable
 fun GalleryImageItem(url: String, onClick: () -> Unit) {
     AsyncImage(
-        modifier = Modifier.clickable { onClick() }.height(120.dp)
+        modifier = Modifier.clickable { onClick() }.height(AppTheme.fixedSize.galleryItemSize)
             .background(AppTheme.colors.surface, RoundedCornerShape(16.dp)),
         model = url,
         contentDescription = null

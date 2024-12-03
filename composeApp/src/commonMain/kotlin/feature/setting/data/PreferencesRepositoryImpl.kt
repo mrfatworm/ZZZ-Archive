@@ -17,6 +17,8 @@ class PreferencesRepositoryImpl(private val settings: Settings) : PreferencesRep
     private val isDarkTheme: SettingConfig<Boolean> =
         BooleanSettingConfig(settings, "IS_DARK_THEME", true)
     private val language: SettingConfig<String> = StringSettingConfig(settings, "LANGUAGE", "")
+    private val uiScale: SettingConfig<Float> = FloatSettingConfig(settings, "UI_SCALE", 1f)
+    private val fontScale: SettingConfig<Float> = FloatSettingConfig(settings, "FONT_SCALE", 1f)
 
     override fun getIsDarkTheme(): Boolean {
         return isDarkTheme.get().toBoolean()
@@ -32,6 +34,22 @@ class PreferencesRepositoryImpl(private val settings: Settings) : PreferencesRep
 
     override fun setLanguage(langCode: String) {
         language.set(langCode)
+    }
+
+    override fun getUiScale(): Float {
+        return uiScale.get().toFloat()
+    }
+
+    override fun setUiScale(value: Float) {
+        uiScale.set(value.toString())
+    }
+
+    override fun getFontScale(): Float {
+        return fontScale.get().toFloat()
+    }
+
+    override fun setFontScale(value: Float) {
+        fontScale.set(value.toString())
     }
 
     override fun clear() = settings.clear()
