@@ -9,6 +9,7 @@
     <string name="cancel">Cancel</string>
     <string name="close">Close</string>
     <string name="retry">Retry</string>
+    <string name="apply">Apply</string>
     <string name="back">Back</string>
     <string name="previous">Previous</string>
     <string name="next">Next</string>
@@ -16,7 +17,10 @@
     <string name="view_detail">View Detail</string>
     <string name="view_all">View All</string>
     <string name="announcement">Announcement</string>
-    <string name="filter">Filter</string>">
+    <string name="filter">Filter</string>
+    <string name="default_value">Default</string>
+    <string name="customize">Customize</string>
+    <string name="multiply">Multiply</string>
     <string name="bangboo_speak">Ehn-ne~ ehn-na</string>
     <string name="unknown_error">Unknown Error</string>
 
@@ -118,6 +122,8 @@
     <string name="color_theme">Color Theme</string>
     <string name="light_theme">Light Theme</string>
     <string name="dark_theme">Dark Theme</string>
+    <string name="ui_scale">UI Scale</string>
+    <string name="ui_scale_warning">Adjust text size (Non-default sizes may cause interface layout issues)</string>
     <string name="hoyolab_account">HoYoLab Account</string>
     <string name="feedback">Feedback</string>
     <string name="privacy_policy">Privacy Policy</string>

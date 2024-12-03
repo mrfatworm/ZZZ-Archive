@@ -33,6 +33,7 @@ private val localAdaptiveLayoutType =
     compositionLocalOf { mutableStateOf(AdaptiveLayoutType.Compact) }
 private val localContentType = compositionLocalOf { mutableStateOf(ContentType.Single) }
 private val localThemeIsDark = compositionLocalOf { mutableStateOf(true) }
+private val localFontScale = compositionLocalOf { mutableStateOf(1f) }
 
 object AppTheme {
 
@@ -56,27 +57,32 @@ object AppTheme {
 
     val isDark: MutableState<Boolean>
         @Composable @ReadOnlyComposable get() = localThemeIsDark.current
+
+    val fontScale: MutableState<Float>
+        @Composable @ReadOnlyComposable get() = localFontScale.current
 }
 
 @Composable
 fun ZzzArchiveTheme(content: @Composable () -> Unit) {
     val adaptiveLayoutType = remember { mutableStateOf(AdaptiveLayoutType.Compact) }
     val contentType = remember { mutableStateOf(ContentType.Single) }
-    val isDarkState = remember { mutableStateOf(true) }
-    val colorScheme: ColorScheme = if (isDarkState.value) darkScheme else lightScheme
-    val typography: Typography = provideTypography()
+    val isDark = remember { mutableStateOf(true) }
+    val colorScheme: ColorScheme = if (isDark.value) darkScheme else lightScheme
+    val fontScale = remember { mutableStateOf(1f) }
+    val typography = mutableStateOf(provideTypography(fontScale.value))
 
     AdaptiveLayout(adaptiveLayoutType, contentType)
-    SystemAppearance(!isDarkState.value)
+    SystemAppearance(!isDark.value)
 
     CompositionLocalProvider(
         localColorScheme provides colorScheme,
-        localTypography provides typography,
+        localTypography provides typography.value,
         localDimens provides Dimens(),
         localRadius provides Radius(),
-        localThemeIsDark provides isDarkState,
         localAdaptiveLayoutType provides adaptiveLayoutType,
-        localContentType provides contentType
+        localContentType provides contentType,
+        localThemeIsDark provides isDark,
+        localFontScale provides fontScale
     ) {
         Box(
             modifier = Modifier
