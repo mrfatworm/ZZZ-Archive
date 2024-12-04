@@ -270,7 +270,7 @@ private fun CheckInButton() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            modifier = Modifier.size(18.dp),
+            modifier = Modifier.size(AppTheme.fixedSize.iconSize),
             imageVector = vectorResource(Res.drawable.ic_calendar_clock),
             contentDescription = null,
             tint = AppTheme.colors.onSurfaceVariant

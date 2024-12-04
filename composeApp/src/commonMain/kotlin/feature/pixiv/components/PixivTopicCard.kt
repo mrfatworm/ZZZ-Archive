@@ -242,7 +242,7 @@ private fun AuthorInfo(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
-            modifier = Modifier.size(18.dp).aspectRatio(1f).clip(CircleShape)
+            modifier = Modifier.size(AppTheme.fixedSize.iconSize).aspectRatio(1f).clip(CircleShape)
         ) {
             if (profileUrl != null) {
                 Image(

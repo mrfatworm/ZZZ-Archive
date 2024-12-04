@@ -60,7 +60,7 @@ private fun FeedbackItem(onClick: () -> Unit) {
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Icon(
-                modifier = Modifier.size(12.dp),
+                modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
                 imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurfaceVariant
@@ -79,7 +79,7 @@ private fun PrivacyPolicyItem() {
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Icon(
-                modifier = Modifier.size(12.dp),
+                modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
                 imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurfaceVariant
@@ -101,13 +101,13 @@ private fun OpenSourceItem() {
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Icon(
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(AppTheme.fixedSize.largeIconSize),
                     imageVector = vectorResource(Res.drawable.ic_figma),
                     contentDescription = "Figma",
                     tint = Color.Unspecified
                 )
                 Icon(
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(AppTheme.fixedSize.largeIconSize),
                     imageVector = vectorResource(Res.drawable.ic_github),
                     contentDescription = "GitHub",
                     tint = AppTheme.colors.onSurfaceContainer

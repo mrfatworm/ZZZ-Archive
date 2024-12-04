@@ -51,7 +51,7 @@ fun ZzzFilterChip(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            modifier = Modifier.size(18.dp),
+            modifier = Modifier.size(AppTheme.fixedSize.iconSize),
             imageVector = vectorResource(iconRes),
             contentDescription = null,
             tint = if (selected) AppTheme.colors.onPrimaryContainer else AppTheme.colors.onSurface

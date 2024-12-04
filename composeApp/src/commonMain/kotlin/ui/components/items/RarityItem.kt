@@ -113,7 +113,7 @@ private fun AttributeTag(modifier: Modifier, textRes: StringResource, iconRes: D
     Icon(
         modifier = modifier.background(
             AppTheme.colors.imageTagContainer, RoundedCornerShape(bottomStart = 8.dp)
-        ).padding(4.dp).size(18.dp),
+        ).padding(4.dp).size(AppTheme.fixedSize.iconSize),
         imageVector = vectorResource(iconRes),
         contentDescription = stringResource(textRes),
         tint = AppTheme.colors.imageOnTagContainer

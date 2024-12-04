@@ -17,6 +17,9 @@ data class FixedSize(
     val minDialogWidth: Dp = Dp.Unspecified,
     val maxDialogHeight: Dp = Dp.Unspecified,
     val iconButtonSize: Dp = Dp.Unspecified,
+    val smallIconSize: Dp = Dp.Unspecified,
+    val iconSize: Dp = Dp.Unspecified,
+    val largeIconSize: Dp = Dp.Unspecified,
 )
 
 fun provideFixedSize(scale: Float = 1f): FixedSize = FixedSize(
@@ -28,4 +31,7 @@ fun provideFixedSize(scale: Float = 1f): FixedSize = FixedSize(
     minDialogWidth = 240.dp * scale,
     maxDialogHeight = 512.dp * scale,
     iconButtonSize = 40.dp * scale,
+    smallIconSize = 12.dp * scale,
+    iconSize = 18.dp * scale,
+    largeIconSize = 24.dp * scale,
 )

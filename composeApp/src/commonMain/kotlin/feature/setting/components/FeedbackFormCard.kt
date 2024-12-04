@@ -122,7 +122,7 @@ private fun IssueTypeItem(
                     color = AppTheme.colors.onSurface
                 )
                 Icon(
-                    modifier = Modifier.size(12.dp),
+                    modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
                     imageVector = vectorResource(Res.drawable.ic_arrow_down_ios),
                     contentDescription = null,
                     tint = AppTheme.colors.onSurfaceVariant
