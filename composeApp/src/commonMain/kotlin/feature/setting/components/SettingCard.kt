@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -25,7 +26,7 @@ import feature.setting.model.SettingState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.components.cards.ContentCard
-import ui.components.dialogs.RestartDialog
+import ui.components.dialogs.ConfirmDialog
 import ui.components.dialogs.ScaleFontSizeDialog
 import ui.theme.AppTheme
 import utils.Language
@@ -39,6 +40,8 @@ import zzzarchive.composeapp.generated.resources.ic_arrow_down_ios
 import zzzarchive.composeapp.generated.resources.ic_arrow_next_ios
 import zzzarchive.composeapp.generated.resources.language
 import zzzarchive.composeapp.generated.resources.light_theme
+import zzzarchive.composeapp.generated.resources.restart
+import zzzarchive.composeapp.generated.resources.restart_hint
 import zzzarchive.composeapp.generated.resources.ui_scale
 import zzzarchive.composeapp.generated.resources.under_development
 
@@ -108,7 +111,17 @@ private fun LanguageSettingItem(
     }, onClick = { showLanguageList = true })
     when {
         openRestartDialog.value -> {
-            RestartDialog(onRestart = onRestart, onDismiss = { })
+            ConfirmDialog(
+                text = stringResource(Res.string.restart_hint),
+                actionText = stringResource(Res.string.restart),
+                onAction = {
+                    openRestartDialog.value = false
+                    onRestart()
+                },
+                onDismiss = {
+                    // Cannot dismiss
+                }
+            )
         }
     }
 }
@@ -146,6 +159,8 @@ private fun FontScaleItem(
     when {
         openUiScaleDialog.value -> {
             ScaleFontSizeDialog(
+                // Override max width to avoid UI Shaking
+                modifier = Modifier.widthIn(max = 720.dp),
                 uiScaleValue = uiScaleValue,
                 fontScaleValue = fontScaleValue,
                 onApply = { uiScale, fontScale ->

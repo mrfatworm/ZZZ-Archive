@@ -14,6 +14,7 @@ data class FixedSize(
     val rarityItemSmallSize: Dp = Dp.Unspecified,
     val galleryItemSize: Dp = Dp.Unspecified,
     val maxDialogWidth: Dp = Dp.Unspecified,
+    val minDialogWidth: Dp = Dp.Unspecified,
     val maxDialogHeight: Dp = Dp.Unspecified,
     val iconButtonSize: Dp = Dp.Unspecified,
 )
@@ -24,6 +25,7 @@ fun provideFixedSize(scale: Float = 1f): FixedSize = FixedSize(
     rarityItemSmallSize = 60.dp * scale,
     galleryItemSize = 120.dp * scale,
     maxDialogWidth = 320.dp * scale,
+    minDialogWidth = 240.dp * scale,
     maxDialogHeight = 512.dp * scale,
     iconButtonSize = 40.dp * scale,
 )

@@ -53,7 +53,9 @@ fun FeedbackScreen(onBackClick: () -> Unit) {
     }
     when {
         uiState.value.showSubmitSuccessDialog -> {
-            ConfirmDialog(stringResource(Res.string.form_submit_success), onDismiss = {
+            ConfirmDialog(stringResource(Res.string.form_submit_success), onAction = {
+                viewModel.dismissSubmitSuccessDialog()
+            }, onDismiss = {
                 viewModel.dismissSubmitSuccessDialog()
             })
         }
