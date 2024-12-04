@@ -135,7 +135,7 @@ fun MainFuncContent(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 MainNavGraph(
-                    modifier = Modifier.widthIn(max = AppTheme.dimens.maxContainerWidth),
+                    modifier = Modifier.widthIn(max = AppTheme.fixedSize.maxContainerWidth),
                     navController = mainFunNavController,
                     navActions = mainNavActions,
                     rootNavActions = rootNavActions

@@ -11,18 +11,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
 import org.jetbrains.compose.resources.stringResource
 import ui.components.buttons.ZzzIconButton
 import ui.components.buttons.ZzzOutlineButton
@@ -43,58 +39,49 @@ fun BannerDialog(
     onNavigate: (String) -> Unit,
     onDismiss: () -> Unit
 ) {
-    Dialog(onDismissRequest = onDismiss) {
-        Card(
-            modifier = Modifier.widthIn(max = 512.dp).heightIn(max = 512.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = AppTheme.colors.surfaceContainer,
-                contentColor = AppTheme.colors.onSurfaceContainer
+    BasicDialog(onDismissRequest = onDismiss) {
+        Box(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp)) {
+            Text(
+                modifier = Modifier.align(Alignment.Center),
+                text = stringResource(Res.string.announcement),
+                color = AppTheme.colors.onSurfaceVariant,
+                style = AppTheme.typography.titleMedium
             )
+            ZzzIconButton(
+                modifier = Modifier.align(Alignment.CenterEnd),
+                iconRes = Res.drawable.ic_close,
+                contentDescriptionRes = Res.string.close
+            ) {
+                onDismiss()
+            }
+        }
+        Column(
+            Modifier.padding(start = 32.dp, end = 32.dp, bottom = 16.dp)
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Box(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp)) {
-                Text(
-                    modifier = Modifier.align(Alignment.Center),
-                    text = stringResource(Res.string.announcement),
-                    color = AppTheme.colors.onSurfaceVariant,
-                    style = AppTheme.typography.titleMedium
-                )
-                ZzzIconButton(
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                    iconRes = Res.drawable.ic_close,
-                    contentDescriptionRes = Res.string.close
+            Text(
+                modifier = Modifier.fillMaxWidth().heightIn(min = 64.dp),
+                text = message,
+                style = AppTheme.typography.bodyMedium
+            )
+            if (url != "") {
+                val urlHandler = LocalUriHandler.current
+                ZzzOutlineButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    iconRes = Res.drawable.ic_link,
+                    text = urlDesc
                 ) {
-                    onDismiss()
+                    urlHandler.openUri(url)
                 }
             }
-            Column(
-                Modifier.padding(start = 32.dp, end = 32.dp, bottom = 16.dp)
-                    .verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Text(
-                    modifier = Modifier.fillMaxWidth().heightIn(min = 64.dp),
-                    text = message,
-                    style = AppTheme.typography.bodyMedium
-                )
-                if (url != "") {
-                    val urlHandler = LocalUriHandler.current
-                    ZzzOutlineButton(
-                        modifier = Modifier.fillMaxWidth(),
-                        iconRes = Res.drawable.ic_link,
-                        text = urlDesc
-                    ) {
-                        urlHandler.openUri(url)
-                    }
-                }
 
-                if (route != "") {
-                    ZzzOutlineButton(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = routeDesc
-                    ) {
-                        onNavigate(route)
-                        onDismiss()
-                    }
+            if (route != "") {
+                ZzzOutlineButton(
+                    modifier = Modifier.fillMaxWidth(), text = routeDesc
+                ) {
+                    onNavigate(route)
+                    onDismiss()
                 }
             }
         }

@@ -9,6 +9,7 @@
     <string name="cancel">Cancel</string>
     <string name="close">Close</string>
     <string name="retry">Retry</string>
+    <string name="apply">Apply</string>
     <string name="back">Back</string>
     <string name="previous">Previous</string>
     <string name="next">Next</string>
@@ -16,7 +17,10 @@
     <string name="view_detail">View Detail</string>
     <string name="view_all">View All</string>
     <string name="announcement">Announcement</string>
-    <string name="filter">Filter</string>">
+    <string name="filter">Filter</string>
+    <string name="default_value">Default</string>
+    <string name="customize">Customize</string>
+    <string name="multiply">Multiply</string>
     <string name="bangboo_speak">Ehn-ne~ ehn-na</string>
     <string name="unknown_error">Unknown Error</string>
 
@@ -118,12 +122,15 @@
     <string name="color_theme">Color Theme</string>
     <string name="light_theme">Light Theme</string>
     <string name="dark_theme">Dark Theme</string>
+    <string name="ui_scale">UI Scale</string>
+    <string name="font_scale">Font Scale</string>
+    <string name="ui_scale_warning">Adjust UI and text size.\n\nWarning: Non-default sizes may cause interface layout issues</string>
     <string name="hoyolab_account">HoYoLab Account</string>
     <string name="feedback">Feedback</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="open_source">Open Source</string>
     <string name="coming_soon">Coming Soon</string>
-    <string name="resource_licence">The game images, animations, audio, and original text used on this website are primarily sourced from the Zenless Zone Zero Wiki (Fandom) and are used solely to better present game information. The copyright for these materials belongs to Zenless Zone Zero/miHoYo. Unless otherwise stated, other content is licensed under the Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) license.</string>
+    <string name="resource_licence">The game images, animations, audio, and original text used on this App are primarily sourced from the Zenless Zone Zero Wiki (Fandom) and are used solely to better present game information. The copyright for these materials belongs to Zenless Zone Zero/miHoYo. Unless otherwise stated, other content is licensed under the Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) license.</string>
     <string name="code_licence">The open-source code on GitHub is licensed under the MIT License.</string>
     <string name="contributors">Contributors</string>
     <string name="author">Author</string>

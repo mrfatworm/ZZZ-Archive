@@ -10,5 +10,9 @@ interface PreferencesRepository {
     fun setIsDarkTheme(value: Boolean)
     fun getLanguageCode(): String
     fun setLanguage(langCode: String)
+    fun getUiScale(): Float
+    fun setUiScale(value: Float)
+    fun getFontScale(): Float
+    fun setFontScale(value: Float)
     fun clear()
 }

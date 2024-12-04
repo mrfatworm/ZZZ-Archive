@@ -43,7 +43,7 @@ fun ZzzTag(
     ) {
         iconRes?.let {
             Icon(
-                modifier = Modifier.size(18.dp),
+                modifier = Modifier.size(AppTheme.fixedSize.iconSize),
                 imageVector = vectorResource(iconRes),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurface

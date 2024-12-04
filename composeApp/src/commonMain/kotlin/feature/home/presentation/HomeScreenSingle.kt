@@ -29,7 +29,7 @@ fun HomeScreenSingle(
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
             .contentPadding(),
-        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentCompact)
     ) {
         AnnouncementBanner(
             uiState.banner,

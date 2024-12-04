@@ -118,7 +118,7 @@ fun ZzzButton(
             Icon(
                 modifier = Modifier
                     .padding(end = 8.dp)
-                    .size(24.dp),
+                    .size(AppTheme.fixedSize.largeIconSize),
                 imageVector = vectorResource(iconRes),
                 contentDescription = null
             )

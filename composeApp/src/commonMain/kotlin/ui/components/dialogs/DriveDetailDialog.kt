@@ -13,12 +13,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import feature.drive.components.DriveDetailCard
 import feature.drive.data.database.DrivesListItemEntity
+import ui.theme.AppTheme
 
 @Composable
 fun DriveDetailDialog(drivesListItemEntity: DrivesListItemEntity, onDismiss: () -> Unit) {
     Dialog(onDismissRequest = onDismiss) {
         DriveDetailCard(
-            modifier = Modifier.widthIn(max = 512.dp, min = 240.dp).heightIn(max = 512.dp),
+            modifier = Modifier.widthIn(max = AppTheme.fixedSize.maxDialogWidth, min = 240.dp)
+                .heightIn(max = AppTheme.fixedSize.maxDialogHeight),
             drivesListItemEntity = drivesListItemEntity,
             onDismiss = onDismiss
         )

@@ -190,7 +190,7 @@ private fun PixivTopicItem(
             .data(artworkUrl).size(Size.ORIGINAL).build()
     )
     Column(
-        modifier = Modifier.width(120.dp),
+        modifier = Modifier.width(AppTheme.fixedSize.galleryItemSize),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -242,7 +242,7 @@ private fun AuthorInfo(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
-            modifier = Modifier.size(18.dp).aspectRatio(1f).clip(CircleShape)
+            modifier = Modifier.size(AppTheme.fixedSize.iconSize).aspectRatio(1f).clip(CircleShape)
         ) {
             if (profileUrl != null) {
                 Image(

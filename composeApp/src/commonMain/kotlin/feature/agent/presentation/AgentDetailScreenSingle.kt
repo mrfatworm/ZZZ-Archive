@@ -37,7 +37,7 @@ fun AgentDetailScreenSingle(
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
             .contentPadding(),
-        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentCompact)
     ) {
         AgentImageCard(uiState.agentDetail, onBackClick)
         AgentAttributesCard(uiState.agentDetail)

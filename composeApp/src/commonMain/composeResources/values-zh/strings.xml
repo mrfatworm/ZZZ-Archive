@@ -9,6 +9,7 @@
     <string name="cancel">取消</string>
     <string name="close">關閉</string>
     <string name="retry">重試</string>
+    <string name="apply">套用</string>
     <string name="back">返回</string>
     <string name="previous">上一個</string>
     <string name="next">下一個</string>
@@ -16,7 +17,10 @@
     <string name="view_detail">查看詳情</string>
     <string name="view_all">查看全部</string>
     <string name="announcement">公告</string>
-    <string name="filter">條件過濾</string>">
+    <string name="filter">條件過濾</string>
+    <string name="default_value">預設值</string>
+    <string name="customize">自訂</string>
+    <string name="multiply">倍率</string>
     <string name="bangboo_speak">嗯嗯呢嗯呢！</string>
     <string name="unknown_error">未知的錯誤</string>
 
@@ -118,6 +122,9 @@
     <string name="color_theme">顏色主題</string>
     <string name="light_theme">亮色主題</string>
     <string name="dark_theme">暗色主題</string>
+    <string name="ui_scale">介面縮放</string>
+    <string name="font_scale">文字縮放</string>
+    <string name="ui_scale_warning">調整介面與文字大小\n\n注意：非預設大小可能導致介面跑版</string>
     <string name="hoyolab_account">HoYoLab 帳號</string>
     <string name="feedback">意見回饋</string>
     <string name="privacy_policy">隱私政策</string>

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -25,17 +26,23 @@ import feature.setting.model.SettingState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.components.cards.ContentCard
-import ui.components.dialogs.RestartDialog
+import ui.components.dialogs.ConfirmDialog
+import ui.components.dialogs.ScaleFontSizeDialog
 import ui.theme.AppTheme
 import utils.Language
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.color_theme
+import zzzarchive.composeapp.generated.resources.customize
 import zzzarchive.composeapp.generated.resources.dark_theme
+import zzzarchive.composeapp.generated.resources.default_value
 import zzzarchive.composeapp.generated.resources.hoyolab_account
 import zzzarchive.composeapp.generated.resources.ic_arrow_down_ios
 import zzzarchive.composeapp.generated.resources.ic_arrow_next_ios
 import zzzarchive.composeapp.generated.resources.language
 import zzzarchive.composeapp.generated.resources.light_theme
+import zzzarchive.composeapp.generated.resources.restart
+import zzzarchive.composeapp.generated.resources.restart_hint
+import zzzarchive.composeapp.generated.resources.ui_scale
 import zzzarchive.composeapp.generated.resources.under_development
 
 @Composable
@@ -43,11 +50,13 @@ fun SettingCard(
     uiState: SettingState,
     onLanguageChange: (String) -> Unit,
     onColorChange: (Boolean) -> Unit,
+    onScaleChange: (Float, Float) -> Unit,
     onRestart: () -> Unit
 ) {
     ContentCard(hasDefaultPadding = false) {
         LanguageSettingItem(uiState.language, onLanguageChange, onRestart)
         ColorSettingItem(onColorChange)
+        FontScaleItem(uiState.uiScale, uiState.fontScale, onScaleChange)
         // HoYoLabSettingItem()
     }
 }
@@ -73,7 +82,7 @@ private fun LanguageSettingItem(
                     color = AppTheme.colors.onSurface
                 )
                 Icon(
-                    modifier = Modifier.size(12.dp),
+                    modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
                     imageVector = vectorResource(Res.drawable.ic_arrow_down_ios),
                     contentDescription = null,
                     tint = AppTheme.colors.onSurfaceVariant
@@ -102,7 +111,64 @@ private fun LanguageSettingItem(
     }, onClick = { showLanguageList = true })
     when {
         openRestartDialog.value -> {
-            RestartDialog(onRestart = onRestart, onDismiss = { })
+            ConfirmDialog(
+                text = stringResource(Res.string.restart_hint),
+                actionText = stringResource(Res.string.restart),
+                onAction = {
+                    openRestartDialog.value = false
+                    onRestart()
+                },
+                onDismiss = {
+                    // Cannot dismiss
+                }
+            )
+        }
+    }
+}
+
+@Composable
+private fun FontScaleItem(
+    uiScaleValue: Float,
+    fontScaleValue: Float,
+    onScaleChange: (Float, Float) -> Unit,
+) {
+    val openUiScaleDialog = remember { mutableStateOf(false) }
+    val actionText = if (uiScaleValue == 1f && fontScaleValue == 1f) {
+        stringResource(Res.string.default_value)
+    } else {
+        stringResource(Res.string.customize)
+    }
+    SettingItem(title = stringResource(Res.string.ui_scale), content = {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = actionText,
+                style = AppTheme.typography.labelMedium,
+                color = AppTheme.colors.onSurface
+            )
+            Icon(
+                modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
+                imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),
+                contentDescription = null,
+                tint = AppTheme.colors.onSurfaceVariant
+            )
+        }
+    }, onClick = { openUiScaleDialog.value = true })
+    when {
+        openUiScaleDialog.value -> {
+            ScaleFontSizeDialog(
+                // Override max width to avoid UI Shaking
+                modifier = Modifier.widthIn(max = 720.dp),
+                uiScaleValue = uiScaleValue,
+                fontScaleValue = fontScaleValue,
+                onApply = { uiScale, fontScale ->
+                    onScaleChange(uiScale, fontScale)
+                },
+                onDismiss = {
+                    openUiScaleDialog.value = false
+                })
         }
     }
 }
@@ -126,7 +192,7 @@ private fun ColorSettingItem(onColorChange: (Boolean) -> Unit) {
                     color = AppTheme.colors.onSurface
                 )
                 Icon(
-                    modifier = Modifier.size(12.dp),
+                    modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
                     imageVector = vectorResource(Res.drawable.ic_arrow_down_ios),
                     contentDescription = null,
                     tint = AppTheme.colors.onSurfaceVariant
@@ -167,7 +233,7 @@ private fun HoYoLabSettingItem() {
                 color = AppTheme.colors.onSurface
             )
             Icon(
-                modifier = Modifier.size(12.dp),
+                modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
                 imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurfaceVariant
