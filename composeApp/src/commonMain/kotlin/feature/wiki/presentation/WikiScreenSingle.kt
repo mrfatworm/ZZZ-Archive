@@ -33,7 +33,7 @@ fun WikiScreenSingle(
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
             .contentPadding(),
-        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentCompact)
     ) {
         AgentsListCard(
             agentsList = uiState.agentsList,
