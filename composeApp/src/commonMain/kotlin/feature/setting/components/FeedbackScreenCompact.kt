@@ -24,9 +24,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import feature.setting.model.FeedbackIssueType
 import feature.setting.model.FeedbackState
 import feature.setting.model.feedbackIssueTypes
+import feature.setting.presentation.FeedbackAction
 import org.jetbrains.compose.resources.stringResource
 import ui.components.ZzzTopBar
 import ui.components.buttons.ZzzPrimaryButton
@@ -40,12 +40,13 @@ import zzzarchive.composeapp.generated.resources.submit_form
 @Composable
 fun FeedbackScreenCompact(
     uiState: FeedbackState,
-    onFormSubmit: (FeedbackIssueType, String, String) -> Unit,
-    onBackClick: () -> Unit
+    onAction: (FeedbackAction) -> Unit
 ) {
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
         ZzzTopBar(
-            title = stringResource(Res.string.feedback), onBackClick = onBackClick
+            title = stringResource(Res.string.feedback), onBackClick = {
+                onAction(FeedbackAction.ClickBack)
+            }
         )
 
     }) { contentPadding ->
@@ -85,7 +86,13 @@ fun FeedbackScreenCompact(
                 text = stringResource(Res.string.submit_form),
                 iconRes = Res.drawable.ic_arrow_up
             ) {
-                onFormSubmit(selectedIssue, issueTextFieldValue, nicknameTextFieldValue)
+                onAction(
+                    FeedbackAction.SubmitForm(
+                        selectedIssue,
+                        issueTextFieldValue,
+                        nicknameTextFieldValue
+                    )
+                )
             }
             Spacer(modifier = Modifier.size(8.dp))
         }

@@ -12,14 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import feature.drive.model.DrivesListState
+import feature.drive.presentation.DrivesListAction
 import ui.theme.AppTheme
 import ui.utils.contentPadding
 
 @Composable
 fun DrivesListScreenDual(
     uiState: DrivesListState,
-    onDriveClick: (Int) -> Unit,
-    onDetailDismiss: () -> Unit
+    onAction: (DrivesListAction) -> Unit,
 ) {
     Row(
         modifier = Modifier.contentPadding(),
@@ -28,13 +28,17 @@ fun DrivesListScreenDual(
         DrivesListCard(
             modifier = Modifier.weight(1f),
             uiState = uiState,
-            onDriveClick = onDriveClick
+            onDriveClick = {
+                onAction(DrivesListAction.ClickDriveDetail(it))
+            }
         )
         uiState.selectedDrive?.let { driveListItem ->
             DriveDetailCard(
                 modifier = Modifier.width(360.dp),
                 drivesListItemEntity = driveListItem,
-                onDismiss = onDetailDismiss
+                onDismiss = {
+                    onAction(DrivesListAction.DismissDriveDetail)
+                }
             )
         }
     }

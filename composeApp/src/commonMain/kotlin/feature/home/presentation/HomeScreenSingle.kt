@@ -22,9 +22,8 @@ import ui.utils.contentPadding
 @Composable
 fun HomeScreenSingle(
     uiState: HomeState,
-    onPixivTagChange: (String) -> Unit,
-    onActionClicked: () -> Unit,
-    onClosed: (Int) -> Unit
+    onAction: (HomeAction) -> Unit,
+    onOpenBannerDialog: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
@@ -33,11 +32,15 @@ fun HomeScreenSingle(
     ) {
         AnnouncementBanner(
             uiState.banner,
-            onActionClicked = onActionClicked,
-            onClosed = onClosed
+            onActionClicked = onOpenBannerDialog,
+            onClosed = {
+                onAction(HomeAction.DismissBanner(it))
+            }
         )
         CoverImageCard(uiState.coverImage)
         NewsPagerCard(uiState.newsList)
-        PixivTopicCard(uiState.pixivTopics, onPixivTagChange)
+        PixivTopicCard(uiState.pixivTopics) {
+            onAction(HomeAction.ChangePixivTag(it))
+        }
     }
 }

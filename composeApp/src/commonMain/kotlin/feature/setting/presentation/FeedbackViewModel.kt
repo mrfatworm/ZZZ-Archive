@@ -37,7 +37,25 @@ class FeedbackViewModel(
         getDeviceOs()
     }
 
-    fun submitFeedback(issueTypeIndex: FeedbackIssueType, issueContent: String, nickname: String) {
+    fun onAction(action: FeedbackAction) {
+        when (action) {
+            is FeedbackAction.SubmitForm -> {
+                submitFeedback(action.issueIndex, action.issueContent, action.nickname)
+            }
+
+            FeedbackAction.DismissDialog -> {
+                dismissSubmitSuccessDialog()
+            }
+
+            else -> {}
+        }
+    }
+
+    private fun submitFeedback(
+        issueTypeIndex: FeedbackIssueType,
+        issueContent: String,
+        nickname: String
+    ) {
         if (issueTypeIndex == feedbackIssueTypes.first() || issueContent.isBlank()) {
             _uiState.update {
                 it.copy(
@@ -75,7 +93,7 @@ class FeedbackViewModel(
         })
     }
 
-    fun dismissSubmitSuccessDialog() {
+    private fun dismissSubmitSuccessDialog() {
         _uiState.update { it.copy(showSubmitSuccessDialog = false) }
     }
 

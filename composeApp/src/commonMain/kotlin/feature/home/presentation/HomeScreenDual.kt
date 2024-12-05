@@ -26,28 +26,15 @@ import ui.utils.contentPadding
 
 @Composable
 fun HomeScreenDual(
-    uiState: HomeState,
-    onAgentsOverviewClick: () -> Unit,
-    onWEnginesOverviewClick: () -> Unit,
-    onBangbooOverviewClick: () -> Unit,
-    onDrivesOverviewClick: () -> Unit,
-    onAgentDetailClick: (Int) -> Unit,
-    onWEngineDetailClick: (Int) -> Unit,
-    onBangbooDetailClick: (Int) -> Unit,
-    onPixivTagChange: (String) -> Unit,
-    onActionClicked: () -> Unit,
-    onClosed: (Int) -> Unit
+    uiState: HomeState, onAction: (HomeAction) -> Unit, onOpenBannerDialog: () -> Unit
 ) {
     Column(
-        modifier = Modifier.verticalScroll(rememberScrollState())
-            .contentPadding(),
+        modifier = Modifier.verticalScroll(rememberScrollState()).contentPadding(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        AnnouncementBanner(
-            uiState.banner,
-            onActionClicked = onActionClicked,
-            onClosed = onClosed
-        )
+        AnnouncementBanner(uiState.banner, onActionClicked = onOpenBannerDialog, onClosed = {
+            onAction(HomeAction.DismissBanner(it))
+        })
         Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
             Column(
                 modifier = Modifier.weight(1f),
@@ -55,7 +42,9 @@ fun HomeScreenDual(
             ) {
                 CoverImageCard(uiState.coverImage)
                 // HoYoLabCard()
-                PixivTopicCard(uiState.pixivTopics, onPixivTagChange)
+                PixivTopicCard(uiState.pixivTopics) {
+                    onAction(HomeAction.ChangePixivTag(it))
+                }
             }
 
             Column(
@@ -63,25 +52,24 @@ fun HomeScreenDual(
                 verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
             ) {
                 NewsPagerCard(uiState.newsList)
-                AgentsListCard(
-                    agentsList = uiState.agentsList,
-                    onAgentsOverviewClick = onAgentsOverviewClick,
-                    onAgentDetailClick = onAgentDetailClick
-                )
-                WEnginesListCard(
-                    wEnginesList = uiState.wEnginesList,
-                    onWEnginesOverviewClick = onWEnginesOverviewClick,
-                    onWEngineDetailClick = onWEngineDetailClick
-                )
-                BangbooListCard(
-                    bangbooList = uiState.bangbooList,
-                    onBangbooOverviewClick = onBangbooOverviewClick,
-                    onBangbooDetailClick = onBangbooDetailClick
-                )
-                DrivesListCard(
-                    drivesList = uiState.drivesList,
-                    onDrivesOverviewClick = onDrivesOverviewClick,
-                )
+                AgentsListCard(agentsList = uiState.agentsList, onAgentsOverviewClick = {
+                    onAction(HomeAction.ClickAgentsOverview)
+                }, onAgentDetailClick = {
+                    onAction(HomeAction.ClickAgent(it))
+                })
+                WEnginesListCard(wEnginesList = uiState.wEnginesList, onWEnginesOverviewClick = {
+                    onAction(HomeAction.ClickWEnginesOverview)
+                }, onWEngineDetailClick = {
+                    onAction(HomeAction.ClickWEngine(it))
+                })
+                BangbooListCard(bangbooList = uiState.bangbooList, onBangbooOverviewClick = {
+                    onAction(HomeAction.ClickBangbooOverview)
+                }, onBangbooDetailClick = {
+                    onAction(HomeAction.ClickBangboo(it))
+                })
+                DrivesListCard(drivesList = uiState.drivesList) {
+                    onAction(HomeAction.ClickDrivesOverview)
+                }
             }
         }
     }

@@ -30,6 +30,18 @@ class WEngineDetailViewModel(
         }
     }
 
+    fun onAction(action: WEngineDetailAction) {
+        when (action) {
+            WEngineDetailAction.Retry -> {
+                viewModelScope.launch {
+                    observeWEngineDetail(wEngineId)
+                }
+            }
+
+            else -> {}
+        }
+    }
+
     private suspend fun observeWEngineDetail(id: Int) {
         _uiState.update { it.copy(isLoading = true, error = null) }
         wEngineDetailUseCase.invoke(id).fold(
@@ -48,16 +60,5 @@ class WEngineDetailViewModel(
                 }
             }
         )
-    }
-
-    fun onAction(action: WEngineDetailAction) {
-        when (action) {
-            WEngineDetailAction.OnBackClick -> {}
-            WEngineDetailAction.OnRetry -> {
-                viewModelScope.launch {
-                    observeWEngineDetail(wEngineId)
-                }
-            }
-        }
     }
 }

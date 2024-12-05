@@ -10,17 +10,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.wengine.model.WEnginesListState
+import feature.wengine.presentation.WEnginesListAction
 import ui.theme.AppTheme
 import ui.utils.contentPadding
-import utils.AgentSpecialty
-import utils.ZzzRarity
 
 @Composable
 fun WEnginesListScreenDual(
     uiState: WEnginesListState,
-    onWEngineClick: (Int) -> Unit,
-    onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
-    onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit
+    onAction: (WEnginesListAction) -> Unit
 ) {
     Row(
         modifier = Modifier.contentPadding(),
@@ -28,9 +25,15 @@ fun WEnginesListScreenDual(
     ) {
         WEnginesListFilterCard(
             uiState = uiState,
-            onWEngineClick = onWEngineClick,
-            onRarityChipSelectionChanged = onRarityChipSelectionChanged,
-            onSpecialtyChipSelectionChanged = onSpecialtyChipSelectionChanged
+            onWEngineClick = {
+                onAction(WEnginesListAction.ClickWEngine(it))
+            },
+            onRarityChipSelectionChanged = {
+                onAction(WEnginesListAction.ChangeRarityFilter(it))
+            },
+            onSpecialtyChipSelectionChanged = {
+                onAction(WEnginesListAction.ChangeSpecialtyFilter(it))
+            }
         )
     }
 }

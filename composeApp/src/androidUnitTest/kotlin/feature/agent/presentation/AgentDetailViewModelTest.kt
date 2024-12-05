@@ -45,4 +45,12 @@ class AgentDetailViewModelTest {
         assertEquals(state.agentDetail, stubAgentDetail)
         assertEquals(state.drivesList, listOf(stubDrivesListItemEntity))
     }
+
+    @Test
+    fun `Retry success`() {
+        coEvery { agentDetailUseCase.invoke(any()) } returns Result.success(stubAgentDetail)
+        viewModel.onAction(AgentDetailAction.Retry)
+        val state = viewModel.uiState.value
+        assertEquals(state.agentDetail, stubAgentDetail)
+    }
 }

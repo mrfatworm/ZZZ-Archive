@@ -13,17 +13,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.setting.model.SettingState
+import feature.setting.presentation.SettingAction
 import ui.theme.AppTheme
 import ui.utils.contentPadding
 
 @Composable
 fun SettingScreenDual(
     uiState: SettingState,
-    onLanguageChange: (String) -> Unit,
-    onColorChange: (Boolean) -> Unit,
-    onScaleChange: (Float, Float) -> Unit,
-    onFeedbackClick: () -> Unit,
-    onRestart: () -> Unit
+    onAction: (SettingAction) -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
         Column(
@@ -33,12 +30,22 @@ fun SettingScreenDual(
         ) {
             SettingCard(
                 uiState = uiState,
-                onLanguageChange = onLanguageChange,
-                onColorChange = onColorChange,
-                onScaleChange = onScaleChange,
-                onRestart = onRestart
+                onLanguageChange = {
+                    onAction(SettingAction.ChangeLanguage(it))
+                },
+                onColorChange = {
+                    onAction(SettingAction.ChangeToDarkTheme(it))
+                },
+                onScaleChange = { uiScale, fontScale ->
+                    onAction(SettingAction.ScaleUi(uiScale, fontScale))
+                },
+                onRestart = {
+                    onAction(SettingAction.RestartApp)
+                }
             )
-            OtherInfoCard(onFeedbackClick = onFeedbackClick)
+            OtherInfoCard(onFeedbackClick = {
+                onAction(SettingAction.ClickFeedback)
+            })
             LicenseCard(uiState.appVersion)
         }
 

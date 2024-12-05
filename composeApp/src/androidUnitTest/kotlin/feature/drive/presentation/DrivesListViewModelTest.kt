@@ -39,15 +39,15 @@ class DrivesListViewModelTest {
 
     @Test
     fun `Select drive`() {
-        viewModel.onDriveClick(1)
+        viewModel.onAction(DrivesListAction.ClickDriveDetail(1))
         val state = viewModel.uiState.value
         assertEquals(state.selectedDrive?.id, 1)
     }
 
     @Test
-    fun `Dismiss detail THAN selectedDrive is null`() {
-        viewModel.onDriveClick(1)
-        viewModel.onDetailDismiss()
+    fun `GIVEN drive selected WHEN onDetailDismiss detail THAN selectedDrive is null`() {
+        viewModel.onAction(DrivesListAction.ClickDriveDetail(1))
+        viewModel.onAction(DrivesListAction.DismissDriveDetail)
         val state = viewModel.uiState.value
         assertEquals(state.selectedDrive, null)
 

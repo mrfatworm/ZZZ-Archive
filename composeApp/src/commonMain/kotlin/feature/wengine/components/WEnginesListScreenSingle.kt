@@ -18,13 +18,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import feature.wengine.model.WEnginesListState
+import feature.wengine.presentation.WEnginesListAction
 import org.jetbrains.compose.resources.stringResource
 import ui.components.ZzzTopBar
 import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
-import utils.AgentSpecialty
-import utils.ZzzRarity
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.filter
 import zzzarchive.composeapp.generated.resources.ic_filter
@@ -35,10 +34,7 @@ import zzzarchive.composeapp.generated.resources.w_engines
 @Composable
 fun WEnginesListScreenSingle(
     uiState: WEnginesListState,
-    onWEngineClick: (Int) -> Unit,
-    onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
-    onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit,
-    onBackClick: () -> Unit
+    onAction: (WEnginesListAction) -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(false) }
@@ -47,7 +43,9 @@ fun WEnginesListScreenSingle(
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
         AnimatedVisibility(AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
             ZzzTopBar(title = stringResource(Res.string.w_engines),
-                onBackClick = onBackClick,
+                onBackClick = {
+                    onAction(WEnginesListAction.ClickBack)
+                },
                 actions = {
                     ZzzIconButton(iconRes = if (isFiltered) Res.drawable.ic_filter_filled else Res.drawable.ic_filter,
                         contentDescriptionRes = Res.string.filter,
@@ -66,16 +64,26 @@ fun WEnginesListScreenSingle(
                 modifier = Modifier.weight(1f),
                 uiState = uiState,
                 invisibleFilter = AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact,
-                onWEngineClick = onWEngineClick,
-                onRarityChipSelectionChanged = onRarityChipSelectionChanged,
-                onSpecialtyChipSelectionChanged = onSpecialtyChipSelectionChanged
+                onWEngineClick = {
+                    onAction(WEnginesListAction.ClickWEngine(it))
+                },
+                onRarityChipSelectionChanged = {
+                    onAction(WEnginesListAction.ChangeRarityFilter(it))
+                },
+                onSpecialtyChipSelectionChanged = {
+                    onAction(WEnginesListAction.ChangeSpecialtyFilter(it))
+                }
             )
         }
         if (showBottomSheet) {
             WEngineFilterBottomSheet(sheetState = sheetState,
                 uiState = uiState,
-                onRarityChipSelectionChanged = onRarityChipSelectionChanged,
-                onSpecialtyChipSelectionChanged = onSpecialtyChipSelectionChanged,
+                onRarityChipSelectionChanged = {
+                    onAction(WEnginesListAction.ChangeRarityFilter(it))
+                },
+                onSpecialtyChipSelectionChanged = {
+                    onAction(WEnginesListAction.ChangeSpecialtyFilter(it))
+                },
                 onDismiss = { showBottomSheet = false })
         }
     }

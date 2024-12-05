@@ -54,6 +54,22 @@ class HomeViewModel(
         }
     }
 
+    fun onAction(action: HomeAction) {
+        when (action) {
+            is HomeAction.DismissBanner -> {
+                closeBannerAndIgnoreId(action.id)
+            }
+
+            is HomeAction.ChangePixivTag -> {
+                viewModelScope.launch {
+                    fetchPixivTopic(action.tag)
+                }
+            }
+
+            else -> {}
+        }
+    }
+
     fun closeBannerAndIgnoreId(id: Int) {
         ignoreBannerId = id
         bannerUseCase.setBannerIgnoreId(id)

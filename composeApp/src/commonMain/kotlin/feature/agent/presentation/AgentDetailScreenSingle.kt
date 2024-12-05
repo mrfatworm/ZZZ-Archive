@@ -31,18 +31,21 @@ import zzzarchive.composeapp.generated.resources.agent_background
 @Composable
 fun AgentDetailScreenSingle(
     uiState: AgentDetailState,
-    wEngineClick: (Int) -> Unit,
-    onBackClick: () -> Unit
+    onAction: (AgentDetailAction) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
             .contentPadding(),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentCompact)
     ) {
-        AgentImageCard(uiState.agentDetail, onBackClick)
+        AgentImageCard(uiState.agentDetail) {
+            onAction(AgentDetailAction.ClickBack)
+        }
         AgentAttributesCard(uiState.agentDetail)
         AgentMaterialsCard(uiState.agentDetail.levelMaterial)
-        SuggestWEnginesCard(uiState.agentDetail.suggestWEngines, wEngineClick)
+        SuggestWEnginesCard(uiState.agentDetail.suggestWEngines) { id ->
+            onAction(AgentDetailAction.ClickWEngine(id))
+        }
         SuggestDrivesCard(uiState.agentDetail.suggestDrives, uiState.drivesList)
         SkillsCard(uiState.agentDetail)
         CinemaCard(uiState.agentDetail)

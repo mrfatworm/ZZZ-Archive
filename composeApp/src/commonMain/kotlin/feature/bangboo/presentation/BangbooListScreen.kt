@@ -24,8 +24,8 @@ fun BangbooListScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     BangbooListContent(uiState, onAction = { action ->
         when (action) {
-            BangbooListAction.OnBackClick -> onBackClick()
-            is BangbooListAction.OnBangbooClick -> onBangbooClick(action.bangbooId)
+            BangbooListAction.ClickBack -> onBackClick()
+            is BangbooListAction.ClickBangboo -> onBangbooClick(action.bangbooId)
             else -> viewModel.onAction(action)
         }
     })
@@ -38,32 +38,11 @@ private fun BangbooListContent(
 ) {
     if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
         BangbooListScreenSingle(
-            uiState = uiState,
-            onRarityChipSelectionChanged = {
-                onAction(BangbooListAction.OnRarityFilterChanged(it))
-            },
-            onAttributeChipSelectionChanged = {
-                onAction(BangbooListAction.OnAttributeFilterChanged(it))
-            },
-            onBangbooClick = {
-                onAction(BangbooListAction.OnBangbooClick(it))
-            },
-            onBackClick = {
-                onAction(BangbooListAction.OnBackClick)
-            }
+            uiState = uiState, onAction
         )
     } else {
         BangbooListScreenDual(
-            uiState = uiState,
-            onRarityChipSelectionChanged = {
-                onAction(BangbooListAction.OnRarityFilterChanged(it))
-            },
-            onAttributeChipSelectionChanged = {
-                onAction(BangbooListAction.OnAttributeFilterChanged(it))
-            },
-            onBangbooClick = {
-                onAction(BangbooListAction.OnBangbooClick(it))
-            }
+            uiState = uiState, onAction
         )
     }
 }

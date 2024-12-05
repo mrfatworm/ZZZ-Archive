@@ -22,13 +22,7 @@ import ui.utils.contentPadding
 @Composable
 fun WikiScreenSingle(
     uiState: WikiState,
-    onAgentsOverviewClick: () -> Unit,
-    onWEnginesOverviewClick: () -> Unit,
-    onBangbooOverviewClick: () -> Unit,
-    onDrivesOverviewClick: () -> Unit,
-    onAgentDetailClick: (Int) -> Unit,
-    onWEngineDetailClick: (Int) -> Unit,
-    onBangbooDetailClick: (Int) -> Unit
+    onAction: (WikiAction) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
@@ -38,25 +32,39 @@ fun WikiScreenSingle(
         AgentsListCard(
             agentsList = uiState.agentsList,
             showViewAll = true,
-            onAgentsOverviewClick = onAgentsOverviewClick,
-            onAgentDetailClick = onAgentDetailClick
+            onAgentsOverviewClick = {
+                onAction(WikiAction.ClickAgentsOverview)
+            },
+            onAgentDetailClick = {
+                onAction(WikiAction.ClickAgent(it))
+            }
         )
         WEnginesListCard(
             wEnginesList = uiState.wEnginesList,
             showViewAll = true,
-            onWEnginesOverviewClick = onWEnginesOverviewClick,
-            onWEngineDetailClick = onWEngineDetailClick
+            onWEnginesOverviewClick = {
+                onAction(WikiAction.ClickWEnginesOverview)
+            },
+            onWEngineDetailClick = {
+                onAction(WikiAction.ClickWEngine(it))
+            }
         )
         BangbooListCard(
             bangbooList = uiState.bangbooList,
             showViewAll = true,
-            onBangbooOverviewClick = onBangbooOverviewClick,
-            onBangbooDetailClick = onBangbooDetailClick
+            onBangbooOverviewClick = {
+                onAction(WikiAction.ClickBangbooOverview)
+            },
+            onBangbooDetailClick = {
+                onAction(WikiAction.ClickBangboo(it))
+            }
         )
         DrivesListCard(
             drivesList = uiState.drivesList,
             showViewAll = true,
-            onDrivesOverviewClick = onDrivesOverviewClick
+            onDrivesOverviewClick = {
+                onAction(WikiAction.ClickDrivesOverview)
+            }
         )
     }
 }

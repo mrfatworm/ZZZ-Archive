@@ -45,7 +45,7 @@ class BangbooListViewModelTest {
 
     @Test
     fun `Filter rarity success`() {
-        viewModel.onAction(BangbooListAction.OnRarityFilterChanged(setOf(ZzzRarity.RANK_S)))
+        viewModel.onAction(BangbooListAction.ChangeRarityFilter(setOf(ZzzRarity.RANK_S)))
         val state = viewModel.uiState.value
         assertEquals(state.filteredBangbooList.first().id, 1) // Penguinboo
         assertEquals(state.filteredBangbooList.size, 1)
@@ -53,7 +53,7 @@ class BangbooListViewModelTest {
 
     @Test
     fun `Filter attribute success`() {
-        viewModel.onAction(BangbooListAction.OnAttributeFilterChanged(setOf(AgentAttribute.Ice)))
+        viewModel.onAction(BangbooListAction.ChangeAttributeFilter(setOf(AgentAttribute.Ice)))
         val state = viewModel.uiState.value
         assertEquals(state.filteredBangbooList.first().id, 1) // Penguinboo
         assertEquals(state.filteredBangbooList.size, 1)

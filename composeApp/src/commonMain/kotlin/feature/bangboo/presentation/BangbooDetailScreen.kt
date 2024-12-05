@@ -22,23 +22,24 @@ fun BangbooDetailScreen(onBackClick: () -> Unit) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     if (uiState.error != null) {
         ErrorScreen(message = uiState.error!!,
-            onAction = { viewModel.onAction(BangbooDetailAction.OnRetry) })
+            onAction = { viewModel.onAction(BangbooDetailAction.Retry) })
     } else {
-        BangbooDetailContent(uiState, onBackClick)
+        BangbooDetailContent(uiState, onAction = { action ->
+            when (action) {
+                BangbooDetailAction.ClickBack -> onBackClick()
+                else -> viewModel.onAction(action)
+            }
+        })
     }
 }
 
 @Composable
-private fun BangbooDetailContent(uiState: BangbooDetailState, onBackClick: () -> Unit) {
+private fun BangbooDetailContent(
+    uiState: BangbooDetailState, onAction: (BangbooDetailAction) -> Unit
+) {
     if (AppTheme.contentType == ContentType.Single) {
-        BangbooDetailScreenSingle(
-            uiState = uiState,
-            onBackClick = onBackClick
-        )
+        BangbooDetailScreenSingle(uiState, onAction)
     } else {
-        BangbooDetailScreenDual(
-            uiState = uiState,
-            onBackClick = onBackClick
-        )
+        BangbooDetailScreenDual(uiState, onAction)
     }
 }

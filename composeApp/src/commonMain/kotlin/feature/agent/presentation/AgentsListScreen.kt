@@ -23,11 +23,11 @@ fun AgentsListScreen(
     AgentsListContent(uiState = uiState,
         onAction = { action ->
             when (action) {
-                is AgentsListAction.OnAgentClick -> {
+                is AgentsListAction.ChangeAgent -> {
                     onAgentClick(action.agentId)
                 }
 
-                AgentsListAction.OnBackClick -> onBackClick()
+                AgentsListAction.ClickBack -> onBackClick()
                 else -> viewModel.onAction(action)
             }
         })
@@ -39,41 +39,8 @@ fun AgentsListContent(
     onAction: (AgentsListAction) -> Unit,
 ) {
     if (AppTheme.contentType == ContentType.Single) {
-        AgentsListScreenSingle(uiState = uiState,
-            onAgentClick = { id ->
-                onAction(AgentsListAction.OnAgentClick(id))
-            },
-            onRarityChipSelectionChanged = { newSelection ->
-                onAction(AgentsListAction.OnRarityFilterChanged(newSelection))
-            },
-            onAttributeChipSelectionChanged = { newSelection ->
-                onAction(AgentsListAction.OnAttributeFilterChanged(newSelection))
-            },
-            onSpecialtyChipSelectionChanged = { newSelection ->
-                onAction(AgentsListAction.OnSpecialtyFilterChanged(newSelection))
-            },
-            onFactionChipSelectionChanged = {
-                onAction(AgentsListAction.OnFactionFilterChanged(it))
-            },
-            onBackClick = {
-                onAction(AgentsListAction.OnBackClick)
-            })
+        AgentsListScreenSingle(uiState = uiState, onAction)
     } else {
-        AgentsListScreenDual(uiState = uiState,
-            onAgentClick = { id ->
-                onAction(AgentsListAction.OnAgentClick(id))
-            },
-            onRarityChipSelectionChanged = { newSelection ->
-                onAction(AgentsListAction.OnRarityFilterChanged(newSelection))
-            },
-            onAttributeChipSelectionChanged = { newSelection ->
-                onAction(AgentsListAction.OnAttributeFilterChanged(newSelection))
-            },
-            onSpecialtyChipSelectionChanged = { newSelection ->
-                onAction(AgentsListAction.OnSpecialtyFilterChanged(newSelection))
-            },
-            onFactionClick = {
-                onAction(AgentsListAction.OnFactionFilterChanged(it))
-            })
+        AgentsListScreenDual(uiState = uiState, onAction)
     }
 }

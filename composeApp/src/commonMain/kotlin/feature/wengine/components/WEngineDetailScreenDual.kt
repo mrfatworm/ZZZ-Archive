@@ -13,6 +13,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.wengine.model.WEngineDetailState
+import feature.wengine.presentation.WEngineDetailAction
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.MaterialsListCard
 import ui.components.cards.TextCard
@@ -25,7 +26,7 @@ import zzzarchive.composeapp.generated.resources.w_engine_effect
 @Composable
 fun WEngineDetailScreenDual(
     uiState: WEngineDetailState,
-    onBackClick: () -> Unit
+    onAction: (WEngineDetailAction) -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
         Column(
@@ -33,7 +34,9 @@ fun WEngineDetailScreenDual(
                 .contentPadding(),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
-            WEngineImageCard(uiState.wEngineDetail, onBackClick)
+            WEngineImageCard(uiState.wEngineDetail) {
+                onAction(WEngineDetailAction.ClickBack)
+            }
             WEngineAttributesCard(uiState.wEngineDetail)
         }
 

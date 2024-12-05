@@ -13,6 +13,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.bangboo.model.BangbooDetailState
+import feature.bangboo.presentation.BangbooDetailAction
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.MaterialsListCard
 import ui.components.cards.TextCard
@@ -26,7 +27,7 @@ import zzzarchive.composeapp.generated.resources.chain_attack
 @Composable
 fun BangbooDetailScreenDual(
     uiState: BangbooDetailState,
-    onBackClick: () -> Unit
+    onAction: (BangbooDetailAction) -> Unit,
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
         Column(
@@ -34,7 +35,9 @@ fun BangbooDetailScreenDual(
                 .contentPadding(),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
         ) {
-            BangbooImageCard(uiState.bangbooDetail, onBackClick)
+            BangbooImageCard(uiState.bangbooDetail) {
+                onAction(BangbooDetailAction.ClickBack)
+            }
             BangbooAttributesCard(uiState.bangbooDetail)
         }
 

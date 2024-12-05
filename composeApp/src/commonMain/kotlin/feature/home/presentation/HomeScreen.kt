@@ -7,10 +7,9 @@ package feature.home.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.dialogs.BannerDialog
 import ui.theme.AppTheme
@@ -28,47 +27,49 @@ fun HomeScreen(
     onBannerNavigate: (String) -> Unit
 ) {
     val viewModel: HomeViewModel = koinViewModel()
-    val uiState = viewModel.uiState.collectAsState()
-    val banner = uiState.value.banner
+    val uiState by viewModel.uiState.collectAsState()
+    HomeScreenContent(uiState, onAction = { actions ->
+        when (actions) {
+            HomeAction.ClickAgentsOverview -> onAgentsOverviewClick()
+            HomeAction.ClickWEnginesOverview -> onWEnginesOverviewClick()
+            HomeAction.ClickBangbooOverview -> onBangbooOverviewClick()
+            HomeAction.ClickDrivesOverview -> onDrivesOverviewClick()
+
+            is HomeAction.ClickAgent -> {
+                onAgentDetailClick(actions.id)
+            }
+
+            is HomeAction.ClickWEngine -> {
+                onWEngineDetailClick(actions.id)
+            }
+
+            is HomeAction.ClickBangboo -> {
+                onBangbooDetailClick(actions.id)
+            }
+
+            is HomeAction.NavigateTo -> {
+                onBannerNavigate(actions.route)
+            }
+
+            else -> viewModel.onAction(actions)
+        }
+    })
+}
+
+@Composable
+private fun HomeScreenContent(
+    uiState: HomeState, onAction: (HomeAction) -> Unit
+) {
+    val banner = uiState.banner
     val openBannerDialog = remember { mutableStateOf(false) }
-    val coroutineScope = rememberCoroutineScope()
     if (AppTheme.contentType == ContentType.Single) {
-        HomeScreenSingle(uiState = uiState.value,
-            onPixivTagChange = {
-                coroutineScope.launch {
-                    viewModel.fetchPixivTopic(it)
-                }
-            },
-            onActionClicked = {
-                openBannerDialog.value = true
-            },
-            onClosed = { id ->
-                coroutineScope.launch {
-                    viewModel.closeBannerAndIgnoreId(id)
-                }
-            })
+        HomeScreenSingle(uiState = uiState, onAction = onAction, onOpenBannerDialog = {
+            openBannerDialog.value = true
+        })
     } else {
-        HomeScreenDual(uiState = uiState.value,
-            onAgentsOverviewClick = onAgentsOverviewClick,
-            onWEnginesOverviewClick = onWEnginesOverviewClick,
-            onBangbooOverviewClick = onBangbooOverviewClick,
-            onDrivesOverviewClick = onDrivesOverviewClick,
-            onAgentDetailClick = onAgentDetailClick,
-            onWEngineDetailClick = onWEngineDetailClick,
-            onBangbooDetailClick = onBangbooDetailClick,
-            onPixivTagChange = {
-                coroutineScope.launch {
-                    viewModel.fetchPixivTopic(it)
-                }
-            },
-            onActionClicked = {
-                openBannerDialog.value = true
-            },
-            onClosed = { id ->
-                coroutineScope.launch {
-                    viewModel.closeBannerAndIgnoreId(id)
-                }
-            })
+        HomeScreenDual(uiState = uiState, onAction = onAction, onOpenBannerDialog = {
+            openBannerDialog.value = true
+        })
     }
     when {
         openBannerDialog.value -> {
@@ -78,7 +79,7 @@ fun HomeScreen(
                 route = banner?.route ?: "",
                 routeDesc = banner?.routeDesc ?: "",
                 onNavigate = {
-                    onBannerNavigate(it)
+                    onAction(HomeAction.NavigateTo(it))
                 },
                 onDismiss = { openBannerDialog.value = false })
         }

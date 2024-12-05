@@ -56,7 +56,13 @@ class FeedbackViewModelTest {
 
     @Test
     fun `Submit Feedback Success`() {
-        viewModel.submitFeedback(feedbackIssueTypes[2], "Issue Desc", "Mr.fatworm")
+        viewModel.onAction(
+            FeedbackAction.SubmitForm(
+                feedbackIssueTypes[2],
+                "Issue Desc",
+                "Mr.fatworm"
+            )
+        )
         val state = viewModel.uiState.value
         println(state.showSubmitSuccessDialog)
         assertTrue(state.showSubmitSuccessDialog)
@@ -64,14 +70,20 @@ class FeedbackViewModelTest {
 
     @Test
     fun `Submit Feedback With Unspecified Issue Type`() {
-        viewModel.submitFeedback(feedbackIssueTypes.first(), "Issue Desc", "Mr.fatworm")
+        viewModel.onAction(
+            FeedbackAction.SubmitForm(
+                feedbackIssueTypes.first(),
+                "Issue Desc",
+                "Mr.fatworm"
+            )
+        )
         val state = viewModel.uiState.value
         assertTrue(state.invalidForm)
     }
 
     @Test
     fun `Submit Feedback With Empty Issue Content`() {
-        viewModel.submitFeedback(feedbackIssueTypes[2], "", "Mr.fatworm")
+        viewModel.onAction(FeedbackAction.SubmitForm(feedbackIssueTypes[2], "", "Mr.fatworm"))
         val state = viewModel.uiState.value
         assertTrue(state.invalidForm)
     }

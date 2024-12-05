@@ -27,6 +27,14 @@ class DrivesListViewModel(
         }
     }
 
+    fun onAction(action: DrivesListAction) {
+        when (action) {
+            DrivesListAction.DismissDriveDetail -> onDetailDismiss()
+            is DrivesListAction.ClickDriveDetail -> onDriveClick(action.id)
+            else -> {}
+        }
+    }
+
     private suspend fun observeDrivesList() {
         drivesListUseCase.invoke().collect { drivesList ->
             _uiState.update { currentState ->
@@ -37,13 +45,13 @@ class DrivesListViewModel(
         }
     }
 
-    fun onDriveClick(driveId: Int) {
+    private fun onDriveClick(driveId: Int) {
         _uiState.update { currentState ->
             currentState.copy(selectedDrive = currentState.drivesList.find { it.id == driveId })
         }
     }
 
-    fun onDetailDismiss() {
+    private fun onDetailDismiss() {
         _uiState.update {
             it.copy(
                 selectedDrive = null

@@ -15,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import feature.drive.data.database.emptyDriveListItemEntity
 import feature.drive.model.DrivesListState
+import feature.drive.presentation.DrivesListAction
 import org.jetbrains.compose.resources.stringResource
 import ui.components.ZzzTopBar
 import ui.components.dialogs.DriveDetailDialog
@@ -26,15 +27,16 @@ import zzzarchive.composeapp.generated.resources.drives
 @Composable
 fun DrivesListScreenSingle(
     uiState: DrivesListState,
-    onDriveClick: (Int) -> Unit,
-    onBackClick: () -> Unit
+    onAction: (DrivesListAction) -> Unit,
 ) {
     val openDetailDialog = remember { mutableStateOf(false) }
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
         AnimatedVisibility(AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
             ZzzTopBar(
                 title = stringResource(Res.string.drives),
-                onBackClick = onBackClick
+                onBackClick = {
+                    onAction(DrivesListAction.ClickBack)
+                }
             )
         }
     }) { contentPadding ->
@@ -46,7 +48,7 @@ fun DrivesListScreenSingle(
                 modifier = Modifier.weight(1f),
                 uiState = uiState,
                 onDriveClick = {
-                    onDriveClick(it)
+                    onAction(DrivesListAction.ClickDriveDetail(it))
                     openDetailDialog.value = true
                 },
             )

@@ -17,18 +17,11 @@ import feature.agent.components.FactionItem
 import feature.agent.model.AgentsListState
 import ui.theme.AppTheme
 import ui.utils.contentPadding
-import utils.AgentAttribute
-import utils.AgentSpecialty
-import utils.ZzzRarity
 
 @Composable
 fun AgentsListScreenDual(
     uiState: AgentsListState,
-    onAgentClick: (Int) -> Unit,
-    onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
-    onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
-    onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit,
-    onFactionClick: (Int) -> Unit
+    onAction: (AgentsListAction) -> Unit
 ) {
     Row(
         modifier = Modifier.contentPadding(),
@@ -37,17 +30,25 @@ fun AgentsListScreenDual(
         AgentsListFilterCard(
             modifier = Modifier.weight(0.7f),
             uiState = uiState,
-            onAgentClick = onAgentClick,
-            onRarityChipSelectionChanged = onRarityChipSelectionChanged,
-            onAttributeChipSelectionChanged = onAttributeChipSelectionChanged,
-            onSpecialtyChipSelectionChanged = onSpecialtyChipSelectionChanged
+            onAgentClick = {
+                onAction(AgentsListAction.ChangeAgent(it))
+            },
+            onRarityChipSelectionChanged = {
+                onAction(AgentsListAction.ChangeRarityFilter(it))
+            },
+            onAttributeChipSelectionChanged = {
+                onAction(AgentsListAction.ChangeAttributeFilter(it))
+            },
+            onSpecialtyChipSelectionChanged = {
+                onAction(AgentsListAction.ChangeSpecialtyFilter(it))
+            }
         )
         LazyColumn(
             modifier = Modifier.weight(0.3f), verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(items = uiState.factionsList, key = { it.id }) { faction ->
                 FactionItem(faction, uiState.selectedFactionId == faction.id) {
-                    onFactionClick(faction.id)
+                    onAction(AgentsListAction.ChangeFactionFilter(faction.id))
                 }
             }
         }

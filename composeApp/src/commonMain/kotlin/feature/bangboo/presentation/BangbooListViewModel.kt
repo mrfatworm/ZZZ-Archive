@@ -27,6 +27,27 @@ class BangbooListViewModel(
         }
     }
 
+    fun onAction(action: BangbooListAction) {
+        when (action) {
+            is BangbooListAction.ChangeAttributeFilter -> {
+                _uiState.update {
+                    it.copy(selectedAttributes = action.attributes)
+                }
+                filterBangbooList()
+            }
+
+            is BangbooListAction.ChangeRarityFilter -> {
+                _uiState.update {
+                    it.copy(selectedRarity = action.rarities)
+                }
+                filterBangbooList()
+            }
+
+            BangbooListAction.ClickBack -> {}
+            is BangbooListAction.ClickBangboo -> {}
+        }
+    }
+
     private suspend fun observeBangbooList() {
         bangbooListUseCase.invoke().collect { bangbooList ->
             _uiState.update {
@@ -37,28 +58,6 @@ class BangbooListViewModel(
             }
         }
     }
-
-    fun onAction(action: BangbooListAction) {
-        when (action) {
-            is BangbooListAction.OnAttributeFilterChanged -> {
-                _uiState.update {
-                    it.copy(selectedAttributes = action.attributes)
-                }
-                filterBangbooList()
-            }
-
-            is BangbooListAction.OnRarityFilterChanged -> {
-                _uiState.update {
-                    it.copy(selectedRarity = action.rarities)
-                }
-                filterBangbooList()
-            }
-
-            BangbooListAction.OnBackClick -> {}
-            is BangbooListAction.OnBangbooClick -> {}
-        }
-    }
-
 
     private fun filterBangbooList() {
         _uiState.update {

@@ -5,8 +5,8 @@ import utils.ZzzRarity
 
 
 sealed interface BangbooListAction {
-    data class OnRarityFilterChanged(val rarities: Set<ZzzRarity>) : BangbooListAction
-    data class OnAttributeFilterChanged(val attributes: Set<AgentAttribute>) : BangbooListAction
-    data class OnBangbooClick(val bangbooId: Int) : BangbooListAction
-    data object OnBackClick : BangbooListAction
+    data class ChangeRarityFilter(val rarities: Set<ZzzRarity>) : BangbooListAction
+    data class ChangeAttributeFilter(val attributes: Set<AgentAttribute>) : BangbooListAction
+    data class ClickBangboo(val bangbooId: Int) : BangbooListAction
+    data object ClickBack : BangbooListAction
 }

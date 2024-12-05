@@ -20,9 +20,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import feature.setting.model.FeedbackIssueType
 import feature.setting.model.FeedbackState
 import feature.setting.model.feedbackIssueTypes
+import feature.setting.presentation.FeedbackAction
 import org.jetbrains.compose.resources.stringResource
 import ui.components.buttons.ZzzIconButton
 import ui.components.buttons.ZzzPrimaryButton
@@ -38,8 +38,7 @@ import zzzarchive.composeapp.generated.resources.submit_form
 @Composable
 fun FeedbackScreenMedium(
     uiState: FeedbackState,
-    onFormSubmit: (FeedbackIssueType, String, String) -> Unit,
-    onBackClick: () -> Unit
+    onAction: (FeedbackAction) -> Unit
 ) {
     var issueTextFieldValue by remember { mutableStateOf("") }
     var nicknameTextFieldValue by remember { mutableStateOf("") }
@@ -52,7 +51,9 @@ fun FeedbackScreenMedium(
         ZzzIconButton(
             iconRes = Res.drawable.ic_arrow_back,
             contentDescriptionRes = Res.string.back,
-            onClick = onBackClick
+            onClick = {
+                onAction(FeedbackAction.ClickBack)
+            }
         )
         FeedbackFormCard(uiState,
             issueTextFieldValue,
@@ -80,7 +81,13 @@ fun FeedbackScreenMedium(
             text = stringResource(Res.string.submit_form),
             iconRes = Res.drawable.ic_arrow_up
         ) {
-            onFormSubmit(selectedIssue, issueTextFieldValue, nicknameTextFieldValue)
+            onAction(
+                FeedbackAction.SubmitForm(
+                    selectedIssue,
+                    issueTextFieldValue,
+                    nicknameTextFieldValue
+                )
+            )
         }
     }
 

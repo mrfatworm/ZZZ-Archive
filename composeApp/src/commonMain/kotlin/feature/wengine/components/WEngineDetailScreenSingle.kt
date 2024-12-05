@@ -13,6 +13,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.wengine.model.WEngineDetailState
+import feature.wengine.presentation.WEngineDetailAction
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.MaterialsListCard
 import ui.components.cards.TextCard
@@ -25,14 +26,16 @@ import zzzarchive.composeapp.generated.resources.w_engine_effect
 @Composable
 fun WEngineDetailScreenSingle(
     uiState: WEngineDetailState,
-    onBackClick: () -> Unit
+    onAction: (WEngineDetailAction) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
             .contentPadding(),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentCompact)
     ) {
-        WEngineImageCard(uiState.wEngineDetail, onBackClick)
+        WEngineImageCard(uiState.wEngineDetail) {
+            onAction(WEngineDetailAction.ClickBack)
+        }
         WEngineAttributesCard(uiState.wEngineDetail)
         TextCard(stringResource(Res.string.w_engine_effect), uiState.wEngineDetail.skill)
         MaterialsListCard(uiState.wEngineDetail.levelMaterials)

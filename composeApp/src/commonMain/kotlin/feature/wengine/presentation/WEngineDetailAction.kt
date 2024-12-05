@@ -2,6 +2,6 @@ package feature.wengine.presentation
 
 
 sealed interface WEngineDetailAction {
-    data object OnBackClick : WEngineDetailAction
-    data object OnRetry : WEngineDetailAction
+    data object ClickBack : WEngineDetailAction
+    data object Retry : WEngineDetailAction
 }

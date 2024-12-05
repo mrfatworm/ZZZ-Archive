@@ -10,17 +10,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.bangboo.model.BangbooListState
+import feature.bangboo.presentation.BangbooListAction
 import ui.theme.AppTheme
 import ui.utils.contentPadding
-import utils.AgentAttribute
-import utils.ZzzRarity
 
 @Composable
 fun BangbooListScreenDual(
     uiState: BangbooListState,
-    onBangbooClick: (Int) -> Unit,
-    onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
-    onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit
+    onAction: (BangbooListAction) -> Unit
 ) {
     Row(
         modifier = Modifier.contentPadding(),
@@ -28,9 +25,15 @@ fun BangbooListScreenDual(
     ) {
         BangbooListFilterCard(
             uiState = uiState,
-            onBangbooClick = onBangbooClick,
-            onRarityChipSelectionChanged = onRarityChipSelectionChanged,
-            onAttributeChipSelectionChanged = onAttributeChipSelectionChanged
+            onBangbooClick = {
+                onAction(BangbooListAction.ClickBangboo(it))
+            },
+            onRarityChipSelectionChanged = {
+                onAction(BangbooListAction.ChangeRarityFilter(it))
+            },
+            onAttributeChipSelectionChanged = {
+                onAction(BangbooListAction.ChangeAttributeFilter(it))
+            }
         )
     }
 }

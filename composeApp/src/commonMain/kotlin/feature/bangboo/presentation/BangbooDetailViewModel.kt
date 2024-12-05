@@ -30,6 +30,17 @@ class BangbooDetailViewModel(
         }
     }
 
+    fun onAction(action: BangbooDetailAction) {
+        when (action) {
+            BangbooDetailAction.ClickBack -> {}
+            BangbooDetailAction.Retry -> {
+                viewModelScope.launch {
+                    fetchBangbooDetail(bangbooId)
+                }
+            }
+        }
+    }
+
     private suspend fun fetchBangbooDetail(id: Int) {
         _uiState.update { it.copy(isLoading = true, error = null) }
         bangbooDetailUseCase.invoke(id).fold(
@@ -43,16 +54,5 @@ class BangbooDetailViewModel(
                 }
             }
         )
-    }
-
-    fun onAction(action: BangbooDetailAction) {
-        when (action) {
-            BangbooDetailAction.OnBackClick -> {}
-            BangbooDetailAction.OnRetry -> {
-                viewModelScope.launch {
-                    fetchBangbooDetail(bangbooId)
-                }
-            }
-        }
     }
 }

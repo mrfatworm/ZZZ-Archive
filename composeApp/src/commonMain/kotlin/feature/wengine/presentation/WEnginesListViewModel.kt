@@ -27,32 +27,32 @@ class WEnginesListViewModel(
         }
     }
 
-    private suspend fun observeWEnginesList() {
-        wEnginesListUseCase.invoke().collect { wEnginesList ->
-            _uiState.update {
-                it.copy(wEnginesList = wEnginesList, filteredWEnginesList = wEnginesList)
-            }
-        }
-    }
-
     fun onAction(action: WEnginesListAction) {
         when (action) {
-            is WEnginesListAction.OnRarityFilterChanged -> {
+            is WEnginesListAction.ChangeRarityFilter -> {
                 _uiState.update {
                     it.copy(selectedRarity = action.rarities)
                 }
                 filterWEnginesList()
             }
 
-            is WEnginesListAction.OnSpecialtyFilterChanged -> {
+            is WEnginesListAction.ChangeSpecialtyFilter -> {
                 _uiState.update {
                     it.copy(selectedSpecialties = action.specialties)
                 }
                 filterWEnginesList()
             }
 
-            is WEnginesListAction.OnWEngineClick -> {}
-            WEnginesListAction.OnBackClick -> {}
+            is WEnginesListAction.ClickWEngine -> {}
+            WEnginesListAction.ClickBack -> {}
+        }
+    }
+
+    private suspend fun observeWEnginesList() {
+        wEnginesListUseCase.invoke().collect { wEnginesList ->
+            _uiState.update {
+                it.copy(wEnginesList = wEnginesList, filteredWEnginesList = wEnginesList)
+            }
         }
     }
 

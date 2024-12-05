@@ -21,8 +21,8 @@ fun WEnginesListScreen(onWEngineClick: (Int) -> Unit, onBackClick: () -> Unit) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     WEnginesListContent(uiState, onAction = { action ->
         when (action) {
-            is WEnginesListAction.OnWEngineClick -> onWEngineClick(action.wEngineId)
-            WEnginesListAction.OnBackClick -> onBackClick()
+            is WEnginesListAction.ClickWEngine -> onWEngineClick(action.wEngineId)
+            WEnginesListAction.ClickBack -> onBackClick()
             else -> viewModel.onAction(action)
         }
     })
@@ -30,35 +30,11 @@ fun WEnginesListScreen(onWEngineClick: (Int) -> Unit, onBackClick: () -> Unit) {
 
 @Composable
 private fun WEnginesListContent(
-    uiState: WEnginesListState,
-    onAction: (WEnginesListAction) -> Unit
+    uiState: WEnginesListState, onAction: (WEnginesListAction) -> Unit
 ) {
     if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
-        WEnginesListScreenSingle(
-            uiState = uiState,
-            onWEngineClick = {
-                onAction(WEnginesListAction.OnWEngineClick(it))
-            },
-            onRarityChipSelectionChanged = {
-                onAction(WEnginesListAction.OnRarityFilterChanged(it))
-            },
-            onSpecialtyChipSelectionChanged = {
-                onAction(WEnginesListAction.OnSpecialtyFilterChanged(it))
-            },
-            onBackClick = {
-                onAction(WEnginesListAction.OnBackClick)
-            })
+        WEnginesListScreenSingle(uiState, onAction)
     } else {
-        WEnginesListScreenDual(
-            uiState = uiState,
-            onWEngineClick = {
-                onAction(WEnginesListAction.OnWEngineClick(it))
-            },
-            onRarityChipSelectionChanged = {
-                onAction(WEnginesListAction.OnRarityFilterChanged(it))
-            },
-            onSpecialtyChipSelectionChanged = {
-                onAction(WEnginesListAction.OnSpecialtyFilterChanged(it))
-            })
+        WEnginesListScreenDual(uiState, onAction)
     }
 }

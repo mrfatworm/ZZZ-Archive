@@ -60,9 +60,9 @@ class AgentDetailViewModel(
 
     fun onAction(action: AgentDetailAction) {
         when (action) {
-            is AgentDetailAction.OnWEngineClick -> {}
-            AgentDetailAction.OnBackClick -> {}
-            AgentDetailAction.OnRetry -> {
+            is AgentDetailAction.ClickWEngine -> {}
+            AgentDetailAction.ClickBack -> {}
+            AgentDetailAction.Retry -> {
                 viewModelScope.launch {
                     fetchAgentsDetail(agentId)
                 }

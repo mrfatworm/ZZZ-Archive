@@ -23,14 +23,30 @@ fun WikiScreen(
     val viewModel: WikiViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    WikiScreenSingle(
-        uiState = uiState,
-        onAgentsOverviewClick = onAgentsOverviewClick,
-        onWEnginesOverviewClick = onWEnginesOverviewClick,
-        onBangbooOverviewClick = onBangbooOverviewClick,
-        onDrivesOverviewClick = onDrivesOverviewClick,
-        onAgentDetailClick = onAgentDetailClick,
-        onWEngineDetailClick = onWEngineDetailClick,
-        onBangbooDetailClick = onBangbooDetailClick,
-    )
+    WikiScreenContent(uiState) { actions ->
+        when (actions) {
+            WikiAction.ClickAgentsOverview -> onAgentsOverviewClick()
+            WikiAction.ClickWEnginesOverview -> onWEnginesOverviewClick()
+            WikiAction.ClickBangbooOverview -> onBangbooOverviewClick()
+            WikiAction.ClickDrivesOverview -> onDrivesOverviewClick()
+            is WikiAction.ClickAgent -> {
+                onAgentDetailClick(actions.id)
+            }
+
+            is WikiAction.ClickWEngine -> {
+                onWEngineDetailClick(actions.id)
+            }
+
+            is WikiAction.ClickBangboo -> {
+                onBangbooDetailClick(actions.id)
+            }
+        }
+    }
+}
+
+@Composable
+private fun WikiScreenContent(
+    uiState: WikiState, onAction: (WikiAction) -> Unit
+) {
+    WikiScreenSingle(uiState = uiState, onAction)
 }

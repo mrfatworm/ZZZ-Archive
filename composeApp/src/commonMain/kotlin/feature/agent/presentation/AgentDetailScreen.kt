@@ -24,13 +24,13 @@ fun AgentDetailScreen(
 
     if (uiState.error != null) {
         ErrorScreen(uiState.error!!, onAction = {
-            viewModel.onAction(AgentDetailAction.OnRetry)
+            viewModel.onAction(AgentDetailAction.Retry)
         })
     } else {
         AgentDetailContent(uiState, onAction = { action ->
             when (action) {
-                is AgentDetailAction.OnWEngineClick -> wEngineClick(action.wEngineId)
-                AgentDetailAction.OnBackClick -> onBackClick()
+                is AgentDetailAction.ClickWEngine -> wEngineClick(action.wEngineId)
+                AgentDetailAction.ClickBack -> onBackClick()
                 else -> viewModel.onAction(action)
             }
         })
@@ -43,20 +43,8 @@ private fun AgentDetailContent(
     onAction: (AgentDetailAction) -> Unit,
 ) {
     if (AppTheme.contentType == ContentType.Single) {
-        AgentDetailScreenSingle(uiState = uiState,
-            onBackClick = {
-                onAction(AgentDetailAction.OnBackClick)
-            },
-            wEngineClick = { id ->
-                onAction(AgentDetailAction.OnWEngineClick(id))
-            })
+        AgentDetailScreenSingle(uiState, onAction)
     } else {
-        AgentDetailScreenDual(uiState = uiState,
-            onBackClick = {
-                onAction(AgentDetailAction.OnBackClick)
-            },
-            wEngineClick = { id ->
-                onAction(AgentDetailAction.OnWEngineClick(id))
-            })
+        AgentDetailScreenDual(uiState = uiState, onAction)
     }
 }

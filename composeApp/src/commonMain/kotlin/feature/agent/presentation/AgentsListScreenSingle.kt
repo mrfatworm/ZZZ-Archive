@@ -25,9 +25,6 @@ import ui.components.ZzzTopBar
 import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
-import utils.AgentAttribute
-import utils.AgentSpecialty
-import utils.ZzzRarity
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.agents
 import zzzarchive.composeapp.generated.resources.filter
@@ -38,12 +35,7 @@ import zzzarchive.composeapp.generated.resources.ic_filter_filled
 @Composable
 fun AgentsListScreenSingle(
     uiState: AgentsListState,
-    onAgentClick: (Int) -> Unit,
-    onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
-    onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
-    onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit,
-    onFactionChipSelectionChanged: (Int) -> Unit,
-    onBackClick: () -> Unit
+    onAction: (AgentsListAction) -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(false) }
@@ -52,7 +44,9 @@ fun AgentsListScreenSingle(
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
         AnimatedVisibility(AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
             ZzzTopBar(title = stringResource(Res.string.agents),
-                onBackClick = onBackClick,
+                onBackClick = {
+                    onAction(AgentsListAction.ClickBack)
+                },
                 actions = {
                     ZzzIconButton(iconRes = if (isFiltered) Res.drawable.ic_filter_filled else Res.drawable.ic_filter,
                         contentDescriptionRes = Res.string.filter,
@@ -71,19 +65,35 @@ fun AgentsListScreenSingle(
                 modifier = Modifier.weight(1f),
                 uiState = uiState,
                 invisibleFilter = AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact,
-                onAgentClick = onAgentClick,
-                onRarityChipSelectionChanged = onRarityChipSelectionChanged,
-                onAttributeChipSelectionChanged = onAttributeChipSelectionChanged,
-                onSpecialtyChipSelectionChanged = onSpecialtyChipSelectionChanged
+                onAgentClick = {
+                    onAction(AgentsListAction.ChangeAgent(it))
+                },
+                onRarityChipSelectionChanged = {
+                    onAction(AgentsListAction.ChangeRarityFilter(it))
+                },
+                onAttributeChipSelectionChanged = {
+                    onAction(AgentsListAction.ChangeAttributeFilter(it))
+                },
+                onSpecialtyChipSelectionChanged = {
+                    onAction(AgentsListAction.ChangeSpecialtyFilter(it))
+                }
             )
         }
         if (showBottomSheet) {
             AgentFilterBottomSheet(sheetState = sheetState,
                 uiState = uiState,
-                onRarityChipSelectionChanged = onRarityChipSelectionChanged,
-                onAttributeChipSelectionChanged = onAttributeChipSelectionChanged,
-                onSpecialtyChipSelectionChanged = onSpecialtyChipSelectionChanged,
-                onFactionChipSelectionChanged = onFactionChipSelectionChanged,
+                onRarityChipSelectionChanged = {
+                    onAction(AgentsListAction.ChangeRarityFilter(it))
+                },
+                onAttributeChipSelectionChanged = {
+                    onAction(AgentsListAction.ChangeAttributeFilter(it))
+                },
+                onSpecialtyChipSelectionChanged = {
+                    onAction(AgentsListAction.ChangeSpecialtyFilter(it))
+                },
+                onFactionChipSelectionChanged = {
+                    onAction(AgentsListAction.ChangeFactionFilter(it))
+                },
                 onDismiss = { showBottomSheet = false })
         }
     }

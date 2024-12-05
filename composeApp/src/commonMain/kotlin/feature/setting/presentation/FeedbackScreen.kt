@@ -9,13 +9,15 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import feature.setting.components.FeedbackScreenCompact
 import feature.setting.components.FeedbackScreenMedium
+import feature.setting.model.FeedbackState
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.dialogs.ConfirmDialog
@@ -27,7 +29,7 @@ import zzzarchive.composeapp.generated.resources.form_submit_success
 @Composable
 fun FeedbackScreen(onBackClick: () -> Unit) {
     val viewModel: FeedbackViewModel = koinViewModel()
-    val uiState = viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val focusManager = LocalFocusManager.current
     Column(
         modifier = Modifier.fillMaxSize().pointerInput(Unit) {
@@ -37,26 +39,31 @@ fun FeedbackScreen(onBackClick: () -> Unit) {
         },
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
-            FeedbackScreenCompact(
-                uiState.value, onFormSubmit = { issueIndex, issueContent, nickname ->
-                    viewModel.submitFeedback(issueIndex, issueContent, nickname)
-                }, onBackClick = onBackClick
-            )
-        } else {
-            FeedbackScreenMedium(
-                uiState.value, onFormSubmit = { issueIndex, issueContent, nickname ->
-                    viewModel.submitFeedback(issueIndex, issueContent, nickname)
-                }, onBackClick = onBackClick
-            )
-        }
+        FeedbackScreenContent(uiState, onAction = { actions ->
+            when (actions) {
+                FeedbackAction.ClickBack -> onBackClick()
+                else -> viewModel.onAction(actions)
+            }
+        })
+    }
+}
+
+@Composable
+private fun FeedbackScreenContent(
+    uiState: FeedbackState,
+    onAction: (FeedbackAction) -> Unit
+) {
+    if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
+        FeedbackScreenCompact(uiState, onAction)
+    } else {
+        FeedbackScreenMedium(uiState, onAction)
     }
     when {
-        uiState.value.showSubmitSuccessDialog -> {
+        uiState.showSubmitSuccessDialog -> {
             ConfirmDialog(stringResource(Res.string.form_submit_success), onAction = {
-                viewModel.dismissSubmitSuccessDialog()
+                onAction(FeedbackAction.DismissDialog)
             }, onDismiss = {
-                viewModel.dismissSubmitSuccessDialog()
+                onAction(FeedbackAction.DismissDialog)
             })
         }
     }

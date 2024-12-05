@@ -41,28 +41,28 @@ class AgentsListViewModel(
 
     fun onAction(action: AgentsListAction) {
         when (action) {
-            is AgentsListAction.OnRarityFilterChanged -> {
+            is AgentsListAction.ChangeRarityFilter -> {
                 _uiState.update {
                     it.copy(selectedRarity = action.rarities)
                 }
                 filterAgentsList()
             }
 
-            is AgentsListAction.OnAttributeFilterChanged -> {
+            is AgentsListAction.ChangeAttributeFilter -> {
                 _uiState.update {
                     it.copy(selectedAttributes = action.attributes)
                 }
                 filterAgentsList()
             }
 
-            is AgentsListAction.OnSpecialtyFilterChanged -> {
+            is AgentsListAction.ChangeSpecialtyFilter -> {
                 _uiState.update {
                     it.copy(selectedSpecialties = action.specialties)
                 }
                 filterAgentsList()
             }
 
-            is AgentsListAction.OnFactionFilterChanged -> {
+            is AgentsListAction.ChangeFactionFilter -> {
                 val factionId = action.factionId
                 _uiState.update {
                     it.copy(selectedFactionId = if (it.selectedFactionId == factionId) 0 else factionId)
@@ -70,9 +70,9 @@ class AgentsListViewModel(
                 filterAgentsList()
             }
 
-            is AgentsListAction.OnAgentClick -> {}
+            is AgentsListAction.ChangeAgent -> {}
 
-            AgentsListAction.OnBackClick -> {}
+            AgentsListAction.ClickBack -> {}
         }
     }
 

@@ -73,20 +73,15 @@ class SettingViewModelTest {
 
     @Test
     fun `Set Dark Theme`() {
-        viewModel.setIsDarkTheme(false)
+        viewModel.onAction(SettingAction.ChangeToDarkTheme(false))
         verify { themeUseCase.setPreferenceIsDarkTheme(false) }
     }
 
     @Test
     fun `Set Ui Scale`() {
-        viewModel.setUiScale(2f)
-        verify { uiScaleUseCase.setUiScale(2f) }
-    }
-
-    @Test
-    fun `Set Font Scale`() {
-        viewModel.setFontScale(2f)
-        verify { uiScaleUseCase.setFontScale(2f) }
+        viewModel.onAction(SettingAction.ScaleUi(1.1f, 1.3f))
+        verify { uiScaleUseCase.setUiScale(1.1f) }
+        verify { uiScaleUseCase.setFontScale(1.3f) }
     }
 
 //    Issue: kotlinx.coroutines.test.UncaughtExceptionsBeforeTest

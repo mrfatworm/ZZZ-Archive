@@ -6,10 +6,10 @@ import utils.ZzzRarity
 
 
 sealed interface AgentsListAction {
-    data class OnRarityFilterChanged(val rarities: Set<ZzzRarity>) : AgentsListAction
-    data class OnAttributeFilterChanged(val attributes: Set<AgentAttribute>) : AgentsListAction
-    data class OnSpecialtyFilterChanged(val specialties: Set<AgentSpecialty>) : AgentsListAction
-    data class OnFactionFilterChanged(val factionId: Int) : AgentsListAction
-    data class OnAgentClick(val agentId: Int) : AgentsListAction
-    data object OnBackClick : AgentsListAction
+    data class ChangeRarityFilter(val rarities: Set<ZzzRarity>) : AgentsListAction
+    data class ChangeAttributeFilter(val attributes: Set<AgentAttribute>) : AgentsListAction
+    data class ChangeSpecialtyFilter(val specialties: Set<AgentSpecialty>) : AgentsListAction
+    data class ChangeFactionFilter(val factionId: Int) : AgentsListAction
+    data class ChangeAgent(val agentId: Int) : AgentsListAction
+    data object ClickBack : AgentsListAction
 }

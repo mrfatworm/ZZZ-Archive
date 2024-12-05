@@ -18,13 +18,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import feature.bangboo.model.BangbooListState
+import feature.bangboo.presentation.BangbooListAction
 import org.jetbrains.compose.resources.stringResource
 import ui.components.ZzzTopBar
 import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
-import utils.AgentAttribute
-import utils.ZzzRarity
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.bangboo
 import zzzarchive.composeapp.generated.resources.filter
@@ -35,10 +34,7 @@ import zzzarchive.composeapp.generated.resources.ic_filter_filled
 @Composable
 fun BangbooListScreenSingle(
     uiState: BangbooListState,
-    onBangbooClick: (Int) -> Unit,
-    onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
-    onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
-    onBackClick: () -> Unit
+    onAction: (BangbooListAction) -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(false) }
@@ -47,7 +43,9 @@ fun BangbooListScreenSingle(
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
         AnimatedVisibility(AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
             ZzzTopBar(title = stringResource(Res.string.bangboo),
-                onBackClick = onBackClick,
+                onBackClick = {
+                    onAction(BangbooListAction.ClickBack)
+                },
                 actions = {
                     ZzzIconButton(iconRes = if (isFiltered) Res.drawable.ic_filter_filled else Res.drawable.ic_filter,
                         contentDescriptionRes = Res.string.filter,
@@ -66,16 +64,26 @@ fun BangbooListScreenSingle(
                 modifier = Modifier.weight(1f),
                 uiState = uiState,
                 invisibleFilter = AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact,
-                onBangbooClick = onBangbooClick,
-                onRarityChipSelectionChanged = onRarityChipSelectionChanged,
-                onAttributeChipSelectionChanged = onAttributeChipSelectionChanged
+                onBangbooClick = {
+                    onAction(BangbooListAction.ClickBangboo(it))
+                },
+                onRarityChipSelectionChanged = {
+                    onAction(BangbooListAction.ChangeRarityFilter(it))
+                },
+                onAttributeChipSelectionChanged = {
+                    onAction(BangbooListAction.ChangeAttributeFilter(it))
+                }
             )
         }
         if (showBottomSheet) {
             BangbooFilterBottomSheet(sheetState = sheetState,
                 uiState = uiState,
-                onRarityChipSelectionChanged = onRarityChipSelectionChanged,
-                onAttributeChipSelectionChanged = onAttributeChipSelectionChanged,
+                onRarityChipSelectionChanged = {
+                    onAction(BangbooListAction.ChangeRarityFilter(it))
+                },
+                onAttributeChipSelectionChanged = {
+                    onAction(BangbooListAction.ChangeAttributeFilter(it))
+                },
                 onDismiss = { showBottomSheet = false })
         }
     }

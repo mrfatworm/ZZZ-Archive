@@ -21,28 +21,24 @@ fun WEngineDetailScreen(onBackClick: () -> Unit) {
     val viewModel: WEngineDetailViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     if (uiState.error != null) {
-        ErrorScreen(
-            uiState.error!!,
-            onAction = { viewModel.onAction(WEngineDetailAction.OnRetry) }
-        )
+        ErrorScreen(uiState.error!!, onAction = { viewModel.onAction(WEngineDetailAction.Retry) })
     } else {
-        WEngineDetailContent(uiState, onBackClick)
+        WEngineDetailContent(uiState) { actions ->
+            when (actions) {
+                WEngineDetailAction.ClickBack -> onBackClick()
+                else -> viewModel.onAction(actions)
+            }
         }
+    }
 }
 
 @Composable
 private fun WEngineDetailContent(
-    uiState: WEngineDetailState,
-    onBackClick: () -> Unit
+    uiState: WEngineDetailState, onAction: (WEngineDetailAction) -> Unit
 ) {
     if (AppTheme.contentType == ContentType.Single) {
-        WEngineDetailScreenSingle(
-            uiState = uiState, onBackClick = onBackClick
-        )
+        WEngineDetailScreenSingle(uiState, onAction)
     } else {
-        WEngineDetailScreenDual(
-            uiState = uiState,
-            onBackClick = onBackClick
-        )
+        WEngineDetailScreenDual(uiState, onAction)
     }
 }

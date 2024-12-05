@@ -43,6 +43,29 @@ class SettingViewModel(
         updateAppVersion()
     }
 
+    fun onAction(action: SettingAction) {
+        when (action) {
+            is SettingAction.ChangeToDarkTheme -> {
+                setIsDarkTheme(action.isDark)
+            }
+
+            is SettingAction.ChangeLanguage -> {
+                setLanguage(action.langCode)
+            }
+
+            is SettingAction.RestartApp -> {
+                restartApp()
+            }
+
+            is SettingAction.ScaleUi -> {
+                setUiScale(action.uiScale)
+                setFontScale(action.fontScale)
+            }
+
+            else -> {}
+        }
+    }
+
     private fun updateLanguageState() {
         val newLanguage = languageUseCase.getLanguage()
         _uiState.update { it.copy(language = newLanguage) }
@@ -61,22 +84,22 @@ class SettingViewModel(
 
     }
 
-    fun setIsDarkTheme(isDark: Boolean) {
+    private fun setIsDarkTheme(isDark: Boolean) {
         _isDark.value = isDark
         themeUseCase.setPreferenceIsDarkTheme(isDark)
     }
 
-    fun setUiScale(uiScale: Float) {
+    private fun setUiScale(uiScale: Float) {
         uiScaleUseCase.setUiScale(uiScale)
         updateUiScaleState()
     }
 
-    fun setFontScale(fontScale: Float) {
+    private fun setFontScale(fontScale: Float) {
         uiScaleUseCase.setFontScale(fontScale)
         updateUiScaleState()
     }
 
-    fun setLanguage(langCode: String) {
+    private fun setLanguage(langCode: String) {
         viewModelScope.launch {
             updateDatabaseUseCase.resetWikiDatabaseVersion()
         }
