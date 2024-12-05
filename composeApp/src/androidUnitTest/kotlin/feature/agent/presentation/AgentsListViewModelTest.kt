@@ -55,7 +55,7 @@ class AgentsListViewModelTest {
     }
 
     @Test
-    fun `Filter rarity S success`() {
+    fun `Filter rarity S`() {
         viewModel.onAction(AgentsListAction.ChangeRarityFilter(setOf(ZzzRarity.RANK_S)))
         val state = viewModel.uiState.value
         assertEquals(state.filteredAgentsList.first().id, 3) // First agent: Nekomiya
@@ -63,7 +63,7 @@ class AgentsListViewModelTest {
     }
 
     @Test
-    fun `Filter attribute Electric success`() {
+    fun `Filter attribute Electric`() {
         viewModel.onAction(AgentsListAction.ChangeAttributeFilter(setOf(AgentAttribute.Electric)))
         val state = viewModel.uiState.value
         assertEquals(state.filteredAgentsList.first().id, 3) // First agent: Nekomiya
@@ -71,7 +71,7 @@ class AgentsListViewModelTest {
     }
 
     @Test
-    fun `Filter specialty Stun success`() {
+    fun `Filter specialty Stun`() {
         viewModel.onAction(AgentsListAction.ChangeSpecialtyFilter(setOf(AgentSpecialty.Stun)))
         val state = viewModel.uiState.value
         assertEquals(state.filteredAgentsList.first().id, 3) // First agent: Nekomiya
@@ -79,7 +79,7 @@ class AgentsListViewModelTest {
     }
 
     @Test
-    fun `Filter faction success`() {
+    fun `Filter faction`() {
         viewModel.onAction(AgentsListAction.ChangeFactionFilter((1)))
         val state = viewModel.uiState.value
         assertEquals(state.filteredAgentsList.first().id, 3) // First agent: Nekomiya

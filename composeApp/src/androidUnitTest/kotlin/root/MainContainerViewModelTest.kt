@@ -38,7 +38,7 @@ class MainContainerViewModelTest {
     }
 
     @Test
-    fun `Set Dark Theme`() {
+    fun `Set Light Theme`() {
         viewModel.setIsDarkTheme(false)
         verify { themeUseCase.setPreferenceIsDarkTheme(false) }
     }

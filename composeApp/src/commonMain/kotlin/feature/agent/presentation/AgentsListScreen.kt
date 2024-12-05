@@ -23,7 +23,7 @@ fun AgentsListScreen(
     AgentsListContent(uiState = uiState,
         onAction = { action ->
             when (action) {
-                is AgentsListAction.ChangeAgent -> {
+                is AgentsListAction.ClickAgent -> {
                     onAgentClick(action.agentId)
                 }
 

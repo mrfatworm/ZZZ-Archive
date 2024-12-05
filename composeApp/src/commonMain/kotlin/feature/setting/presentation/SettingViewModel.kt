@@ -107,7 +107,7 @@ class SettingViewModel(
         updateLanguageState()
     }
 
-    fun restartApp() {
+    private fun restartApp() {
         appActionsUseCase.restart()
     }
 }

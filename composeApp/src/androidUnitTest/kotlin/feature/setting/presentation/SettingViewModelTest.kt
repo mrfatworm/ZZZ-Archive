@@ -7,15 +7,15 @@ package feature.setting.presentation
 
 
 import MainDispatcherRule
-import android.content.Context
 import database.UpdateDatabaseUseCase
 import feature.setting.domain.AppInfoUseCase
-import feature.setting.domain.LanguageUseCase
+import feature.setting.domain.FakeLanguageUseCase
 import feature.setting.domain.ThemeUseCase
 import feature.setting.domain.UiScaleUseCase
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import org.junit.Ignore
 import org.junit.Rule
 import utils.AppActionsUseCase
 import kotlin.test.BeforeTest
@@ -28,22 +28,20 @@ class SettingViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private val mockContext = mockk<Context>(relaxed = true)
     private val themeUseCase = mockk<ThemeUseCase>()
     private val uiScaleUseCase = mockk<UiScaleUseCase>()
-    private val languageUseCase = mockk<LanguageUseCase>()
+    private val languageUseCase = FakeLanguageUseCase()
     private val appInfoUseCase = mockk<AppInfoUseCase>()
-    private val appActionsUseCase = AppActionsUseCase(mockContext)
+    private val appActionsUseCase = mockk<AppActionsUseCase>()
     private val updateDatabaseUseCase = mockk<UpdateDatabaseUseCase>()
     private lateinit var viewModel: SettingViewModel
 
     @BeforeTest
     fun setup() {
-        every { languageUseCase.getLanguage().code } returns "en"
-        every { languageUseCase.setLanguage(any()) } returns Unit
         every { themeUseCase.getPreferenceIsDarkTheme() } returns true
         every { themeUseCase.setPreferenceIsDarkTheme(any()) } returns Unit
         every { appInfoUseCase.getAppVersion() } returns "Luciana 2024.11.13"
+        every { appActionsUseCase.restart() } returns Unit
         every { uiScaleUseCase.getUiScale() } returns 1f
         every { uiScaleUseCase.getFontScale() } returns 1f
         every { uiScaleUseCase.setUiScale(any()) } returns Unit
@@ -84,10 +82,18 @@ class SettingViewModelTest {
         verify { uiScaleUseCase.setFontScale(1.3f) }
     }
 
-//    Issue: kotlinx.coroutines.test.UncaughtExceptionsBeforeTest
-//    @Test
-//    fun `Set Language`() {
-//        viewModel.setLanguage("zh")
-//        verify { languageUseCase.setLanguage("zh") }
-//    }
+    @Test
+    fun `Restart App`() {
+        viewModel.onAction(SettingAction.RestartApp)
+        verify { appActionsUseCase.restart() }
+    }
+
+
+    @Ignore("Issue: kotlinx.coroutines.test.UncaughtExceptionsBeforeTest")
+    @Test
+    fun `Set Language`() {
+        viewModel.onAction(SettingAction.ChangeLanguage("zh"))
+        val state = viewModel.uiState.value
+        assertEquals("zh", state.language.code)
+    }
 }

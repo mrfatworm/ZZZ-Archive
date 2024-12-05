@@ -66,7 +66,7 @@ fun AgentsListScreenSingle(
                 uiState = uiState,
                 invisibleFilter = AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact,
                 onAgentClick = {
-                    onAction(AgentsListAction.ChangeAgent(it))
+                    onAction(AgentsListAction.ClickAgent(it))
                 },
                 onRarityChipSelectionChanged = {
                     onAction(AgentsListAction.ChangeRarityFilter(it))

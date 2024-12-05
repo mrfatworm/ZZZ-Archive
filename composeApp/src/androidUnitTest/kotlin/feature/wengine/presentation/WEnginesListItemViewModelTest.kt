@@ -42,13 +42,13 @@ class WEnginesListItemViewModelTest {
     }
 
     @Test
-    fun `Init data success`() {
+    fun `Init data`() {
         val state = viewModel.uiState.value
         assertEquals(state.wEnginesList, stubWEnginesList)
     }
 
     @Test
-    fun `Filter rarity success`() {
+    fun `Filter rarity`() {
         viewModel.onAction(WEnginesListAction.ChangeRarityFilter(setOf(ZzzRarity.RANK_S)))
         val state = viewModel.uiState.value
         assertEquals(state.filteredWEnginesList.first().id, 44)
@@ -56,7 +56,7 @@ class WEnginesListItemViewModelTest {
     }
 
     @Test
-    fun `Filter specialty success`() {
+    fun `Filter specialty`() {
         viewModel.onAction(WEnginesListAction.ChangeSpecialtyFilter(setOf(AgentSpecialty.Support)))
         val state = viewModel.uiState.value
         assertEquals(state.filteredWEnginesList.first().id, 44)

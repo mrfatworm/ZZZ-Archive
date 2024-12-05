@@ -70,7 +70,7 @@ class AgentsListViewModel(
                 filterAgentsList()
             }
 
-            is AgentsListAction.ChangeAgent -> {}
+            is AgentsListAction.ClickAgent -> {}
 
             AgentsListAction.ClickBack -> {}
         }
