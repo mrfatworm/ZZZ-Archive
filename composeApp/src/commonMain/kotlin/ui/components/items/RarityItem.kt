@@ -47,7 +47,6 @@ import utils.AgentAttribute
 import utils.AgentSpecialty
 import utils.ZzzRarity
 
-private val itemShape = RoundedCornerShape(8.dp)
 
 @Composable
 fun RarityItem(
@@ -64,18 +63,20 @@ fun RarityItem(
     val isHovered = interactionSource.collectIsHoveredAsState()
 
     Column(
-        modifier = modifier.width(AppTheme.fixedSize.rarityItemMediumSize)
+        modifier = modifier.width(AppTheme.size.rarityItemMediumSize)
             .pointerHoverIcon(PointerIcon.Hand)
             .clickable(interactionSource = interactionSource, indication = null) {
                 onClick()
             },
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(6.dp)
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s250)
     ) {
         Box(
             modifier = Modifier.aspectRatio(1f).fillMaxSize().background(
                 AppTheme.colors.imageBackground
-            ).border(3.dp, AppTheme.colors.imageBorder, shape = itemShape).clip(itemShape)
+            ).border(
+                AppTheme.size.borderWidth, AppTheme.colors.imageBorder, shape = AppTheme.shape.r300
+            ).clip(AppTheme.shape.r300)
         ) {
             SubcomposeAsyncImage(modifier = Modifier.fillMaxSize(),
                 model = imgUrl,
@@ -112,8 +113,9 @@ fun RarityItem(
 private fun AttributeTag(modifier: Modifier, textRes: StringResource, iconRes: DrawableResource) {
     Icon(
         modifier = modifier.background(
-            AppTheme.colors.imageTagContainer, RoundedCornerShape(bottomStart = 8.dp)
-        ).padding(4.dp).size(AppTheme.fixedSize.iconSize),
+            AppTheme.colors.imageTagContainer,
+            RoundedCornerShape(bottomStart = AppTheme.spacing.s300)
+        ).padding(AppTheme.spacing.s200).size(AppTheme.size.iconSize),
         imageVector = vectorResource(iconRes),
         contentDescription = stringResource(textRes),
         tint = AppTheme.colors.imageOnTagContainer
@@ -122,7 +124,7 @@ private fun AttributeTag(modifier: Modifier, textRes: StringResource, iconRes: D
 
 @Composable
 private fun RarityIndicator(modifier: Modifier, rarity: ZzzRarity, isFocus: Boolean = false) {
-    val animatedHeight by animateDpAsState(targetValue = if (isFocus) 8.dp else 0.dp)
+    val animatedHeight by animateDpAsState(targetValue = if (isFocus) AppTheme.spacing.s300 else 0.dp)
 
     Spacer(modifier.fillMaxWidth().height(animatedHeight).background(rarity.color))
 }

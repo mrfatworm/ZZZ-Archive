@@ -23,7 +23,7 @@ import feature.agent.components.SuggestWEnginesCard
 import feature.agent.model.AgentDetailState
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.TextCard
-import ui.theme.AppTheme
+import ui.utils.contentGap
 import ui.utils.contentPadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.agent_background
@@ -33,11 +33,11 @@ fun AgentDetailScreenDual(
     uiState: AgentDetailState,
     onAction: (AgentDetailAction) -> Unit,
 ) {
-    Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
+    Row(horizontalArrangement = Arrangement.spacedBy(contentGap())) {
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
                 .contentPadding(),
-            verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
+            verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             AgentImageCard(uiState.agentDetail) {
                 onAction(AgentDetailAction.ClickBack)
@@ -48,7 +48,7 @@ fun AgentDetailScreenDual(
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
                 .contentPadding(),
-            verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
+            verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             AgentMaterialsCard(uiState.agentDetail.levelMaterial)
             SuggestWEnginesCard(uiState.agentDetail.suggestWEngines) { id ->

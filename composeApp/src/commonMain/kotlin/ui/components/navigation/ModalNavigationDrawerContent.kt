@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -29,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
@@ -46,7 +46,6 @@ import zzzarchive.composeapp.generated.resources.ic_sun
 import zzzarchive.composeapp.generated.resources.light_theme
 import zzzarchive.composeapp.generated.resources.navigation_drawer
 
-val navigationDrawerShape = RoundedCornerShape(32.dp)
 val navigationDrawerMinWidth = 240.dp
 val navigationDrawerMaxWidth = 360.dp
 
@@ -58,14 +57,15 @@ fun ModalNavigationDrawerContent(
     onThemeChanged: () -> Unit
 ) {
     Column(
-        modifier = Modifier.fillMaxHeight().padding(4.dp)
+        modifier = Modifier.fillMaxHeight().padding(AppTheme.spacing.s200)
+            .clip(AppTheme.shape.r500)
             .widthIn(min = navigationDrawerMinWidth, max = navigationDrawerMaxWidth)
-            .border(3.dp, AppTheme.colors.border, navigationDrawerShape)
-            .background(AppTheme.colors.surfaceContainer, navigationDrawerShape)
-            .padding(horizontal = 16.dp, vertical = 20.dp)
+            .border(AppTheme.size.borderWidth, AppTheme.colors.border, AppTheme.shape.r500)
+            .background(AppTheme.colors.surfaceContainer)
+            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s450)
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            modifier = Modifier.fillMaxWidth().padding(AppTheme.spacing.s400),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -91,7 +91,7 @@ fun ModalNavigationDrawerContent(
                 val isSelected = selectedMainFlow == destination.route
                 NavigationDrawerItem(selected = isSelected, label = {
                     Text(
-                        modifier = Modifier.padding(horizontal = 16.dp),
+                        modifier = Modifier.padding(horizontal = AppTheme.spacing.s400),
                         text = stringResource(destination.textRes),
                         style = if (isSelected) AppTheme.typography.labelLarge else AppTheme.typography.labelMedium
                     )
@@ -105,17 +105,17 @@ fun ModalNavigationDrawerContent(
                     onDrawerClicked()
                 })
                 HorizontalDivider(
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    thickness = 3.dp,
+                    modifier = Modifier.padding(horizontal = AppTheme.spacing.s400),
+                    thickness = AppTheme.size.borderWidth,
                     color = AppTheme.colors.border
                 )
             }
             Spacer(
-                modifier = Modifier.weight(1f).heightIn(min = 16.dp)
+                modifier = Modifier.weight(1f).heightIn(min = AppTheme.spacing.s400)
             )
             val isDark by AppTheme.isDark
             NavigationDrawerItem(
-                modifier = Modifier.padding(horizontal = 12.dp),
+                modifier = Modifier.padding(horizontal = AppTheme.spacing.s350),
                 selected = false,
                 onClick = onThemeChanged,
                 icon = {

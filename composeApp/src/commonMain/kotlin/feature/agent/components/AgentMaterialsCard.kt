@@ -9,10 +9,7 @@ import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -29,14 +26,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import feature.agent.model.AgentLevelMaterial
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.ContentCard
 import ui.components.cards.HoveredIndicatorHeader
 import ui.components.items.RarityMiniItem
 import ui.theme.AppTheme
+import ui.utils.cardPaddingWithHeader
 import ui.utils.drawRowListMask
+import ui.utils.rowListGap
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.materials
 import zzzarchive.composeapp.generated.resources.skills
@@ -59,13 +57,11 @@ fun AgentMaterialsCard(material: AgentLevelMaterial) {
             modifier = Modifier.drawRowListMask(
                 colorScheme = AppTheme.colors,
                 startEnable = lazyListState.canScrollBackward,
-                endEnable = lazyListState.canScrollForward
-            ), state = lazyListState, contentPadding = PaddingValues(
-                top = AppTheme.dimens.paddingUnderCardHeader,
-                start = AppTheme.dimens.paddingCard,
-                end = AppTheme.dimens.paddingCard,
-                bottom = AppTheme.dimens.paddingCard
-            )
+                endEnable = lazyListState.canScrollForward,
+            ),
+            state = lazyListState,
+            contentPadding = cardPaddingWithHeader(),
+            horizontalArrangement = rowListGap()
         ) {
             items(items = materialsList, key = { it.id }) { material ->
                 RarityMiniItem(
@@ -73,7 +69,6 @@ fun AgentMaterialsCard(material: AgentLevelMaterial) {
                     text = material.getAmountText(),
                     imgUrl = material.getProfileUrl()
                 )
-                Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
             }
         }
     }
@@ -93,7 +88,7 @@ private fun Header(
         lazyListState = lazyListState
     ) {
         Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(

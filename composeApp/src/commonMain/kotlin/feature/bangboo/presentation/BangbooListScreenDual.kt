@@ -1,17 +1,17 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.bangboo.components
+package feature.bangboo.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import feature.bangboo.components.BangbooListFilterCard
 import feature.bangboo.model.BangbooListState
-import feature.bangboo.presentation.BangbooListAction
-import ui.theme.AppTheme
+import ui.utils.containerGap
 import ui.utils.contentPadding
 
 @Composable
@@ -21,7 +21,7 @@ fun BangbooListScreenDual(
 ) {
     Row(
         modifier = Modifier.contentPadding(),
-        horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
+        horizontalArrangement = Arrangement.spacedBy(containerGap())
     ) {
         BangbooListFilterCard(
             uiState = uiState,

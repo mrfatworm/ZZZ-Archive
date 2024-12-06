@@ -8,8 +8,6 @@ package feature.bangboo.presentation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import feature.bangboo.components.BangbooDetailScreenDual
-import feature.bangboo.components.BangbooDetailScreenSingle
 import feature.bangboo.model.BangbooDetailState
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.ErrorScreen

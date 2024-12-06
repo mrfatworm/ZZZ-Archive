@@ -57,7 +57,7 @@ private fun AppInfo(modifier: Modifier, appVersion: String) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s350)
     ) {
         Image(
             modifier = Modifier.size(200.dp),

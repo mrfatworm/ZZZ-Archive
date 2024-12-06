@@ -12,8 +12,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import ui.theme.AppTheme
+import ui.utils.cardPadding
 import utils.ZzzRarity
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_rare
@@ -25,9 +25,9 @@ fun RarityFilterChipsList(
 ) {
     val rarities = listOf(ZzzRarity.RANK_S, ZzzRarity.RANK_A)
     FlowRow(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = AppTheme.dimens.paddingCard),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier = Modifier.fillMaxWidth().padding(horizontal = cardPadding()),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
         rarities.forEach { rarity ->
             ZzzFilterChip(text = rarity.code,

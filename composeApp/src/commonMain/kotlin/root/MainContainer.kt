@@ -23,7 +23,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -39,6 +38,7 @@ import ui.navigation.NavActions
 import ui.navigation.graph.MainNavGraph
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
+import ui.utils.containerGap
 import ui.utils.containerPadding
 import ui.utils.contentPadding
 
@@ -115,9 +115,8 @@ fun MainFuncContent(
         modifier = Modifier.fillMaxSize()
     ) {
         Row(
-            modifier = Modifier.weight(1f)
-                .containerPadding(AppTheme.adaptiveLayoutType, AppTheme.dimens),
-            horizontalArrangement = horizontalParentGap()
+            modifier = Modifier.weight(1f).containerPadding(),
+            horizontalArrangement = Arrangement.spacedBy(containerGap())
         ) {
             AnimatedVisibility(
                 visible = AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Medium || AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Expanded
@@ -135,7 +134,7 @@ fun MainFuncContent(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 MainNavGraph(
-                    modifier = Modifier.widthIn(max = AppTheme.fixedSize.maxContainerWidth),
+                    modifier = Modifier.widthIn(max = AppTheme.size.maxContainerWidth),
                     navController = mainFunNavController,
                     navActions = mainNavActions,
                     rootNavActions = rootNavActions
@@ -151,12 +150,3 @@ fun MainFuncContent(
         }
     }
 }
-
-@Composable
-private fun horizontalParentGap() = Arrangement.spacedBy(
-    when (AppTheme.adaptiveLayoutType) {
-        AdaptiveLayoutType.Expanded -> AppTheme.dimens.gapParentExpanded
-        AdaptiveLayoutType.Medium -> AppTheme.dimens.gapParentMedium
-        AdaptiveLayoutType.Compact -> 0.dp
-    }
-)

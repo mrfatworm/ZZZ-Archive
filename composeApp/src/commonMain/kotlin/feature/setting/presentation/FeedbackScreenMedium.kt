@@ -1,9 +1,9 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.setting.components
+package feature.setting.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,13 +20,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import feature.setting.components.FeedbackFormCard
 import feature.setting.model.FeedbackState
 import feature.setting.model.feedbackIssueTypes
-import feature.setting.presentation.FeedbackAction
 import org.jetbrains.compose.resources.stringResource
 import ui.components.buttons.ZzzIconButton
 import ui.components.buttons.ZzzPrimaryButton
 import ui.theme.AppTheme
+import ui.utils.contentGap
 import ui.utils.contentPadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.back
@@ -46,7 +47,7 @@ fun FeedbackScreenMedium(
     Column(
         modifier = Modifier.widthIn(max = 640.dp).verticalScroll(rememberScrollState())
             .contentPadding(),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         ZzzIconButton(
             iconRes = Res.drawable.ic_arrow_back,

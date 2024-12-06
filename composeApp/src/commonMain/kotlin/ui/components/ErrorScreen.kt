@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import ui.components.buttons.ZzzPrimaryButton
 import ui.theme.AppTheme
@@ -27,7 +26,10 @@ fun ErrorScreen(
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
+        verticalArrangement = Arrangement.spacedBy(
+            AppTheme.spacing.s300,
+            Alignment.CenterVertically
+        )
     ) {
         Text(
             text = message,

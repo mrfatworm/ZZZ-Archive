@@ -16,14 +16,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
-import androidx.compose.ui.unit.dp
 import ui.theme.AppTheme
 
 @Composable
 fun SettingItem(title: String, content: @Composable () -> Unit, onClick: () -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand)
-            .clickable(onClick = onClick).padding(horizontal = 16.dp, vertical = 12.dp),
+            .clickable(onClick = onClick)
+            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

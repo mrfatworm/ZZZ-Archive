@@ -72,4 +72,5 @@ ZZZ Archive 是動作遊戲 "絕區零" 的維基應用程式，使用者可查�
 - [Compose Multiplatform Wizard](https://github.com/terrakok/Compose-Multiplatform-Wizard)
 - [BuildKonfig for KMP](https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/)
 - [Release macOS App](https://www.marcogomiero.com/posts/2024/compose-macos-app-store/)
+- [Design System](https://github.com/felipecastilhos)
 - 封面繪師 [EDIBLE](https://www.pixiv.net/users/75576278)

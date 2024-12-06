@@ -1,9 +1,9 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.wengine.components
+package feature.wengine.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,12 +12,14 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import feature.wengine.components.WEngineAttributesCard
+import feature.wengine.components.WEngineImageCard
 import feature.wengine.model.WEngineDetailState
-import feature.wengine.presentation.WEngineDetailAction
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.MaterialsListCard
 import ui.components.cards.TextCard
-import ui.theme.AppTheme
+import ui.utils.containerGap
+import ui.utils.contentGap
 import ui.utils.contentPadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.additional_info
@@ -28,11 +30,11 @@ fun WEngineDetailScreenDual(
     uiState: WEngineDetailState,
     onAction: (WEngineDetailAction) -> Unit
 ) {
-    Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
+    Row(horizontalArrangement = Arrangement.spacedBy(containerGap())) {
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
                 .contentPadding(),
-            verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
+            verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             WEngineImageCard(uiState.wEngineDetail) {
                 onAction(WEngineDetailAction.ClickBack)
@@ -43,7 +45,7 @@ fun WEngineDetailScreenDual(
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
                 .contentPadding(),
-            verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
+            verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             TextCard(stringResource(Res.string.w_engine_effect), uiState.wEngineDetail.skill)
             MaterialsListCard(uiState.wEngineDetail.levelMaterials)
