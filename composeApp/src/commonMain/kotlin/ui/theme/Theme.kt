@@ -26,7 +26,7 @@ import ui.utils.ContentType
 
 private val localColorScheme = compositionLocalOf { ColorScheme() }
 private val localTypography = compositionLocalOf { Typography() }
-private val localRadius = compositionLocalOf { Radius() }
+private val localShape = compositionLocalOf { Shape.regular() }
 private val localSpacing = compositionLocalOf { Spacing.regular() }
 private val localComponentSize = compositionLocalOf { ComponentSize() }
 private val localAdaptiveLayoutType =
@@ -44,8 +44,8 @@ object AppTheme {
     val typography: Typography
         @Composable @ReadOnlyComposable get() = localTypography.current
 
-    val radius: Radius
-        @Composable @ReadOnlyComposable get() = localRadius.current
+    val shape: Shape
+        @Composable @ReadOnlyComposable get() = localShape.current
 
     val spacing: Spacing
         @Composable @ReadOnlyComposable get() = localSpacing.current
@@ -88,7 +88,7 @@ fun ZzzArchiveTheme(content: @Composable () -> Unit) {
         localTypography provides typography.value,
         localSpacing provides Spacing.regular(),
         localComponentSize provides fixedSize.value,
-        localRadius provides Radius(),
+        localShape provides Shape.regular(),
         localAdaptiveLayoutType provides adaptiveLayoutType,
         localContentType provides contentType,
         localThemeIsDark provides isDark,

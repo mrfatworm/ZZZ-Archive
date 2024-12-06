@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -35,6 +34,7 @@ import zzzarchive.composeapp.generated.resources.ic_arrow_back
 import zzzarchive.composeapp.generated.resources.ic_arrow_next
 import zzzarchive.composeapp.generated.resources.previous
 
+
 @Composable
 fun ContentCard(
     modifier: Modifier = Modifier,
@@ -42,9 +42,8 @@ fun ContentCard(
     content: @Composable ColumnScope.() -> Unit
 ) {
     Column(
-        modifier = modifier.background(
-            AppTheme.colors.surfaceContainer, RoundedCornerShape(AppTheme.radius.contentCard)
-        ).clip(RoundedCornerShape(AppTheme.radius.contentCard))
+        modifier = modifier.clip(AppTheme.shape.cardShape)
+            .background(AppTheme.colors.surfaceContainer)
             .padding(if (hasDefaultPadding) cardPadding() else 0.dp)
     ) {
         content()
@@ -94,7 +93,7 @@ fun HoveredIndicatorHeader(
                     ZzzIconButton(
                         iconRes = Res.drawable.ic_arrow_back,
                         contentDescriptionRes = Res.string.previous,
-                        size = 32.dp
+                        size = AppTheme.size.smallIconButtonSize
                     ) {
                         val targetIndex = lazyListState.firstVisibleItemIndex - 3
                         coroutineScope.launch {
@@ -108,7 +107,7 @@ fun HoveredIndicatorHeader(
                     ZzzIconButton(
                         iconRes = Res.drawable.ic_arrow_next,
                         contentDescriptionRes = Res.string.previous,
-                        size = 32.dp
+                        size = AppTheme.size.smallIconButtonSize
                     ) {
                         val targetIndex = lazyListState.firstVisibleItemIndex + 3
                         coroutineScope.launch {

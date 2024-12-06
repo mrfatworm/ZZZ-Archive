@@ -10,7 +10,6 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
@@ -102,7 +101,7 @@ fun ZzzButton(
             color = if (hasBorder) AppTheme.colors.buttonBorder else Color.Transparent,
             shape = CircleShape
         ),
-        shape = RoundedCornerShape(64.dp),
+        shape = AppTheme.shape.round,
         colors = ButtonColors(
             containerColor = containerColor,
             contentColor = contentColor,

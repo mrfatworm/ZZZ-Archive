@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -31,7 +30,6 @@ import feature.drive.data.database.emptyDriveListItemEntity
 import org.jetbrains.compose.resources.stringResource
 import ui.components.dialogs.DriveDetailDialog
 import ui.components.items.RarityItem
-import ui.components.items.RowListEndItem
 import ui.theme.AppTheme
 import ui.utils.cardPaddingWithHeader
 import ui.utils.drawRowListMask
@@ -63,10 +61,10 @@ fun DrivesListCard(
         ) {
             if (showViewAll) {
                 Text(
-                    modifier = Modifier.clip(RoundedCornerShape(8.dp))
+                    modifier = Modifier.clip(AppTheme.shape.r300)
                         .clickable { onDrivesOverviewClick() }.pointerHoverIcon(PointerIcon.Hand)
                         .background(AppTheme.colors.surface)
-                        .border(1.dp, AppTheme.colors.border, RoundedCornerShape(8.dp))
+                        .border(1.dp, AppTheme.colors.border, AppTheme.shape.r300)
                         .padding(AppTheme.spacing.s300),
                     text = stringResource(Res.string.all_drives),
                     style = AppTheme.typography.labelMedium,
@@ -93,11 +91,6 @@ fun DrivesListCard(
                         openDetailDialog.value = true
                         selectedDriveId.value = drive.id
                     })
-            }
-            item {
-                RowListEndItem(text = stringResource(Res.string.all_drives)) {
-                    onDrivesOverviewClick()
-                }
             }
         }
     }

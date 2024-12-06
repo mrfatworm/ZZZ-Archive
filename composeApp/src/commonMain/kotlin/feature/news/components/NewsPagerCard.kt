@@ -22,7 +22,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -51,11 +50,8 @@ fun NewsPagerCard(newsList: List<OfficialNewsState>) {
     val pagerState = rememberPagerState(pageCount = { newsList.size })
     val coroutineScope = rememberCoroutineScope()
     Column(
-        Modifier.background(
-            AppTheme.colors.surfaceContainer, RoundedCornerShape(AppTheme.radius.contentCard)
-        ).padding(bottom = 8.dp).clip(
-            RoundedCornerShape(AppTheme.radius.contentCard)
-        ), verticalArrangement = Arrangement.spacedBy(4.dp)
+        Modifier.clip(AppTheme.shape.cardShape).background(AppTheme.colors.surfaceContainer)
+            .padding(bottom = 8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         HorizontalPager(modifier = Modifier, state = pagerState) { currentPager ->
             NewsPagerCardItem(newsList[currentPager])

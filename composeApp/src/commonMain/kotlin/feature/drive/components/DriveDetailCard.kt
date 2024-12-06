@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -79,7 +78,7 @@ fun DriveDetailCard(
                 )
                 Text(
                     modifier = Modifier.fillMaxWidth()
-                        .clip(RoundedCornerShape(AppTheme.radius.contentCard))
+                        .clip(AppTheme.shape.cardShape)
                         .background(AppTheme.colors.surface)
                         .padding(horizontal = 16.dp, vertical = 8.dp),
                     text = drivesListItemEntity.pieceSetTwo,
@@ -96,7 +95,7 @@ fun DriveDetailCard(
                 )
                 Text(
                     modifier = Modifier.fillMaxWidth()
-                        .clip(RoundedCornerShape(AppTheme.radius.contentCard))
+                        .clip(AppTheme.shape.cardShape)
                         .background(AppTheme.colors.surface)
                         .padding(horizontal = 16.dp, vertical = 8.dp),
                     text = drivesListItemEntity.pieceSetFour,

@@ -22,7 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -55,7 +54,8 @@ fun ZzzBottomSheet(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    modifier = Modifier.size(16.dp).graphicsLayer { rotationZ = 45f },
+                    modifier = Modifier.size(AppTheme.size.iconSize)
+                        .graphicsLayer { rotationZ = 45f },
                     imageVector = vectorResource(Res.drawable.ic_do_not_disturb_on),
                     contentDescription = null,
                     tint = AppTheme.colors.onSurfaceVariant
@@ -68,7 +68,8 @@ fun ZzzBottomSheet(
                     color = AppTheme.colors.onSurface
                 )
                 Icon(
-                    modifier = Modifier.size(16.dp).graphicsLayer { rotationZ = 45f },
+                    modifier = Modifier.size(AppTheme.size.iconSize)
+                        .graphicsLayer { rotationZ = 45f },
                     imageVector = vectorResource(Res.drawable.ic_do_not_disturb_on),
                     contentDescription = null,
                     tint = AppTheme.colors.onSurfaceVariant

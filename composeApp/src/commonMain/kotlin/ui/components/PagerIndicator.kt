@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,7 +36,7 @@ fun PagerIndicator(modifier: Modifier, pageCount: Int, currentPage: Int, onClick
             Box(modifier = Modifier
                 .clickable { onClick(page) }
                 .padding(AppTheme.spacing.s200)
-                .clip(RoundedCornerShape(6.dp))
+                .clip(AppTheme.shape.r250)
                 .background(color = color)
                 .size(height = 6.dp, width = size))
         }

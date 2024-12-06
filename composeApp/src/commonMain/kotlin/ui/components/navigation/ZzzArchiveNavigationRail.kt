@@ -63,7 +63,7 @@ fun ZzzArchiveNavigationRail(
                     tint = AppTheme.colors.onSurfaceVariant
                 )
             })
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(AppTheme.spacing.s300))
         Column(
             modifier = Modifier.fillMaxHeight().verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,

@@ -11,7 +11,6 @@ import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import coil3.compose.AsyncImage
@@ -44,7 +42,7 @@ fun GalleryDialog(url: String, onDismiss: () -> Unit) {
     ) {
         Box(
             modifier = Modifier.fillMaxSize()
-                .background(AppTheme.colors.surface.copy(alpha = 0.7f), RoundedCornerShape(16.dp))
+                .background(AppTheme.colors.surface.copy(alpha = 0.7f), AppTheme.shape.r400)
         ) {
             AsyncImage(
                 modifier = Modifier

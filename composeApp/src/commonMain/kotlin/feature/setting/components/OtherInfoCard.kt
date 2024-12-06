@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -153,12 +152,11 @@ fun OpenSourceItem(
     onClick: () -> Unit
 ) {
     Column(
-        modifier = modifier.clip(RoundedCornerShape(AppTheme.radius.contentCard)).clickable {
+        modifier = modifier.clip(AppTheme.shape.cardShape).clickable {
             onClick()
         }.border(
             AppTheme.size.borderWidth,
-            AppTheme.colors.buttonBorder,
-            RoundedCornerShape(AppTheme.radius.contentCard)
+            AppTheme.colors.buttonBorder, AppTheme.shape.cardShape
         ).padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(12.dp)

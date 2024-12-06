@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -17,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import feature.banner.data.BannerLevel
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -49,7 +47,7 @@ fun Banner(
     }
 
     Row(
-        modifier = modifier.clip(RoundedCornerShape(16.dp)).fillMaxWidth()
+        modifier = modifier.clip(AppTheme.shape.r400).fillMaxWidth()
             .background(containerColor)
             .padding(start = AppTheme.spacing.s400, end = AppTheme.spacing.s200),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),

@@ -47,7 +47,6 @@ import utils.AgentAttribute
 import utils.AgentSpecialty
 import utils.ZzzRarity
 
-private val itemShape = RoundedCornerShape(8.dp)
 
 @Composable
 fun RarityItem(
@@ -75,8 +74,9 @@ fun RarityItem(
         Box(
             modifier = Modifier.aspectRatio(1f).fillMaxSize().background(
                 AppTheme.colors.imageBackground
-            ).border(AppTheme.size.borderWidth, AppTheme.colors.imageBorder, shape = itemShape)
-                .clip(itemShape)
+            ).border(
+                AppTheme.size.borderWidth, AppTheme.colors.imageBorder, shape = AppTheme.shape.r300
+            ).clip(AppTheme.shape.r300)
         ) {
             SubcomposeAsyncImage(modifier = Modifier.fillMaxSize(),
                 model = imgUrl,

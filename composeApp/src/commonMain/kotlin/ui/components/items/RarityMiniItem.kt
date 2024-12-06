@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -29,13 +28,11 @@ import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import ui.components.ImageNotFound
 import ui.theme.AppTheme
 import utils.ZzzRarity
 
-private val itemShape = RoundedCornerShape(8.dp)
 
 @Composable
 fun RarityMiniItem(
@@ -58,19 +55,17 @@ fun RarityMiniItem(
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
     ) {
         Box(
-            modifier = Modifier.fillMaxSize().aspectRatio(1f).background(
-                rarity?.color ?: Color.Transparent, itemShape
-            ).border(AppTheme.size.borderWidth, AppTheme.colors.imageBorder, shape = itemShape)
-                .clip(itemShape)
+            modifier = Modifier.fillMaxSize().aspectRatio(1f).clip(AppTheme.shape.r300).background(
+                rarity?.color ?: Color.Transparent
+            ).border(
+                AppTheme.size.borderWidth, AppTheme.colors.imageBorder, shape = AppTheme.shape.r300
+            )
+
         ) {
             Box(
                 modifier = Modifier.fillMaxWidth().fillMaxHeight(if (rarity == null) 1f else 0.86f)
-                    .clip(itemShape).background(AppTheme.colors.imageBackground)
-                    .border(
-                        AppTheme.size.borderWidth,
-                        AppTheme.colors.imageInsideBorder,
-                        shape = itemShape
-                    )
+                    .background(AppTheme.colors.imageBackground)
+
             ) {
                 if (imgUrl == null) {
                     ImageNotFound()

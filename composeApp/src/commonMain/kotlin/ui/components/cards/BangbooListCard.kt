@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -28,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import feature.bangboo.model.BangbooListItem
 import org.jetbrains.compose.resources.stringResource
 import ui.components.items.RarityItem
-import ui.components.items.RowListEndItem
 import ui.theme.AppTheme
 import ui.utils.cardPaddingWithHeader
 import ui.utils.drawRowListMask
@@ -58,10 +56,10 @@ fun BangbooListCard(
         ) {
             if (showViewAll) {
                 Text(
-                    modifier = Modifier.clip(RoundedCornerShape(8.dp))
+                    modifier = Modifier.clip(AppTheme.shape.r300)
                         .clickable { onBangbooOverviewClick() }.pointerHoverIcon(PointerIcon.Hand)
                         .background(AppTheme.colors.surface)
-                        .border(1.dp, AppTheme.colors.border, RoundedCornerShape(8.dp))
+                        .border(1.dp, AppTheme.colors.border, AppTheme.shape.r300)
                         .padding(AppTheme.spacing.s300),
                     text = stringResource(Res.string.all_bangboo),
                     style = AppTheme.typography.labelMedium,
@@ -88,11 +86,6 @@ fun BangbooListCard(
                     onClick = {
                         onBangbooDetailClick(bangboo.id)
                     })
-            }
-            item {
-                RowListEndItem(text = stringResource(Res.string.all_bangboo)) {
-                    onBangbooOverviewClick()
-                }
             }
         }
     }

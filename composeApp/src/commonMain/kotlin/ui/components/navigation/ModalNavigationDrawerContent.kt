@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -46,7 +45,6 @@ import zzzarchive.composeapp.generated.resources.ic_sun
 import zzzarchive.composeapp.generated.resources.light_theme
 import zzzarchive.composeapp.generated.resources.navigation_drawer
 
-val navigationDrawerShape = RoundedCornerShape(32.dp)
 val navigationDrawerMinWidth = 240.dp
 val navigationDrawerMaxWidth = 360.dp
 
@@ -60,8 +58,8 @@ fun ModalNavigationDrawerContent(
     Column(
         modifier = Modifier.fillMaxHeight().padding(AppTheme.spacing.s200)
             .widthIn(min = navigationDrawerMinWidth, max = navigationDrawerMaxWidth)
-            .border(AppTheme.size.borderWidth, AppTheme.colors.border, navigationDrawerShape)
-            .background(AppTheme.colors.surfaceContainer, navigationDrawerShape)
+            .border(AppTheme.size.borderWidth, AppTheme.colors.border, AppTheme.shape.r500)
+            .background(AppTheme.colors.surfaceContainer)
             .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s450)
     ) {
         Row(
@@ -111,7 +109,7 @@ fun ModalNavigationDrawerContent(
                 )
             }
             Spacer(
-                modifier = Modifier.weight(1f).heightIn(min = 16.dp)
+                modifier = Modifier.weight(1f).heightIn(min = AppTheme.spacing.s400)
             )
             val isDark by AppTheme.isDark
             NavigationDrawerItem(

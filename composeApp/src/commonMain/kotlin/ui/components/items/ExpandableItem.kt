@@ -26,7 +26,6 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.vectorResource
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
@@ -56,7 +55,7 @@ fun ExpandableItem(title: String, subtitle: String, description: String) {
                 color = AppTheme.colors.onSurfaceVariant
             )
             Icon(
-                modifier = Modifier.size(16.dp).graphicsLayer {
+                modifier = Modifier.size(AppTheme.size.smallIconSize).graphicsLayer {
                     rotationZ = if (expanded) 180f else 0f
                 },
                 imageVector = vectorResource(Res.drawable.ic_arrow_down_ios),
