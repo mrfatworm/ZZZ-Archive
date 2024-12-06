@@ -38,8 +38,9 @@ fun ExpandableItem(title: String, subtitle: String, description: String) {
     Column {
         Row(
             modifier = Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand)
-                .clickable { expanded = !expanded }.padding(horizontal = 16.dp, vertical = 8.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+                .clickable { expanded = !expanded }
+                .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300),
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -65,7 +66,12 @@ fun ExpandableItem(title: String, subtitle: String, description: String) {
         }
         AnimatedVisibility(visible = expanded) {
             Text(
-                modifier = Modifier.padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 32.dp),
+                modifier = Modifier.padding(
+                    start = AppTheme.spacing.s400,
+                    top = AppTheme.spacing.s300,
+                    end = AppTheme.spacing.s400,
+                    bottom = AppTheme.spacing.s500
+                ),
                 text = description,
                 style = AppTheme.typography.bodyMedium,
                 color = AppTheme.colors.onSurface

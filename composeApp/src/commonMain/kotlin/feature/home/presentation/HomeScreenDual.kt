@@ -15,13 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import feature.banner.components.AnnouncementBanner
 import feature.cover_image.components.CoverImageCard
-import feature.news.presentation.NewsPagerCard
+import feature.news.components.NewsPagerCard
 import feature.pixiv.components.PixivTopicCard
 import ui.components.cards.AgentsListCard
 import ui.components.cards.BangbooListCard
 import ui.components.cards.DrivesListCard
 import ui.components.cards.WEnginesListCard
-import ui.theme.AppTheme
+import ui.utils.containerGap
+import ui.utils.contentGap
 import ui.utils.contentPadding
 
 @Composable
@@ -35,10 +36,10 @@ fun HomeScreenDual(
         AnnouncementBanner(uiState.banner, onActionClicked = onOpenBannerDialog, onClosed = {
             onAction(HomeAction.DismissBanner(it))
         })
-        Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)) {
+        Row(horizontalArrangement = Arrangement.spacedBy(containerGap())) {
             Column(
                 modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
+                verticalArrangement = Arrangement.spacedBy(contentGap())
             ) {
                 CoverImageCard(uiState.coverImage)
                 // HoYoLabCard()
@@ -49,7 +50,7 @@ fun HomeScreenDual(
 
             Column(
                 modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
+                verticalArrangement = Arrangement.spacedBy(contentGap())
             ) {
                 NewsPagerCard(uiState.newsList)
                 AgentsListCard(agentsList = uiState.agentsList, onAgentsOverviewClick = {

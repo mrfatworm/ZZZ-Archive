@@ -60,7 +60,7 @@ private fun FeedbackItem(onClick: () -> Unit) {
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Icon(
-                modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
+                modifier = Modifier.size(AppTheme.size.smallIconSize),
                 imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurfaceVariant
@@ -79,7 +79,7 @@ private fun PrivacyPolicyItem() {
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Icon(
-                modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
+                modifier = Modifier.size(AppTheme.size.smallIconSize),
                 imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurfaceVariant
@@ -101,13 +101,13 @@ private fun OpenSourceItem() {
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Icon(
-                    modifier = Modifier.size(AppTheme.fixedSize.largeIconSize),
+                    modifier = Modifier.size(AppTheme.size.largeIconSize),
                     imageVector = vectorResource(Res.drawable.ic_figma),
                     contentDescription = "Figma",
                     tint = Color.Unspecified
                 )
                 Icon(
-                    modifier = Modifier.size(AppTheme.fixedSize.largeIconSize),
+                    modifier = Modifier.size(AppTheme.size.largeIconSize),
                     imageVector = vectorResource(Res.drawable.ic_github),
                     contentDescription = "GitHub",
                     tint = AppTheme.colors.onSurfaceContainer
@@ -156,7 +156,7 @@ fun OpenSourceItem(
         modifier = modifier.clip(RoundedCornerShape(AppTheme.radius.contentCard)).clickable {
             onClick()
         }.border(
-            AppTheme.dimens.borderWidth,
+            AppTheme.size.borderWidth,
             AppTheme.colors.buttonBorder,
             RoundedCornerShape(AppTheme.radius.contentCard)
         ).padding(16.dp),

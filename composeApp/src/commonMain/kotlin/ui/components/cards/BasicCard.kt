@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
+import ui.utils.cardPadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_arrow_back
 import zzzarchive.composeapp.generated.resources.ic_arrow_next
@@ -44,7 +45,7 @@ fun ContentCard(
         modifier = modifier.background(
             AppTheme.colors.surfaceContainer, RoundedCornerShape(AppTheme.radius.contentCard)
         ).clip(RoundedCornerShape(AppTheme.radius.contentCard))
-            .padding(if (hasDefaultPadding) AppTheme.dimens.paddingCard else 0.dp)
+            .padding(if (hasDefaultPadding) cardPadding() else 0.dp)
     ) {
         content()
     }
@@ -56,7 +57,7 @@ fun CardHeader(
 ) {
     Row(
         modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp)
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -80,14 +81,14 @@ fun HoveredIndicatorHeader(
     val coroutineScope = rememberCoroutineScope()
     CardHeader(title = title) {
         Row(
-            Modifier.padding(horizontal = 8.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            Modifier.padding(horizontal = AppTheme.spacing.s300),
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400),
             verticalAlignment = Alignment.CenterVertically
         ) {
             startContent()
             AnimatedVisibility(visible = isHovered, enter = fadeIn(), exit = fadeOut()) {
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     ZzzIconButton(

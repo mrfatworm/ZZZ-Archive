@@ -58,14 +58,14 @@ fun ModalNavigationDrawerContent(
     onThemeChanged: () -> Unit
 ) {
     Column(
-        modifier = Modifier.fillMaxHeight().padding(4.dp)
+        modifier = Modifier.fillMaxHeight().padding(AppTheme.spacing.s200)
             .widthIn(min = navigationDrawerMinWidth, max = navigationDrawerMaxWidth)
-            .border(3.dp, AppTheme.colors.border, navigationDrawerShape)
+            .border(AppTheme.size.borderWidth, AppTheme.colors.border, navigationDrawerShape)
             .background(AppTheme.colors.surfaceContainer, navigationDrawerShape)
-            .padding(horizontal = 16.dp, vertical = 20.dp)
+            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s450)
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            modifier = Modifier.fillMaxWidth().padding(AppTheme.spacing.s400),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -91,7 +91,7 @@ fun ModalNavigationDrawerContent(
                 val isSelected = selectedMainFlow == destination.route
                 NavigationDrawerItem(selected = isSelected, label = {
                     Text(
-                        modifier = Modifier.padding(horizontal = 16.dp),
+                        modifier = Modifier.padding(horizontal = AppTheme.spacing.s400),
                         text = stringResource(destination.textRes),
                         style = if (isSelected) AppTheme.typography.labelLarge else AppTheme.typography.labelMedium
                     )
@@ -105,8 +105,8 @@ fun ModalNavigationDrawerContent(
                     onDrawerClicked()
                 })
                 HorizontalDivider(
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    thickness = 3.dp,
+                    modifier = Modifier.padding(horizontal = AppTheme.spacing.s400),
+                    thickness = AppTheme.size.borderWidth,
                     color = AppTheme.colors.border
                 )
             }
@@ -115,7 +115,7 @@ fun ModalNavigationDrawerContent(
             )
             val isDark by AppTheme.isDark
             NavigationDrawerItem(
-                modifier = Modifier.padding(horizontal = 12.dp),
+                modifier = Modifier.padding(horizontal = AppTheme.spacing.s350),
                 selected = false,
                 onClick = onThemeChanged,
                 icon = {

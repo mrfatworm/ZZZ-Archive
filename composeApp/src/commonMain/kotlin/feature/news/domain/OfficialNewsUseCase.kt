@@ -8,7 +8,7 @@ package feature.news.domain
 import feature.news.data.NewsBannerResponse
 import feature.news.data.OfficialNewsListItem
 import feature.news.data.OfficialNewsRepository
-import feature.news.presentation.OfficialNewsState
+import feature.news.model.OfficialNewsState
 import feature.setting.domain.LanguageUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

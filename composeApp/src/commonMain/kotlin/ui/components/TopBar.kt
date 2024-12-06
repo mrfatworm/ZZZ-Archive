@@ -15,14 +15,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.back
 import zzzarchive.composeapp.generated.resources.ic_arrow_back
 
-val horizontalSpacer = 16.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,7 +39,7 @@ fun ZzzTopBar(
     }, navigationIcon = {
         if (hasBack) {
             ZzzIconButton(
-                modifier = Modifier.padding(start = horizontalSpacer),
+                modifier = Modifier.padding(start = AppTheme.spacing.s400),
                 iconRes = Res.drawable.ic_arrow_back,
                 contentDescriptionRes = Res.string.back,
                 onClick = onBackClick
@@ -49,7 +47,7 @@ fun ZzzTopBar(
         }
     }, actions = {
         actions()
-        Spacer(Modifier.size(horizontalSpacer))
+        Spacer(Modifier.size(AppTheme.spacing.s400))
     }, colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
         containerColor = AppTheme.colors.surfaceContainer,
         navigationIconContentColor = AppTheme.colors.onSurfaceContainer,

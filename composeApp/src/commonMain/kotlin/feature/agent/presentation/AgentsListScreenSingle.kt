@@ -7,7 +7,6 @@ package feature.agent.presentation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -25,6 +24,7 @@ import ui.components.ZzzTopBar
 import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
+import ui.utils.contentPaddingInScaffold
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.agents
 import zzzarchive.composeapp.generated.resources.filter
@@ -58,8 +58,7 @@ fun AgentsListScreenSingle(
         }
     }) { contentPadding ->
         Column(
-            modifier = Modifier.padding(contentPadding)
-                .padding(AppTheme.dimens.paddingParentCompact)
+            modifier = Modifier.contentPaddingInScaffold(contentPadding)
         ) {
             AgentsListFilterCard(
                 modifier = Modifier.weight(1f),

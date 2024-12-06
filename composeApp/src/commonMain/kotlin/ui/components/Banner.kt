@@ -50,8 +50,9 @@ fun Banner(
 
     Row(
         modifier = modifier.clip(RoundedCornerShape(16.dp)).fillMaxWidth()
-            .background(containerColor).padding(start = 16.dp, end = 4.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+            .background(containerColor)
+            .padding(start = AppTheme.spacing.s400, end = AppTheme.spacing.s200),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -64,7 +65,8 @@ fun Banner(
         )
         actionTextRes?.let {
             Text(
-                modifier = Modifier.clickable(onClick = onActionClicked).padding(vertical = 4.dp),
+                modifier = Modifier.clickable(onClick = onActionClicked)
+                    .padding(vertical = AppTheme.spacing.s200),
                 text = stringResource(actionTextRes),
                 color = contentColor,
                 style = AppTheme.typography.titleSmall,
@@ -74,7 +76,7 @@ fun Banner(
         if (closable) {
             IconButton(onClick = onClosed) {
                 Icon(
-                    modifier = Modifier.size(AppTheme.fixedSize.iconSize),
+                    modifier = Modifier.size(AppTheme.size.iconSize),
                     imageVector = vectorResource(Res.drawable.ic_close),
                     contentDescription = stringResource(Res.string.close),
                     tint = contentColor

@@ -16,7 +16,7 @@ import ui.components.cards.AgentsListCard
 import ui.components.cards.BangbooListCard
 import ui.components.cards.DrivesListCard
 import ui.components.cards.WEnginesListCard
-import ui.theme.AppTheme
+import ui.utils.contentGap
 import ui.utils.contentPadding
 
 @Composable
@@ -27,7 +27,7 @@ fun WikiScreenSingle(
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
             .contentPadding(),
-        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentCompact)
+        verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         AgentsListCard(
             agentsList = uiState.agentsList,

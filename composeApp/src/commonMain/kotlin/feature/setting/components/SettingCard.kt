@@ -82,7 +82,7 @@ private fun LanguageSettingItem(
                     color = AppTheme.colors.onSurface
                 )
                 Icon(
-                    modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
+                    modifier = Modifier.size(AppTheme.size.smallIconSize),
                     imageVector = vectorResource(Res.drawable.ic_arrow_down_ios),
                     contentDescription = null,
                     tint = AppTheme.colors.onSurfaceVariant
@@ -149,7 +149,7 @@ private fun FontScaleItem(
                 color = AppTheme.colors.onSurface
             )
             Icon(
-                modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
+                modifier = Modifier.size(AppTheme.size.smallIconSize),
                 imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurfaceVariant
@@ -192,7 +192,7 @@ private fun ColorSettingItem(onColorChange: (Boolean) -> Unit) {
                     color = AppTheme.colors.onSurface
                 )
                 Icon(
-                    modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
+                    modifier = Modifier.size(AppTheme.size.smallIconSize),
                     imageVector = vectorResource(Res.drawable.ic_arrow_down_ios),
                     contentDescription = null,
                     tint = AppTheme.colors.onSurfaceVariant
@@ -233,7 +233,7 @@ private fun HoYoLabSettingItem() {
                 color = AppTheme.colors.onSurface
             )
             Icon(
-                modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
+                modifier = Modifier.size(AppTheme.size.smallIconSize),
                 imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurfaceVariant

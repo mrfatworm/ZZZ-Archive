@@ -36,7 +36,7 @@ fun PagerIndicator(modifier: Modifier, pageCount: Int, currentPage: Int, onClick
             val size = if (currentPage == page) 16.dp else 6.dp
             Box(modifier = Modifier
                 .clickable { onClick(page) }
-                .padding(4.dp)
+                .padding(AppTheme.spacing.s200)
                 .clip(RoundedCornerShape(6.dp))
                 .background(color = color)
                 .size(height = 6.dp, width = size))

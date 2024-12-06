@@ -3,7 +3,7 @@
  * License: MIT
  */
 
-package feature.news.presentation
+package feature.news.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -39,6 +39,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import feature.news.model.OfficialNewsState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ui.components.PagerIndicator

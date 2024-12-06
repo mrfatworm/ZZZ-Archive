@@ -14,9 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.AppTheme
+import ui.utils.cardPadding
 import ui.utils.conditional
 import utils.AgentAttribute
 
@@ -32,9 +32,9 @@ fun AttributeFilterChipsList(
     FlowRow(
         modifier = Modifier.fillMaxWidth().conditional(maxLine != Int.MAX_VALUE) {
             horizontalScroll(rememberScrollState())
-        }.padding(horizontal = AppTheme.dimens.paddingCard),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+        }.padding(horizontal = cardPadding()),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         maxLines = maxLine
     ) {
         attributes.forEach { attribute ->

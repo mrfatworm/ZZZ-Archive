@@ -34,16 +34,16 @@ fun ZzzTag(
 ) {
     Row(
         modifier = modifier.clip(tagShape).background(AppTheme.colors.surface).border(
-            width = 3.dp,
+            width = AppTheme.size.borderWidth,
             color = AppTheme.colors.border,
             shape = tagShape
-        ).padding(horizontal = 11.dp, vertical = 7.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ).padding(horizontal = AppTheme.spacing.s350, vertical = AppTheme.spacing.s300),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {
         iconRes?.let {
             Icon(
-                modifier = Modifier.size(AppTheme.fixedSize.iconSize),
+                modifier = Modifier.size(AppTheme.size.iconSize),
                 imageVector = vectorResource(iconRes),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurface

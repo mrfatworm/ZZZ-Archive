@@ -15,7 +15,6 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
@@ -25,11 +24,11 @@ import ui.utils.ContentType
  * [Building an Efficient UI Design System with Jetpack Compose and Compose Multiplatform](https://medium.com/@ahmednasser_12958/building-an-efficient-ui-design-system-0a049b6ee3f7)
  */
 
-private val localColorScheme = staticCompositionLocalOf { ColorScheme() }
-private val localTypography = staticCompositionLocalOf { Typography() }
-private val localRadius = staticCompositionLocalOf { Radius() }
-private val localDimens = staticCompositionLocalOf { Dimens() }
-private val localFixedSize = staticCompositionLocalOf { FixedSize() }
+private val localColorScheme = compositionLocalOf { ColorScheme() }
+private val localTypography = compositionLocalOf { Typography() }
+private val localRadius = compositionLocalOf { Radius() }
+private val localSpacing = compositionLocalOf { Spacing.regular() }
+private val localComponentSize = compositionLocalOf { ComponentSize() }
 private val localAdaptiveLayoutType =
     compositionLocalOf { mutableStateOf(AdaptiveLayoutType.Compact) }
 private val localContentType = compositionLocalOf { mutableStateOf(ContentType.Single) }
@@ -48,11 +47,11 @@ object AppTheme {
     val radius: Radius
         @Composable @ReadOnlyComposable get() = localRadius.current
 
-    val dimens: Dimens
-        @Composable @ReadOnlyComposable get() = localDimens.current
+    val spacing: Spacing
+        @Composable @ReadOnlyComposable get() = localSpacing.current
 
-    val fixedSize: FixedSize
-        @Composable @ReadOnlyComposable get() = localFixedSize.current
+    val size: ComponentSize
+        @Composable @ReadOnlyComposable get() = localComponentSize.current
 
     val adaptiveLayoutType: AdaptiveLayoutType
         @Composable @ReadOnlyComposable get() = localAdaptiveLayoutType.current.value
@@ -79,7 +78,7 @@ fun ZzzArchiveTheme(content: @Composable () -> Unit) {
     val fontScale = remember { mutableStateOf(1f) }
     val typography = mutableStateOf(provideTypography(fontScale.value))
     val uiScale = remember { mutableStateOf(1f) }
-    val fixedSize = mutableStateOf(provideFixedSize(uiScale.value))
+    val fixedSize = mutableStateOf(provideComponentSize(uiScale.value))
 
     AdaptiveLayout(adaptiveLayoutType, contentType)
     SystemAppearance(!isDark.value)
@@ -87,8 +86,8 @@ fun ZzzArchiveTheme(content: @Composable () -> Unit) {
     CompositionLocalProvider(
         localColorScheme provides colorScheme,
         localTypography provides typography.value,
-        localDimens provides Dimens(),
-        localFixedSize provides fixedSize.value,
+        localSpacing provides Spacing.regular(),
+        localComponentSize provides fixedSize.value,
         localRadius provides Radius(),
         localAdaptiveLayoutType provides adaptiveLayoutType,
         localContentType provides contentType,

@@ -13,7 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import ui.components.buttons.ZzzPrimaryButton
 import ui.theme.AppTheme
@@ -30,10 +29,13 @@ fun ConfirmDialog(
     BasicDialog(onDismissRequest = onDismiss) {
         Column(
             modifier = Modifier.padding(
-                start = 32.dp, top = 32.dp, end = 32.dp, bottom = 16.dp
+                start = AppTheme.spacing.s500,
+                top = AppTheme.spacing.s500,
+                end = AppTheme.spacing.s500,
+                bottom = AppTheme.spacing.s400
             ),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(32.dp)
+            verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s500)
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),

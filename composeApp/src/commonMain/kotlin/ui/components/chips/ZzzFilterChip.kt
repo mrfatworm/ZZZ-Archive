@@ -46,12 +46,16 @@ fun ZzzFilterChip(
                 width = 1.dp,
                 color = if (selected) Color.Transparent else AppTheme.colors.border,
                 shape = chipShape
-            ).padding(start = 8.dp, end = 12.dp, top = 6.dp, bottom = 6.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ).padding(
+                start = AppTheme.spacing.s300,
+                end = AppTheme.spacing.s350,
+                top = AppTheme.spacing.s250,
+                bottom = AppTheme.spacing.s250
+            ), horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            modifier = Modifier.size(AppTheme.fixedSize.iconSize),
+            modifier = Modifier.size(AppTheme.size.iconSize),
             imageVector = vectorResource(iconRes),
             contentDescription = null,
             tint = if (selected) AppTheme.colors.onPrimaryContainer else AppTheme.colors.onSurface

@@ -35,6 +35,6 @@ fun BasicDialog(
 }
 
 @Composable
-fun basicDialogModifier() = Modifier.widthIn(max = AppTheme.fixedSize.maxDialogWidth)
-    .heightIn(max = AppTheme.fixedSize.maxDialogHeight)
+fun basicDialogModifier() = Modifier.widthIn(max = AppTheme.size.maxDialogWidth)
+    .heightIn(max = AppTheme.size.maxDialogHeight)
 

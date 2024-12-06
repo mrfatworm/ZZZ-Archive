@@ -40,7 +40,10 @@ fun BannerDialog(
     onDismiss: () -> Unit
 ) {
     BasicDialog(onDismissRequest = onDismiss) {
-        Box(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp)) {
+        Box(
+            Modifier.fillMaxWidth()
+                .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350)
+        ) {
             Text(
                 modifier = Modifier.align(Alignment.Center),
                 text = stringResource(Res.string.announcement),
@@ -56,9 +59,13 @@ fun BannerDialog(
             }
         }
         Column(
-            Modifier.padding(start = 32.dp, end = 32.dp, bottom = 16.dp)
+            Modifier.padding(
+                start = AppTheme.spacing.s500,
+                end = AppTheme.spacing.s500,
+                bottom = AppTheme.spacing.s400
+            )
                 .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth().heightIn(min = 64.dp),

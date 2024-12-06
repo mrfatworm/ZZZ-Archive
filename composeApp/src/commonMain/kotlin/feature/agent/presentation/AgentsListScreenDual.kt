@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import feature.agent.components.AgentsListFilterCard
 import feature.agent.components.FactionItem
 import feature.agent.model.AgentsListState
-import ui.theme.AppTheme
+import ui.utils.containerGap
 import ui.utils.contentPadding
 
 @Composable
@@ -25,7 +25,7 @@ fun AgentsListScreenDual(
 ) {
     Row(
         modifier = Modifier.contentPadding(),
-        horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentExpanded)
+        horizontalArrangement = Arrangement.spacedBy(containerGap())
     ) {
         AgentsListFilterCard(
             modifier = Modifier.weight(0.7f),

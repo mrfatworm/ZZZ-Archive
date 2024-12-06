@@ -62,7 +62,7 @@ fun GalleryDialog(url: String, onDismiss: () -> Unit) {
             )
         }
         ZzzIconButton(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(AppTheme.spacing.s400),
             iconRes = Res.drawable.ic_close,
             contentDescriptionRes = Res.string.close,
             onClick = onDismiss

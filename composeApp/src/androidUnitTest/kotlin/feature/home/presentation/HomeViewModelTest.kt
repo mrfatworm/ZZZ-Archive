@@ -20,7 +20,7 @@ import feature.drive.data.database.stubDrivesListItemEntity
 import feature.drive.domain.DrivesListUseCase
 import feature.news.data.stubOfficialNewsDataResponse
 import feature.news.domain.OfficialNewsUseCase
-import feature.news.presentation.stubOfficialNewsState
+import feature.news.model.stubOfficialNewsState
 import feature.pixiv.data.stubPixivTopicResponse
 import feature.pixiv.domain.PixivUseCase
 import feature.wengine.domain.WEnginesListUseCase

@@ -5,7 +5,6 @@
 
 package feature.drive.components
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -14,12 +13,14 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import feature.drive.model.DrivesListState
 import ui.components.cards.ContentCard
 import ui.components.items.RarityItem
 import ui.theme.AppTheme
+import ui.utils.cardPadding
 import ui.utils.drawColumnListMask
+import ui.utils.gridListHorizontalGap
+import ui.utils.gridListVerticalGap
 
 @Composable
 fun DrivesListCard(
@@ -34,15 +35,15 @@ fun DrivesListCard(
     ) {
         LazyVerticalGrid(
             state = lazyGridState,
-            columns = GridCells.Adaptive(AppTheme.fixedSize.rarityItemMediumSize),
+            columns = GridCells.Adaptive(AppTheme.size.rarityItemMediumSize),
             modifier = Modifier.fillMaxSize().drawColumnListMask(
                 colorScheme = AppTheme.colors,
                 topEnable = lazyGridState.canScrollBackward,
                 bottomEnable = lazyGridState.canScrollForward
             ),
-            contentPadding = PaddingValues(AppTheme.dimens.paddingCard),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            contentPadding = PaddingValues(cardPadding()),
+            horizontalArrangement = gridListHorizontalGap(),
+            verticalArrangement = gridListVerticalGap()
         ) {
             items(
                 count = uiState.drivesList.size,

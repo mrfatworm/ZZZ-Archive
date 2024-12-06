@@ -47,7 +47,7 @@ fun RarityMiniItem(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     Column(
-        modifier = modifier.width(AppTheme.fixedSize.rarityItemSmallSize)
+        modifier = modifier.width(AppTheme.size.rarityItemSmallSize)
             .pointerHoverIcon(if (onClick != null) PointerIcon.Hand else PointerIcon.Default)
             .clickable(interactionSource = interactionSource, indication = null) {
                 if (onClick != null) {
@@ -55,17 +55,22 @@ fun RarityMiniItem(
                 }
             },
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
     ) {
         Box(
             modifier = Modifier.fillMaxSize().aspectRatio(1f).background(
                 rarity?.color ?: Color.Transparent, itemShape
-            ).border(3.dp, AppTheme.colors.imageBorder, shape = itemShape).clip(itemShape)
+            ).border(AppTheme.size.borderWidth, AppTheme.colors.imageBorder, shape = itemShape)
+                .clip(itemShape)
         ) {
             Box(
                 modifier = Modifier.fillMaxWidth().fillMaxHeight(if (rarity == null) 1f else 0.86f)
                     .clip(itemShape).background(AppTheme.colors.imageBackground)
-                    .border(3.dp, AppTheme.colors.imageInsideBorder, shape = itemShape)
+                    .border(
+                        AppTheme.size.borderWidth,
+                        AppTheme.colors.imageInsideBorder,
+                        shape = itemShape
+                    )
             ) {
                 if (imgUrl == null) {
                     ImageNotFound()

@@ -49,7 +49,7 @@ fun FactionItem(faction: Faction, isSelected: Boolean = false, onFactionClick: (
     Box(
         modifier = Modifier.aspectRatio(1.8f).fillMaxWidth()
         .clip(RoundedCornerShape(16.dp)).border(
-            AppTheme.dimens.borderWidth,
+                AppTheme.size.borderWidth,
             if (isSelected) AppTheme.colors.primary else Color.Transparent,
             RoundedCornerShape(16.dp)
         ).pointerHoverIcon(PointerIcon.Hand).clickable(

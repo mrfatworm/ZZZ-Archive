@@ -47,11 +47,11 @@ fun ZzzBottomSheet(
         dragHandle = null
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth().padding(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxWidth().padding(AppTheme.spacing.s400),
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(

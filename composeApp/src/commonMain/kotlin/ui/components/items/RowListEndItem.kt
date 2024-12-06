@@ -24,7 +24,7 @@ import ui.theme.AppTheme
 
 @Composable
 fun RowListEndItem(
-    modifier: Modifier = Modifier.size(AppTheme.fixedSize.rarityItemMediumSize),
+    modifier: Modifier = Modifier.size(AppTheme.size.rarityItemMediumSize),
     text: String,
     radius: Dp = 8.dp,
     onClick: () -> Unit
@@ -32,7 +32,8 @@ fun RowListEndItem(
     Box(
         modifier = modifier.clickable { onClick() }.background(
             Color(0xFF888888), RoundedCornerShape(radius)
-        ).background(AppTheme.colors.hoveredMask, RoundedCornerShape(radius)).padding(8.dp),
+        ).background(AppTheme.colors.hoveredMask, RoundedCornerShape(radius))
+            .padding(AppTheme.spacing.s300),
     ) {
         Text(
             modifier = Modifier.align(Alignment.Center).fillMaxWidth(),

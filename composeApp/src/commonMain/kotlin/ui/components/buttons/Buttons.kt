@@ -98,7 +98,7 @@ fun ZzzButton(
     Button(
         modifier = modifier.pointerHoverIcon(if (enabled) PointerIcon.Hand else PointerIcon.Default)
             .border(
-            width = if (hasBorder) 3.dp else 0.dp,
+                width = if (hasBorder) AppTheme.size.borderWidth else 0.dp,
             color = if (hasBorder) AppTheme.colors.buttonBorder else Color.Transparent,
             shape = CircleShape
         ),
@@ -117,8 +117,8 @@ fun ZzzButton(
         iconRes?.let {
             Icon(
                 modifier = Modifier
-                    .padding(end = 8.dp)
-                    .size(AppTheme.fixedSize.largeIconSize),
+                    .padding(end = AppTheme.spacing.s300)
+                    .size(AppTheme.size.largeIconSize),
                 imageVector = vectorResource(iconRes),
                 contentDescription = null
             )

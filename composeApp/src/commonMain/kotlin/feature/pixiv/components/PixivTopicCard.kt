@@ -14,7 +14,6 @@ import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -62,7 +61,9 @@ import ui.components.ImageNotFound
 import ui.components.cards.ContentCard
 import ui.components.cards.HoveredIndicatorHeader
 import ui.theme.AppTheme
+import ui.utils.cardPaddingWithHeader
 import ui.utils.drawRowListMask
+import ui.utils.rowListGap
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_favorite
 import zzzarchive.composeapp.generated.resources.pixiv_hot
@@ -86,12 +87,10 @@ fun PixivTopicCard(
                 colorScheme = AppTheme.colors,
                 startEnable = lazyListState.canScrollBackward,
                 endEnable = lazyListState.canScrollForward
-            ), state = lazyListState, contentPadding = PaddingValues(
-                top = AppTheme.dimens.paddingUnderCardHeader,
-                start = AppTheme.dimens.paddingCard,
-                end = AppTheme.dimens.paddingCard,
-                bottom = 24.dp
-            ), horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapImageProfileList)
+            ),
+            state = lazyListState,
+            contentPadding = cardPaddingWithHeader(),
+            horizontalArrangement = rowListGap()
         ) {
             items(items = recentArticlesList, key = { it.id }) { item ->
                 PixivTopicItem(
@@ -190,7 +189,7 @@ private fun PixivTopicItem(
             .data(artworkUrl).size(Size.ORIGINAL).build()
     )
     Column(
-        modifier = Modifier.width(AppTheme.fixedSize.galleryItemSize),
+        modifier = Modifier.width(AppTheme.size.galleryItemSize),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -242,7 +241,7 @@ private fun AuthorInfo(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
-            modifier = Modifier.size(AppTheme.fixedSize.iconSize).aspectRatio(1f).clip(CircleShape)
+            modifier = Modifier.size(AppTheme.size.iconSize).aspectRatio(1f).clip(CircleShape)
         ) {
             if (profileUrl != null) {
                 Image(

@@ -108,7 +108,7 @@ private fun Header() {
 private fun PlayerInfo(modifier: Modifier) {
     Box(
         modifier = Modifier.size(48.dp)
-            .border(AppTheme.dimens.borderWidth, AppTheme.colors.border, CircleShape)
+            .border(AppTheme.size.borderWidth, AppTheme.colors.border, CircleShape)
             .clip(CircleShape)
     ) {
         ImageNotFound()
@@ -270,7 +270,7 @@ private fun CheckInButton() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            modifier = Modifier.size(AppTheme.fixedSize.iconSize),
+            modifier = Modifier.size(AppTheme.size.iconSize),
             imageVector = vectorResource(Res.drawable.ic_calendar_clock),
             contentDescription = null,
             tint = AppTheme.colors.onSurfaceVariant
