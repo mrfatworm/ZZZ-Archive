@@ -12,7 +12,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import feature.banner.components.AnnouncementBanner
 import feature.cover_image.components.CoverImageCard
 import feature.news.components.NewsPagerCard
@@ -21,6 +20,7 @@ import ui.components.cards.AgentsListCard
 import ui.components.cards.BangbooListCard
 import ui.components.cards.DrivesListCard
 import ui.components.cards.WEnginesListCard
+import ui.theme.AppTheme
 import ui.utils.containerGap
 import ui.utils.contentGap
 import ui.utils.contentPadding
@@ -31,7 +31,7 @@ fun HomeScreenDual(
 ) {
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState()).contentPadding(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
         AnnouncementBanner(uiState.banner, onActionClicked = onOpenBannerDialog, onClosed = {
             onAction(HomeAction.DismissBanner(it))

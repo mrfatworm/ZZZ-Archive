@@ -74,7 +74,7 @@ private fun LanguageSettingItem(
             val languagesList = Language.entries.toList()
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
             ) {
                 Text(
                     text = language.localName,
@@ -141,7 +141,7 @@ private fun FontScaleItem(
     SettingItem(title = stringResource(Res.string.ui_scale), content = {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
         ) {
             Text(
                 text = actionText,
@@ -182,7 +182,7 @@ private fun ColorSettingItem(onColorChange: (Boolean) -> Unit) {
             val colorThemeList = listOf(Res.string.dark_theme, Res.string.light_theme)
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
             ) {
                 Text(
                     text = if (isDarkTheme) stringResource(Res.string.dark_theme) else stringResource(
@@ -225,7 +225,7 @@ private fun HoYoLabSettingItem() {
     SettingItem(title = stringResource(Res.string.hoyolab_account), content = {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
         ) {
             Text(
                 text = stringResource(Res.string.under_development),

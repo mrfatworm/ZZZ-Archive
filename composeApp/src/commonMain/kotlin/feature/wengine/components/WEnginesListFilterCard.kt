@@ -17,7 +17,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import feature.wengine.model.WEnginesListState
 import ui.components.cards.ContentCard
 import ui.components.chips.RarityFilterChipsList
@@ -48,7 +47,7 @@ fun WEnginesListFilterCard(
         AnimatedVisibility(visible = !invisibleFilter) {
             Column(
                 modifier = Modifier.padding(top = cardPadding()),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
             ) {
                 RarityFilterChipsList(uiState.selectedRarity, onRarityChipSelectionChanged)
                 SpecialtyFilterChips(

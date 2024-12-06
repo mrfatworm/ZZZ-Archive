@@ -28,7 +28,7 @@ private val localColorScheme = compositionLocalOf { ColorScheme() }
 private val localTypography = compositionLocalOf { Typography() }
 private val localShape = compositionLocalOf { Shape.regular() }
 private val localSpacing = compositionLocalOf { Spacing.regular() }
-private val localComponentSize = compositionLocalOf { ComponentSize() }
+private val localSize = compositionLocalOf { Size() }
 private val localAdaptiveLayoutType =
     compositionLocalOf { mutableStateOf(AdaptiveLayoutType.Compact) }
 private val localContentType = compositionLocalOf { mutableStateOf(ContentType.Single) }
@@ -50,8 +50,8 @@ object AppTheme {
     val spacing: Spacing
         @Composable @ReadOnlyComposable get() = localSpacing.current
 
-    val size: ComponentSize
-        @Composable @ReadOnlyComposable get() = localComponentSize.current
+    val size: Size
+        @Composable @ReadOnlyComposable get() = localSize.current
 
     val adaptiveLayoutType: AdaptiveLayoutType
         @Composable @ReadOnlyComposable get() = localAdaptiveLayoutType.current.value
@@ -78,7 +78,7 @@ fun ZzzArchiveTheme(content: @Composable () -> Unit) {
     val fontScale = remember { mutableStateOf(1f) }
     val typography = mutableStateOf(provideTypography(fontScale.value))
     val uiScale = remember { mutableStateOf(1f) }
-    val fixedSize = mutableStateOf(provideComponentSize(uiScale.value))
+    val fixedSize = mutableStateOf(provideSize(uiScale.value))
 
     AdaptiveLayout(adaptiveLayoutType, contentType)
     SystemAppearance(!isDark.value)
@@ -87,7 +87,7 @@ fun ZzzArchiveTheme(content: @Composable () -> Unit) {
         localColorScheme provides colorScheme,
         localTypography provides typography.value,
         localSpacing provides Spacing.regular(),
-        localComponentSize provides fixedSize.value,
+        localSize provides fixedSize.value,
         localShape provides Shape.regular(),
         localAdaptiveLayoutType provides adaptiveLayoutType,
         localContentType provides contentType,

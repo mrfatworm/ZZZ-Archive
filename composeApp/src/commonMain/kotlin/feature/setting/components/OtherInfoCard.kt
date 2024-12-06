@@ -25,7 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -56,7 +55,7 @@ private fun FeedbackItem(onClick: () -> Unit) {
     SettingItem(title = stringResource(Res.string.feedback), content = {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
         ) {
             Icon(
                 modifier = Modifier.size(AppTheme.size.smallIconSize),
@@ -75,7 +74,7 @@ private fun PrivacyPolicyItem() {
     SettingItem(title = stringResource(Res.string.privacy_policy), content = {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
         ) {
             Icon(
                 modifier = Modifier.size(AppTheme.size.smallIconSize),
@@ -97,7 +96,7 @@ private fun OpenSourceItem() {
         SettingItem(title = stringResource(Res.string.open_source), content = {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
             ) {
                 Icon(
                     modifier = Modifier.size(AppTheme.size.largeIconSize),
@@ -118,8 +117,8 @@ private fun OpenSourceItem() {
         })
         AnimatedVisibility(visible = isExpanded) {
             Row(
-                modifier = Modifier.padding(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
+                modifier = Modifier.padding(AppTheme.spacing.s400),
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)
             ) {
                 OpenSourceItem(modifier = Modifier.weight(1f),
                     iconRes = Res.drawable.ic_figma,
@@ -157,12 +156,12 @@ fun OpenSourceItem(
         }.border(
             AppTheme.size.borderWidth,
             AppTheme.colors.buttonBorder, AppTheme.shape.cardShape
-        ).padding(16.dp),
+        ).padding(AppTheme.spacing.s400),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s350)
     ) {
         Icon(
-            modifier = Modifier.size(48.dp),
+            modifier = Modifier.size(AppTheme.size.extraLargeIconSize),
             imageVector = vectorResource(iconRes),
             contentDescription = null,
             tint = if (isTintIcon) AppTheme.colors.onSurfaceContainer else Color.Unspecified

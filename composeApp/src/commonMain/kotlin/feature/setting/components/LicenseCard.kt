@@ -13,7 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.ContentCard
 import ui.theme.AppTheme
@@ -33,7 +32,7 @@ fun LicenseCard(appVersion: String) {
             style = AppTheme.typography.titleSmall,
             color = AppTheme.colors.onSurfaceVariant
         )
-        Spacer(Modifier.size(8.dp))
+        Spacer(Modifier.size(AppTheme.spacing.s300))
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = appVersion,
@@ -41,14 +40,14 @@ fun LicenseCard(appVersion: String) {
             style = AppTheme.typography.labelSmall,
             color = AppTheme.colors.onSurfaceVariant
         )
-        Spacer(Modifier.size(8.dp))
+        Spacer(Modifier.size(AppTheme.spacing.s300))
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(Res.string.resource_licence),
             style = AppTheme.typography.bodySmall,
             color = AppTheme.colors.onSurfaceVariant
         )
-        Spacer(Modifier.size(8.dp))
+        Spacer(Modifier.size(AppTheme.spacing.s300))
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(Res.string.code_licence),

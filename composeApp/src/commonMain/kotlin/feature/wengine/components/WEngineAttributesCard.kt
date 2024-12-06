@@ -9,12 +9,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import feature.wengine.model.WEngineDetail
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.CardHeader
 import ui.components.cards.ContentCard
 import ui.components.items.AttributeItem
+import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.atk
 import zzzarchive.composeapp.generated.resources.attributes
@@ -33,7 +33,7 @@ fun WEngineAttributesCard(wEngineDetail: WEngineDetail) {
             title = wEngineDetail.stat.name,
             content = wEngineDetail.stat.value
         )
-        Spacer(Modifier.size(4.dp))
+        Spacer(Modifier.size(AppTheme.spacing.s200))
     }
 }
 

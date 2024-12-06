@@ -28,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
@@ -57,6 +58,7 @@ fun ModalNavigationDrawerContent(
 ) {
     Column(
         modifier = Modifier.fillMaxHeight().padding(AppTheme.spacing.s200)
+            .clip(AppTheme.shape.r500)
             .widthIn(min = navigationDrawerMinWidth, max = navigationDrawerMaxWidth)
             .border(AppTheme.size.borderWidth, AppTheme.colors.border, AppTheme.shape.r500)
             .background(AppTheme.colors.surfaceContainer)

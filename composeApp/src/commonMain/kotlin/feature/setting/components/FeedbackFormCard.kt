@@ -23,7 +23,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import feature.setting.model.FeedbackIssueType
 import feature.setting.model.FeedbackState
 import org.jetbrains.compose.resources.stringResource
@@ -52,7 +51,7 @@ fun FeedbackFormCard(
     Column(
         modifier = Modifier.background(
             AppTheme.colors.surfaceContainer, AppTheme.shape.cardShape
-        ).padding(horizontal = 4.dp, vertical = 8.dp)
+        ).padding(horizontal = AppTheme.spacing.s200, vertical = AppTheme.spacing.s400)
     ) {
         IssueTypeItem(
             feedbackIssueTypes = feedbackState.issueTypes,
@@ -81,8 +80,11 @@ private fun IssueTextField(
     onNickNameChange: (String) -> Unit
 ) {
     Column(
-        modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        modifier = Modifier.padding(
+            horizontal = AppTheme.spacing.s400,
+            vertical = AppTheme.spacing.s350
+        ),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)
     ) {
         ZzzTextFiled(
             modifier = Modifier.fillMaxWidth(),
@@ -113,7 +115,7 @@ private fun IssueTypeItem(
         Column(horizontalAlignment = Alignment.End) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
             ) {
                 Text(
                     text = stringResource(selectedIssueType),
@@ -153,7 +155,8 @@ private fun IssueTypeItem(
 @Composable
 private fun SettingItemText(title: String, content: String) {
     Row(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
+        modifier = Modifier.fillMaxWidth()
+            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

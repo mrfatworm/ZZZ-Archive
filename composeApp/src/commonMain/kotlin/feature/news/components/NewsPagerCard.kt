@@ -51,7 +51,8 @@ fun NewsPagerCard(newsList: List<OfficialNewsState>) {
     val coroutineScope = rememberCoroutineScope()
     Column(
         Modifier.clip(AppTheme.shape.cardShape).background(AppTheme.colors.surfaceContainer)
-            .padding(bottom = 8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)
+            .padding(bottom = AppTheme.spacing.s400),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
     ) {
         HorizontalPager(modifier = Modifier, state = pagerState) { currentPager ->
             NewsPagerCardItem(newsList[currentPager])
@@ -109,8 +110,9 @@ fun NewsPagerCardItem(newsState: OfficialNewsState) {
 @Composable
 private fun NewsInfo(modifier: Modifier, newsState: OfficialNewsState) {
     Column(
-        modifier.fillMaxWidth().background(AppTheme.colors.hoveredMask).padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier.fillMaxWidth().background(AppTheme.colors.hoveredMask)
+            .padding(AppTheme.spacing.s400),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
         Text(
             text = newsState.title,

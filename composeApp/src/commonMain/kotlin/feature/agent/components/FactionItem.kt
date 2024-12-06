@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -48,10 +47,10 @@ fun FactionItem(faction: Faction, isSelected: Boolean = false, onFactionClick: (
 
     Box(
         modifier = Modifier.aspectRatio(1.8f).fillMaxWidth()
-        .clip(RoundedCornerShape(16.dp)).border(
+            .clip(AppTheme.shape.r400).border(
                 AppTheme.size.borderWidth,
             if (isSelected) AppTheme.colors.primary else Color.Transparent,
-            RoundedCornerShape(16.dp)
+                AppTheme.shape.cardShape
         ).pointerHoverIcon(PointerIcon.Hand).clickable(
             interactionSource = interactionSource, indication = null
         ) {
@@ -86,7 +85,8 @@ fun FactionItem(faction: Faction, isSelected: Boolean = false, onFactionClick: (
 @Composable
 private fun FactionInfo(modifier: Modifier, factionName: String) {
     Column(
-        modifier.fillMaxSize().background(AppTheme.colors.hoveredMask).padding(16.dp),
+        modifier.fillMaxSize().background(AppTheme.colors.hoveredMask)
+            .padding(AppTheme.spacing.s400),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

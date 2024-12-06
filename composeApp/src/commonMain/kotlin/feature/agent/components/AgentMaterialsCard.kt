@@ -26,7 +26,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import feature.agent.model.AgentLevelMaterial
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.ContentCard
@@ -89,7 +88,7 @@ private fun Header(
         lazyListState = lazyListState
     ) {
         Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(

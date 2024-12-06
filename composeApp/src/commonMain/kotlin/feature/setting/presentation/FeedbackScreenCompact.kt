@@ -22,7 +22,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import feature.setting.components.FeedbackFormCard
 import feature.setting.model.FeedbackState
 import feature.setting.model.feedbackIssueTypes
@@ -53,7 +52,7 @@ fun FeedbackScreenCompact(
         Column(
             modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
                 .contentPaddingInScaffold(contentPadding),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s350)
         ) {
             var issueTextFieldValue by remember { mutableStateOf("") }
             var nicknameTextFieldValue by remember { mutableStateOf("") }
@@ -93,7 +92,7 @@ fun FeedbackScreenCompact(
                     )
                 )
             }
-            Spacer(modifier = Modifier.size(8.dp))
+            Spacer(Modifier.size(AppTheme.spacing.s300))
         }
     }
 }
