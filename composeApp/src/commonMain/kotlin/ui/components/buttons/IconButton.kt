@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -31,7 +30,7 @@ fun ZzzIconButton(
     iconRes: DrawableResource,
     contentDescriptionRes: StringResource? = null,
     tint: Color = AppTheme.colors.onSurface,
-    size: Dp = AppTheme.fixedSize.iconButtonSize,
+    size: Dp = AppTheme.size.iconButtonSize,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     onClick: () -> Unit
@@ -39,14 +38,14 @@ fun ZzzIconButton(
     Surface(modifier = modifier.pointerHoverIcon(if (enabled) PointerIcon.Hand else PointerIcon.Default).size(size),
         color = AppTheme.colors.surface,
         border = BorderStroke(
-            width = AppTheme.dimens.borderWidth, color = AppTheme.colors.border
+            width = AppTheme.size.borderWidth, color = AppTheme.colors.border
         ),
         shape = CircleShape,
         interactionSource = interactionSource,
         enabled = enabled,
         onClick = { onClick() }) {
         Icon(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(AppTheme.spacing.s300),
             imageVector = vectorResource(iconRes),
             contentDescription = if (contentDescriptionRes == null) null else stringResource(
                 contentDescriptionRes

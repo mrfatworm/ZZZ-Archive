@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import feature.agent.model.AgentDetail
 import org.jetbrains.compose.resources.stringResource
@@ -63,7 +62,7 @@ fun AgentImageCard(agentDetail: AgentDetail, onBackClick: () -> Unit) {
                 contentDescription = null,
             )
         }
-        Spacer(Modifier.size(8.dp))
+        Spacer(Modifier.size(AppTheme.spacing.s300))
         SelectionContainer {
             Text(
                 text = agentDetail.fullName,
@@ -71,10 +70,10 @@ fun AgentImageCard(agentDetail: AgentDetail, onBackClick: () -> Unit) {
                 color = AppTheme.colors.onSurface
             )
         }
-        Spacer(Modifier.size(16.dp))
+        Spacer(Modifier.size(AppTheme.spacing.s400))
         FlowRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
+            verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
         ) {
             ZzzTag(text = agentDetail.rarity.code, iconRes = Res.drawable.ic_rare)
             ZzzTag(

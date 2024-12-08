@@ -50,7 +50,7 @@ fun WEngineImageCard(wEngineDetail: WEngineDetail, onBackClick: () -> Unit) {
             )
         }
 
-        Spacer(Modifier.size(8.dp))
+        Spacer(Modifier.size(AppTheme.spacing.s300))
         SelectionContainer {
             Text(
                 text = wEngineDetail.name,
@@ -58,9 +58,9 @@ fun WEngineImageCard(wEngineDetail: WEngineDetail, onBackClick: () -> Unit) {
                 color = AppTheme.colors.onSurface
             )
         }
-        Spacer(Modifier.size(16.dp))
+        Spacer(Modifier.size(AppTheme.spacing.s400))
         Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
         ) {
             ZzzTag(text = wEngineDetail.rarity.code, iconRes = Res.drawable.ic_rare)
             ZzzTag(

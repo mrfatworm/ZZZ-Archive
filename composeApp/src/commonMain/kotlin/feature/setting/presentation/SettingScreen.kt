@@ -8,8 +8,6 @@ package feature.setting.presentation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import feature.setting.components.SettingScreenDual
-import feature.setting.components.SettingScreenSingle
 import feature.setting.model.SettingState
 import org.koin.compose.viewmodel.koinViewModel
 import ui.theme.AppTheme

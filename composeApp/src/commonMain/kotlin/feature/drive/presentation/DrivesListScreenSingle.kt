@@ -1,26 +1,26 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.drive.components
+package feature.drive.presentation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import feature.drive.components.DrivesListCard
 import feature.drive.data.database.emptyDriveListItemEntity
 import feature.drive.model.DrivesListState
-import feature.drive.presentation.DrivesListAction
 import org.jetbrains.compose.resources.stringResource
 import ui.components.ZzzTopBar
 import ui.components.dialogs.DriveDetailDialog
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
+import ui.utils.contentPaddingInScaffold
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.drives
 
@@ -41,8 +41,7 @@ fun DrivesListScreenSingle(
         }
     }) { contentPadding ->
         Column(
-            modifier = Modifier.padding(contentPadding)
-                .padding(AppTheme.dimens.paddingParentCompact)
+            modifier = Modifier.contentPaddingInScaffold(contentPadding)
         ) {
             DrivesListCard(
                 modifier = Modifier.weight(1f),

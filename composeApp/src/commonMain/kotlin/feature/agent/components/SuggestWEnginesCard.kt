@@ -8,9 +8,6 @@ package feature.agent.components
 import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -23,7 +20,9 @@ import ui.components.cards.ContentCard
 import ui.components.cards.HoveredIndicatorHeader
 import ui.components.items.RarityMiniItem
 import ui.theme.AppTheme
+import ui.utils.cardPaddingWithHeader
 import ui.utils.drawRowListMask
+import ui.utils.rowListGap
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.suggest_w_engines
 
@@ -46,12 +45,10 @@ fun SuggestWEnginesCard(wEnginesList: List<RarityItem>, wEngineClick: (Int) -> U
                 colorScheme = AppTheme.colors,
                 startEnable = lazyListState.canScrollBackward,
                 endEnable = lazyListState.canScrollForward
-            ), state = lazyListState, contentPadding = PaddingValues(
-                top = AppTheme.dimens.paddingUnderCardHeader,
-                start = AppTheme.dimens.paddingCard,
-                end = AppTheme.dimens.paddingCard,
-                bottom = AppTheme.dimens.paddingCard
-            )
+            ),
+            state = lazyListState,
+            contentPadding = cardPaddingWithHeader(),
+            horizontalArrangement = rowListGap()
         ) {
             items(items = wEnginesList, key = { it.id }) { wEngine ->
                 RarityMiniItem(
@@ -60,7 +57,6 @@ fun SuggestWEnginesCard(wEnginesList: List<RarityItem>, wEngineClick: (Int) -> U
                 ) {
                     wEngineClick(wEngine.id)
                 }
-                Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
             }
         }
     }

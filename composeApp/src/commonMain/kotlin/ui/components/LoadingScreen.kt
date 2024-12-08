@@ -33,7 +33,10 @@ fun LoadingScreen() {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
+        verticalArrangement = Arrangement.spacedBy(
+            AppTheme.spacing.s400,
+            Alignment.CenterVertically
+        )
     ) {
         val infiniteTransition = rememberInfiniteTransition(label = "Rotate Animation")
         val rotateAnimation = infiniteTransition.animateFloat(

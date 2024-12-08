@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -44,7 +43,10 @@ fun DriveDetailCard(
             contentColor = AppTheme.colors.onSurfaceContainer
         )
     ) {
-        Box(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp)) {
+        Box(
+            Modifier.fillMaxWidth()
+                .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350)
+        ) {
             Text(
                 modifier = Modifier.align(Alignment.Center),
                 text = drivesListItemEntity.name,
@@ -60,17 +62,21 @@ fun DriveDetailCard(
             }
         }
         Column(
-            Modifier.padding(start = 24.dp, end = 24.dp, bottom = 24.dp)
+            Modifier.padding(
+                start = AppTheme.spacing.s450,
+                end = AppTheme.spacing.s450,
+                bottom = AppTheme.spacing.s450
+            )
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)
         ) {
             AsyncImage(
                 modifier = Modifier.widthIn(max = 160.dp, min = 120.dp).aspectRatio(1f),
                 model = drivesListItemEntity.imageUrl,
                 contentDescription = null
             )
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)) {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     text = stringResource(Res.string.piece_set, 2),
@@ -79,15 +85,18 @@ fun DriveDetailCard(
                 )
                 Text(
                     modifier = Modifier.fillMaxWidth()
-                        .clip(RoundedCornerShape(AppTheme.radius.contentCard))
+                        .clip(AppTheme.shape.r400)
                         .background(AppTheme.colors.surface)
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                        .padding(
+                            horizontal = AppTheme.spacing.s400,
+                            vertical = AppTheme.spacing.s300
+                        ),
                     text = drivesListItemEntity.pieceSetTwo,
                     style = AppTheme.typography.bodyMedium,
                     color = AppTheme.colors.onSurface
                 )
             }
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)) {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     text = stringResource(Res.string.piece_set, 4),
@@ -96,9 +105,12 @@ fun DriveDetailCard(
                 )
                 Text(
                     modifier = Modifier.fillMaxWidth()
-                        .clip(RoundedCornerShape(AppTheme.radius.contentCard))
+                        .clip(AppTheme.shape.r400)
                         .background(AppTheme.colors.surface)
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                        .padding(
+                            horizontal = AppTheme.spacing.s400,
+                            vertical = AppTheme.spacing.s300
+                        ),
                     text = drivesListItemEntity.pieceSetFour,
                     style = AppTheme.typography.bodyMedium,
                     color = AppTheme.colors.onSurface

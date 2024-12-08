@@ -1,13 +1,12 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
+ * License: MIT
  */
 
-package feature.bangboo.components
+package feature.bangboo.presentation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -17,13 +16,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import feature.bangboo.components.BangbooFilterBottomSheet
+import feature.bangboo.components.BangbooListFilterCard
 import feature.bangboo.model.BangbooListState
-import feature.bangboo.presentation.BangbooListAction
 import org.jetbrains.compose.resources.stringResource
 import ui.components.ZzzTopBar
 import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
+import ui.utils.contentPaddingInScaffold
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.bangboo
 import zzzarchive.composeapp.generated.resources.filter
@@ -57,8 +58,7 @@ fun BangbooListScreenSingle(
         }
     }) { contentPadding ->
         Column(
-            modifier = Modifier.padding(contentPadding)
-                .padding(AppTheme.dimens.paddingParentCompact)
+            modifier = Modifier.contentPaddingInScaffold(contentPadding)
         ) {
             BangbooListFilterCard(
                 modifier = Modifier.weight(1f),

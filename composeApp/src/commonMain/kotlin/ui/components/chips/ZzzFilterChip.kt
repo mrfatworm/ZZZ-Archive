@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,7 +27,6 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.theme.AppTheme
 
-private val chipShape = RoundedCornerShape(8.dp)
 
 @Composable
 fun ZzzFilterChip(
@@ -39,19 +37,23 @@ fun ZzzFilterChip(
     onClick: () -> Unit
 ) {
     Row(
-        modifier = modifier.clip(chipShape).pointerHoverIcon(PointerIcon.Hand)
+        modifier = modifier.clip(AppTheme.shape.r300).pointerHoverIcon(PointerIcon.Hand)
             .clickable(onClick = onClick).background(
                 color = if (selected) AppTheme.colors.primaryContainer else AppTheme.colors.surface
             ).border(
                 width = 1.dp,
                 color = if (selected) Color.Transparent else AppTheme.colors.border,
-                shape = chipShape
-            ).padding(start = 8.dp, end = 12.dp, top = 6.dp, bottom = 6.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                shape = AppTheme.shape.r300
+            ).padding(
+                start = AppTheme.spacing.s300,
+                end = AppTheme.spacing.s350,
+                top = AppTheme.spacing.s250,
+                bottom = AppTheme.spacing.s250
+            ), horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            modifier = Modifier.size(AppTheme.fixedSize.iconSize),
+            modifier = Modifier.size(AppTheme.size.iconSize),
             imageVector = vectorResource(iconRes),
             contentDescription = null,
             tint = if (selected) AppTheme.colors.onPrimaryContainer else AppTheme.colors.onSurface

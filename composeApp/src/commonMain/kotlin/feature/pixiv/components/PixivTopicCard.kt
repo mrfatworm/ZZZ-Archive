@@ -14,7 +14,6 @@ import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -28,7 +27,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -46,7 +44,6 @@ import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import coil3.compose.LocalPlatformContext
 import coil3.compose.rememberAsyncImagePainter
 import coil3.network.NetworkHeaders
@@ -62,7 +59,9 @@ import ui.components.ImageNotFound
 import ui.components.cards.ContentCard
 import ui.components.cards.HoveredIndicatorHeader
 import ui.theme.AppTheme
+import ui.utils.cardPaddingWithHeader
 import ui.utils.drawRowListMask
+import ui.utils.rowListGap
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_favorite
 import zzzarchive.composeapp.generated.resources.pixiv_hot
@@ -86,12 +85,10 @@ fun PixivTopicCard(
                 colorScheme = AppTheme.colors,
                 startEnable = lazyListState.canScrollBackward,
                 endEnable = lazyListState.canScrollForward
-            ), state = lazyListState, contentPadding = PaddingValues(
-                top = AppTheme.dimens.paddingUnderCardHeader,
-                start = AppTheme.dimens.paddingCard,
-                end = AppTheme.dimens.paddingCard,
-                bottom = 24.dp
-            ), horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapImageProfileList)
+            ),
+            state = lazyListState,
+            contentPadding = cardPaddingWithHeader(),
+            horizontalArrangement = rowListGap()
         ) {
             items(items = recentArticlesList, key = { it.id }) { item ->
                 PixivTopicItem(
@@ -136,13 +133,13 @@ private fun TagDropDownButton(onPixivTagChange: (String) -> Unit) {
         val pixivZzzLikeTags = pixivTagDropdownItems
         var showTagsList by remember { mutableStateOf(false) }
         var tagText by remember { mutableStateOf(pixivZzzLikeTags.first().tagText) }
-        Row(modifier = Modifier.clip(RoundedCornerShape(8.dp)).clickable { showTagsList = true }
+        Row(modifier = Modifier.clip(AppTheme.shape.r300).clickable { showTagsList = true }
             .pointerHoverIcon(PointerIcon.Hand).background(AppTheme.colors.surface)
-            .padding(horizontal = 8.dp, vertical = 4.dp),
+            .padding(horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s200),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)) {
             Icon(
-                modifier = Modifier.size(16.dp),
+                modifier = Modifier.size(AppTheme.size.iconSize),
                 imageVector = vectorResource(Res.drawable.ic_favorite),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurface
@@ -190,12 +187,12 @@ private fun PixivTopicItem(
             .data(artworkUrl).size(Size.ORIGINAL).build()
     )
     Column(
-        modifier = Modifier.width(AppTheme.fixedSize.galleryItemSize),
+        modifier = Modifier.width(AppTheme.size.galleryItemSize),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
         Box(
-            modifier = Modifier.fillMaxSize().aspectRatio(1f).clip(RoundedCornerShape(16.dp))
+            modifier = Modifier.fillMaxSize().aspectRatio(1f).clip(AppTheme.shape.r400)
         ) {
             if (artworkUrl != null) {
                 Image(
@@ -238,11 +235,11 @@ private fun AuthorInfo(
         modifier = Modifier.clickable(
             interactionSource = interactionSource, indication = null, onClick = onClick
         ).pointerHoverIcon(PointerIcon.Hand),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
-            modifier = Modifier.size(AppTheme.fixedSize.iconSize).aspectRatio(1f).clip(CircleShape)
+            modifier = Modifier.size(AppTheme.size.iconSize).aspectRatio(1f).clip(CircleShape)
         ) {
             if (profileUrl != null) {
                 Image(

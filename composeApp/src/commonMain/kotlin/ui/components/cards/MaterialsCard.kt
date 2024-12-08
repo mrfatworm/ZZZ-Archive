@@ -8,9 +8,6 @@ package ui.components.cards
 import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -22,7 +19,9 @@ import feature.agent.model.LevelMaterial
 import org.jetbrains.compose.resources.stringResource
 import ui.components.items.RarityMiniItem
 import ui.theme.AppTheme
+import ui.utils.cardPaddingWithHeader
 import ui.utils.drawRowListMask
+import ui.utils.rowListGap
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.materials
 
@@ -41,12 +40,10 @@ fun MaterialsListCard(materialsList: List<LevelMaterial>) {
                 colorScheme = AppTheme.colors,
                 startEnable = lazyListState.canScrollBackward,
                 endEnable = lazyListState.canScrollForward
-            ), state = lazyListState, contentPadding = PaddingValues(
-                top = AppTheme.dimens.paddingUnderCardHeader,
-                start = AppTheme.dimens.paddingCard,
-                end = AppTheme.dimens.paddingCard,
-                bottom = AppTheme.dimens.paddingCard
-            )
+            ),
+            state = lazyListState,
+            contentPadding = cardPaddingWithHeader(),
+            horizontalArrangement = rowListGap()
         ) {
             items(items = materialsList, key = { it.id }) { material ->
                 RarityMiniItem(
@@ -54,7 +51,6 @@ fun MaterialsListCard(materialsList: List<LevelMaterial>) {
                     text = material.getAmountText(),
                     imgUrl = material.getProfileUrl()
                 )
-                Spacer(modifier = Modifier.size(AppTheme.dimens.gapImageProfileList))
             }
         }
     }

@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -24,7 +23,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import feature.setting.model.FeedbackIssueType
 import feature.setting.model.FeedbackState
 import org.jetbrains.compose.resources.stringResource
@@ -52,8 +50,8 @@ fun FeedbackFormCard(
 ) {
     Column(
         modifier = Modifier.background(
-            AppTheme.colors.surfaceContainer, RoundedCornerShape(AppTheme.radius.contentCard)
-        ).padding(horizontal = 4.dp, vertical = 8.dp)
+            AppTheme.colors.surfaceContainer, AppTheme.shape.r400
+        ).padding(horizontal = AppTheme.spacing.s200, vertical = AppTheme.spacing.s400)
     ) {
         IssueTypeItem(
             feedbackIssueTypes = feedbackState.issueTypes,
@@ -82,8 +80,11 @@ private fun IssueTextField(
     onNickNameChange: (String) -> Unit
 ) {
     Column(
-        modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        modifier = Modifier.padding(
+            horizontal = AppTheme.spacing.s400,
+            vertical = AppTheme.spacing.s350
+        ),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)
     ) {
         ZzzTextFiled(
             modifier = Modifier.fillMaxWidth(),
@@ -114,7 +115,7 @@ private fun IssueTypeItem(
         Column(horizontalAlignment = Alignment.End) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
             ) {
                 Text(
                     text = stringResource(selectedIssueType),
@@ -122,7 +123,7 @@ private fun IssueTypeItem(
                     color = AppTheme.colors.onSurface
                 )
                 Icon(
-                    modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
+                    modifier = Modifier.size(AppTheme.size.smallIconSize),
                     imageVector = vectorResource(Res.drawable.ic_arrow_down_ios),
                     contentDescription = null,
                     tint = AppTheme.colors.onSurfaceVariant
@@ -154,7 +155,8 @@ private fun IssueTypeItem(
 @Composable
 private fun SettingItemText(title: String, content: String) {
     Row(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
+        modifier = Modifier.fillMaxWidth()
+            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
