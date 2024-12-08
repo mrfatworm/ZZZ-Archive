@@ -50,7 +50,7 @@ fun NewsPagerCard(newsList: List<OfficialNewsState>) {
     val pagerState = rememberPagerState(pageCount = { newsList.size })
     val coroutineScope = rememberCoroutineScope()
     Column(
-        Modifier.clip(AppTheme.shape.cardShape).background(AppTheme.colors.surfaceContainer)
+        Modifier.clip(AppTheme.shape.r400).background(AppTheme.colors.surfaceContainer)
             .padding(bottom = AppTheme.spacing.s400),
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
     ) {

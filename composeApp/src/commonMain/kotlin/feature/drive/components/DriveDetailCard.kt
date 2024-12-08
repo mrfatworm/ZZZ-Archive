@@ -85,7 +85,7 @@ fun DriveDetailCard(
                 )
                 Text(
                     modifier = Modifier.fillMaxWidth()
-                        .clip(AppTheme.shape.cardShape)
+                        .clip(AppTheme.shape.r400)
                         .background(AppTheme.colors.surface)
                         .padding(
                             horizontal = AppTheme.spacing.s400,
@@ -105,7 +105,7 @@ fun DriveDetailCard(
                 )
                 Text(
                     modifier = Modifier.fillMaxWidth()
-                        .clip(AppTheme.shape.cardShape)
+                        .clip(AppTheme.shape.r400)
                         .background(AppTheme.colors.surface)
                         .padding(
                             horizontal = AppTheme.spacing.s400,

@@ -22,8 +22,7 @@ data class Shape(
     val r400: RoundedCornerShape,
     val r450: RoundedCornerShape,
     val r500: RoundedCornerShape,
-    val round: RoundedCornerShape = CircleShape,
-    val cardShape: RoundedCornerShape
+    val round: RoundedCornerShape = CircleShape
 ) {
     companion object {
         fun regular() = Shape(
@@ -34,8 +33,7 @@ data class Shape(
             r350 = RoundedCornerShape(12.dp),
             r400 = RoundedCornerShape(16.dp),
             r450 = RoundedCornerShape(24.dp),
-            r500 = RoundedCornerShape(32.dp),
-            cardShape = RoundedCornerShape(16.dp)
+            r500 = RoundedCornerShape(32.dp)
         )
     }
 }

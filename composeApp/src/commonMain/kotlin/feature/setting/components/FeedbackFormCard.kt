@@ -50,7 +50,7 @@ fun FeedbackFormCard(
 ) {
     Column(
         modifier = Modifier.background(
-            AppTheme.colors.surfaceContainer, AppTheme.shape.cardShape
+            AppTheme.colors.surfaceContainer, AppTheme.shape.r400
         ).padding(horizontal = AppTheme.spacing.s200, vertical = AppTheme.spacing.s400)
     ) {
         IssueTypeItem(

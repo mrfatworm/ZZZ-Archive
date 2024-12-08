@@ -59,7 +59,7 @@ fun HoYoLabCard() {
         }
         Text(
             modifier = Modifier.align(Alignment.Center).rotate(15f)
-                .background(AppTheme.colors.hoveredMask, AppTheme.shape.cardShape)
+                .background(AppTheme.colors.hoveredMask, AppTheme.shape.r400)
                 .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300),
             text = stringResource(Res.string.under_development),
             color = AppTheme.colors.onHoveredMaskVariant,

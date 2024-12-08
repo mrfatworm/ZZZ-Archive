@@ -50,7 +50,7 @@ fun FactionItem(faction: Faction, isSelected: Boolean = false, onFactionClick: (
             .clip(AppTheme.shape.r400).border(
                 AppTheme.size.borderWidth,
             if (isSelected) AppTheme.colors.primary else Color.Transparent,
-                AppTheme.shape.cardShape
+                AppTheme.shape.r400
         ).pointerHoverIcon(PointerIcon.Hand).clickable(
             interactionSource = interactionSource, indication = null
         ) {

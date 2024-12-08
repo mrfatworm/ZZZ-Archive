@@ -151,11 +151,11 @@ fun OpenSourceItem(
     onClick: () -> Unit
 ) {
     Column(
-        modifier = modifier.clip(AppTheme.shape.cardShape).clickable {
+        modifier = modifier.clip(AppTheme.shape.r400).clickable {
             onClick()
         }.border(
             AppTheme.size.borderWidth,
-            AppTheme.colors.buttonBorder, AppTheme.shape.cardShape
+            AppTheme.colors.buttonBorder, AppTheme.shape.r400
         ).padding(AppTheme.spacing.s400),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s350)

@@ -42,7 +42,7 @@ fun ContentCard(
     content: @Composable ColumnScope.() -> Unit
 ) {
     Column(
-        modifier = modifier.clip(AppTheme.shape.cardShape)
+        modifier = modifier.clip(AppTheme.shape.r400)
             .background(AppTheme.colors.surfaceContainer)
             .padding(if (hasDefaultPadding) cardPadding() else 0.dp)
     ) {
