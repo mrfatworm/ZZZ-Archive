@@ -7,7 +7,6 @@ package ui.components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
@@ -16,7 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.unit.dp
 import ui.theme.AppTheme
 
 @Composable
@@ -35,9 +33,9 @@ fun ZzzTextFiled(
 ) {
     OutlinedTextField(
         modifier = modifier.border(
-            AppTheme.dimens.borderWidth,
+            AppTheme.size.borderWidth,
             if (isError) AppTheme.colors.alert else AppTheme.colors.border,
-            RoundedCornerShape(16.dp)
+            AppTheme.shape.r400
         ),
         value = value,
         onValueChange = onValueChange,
@@ -59,7 +57,7 @@ fun ZzzTextFiled(
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
         interactionSource = interactionSource,
-        shape = RoundedCornerShape(16.dp),
+        shape = AppTheme.shape.r400,
         colors = OutlinedTextFieldDefaults.colors().copy(
             unfocusedTextColor = AppTheme.colors.onSurface,
             unfocusedContainerColor = AppTheme.colors.surface,

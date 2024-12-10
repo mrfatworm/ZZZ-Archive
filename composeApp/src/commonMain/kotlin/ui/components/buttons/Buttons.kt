@@ -10,7 +10,6 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
@@ -98,11 +97,11 @@ fun ZzzButton(
     Button(
         modifier = modifier.pointerHoverIcon(if (enabled) PointerIcon.Hand else PointerIcon.Default)
             .border(
-            width = if (hasBorder) 3.dp else 0.dp,
+                width = if (hasBorder) AppTheme.size.borderWidth else 0.dp,
             color = if (hasBorder) AppTheme.colors.buttonBorder else Color.Transparent,
             shape = CircleShape
         ),
-        shape = RoundedCornerShape(64.dp),
+        shape = AppTheme.shape.round,
         colors = ButtonColors(
             containerColor = containerColor,
             contentColor = contentColor,
@@ -117,8 +116,8 @@ fun ZzzButton(
         iconRes?.let {
             Icon(
                 modifier = Modifier
-                    .padding(end = 8.dp)
-                    .size(AppTheme.fixedSize.largeIconSize),
+                    .padding(end = AppTheme.spacing.s300)
+                    .size(AppTheme.size.largeIconSize),
                 imageVector = vectorResource(iconRes),
                 contentDescription = null
             )

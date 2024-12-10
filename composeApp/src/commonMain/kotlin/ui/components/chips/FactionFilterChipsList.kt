@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import feature.agent.model.Faction
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.AppTheme
@@ -25,9 +24,9 @@ fun FactionFilterChipsList(
     selectedFactionId: Int, factionsList: List<Faction>, onSelectionChanged: (Int) -> Unit
 ) {
     FlowRow(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = AppTheme.dimens.paddingCard),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier = Modifier.fillMaxWidth().padding(horizontal = AppTheme.spacing.s400),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
         factionsList.forEach { faction ->
             ZzzFilterChip(text = stringResource(faction.getFactionNameRes()),

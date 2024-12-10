@@ -8,8 +8,6 @@ package feature.wengine.presentation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import feature.wengine.components.WEngineDetailScreenDual
-import feature.wengine.components.WEngineDetailScreenSingle
 import feature.wengine.model.WEngineDetailState
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.ErrorScreen

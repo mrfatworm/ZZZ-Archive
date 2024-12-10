@@ -14,9 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.banner.components.AnnouncementBanner
 import feature.cover_image.components.CoverImageCard
-import feature.news.presentation.NewsPagerCard
+import feature.news.components.NewsPagerCard
 import feature.pixiv.components.PixivTopicCard
-import ui.theme.AppTheme
+import ui.utils.contentGap
 import ui.utils.contentPadding
 
 @Composable
@@ -28,7 +28,7 @@ fun HomeScreenSingle(
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
             .contentPadding(),
-        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.gapContentCompact)
+        verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         AnnouncementBanner(
             uiState.banner,

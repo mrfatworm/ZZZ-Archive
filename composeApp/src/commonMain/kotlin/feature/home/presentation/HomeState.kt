@@ -10,7 +10,7 @@ import feature.bangboo.model.BangbooListItem
 import feature.banner.data.BannerResponse
 import feature.cover_image.data.database.CoverImageListItemEntity
 import feature.drive.data.database.DrivesListItemEntity
-import feature.news.presentation.OfficialNewsState
+import feature.news.model.OfficialNewsState
 import feature.pixiv.data.RecentArticle
 import feature.wengine.model.WEnginesListItem
 

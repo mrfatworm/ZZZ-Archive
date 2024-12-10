@@ -18,7 +18,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.components.ZzzSlider
@@ -53,8 +52,11 @@ fun ScaleFontSizeDialog(
     }) {
         Column(
             modifier = Modifier.padding(
-                start = 32.dp, top = 32.dp, end = 32.dp, bottom = 16.dp
-            ), verticalArrangement = Arrangement.spacedBy(24.dp)
+                start = AppTheme.spacing.s500,
+                top = AppTheme.spacing.s500,
+                end = AppTheme.spacing.s500,
+                bottom = AppTheme.spacing.s400
+            ), verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s450)
         ) {
             ScalePreview()
             ScaleUiSlider(stringResource(Res.string.ui_scale), uiScale, onScaleValueChange = {
@@ -65,7 +67,7 @@ fun ScaleFontSizeDialog(
             })
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End)
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300, Alignment.End)
             ) {
                 ZzzOutlineButton(text = stringResource(Res.string.default_value)) {
                     uiScale = 1f
@@ -82,7 +84,7 @@ fun ScaleFontSizeDialog(
 
 @Composable
 private fun ScalePreview() {
-    Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+    Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)) {
         RarityItem(name = "", placeHolder = {
             Image(
                 modifier = Modifier.fillMaxSize(),
@@ -102,7 +104,7 @@ private fun ScalePreview() {
 private fun ScaleUiSlider(
     scaleType: String, scaleValue: Float, onScaleValueChange: (Float) -> Unit
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)) {
         val firstDigitPlace = round(scaleValue * 10) / 10
         Text(
             text = "$scaleType ${stringResource(Res.string.multiply)}: ${firstDigitPlace}x"

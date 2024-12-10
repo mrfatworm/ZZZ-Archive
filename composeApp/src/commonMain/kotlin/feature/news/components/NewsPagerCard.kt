@@ -3,7 +3,7 @@
  * License: MIT
  */
 
-package feature.news.presentation
+package feature.news.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -22,7 +22,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -39,6 +38,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import feature.news.model.OfficialNewsState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ui.components.PagerIndicator
@@ -50,11 +50,9 @@ fun NewsPagerCard(newsList: List<OfficialNewsState>) {
     val pagerState = rememberPagerState(pageCount = { newsList.size })
     val coroutineScope = rememberCoroutineScope()
     Column(
-        Modifier.background(
-            AppTheme.colors.surfaceContainer, RoundedCornerShape(AppTheme.radius.contentCard)
-        ).padding(bottom = 8.dp).clip(
-            RoundedCornerShape(AppTheme.radius.contentCard)
-        ), verticalArrangement = Arrangement.spacedBy(4.dp)
+        Modifier.clip(AppTheme.shape.r400).background(AppTheme.colors.surfaceContainer)
+            .padding(bottom = AppTheme.spacing.s400),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
     ) {
         HorizontalPager(modifier = Modifier, state = pagerState) { currentPager ->
             NewsPagerCardItem(newsList[currentPager])
@@ -112,8 +110,9 @@ fun NewsPagerCardItem(newsState: OfficialNewsState) {
 @Composable
 private fun NewsInfo(modifier: Modifier, newsState: OfficialNewsState) {
     Column(
-        modifier.fillMaxWidth().background(AppTheme.colors.hoveredMask).padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier.fillMaxWidth().background(AppTheme.colors.hoveredMask)
+            .padding(AppTheme.spacing.s400),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
         Text(
             text = newsState.title,

@@ -17,14 +17,16 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import feature.bangboo.model.BangbooListState
 import ui.components.cards.ContentCard
 import ui.components.chips.AttributeFilterChipsList
 import ui.components.chips.RarityFilterChipsList
 import ui.components.items.RarityItem
 import ui.theme.AppTheme
+import ui.utils.cardPadding
 import ui.utils.drawColumnListMask
+import ui.utils.gridListHorizontalGap
+import ui.utils.gridListVerticalGap
 import utils.AgentAttribute
 import utils.ZzzRarity
 
@@ -44,8 +46,8 @@ fun BangbooListFilterCard(
     ) {
         AnimatedVisibility(visible = !invisibleFilter) {
             Column(
-                modifier = Modifier.padding(top = AppTheme.dimens.paddingCard),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                modifier = Modifier.padding(top = cardPadding()),
+                verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
             ) {
                 RarityFilterChipsList(uiState.selectedRarity, onRarityChipSelectionChanged)
                 AttributeFilterChipsList(
@@ -58,15 +60,15 @@ fun BangbooListFilterCard(
 
         LazyVerticalGrid(
             state = lazyGridState,
-            columns = GridCells.Adaptive(AppTheme.fixedSize.rarityItemMediumSize),
+            columns = GridCells.Adaptive(AppTheme.size.rarityItemMediumSize),
             modifier = Modifier.fillMaxSize().drawColumnListMask(
                 colorScheme = AppTheme.colors,
                 topEnable = lazyGridState.canScrollBackward,
                 bottomEnable = lazyGridState.canScrollForward
             ),
-            contentPadding = PaddingValues(AppTheme.dimens.paddingCard),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            contentPadding = PaddingValues(cardPadding()),
+            horizontalArrangement = gridListHorizontalGap(),
+            verticalArrangement = gridListVerticalGap()
         ) {
             items(
                 count = uiState.filteredBangbooList.size,

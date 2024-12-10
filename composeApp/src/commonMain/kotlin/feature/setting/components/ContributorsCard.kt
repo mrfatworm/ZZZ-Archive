@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import feature.setting.model.Contributor
 import feature.setting.model.Contributors
 import org.jetbrains.compose.resources.stringResource
@@ -39,7 +38,7 @@ import zzzarchive.composeapp.generated.resources.ui_ux_designers
 @Composable
 fun ContributorsCard(contributors: Contributors) {
     ContentCard {
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(Res.string.contributors),
@@ -49,11 +48,14 @@ fun ContributorsCard(contributors: Contributors) {
             )
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+                horizontalArrangement = Arrangement.spacedBy(
+                    AppTheme.spacing.s300,
+                    Alignment.CenterHorizontally
+                ),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
+                    modifier = Modifier.size(AppTheme.size.smallIconSize),
                     imageVector = vectorResource(Res.drawable.ic_people),
                     contentDescription = null,
                     tint = AppTheme.colors.onSurfaceVariant
@@ -79,7 +81,7 @@ fun ContributorsCard(contributors: Contributors) {
 
 @Composable
 fun ContributorItem(title: String, contributorList: List<Contributor>) {
-    Column(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
+    Column(modifier = Modifier.fillMaxWidth().padding(vertical = AppTheme.spacing.s200)) {
         Text(
             text = title,
             style = AppTheme.typography.titleSmall,
@@ -88,8 +90,8 @@ fun ContributorItem(title: String, contributorList: List<Contributor>) {
         contributorList.forEach { contributor ->
             SelectionContainer {
                 Row(
-                    modifier = Modifier.padding(vertical = 4.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    modifier = Modifier.padding(vertical = AppTheme.spacing.s200),
+                    horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
                 ) {
                     Text(
                         text = contributor.name,

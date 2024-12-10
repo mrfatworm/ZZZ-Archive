@@ -3,7 +3,7 @@
  * License: MIT
  */
 
-package feature.news.presentation
+package feature.news.model
 
 
 data class OfficialNewsState(

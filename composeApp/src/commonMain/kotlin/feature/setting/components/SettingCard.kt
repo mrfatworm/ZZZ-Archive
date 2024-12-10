@@ -74,7 +74,7 @@ private fun LanguageSettingItem(
             val languagesList = Language.entries.toList()
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
             ) {
                 Text(
                     text = language.localName,
@@ -82,7 +82,7 @@ private fun LanguageSettingItem(
                     color = AppTheme.colors.onSurface
                 )
                 Icon(
-                    modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
+                    modifier = Modifier.size(AppTheme.size.smallIconSize),
                     imageVector = vectorResource(Res.drawable.ic_arrow_down_ios),
                     contentDescription = null,
                     tint = AppTheme.colors.onSurfaceVariant
@@ -141,7 +141,7 @@ private fun FontScaleItem(
     SettingItem(title = stringResource(Res.string.ui_scale), content = {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
         ) {
             Text(
                 text = actionText,
@@ -149,7 +149,7 @@ private fun FontScaleItem(
                 color = AppTheme.colors.onSurface
             )
             Icon(
-                modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
+                modifier = Modifier.size(AppTheme.size.smallIconSize),
                 imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurfaceVariant
@@ -182,7 +182,7 @@ private fun ColorSettingItem(onColorChange: (Boolean) -> Unit) {
             val colorThemeList = listOf(Res.string.dark_theme, Res.string.light_theme)
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
             ) {
                 Text(
                     text = if (isDarkTheme) stringResource(Res.string.dark_theme) else stringResource(
@@ -192,7 +192,7 @@ private fun ColorSettingItem(onColorChange: (Boolean) -> Unit) {
                     color = AppTheme.colors.onSurface
                 )
                 Icon(
-                    modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
+                    modifier = Modifier.size(AppTheme.size.smallIconSize),
                     imageVector = vectorResource(Res.drawable.ic_arrow_down_ios),
                     contentDescription = null,
                     tint = AppTheme.colors.onSurfaceVariant
@@ -225,7 +225,7 @@ private fun HoYoLabSettingItem() {
     SettingItem(title = stringResource(Res.string.hoyolab_account), content = {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
         ) {
             Text(
                 text = stringResource(Res.string.under_development),
@@ -233,7 +233,7 @@ private fun HoYoLabSettingItem() {
                 color = AppTheme.colors.onSurface
             )
             Icon(
-                modifier = Modifier.size(AppTheme.fixedSize.smallIconSize),
+                modifier = Modifier.size(AppTheme.size.smallIconSize),
                 imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurfaceVariant

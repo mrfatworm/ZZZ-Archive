@@ -50,11 +50,11 @@ fun ZzzArchiveNavigationRail(
 ) {
     Column(
         modifier
-            .border(3.dp, AppTheme.colors.border, CircleShape)
+            .border(AppTheme.size.borderWidth, AppTheme.colors.border, CircleShape)
             .background(AppTheme.colors.surfaceContainer, CircleShape).widthIn(min = 80.dp)
-            .padding(vertical = 16.dp).selectableGroup(),
+            .padding(vertical = AppTheme.spacing.s400).selectableGroup(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
     ) {
             NavigationRailItem(selected = false, onClick = onDrawerClicked, icon = {
                 Icon(
@@ -63,11 +63,11 @@ fun ZzzArchiveNavigationRail(
                     tint = AppTheme.colors.onSurfaceVariant
                 )
             })
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(AppTheme.spacing.s300))
         Column(
             modifier = Modifier.fillMaxHeight().verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+            verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
         ) {
             NAV_RAIL_MAIN_FLOW.forEach { destination ->
                 val isSelected = selectedMainFlow == destination.route
@@ -83,7 +83,7 @@ fun ZzzArchiveNavigationRail(
                 )
             }
             Spacer(
-                modifier = Modifier.weight(1f).heightIn(min = 16.dp)
+                modifier = Modifier.weight(1f).heightIn(min = AppTheme.spacing.s400)
             )
 
             val isDark by AppTheme.isDark

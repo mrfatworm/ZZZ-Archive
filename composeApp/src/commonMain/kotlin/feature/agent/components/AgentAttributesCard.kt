@@ -9,12 +9,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import feature.agent.model.AgentDetail
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.CardHeader
 import ui.components.cards.ContentCard
 import ui.components.items.AttributeItem
+import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.attributes
 import zzzarchive.composeapp.generated.resources.hp_atk_def
@@ -32,7 +32,7 @@ fun AgentAttributesCard(agentDetail: AgentDetail) {
         agentDetail.basicData.nameAndValues.forEach {
             AttributeItem(title = it.name, content = it.value)
         }
-        Spacer(Modifier.size(4.dp))
+        Spacer(Modifier.size(AppTheme.spacing.s200))
     }
 }
 

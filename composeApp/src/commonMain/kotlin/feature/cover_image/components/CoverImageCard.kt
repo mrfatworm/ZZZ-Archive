@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -47,7 +46,7 @@ fun CoverImageCard(coverImages: List<CoverImageListItemEntity>) {
     val coverImage = coverImages.firstOrNull()
 
     Box(
-        modifier = Modifier.aspectRatio(1.7f).fillMaxWidth().clip(RoundedCornerShape(16.dp))
+        modifier = Modifier.aspectRatio(1.7f).fillMaxWidth().clip(AppTheme.shape.r400)
     ) {
         if (coverImage == null) {
             ImageNotFound()
@@ -79,8 +78,9 @@ fun CoverImageCard(coverImages: List<CoverImageListItemEntity>) {
 @Composable
 private fun ArtworkInfo(modifier: Modifier, coverImage: CoverImageListItemEntity) {
     Column(
-        modifier.fillMaxWidth().background(AppTheme.colors.hoveredMask).padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier.fillMaxWidth().background(AppTheme.colors.hoveredMask)
+            .padding(AppTheme.spacing.s400),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
         Text(
             modifier = Modifier,

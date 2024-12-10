@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import ui.theme.AppTheme
+import ui.utils.cardPaddingWithHeader
 
 @Composable
 fun TextCard(title: String, content: String, subTitle: String = "") {
@@ -27,8 +28,7 @@ fun TextCard(title: String, content: String, subTitle: String = "") {
             )
         }
         Text(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = AppTheme.dimens.paddingCard)
-                .padding(bottom = AppTheme.dimens.paddingCard),
+            modifier = Modifier.fillMaxWidth().padding(cardPaddingWithHeader()),
             text = content,
             style = AppTheme.typography.bodyMedium,
             color = AppTheme.colors.onSurface
