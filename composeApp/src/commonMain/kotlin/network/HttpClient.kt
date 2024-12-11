@@ -98,3 +98,20 @@ fun createGoogleDocHttpClient(engine: HttpClientEngine): HttpClient {
         }
     }
 }
+
+fun createHoYoLabHttpClient(engine: HttpClientEngine): HttpClient {
+    return HttpClient(engine) {
+        install(ContentNegotiation) {
+            json(Json {
+                prettyPrint = true
+                isLenient = true
+                ignoreUnknownKeys = true
+                explicitNulls = false
+            })
+        }
+        install(Logging) {
+            logger = Logger.SIMPLE
+            level = LogLevel.ALL
+        }
+    }
+}

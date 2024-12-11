@@ -51,13 +51,14 @@ fun SettingCard(
     onLanguageChange: (String) -> Unit,
     onColorChange: (Boolean) -> Unit,
     onScaleChange: (Float, Float) -> Unit,
+    onHoYoLabClick: () -> Unit,
     onRestart: () -> Unit
 ) {
     ContentCard(hasDefaultPadding = false) {
         LanguageSettingItem(uiState.language, onLanguageChange, onRestart)
         ColorSettingItem(onColorChange)
         FontScaleItem(uiState.uiScale, uiState.fontScale, onScaleChange)
-        // HoYoLabSettingItem()
+        HoYoLabSettingItem(onHoYoLabClick)
     }
 }
 
@@ -221,7 +222,7 @@ private fun ColorSettingItem(onColorChange: (Boolean) -> Unit) {
 }
 
 @Composable
-private fun HoYoLabSettingItem() {
+private fun HoYoLabSettingItem(onClick: () -> Unit) {
     SettingItem(title = stringResource(Res.string.hoyolab_account), content = {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -239,5 +240,5 @@ private fun HoYoLabSettingItem() {
                 tint = AppTheme.colors.onSurfaceVariant
             )
         }
-    }, onClick = { })
+    }, onClick = onClick)
 }

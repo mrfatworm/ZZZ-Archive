@@ -160,4 +160,9 @@
     <string name="invalid_form">Unspecified issue type or issue content.</string>
     <string name="form_submit_success">The form has been submitted. Thank you for your feedback!</string>
 
+    <!-- HoYoLab Connect -->
+    <string name="hoyolab_connect">連結 HoYoLab</string>
+    <string name="connect">連結</string>
+    <string name="disconnect">解除連結</string>
+
 </resources>

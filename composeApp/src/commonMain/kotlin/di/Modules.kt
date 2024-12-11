@@ -38,6 +38,10 @@ import feature.drive.presentation.DrivesListViewModel
 import feature.home.data.AssetVersionRepository
 import feature.home.data.AssetVersionRepositoryImpl
 import feature.home.presentation.HomeViewModel
+import feature.hoyolab.data.HoYoLabRepository
+import feature.hoyolab.data.HoYoLabRepositoryImpl
+import feature.hoyolab.domain.HoYoLabConnectUseCase
+import feature.hoyolab.presentation.HoYoLabConnectViewModel
 import feature.news.data.OfficialNewsRepository
 import feature.news.data.OfficialNewsRepositoryImpl
 import feature.news.domain.OfficialNewsUseCase
@@ -117,6 +121,7 @@ val sharedModule = module {
     single<BangbooRepository> { BangbooRepositoryImpl(get(), get()) }
     single<DriveRepository> { DriveRepositoryImpl(get(), get()) }
     single<GoogleDocRepository> { GoogleDocRepositoryImpl(get()) }
+    single<HoYoLabRepository> { HoYoLabRepositoryImpl(get()) }
 
     // Use cases
     single<CoverImageUseCase> { CoverImageUseCase(get()) }
@@ -138,6 +143,7 @@ val sharedModule = module {
         UpdateDatabaseUseCase(get(), get(), get(), get(), get(), get(), get())
     }
     single<UiScaleUseCase> { UiScaleUseCase(get()) }
+    single<HoYoLabConnectUseCase> { HoYoLabConnectUseCase(get()) }
 
     // ViewModels
     viewModelOf(::SplashViewModel)
@@ -153,4 +159,5 @@ val sharedModule = module {
     viewModelOf(::DrivesListViewModel)
     viewModelOf(::SettingViewModel)
     viewModelOf(::FeedbackViewModel)
+    viewModelOf(::HoYoLabConnectViewModel)
 }
