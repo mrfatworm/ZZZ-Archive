@@ -9,6 +9,8 @@ import database.RoomDatabaseFactory
 import io.ktor.client.engine.okhttp.OkHttp
 import network.GoogleDocHttp
 import network.GoogleDocHttpImpl
+import network.HoYoLabHttp
+import network.HoYoLabHttpImpl
 import network.OfficialWebHttp
 import network.OfficialWebHttpImpl
 import network.PixivHttp
@@ -26,4 +28,5 @@ actual val platformModule = module {
     single<OfficialWebHttp> { OfficialWebHttpImpl(OkHttp.create(), get()) }
     single<PixivHttp> { PixivHttpImpl(OkHttp.create()) }
     single<GoogleDocHttp> { GoogleDocHttpImpl(OkHttp.create()) }
+    single<HoYoLabHttp> { HoYoLabHttpImpl(OkHttp.create()) }
 }

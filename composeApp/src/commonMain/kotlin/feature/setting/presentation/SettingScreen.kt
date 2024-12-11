@@ -14,12 +14,13 @@ import ui.theme.AppTheme
 import ui.utils.ContentType
 
 @Composable
-fun SettingScreen(onFeedbackClick: () -> Unit) {
+fun SettingScreen(onFeedbackClick: () -> Unit, onHoYoLabClick: () -> Unit) {
     val viewModel: SettingViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     SettingScreenContent(uiState) { action ->
         when (action) {
             SettingAction.ClickFeedback -> onFeedbackClick()
+            SettingAction.ClickHoYoLab -> onHoYoLabClick()
             else -> viewModel.onAction(action)
         }
     }

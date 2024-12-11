@@ -160,4 +160,9 @@
     <string name="invalid_form">問題類型未選擇或問題內容為空。</string>
     <string name="form_submit_success">表單已送出\n感謝您的回饋！</string>
 
+    <!-- HoYoLab Connect -->
+    <string name="hoyolab_connect">HoYoLab Connect</string>
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+
 </resources>

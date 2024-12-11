@@ -41,6 +41,9 @@ fun SettingScreenSingle(
             onScaleChange = { uiScale, fontScale ->
                 onAction(SettingAction.ScaleUi(uiScale, fontScale))
             },
+            onHoYoLabClick = {
+                onAction(SettingAction.ClickHoYoLab)
+            },
             onRestart = {
                 onAction(SettingAction.RestartApp)
             }
