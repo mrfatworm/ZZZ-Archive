@@ -48,7 +48,8 @@ fun SplashScreen(startMainFlow: () -> Unit) {
         delay(1000)
         startMainFlow()
     }
-    SplashScreenSingle(uiState)
+    SantaSplashScreen()
+    //SplashScreenSingle(uiState)
 }
 val splashColor = Color(0xFF3C3C3C)
 
