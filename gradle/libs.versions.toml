@@ -6,6 +6,7 @@ buildKonfig = "0.15.2"
 coil = "3.0.3"
 compose-adaptive = "1.0.1"
 compose-plugin = "1.7.1"
+cryptography = "0.4.0"
 kotlin = "2.1.0"
 kotlinx-coroutines = "1.9.0"
 koin = "4.1.0-Beta1"
@@ -61,6 +62,12 @@ multiplatformSettings-test = { module = "com.russhwolf:multiplatform-settings-te
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+
+#===Cryptography
+cryptography-core = { module = "dev.whyoleg.cryptography:cryptography-core", version.ref = "cryptography"}
+cryptography-provider-jdk = { module = "dev.whyoleg.cryptography:cryptography-provider-jdk", version.ref = "cryptography"}
+cryptography-provider-apple = { module = "dev.whyoleg.cryptography:cryptography-provider-apple", version.ref = "cryptography"}
+
 
 #===Test
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }

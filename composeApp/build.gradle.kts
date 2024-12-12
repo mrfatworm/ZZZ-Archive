@@ -59,6 +59,7 @@ kotlin {
             implementation(libs.multiplatformSettings.no.arg)
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
+            implementation(libs.cryptography.core)
         }
         commonTest.dependencies {
             implementation(kotlin("test-annotations-common"))
@@ -76,6 +77,7 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.androidx.core.splashscreen)
+            implementation(libs.cryptography.provider.jdk)
         }
 
         androidUnitTest.dependencies {
@@ -84,12 +86,14 @@ kotlin {
 
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+            implementation(libs.cryptography.provider.apple)
         }
 
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.cryptography.provider.jdk)
         }
 
         dependencies {

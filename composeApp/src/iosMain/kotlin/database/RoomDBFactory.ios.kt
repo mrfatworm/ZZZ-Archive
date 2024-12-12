@@ -11,6 +11,7 @@ import feature.agent.data.database.AgentsListDB
 import feature.bangboo.data.database.BangbooListDB
 import feature.cover_image.data.database.CoverImagesListDB
 import feature.drive.data.database.DrivesListDB
+import feature.hoyolab.data.database.HoYoLabAccountDB
 import feature.wengine.data.database.WEnginesListDB
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSDocumentDirectory
@@ -61,6 +62,13 @@ actual class RoomDatabaseFactory {
     actual fun createCoverImagesListDatabase(): RoomDatabase.Builder<CoverImagesListDB> {
         val dbFile = documentDirectory() + "/${CoverImagesListDB.DATABASE_NAME}"
         return Room.databaseBuilder<CoverImagesListDB>(
+            name = dbFile
+        )
+    }
+
+    actual fun createHoYoLabAccountDatabase(): RoomDatabase.Builder<HoYoLabAccountDB> {
+        val dbFile = documentDirectory() + "/${HoYoLabAccountDB.DATABASE_NAME}"
+        return Room.databaseBuilder<HoYoLabAccountDB>(
             name = dbFile
         )
     }

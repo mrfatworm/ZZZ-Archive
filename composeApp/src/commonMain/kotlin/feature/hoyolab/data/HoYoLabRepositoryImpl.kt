@@ -5,13 +5,18 @@
 
 package feature.hoyolab.data
 
+import feature.hoyolab.data.database.HoYoLabAccountDao
+import feature.hoyolab.data.database.HoYoLabAccountEntity
 import feature.hoyolab.data.mapper.toPlayerAccountInfo
 import feature.hoyolab.model.PlayerAccountInfo
 import feature.hoyolab.model.PlayerDetailResponse
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withTimeout
 import network.HoYoLabHttp
 
-class HoYoLabRepositoryImpl(private val httpClient: HoYoLabHttp) : HoYoLabRepository {
+class HoYoLabRepositoryImpl(
+    private val httpClient: HoYoLabHttp, private val hoYoLabAccountDao: HoYoLabAccountDao
+) : HoYoLabRepository {
     override suspend fun requestUserGameRolesByLToken(
         region: String, lToken: String, ltUid: String
     ): Result<List<PlayerAccountInfo>> {
@@ -37,4 +42,22 @@ class HoYoLabRepositoryImpl(private val httpClient: HoYoLabHttp) : HoYoLabReposi
             Result.failure(e)
         }
     }
+
+    override suspend fun addAccountToDatabase(
+        uid: Int, region: String, regionName: String, lToken: ByteArray, ltUid: ByteArray
+    ) {
+        hoYoLabAccountDao.insertAccount(
+            HoYoLabAccountEntity(
+                uid = uid,
+                region = region,
+                regionName = regionName,
+                lToken = lToken,
+                ltUid = ltUid,
+            )
+        )
+    }
+
+    override suspend fun fetchAccountFromDB(): Flow<List<HoYoLabAccountEntity>> =
+        hoYoLabAccountDao.getAccountList()
+
 }

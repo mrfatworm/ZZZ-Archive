@@ -40,7 +40,10 @@ import feature.home.data.AssetVersionRepositoryImpl
 import feature.home.presentation.HomeViewModel
 import feature.hoyolab.data.HoYoLabRepository
 import feature.hoyolab.data.HoYoLabRepositoryImpl
-import feature.hoyolab.domain.HoYoLabConnectUseCase
+import feature.hoyolab.data.crypto.ZzzCrypto
+import feature.hoyolab.data.crypto.ZzzCryptoImpl
+import feature.hoyolab.data.database.HoYoLabAccountDB
+import feature.hoyolab.domain.HoYoLabManageUseCase
 import feature.hoyolab.presentation.HoYoLabConnectViewModel
 import feature.news.data.OfficialNewsRepository
 import feature.news.data.OfficialNewsRepositoryImpl
@@ -102,11 +105,16 @@ val sharedModule = module {
         get<RoomDatabaseFactory>().createCoverImagesListDatabase().setDriver(BundledSQLiteDriver())
             .build()
     }
+    single {
+        get<RoomDatabaseFactory>().createHoYoLabAccountDatabase().setDriver(BundledSQLiteDriver())
+            .build()
+    }
     single { get<AgentsListDB>().agentsListDao }
     single { get<WEnginesListDB>().wEnginesListDao }
     single { get<BangbooListDB>().bangbooListDao }
     single { get<DrivesListDB>().drivesListDao }
     single { get<CoverImagesListDB>().coverImagesListDao }
+    single { get<HoYoLabAccountDB>().hoYoLabAccountDao }
 
     // Repositories
     single<SystemConfigRepository> { SystemConfigRepositoryImpl(get()) }
@@ -121,7 +129,8 @@ val sharedModule = module {
     single<BangbooRepository> { BangbooRepositoryImpl(get(), get()) }
     single<DriveRepository> { DriveRepositoryImpl(get(), get()) }
     single<GoogleDocRepository> { GoogleDocRepositoryImpl(get()) }
-    single<HoYoLabRepository> { HoYoLabRepositoryImpl(get()) }
+    single<HoYoLabRepository> { HoYoLabRepositoryImpl(get(), get()) }
+    single<ZzzCrypto> { ZzzCryptoImpl() }
 
     // Use cases
     single<CoverImageUseCase> { CoverImageUseCase(get()) }
@@ -143,7 +152,7 @@ val sharedModule = module {
         UpdateDatabaseUseCase(get(), get(), get(), get(), get(), get(), get())
     }
     single<UiScaleUseCase> { UiScaleUseCase(get()) }
-    single<HoYoLabConnectUseCase> { HoYoLabConnectUseCase(get()) }
+    single<HoYoLabManageUseCase> { HoYoLabManageUseCase(get(), get()) }
 
     // ViewModels
     viewModelOf(::SplashViewModel)
