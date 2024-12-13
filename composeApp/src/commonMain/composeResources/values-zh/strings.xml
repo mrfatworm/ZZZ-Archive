@@ -157,12 +157,15 @@
     <string name="device_name">裝置名稱</string>
     <string name="operating_system">作業系統</string>
     <string name="submit_form">提交表單</string>
-    <string name="invalid_form">問題類型未選擇或問題內容為空。</string>
+    <string name="invalid_feedback_form">問題類型未選擇或問題內容為空。</string>
     <string name="form_submit_success">表單已送出\n感謝您的回饋！</string>
 
     <!-- HoYoLab Connect -->
-    <string name="hoyolab_connect">HoYoLab Connect</string>
-    <string name="connect">Connect</string>
-    <string name="disconnect">Disconnect</string>
+    <string name="hoyolab_connect">連結 HoYoLab</string>
+    <string name="connect">連結</string>
+    <string name="disconnect">解除連結</string>
+    <string name="game_server">遊戲伺服器</string>
+    <string name="account_not_found">查無帳號</string>
+    <string name="invalid_hoYoLab_form">遊戲伺服器未選擇或輸入內容為空</string>
 
 </resources>

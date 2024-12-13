@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.invalid_form
+import zzzarchive.composeapp.generated.resources.invalid_feedback_form
 import zzzarchive.composeapp.generated.resources.unknown_error
 
 class FeedbackViewModel(
@@ -59,7 +59,7 @@ class FeedbackViewModel(
         if (issueTypeIndex == feedbackIssueTypes.first() || issueContent.isBlank()) {
             _uiState.update {
                 it.copy(
-                    invalidForm = true, invalidMessage = Res.string.invalid_form
+                    invalidForm = true, invalidMessage = Res.string.invalid_feedback_form
                 )
             }
         } else {

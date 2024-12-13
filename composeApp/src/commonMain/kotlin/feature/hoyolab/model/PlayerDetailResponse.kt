@@ -10,10 +10,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PlayerDetailResponse(
-    @SerialName("retcode")
-    val retCode: Int,
-    val message: String,
-    val data: PlayerInfoData
+    @SerialName("retcode") val retCode: Int, val message: String, val data: PlayerInfoData
 )
 
 @Serializable
@@ -63,3 +60,63 @@ data class PlayerInfoGameDataShow(
     @SerialName("medal_list") val medalList: List<String>,
     @SerialName("card_url") val cardUrl: String
 )
+
+val stubPlayerDetailResponse = PlayerDetailResponse(
+    retCode = 0, message = "OK", data = PlayerInfoData(
+        stats = PlayerInfoStats(
+            activeDays = 160,
+            avatarNum = 17,
+            worldLevelName = "Legendary Proxy",
+            curPeriodZoneLayerCount = 0,
+            buddyNum = 24,
+            achievementCount = 243,
+            climbingTowerLayer = 5,
+            nextHundredLayer = "Laboratory RuinsPrep Area"
+        ),
+        avatarList = listOf(
+            PlayerInfoAvatar(
+                id = 1251,
+                level = 60,
+                nameMi18n = "Qingyi",
+                fullNameMi18n = "Qingyi",
+                elementType = 203,
+                campNameMi18n = "Criminal Investigation Special Response Team",
+                avatarProfession = 2,
+                rarity = "S",
+                groupIconPath = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u642mb/ce27b0fcda10a39f095b1fc1534e8635.png",
+                hollowIconPath = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u642mb/2d795cd2baf957410b15510a8a2964c3.png",
+                rank = 1,
+                isChosen = false,
+                roleSquareUrl = "https://act-webstatic.hoyoverse.com/game_record/zzzv2/role_square_avatar/role_square_avatar_1251.png"
+            ), PlayerInfoAvatar(
+                id = 1241,
+                level = 60,
+                nameMi18n = "Zhu Yuan",
+                fullNameMi18n = "Zhu Yuan",
+                elementType = 205,
+                campNameMi18n = "Criminal Investigation Special Response Team",
+                avatarProfession = 2,
+                rarity = "S",
+                groupIconPath = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u642mb/ce27b0fcda10a39f095b1fc1534e8635.png",
+                hollowIconPath = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u642mb/3f37a88a88536840e6d4601ba05a1114.png",
+                rank = 1,
+                isChosen = false,
+                roleSquareUrl = "https://act-webstatic.hoyoverse.com/game_record/zzzv2/role_square_avatar/role_square_avatar_1241.png"
+            )
+        ),
+        curHeadIconUrl = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u642mb/898feb9a5ef77bd02a992c9bfbc5d76d.png",
+        awardState = "AwardStateDone",
+        gameDataShow = PlayerInfoGameDataShow(
+            personalTitle = "Young Lady's Person",
+            titleMainColor = "f58661",
+            titleBottomColor = "fe357b",
+            titleBgUrl = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u642mb/1383c6f29f29ef7c79e5bb2a782eb228.png",
+            medalList = listOf(
+                "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u642mb/eb7ae51f666fb51d7304914be81b8599.png",
+                "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u642mb/8439b3a2c292af2d50faec333b2dfa8a.png"
+            ),
+            cardUrl = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u642mb/922b5553874bda279b83d6b78798f6a5.png"
+        )
+    )
+)
+

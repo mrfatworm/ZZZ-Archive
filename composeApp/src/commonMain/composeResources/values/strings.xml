@@ -157,12 +157,15 @@
     <string name="device_name">Device Name</string>
     <string name="operating_system">OS</string>
     <string name="submit_form">Submit</string>
-    <string name="invalid_form">Unspecified issue type or issue content.</string>
+    <string name="invalid_feedback_form">Unspecified issue type or issue content.</string>
     <string name="form_submit_success">The form has been submitted. Thank you for your feedback!</string>
 
     <!-- HoYoLab Connect -->
-    <string name="hoyolab_connect">連結 HoYoLab</string>
-    <string name="connect">連結</string>
-    <string name="disconnect">解除連結</string>
+    <string name="hoyolab_connect">HoYoLab Connect</string>
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="game_server">Game Server</string>
+    <string name="account_not_found">Account Not Found</string>
+    <string name="invalid_hoYoLab_form">Unspecified game server or empty input field.</string>
 
 </resources>

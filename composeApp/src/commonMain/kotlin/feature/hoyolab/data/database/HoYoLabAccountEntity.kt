@@ -7,6 +7,7 @@ package feature.hoyolab.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import io.ktor.utils.io.core.toByteArray
 
 @Entity
 data class HoYoLabAccountEntity(
@@ -16,4 +17,12 @@ data class HoYoLabAccountEntity(
     val regionName: String,
     val lToken: ByteArray,
     val ltUid: ByteArray,
+)
+
+val stubHoYoLabAccountEntity = HoYoLabAccountEntity(
+    uid = 123456789,
+    region = "prod_gf_jp",
+    regionName = "Asia",
+    lToken = "fake_ltoken".toByteArray(),
+    ltUid = "fake_lt_uid".toByteArray()
 )

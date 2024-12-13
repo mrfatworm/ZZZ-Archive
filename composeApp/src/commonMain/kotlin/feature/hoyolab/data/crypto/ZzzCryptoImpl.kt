@@ -5,6 +5,7 @@
 
 package feature.hoyolab.data.crypto
 
+import com.mrfatworm.zzzarchive.ZzzConfig
 import dev.whyoleg.cryptography.CryptographyProvider
 import dev.whyoleg.cryptography.algorithms.AES
 import dev.whyoleg.cryptography.algorithms.AES.Key
@@ -13,10 +14,7 @@ import kotlin.io.encoding.ExperimentalEncodingApi
 
 @OptIn(ExperimentalEncodingApi::class)
 class ZzzCryptoImpl : ZzzCrypto {
-
-    override val key = aesKey
-    // For open-source
-    // val key = "eryuQ00pQZ16die2sfaPerkoGwQVM9jXACLNAMPHM/M="
+    override val key = ZzzConfig.AES_KEY
 
     override suspend fun encryptData(text: String): ByteArray {
         val provider = CryptographyProvider.Default

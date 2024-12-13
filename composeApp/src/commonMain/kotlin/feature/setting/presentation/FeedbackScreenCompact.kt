@@ -33,7 +33,7 @@ import ui.utils.contentPaddingInScaffold
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.feedback
 import zzzarchive.composeapp.generated.resources.ic_arrow_up
-import zzzarchive.composeapp.generated.resources.invalid_form
+import zzzarchive.composeapp.generated.resources.invalid_feedback_form
 import zzzarchive.composeapp.generated.resources.submit_form
 
 @Composable
@@ -73,7 +73,7 @@ fun FeedbackScreenCompact(
             if (uiState.invalidForm) {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
-                    text = stringResource(Res.string.invalid_form),
+                    text = stringResource(Res.string.invalid_feedback_form),
                     textAlign = TextAlign.Center,
                     color = AppTheme.colors.alert,
                     style = AppTheme.typography.titleSmall

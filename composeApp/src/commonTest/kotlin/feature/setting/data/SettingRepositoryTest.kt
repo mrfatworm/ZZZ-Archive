@@ -43,7 +43,7 @@ class SettingRepositoryTest {
     }
 
     @Test
-    fun `Delete all setting THAN Reset to default value`() {
+    fun `Delete all setting THEN Reset to default value`() {
         settingsRepository.clear()
         val isDarkTheme = settingsRepository.getIsDarkTheme()
         val language = settingsRepository.getLanguageCode()

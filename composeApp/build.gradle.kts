@@ -3,6 +3,7 @@ import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
+import java.util.Properties
 import java.util.regex.Pattern
 
 plugins {
@@ -207,6 +208,11 @@ compose.desktop {
 
 // Ref: https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/
 project.extra.set("buildkonfig.flavor", currentBuildVariant())
+val localProperties = project.rootProject.file("local.properties")
+val aesKey: String =
+    Properties().apply { load(localProperties.inputStream()) }.getProperty("AES_KEY")
+        ?: "eryuQ00pQZ16die2sfaPerkoGwQVM9jXACLNAMPHM/M=" // Fake key for open-source
+
 buildkonfig {
     packageName = zzzPackageId
     objectName = "ZzzConfig"
@@ -220,6 +226,7 @@ buildkonfig {
             FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api"
         )
         buildConfigField(FieldSpec.Type.STRING, "VERSION", "$zzzVersionName-Beta")
+        buildConfigField(FieldSpec.Type.STRING, "AES_KEY", aesKey)
     }
 
     defaultConfigs("Dev") {
@@ -230,6 +237,7 @@ buildkonfig {
             FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api"
         )
         buildConfigField(FieldSpec.Type.STRING, "VERSION", "$zzzVersionName-Beta")
+        buildConfigField(FieldSpec.Type.STRING, "AES_KEY", aesKey)
     }
 
     defaultConfigs("Live") {
@@ -240,6 +248,7 @@ buildkonfig {
             FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Api"
         )
         buildConfigField(FieldSpec.Type.STRING, "VERSION", zzzVersionName)
+        buildConfigField(FieldSpec.Type.STRING, "AES_KEY", aesKey)
     }
 }
 

@@ -3,7 +3,7 @@
  * License: MIT
  */
 
-package feature.hoyolab.data
+package feature.hoyolab.data.repository
 
 import feature.hoyolab.data.database.HoYoLabAccountDao
 import feature.hoyolab.data.database.HoYoLabAccountEntity
@@ -43,7 +43,13 @@ class HoYoLabRepositoryImpl(
         }
     }
 
-    override suspend fun addAccountToDatabase(
+    override suspend fun getAllAccountsFromDB(): Flow<List<HoYoLabAccountEntity>> =
+        hoYoLabAccountDao.getAccountList()
+
+    override suspend fun getAccountFromDB(uid: Int): Flow<HoYoLabAccountEntity> =
+        hoYoLabAccountDao.getAccount(uid)
+
+    override suspend fun addAccountToDB(
         uid: Int, region: String, regionName: String, lToken: ByteArray, ltUid: ByteArray
     ) {
         hoYoLabAccountDao.insertAccount(
@@ -57,7 +63,5 @@ class HoYoLabRepositoryImpl(
         )
     }
 
-    override suspend fun fetchAccountFromDB(): Flow<List<HoYoLabAccountEntity>> =
-        hoYoLabAccountDao.getAccountList()
-
+    override suspend fun deleteAccountFromDB(uid: Int) = hoYoLabAccountDao.deleteAccount(uid)
 }

@@ -5,8 +5,11 @@
 
 package feature.hoyolab.presentation
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import feature.hoyolab.model.ServersList
 import org.jetbrains.compose.resources.stringResource
@@ -53,16 +57,27 @@ fun HoYoLabConnectScreen(onBackClick: () -> Unit) {
             text = stringResource(Res.string.connect),
             onClick = {
                 viewModel.onAction(
-                    HoYoLabConnectAction.ConnectToHoYoLab(
+                    HoYoLabConnectAction.ConnectToHoYoLabAndAdd(
                         ServersList.ASIA.region,
                         lToken,
                         ltUid
                     )
                 )
             })
-        Text(text = uiState.userName, color = AppTheme.colors.onSurface)
-        Text(text = uiState.uid, color = AppTheme.colors.onSurface)
         Text(text = uiState.errorMessage, color = AppTheme.colors.alert)
+        LazyColumn {
+            items(uiState.connectedAccounts) {
+                AccountListItem(uid = it.uid, regionName = it.regionName)
+            }
+        }
     }
 
+}
+
+@Composable
+fun AccountListItem(uid: String, regionName: String) {
+    Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(text = uid, color = AppTheme.colors.onSurface)
+        Text(text = regionName, color = AppTheme.colors.onSurface)
+    }
 }

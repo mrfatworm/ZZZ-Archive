@@ -21,20 +21,20 @@ class AgentRepositoryImplTest {
     // Remote: 3 agents, Local: 1 agent
 
     @Test
-    fun `WHEN Get agents list success THAN return local DB`() = runTest {
+    fun `WHEN Get agents list success THEN return local DB`() = runTest {
         val result = repository.getAgentsList().first()
         assertEquals(result.size, 1)
     }
 
     @Test
-    fun `WHEN Request agents list success THAN return updated DB`() = runTest {
+    fun `WHEN Request agents list success THEN return updated DB`() = runTest {
         repository.requestAndUpdateAgentsListDB()
         val result = repository.getAgentsList().first()
         assertEquals(result.size, 3)
     }
 
     @Test
-    fun `GIVEN Agents list DB is empty WHEN Get agents list THAN Auto request and return updated DB`() =
+    fun `GIVEN Agents list DB is empty WHEN Get agents list THEN Auto request and return updated DB`() =
         runTest {
         agentsListDao.deleteAgentsList()
         val result = repository.getAgentsList().first()
@@ -42,14 +42,14 @@ class AgentRepositoryImplTest {
     }
 
     @Test
-    fun `WHEN Request agents list error THAN return local DB`() = runTest {
+    fun `WHEN Request agents list error THEN return local DB`() = runTest {
         httpClient.setError(true)
         val result = repository.getAgentsList().first()
         assertEquals(result.size, 1)
     }
 
     @Test
-    fun `GIVEN Agents list DB is empty WHEN Request agents list error THAN return empty DB`() =
+    fun `GIVEN Agents list DB is empty WHEN Request agents list error THEN return empty DB`() =
         runTest {
         httpClient.setError(true)
         agentsListDao.deleteAgentsList()

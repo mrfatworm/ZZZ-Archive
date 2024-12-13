@@ -45,7 +45,7 @@ class DrivesListViewModelTest {
     }
 
     @Test
-    fun `GIVEN drive selected WHEN onDetailDismiss detail THAN selectedDrive is null`() {
+    fun `GIVEN drive selected WHEN onDetailDismiss detail THEN selectedDrive is null`() {
         viewModel.onAction(DrivesListAction.ClickDriveDetail(1))
         viewModel.onAction(DrivesListAction.DismissDriveDetail)
         val state = viewModel.uiState.value

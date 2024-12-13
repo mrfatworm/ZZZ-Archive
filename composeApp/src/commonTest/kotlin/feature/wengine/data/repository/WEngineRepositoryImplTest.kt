@@ -19,20 +19,20 @@ class WEngineRepositoryImplTest {
     // Remote: 2 W-Engines, Local: 1 W-Engine
 
     @Test
-    fun `WHEN Get W-Engines list success THAN return local DB`() = runTest {
+    fun `WHEN Get W-Engines list success THEN return local DB`() = runTest {
         val result = repository.getWEnginesList().first()
         assertEquals(result.size, 1)
     }
 
     @Test
-    fun `WHEN Request W-Engines list success THAN return updated DB`() = runTest {
+    fun `WHEN Request W-Engines list success THEN return updated DB`() = runTest {
         repository.requestAndUpdateWEnginesListDB()
         val result = repository.getWEnginesList().first()
         assertEquals(result.size, 2)
     }
 
     @Test
-    fun `GIVEN W-Engines list DB is empty WHEN Get W-Engines list THAN Auto request and return updated DB`() =
+    fun `GIVEN W-Engines list DB is empty WHEN Get W-Engines list THEN Auto request and return updated DB`() =
         runTest {
             database.deleteWEnginesList()
             val result = repository.getWEnginesList().first()
@@ -40,14 +40,14 @@ class WEngineRepositoryImplTest {
         }
 
     @Test
-    fun `WHEN Request W-Engines list error THAN return local DB`() = runTest {
+    fun `WHEN Request W-Engines list error THEN return local DB`() = runTest {
         httpClient.setError(true)
         val result = repository.getWEnginesList().first()
         assertEquals(result.size, 1)
     }
 
     @Test
-    fun `GIVEN W-Engines list DB is empty WHEN Request W-Engines list error THAN return empty DB`() =
+    fun `GIVEN W-Engines list DB is empty WHEN Request W-Engines list error THEN return empty DB`() =
         runTest {
             httpClient.setError(true)
             database.deleteWEnginesList()

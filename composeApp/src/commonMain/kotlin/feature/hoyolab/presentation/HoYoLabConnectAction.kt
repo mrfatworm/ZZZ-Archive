@@ -6,10 +6,9 @@
 package feature.hoyolab.presentation
 
 sealed class HoYoLabConnectAction {
-    data class ConnectToHoYoLab(val region: String, val lToken: String, val ltUid: String) :
+    data class ConnectToHoYoLabAndAdd(val region: String, val lToken: String, val ltUid: String) :
         HoYoLabConnectAction()
 
-    data class ChangeLToken(val lToken: String) : HoYoLabConnectAction()
-    data class ChangeLtUid(val ltUid: String) : HoYoLabConnectAction()
+    data class DeleteAccount(val uid: Int) : HoYoLabConnectAction()
     data object ClickBack : HoYoLabConnectAction()
 }

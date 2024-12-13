@@ -20,20 +20,20 @@ class BangbooRepositoryImplTest {
     // Remote: 3 bangboo, Local: 1 bangboo
 
     @Test
-    fun `WHEN Get bangboo list success THAN return local DB`() = runTest {
+    fun `WHEN Get bangboo list success THEN return local DB`() = runTest {
         val result = repository.getBangbooList().first()
         assertEquals(result.size, 1)
     }
 
     @Test
-    fun `WHEN Request bangboo list success THAN return updated DB`() = runTest {
+    fun `WHEN Request bangboo list success THEN return updated DB`() = runTest {
         repository.requestAndUpdateBangbooListDB()
         val result = repository.getBangbooList().first()
         assertEquals(result.size, 3)
     }
 
     @Test
-    fun `GIVEN Bangboo list DB is empty WHEN Get bangboo list THAN Auto request and return updated DB`() =
+    fun `GIVEN Bangboo list DB is empty WHEN Get bangboo list THEN Auto request and return updated DB`() =
         runTest {
             bangbooListDao.deleteBangbooList()
             val result = repository.getBangbooList().first()
@@ -41,14 +41,14 @@ class BangbooRepositoryImplTest {
         }
 
     @Test
-    fun `WHEN Request bangboo list error THAN return local DB`() = runTest {
+    fun `WHEN Request bangboo list error THEN return local DB`() = runTest {
         httpClient.setError(true)
         val result = repository.getBangbooList().first()
         assertEquals(result.size, 1)
     }
 
     @Test
-    fun `GIVEN bangboo list DB is empty WHEN Request bangboo list error THAN return empty DB`() =
+    fun `GIVEN bangboo list DB is empty WHEN Request bangboo list error THEN return empty DB`() =
         runTest {
         httpClient.setError(true)
             bangbooListDao.deleteBangbooList()

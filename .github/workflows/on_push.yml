@@ -1,13 +1,16 @@
 name: On Push
 
-on:
-  push:
-    branches-ignore:
-      - "doc/**"
-    paths-ignore:
-      - "**/*.md"
+on: [push, pull_request]
+
+branches-ignore:
+   - "doc/**"
+
+paths-ignore:
+   - "**/*.md"
 
 jobs:
+  lint:
+    uses: ./.github/workflows/job_lint.yml
 
   unit_test:
     uses: ./.github/workflows/job_test_debug.yml

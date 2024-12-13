@@ -38,11 +38,11 @@ import feature.drive.presentation.DrivesListViewModel
 import feature.home.data.AssetVersionRepository
 import feature.home.data.AssetVersionRepositoryImpl
 import feature.home.presentation.HomeViewModel
-import feature.hoyolab.data.HoYoLabRepository
-import feature.hoyolab.data.HoYoLabRepositoryImpl
 import feature.hoyolab.data.crypto.ZzzCrypto
 import feature.hoyolab.data.crypto.ZzzCryptoImpl
 import feature.hoyolab.data.database.HoYoLabAccountDB
+import feature.hoyolab.data.repository.HoYoLabRepository
+import feature.hoyolab.data.repository.HoYoLabRepositoryImpl
 import feature.hoyolab.domain.HoYoLabManageUseCase
 import feature.hoyolab.presentation.HoYoLabConnectViewModel
 import feature.news.data.OfficialNewsRepository

@@ -6,7 +6,11 @@
 package feature.hoyolab.model
 
 data class HoYoLabConnectState(
-    val userName: String = "---",
-    val uid: String = "---",
+    val connectedAccounts: List<ConnectedAccountsListItem> = emptyList(),
     val errorMessage: String = ""
+)
+
+data class ConnectedAccountsListItem(
+    val uid: String,
+    val regionName: String,
 )

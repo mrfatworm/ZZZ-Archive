@@ -3,7 +3,7 @@
  * License: MIT
  */
 
-package feature.hoyolab.data
+package feature.hoyolab.data.repository
 
 import feature.hoyolab.data.database.HoYoLabAccountEntity
 import feature.hoyolab.model.PlayerAccountInfo
@@ -19,9 +19,13 @@ interface HoYoLabRepository {
         uid: Int, region: String, lToken: String, ltUid: String
     ): Result<PlayerDetailResponse>
 
-    suspend fun addAccountToDatabase(
+    suspend fun getAllAccountsFromDB(): Flow<List<HoYoLabAccountEntity>>
+
+    suspend fun getAccountFromDB(uid: Int): Flow<HoYoLabAccountEntity>
+
+    suspend fun addAccountToDB(
         uid: Int, region: String, regionName: String, lToken: ByteArray, ltUid: ByteArray
     )
 
-    suspend fun fetchAccountFromDB(): Flow<List<HoYoLabAccountEntity>>
+    suspend fun deleteAccountFromDB(uid: Int)
 }

@@ -21,9 +21,7 @@ class HoYoLabHttpImpl(engine: HttpClientEngine) : HoYoLabHttp {
     private val client = createHoYoLabHttpClient(engine)
 
     override suspend fun requestUserGameRolesByLToken(
-        region: String,
-        lToken: String,
-        ltUid: String
+        region: String, lToken: String, ltUid: String
     ): UserGameRolesResponse = client.get {
         url {
             takeFrom("https://api-account-os.hoyolab.com/binding/api/getUserGameRolesByLtoken")
@@ -36,13 +34,17 @@ class HoYoLabHttpImpl(engine: HttpClientEngine) : HoYoLabHttp {
     }.body()
 
     override suspend fun requestPlayerDetail(
-        uid: Int,
-        region: String,
-        lToken: String,
-        ltUid: String
-    ): PlayerDetailResponse {
-        TODO("Not yet implemented")
-    }
+        uid: Int, region: String, lToken: String, ltUid: String
+    ): PlayerDetailResponse = client.get {
+        url {
+            takeFrom("https://sg-public-api.hoyolab.com/event/game_record_zzz/api/zzz/index")
+        }
+        parameter("server", region)
+        parameter("role_id", uid)
+        cookie("ltoken_v2", lToken)
+        cookie("ltuid_v2", ltUid)
+        contentType(ContentType.Application.Json)
+    }.body()
 }
 
 

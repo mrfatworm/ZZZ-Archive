@@ -7,7 +7,9 @@ package feature.hoyolab.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mrfatworm.zzzarchive.ZzzConfig
 import feature.hoyolab.domain.HoYoLabManageUseCase
+import feature.hoyolab.model.ConnectedAccountsListItem
 import feature.hoyolab.model.HoYoLabConnectState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,80 +27,53 @@ class HoYoLabConnectViewModel(
         viewModelScope.launch {
             observeAccountList()
         }
+
+        println("Lance Key = ${ZzzConfig.AES_KEY}")
     }
 
     fun onAction(action: HoYoLabConnectAction) {
         when (action) {
-            is HoYoLabConnectAction.ConnectToHoYoLab -> {
-                connectToHoYoLab(action.region, action.lToken, action.ltUid)
+            is HoYoLabConnectAction.ConnectToHoYoLabAndAdd -> {
+                viewModelScope.launch {
+                    connectToHoYoLab(action.region, action.lToken, action.ltUid)
+                }
             }
 
-            is HoYoLabConnectAction.ChangeLToken -> {
-
-            }
-
-            is HoYoLabConnectAction.ChangeLtUid -> {
-
+            is HoYoLabConnectAction.DeleteAccount -> {
+                viewModelScope.launch {
+                    hoYoLabManageUseCase.deleteAccountFromDB(action.uid)
+                }
             }
 
             else -> {}
         }
     }
 
-    private fun connectToHoYoLab(server: String, lToken: String, ltUid: String) {
-        viewModelScope.launch {
-            val result = hoYoLabManageUseCase.requestUserGameRoles(server, lToken, ltUid)
-            result.fold(onSuccess = { accountInfo ->
-                if (accountInfo.isEmpty()) {
-                    _uiState.update { state ->
-                        state.copy(
-                            errorMessage = "No account found"
-                        )
-                    }
-                } else {
-                    _uiState.update { state ->
-                        state.copy(
-                            userName = accountInfo.first().nickname, uid = accountInfo.first().uid
-                        )
-                    }
-                    hoYoLabManageUseCase.encryptAndSaveToDatabase(
-                        region = server,
-                        regionName = accountInfo.first().regionName,
-                        lToken = lToken,
-                        ltUid = ltUid,
-                        uid = accountInfo.first().uid
-                    )
-                }
-            }, onFailure = {
-                _uiState.update { state ->
-                    state.copy(
-                        errorMessage = "Request Error"
-                    )
-                }
-            })
-        }
-    }
-
     private suspend fun observeAccountList() {
-        hoYoLabManageUseCase.getAccountFromDB().collect { accountList ->
-            if (accountList.isEmpty()) {
-                _uiState.update { state ->
-                    state.copy(
-                        errorMessage = "No account found"
-                    )
-                }
-                return@collect
-            }
-
+        hoYoLabManageUseCase.getAllAccountsFromDB().collect { accountList ->
             println("lToken: ${accountList.first().lToken}")
             println("ltUid: ${accountList.first().ltUid}")
 
             _uiState.update { state ->
-                state.copy(
-                    userName = accountList.first().regionName,
-                    uid = accountList.first().uid.toString()
-                )
+                state.copy(connectedAccounts = accountList.map {
+                    ConnectedAccountsListItem(
+                        uid = it.uid.toString(), regionName = it.regionName
+                    )
+                })
             }
         }
+    }
+
+    private suspend fun connectToHoYoLab(server: String, lToken: String, ltUid: String) {
+        val result = hoYoLabManageUseCase.requestUserGameRolesAndSave(server, lToken, ltUid)
+        result.fold(onSuccess = {
+
+        }, onFailure = {
+            _uiState.update { state ->
+                state.copy(
+                    errorMessage = "Request Error"
+                )
+            }
+        })
     }
 }

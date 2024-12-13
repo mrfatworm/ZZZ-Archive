@@ -28,6 +28,9 @@ jobs:
         java-version: '18'
         cache: gradle
 
+    - name: Set up local.properties
+      run: echo "AES_KEY=${{ secrets.AES_KEY }}" > local.properties
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 

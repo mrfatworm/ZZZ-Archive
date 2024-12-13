@@ -20,6 +20,9 @@ interface HoYoLabAccountDao {
     @Query("SELECT * FROM HoYoLabAccountEntity")
     fun getAccountList(): Flow<List<HoYoLabAccountEntity>>
 
+    @Query("SELECT * FROM HoYoLabAccountEntity WHERE uid = :uid")
+    fun getAccount(uid: Int): Flow<HoYoLabAccountEntity>
+
     @Query("DELETE FROM HoYoLabAccountEntity WHERE uid = :uid")
     suspend fun deleteAccount(uid: Int)
 

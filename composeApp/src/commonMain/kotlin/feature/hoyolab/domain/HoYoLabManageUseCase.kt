@@ -5,41 +5,47 @@
 
 package feature.hoyolab.domain
 
-import feature.hoyolab.data.HoYoLabRepository
 import feature.hoyolab.data.crypto.ZzzCrypto
-import feature.hoyolab.model.HoYoLabAccount
-import feature.hoyolab.model.PlayerAccountInfo
+import feature.hoyolab.data.database.HoYoLabAccountEntity
+import feature.hoyolab.data.repository.HoYoLabRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 class HoYoLabManageUseCase(
     private val repository: HoYoLabRepository, private val zzzCryptoImpl: ZzzCrypto
 ) {
-    suspend fun requestUserGameRoles(
+    suspend fun requestUserGameRolesAndSave(
         region: String,
         lToken: String,
         ltUid: String
-    ): Result<List<PlayerAccountInfo>> =
-        repository.requestUserGameRolesByLToken(region, lToken, ltUid)
-
-    suspend fun getAccountFromDB(): Flow<List<HoYoLabAccount>> = flow {
-        repository.fetchAccountFromDB().collect { accountList ->
-            emit(accountList.map {
-                HoYoLabAccount(
-                    uid = it.uid,
-                    region = it.region,
-                    regionName = it.regionName,
-                    lToken = zzzCryptoImpl.decryptData(it.lToken),
-                    ltUid = zzzCryptoImpl.decryptData(it.ltUid)
+    ): Result<Unit> {
+        val result = repository.requestUserGameRolesByLToken(region, lToken, ltUid)
+        result.fold(onSuccess = { accountInfo ->
+            if (accountInfo.isEmpty()) {
+                return Result.failure(Exception("No account found"))
+            } else {
+                encryptAndSaveToDatabase(
+                    uid = accountInfo.first().uid,
+                    region = region,
+                    regionName = accountInfo.first().regionName,
+                    lToken = lToken,
+                    ltUid = ltUid,
                 )
-            })
-        }
+                return Result.success(Unit)
+            }
+        }, onFailure = {
+            return Result.failure(it)
+        })
     }
 
-    suspend fun encryptAndSaveToDatabase(
+    suspend fun getAllAccountsFromDB(): Flow<List<HoYoLabAccountEntity>> =
+        repository.getAllAccountsFromDB()
+
+    suspend fun deleteAccountFromDB(uid: Int) = repository.deleteAccountFromDB(uid)
+
+    private suspend fun encryptAndSaveToDatabase(
         region: String, regionName: String, lToken: String, ltUid: String, uid: String
     ) {
-        repository.addAccountToDatabase(
+        repository.addAccountToDB(
             uid.toInt(),
             region,
             regionName,
