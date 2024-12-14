@@ -19,6 +19,7 @@ import feature.pixiv.domain.PixivUseCase
 import feature.wengine.domain.WEnginesListUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -39,9 +40,8 @@ class HomeViewModel(
     val uiState = _uiState.asStateFlow()
 
     init {
-
-        ignoreBannerId = bannerUseCase.getBannerIgnoreId()
         viewModelScope.launch {
+            launch { ignoreBannerId = bannerUseCase.getBannerIgnoreId().first() }
             launch { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() }
             launch { fetchBanner() }
             launch { observeCoverImage() }
@@ -57,7 +57,9 @@ class HomeViewModel(
     fun onAction(action: HomeAction) {
         when (action) {
             is HomeAction.DismissBanner -> {
-                closeBannerAndIgnoreId(action.id)
+                viewModelScope.launch {
+                    closeBannerAndIgnoreId(action.id)
+                }
             }
 
             is HomeAction.ChangePixivTag -> {
@@ -70,7 +72,7 @@ class HomeViewModel(
         }
     }
 
-    fun closeBannerAndIgnoreId(id: Int) {
+    suspend fun closeBannerAndIgnoreId(id: Int) {
         ignoreBannerId = id
         bannerUseCase.setBannerIgnoreId(id)
         _uiState.update { state ->

@@ -6,10 +6,11 @@
 package feature.setting.domain
 
 import feature.setting.data.PreferencesRepository
+import kotlinx.coroutines.flow.Flow
 
 class UiScaleUseCase(private val repository: PreferencesRepository) {
-    fun getUiScale(): Float = repository.getUiScale()
-    fun setUiScale(value: Float) = repository.setUiScale(value)
-    fun getFontScale(): Float = repository.getFontScale()
-    fun setFontScale(value: Float) = repository.setFontScale(value)
+    fun getUiScale(): Flow<Float> = repository.getUiScale()
+    suspend fun setUiScale(value: Float) = repository.setUiScale(value)
+    fun getFontScale(): Flow<Float> = repository.getFontScale()
+    suspend fun setFontScale(value: Float) = repository.setFontScale(value)
 }

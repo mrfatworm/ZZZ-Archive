@@ -5,17 +5,23 @@
 
 package feature.wengine.domain
 
+import feature.setting.domain.LanguageUseCase
 import feature.wengine.data.repository.WEngineRepository
 import feature.wengine.model.WEnginesListItem
+import kotlinx.coroutines.flow.first
 import utils.AgentSpecialty
 import utils.ZzzRarity
 
 
 class WEnginesListUseCase(
-    private val wEngineRepository: WEngineRepository
+    private val wEngineRepository: WEngineRepository, private val languageUseCase: LanguageUseCase
 ) {
-    suspend fun invoke() = wEngineRepository.getWEnginesList()
-    suspend fun updateWEnginesList() = wEngineRepository.requestAndUpdateWEnginesListDB()
+    suspend fun invoke() =
+        wEngineRepository.getWEnginesList(languageUseCase.getLanguage().first().officialCode)
+
+    suspend fun updateWEnginesList() = wEngineRepository.requestAndUpdateWEnginesListDB(
+        languageUseCase.getLanguage().first().officialCode
+    )
 
     fun filterWEnginesList(
         wEnginesList: List<WEnginesListItem>,

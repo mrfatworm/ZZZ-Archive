@@ -10,7 +10,7 @@ import feature.agent.model.AgentListItem
 import kotlinx.coroutines.flow.Flow
 
 interface AgentRepository {
-    suspend fun getAgentsList(): Flow<List<AgentListItem>>
-    suspend fun requestAndUpdateAgentsListDB(): Result<Unit>
-    suspend fun getAgentDetail(id: Int): Result<AgentDetail>
+    suspend fun getAgentsList(languagePath: String): Flow<List<AgentListItem>>
+    suspend fun requestAndUpdateAgentsListDB(languagePath: String): Result<Unit>
+    suspend fun getAgentDetail(id: Int, languagePath: String): Result<AgentDetail>
 }

@@ -6,62 +6,76 @@
 package feature.setting.data
 
 
-import com.russhwolf.settings.Settings
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.floatPreferencesKey
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-/**
- * This class demonstrates common code exercising all of the functionality of the [Settings] class.
- * The majority of this functionality is delegated to [SettingConfig] subclasses for each supported type.
- */
-class PreferencesRepositoryImpl(private val settings: Settings) : PreferencesRepository {
+class PreferencesRepositoryImpl(private val dataStore: DataStore<Preferences>) :
+    PreferencesRepository {
 
-    private val isDarkTheme: SettingConfig<Boolean> =
-        BooleanSettingConfig(settings, "IS_DARK_THEME", true)
-    private val language: SettingConfig<String> = StringSettingConfig(settings, "LANGUAGE", "")
-    private val uiScale: SettingConfig<Float> = FloatSettingConfig(settings, "UI_SCALE", 1f)
-    private val fontScale: SettingConfig<Float> = FloatSettingConfig(settings, "FONT_SCALE", 1f)
-    private val defaultHoYoLabAccountUid: SettingConfig<Int> =
-        IntSettingConfig(settings, "DEFAULT_HOYO_LAB_ACCOUNT_UID", 0)
-
-    override fun getIsDarkTheme(): Boolean {
-        return isDarkTheme.get().toBoolean()
+    companion object {
+        const val DEFAULT_IS_DARK_THEME = true
+        const val DEFAULT_LANGUAGE = ""
+        const val DEFAULT_UI_SCALE = 1f
+        const val DEFAULT_FONT_SCALE = 1f
+        const val DEFAULT_HOYOLAB_ACCOUNT_UID = 0
     }
 
-    override fun setIsDarkTheme(value: Boolean) {
-        isDarkTheme.set(value.toString())
+    private val isDarkThemeKey = booleanPreferencesKey("is_dark_theme")
+    private val languageKey = stringPreferencesKey("language")
+    private val uiScaleKey = floatPreferencesKey("ui_scale")
+    private val fontScaleKey = floatPreferencesKey("font_scale")
+    private val defaultHoYoLabAccountUidKey = intPreferencesKey("default_hoyolab_account_uid")
+
+
+    override fun getIsDarkTheme(): Flow<Boolean> = dataStore.data.map {
+        it[isDarkThemeKey] ?: DEFAULT_IS_DARK_THEME
     }
 
-    override fun getLanguageCode(): String {
-        return language.get()
+    override suspend fun setIsDarkTheme(value: Boolean) {
+        dataStore.edit { it[isDarkThemeKey] = value }
     }
 
-    override fun setLanguage(langCode: String) {
-        language.set(langCode)
+    override fun getLanguageCode(): Flow<String> = dataStore.data.map {
+        it[languageKey] ?: DEFAULT_LANGUAGE
     }
 
-    override fun getUiScale(): Float {
-        return uiScale.get().toFloat()
+    override suspend fun setLanguage(langCode: String) {
+        dataStore.edit { it[languageKey] = langCode }
     }
 
-    override fun setUiScale(value: Float) {
-        uiScale.set(value.toString())
+    override fun getUiScale(): Flow<Float> = dataStore.data.map {
+        it[uiScaleKey]?.toFloat() ?: DEFAULT_UI_SCALE
     }
 
-    override fun getFontScale(): Float {
-        return fontScale.get().toFloat()
+    override suspend fun setUiScale(value: Float) {
+        dataStore.edit { it[uiScaleKey] = value }
     }
 
-    override fun setFontScale(value: Float) {
-        fontScale.set(value.toString())
+    override fun getFontScale(): Flow<Float> = dataStore.data.map {
+        it[fontScaleKey]?.toFloat() ?: DEFAULT_FONT_SCALE
     }
 
-    override fun getDefaultHoYoLabAccountUid(): Int {
-        return defaultHoYoLabAccountUid.get().toInt()
+    override suspend fun setFontScale(value: Float) {
+        dataStore.edit { it[fontScaleKey] = value }
     }
 
-    override fun setDefaultHoYoLabAccountUid(value: Int) {
-        defaultHoYoLabAccountUid.set(value.toString())
+    override fun getDefaultHoYoLabAccountUid(): Flow<Int> = dataStore.data.map {
+        it[defaultHoYoLabAccountUidKey]?.toInt() ?: DEFAULT_HOYOLAB_ACCOUNT_UID
     }
 
-    override fun clear() = settings.clear()
+    override suspend fun setDefaultHoYoLabAccountUid(value: Int) {
+        dataStore.edit { it[defaultHoYoLabAccountUidKey] = value }
+    }
+
+    override suspend fun clear() {
+        dataStore.edit { it.clear() }
+    }
 }
 

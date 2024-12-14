@@ -8,6 +8,8 @@ package feature.setting.domain/*
  * License: MIT
  */
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import utils.Language
 
 /*
@@ -19,11 +21,11 @@ import utils.Language
 class FakeLanguageUseCase : LanguageUseCase {
     private var language = Language.English
 
-    override fun getLanguage(): Language {
-        return language
+    override fun getLanguage(): Flow<Language> = flow {
+        emit(language)
     }
 
-    override fun setLanguage(langCode: String) {
+    override suspend fun setLanguage(langCode: String) {
         language = Language.entries.firstOrNull { it.code == langCode } ?: Language.English
     }
 }

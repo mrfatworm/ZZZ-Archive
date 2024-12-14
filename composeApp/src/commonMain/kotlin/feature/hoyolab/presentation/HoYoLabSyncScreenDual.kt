@@ -17,11 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.hoyolab.components.AccountsListItemCard
 import feature.hoyolab.components.AddHoYoLabAccountCard
-import feature.hoyolab.model.HoYoLabConnectState
+import feature.hoyolab.model.HoYoLabSyncState
 import org.jetbrains.compose.resources.stringResource
 import ui.components.buttons.ZzzIconButton
 import ui.components.buttons.ZzzPrimaryButton
 import ui.utils.containerGap
+import ui.utils.contentGap
 import ui.utils.contentPadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.add_account
@@ -29,9 +30,9 @@ import zzzarchive.composeapp.generated.resources.ic_add
 import zzzarchive.composeapp.generated.resources.ic_arrow_back
 
 @Composable
-fun HoYoLabConnectScreenDual(
-    uiState: HoYoLabConnectState,
-    onAction: (HoYoLabConnectAction) -> Unit
+fun HoYoLabSyncScreenDual(
+    uiState: HoYoLabSyncState,
+    onAction: (HoYoLabSyncAction) -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(containerGap())) {
         Column(
@@ -39,41 +40,44 @@ fun HoYoLabConnectScreenDual(
             verticalArrangement = Arrangement.spacedBy(containerGap())
         ) {
             ZzzIconButton(iconRes = Res.drawable.ic_arrow_back, onClick = {
-                onAction(HoYoLabConnectAction.ClickBack)
+                onAction(HoYoLabSyncAction.ClickBack)
             })
 
-            if (uiState.connectedAccounts.isEmpty()) {
+            if (uiState.syncedAccounts.isEmpty()) {
                 AddHoYoLabAccountCard(
                     errorMessage = uiState.errorMessage,
                     onSubmit = { serverRegion, lToken, ltUid ->
                         onAction(
-                            HoYoLabConnectAction.ConnectToHoYoLabAndAdd(
+                            HoYoLabSyncAction.ConnectToHoYoLabAndAdd(
                                 serverRegion, lToken, ltUid
                             )
                         )
                     })
             }
 
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(containerGap())) {
-                items(uiState.connectedAccounts) { account ->
-                    AccountsListItemCard(uid = account.uid.toString(),
-                        regionName = account.regionName,
-                        updateAt = account.datetime,
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(contentGap())) {
+                items(uiState.syncedAccounts) { account ->
+                    AccountsListItemCard(
+                        uiState = account,
                         isDefault = account.uid == uiState.defaultAccountUid,
+                        syncable = uiState.syncable,
+                        sync = {
+                            onAction(HoYoLabSyncAction.SyncAccount(account.uid))
+                        },
                         setAsDefault = {
-                            onAction(HoYoLabConnectAction.SetDefaultAccount(account.uid))
+                            onAction(HoYoLabSyncAction.SetDefaultAccount(account.uid))
                         },
                         delete = {
-                            onAction(HoYoLabConnectAction.DeleteAccount(account.uid))
+                            onAction(HoYoLabSyncAction.DeleteAccount(account.uid))
                         })
                 }
                 item {
-                    if (uiState.connectedAccounts.isNotEmpty()) {
+                    if (uiState.syncedAccounts.isNotEmpty()) {
                         ZzzPrimaryButton(
                             modifier = Modifier.fillMaxWidth(),
                             text = stringResource(Res.string.add_account),
                             iconRes = Res.drawable.ic_add
-                        ) { onAction(HoYoLabConnectAction.ShowAddAccountDialog(true)) }
+                        ) { onAction(HoYoLabSyncAction.ShowAddAccountDialog(true)) }
                     }
                 }
             }

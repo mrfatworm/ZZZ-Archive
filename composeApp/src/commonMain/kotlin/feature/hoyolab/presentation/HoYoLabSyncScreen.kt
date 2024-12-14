@@ -8,44 +8,44 @@ package feature.hoyolab.presentation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import feature.hoyolab.model.HoYoLabConnectState
+import feature.hoyolab.model.HoYoLabSyncState
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.dialogs.AddHoYoLabAccountDialog
 import ui.theme.AppTheme
 import ui.utils.ContentType
 
 @Composable
-fun HoYoLabConnectScreen(onBackClick: () -> Unit) {
-    val viewModel: HoYoLabConnectViewModel = koinViewModel()
+fun HoYoLabSyncScreen(onBackClick: () -> Unit) {
+    val viewModel: HoYoLabSyncViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    HoYoLabConnectScreenContent(uiState, onAction = { action ->
+    HoYoLabSyncScreenContent(uiState, onAction = { action ->
         when (action) {
-            HoYoLabConnectAction.ClickBack -> onBackClick()
+            HoYoLabSyncAction.ClickBack -> onBackClick()
             else -> viewModel.onAction(action)
         }
     })
 }
 
 @Composable
-private fun HoYoLabConnectScreenContent(
-    uiState: HoYoLabConnectState, onAction: (HoYoLabConnectAction) -> Unit,
+private fun HoYoLabSyncScreenContent(
+    uiState: HoYoLabSyncState, onAction: (HoYoLabSyncAction) -> Unit,
 ) {
     if (AppTheme.contentType == ContentType.Single) {
-        HoYoLabConnectScreenSingle(uiState, onAction)
+        HoYoLabSyncScreenSingle(uiState, onAction)
     } else {
-        HoYoLabConnectScreenDual(uiState, onAction)
+        HoYoLabSyncScreenDual(uiState, onAction)
     }
 
     when {
         uiState.openAddAccountDialog -> {
             AddHoYoLabAccountDialog(uiState.errorMessage, onSubmit = { region, lToken, ltUid ->
                 onAction(
-                    HoYoLabConnectAction.ConnectToHoYoLabAndAdd(
+                    HoYoLabSyncAction.ConnectToHoYoLabAndAdd(
                         region, lToken, ltUid
                     )
                 )
             }, onDismiss = {
-                onAction(HoYoLabConnectAction.ShowAddAccountDialog(false))
+                onAction(HoYoLabSyncAction.ShowAddAccountDialog(false))
             })
         }
     }

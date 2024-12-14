@@ -169,14 +169,15 @@
     <string name="invalid_feedback_form">Unspecified issue type or issue content.</string>
     <string name="form_submit_success">The form has been submitted. Thank you for your feedback!</string>
 
-    <!-- HoYoLab Connect -->
-    <string name="hoyolab_connect">HoYoLab Connect</string>
-    <string name="connect">Connect</string>
-    <string name="disconnect">Disconnect</string>
+    <!-- HoYoLab Sync -->
+    <string name="hoyolab_sync">HoYoLab Sync</string>
+    <string name="sync">Sync</string>
+    <string name="unsync">Unsync</string>
     <string name="game_server">Game Server</string>
     <string name="account_not_found">Account Not Found</string>
     <string name="invalid_hoYoLab_form">Unspecified game server or empty input field.</string>
     <string name="update_at">%1$s updated</string>
+    <string name="user_profile_image">User Profile Image</string>
     <string name="hoyolab_connect_announcement">The information submitted on this page is only used for processing requests in HoYoLab and is encrypted and stored on your device. We do not collect any data.</string>
     <string name="remove_account_hint">Do you want to disconnect the account?\n(remove its data from this device)</string>
     <string name="add_account">Add Account</string>

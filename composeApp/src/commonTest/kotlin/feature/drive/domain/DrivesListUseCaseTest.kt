@@ -7,6 +7,7 @@ package feature.drive.domain
 
 import feature.drive.data.FakeDriveRepository
 import feature.drive.data.database.stubDrivesListItemEntity
+import feature.setting.domain.FakeLanguageUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
@@ -15,7 +16,8 @@ import kotlin.test.assertNull
 
 class DrivesListUseCaseTest {
     private val driveRepository = FakeDriveRepository()
-    private val drivesListUseCase = DrivesListUseCase(driveRepository)
+    private val languageUseCase = FakeLanguageUseCase()
+    private val drivesListUseCase = DrivesListUseCase(driveRepository, languageUseCase)
 
     @Test
     fun `Get drives list`() = runTest {

@@ -8,17 +8,24 @@ package feature.agent.domain
 import feature.agent.data.repository.AgentRepository
 import feature.agent.model.AgentListItem
 import feature.agent.model.Faction
+import feature.setting.domain.LanguageUseCase
+import kotlinx.coroutines.flow.first
 import utils.AgentAttribute
 import utils.AgentSpecialty
 import utils.ZzzRarity
 
 
 class AgentsListUseCase(
-    private val agentRepository: AgentRepository
+    private val agentRepository: AgentRepository,
+    private val languageUseCase: LanguageUseCase
 ) {
 
-    suspend fun invoke() = agentRepository.getAgentsList()
-    suspend fun updateAgentsList() = agentRepository.requestAndUpdateAgentsListDB()
+    suspend fun invoke() =
+        agentRepository.getAgentsList(languageUseCase.getLanguage().first().officialCode)
+
+    suspend fun updateAgentsList() = agentRepository.requestAndUpdateAgentsListDB(
+        languageUseCase.getLanguage().first().officialCode
+    )
 
     fun getFactionsList(agentsList: List<AgentListItem>): List<Faction> {
         val maxFactionId = agentsList.maxOfOrNull { it.factionId } ?: 0

@@ -12,7 +12,7 @@ class FakeBannerRepository : BannerRepository {
         this.isError = isError
     }
 
-    override suspend fun getBanner(): Result<BannerResponse> {
+    override suspend fun getBanner(languageCode: String): Result<BannerResponse> {
         return if (isError) {
             Result.failure(Exception())
         } else {

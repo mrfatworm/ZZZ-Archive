@@ -57,17 +57,16 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.okio)
-            implementation(libs.multiplatformSettings.no.arg)
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
             implementation(libs.cryptography.core)
             implementation(libs.kotlinx.datetime)
+            implementation(libs.androidx.datastore.core)
         }
 
         commonTest.dependencies {
             implementation(kotlin("test-annotations-common"))
             implementation(libs.kotlin.test)
-            implementation(libs.multiplatformSettings.test)
             @OptIn(ExperimentalComposeLibrary::class) implementation(compose.uiTest)
         }
 

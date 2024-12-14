@@ -11,7 +11,9 @@ import feature.cover_image.data.FakeCoverImageRepository
 import feature.drive.data.FakeDriveRepository
 import feature.home.data.FakeAssetVersionRepository
 import feature.setting.data.FakeSystemConfigRepository
+import feature.setting.domain.FakeLanguageUseCase
 import feature.wengine.data.repository.FakeWEngineRepository
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -24,6 +26,7 @@ class UpdateDatabaseUseCaseTest {
     private val bangbooRepository = FakeBangbooRepository()
     private val driveRepository = FakeDriveRepository()
     private val systemConfigRepository = FakeSystemConfigRepository()
+    private val languageUseCase = FakeLanguageUseCase()
 
     private val updateDatabaseUseCase = UpdateDatabaseUseCase(
         assetVersionRepository,
@@ -32,25 +35,26 @@ class UpdateDatabaseUseCaseTest {
         wEngineRepository,
         bangbooRepository,
         driveRepository,
-        systemConfigRepository
+        systemConfigRepository,
+        languageUseCase
     )
 
     @Test
     fun `Update assets if new version available`() = runTest {
         updateDatabaseUseCase.updateAssetsIfNewVersionAvailable()
-        assertEquals(systemConfigRepository.getCoverImageDBVersion(), 2)
-        assertEquals(systemConfigRepository.getAgentListDBVersion(), 2)
-        assertEquals(systemConfigRepository.getWEngineListDBVersion(), 2)
-        assertEquals(systemConfigRepository.getBangbooListDBVersion(), 2)
-        assertEquals(systemConfigRepository.getDriveListDBVersion(), 2)
+        assertEquals(systemConfigRepository.getCoverImageDBVersion().first(), 2)
+        assertEquals(systemConfigRepository.getAgentListDBVersion().first(), 2)
+        assertEquals(systemConfigRepository.getWEngineListDBVersion().first(), 2)
+        assertEquals(systemConfigRepository.getBangbooListDBVersion().first(), 2)
+        assertEquals(systemConfigRepository.getDriveListDBVersion().first(), 2)
     }
 
     @Test
     fun `Reset wiki database version`() = runTest {
         updateDatabaseUseCase.resetWikiDatabaseVersion()
-        assertEquals(systemConfigRepository.getAgentListDBVersion(), 0)
-        assertEquals(systemConfigRepository.getWEngineListDBVersion(), 0)
-        assertEquals(systemConfigRepository.getBangbooListDBVersion(), 0)
-        assertEquals(systemConfigRepository.getDriveListDBVersion(), 0)
+        assertEquals(systemConfigRepository.getAgentListDBVersion().first(), 0)
+        assertEquals(systemConfigRepository.getWEngineListDBVersion().first(), 0)
+        assertEquals(systemConfigRepository.getBangbooListDBVersion().first(), 0)
+        assertEquals(systemConfigRepository.getDriveListDBVersion().first(), 0)
     }
 }

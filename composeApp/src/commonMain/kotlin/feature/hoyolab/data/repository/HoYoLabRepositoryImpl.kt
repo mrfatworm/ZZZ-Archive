@@ -8,7 +8,7 @@ package feature.hoyolab.data.repository
 import feature.hoyolab.data.database.HoYoLabAccountDao
 import feature.hoyolab.data.database.HoYoLabAccountEntity
 import feature.hoyolab.data.mapper.toPlayerAccountInfo
-import feature.hoyolab.model.PlayerAccountInfo
+import feature.hoyolab.model.PlayerBasicInfo
 import feature.hoyolab.model.PlayerDetailResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withTimeout
@@ -19,7 +19,7 @@ class HoYoLabRepositoryImpl(
 ) : HoYoLabRepository {
     override suspend fun requestUserGameRolesByLToken(
         region: String, lToken: String, ltUid: String
-    ): Result<List<PlayerAccountInfo>> {
+    ): Result<List<PlayerBasicInfo>> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
                 httpClient.requestUserGameRolesByLToken(region, lToken, ltUid)
@@ -53,6 +53,10 @@ class HoYoLabRepositoryImpl(
         uid: Int,
         region: String,
         regionName: String,
+        level: Int,
+        nickName: String,
+        profileUrl: String,
+        cardUrl: String,
         lToken: ByteArray,
         ltUid: ByteArray,
         updatedAt: Long
@@ -62,6 +66,10 @@ class HoYoLabRepositoryImpl(
                 uid = uid,
                 region = region,
                 regionName = regionName,
+                level = level,
+                nickName = nickName,
+                profileUrl = profileUrl,
+                cardUrl = cardUrl,
                 lToken = lToken,
                 ltUid = ltUid,
                 updatedAt = updatedAt

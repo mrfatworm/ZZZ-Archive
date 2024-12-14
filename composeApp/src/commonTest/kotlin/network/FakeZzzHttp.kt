@@ -29,7 +29,6 @@ import feature.wengine.model.stubWEnginesListResponse
 
 class FakeZzzHttp : ZzzHttp {
     override val defaultTimeout = 5000L
-    override val languagePath = "zh"
 
     private var isError = false
 
@@ -45,7 +44,7 @@ class FakeZzzHttp : ZzzHttp {
         }
     }
 
-    override suspend fun requestBanner(): BannerResponse {
+    override suspend fun requestBanner(languagePath: String): BannerResponse {
         return if (isError) {
             throw Exception()
         } else {
@@ -61,7 +60,7 @@ class FakeZzzHttp : ZzzHttp {
         }
     }
 
-    override suspend fun requestAgentsList(): AgentsListResponse {
+    override suspend fun requestAgentsList(languagePath: String): AgentsListResponse {
         return if (isError) {
             throw Exception()
         } else {
@@ -69,7 +68,7 @@ class FakeZzzHttp : ZzzHttp {
         }
     }
 
-    override suspend fun requestAgentDetail(id: Int): AgentDetailResponse {
+    override suspend fun requestAgentDetail(id: Int, languagePath: String): AgentDetailResponse {
         return if (isError) {
             throw Exception()
         } else {
@@ -77,7 +76,7 @@ class FakeZzzHttp : ZzzHttp {
         }
     }
 
-    override suspend fun requestWEnginesList(): WEnginesListResponse {
+    override suspend fun requestWEnginesList(languagePath: String): WEnginesListResponse {
         return if (isError) {
             throw Exception()
         } else {
@@ -85,7 +84,10 @@ class FakeZzzHttp : ZzzHttp {
         }
     }
 
-    override suspend fun requestWEngineDetail(id: Int): WEngineDetailResponse {
+    override suspend fun requestWEngineDetail(
+        id: Int,
+        languagePath: String
+    ): WEngineDetailResponse {
         return if (isError) {
             throw Exception()
         } else {
@@ -93,7 +95,7 @@ class FakeZzzHttp : ZzzHttp {
         }
     }
 
-    override suspend fun requestBangbooList(): BangbooListResponse {
+    override suspend fun requestBangbooList(languagePath: String): BangbooListResponse {
         return if (isError) {
             throw Exception()
         } else {
@@ -101,7 +103,10 @@ class FakeZzzHttp : ZzzHttp {
         }
     }
 
-    override suspend fun requestBangbooDetail(id: Int): BangbooDetailResponse {
+    override suspend fun requestBangbooDetail(
+        id: Int,
+        languagePath: String
+    ): BangbooDetailResponse {
         return if (isError) {
             throw Exception()
         } else {
@@ -109,7 +114,7 @@ class FakeZzzHttp : ZzzHttp {
         }
     }
 
-    override suspend fun requestDrivesList(): DrivesListResponse {
+    override suspend fun requestDrivesList(languagePath: String): DrivesListResponse {
         return if (isError) {
             throw Exception()
         } else {

@@ -29,21 +29,19 @@ class SettingViewModel(
 
     private var _uiState = MutableStateFlow(settingState)
     val uiState = _uiState.asStateFlow()
-    private val _isDark = MutableStateFlow(false)
-    val isDark = _isDark.asStateFlow()
+    private val _isDark = themeUseCase.getPreferenceIsDarkTheme()
+    val isDark = _isDark
 
     init {
-        initSetting()
+        viewModelScope.launch {
+            launch { observeUiScale() }
+            launch { observeFontScale() }
+            launch { observeLanguage() }
+            launch { updateAppVersion() }
+        }
     }
 
-    private fun initSetting() {
-        _isDark.value = themeUseCase.getPreferenceIsDarkTheme()
-        updateUiScaleState()
-        updateLanguageState()
-        updateAppVersion()
-    }
-
-    fun onAction(action: SettingAction) {
+    suspend fun onAction(action: SettingAction) {
         when (action) {
             is SettingAction.ChangeToDarkTheme -> {
                 setIsDarkTheme(action.isDark)
@@ -66,17 +64,23 @@ class SettingViewModel(
         }
     }
 
-    private fun updateLanguageState() {
-        val newLanguage = languageUseCase.getLanguage()
-        _uiState.update { it.copy(language = newLanguage) }
+    private suspend fun observeLanguage() {
+        languageUseCase.getLanguage().collect { language ->
+            _uiState.update { it.copy(language = language) }
+        }
     }
 
-    private fun updateUiScaleState() {
-        _uiState.update {
-            it.copy(
-                uiScale = uiScaleUseCase.getUiScale(), fontScale = uiScaleUseCase.getFontScale()
-            )
+    private suspend fun observeUiScale() {
+        uiScaleUseCase.getUiScale().collect { uiScale ->
+            _uiState.update { it.copy(uiScale = uiScale) }
         }
+    }
+
+    private suspend fun observeFontScale() {
+        uiScaleUseCase.getFontScale().collect { fontScale ->
+            _uiState.update { it.copy(fontScale = fontScale) }
+        }
+
     }
 
     private fun updateAppVersion() {
@@ -85,26 +89,22 @@ class SettingViewModel(
     }
 
     private fun setIsDarkTheme(isDark: Boolean) {
-        _isDark.value = isDark
-        themeUseCase.setPreferenceIsDarkTheme(isDark)
-    }
-
-    private fun setUiScale(uiScale: Float) {
-        uiScaleUseCase.setUiScale(uiScale)
-        updateUiScaleState()
-    }
-
-    private fun setFontScale(fontScale: Float) {
-        uiScaleUseCase.setFontScale(fontScale)
-        updateUiScaleState()
-    }
-
-    private fun setLanguage(langCode: String) {
         viewModelScope.launch {
-            updateDatabaseUseCase.resetWikiDatabaseVersion()
+            themeUseCase.setPreferenceIsDarkTheme(isDark)
         }
+    }
+
+    private suspend fun setUiScale(uiScale: Float) {
+        uiScaleUseCase.setUiScale(uiScale)
+    }
+
+    private suspend fun setFontScale(fontScale: Float) {
+        uiScaleUseCase.setFontScale(fontScale)
+    }
+
+    private suspend fun setLanguage(langCode: String) {
+        updateDatabaseUseCase.resetWikiDatabaseVersion()
         languageUseCase.setLanguage(langCode)
-        updateLanguageState()
     }
 
     private fun restartApp() {

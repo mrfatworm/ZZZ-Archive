@@ -5,6 +5,8 @@
 
 package feature.setting.data
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import utils.Language
 
 class FakePreferenceRepository : PreferencesRepository {
@@ -14,47 +16,47 @@ class FakePreferenceRepository : PreferencesRepository {
     private var fontScale = 1f
     private var defaultHoYoLabAccountUid = 0
 
-    override fun getIsDarkTheme(): Boolean {
-        return isDarkTheme
+    override fun getIsDarkTheme(): Flow<Boolean> = flow {
+        emit(isDarkTheme)
     }
 
-    override fun setIsDarkTheme(value: Boolean) {
+    override suspend fun setIsDarkTheme(value: Boolean) {
         isDarkTheme = value
     }
 
-    override fun getLanguageCode(): String {
-        return language
+    override fun getLanguageCode(): Flow<String> = flow {
+        emit(language)
     }
 
-    override fun setLanguage(langCode: String) {
+    override suspend fun setLanguage(langCode: String) {
         language = langCode
     }
 
-    override fun getUiScale(): Float {
-        return uiScale
+    override fun getUiScale(): Flow<Float> = flow {
+        emit(uiScale)
     }
 
-    override fun setUiScale(value: Float) {
+    override suspend fun setUiScale(value: Float) {
         uiScale = value
     }
 
-    override fun getFontScale(): Float {
-        return fontScale
+    override fun getFontScale(): Flow<Float> = flow {
+        emit(fontScale)
     }
 
-    override fun setFontScale(value: Float) {
+    override suspend fun setFontScale(value: Float) {
         fontScale = value
     }
 
-    override fun getDefaultHoYoLabAccountUid(): Int {
-        return defaultHoYoLabAccountUid
+    override fun getDefaultHoYoLabAccountUid(): Flow<Int> = flow {
+        emit(defaultHoYoLabAccountUid)
     }
 
-    override fun setDefaultHoYoLabAccountUid(value: Int) {
+    override suspend fun setDefaultHoYoLabAccountUid(value: Int) {
         defaultHoYoLabAccountUid = value
     }
 
-    override fun clear() {
+    override suspend fun clear() {
         isDarkTheme = true
         language = Language.English.code
     }

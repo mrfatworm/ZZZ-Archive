@@ -27,9 +27,7 @@ import feature.wengine.domain.WEnginesListUseCase
 import feature.wengine.model.stubWEnginesList
 import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.every
 import io.mockk.mockk
-import io.mockk.verify
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -57,14 +55,14 @@ class HomeViewModelTest {
     fun setup() {
         coEvery { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() } returns Unit
         coEvery { bannerUseCase.invoke() } returns Result.success(stubBannerResponse)
-        every { bannerUseCase.getBannerIgnoreId() } returns 0
-        every { bannerUseCase.setBannerIgnoreId(any()) } returns Unit
+        coEvery { bannerUseCase.getBannerIgnoreId() } returns flowOf(0)
+        coEvery { bannerUseCase.setBannerIgnoreId(any()) } returns Unit
         coEvery { coverImageUseCase.invoke() } returns flowOf(listOf(stubCoverImageListItemEntity))
         coEvery { pixivUseCase.invoke(any()) } returns Result.success(stubPixivTopicResponse.getPopularArticles())
         coEvery {
             officialNewsUseCase.getNewsPeriodically(any(), any())
         } returns flowOf(Result.success(stubOfficialNewsDataResponse.data.list))
-        every { officialNewsUseCase.convertToOfficialNewsState(any()) } returns listOf(
+        coEvery { officialNewsUseCase.convertToOfficialNewsState(any()) } returns listOf(
             stubOfficialNewsState
         )
         coEvery { agentsListUseCase.invoke() } returns flowOf(stubAgentsList)
@@ -85,7 +83,7 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `Init Data Success`() = runTest {
+    fun `Init data success`() = runTest {
         val state = viewModel.uiState.value
         assertEquals(state.banner, stubBannerResponse)
         assertEquals(state.coverImage, listOf(stubCoverImageListItemEntity))
@@ -99,8 +97,8 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `Set Banner Ignore Id as One than ignore banner data`() {
+    fun `Set banner ignore id as one THEN ignore banner data`() = runTest {
         viewModel.closeBannerAndIgnoreId(1)
-        verify { bannerUseCase.setBannerIgnoreId(1) }
+        coVerify { bannerUseCase.setBannerIgnoreId(1) }
     }
 }

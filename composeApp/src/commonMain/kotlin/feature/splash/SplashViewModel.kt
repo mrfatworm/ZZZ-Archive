@@ -1,6 +1,7 @@
 package feature.splash
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import feature.setting.domain.AppInfoUseCase
 import feature.setting.domain.LanguageUseCase
 import feature.setting.domain.ThemeUseCase
@@ -8,7 +9,9 @@ import feature.setting.domain.UiScaleUseCase
 import feature.splash.model.SplashState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import utils.changePlatformLanguage
 
 class SplashViewModel(
@@ -22,29 +25,31 @@ class SplashViewModel(
 
     init {
         //settingsRepository.clear() // For test
-        getPreferenceTheme()
-        getPreferenceUiScale()
-        initLanguage()
-        getAppVersion()
+        viewModelScope.launch {
+            launch { initIsDarkTheme() }
+            launch { initUiScale() }
+            launch { initLanguage() }
+            launch { getAppVersion() }
+        }
     }
 
-    private fun getPreferenceTheme() {
-        val isDark = themeUseCase.getPreferenceIsDarkTheme()
+    private suspend fun initIsDarkTheme() {
+        val isDark = themeUseCase.getPreferenceIsDarkTheme().first()
         _uiState.update {
             it.copy(isDark = isDark)
         }
     }
 
-    private fun getPreferenceUiScale() {
-        val uiScale = uiScaleUseCase.getUiScale()
-        val fontScale = uiScaleUseCase.getFontScale()
+    private suspend fun initUiScale() {
+        val uiScale = uiScaleUseCase.getUiScale().first()
+        val fontScale = uiScaleUseCase.getFontScale().first()
         _uiState.update {
             it.copy(uiScale = uiScale, fontScale = fontScale)
         }
     }
 
-    private fun initLanguage() {
-        val preferenceLangCode = languageUseCase.getLanguage().code
+    private suspend fun initLanguage() {
+        val preferenceLangCode = languageUseCase.getLanguage().first().code
         if (preferenceLangCode != "") {
             changePlatformLanguage(preferenceLangCode)
         }

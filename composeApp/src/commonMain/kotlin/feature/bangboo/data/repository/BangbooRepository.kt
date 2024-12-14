@@ -10,7 +10,7 @@ import feature.bangboo.model.BangbooListItem
 import kotlinx.coroutines.flow.Flow
 
 interface BangbooRepository {
-    suspend fun getBangbooList(): Flow<List<BangbooListItem>>
-    suspend fun requestAndUpdateBangbooListDB(): Result<Unit>
-    suspend fun getBangbooDetail(id: Int): Result<BangbooDetail>
+    suspend fun getBangbooList(languagePath: String): Flow<List<BangbooListItem>>
+    suspend fun requestAndUpdateBangbooListDB(languagePath: String): Result<Unit>
+    suspend fun getBangbooDetail(id: Int, languagePath: String): Result<BangbooDetail>
 }

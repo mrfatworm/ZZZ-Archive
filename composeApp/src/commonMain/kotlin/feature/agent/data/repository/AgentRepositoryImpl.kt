@@ -21,20 +21,20 @@ class AgentRepositoryImpl(
     private val httpClient: ZzzHttp, private val agentsListDB: AgentsListDao
 ) : AgentRepository {
 
-    override suspend fun getAgentsList(): Flow<List<AgentListItem>> {
+    override suspend fun getAgentsList(languagePath: String): Flow<List<AgentListItem>> {
         val cachedAgentsList = agentsListDB.getAgentsList()
         if (cachedAgentsList.first().isEmpty()) {
-            requestAndUpdateAgentsListDB()
+            requestAndUpdateAgentsListDB(languagePath)
         }
         return agentsListDB.getAgentsList().map { localAgentsList ->
             localAgentsList.map { it.toAgentListItem() }.reversed()
         }
     }
 
-    override suspend fun requestAndUpdateAgentsListDB(): Result<Unit> {
+    override suspend fun requestAndUpdateAgentsListDB(languagePath: String): Result<Unit> {
         try {
             val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestAgentsList()
+                httpClient.requestAgentsList(languagePath)
             }
             agentsListDB.setAgentsList(result.agents.map { it.toAgentsListItemEntity() })
             return Result.success(Unit)
@@ -44,10 +44,10 @@ class AgentRepositoryImpl(
     }
 
 
-    override suspend fun getAgentDetail(id: Int): Result<AgentDetail> {
+    override suspend fun getAgentDetail(id: Int, languagePath: String): Result<AgentDetail> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestAgentDetail(id)
+                httpClient.requestAgentDetail(id, languagePath)
             }
             Result.success(result.toAgentDetail())
         } catch (e: Exception) {

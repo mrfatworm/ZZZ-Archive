@@ -20,14 +20,14 @@ class WEngineRepositoryImplTest {
 
     @Test
     fun `WHEN Get W-Engines list success THEN return local DB`() = runTest {
-        val result = repository.getWEnginesList().first()
+        val result = repository.getWEnginesList("").first()
         assertEquals(result.size, 1)
     }
 
     @Test
     fun `WHEN Request W-Engines list success THEN return updated DB`() = runTest {
-        repository.requestAndUpdateWEnginesListDB()
-        val result = repository.getWEnginesList().first()
+        repository.requestAndUpdateWEnginesListDB("")
+        val result = repository.getWEnginesList("").first()
         assertEquals(result.size, 2)
     }
 
@@ -35,14 +35,14 @@ class WEngineRepositoryImplTest {
     fun `GIVEN W-Engines list DB is empty WHEN Get W-Engines list THEN Auto request and return updated DB`() =
         runTest {
             database.deleteWEnginesList()
-            val result = repository.getWEnginesList().first()
+            val result = repository.getWEnginesList("").first()
             assertEquals(result.size, 2)
         }
 
     @Test
     fun `WHEN Request W-Engines list error THEN return local DB`() = runTest {
         httpClient.setError(true)
-        val result = repository.getWEnginesList().first()
+        val result = repository.getWEnginesList("").first()
         assertEquals(result.size, 1)
     }
 
@@ -51,7 +51,7 @@ class WEngineRepositoryImplTest {
         runTest {
             httpClient.setError(true)
             database.deleteWEnginesList()
-            val result = repository.getWEnginesList().first()
+            val result = repository.getWEnginesList("").first()
             assertEquals(result.size, 0)
         }
 }

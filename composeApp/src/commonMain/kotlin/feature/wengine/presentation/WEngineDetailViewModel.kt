@@ -26,7 +26,7 @@ class WEngineDetailViewModel(
 
     init {
         viewModelScope.launch {
-            observeWEngineDetail(wEngineId)
+            updateWEngineDetail(wEngineId)
         }
     }
 
@@ -34,7 +34,7 @@ class WEngineDetailViewModel(
         when (action) {
             WEngineDetailAction.Retry -> {
                 viewModelScope.launch {
-                    observeWEngineDetail(wEngineId)
+                    updateWEngineDetail(wEngineId)
                 }
             }
 
@@ -42,7 +42,7 @@ class WEngineDetailViewModel(
         }
     }
 
-    private suspend fun observeWEngineDetail(id: Int) {
+    private suspend fun updateWEngineDetail(id: Int) {
         _uiState.update { it.copy(isLoading = true, error = null) }
         wEngineDetailUseCase.invoke(id).fold(
             onSuccess = { wEngine ->

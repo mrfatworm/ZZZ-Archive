@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.serialization.json.Json
@@ -26,14 +27,15 @@ class OfficialNewsUseCase(
     fun getNewsPeriodically(
         perMinutes: Int, amount: Int
     ): Flow<Result<List<OfficialNewsListItem>>> = flow {
+        val languageNewsCode = languageUseCase.getLanguage().first().officialCode
         while (true) {
-            emit(officialNewsRepository.getNews(amount))
+            emit(officialNewsRepository.getNews(amount, languageNewsCode))
             delay(perMinutes * 60 * 1000L)
         }
     }.flowOn(Dispatchers.IO)
 
-    fun convertToOfficialNewsState(newsList: List<OfficialNewsListItem>): List<OfficialNewsState> {
-        val languageNewsCode = languageUseCase.getLanguage().officialNewsCode
+    suspend fun convertToOfficialNewsState(newsList: List<OfficialNewsListItem>): List<OfficialNewsState> {
+        val languageNewsCode = languageUseCase.getLanguage().first().officialCode
         return newsList.map {
             OfficialNewsState(
                 title = it.sTitle,

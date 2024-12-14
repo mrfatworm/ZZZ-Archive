@@ -7,15 +7,19 @@ package feature.banner.domain
 
 import feature.banner.data.BannerRepository
 import feature.setting.data.SystemConfigRepository
+import feature.setting.domain.LanguageUseCase
+import kotlinx.coroutines.flow.first
 
 class BannerUseCase(
     private val bannerRepository: BannerRepository,
-    private val systemConfigRepository: SystemConfigRepository
+    private val systemConfigRepository: SystemConfigRepository,
+    private val languageUseCase: LanguageUseCase
 ) {
-    suspend fun invoke() = bannerRepository.getBanner()
+    suspend fun invoke() =
+        bannerRepository.getBanner(languageUseCase.getLanguage().first().officialCode)
 
     fun getBannerIgnoreId() = systemConfigRepository.getBannerIgnoreId()
 
-    fun setBannerIgnoreId(id: Int) = systemConfigRepository.setBannerIgnoreId(id)
+    suspend fun setBannerIgnoreId(id: Int) = systemConfigRepository.setBannerIgnoreId(id)
 
 }

@@ -6,6 +6,8 @@
 package feature.setting.domain
 
 import feature.setting.data.FakePreferenceRepository
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -15,28 +17,28 @@ class UiScaleUseCaseTest {
     private val useCase = UiScaleUseCase(repository)
 
     @Test
-    fun `Get UI scale`() {
-        val result = useCase.getUiScale()
+    fun `Get UI scale`() = runTest {
+        val result = useCase.getUiScale().first()
         assertEquals(result, 1f)
     }
 
     @Test
-    fun `Set UI scale`() {
+    fun `Set UI scale`() = runTest {
         useCase.setUiScale(2f)
-        val result = useCase.getUiScale()
+        val result = useCase.getUiScale().first()
         assertEquals(result, 2f)
     }
 
     @Test
-    fun `Get Font scale`() {
-        val result = useCase.getFontScale()
+    fun `Get Font scale`() = runTest {
+        val result = useCase.getFontScale().first()
         assertEquals(result, 1f)
     }
 
     @Test
-    fun `Set Font scale`() {
+    fun `Set Font scale`() = runTest {
         useCase.setFontScale(2f)
-        val result = useCase.getFontScale()
+        val result = useCase.getFontScale().first()
         assertEquals(result, 2f)
     }
 }

@@ -17,18 +17,18 @@ class DriveRepositoryImpl(
     private val httpClient: ZzzHttp,
     private val drivesListDB: DrivesListDao
 ) : DriveRepository {
-    override suspend fun getDrivesList(): Flow<List<DrivesListItemEntity>> {
+    override suspend fun getDrivesList(languagePath: String): Flow<List<DrivesListItemEntity>> {
         val cachedDrivesList = drivesListDB.getDrivesList()
         if (cachedDrivesList.first().isEmpty()) {
-            requestAndUpdateDrivesListDB()
+            requestAndUpdateDrivesListDB(languagePath)
         }
         return drivesListDB.getDrivesList()
     }
 
-    override suspend fun requestAndUpdateDrivesListDB(): Result<Unit> {
+    override suspend fun requestAndUpdateDrivesListDB(languagePath: String): Result<Unit> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestDrivesList()
+                httpClient.requestDrivesList(languagePath)
             }
             drivesListDB.setDrivesList(result.drives.map { it.toDriveListEntity() })
             Result.success(Unit)

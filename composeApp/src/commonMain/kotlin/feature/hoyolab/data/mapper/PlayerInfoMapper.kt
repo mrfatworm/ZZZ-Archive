@@ -5,11 +5,11 @@
 
 package feature.hoyolab.data.mapper
 
-import feature.hoyolab.model.PlayerAccountInfo
+import feature.hoyolab.model.PlayerBasicInfo
 import feature.hoyolab.model.UserGameRole
 
-fun UserGameRole.toPlayerAccountInfo(): PlayerAccountInfo {
-    return PlayerAccountInfo(
+fun UserGameRole.toPlayerAccountInfo(): PlayerBasicInfo {
+    return PlayerBasicInfo(
         region = region,
         regionName = regionName,
         uid = gameUid,

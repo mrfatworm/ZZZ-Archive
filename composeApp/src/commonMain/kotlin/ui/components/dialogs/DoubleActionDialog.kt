@@ -27,9 +27,9 @@ import zzzarchive.composeapp.generated.resources.confirm
 fun DoubleActionDialog(
     text: String,
     primaryActionText: String = stringResource(Res.string.confirm),
-    secondActionText: String = stringResource(Res.string.cancel),
+    secondaryActionText: String = stringResource(Res.string.cancel),
     onPrimaryAction: () -> Unit,
-    onSecondAction: () -> Unit,
+    onSecondaryAction: () -> Unit,
     onDismiss: () -> Unit
 ) {
     BasicDialog(onDismissRequest = onDismiss) {
@@ -54,8 +54,8 @@ fun DoubleActionDialog(
                 horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400, Alignment.End),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                ZzzOutlineButton(text = secondActionText) {
-                    onSecondAction()
+                ZzzOutlineButton(text = secondaryActionText) {
+                    onSecondaryAction()
                 }
 
                 ZzzPrimaryButton(text = primaryActionText) {

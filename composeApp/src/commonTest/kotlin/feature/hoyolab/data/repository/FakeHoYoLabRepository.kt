@@ -7,40 +7,74 @@ package feature.hoyolab.data.repository
 
 import feature.hoyolab.data.database.HoYoLabAccountEntity
 import feature.hoyolab.data.database.stubHoYoLabAccountEntity
-import feature.hoyolab.model.PlayerAccountInfo
+import feature.hoyolab.model.PlayerBasicInfo
 import feature.hoyolab.model.PlayerDetailResponse
-import feature.hoyolab.model.stubPlayerAccountInfo
+import feature.hoyolab.model.stubPlayerBasicInfo
 import feature.hoyolab.model.stubPlayerDetailResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class FakeHoYoLabRepository : HoYoLabRepository {
     private var isError = false
-    private var isEmptyAccountList = false
-    var isAdded = false
-        private set
-    var isDeleted = false
-        private set
+    private val accountListInDB = mutableListOf(stubHoYoLabAccountEntity)
 
     fun setError(isError: Boolean) {
         this.isError = isError
     }
 
-    fun setIsEmptyAccountList(isEmptyAccountList: Boolean) {
-        this.isEmptyAccountList = isEmptyAccountList
+    fun clearAccountList() {
+        accountListInDB.clear()
+    }
+
+    override suspend fun getAllAccountsFromDB(): Flow<List<HoYoLabAccountEntity>> = flow {
+        emit(accountListInDB)
+    }
+
+    override suspend fun getAccountFromDB(uid: Int): Flow<HoYoLabAccountEntity> = flow {
+        emit(accountListInDB.find { it.uid == uid } ?: throw Exception("Account not found"))
+    }
+
+    override suspend fun addAccountToDB(
+        uid: Int,
+        region: String,
+        regionName: String,
+        level: Int,
+        nickName: String,
+        profileUrl: String,
+        cardUrl: String,
+        lToken: ByteArray,
+        ltUid: ByteArray,
+        updatedAt: Long
+    ) {
+        accountListInDB.add(
+            HoYoLabAccountEntity(
+                uid = uid,
+                region = region,
+                regionName = regionName,
+                level = level,
+                nickName = nickName,
+                profileUrl = profileUrl,
+                cardUrl = cardUrl,
+                lToken = lToken,
+                ltUid = ltUid,
+                updatedAt = updatedAt
+            )
+        )
+    }
+
+    override suspend fun deleteAccountFromDB(uid: Int) {
+        accountListInDB.removeAt(accountListInDB.indexOfFirst { it.uid == uid })
     }
 
     override suspend fun requestUserGameRolesByLToken(
         region: String,
         lToken: String,
         ltUid: String
-    ): Result<List<PlayerAccountInfo>> {
+    ): Result<List<PlayerBasicInfo>> {
         return if (isError) {
             Result.failure(Exception())
-        } else if (isEmptyAccountList) {
-            Result.success(emptyList())
         } else {
-            Result.success(listOf(stubPlayerAccountInfo))
+            Result.success(listOf(stubPlayerBasicInfo))
         }
     }
 
@@ -55,27 +89,5 @@ class FakeHoYoLabRepository : HoYoLabRepository {
         } else {
             Result.success(stubPlayerDetailResponse)
         }
-    }
-
-    override suspend fun getAllAccountsFromDB(): Flow<List<HoYoLabAccountEntity>> = flow {
-        emit(listOf(stubHoYoLabAccountEntity))
-    }
-
-    override suspend fun getAccountFromDB(uid: Int): Flow<HoYoLabAccountEntity> = flow {
-        emit(stubHoYoLabAccountEntity)
-    }
-
-    override suspend fun addAccountToDB(
-        uid: Int,
-        region: String,
-        regionName: String,
-        lToken: ByteArray,
-        ltUid: ByteArray
-    ) {
-        isAdded = true
-    }
-
-    override suspend fun deleteAccountFromDB(uid: Int) {
-        isDeleted = true
     }
 }

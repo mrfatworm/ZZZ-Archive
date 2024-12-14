@@ -19,11 +19,12 @@ class FakeWEngineRepository : WEngineRepository {
         this.isError = isError
     }
 
-    override suspend fun getWEnginesList(): Flow<List<WEnginesListItem>> = flow {
+    override suspend fun getWEnginesList(languagePath: String): Flow<List<WEnginesListItem>> =
+        flow {
         emit(stubWEnginesList)
     }
 
-    override suspend fun requestAndUpdateWEnginesListDB(): Result<Unit> {
+    override suspend fun requestAndUpdateWEnginesListDB(languagePath: String): Result<Unit> {
         return if (isError) {
             Result.failure(Exception())
         } else {
@@ -31,7 +32,7 @@ class FakeWEngineRepository : WEngineRepository {
         }
     }
 
-    override suspend fun getWEngineDetail(id: Int): Result<WEngineDetail> {
+    override suspend fun getWEngineDetail(id: Int, languagePath: String): Result<WEngineDetail> {
         return if (isError) {
             Result.failure(Exception())
         } else {

@@ -20,20 +20,20 @@ import network.ZzzHttp
 class WEngineRepositoryImpl(
     private val httpClient: ZzzHttp, private val wEnginesListDao: WEnginesListDao
 ) : WEngineRepository {
-    override suspend fun getWEnginesList(): Flow<List<WEnginesListItem>> {
+    override suspend fun getWEnginesList(languagePath: String): Flow<List<WEnginesListItem>> {
         val cachedWEnginesList = wEnginesListDao.getWEnginesList()
         if (cachedWEnginesList.first().isEmpty()) {
-            requestAndUpdateWEnginesListDB()
+            requestAndUpdateWEnginesListDB(languagePath)
         }
         return wEnginesListDao.getWEnginesList().map { wEnginesList ->
             wEnginesList.map { it.toWEnginesListItem() }.reversed()
         }
     }
 
-    override suspend fun requestAndUpdateWEnginesListDB(): Result<Unit> {
+    override suspend fun requestAndUpdateWEnginesListDB(languagePath: String): Result<Unit> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestWEnginesList()
+                httpClient.requestWEnginesList(languagePath)
             }
             wEnginesListDao.setWEnginesList(result.wEngines.map { it.toWEnginesListItemEntity() })
             Result.success(Unit)
@@ -42,10 +42,10 @@ class WEngineRepositoryImpl(
         }
     }
 
-    override suspend fun getWEngineDetail(id: Int): Result<WEngineDetail> {
+    override suspend fun getWEngineDetail(id: Int, languagePath: String): Result<WEngineDetail> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestWEngineDetail(id)
+                httpClient.requestWEngineDetail(id, languagePath)
             }
             Result.success(result.toWEngineDetail())
         } catch (e: Exception) {

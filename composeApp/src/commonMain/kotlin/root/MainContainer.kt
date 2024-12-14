@@ -63,10 +63,10 @@ fun MainContainer(
     val selectedMainFlow =
         ALL_MAIN_FLOW.find { it.route == fourthNavDestination }?.route ?: MainFlow.Home.route
 
-    val scope = rememberCoroutineScope()
+    val coroutineScope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val viewModel: MainContainerViewModel = koinViewModel()
-    val isDark by viewModel.isDark.collectAsState()
+    val isDark by viewModel.isDark.collectAsState(true)
     var isDarkComposeState by AppTheme.isDark
 
     ModalNavigationDrawer(
@@ -74,12 +74,14 @@ fun MainContainer(
             ModalNavigationDrawerContent(selectedMainFlow = selectedMainFlow,
                 navigationActions = mainFunNavActions,
                 onDrawerClicked = {
-                    scope.launch {
+                    coroutineScope.launch {
                         drawerState.close()
                     }
                 },
                 onThemeChanged = {
-                    viewModel.setIsDarkTheme(!isDark)
+                    coroutineScope.launch {
+                        viewModel.setIsDarkTheme(!isDark)
+                    }
                     isDarkComposeState = !isDark
                 })
         }, drawerState = drawerState, gesturesEnabled = false
@@ -90,12 +92,14 @@ fun MainContainer(
             selectedDestination = selectedDestination,
             selectedMainFlow = selectedMainFlow,
             onDrawerClicked = {
-                scope.launch {
+                coroutineScope.launch {
                     drawerState.open()
                 }
             },
             onThemeChanged = {
-                viewModel.setIsDarkTheme(!isDark)
+                coroutineScope.launch {
+                    viewModel.setIsDarkTheme(!isDark)
+                }
                 isDarkComposeState = !isDark
             })
     }

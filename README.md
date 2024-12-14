@@ -48,11 +48,11 @@ Thanks to all the contributors who made KMP/CMP possible!
 - JetBrains Navigation Compose
 - JetBrains Lifecycle ViewModel
 - Androidx Room Database
+- Androidx DataStore
 - Koin
 - Ktor
 - Coil
 - BuildKonfig
-- Multiplatform Setting
 - Okio I/O
 
 ## Localization Support

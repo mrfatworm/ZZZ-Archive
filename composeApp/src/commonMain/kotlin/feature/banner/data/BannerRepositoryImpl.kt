@@ -9,10 +9,10 @@ import kotlinx.coroutines.withTimeout
 import network.ZzzHttp
 
 class BannerRepositoryImpl(private val httpClient: ZzzHttp) : BannerRepository {
-    override suspend fun getBanner(): Result<BannerResponse> {
+    override suspend fun getBanner(languageCode: String): Result<BannerResponse> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestBanner()
+                httpClient.requestBanner(languageCode)
             }
             Result.success(result)
         } catch (e: Exception) {

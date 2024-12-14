@@ -31,7 +31,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.navigation.NAV_RAIL_MAIN_FLOW
@@ -76,7 +75,7 @@ fun ModalNavigationDrawerContent(
             )
             IconButton(onClick = onDrawerClicked) {
                 Icon(
-                    painter = painterResource(Res.drawable.ic_nav_back),
+                    imageVector = vectorResource(Res.drawable.ic_nav_back),
                     contentDescription = stringResource(Res.string.navigation_drawer),
                     tint = AppTheme.colors.onSurfaceVariant
                 )

@@ -168,14 +168,15 @@
     <string name="invalid_feedback_form">問題類型未選擇或問題內容為空。</string>
     <string name="form_submit_success">表單已送出\n感謝您的回饋！</string>
 
-    <!-- HoYoLab Connect -->
-    <string name="hoyolab_connect">連結 HoYoLab</string>
-    <string name="connect">連結</string>
-    <string name="disconnect">解除連結</string>
+    <!-- HoYoLab Sync -->
+    <string name="hoyolab_sync">同步 HoYoLab</string>
+    <string name="sync">同步</string>
+    <string name="unsync">取消同步</string>
     <string name="game_server">遊戲伺服器</string>
     <string name="account_not_found">查無帳號</string>
     <string name="invalid_hoYoLab_form">遊戲伺服器未選擇或輸入內容為空</string>
     <string name="update_at">%1$s 更新</string>
+    <string name="user_profile_image">使用者頭像</string>
     <string name="hoyolab_connect_announcement">本頁面提交的資料僅用於 HoYoLab 的請求處理，並加密儲存在您的裝置中。我們不會蒐集任何資訊。</string>
     <string name="remove_account_hint">是否取消帳號連結\n（從本裝置清除該帳號資料）</string>
     <string name="add_account">新增帳號</string>

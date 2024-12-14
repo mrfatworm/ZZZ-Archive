@@ -7,28 +7,31 @@ package feature.setting.domain
 
 import androidx.compose.ui.text.intl.Locale
 import feature.setting.data.PreferencesRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 import utils.Language
 import utils.changePlatformLanguage
 
 interface LanguageUseCase {
-    fun getLanguage(): Language
-    fun setLanguage(langCode: String)
+    fun getLanguage(): Flow<Language>
+    suspend fun setLanguage(langCode: String)
 }
 
 class LanguageUseCaseImpl(private val preferencesRepository: PreferencesRepository) :
     LanguageUseCase {
 
-    override fun getLanguage(): Language {
-        val langCode = preferencesRepository.getLanguageCode()
+    override fun getLanguage(): Flow<Language> = flow {
+        val langCode = preferencesRepository.getLanguageCode().first()
         val deviceLanguage: String = Locale.current.language
         val language =
             if (langCode == "") Language.entries.firstOrNull { it.code == deviceLanguage }
                 ?: Language.English
             else Language.entries.firstOrNull { it.code == langCode } ?: Language.English
-        return language
+        emit(language)
     }
 
-    override fun setLanguage(langCode: String) {
+    override suspend fun setLanguage(langCode: String) {
         preferencesRepository.setLanguage(langCode)
         changePlatformLanguage(langCode)
     }

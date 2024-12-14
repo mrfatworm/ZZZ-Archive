@@ -2,21 +2,14 @@ package root
 
 import androidx.lifecycle.ViewModel
 import feature.setting.domain.ThemeUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 class MainContainerViewModel(
     private val themeUseCase: ThemeUseCase
 ) : ViewModel() {
-    private val _isDark = MutableStateFlow(false)
-    val isDark = _isDark.asStateFlow()
+    private val _isDark = themeUseCase.getPreferenceIsDarkTheme()
+    val isDark = _isDark
 
-    init {
-        _isDark.value = themeUseCase.getPreferenceIsDarkTheme()
-    }
-
-    fun setIsDarkTheme(isDark: Boolean) {
-        _isDark.value = isDark
+    suspend fun setIsDarkTheme(isDark: Boolean) {
         themeUseCase.setPreferenceIsDarkTheme(isDark)
     }
 }

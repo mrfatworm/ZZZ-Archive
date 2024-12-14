@@ -13,7 +13,9 @@ import feature.setting.domain.ThemeUseCase
 import feature.setting.domain.UiScaleUseCase
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
+import utils.Language
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -32,11 +34,11 @@ class SplashViewModelTest {
 
     @BeforeTest
     fun setup() {
-        every { themeUseCase.getPreferenceIsDarkTheme() } returns true
-        every { languageUseCase.getLanguage().code } returns "en"
+        every { themeUseCase.getPreferenceIsDarkTheme() } returns flowOf(true)
+        every { languageUseCase.getLanguage() } returns flowOf(Language.English)
         every { appInfoUseCase.getAppVersion() } returns "Luciana 2024.11.13"
-        every { uiScaleUseCase.getUiScale() } returns 1f
-        every { uiScaleUseCase.getFontScale() } returns 1f
+        every { uiScaleUseCase.getUiScale() } returns flowOf(1f)
+        every { uiScaleUseCase.getFontScale() } returns flowOf(1f)
 
         viewModel = SplashViewModel(themeUseCase, uiScaleUseCase, languageUseCase, appInfoUseCase)
     }

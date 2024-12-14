@@ -6,14 +6,14 @@
 package feature.hoyolab.data.repository
 
 import feature.hoyolab.data.database.HoYoLabAccountEntity
-import feature.hoyolab.model.PlayerAccountInfo
+import feature.hoyolab.model.PlayerBasicInfo
 import feature.hoyolab.model.PlayerDetailResponse
 import kotlinx.coroutines.flow.Flow
 
 interface HoYoLabRepository {
     suspend fun requestUserGameRolesByLToken(
         region: String, lToken: String, ltUid: String
-    ): Result<List<PlayerAccountInfo>>
+    ): Result<List<PlayerBasicInfo>>
 
     suspend fun requestPlayerDetail(
         uid: Int, region: String, lToken: String, ltUid: String
@@ -27,6 +27,10 @@ interface HoYoLabRepository {
         uid: Int,
         region: String,
         regionName: String,
+        level: Int,
+        nickName: String,
+        profileUrl: String,
+        cardUrl: String,
         lToken: ByteArray,
         ltUid: ByteArray,
         updatedAt: Long

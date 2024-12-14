@@ -22,14 +22,14 @@ class AgentRepositoryImplTest {
 
     @Test
     fun `WHEN Get agents list success THEN return local DB`() = runTest {
-        val result = repository.getAgentsList().first()
+        val result = repository.getAgentsList("").first()
         assertEquals(result.size, 1)
     }
 
     @Test
     fun `WHEN Request agents list success THEN return updated DB`() = runTest {
-        repository.requestAndUpdateAgentsListDB()
-        val result = repository.getAgentsList().first()
+        repository.requestAndUpdateAgentsListDB("")
+        val result = repository.getAgentsList("").first()
         assertEquals(result.size, 3)
     }
 
@@ -37,14 +37,14 @@ class AgentRepositoryImplTest {
     fun `GIVEN Agents list DB is empty WHEN Get agents list THEN Auto request and return updated DB`() =
         runTest {
         agentsListDao.deleteAgentsList()
-        val result = repository.getAgentsList().first()
+            val result = repository.getAgentsList("").first()
         assertEquals(result.size, 3)
     }
 
     @Test
     fun `WHEN Request agents list error THEN return local DB`() = runTest {
         httpClient.setError(true)
-        val result = repository.getAgentsList().first()
+        val result = repository.getAgentsList("").first()
         assertEquals(result.size, 1)
     }
 
@@ -53,20 +53,20 @@ class AgentRepositoryImplTest {
         runTest {
         httpClient.setError(true)
         agentsListDao.deleteAgentsList()
-        val result = repository.getAgentsList().first()
+            val result = repository.getAgentsList("").first()
         assertEquals(result.size, 0)
     }
 
     @Test
     fun `Get agent detail success`() = runTest {
-        val result = repository.getAgentDetail(20).getOrNull()
+        val result = repository.getAgentDetail(20, "").getOrNull()
         assertEquals(result, stubAgentDetail)
     }
 
     @Test
     fun `Get agent detail error`() = runTest {
         httpClient.setError(true)
-        val result = repository.getAgentDetail(20).getOrNull()
+        val result = repository.getAgentDetail(20, "").getOrNull()
         assertNull(result)
     }
 }

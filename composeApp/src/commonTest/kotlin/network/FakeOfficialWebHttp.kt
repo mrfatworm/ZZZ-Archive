@@ -10,14 +10,13 @@ import feature.news.data.stubOfficialNewsDataResponse
 
 class FakeOfficialWebHttp : OfficialWebHttp {
     override val timeout = 5000L
-    override val languagePath = "zh"
     private var isError = false
 
     fun setError(isError: Boolean) {
         this.isError = isError
     }
 
-    override suspend fun requestNews(amount: Int): OfficialNewsResponse {
+    override suspend fun requestNews(amount: Int, languagePath: String): OfficialNewsResponse {
         return if (isError) {
             throw Exception()
         } else {

@@ -6,7 +6,6 @@
 package network
 
 import feature.news.data.OfficialNewsResponse
-import feature.setting.domain.LanguageUseCase
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.get
@@ -15,13 +14,12 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.path
 
-class OfficialWebHttpImpl(engine: HttpClientEngine, languageUsecase: LanguageUseCase) :
+class OfficialWebHttpImpl(engine: HttpClientEngine) :
     OfficialWebHttp {
     override val timeout = 5000L
-    override val languagePath = languageUsecase.getLanguage().officialNewsCode
     private val client = createOfficialWebHttpClient(engine)
 
-    override suspend fun requestNews(amount: Int): OfficialNewsResponse =
+    override suspend fun requestNews(amount: Int, languagePath: String): OfficialNewsResponse =
         client.get {
             url {
                 path("/content_v2_user/app/3e9196a4b9274bd7/getContentList")

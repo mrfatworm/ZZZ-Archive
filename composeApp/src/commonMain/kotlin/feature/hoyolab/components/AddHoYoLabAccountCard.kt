@@ -26,7 +26,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import feature.hoyolab.model.ServersList
 import feature.setting.components.SettingItem
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.components.ZzzTextFiled
@@ -35,12 +34,12 @@ import ui.components.cards.ContentCard
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.clear
-import zzzarchive.composeapp.generated.resources.connect
 import zzzarchive.composeapp.generated.resources.game_server
 import zzzarchive.composeapp.generated.resources.ic_arrow_down_ios
 import zzzarchive.composeapp.generated.resources.ic_close
 import zzzarchive.composeapp.generated.resources.ic_warning
 import zzzarchive.composeapp.generated.resources.please_select
+import zzzarchive.composeapp.generated.resources.sync
 import zzzarchive.composeapp.generated.resources.unknown_error
 
 @Composable
@@ -77,7 +76,7 @@ fun AddHoYoLabAccountCard(errorMessage: String, onSubmit: (String, String, Strin
             ) {
                 Text(text = errorMessage, color = AppTheme.colors.alert)
 
-                ZzzPrimaryButton(text = stringResource(Res.string.connect), onClick = {
+                ZzzPrimaryButton(text = stringResource(Res.string.sync), onClick = {
                     if (lToken.isEmpty() || ltUid.isEmpty() || selectedServerRegion == ServersList.None) {
                         isLTokenError = lToken.isEmpty()
                         isLtUidError = ltUid.isEmpty()
@@ -109,7 +108,7 @@ private fun SecretTextField(
                 onValueChange("")
             }) {
                 Icon(
-                    painter = painterResource(Res.drawable.ic_close),
+                    imageVector = vectorResource(Res.drawable.ic_close),
                     contentDescription = stringResource(Res.string.clear),
                     tint = AppTheme.colors.onSurface
                 )

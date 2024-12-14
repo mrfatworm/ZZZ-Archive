@@ -5,16 +5,18 @@
 
 package feature.setting.data
 
+import kotlinx.coroutines.flow.Flow
+
 interface PreferencesRepository {
-    fun getIsDarkTheme(): Boolean
-    fun setIsDarkTheme(value: Boolean)
-    fun getLanguageCode(): String
-    fun setLanguage(langCode: String)
-    fun getUiScale(): Float
-    fun setUiScale(value: Float)
-    fun getFontScale(): Float
-    fun setFontScale(value: Float)
-    fun getDefaultHoYoLabAccountUid(): Int
-    fun setDefaultHoYoLabAccountUid(value: Int)
-    fun clear()
+    fun getIsDarkTheme(): Flow<Boolean>
+    suspend fun setIsDarkTheme(value: Boolean)
+    fun getLanguageCode(): Flow<String>
+    suspend fun setLanguage(langCode: String)
+    fun getUiScale(): Flow<Float>
+    suspend fun setUiScale(value: Float)
+    fun getFontScale(): Flow<Float>
+    suspend fun setFontScale(value: Float)
+    fun getDefaultHoYoLabAccountUid(): Flow<Int>
+    suspend fun setDefaultHoYoLabAccountUid(value: Int)
+    suspend fun clear()
 }

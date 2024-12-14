@@ -14,7 +14,9 @@ import feature.setting.model.feedbackIssueTypes
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
+import utils.Language
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -35,7 +37,7 @@ class FeedbackViewModelTest {
         every { appInfoUseCase.getAppVersion() } returns "Luciana 2024.11.13"
         every { appInfoUseCase.getDeviceInfo() } returns "Pixel 9 Pro"
         every { appInfoUseCase.getDeviceOs() } returns "Android 35"
-        every { languageUseCase.getLanguage().code } returns "en"
+        coEvery { languageUseCase.getLanguage() } returns flowOf(Language.English)
         coEvery {
             googleDocUseCase.submitFeedbackForm(
                 any(), any(), any(), any(), any(), any(), any()

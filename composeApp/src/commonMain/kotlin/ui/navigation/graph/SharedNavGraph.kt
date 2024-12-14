@@ -12,7 +12,7 @@ import feature.agent.presentation.AgentsListScreen
 import feature.bangboo.presentation.BangbooDetailScreen
 import feature.bangboo.presentation.BangbooListScreen
 import feature.drive.presentation.DrivesListScreen
-import feature.hoyolab.presentation.HoYoLabConnectScreen
+import feature.hoyolab.presentation.HoYoLabSyncScreen
 import feature.setting.presentation.FeedbackScreen
 import feature.setting.presentation.SettingScreen
 import feature.wengine.presentation.WEngineDetailScreen
@@ -85,7 +85,7 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
     }
 
     composable(Screen.HoYoLabConnect.route) {
-        HoYoLabConnectScreen() {
+        HoYoLabSyncScreen() {
             navActions.back()
         }
 

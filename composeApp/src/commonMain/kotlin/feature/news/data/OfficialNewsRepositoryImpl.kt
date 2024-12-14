@@ -9,10 +9,13 @@ import kotlinx.coroutines.withTimeout
 import network.OfficialWebHttp
 
 class OfficialNewsRepositoryImpl(private val httpClient: OfficialWebHttp) : OfficialNewsRepository {
-    override suspend fun getNews(amount: Int): Result<List<OfficialNewsListItem>> {
+    override suspend fun getNews(
+        amount: Int,
+        languagePath: String
+    ): Result<List<OfficialNewsListItem>> {
         return try {
             val result = withTimeout(httpClient.timeout) {
-                httpClient.requestNews(amount)
+                httpClient.requestNews(amount, languagePath)
             }
             Result.success(result.data.list)
         } catch (e: Exception) {

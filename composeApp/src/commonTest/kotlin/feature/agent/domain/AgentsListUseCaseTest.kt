@@ -8,6 +8,7 @@ package feature.agent.domain
 import feature.agent.data.repository.FakeAgentRepository
 import feature.agent.model.Faction
 import feature.agent.model.stubAgentsList
+import feature.setting.domain.FakeLanguageUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import utils.AgentAttribute
@@ -21,7 +22,8 @@ import kotlin.test.assertNull
 class AgentsListUseCaseTest {
 
     private val agentRepository = FakeAgentRepository()
-    private val agentsListUseCase = AgentsListUseCase(agentRepository)
+    private val languageUseCase = FakeLanguageUseCase()
+    private val agentsListUseCase = AgentsListUseCase(agentRepository, languageUseCase)
 
 
     @Test

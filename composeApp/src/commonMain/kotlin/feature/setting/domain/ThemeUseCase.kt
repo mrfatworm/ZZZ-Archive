@@ -6,13 +6,12 @@
 package feature.setting.domain
 
 import feature.setting.data.PreferencesRepository
+import kotlinx.coroutines.flow.Flow
 
 class ThemeUseCase(private val preferencesRepository: PreferencesRepository) {
-    fun getPreferenceIsDarkTheme(): Boolean {
-        return preferencesRepository.getIsDarkTheme()
-    }
+    fun getPreferenceIsDarkTheme(): Flow<Boolean> = preferencesRepository.getIsDarkTheme()
 
-    fun setPreferenceIsDarkTheme(isDark: Boolean) {
+    suspend fun setPreferenceIsDarkTheme(isDark: Boolean) {
         preferencesRepository.setIsDarkTheme(isDark)
     }
 }

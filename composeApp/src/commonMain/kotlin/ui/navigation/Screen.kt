@@ -17,7 +17,7 @@ import zzzarchive.composeapp.generated.resources.drives
 import zzzarchive.composeapp.generated.resources.feedback
 import zzzarchive.composeapp.generated.resources.function
 import zzzarchive.composeapp.generated.resources.home
-import zzzarchive.composeapp.generated.resources.hoyolab_connect
+import zzzarchive.composeapp.generated.resources.hoyolab_sync
 import zzzarchive.composeapp.generated.resources.ic_help
 import zzzarchive.composeapp.generated.resources.setting
 import zzzarchive.composeapp.generated.resources.unknown
@@ -92,7 +92,7 @@ sealed class Screen(
     )
 
     data object HoYoLabConnect : Screen(
-        route = "hoyolabConnect", textRes = Res.string.hoyolab_connect
+        route = "hoyolabConnect", textRes = Res.string.hoyolab_sync
     )
 
 

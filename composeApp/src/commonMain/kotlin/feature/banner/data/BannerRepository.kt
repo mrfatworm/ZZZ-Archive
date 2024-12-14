@@ -6,5 +6,5 @@
 package feature.banner.data
 
 interface BannerRepository {
-    suspend fun getBanner(): Result<BannerResponse>
+    suspend fun getBanner(languageCode: String): Result<BannerResponse>
 }

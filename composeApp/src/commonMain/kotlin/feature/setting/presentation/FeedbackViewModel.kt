@@ -31,7 +31,9 @@ class FeedbackViewModel(
     val uiState = _uiState.asStateFlow()
 
     init {
-        getLanguage()
+        viewModelScope.launch {
+            observeLanguage()
+        }
         getAppVersion()
         getDeviceInfo()
         getDeviceOs()
@@ -97,9 +99,10 @@ class FeedbackViewModel(
         _uiState.update { it.copy(showSubmitSuccessDialog = false) }
     }
 
-    private fun getLanguage() {
-        val language = languageUseCase.getLanguage()
-        _uiState.update { it.copy(language = language.code) }
+    private suspend fun observeLanguage() {
+        languageUseCase.getLanguage().collect { language ->
+            _uiState.update { it.copy(language = language.code) }
+        }
     }
 
     private fun getAppVersion() {

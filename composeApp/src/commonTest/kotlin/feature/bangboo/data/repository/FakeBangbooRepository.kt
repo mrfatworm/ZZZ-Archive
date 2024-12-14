@@ -19,11 +19,11 @@ class FakeBangbooRepository : BangbooRepository {
         this.isError = isError
     }
 
-    override suspend fun getBangbooList(): Flow<List<BangbooListItem>> = flow {
+    override suspend fun getBangbooList(languagePath: String): Flow<List<BangbooListItem>> = flow {
         emit(stubBangbooList)
     }
 
-    override suspend fun requestAndUpdateBangbooListDB(): Result<Unit> {
+    override suspend fun requestAndUpdateBangbooListDB(languagePath: String): Result<Unit> {
         return if (isError) {
             Result.failure(Exception())
         } else {
@@ -31,7 +31,7 @@ class FakeBangbooRepository : BangbooRepository {
         }
     }
 
-    override suspend fun getBangbooDetail(id: Int): Result<BangbooDetail> {
+    override suspend fun getBangbooDetail(id: Int, languagePath: String): Result<BangbooDetail> {
         return if (isError) {
             Result.failure(Exception())
         } else {

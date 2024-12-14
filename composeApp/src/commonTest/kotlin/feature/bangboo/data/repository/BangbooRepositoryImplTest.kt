@@ -21,14 +21,14 @@ class BangbooRepositoryImplTest {
 
     @Test
     fun `WHEN Get bangboo list success THEN return local DB`() = runTest {
-        val result = repository.getBangbooList().first()
+        val result = repository.getBangbooList("").first()
         assertEquals(result.size, 1)
     }
 
     @Test
     fun `WHEN Request bangboo list success THEN return updated DB`() = runTest {
-        repository.requestAndUpdateBangbooListDB()
-        val result = repository.getBangbooList().first()
+        repository.requestAndUpdateBangbooListDB("")
+        val result = repository.getBangbooList("").first()
         assertEquals(result.size, 3)
     }
 
@@ -36,14 +36,14 @@ class BangbooRepositoryImplTest {
     fun `GIVEN Bangboo list DB is empty WHEN Get bangboo list THEN Auto request and return updated DB`() =
         runTest {
             bangbooListDao.deleteBangbooList()
-            val result = repository.getBangbooList().first()
+            val result = repository.getBangbooList("").first()
             assertEquals(result.size, 3)
         }
 
     @Test
     fun `WHEN Request bangboo list error THEN return local DB`() = runTest {
         httpClient.setError(true)
-        val result = repository.getBangbooList().first()
+        val result = repository.getBangbooList("").first()
         assertEquals(result.size, 1)
     }
 
@@ -52,20 +52,20 @@ class BangbooRepositoryImplTest {
         runTest {
         httpClient.setError(true)
             bangbooListDao.deleteBangbooList()
-            val result = repository.getBangbooList().first()
+            val result = repository.getBangbooList("").first()
             assertEquals(result.size, 0)
     }
 
     @Test
     fun `Get Bangboo Detail Success`() = runTest {
-        val result = repository.getBangbooDetail(6).getOrNull()
+        val result = repository.getBangbooDetail(6, "").getOrNull()
         assertEquals(result?.id, 6)
     }
 
     @Test
     fun `Get Bangboo Detail Error`() = runTest {
         httpClient.setError(true)
-        val result = repository.getBangbooDetail(6).getOrNull()
+        val result = repository.getBangbooDetail(6, "").getOrNull()
         assertNull(result)
 
     }

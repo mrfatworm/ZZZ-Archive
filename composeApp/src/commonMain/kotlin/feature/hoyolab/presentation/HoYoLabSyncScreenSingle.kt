@@ -16,28 +16,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.hoyolab.components.AccountsListItemCard
 import feature.hoyolab.components.AddHoYoLabAccountCard
-import feature.hoyolab.model.HoYoLabConnectState
+import feature.hoyolab.model.HoYoLabSyncState
 import org.jetbrains.compose.resources.stringResource
 import ui.components.ZzzTopBar
 import ui.components.buttons.ZzzPrimaryButton
 import ui.theme.AppTheme
-import ui.utils.containerGap
 import ui.utils.contentGap
 import ui.utils.contentPaddingInScaffold
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.add_account
-import zzzarchive.composeapp.generated.resources.hoyolab_connect
+import zzzarchive.composeapp.generated.resources.hoyolab_sync
 import zzzarchive.composeapp.generated.resources.ic_add
 
 @Composable
-fun HoYoLabConnectScreenSingle(
-    uiState: HoYoLabConnectState,
-    onAction: (HoYoLabConnectAction) -> Unit
+fun HoYoLabSyncScreenSingle(
+    uiState: HoYoLabSyncState,
+    onAction: (HoYoLabSyncAction) -> Unit
 ) {
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
         ZzzTopBar(
-            title = stringResource(Res.string.hoyolab_connect), onBackClick = {
-                onAction(HoYoLabConnectAction.ClickBack)
+            title = stringResource(Res.string.hoyolab_sync), onBackClick = {
+                onAction(HoYoLabSyncAction.ClickBack)
             }
         )
 
@@ -47,37 +46,40 @@ fun HoYoLabConnectScreenSingle(
                 .contentPaddingInScaffold(contentPadding),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
-            if (uiState.connectedAccounts.isEmpty()) {
+            if (uiState.syncedAccounts.isEmpty()) {
                 AddHoYoLabAccountCard(
                     errorMessage = uiState.errorMessage,
                     onSubmit = { serverRegion, lToken, ltUid ->
                         onAction(
-                            HoYoLabConnectAction.ConnectToHoYoLabAndAdd(
+                            HoYoLabSyncAction.ConnectToHoYoLabAndAdd(
                                 serverRegion, lToken, ltUid
                             )
                         )
                     })
             }
 
-            Column(verticalArrangement = Arrangement.spacedBy(containerGap())) {
-                uiState.connectedAccounts.forEach { account ->
-                    AccountsListItemCard(uid = account.uid.toString(),
-                        regionName = account.regionName,
-                        updateAt = account.datetime,
+            Column(verticalArrangement = Arrangement.spacedBy(contentGap())) {
+                uiState.syncedAccounts.forEach { account ->
+                    AccountsListItemCard(
+                        uiState = account,
                         isDefault = account.uid == uiState.defaultAccountUid,
+                        syncable = uiState.syncable,
+                        sync = {
+                            onAction(HoYoLabSyncAction.SyncAccount(account.uid))
+                        },
                         setAsDefault = {
-                            onAction(HoYoLabConnectAction.SetDefaultAccount(account.uid))
+                            onAction(HoYoLabSyncAction.SetDefaultAccount(account.uid))
                         },
                         delete = {
-                            onAction(HoYoLabConnectAction.DeleteAccount(account.uid))
+                            onAction(HoYoLabSyncAction.DeleteAccount(account.uid))
                         })
                 }
-                if (uiState.connectedAccounts.isNotEmpty()) {
+                if (uiState.syncedAccounts.isNotEmpty()) {
                     ZzzPrimaryButton(
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(Res.string.add_account),
                         iconRes = Res.drawable.ic_add
-                    ) { onAction(HoYoLabConnectAction.ShowAddAccountDialog(true)) }
+                    ) { onAction(HoYoLabSyncAction.ShowAddAccountDialog(true)) }
                 }
             }
         }

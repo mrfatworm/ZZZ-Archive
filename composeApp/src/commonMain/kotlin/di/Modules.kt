@@ -6,9 +6,9 @@
 package di
 
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
-import com.russhwolf.settings.Settings
 import database.RoomDatabaseFactory
 import database.UpdateDatabaseUseCase
+import datastore.DataStoreFactory
 import feature.agent.data.database.AgentsListDB
 import feature.agent.data.repository.AgentRepository
 import feature.agent.data.repository.AgentRepositoryImpl
@@ -44,8 +44,8 @@ import feature.hoyolab.data.database.HoYoLabAccountDB
 import feature.hoyolab.data.repository.HoYoLabRepository
 import feature.hoyolab.data.repository.HoYoLabRepositoryImpl
 import feature.hoyolab.domain.HoYoLabManageUseCase
-import feature.hoyolab.domain.HoYoLabSettingUseCase
-import feature.hoyolab.presentation.HoYoLabConnectViewModel
+import feature.hoyolab.domain.HoYoLabPreferenceUseCase
+import feature.hoyolab.presentation.HoYoLabSyncViewModel
 import feature.news.data.OfficialNewsRepository
 import feature.news.data.OfficialNewsRepositoryImpl
 import feature.news.domain.OfficialNewsUseCase
@@ -77,14 +77,13 @@ import feature.wengine.presentation.WEnginesListViewModel
 import feature.wiki.presentation.WikiViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModelOf
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import root.MainContainerViewModel
 
 expect val platformModule: Module
 
 val sharedModule = module {
-    single<Settings> { Settings() }
-
     // Database
     single {
         get<RoomDatabaseFactory>().createAgentListDatabase().setDriver(BundledSQLiteDriver())
@@ -117,9 +116,13 @@ val sharedModule = module {
     single { get<CoverImagesListDB>().coverImagesListDao }
     single { get<HoYoLabAccountDB>().hoYoLabAccountDao }
 
+    // DataStore
+    single(named("PreferenceDataStore")) { get<DataStoreFactory>().getPreferenceDataStore() }
+    single(named("ConfigDataStore")) { get<DataStoreFactory>().getConfigDataStore() }
+
     // Repositories
-    single<SystemConfigRepository> { SystemConfigRepositoryImpl(get()) }
-    single<PreferencesRepository> { PreferencesRepositoryImpl(get()) }
+    single<SystemConfigRepository> { SystemConfigRepositoryImpl(get(named("ConfigDataStore"))) }
+    single<PreferencesRepository> { PreferencesRepositoryImpl(get(named("PreferenceDataStore"))) }
     single<AssetVersionRepository> { AssetVersionRepositoryImpl(get()) }
     single<BannerRepository> { BannerRepositoryImpl(get()) }
     single<OfficialNewsRepository> { OfficialNewsRepositoryImpl(get()) }
@@ -136,25 +139,25 @@ val sharedModule = module {
     // Use cases
     single<CoverImageUseCase> { CoverImageUseCase(get()) }
     single<PixivUseCase> { PixivUseCase(get()) }
-    single<BannerUseCase> { BannerUseCase(get(), get()) }
+    single<BannerUseCase> { BannerUseCase(get(), get(), get()) }
     single<LanguageUseCase> { LanguageUseCaseImpl(get()) }
     single<OfficialNewsUseCase> { OfficialNewsUseCase(get(), get()) }
-    single<AgentsListUseCase> { AgentsListUseCase(get()) }
-    single<AgentDetailUseCase> { AgentDetailUseCase(get()) }
-    single<BangbooListUseCase> { BangbooListUseCase(get()) }
-    single<BangbooDetailUseCase> { BangbooDetailUseCase(get()) }
-    single<WEnginesListUseCase> { WEnginesListUseCase(get()) }
-    single<WEngineDetailUseCase> { WEngineDetailUseCase(get()) }
-    single<DrivesListUseCase> { DrivesListUseCase(get()) }
+    single<AgentsListUseCase> { AgentsListUseCase(get(), get()) }
+    single<AgentDetailUseCase> { AgentDetailUseCase(get(), get()) }
+    single<BangbooListUseCase> { BangbooListUseCase(get(), get()) }
+    single<BangbooDetailUseCase> { BangbooDetailUseCase(get(), get()) }
+    single<WEnginesListUseCase> { WEnginesListUseCase(get(), get()) }
+    single<WEngineDetailUseCase> { WEngineDetailUseCase(get(), get()) }
+    single<DrivesListUseCase> { DrivesListUseCase(get(), get()) }
     single<AppInfoUseCase> { AppInfoUseCase() }
     single<GoogleDocUseCase> { GoogleDocUseCase(get()) }
     single<ThemeUseCase> { ThemeUseCase(get()) }
     single<UpdateDatabaseUseCase> {
-        UpdateDatabaseUseCase(get(), get(), get(), get(), get(), get(), get())
+        UpdateDatabaseUseCase(get(), get(), get(), get(), get(), get(), get(), get())
     }
     single<UiScaleUseCase> { UiScaleUseCase(get()) }
     single<HoYoLabManageUseCase> { HoYoLabManageUseCase(get(), get(), get()) }
-    single<HoYoLabSettingUseCase> { HoYoLabSettingUseCase(get()) }
+    single<HoYoLabPreferenceUseCase> { HoYoLabPreferenceUseCase(get()) }
 
     // ViewModels
     viewModelOf(::SplashViewModel)
@@ -170,5 +173,5 @@ val sharedModule = module {
     viewModelOf(::DrivesListViewModel)
     viewModelOf(::SettingViewModel)
     viewModelOf(::FeedbackViewModel)
-    viewModelOf(::HoYoLabConnectViewModel)
+    viewModelOf(::HoYoLabSyncViewModel)
 }

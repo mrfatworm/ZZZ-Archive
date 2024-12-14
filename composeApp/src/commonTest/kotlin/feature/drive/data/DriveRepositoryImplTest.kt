@@ -21,14 +21,14 @@ class DriveRepositoryImplTest {
 
     @Test
     fun `WHEN Get drives list success THEN return local DB`() = runTest {
-        val result = repository.getDrivesList().first()
+        val result = repository.getDrivesList("").first()
         assertEquals(result.size, 1)
     }
 
     @Test
     fun `WHEN Request drives list success THEN return updated DB`() = runTest {
-        repository.requestAndUpdateDrivesListDB()
-        val result = repository.getDrivesList().first()
+        repository.requestAndUpdateDrivesListDB("")
+        val result = repository.getDrivesList("").first()
         assertEquals(result.size, 2)
     }
 
@@ -36,14 +36,14 @@ class DriveRepositoryImplTest {
     fun `GIVEN drives list DB is empty WHEN Get drives list THEN Auto request and return updated DB`() =
         runTest {
             database.deleteDrivesList()
-            val result = repository.getDrivesList().first()
+            val result = repository.getDrivesList("").first()
             assertEquals(result.size, 2)
         }
 
     @Test
     fun `WHEN Request drives list error THEN return local DB`() = runTest {
         httpClient.setError(true)
-        val result = repository.getDrivesList().first()
+        val result = repository.getDrivesList("").first()
         assertEquals(result.size, 1)
     }
 
@@ -52,7 +52,7 @@ class DriveRepositoryImplTest {
         runTest {
         httpClient.setError(true)
             database.deleteDrivesList()
-            val result = repository.getDrivesList().first()
+            val result = repository.getDrivesList("").first()
             assertEquals(result.size, 0)
     }
 }

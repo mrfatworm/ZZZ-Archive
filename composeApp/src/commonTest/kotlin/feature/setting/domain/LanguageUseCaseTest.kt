@@ -6,6 +6,8 @@
 package feature.setting.domain
 
 import feature.setting.data.FakePreferenceRepository
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.runTest
 import utils.Language
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,15 +19,15 @@ class LanguageUseCaseTest {
     private val languageUseCase = LanguageUseCaseImpl(settingRepository)
 
     @Test
-    fun `Get language`() {
-        val result = languageUseCase.getLanguage()
+    fun `Get language`() = runTest {
+        val result = languageUseCase.getLanguage().first()
         assertEquals(result, Language.English)
     }
 
     @Test
-    fun `Set language`() {
+    fun `Set language`() = runTest {
         languageUseCase.setLanguage(Language.ChineseTraditional.code)
-        val result = languageUseCase.getLanguage()
+        val result = languageUseCase.getLanguage().first()
         assertEquals(result, Language.ChineseTraditional)
     }
 }

@@ -18,15 +18,14 @@ import feature.wengine.model.WEnginesListResponse
 
 interface ZzzHttp {
     val defaultTimeout: Long
-    val languagePath: String
     suspend fun requestAssetVersion(): AssetVersionResponse
-    suspend fun requestBanner(): BannerResponse
     suspend fun requestCoverImage(): CoverImageListResponse
-    suspend fun requestAgentsList(): AgentsListResponse
-    suspend fun requestAgentDetail(id: Int): AgentDetailResponse
-    suspend fun requestWEnginesList(): WEnginesListResponse
-    suspend fun requestWEngineDetail(id: Int): WEngineDetailResponse
-    suspend fun requestBangbooList(): BangbooListResponse
-    suspend fun requestBangbooDetail(id: Int): BangbooDetailResponse
-    suspend fun requestDrivesList(): DrivesListResponse
+    suspend fun requestBanner(languagePath: String): BannerResponse
+    suspend fun requestAgentsList(languagePath: String): AgentsListResponse
+    suspend fun requestAgentDetail(id: Int, languagePath: String): AgentDetailResponse
+    suspend fun requestWEnginesList(languagePath: String): WEnginesListResponse
+    suspend fun requestWEngineDetail(id: Int, languagePath: String): WEngineDetailResponse
+    suspend fun requestBangbooList(languagePath: String): BangbooListResponse
+    suspend fun requestBangbooDetail(id: Int, languagePath: String): BangbooDetailResponse
+    suspend fun requestDrivesList(languagePath: String): DrivesListResponse
 }

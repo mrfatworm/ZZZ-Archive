@@ -7,6 +7,7 @@ package feature.bangboo.domain
 
 import feature.bangboo.data.repository.FakeBangbooRepository
 import feature.bangboo.model.stubBangbooList
+import feature.setting.domain.FakeLanguageUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import utils.AgentAttribute
@@ -19,7 +20,8 @@ import kotlin.test.assertNull
 class BangbooListUseCaseTest {
 
     private val bangbooRepository = FakeBangbooRepository()
-    private val bangbooListUseCase = BangbooListUseCase(bangbooRepository)
+    private val languageUseCase = FakeLanguageUseCase()
+    private val bangbooListUseCase = BangbooListUseCase(bangbooRepository, languageUseCase)
 
 
     @Test

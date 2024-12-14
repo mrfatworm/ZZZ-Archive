@@ -7,6 +7,7 @@ package feature.bangboo.domain
 
 import feature.bangboo.data.repository.FakeBangbooRepository
 import feature.bangboo.model.stubBangbooDetail
+import feature.setting.domain.FakeLanguageUseCase
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -16,7 +17,8 @@ import kotlin.test.assertNull
 class BangbooDetailUseCaseTest {
 
     private val bangbooRepository = FakeBangbooRepository()
-    private val bangbooDetailUseCase = BangbooDetailUseCase(bangbooRepository)
+    private val languageUseCase = FakeLanguageUseCase()
+    private val bangbooDetailUseCase = BangbooDetailUseCase(bangbooRepository, languageUseCase)
 
 
     @Test

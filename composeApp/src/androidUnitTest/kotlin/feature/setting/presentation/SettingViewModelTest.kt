@@ -12,9 +12,14 @@ import feature.setting.domain.AppInfoUseCase
 import feature.setting.domain.FakeLanguageUseCase
 import feature.setting.domain.ThemeUseCase
 import feature.setting.domain.UiScaleUseCase
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.runTest
 import org.junit.Ignore
 import org.junit.Rule
 import utils.AppActionsUseCase
@@ -38,14 +43,14 @@ class SettingViewModelTest {
 
     @BeforeTest
     fun setup() {
-        every { themeUseCase.getPreferenceIsDarkTheme() } returns true
-        every { themeUseCase.setPreferenceIsDarkTheme(any()) } returns Unit
+        every { themeUseCase.getPreferenceIsDarkTheme() } returns flowOf(true)
+        coEvery { themeUseCase.setPreferenceIsDarkTheme(any()) } returns Unit
         every { appInfoUseCase.getAppVersion() } returns "Luciana 2024.11.13"
         every { appActionsUseCase.restart() } returns Unit
-        every { uiScaleUseCase.getUiScale() } returns 1f
-        every { uiScaleUseCase.getFontScale() } returns 1f
-        every { uiScaleUseCase.setUiScale(any()) } returns Unit
-        every { uiScaleUseCase.setFontScale(any()) } returns Unit
+        every { uiScaleUseCase.getUiScale() } returns flowOf(1f)
+        every { uiScaleUseCase.getFontScale() } returns flowOf(1f)
+        coEvery { uiScaleUseCase.setUiScale(any()) } returns Unit
+        coEvery { uiScaleUseCase.setFontScale(any()) } returns Unit
 
         viewModel =
             SettingViewModel(
@@ -59,8 +64,8 @@ class SettingViewModelTest {
     }
 
     @Test
-    fun `Init Data Success`() {
-        val isDark = viewModel.isDark.value
+    fun `Init Data Success`() = runTest {
+        val isDark = viewModel.isDark.first()
         val state = viewModel.uiState.value
         assertTrue(isDark)
         assertEquals(1f, state.uiScale)
@@ -70,20 +75,20 @@ class SettingViewModelTest {
     }
 
     @Test
-    fun `Set Dark Theme`() {
+    fun `Set Dark Theme`() = runTest {
         viewModel.onAction(SettingAction.ChangeToDarkTheme(false))
-        verify { themeUseCase.setPreferenceIsDarkTheme(false) }
+        coVerify { themeUseCase.setPreferenceIsDarkTheme(false) }
     }
 
     @Test
-    fun `Set Ui Scale`() {
+    fun `Set Ui Scale`() = runTest {
         viewModel.onAction(SettingAction.ScaleUi(1.1f, 1.3f))
-        verify { uiScaleUseCase.setUiScale(1.1f) }
-        verify { uiScaleUseCase.setFontScale(1.3f) }
+        coVerify { uiScaleUseCase.setUiScale(1.1f) }
+        coVerify { uiScaleUseCase.setFontScale(1.3f) }
     }
 
     @Test
-    fun `Restart App`() {
+    fun `Restart App`() = runTest {
         viewModel.onAction(SettingAction.RestartApp)
         verify { appActionsUseCase.restart() }
     }
@@ -91,7 +96,7 @@ class SettingViewModelTest {
 
     @Ignore("Issue: kotlinx.coroutines.test.UncaughtExceptionsBeforeTest")
     @Test
-    fun `Set Language`() {
+    fun `Set Language`() = runTest {
         viewModel.onAction(SettingAction.ChangeLanguage("zh"))
         val state = viewModel.uiState.value
         assertEquals("zh", state.language.code)

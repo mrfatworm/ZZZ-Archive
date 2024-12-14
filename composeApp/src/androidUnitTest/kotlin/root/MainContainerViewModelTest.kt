@@ -8,9 +8,13 @@ package root
 
 import MainDispatcherRule
 import feature.setting.domain.ThemeUseCase
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.verify
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -26,20 +30,20 @@ class MainContainerViewModelTest {
 
     @BeforeTest
     fun setup() {
-        every { themeUseCase.getPreferenceIsDarkTheme() } returns true
-        every { themeUseCase.setPreferenceIsDarkTheme(any()) } returns Unit
+        every { themeUseCase.getPreferenceIsDarkTheme() } returns flowOf(true)
+        coEvery { themeUseCase.setPreferenceIsDarkTheme(any()) } returns Unit
         viewModel = MainContainerViewModel(themeUseCase)
     }
 
     @Test
-    fun `Init Data Success`() {
-        val isDark = viewModel.isDark.value
+    fun `Init Data Success`() = runTest {
+        val isDark = viewModel.isDark.first()
         assertTrue(isDark)
     }
 
     @Test
-    fun `Set Light Theme`() {
+    fun `Set Light Theme`() = runTest {
         viewModel.setIsDarkTheme(false)
-        verify { themeUseCase.setPreferenceIsDarkTheme(false) }
+        coVerify { themeUseCase.setPreferenceIsDarkTheme(false) }
     }
 }

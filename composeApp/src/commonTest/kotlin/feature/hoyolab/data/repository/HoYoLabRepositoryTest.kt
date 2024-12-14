@@ -7,7 +7,7 @@ package feature.hoyolab.data.repository
 
 import feature.hoyolab.data.database.FakeHoYoLabAccountDao
 import feature.hoyolab.data.database.stubHoYoLabAccountEntity
-import feature.hoyolab.model.stubPlayerAccountInfo
+import feature.hoyolab.model.stubPlayerBasicInfo
 import feature.hoyolab.model.stubPlayerDetailResponse
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
@@ -26,7 +26,7 @@ class HoYoLabRepositoryTest {
     fun `Request user game roles by LToken THEN success`() = runTest {
         val result =
             repository.requestUserGameRolesByLToken("prod_gf_jp", "fake_ltoken", "fake_lt_uid")
-        assertEquals(result, Result.success(listOf(stubPlayerAccountInfo)))
+        assertEquals(result, Result.success(listOf(stubPlayerBasicInfo)))
     }
 
     @Test

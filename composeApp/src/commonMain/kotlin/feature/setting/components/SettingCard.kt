@@ -26,8 +26,8 @@ import feature.setting.model.SettingState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.components.cards.ContentCard
+import ui.components.dialogs.DoubleActionDialog
 import ui.components.dialogs.ScaleFontSizeDialog
-import ui.components.dialogs.SingleActionDialog
 import ui.theme.AppTheme
 import utils.Language
 import zzzarchive.composeapp.generated.resources.Res
@@ -39,6 +39,7 @@ import zzzarchive.composeapp.generated.resources.hoyolab_account
 import zzzarchive.composeapp.generated.resources.ic_arrow_down_ios
 import zzzarchive.composeapp.generated.resources.ic_arrow_next_ios
 import zzzarchive.composeapp.generated.resources.language
+import zzzarchive.composeapp.generated.resources.later
 import zzzarchive.composeapp.generated.resources.light_theme
 import zzzarchive.composeapp.generated.resources.restart
 import zzzarchive.composeapp.generated.resources.restart_hint
@@ -111,12 +112,16 @@ private fun LanguageSettingItem(
     }, onClick = { showLanguageList = true })
     when {
         openRestartDialog.value -> {
-            SingleActionDialog(
+            DoubleActionDialog(
                 text = stringResource(Res.string.restart_hint),
-                actionText = stringResource(Res.string.restart),
-                onAction = {
+                primaryActionText = stringResource(Res.string.restart),
+                secondaryActionText = stringResource(Res.string.later),
+                onPrimaryAction = {
                     openRestartDialog.value = false
                     onRestart()
+                },
+                onSecondaryAction = {
+                    openRestartDialog.value = false
                 },
                 onDismiss = {
                     // Cannot dismiss

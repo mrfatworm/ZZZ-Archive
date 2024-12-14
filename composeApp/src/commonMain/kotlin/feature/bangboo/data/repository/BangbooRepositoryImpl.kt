@@ -21,20 +21,20 @@ class BangbooRepositoryImpl(
     private val httpClient: ZzzHttp,
     private val bangbooListDB: BangbooListDao
 ) : BangbooRepository {
-    override suspend fun getBangbooList(): Flow<List<BangbooListItem>> {
+    override suspend fun getBangbooList(languagePath: String): Flow<List<BangbooListItem>> {
         val cachedBangbooList = bangbooListDB.getBangbooList()
         if (cachedBangbooList.first().isEmpty()) {
-            requestAndUpdateBangbooListDB()
+            requestAndUpdateBangbooListDB(languagePath)
         }
         return bangbooListDB.getBangbooList().map { localBangbooList ->
             localBangbooList.map { it.toBangbooListItem() }.reversed()
         }
     }
 
-    override suspend fun requestAndUpdateBangbooListDB(): Result<Unit> {
+    override suspend fun requestAndUpdateBangbooListDB(languagePath: String): Result<Unit> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestBangbooList()
+                httpClient.requestBangbooList(languagePath)
             }
             bangbooListDB.setBangbooList(result.bangboo.map { it.toBangbooListItemEntity() })
             Result.success(Unit)
@@ -43,10 +43,10 @@ class BangbooRepositoryImpl(
         }
     }
 
-    override suspend fun getBangbooDetail(id: Int): Result<BangbooDetail> {
+    override suspend fun getBangbooDetail(id: Int, languagePath: String): Result<BangbooDetail> {
         return try {
             val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestBangbooDetail(id)
+                httpClient.requestBangbooDetail(id, languagePath)
             }
             Result.success(result.toBangbooDetail())
         } catch (e: Exception) {
