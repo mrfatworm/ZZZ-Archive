@@ -17,6 +17,7 @@ data class HoYoLabAccountEntity(
     val regionName: String,
     val lToken: ByteArray,
     val ltUid: ByteArray,
+    val updatedAt: Long
 )
 
 val stubHoYoLabAccountEntity = HoYoLabAccountEntity(
@@ -24,5 +25,6 @@ val stubHoYoLabAccountEntity = HoYoLabAccountEntity(
     region = "prod_gf_jp",
     regionName = "Asia",
     lToken = "fake_ltoken".toByteArray(),
-    ltUid = "fake_lt_uid".toByteArray()
+    ltUid = "fake_lt_uid".toByteArray(),
+    updatedAt = 0L
 )

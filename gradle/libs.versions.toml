@@ -9,6 +9,7 @@ compose-plugin = "1.7.1"
 cryptography = "0.4.0"
 kotlin = "2.1.0"
 kotlinx-coroutines = "1.9.0"
+kotlin-datetime = "0.6.1"
 koin = "4.1.0-Beta1"
 ksp = "2.1.0-1.0.29"
 ktor = "3.0.1"
@@ -28,6 +29,7 @@ androidx-lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:life
 androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 navigation-compose = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref ="navigation-compose" }
 compose-adaptive = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive", version.ref = "compose-adaptive"}
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlin-datetime" }
 
 #===Android
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }

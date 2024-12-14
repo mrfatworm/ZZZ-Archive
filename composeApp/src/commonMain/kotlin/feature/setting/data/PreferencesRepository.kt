@@ -14,5 +14,7 @@ interface PreferencesRepository {
     fun setUiScale(value: Float)
     fun getFontScale(): Float
     fun setFontScale(value: Float)
+    fun getDefaultHoYoLabAccountUid(): Int
+    fun setDefaultHoYoLabAccountUid(value: Int)
     fun clear()
 }

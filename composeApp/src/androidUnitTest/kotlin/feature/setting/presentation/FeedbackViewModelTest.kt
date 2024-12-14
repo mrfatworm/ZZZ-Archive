@@ -64,7 +64,6 @@ class FeedbackViewModelTest {
             )
         )
         val state = viewModel.uiState.value
-        println(state.showSubmitSuccessDialog)
         assertTrue(state.showSubmitSuccessDialog)
     }
 

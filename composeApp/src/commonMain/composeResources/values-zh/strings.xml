@@ -5,9 +5,13 @@
 
     <!-- Common -->
     <string name="navigation_drawer">導航列</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
     <string name="confirm">確認</string>
     <string name="cancel">取消</string>
     <string name="close">關閉</string>
+    <string name="clear">清除</string>
+    <string name="delete">刪除</string>
     <string name="retry">重試</string>
     <string name="apply">套用</string>
     <string name="back">返回</string>
@@ -18,11 +22,15 @@
     <string name="view_all">查看全部</string>
     <string name="announcement">公告</string>
     <string name="filter">條件過濾</string>
+    <string name="default">預設</string>
     <string name="default_value">預設值</string>
+    <string name="set_as_default">設為預設</string>
     <string name="customize">自訂</string>
     <string name="multiply">倍率</string>
     <string name="bangboo_speak">嗯嗯呢嗯呢！</string>
     <string name="unknown_error">未知的錯誤</string>
+    <string name="visible">顯示</string>
+    <string name="invisible">隱藏</string>
 
     <!-- Sub System -->
     <string name="home">首頁</string>
@@ -167,5 +175,9 @@
     <string name="game_server">遊戲伺服器</string>
     <string name="account_not_found">查無帳號</string>
     <string name="invalid_hoYoLab_form">遊戲伺服器未選擇或輸入內容為空</string>
+    <string name="update_at">%1$s 更新</string>
+    <string name="hoyolab_connect_announcement">本頁面提交的資料僅用於 HoYoLab 的請求處理，並加密儲存在您的裝置中。我們不會蒐集任何資訊。</string>
+    <string name="remove_account_hint">是否取消帳號連結\n（從本裝置清除該帳號資料）</string>
+    <string name="add_account">新增帳號</string>
 
 </resources>

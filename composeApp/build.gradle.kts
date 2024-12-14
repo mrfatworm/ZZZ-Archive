@@ -61,7 +61,9 @@ kotlin {
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
             implementation(libs.cryptography.core)
+            implementation(libs.kotlinx.datetime)
         }
+
         commonTest.dependencies {
             implementation(kotlin("test-annotations-common"))
             implementation(libs.kotlin.test)

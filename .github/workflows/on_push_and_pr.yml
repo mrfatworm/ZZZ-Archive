@@ -1,12 +1,14 @@
-name: On Push
+name: On Push and PR
 
-on: [push, pull_request]
+on:
+  push:
+    branches-ignore:
+      - "doc/**"
 
-branches-ignore:
-   - "doc/**"
+    paths-ignore:
+      - "**/*.md"
 
-paths-ignore:
-   - "**/*.md"
+  pull_request:
 
 jobs:
   lint:

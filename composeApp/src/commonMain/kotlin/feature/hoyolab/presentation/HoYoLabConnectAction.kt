@@ -8,7 +8,8 @@ package feature.hoyolab.presentation
 sealed class HoYoLabConnectAction {
     data class ConnectToHoYoLabAndAdd(val region: String, val lToken: String, val ltUid: String) :
         HoYoLabConnectAction()
-
+    data class SetDefaultAccount(val uid: Int) : HoYoLabConnectAction()
     data class DeleteAccount(val uid: Int) : HoYoLabConnectAction()
+    data class ShowAddAccountDialog(val isVisible: Boolean) : HoYoLabConnectAction()
     data object ClickBack : HoYoLabConnectAction()
 }

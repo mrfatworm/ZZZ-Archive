@@ -7,28 +7,29 @@ package feature.hoyolab.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mrfatworm.zzzarchive.ZzzConfig
 import feature.hoyolab.domain.HoYoLabManageUseCase
+import feature.hoyolab.domain.HoYoLabSettingUseCase
 import feature.hoyolab.model.ConnectedAccountsListItem
 import feature.hoyolab.model.HoYoLabConnectState
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class HoYoLabConnectViewModel(
-    private val hoYoLabManageUseCase: HoYoLabManageUseCase
+    private val hoYoLabManageUseCase: HoYoLabManageUseCase,
+    private val hoYoLabSettingUseCase: HoYoLabSettingUseCase
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(HoYoLabConnectState())
     val uiState = _uiState.asStateFlow()
 
     init {
+        getDefaultHoYoLabAccountUid()
         viewModelScope.launch {
             observeAccountList()
         }
-
-        println("Lance Key = ${ZzzConfig.AES_KEY}")
     }
 
     fun onAction(action: HoYoLabConnectAction) {
@@ -40,9 +41,23 @@ class HoYoLabConnectViewModel(
             }
 
             is HoYoLabConnectAction.DeleteAccount -> {
-                viewModelScope.launch {
+                val deleteAccountDeferred = viewModelScope.async {
                     hoYoLabManageUseCase.deleteAccountFromDB(action.uid)
                 }
+                viewModelScope.launch {
+                    deleteAccountDeferred.await()
+                    getDefaultHoYoLabAccountUid()
+                }
+            }
+
+            is HoYoLabConnectAction.ShowAddAccountDialog -> {
+                _uiState.update { state ->
+                    state.copy(openAddAccountDialog = action.isVisible)
+                }
+            }
+
+            is HoYoLabConnectAction.SetDefaultAccount -> {
+                setDefaultHoYoLabAccountUid(action.uid)
             }
 
             else -> {}
@@ -51,13 +66,15 @@ class HoYoLabConnectViewModel(
 
     private suspend fun observeAccountList() {
         hoYoLabManageUseCase.getAllAccountsFromDB().collect { accountList ->
-            println("lToken: ${accountList.first().lToken}")
-            println("ltUid: ${accountList.first().ltUid}")
+//            println("lToken: ${accountList.firstOrNull()?.lToken}")
+//            println("ltUid: ${accountList.firstOrNull()?.ltUid}")
 
             _uiState.update { state ->
                 state.copy(connectedAccounts = accountList.map {
                     ConnectedAccountsListItem(
-                        uid = it.uid.toString(), regionName = it.regionName
+                        uid = it.uid,
+                        regionName = it.regionName,
+                        datetime = hoYoLabManageUseCase.convertToLocalDatetime(it.updatedAt)
                     )
                 })
             }
@@ -67,13 +84,31 @@ class HoYoLabConnectViewModel(
     private suspend fun connectToHoYoLab(server: String, lToken: String, ltUid: String) {
         val result = hoYoLabManageUseCase.requestUserGameRolesAndSave(server, lToken, ltUid)
         result.fold(onSuccess = {
-
+            _uiState.update { state ->
+                state.copy(
+                    openAddAccountDialog = false,
+                    errorMessage = ""
+                )
+            }
         }, onFailure = {
             _uiState.update { state ->
                 state.copy(
-                    errorMessage = "Request Error"
+                    errorMessage = it.message ?: "Unknown error"
                 )
             }
         })
+    }
+
+    private fun getDefaultHoYoLabAccountUid() {
+        _uiState.update { state ->
+            state.copy(
+                defaultAccountUid = hoYoLabSettingUseCase.getDefaultHoYoLabAccountUid()
+            )
+        }
+    }
+
+    private fun setDefaultHoYoLabAccountUid(uid: Int) {
+        hoYoLabSettingUseCase.setDefaultHoYoLabAccountUid(uid)
+        getDefaultHoYoLabAccountUid()
     }
 }

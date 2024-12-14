@@ -26,8 +26,8 @@ import feature.setting.model.SettingState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.components.cards.ContentCard
-import ui.components.dialogs.ConfirmDialog
 import ui.components.dialogs.ScaleFontSizeDialog
+import ui.components.dialogs.SingleActionDialog
 import ui.theme.AppTheme
 import utils.Language
 import zzzarchive.composeapp.generated.resources.Res
@@ -43,7 +43,6 @@ import zzzarchive.composeapp.generated.resources.light_theme
 import zzzarchive.composeapp.generated.resources.restart
 import zzzarchive.composeapp.generated.resources.restart_hint
 import zzzarchive.composeapp.generated.resources.ui_scale
-import zzzarchive.composeapp.generated.resources.under_development
 
 @Composable
 fun SettingCard(
@@ -112,7 +111,7 @@ private fun LanguageSettingItem(
     }, onClick = { showLanguageList = true })
     when {
         openRestartDialog.value -> {
-            ConfirmDialog(
+            SingleActionDialog(
                 text = stringResource(Res.string.restart_hint),
                 actionText = stringResource(Res.string.restart),
                 onAction = {
@@ -228,11 +227,6 @@ private fun HoYoLabSettingItem(onClick: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
         ) {
-            Text(
-                text = stringResource(Res.string.under_development),
-                style = AppTheme.typography.labelMedium,
-                color = AppTheme.colors.onSurface
-            )
             Icon(
                 modifier = Modifier.size(AppTheme.size.smallIconSize),
                 imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),

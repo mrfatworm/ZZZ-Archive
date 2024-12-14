@@ -5,9 +5,13 @@
 
     <!-- Common -->
     <string name="navigation_drawer">Navigation Drawer</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
     <string name="close">Close</string>
+    <string name="clear">Clear</string>
+    <string name="delete">Delete</string>
     <string name="retry">Retry</string>
     <string name="apply">Apply</string>
     <string name="back">Back</string>
@@ -18,11 +22,16 @@
     <string name="view_all">View All</string>
     <string name="announcement">Announcement</string>
     <string name="filter">Filter</string>
+    <string name="default">Default</string>
     <string name="default_value">Default</string>
+    <string name="set_as_default">Set as Default</string>
     <string name="customize">Customize</string>
     <string name="multiply">Multiply</string>
     <string name="bangboo_speak">Ehn-ne~ ehn-na</string>
     <string name="unknown_error">Unknown Error</string>
+    <string name="visible">Visible</string>
+    <string name="invisible">Invisible</string>
+
 
     <!-- Sub System -->
     <string name="home">Home</string>
@@ -167,5 +176,9 @@
     <string name="game_server">Game Server</string>
     <string name="account_not_found">Account Not Found</string>
     <string name="invalid_hoYoLab_form">Unspecified game server or empty input field.</string>
+    <string name="update_at">%1$s updated</string>
+    <string name="hoyolab_connect_announcement">The information submitted on this page is only used for processing requests in HoYoLab and is encrypted and stored on your device. We do not collect any data.</string>
+    <string name="remove_account_hint">Do you want to disconnect the account?\n(remove its data from this device)</string>
+    <string name="add_account">Add Account</string>
 
 </resources>

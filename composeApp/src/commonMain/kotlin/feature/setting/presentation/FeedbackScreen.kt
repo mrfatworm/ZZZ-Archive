@@ -18,7 +18,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import feature.setting.model.FeedbackState
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import ui.components.dialogs.ConfirmDialog
+import ui.components.dialogs.SingleActionDialog
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 import zzzarchive.composeapp.generated.resources.Res
@@ -58,7 +58,7 @@ private fun FeedbackScreenContent(
     }
     when {
         uiState.showSubmitSuccessDialog -> {
-            ConfirmDialog(stringResource(Res.string.form_submit_success), onAction = {
+            SingleActionDialog(stringResource(Res.string.form_submit_success), onAction = {
                 onAction(FeedbackAction.DismissDialog)
             }, onDismiss = {
                 onAction(FeedbackAction.DismissDialog)

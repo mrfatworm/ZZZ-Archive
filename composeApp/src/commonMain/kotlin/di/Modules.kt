@@ -44,6 +44,7 @@ import feature.hoyolab.data.database.HoYoLabAccountDB
 import feature.hoyolab.data.repository.HoYoLabRepository
 import feature.hoyolab.data.repository.HoYoLabRepositoryImpl
 import feature.hoyolab.domain.HoYoLabManageUseCase
+import feature.hoyolab.domain.HoYoLabSettingUseCase
 import feature.hoyolab.presentation.HoYoLabConnectViewModel
 import feature.news.data.OfficialNewsRepository
 import feature.news.data.OfficialNewsRepositoryImpl
@@ -152,7 +153,8 @@ val sharedModule = module {
         UpdateDatabaseUseCase(get(), get(), get(), get(), get(), get(), get())
     }
     single<UiScaleUseCase> { UiScaleUseCase(get()) }
-    single<HoYoLabManageUseCase> { HoYoLabManageUseCase(get(), get()) }
+    single<HoYoLabManageUseCase> { HoYoLabManageUseCase(get(), get(), get()) }
+    single<HoYoLabSettingUseCase> { HoYoLabSettingUseCase(get()) }
 
     // ViewModels
     viewModelOf(::SplashViewModel)

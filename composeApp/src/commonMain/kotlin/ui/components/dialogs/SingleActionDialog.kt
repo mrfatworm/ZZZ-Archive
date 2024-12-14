@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import org.jetbrains.compose.resources.stringResource
 import ui.components.buttons.ZzzPrimaryButton
 import ui.theme.AppTheme
@@ -20,7 +21,7 @@ import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.bangboo_speak
 
 @Composable
-fun ConfirmDialog(
+fun SingleActionDialog(
     text: String,
     actionText: String = stringResource(Res.string.bangboo_speak),
     onAction: () -> Unit,
@@ -40,6 +41,7 @@ fun ConfirmDialog(
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = text,
+                textAlign = TextAlign.Center,
                 style = AppTheme.typography.bodyMedium
             )
 

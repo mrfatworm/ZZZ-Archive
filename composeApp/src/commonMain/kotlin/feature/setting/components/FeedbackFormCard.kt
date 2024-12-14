@@ -5,7 +5,6 @@
 
 package feature.setting.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,6 +27,7 @@ import feature.setting.model.FeedbackState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.components.ZzzTextFiled
+import ui.components.cards.ContentCard
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.app_version
@@ -48,28 +48,25 @@ fun FeedbackFormCard(
     onNickNameChange: (String) -> Unit,
     onIssueSelected: (FeedbackIssueType) -> Unit
 ) {
-    Column(
-        modifier = Modifier.background(
-            AppTheme.colors.surfaceContainer, AppTheme.shape.r400
-        ).padding(horizontal = AppTheme.spacing.s200, vertical = AppTheme.spacing.s400)
-    ) {
-        IssueTypeItem(
-            feedbackIssueTypes = feedbackState.issueTypes,
-            onIssueSelected = onIssueSelected
-        )
-        IssueTextField(issueText, onIssueDescChange, nicknameText, onNickNameChange)
-        SettingItemText(
-            title = stringResource(Res.string.app_version), content = feedbackState.appVersion
-        )
-        SettingItemText(
-            title = stringResource(Res.string.device_name), content = feedbackState.deviceName
-        )
-        SettingItemText(
-            title = stringResource(Res.string.operating_system),
-            content = feedbackState.operatingSystem
-        )
+    ContentCard(hasDefaultPadding = false) {
+        Column(modifier = Modifier.padding(vertical = AppTheme.spacing.s400)) {
+            IssueTypeItem(
+                feedbackIssueTypes = feedbackState.issueTypes,
+                onIssueSelected = onIssueSelected
+            )
+            IssueTextField(issueText, onIssueDescChange, nicknameText, onNickNameChange)
+            SettingItemText(
+                title = stringResource(Res.string.app_version), content = feedbackState.appVersion
+            )
+            SettingItemText(
+                title = stringResource(Res.string.device_name), content = feedbackState.deviceName
+            )
+            SettingItemText(
+                title = stringResource(Res.string.operating_system),
+                content = feedbackState.operatingSystem
+            )
+        }
     }
-
 }
 
 @Composable

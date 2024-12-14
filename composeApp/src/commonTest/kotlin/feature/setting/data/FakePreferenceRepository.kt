@@ -12,6 +12,7 @@ class FakePreferenceRepository : PreferencesRepository {
     private var language = Language.English.code
     private var uiScale = 1f
     private var fontScale = 1f
+    private var defaultHoYoLabAccountUid = 0
 
     override fun getIsDarkTheme(): Boolean {
         return isDarkTheme
@@ -43,6 +44,14 @@ class FakePreferenceRepository : PreferencesRepository {
 
     override fun setFontScale(value: Float) {
         fontScale = value
+    }
+
+    override fun getDefaultHoYoLabAccountUid(): Int {
+        return defaultHoYoLabAccountUid
+    }
+
+    override fun setDefaultHoYoLabAccountUid(value: Int) {
+        defaultHoYoLabAccountUid = value
     }
 
     override fun clear() {

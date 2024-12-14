@@ -19,6 +19,8 @@ class PreferencesRepositoryImpl(private val settings: Settings) : PreferencesRep
     private val language: SettingConfig<String> = StringSettingConfig(settings, "LANGUAGE", "")
     private val uiScale: SettingConfig<Float> = FloatSettingConfig(settings, "UI_SCALE", 1f)
     private val fontScale: SettingConfig<Float> = FloatSettingConfig(settings, "FONT_SCALE", 1f)
+    private val defaultHoYoLabAccountUid: SettingConfig<Int> =
+        IntSettingConfig(settings, "DEFAULT_HOYO_LAB_ACCOUNT_UID", 0)
 
     override fun getIsDarkTheme(): Boolean {
         return isDarkTheme.get().toBoolean()
@@ -50,6 +52,14 @@ class PreferencesRepositoryImpl(private val settings: Settings) : PreferencesRep
 
     override fun setFontScale(value: Float) {
         fontScale.set(value.toString())
+    }
+
+    override fun getDefaultHoYoLabAccountUid(): Int {
+        return defaultHoYoLabAccountUid.get().toInt()
+    }
+
+    override fun setDefaultHoYoLabAccountUid(value: Int) {
+        defaultHoYoLabAccountUid.set(value.toString())
     }
 
     override fun clear() = settings.clear()

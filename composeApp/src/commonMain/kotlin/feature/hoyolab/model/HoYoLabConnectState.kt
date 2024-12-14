@@ -7,10 +7,13 @@ package feature.hoyolab.model
 
 data class HoYoLabConnectState(
     val connectedAccounts: List<ConnectedAccountsListItem> = emptyList(),
+    val defaultAccountUid: Int = 0,
+    val openAddAccountDialog: Boolean = false,
     val errorMessage: String = ""
 )
 
 data class ConnectedAccountsListItem(
-    val uid: String,
+    val uid: Int,
     val regionName: String,
+    val datetime: String,
 )

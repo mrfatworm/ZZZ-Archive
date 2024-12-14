@@ -24,7 +24,12 @@ interface HoYoLabRepository {
     suspend fun getAccountFromDB(uid: Int): Flow<HoYoLabAccountEntity>
 
     suspend fun addAccountToDB(
-        uid: Int, region: String, regionName: String, lToken: ByteArray, ltUid: ByteArray
+        uid: Int,
+        region: String,
+        regionName: String,
+        lToken: ByteArray,
+        ltUid: ByteArray,
+        updatedAt: Long
     )
 
     suspend fun deleteAccountFromDB(uid: Int)

@@ -35,8 +35,6 @@ class UpdateDatabaseUseCase(
                 }
             }
             if (assetVersionResponse.wEnginesList > systemConfigRepository.getWEngineListDBVersion()) {
-                println("Lance Current Version: ${systemConfigRepository.getWEngineListDBVersion()}")
-                println("Lance Network Version: ${assetVersionResponse.wEnginesList}")
                 wEngineRepository.requestAndUpdateWEnginesListDB().onSuccess {
                     systemConfigRepository.setWEngineListDBVersion(assetVersionResponse.wEnginesList)
                 }

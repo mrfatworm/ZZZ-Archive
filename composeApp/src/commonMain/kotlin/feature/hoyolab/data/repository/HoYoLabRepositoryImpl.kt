@@ -50,7 +50,12 @@ class HoYoLabRepositoryImpl(
         hoYoLabAccountDao.getAccount(uid)
 
     override suspend fun addAccountToDB(
-        uid: Int, region: String, regionName: String, lToken: ByteArray, ltUid: ByteArray
+        uid: Int,
+        region: String,
+        regionName: String,
+        lToken: ByteArray,
+        ltUid: ByteArray,
+        updatedAt: Long
     ) {
         hoYoLabAccountDao.insertAccount(
             HoYoLabAccountEntity(
@@ -59,6 +64,7 @@ class HoYoLabRepositoryImpl(
                 regionName = regionName,
                 lToken = lToken,
                 ltUid = ltUid,
+                updatedAt = updatedAt
             )
         )
     }

@@ -10,6 +10,7 @@ import feature.hoyolab.data.database.stubHoYoLabAccountEntity
 import feature.hoyolab.data.repository.FakeHoYoLabRepository
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.TimeZone
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -55,5 +56,12 @@ class HoYoLabManageUseCaseTest {
     fun `Delete account from database`() = runTest {
         useCase.deleteAccountFromDB(123456789)
         assertTrue(repository.isDeleted)
+    }
+
+    @Test
+    fun `Convert timestamp to local datetime`() {
+        val timeZone = TimeZone.of("Asia/Taipei")
+        val result = useCase.convertToLocalDatetime(1734058599802, timeZone)
+        assertEquals(result, "2024-12-13 10:56")
     }
 }
