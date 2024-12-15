@@ -169,9 +169,26 @@
     <string name="invalid_hoYoLab_form">遊戲伺服器未選擇或輸入內容為空</string>
     <string name="update_at">%1$s 更新</string>
     <string name="user_profile_image">使用者頭像</string>
-    <string name="hoyolab_connect_announcement">本頁面提交的資料僅用於 HoYoLab 的請求處理，並加密儲存在您的裝置中。我們不會蒐集任何資訊。</string>
+    <string name="hoyolab_sync_announcement">本頁面提交的資料僅用於 HoYoLab 的請求處理，並加密儲存在您的裝置中。我們不會蒐集任何資訊。</string>
     <string name="remove_account_hint">是否取消帳號連結\n（從本裝置清除該帳號資料）</string>
     <string name="add_account">新增帳號</string>
+
+    <!-- HoYoLab Sync Tutorial -->
+    <string name="instruction_guide">使用教學</string>
+    <string name="open_a_desktop_browser">打開電腦版瀏覽器</string>
+    <string name="navigate_to_zzz_battle_record">前往絕區零戰績</string>
+    <string name="hoyolab_zzz_game_record">HoYoLab > 絕區零 > 戰績</string>
+    <string name="open_developer_tools">開啟開發人員工具</string>
+    <string name="press_f12_to_open_developer_tools_cookies">按下 F12 開啟開發人員工具 > 應用程式 > Cookies</string>
+    <string name="copy_ltoken_ltuid_paste_them_into_the_form">複製 ltoken_v2 與 ltuid_v2 的值，並貼上至表單中</string>
+    <string name="frequently_asked_questions">常見問題</string>
+    <string name="unable_to_link">無法連結或連結失敗？</string>
+    <string name="please_try_again_using_incognito_mode">請使用瀏覽器無痕模式再試一次</string>
+    <string name="there_are_two_ltoken_values_which_one_should_i_choose">ltoken_v2 有兩個該怎麼選擇？</string>
+    <string name="either_one_works">都可以</string>
+    <string name="i_still_have_other_questions">我還有其他問題！！！</string>
+    <string name="provide_feedback_via_suggestions_or_report_your_issue_on_github">歡迎至 意見回饋 或 GitHub 回報您的問題</string>
+    <string name="image_example">圖片範例</string>
 
     <!-- HoYoLab Card -->
     <string name="engagement_today">今日活躍度</string>

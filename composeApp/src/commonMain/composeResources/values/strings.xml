@@ -169,9 +169,26 @@
     <string name="invalid_hoYoLab_form">Unspecified game server or empty input field.</string>
     <string name="update_at">%1$s updated</string>
     <string name="user_profile_image">User Profile Image</string>
-    <string name="hoyolab_connect_announcement">The information submitted on this page is only used for processing requests in HoYoLab and is encrypted and stored on your device. We do not collect any data.</string>
+    <string name="hoyolab_sync_announcement">The information submitted on this page is solely used for processing requests in HoYoLab and is encrypted and stored on your device. We do not collect any data.</string>
     <string name="remove_account_hint">Do you want to disconnect the account?\n(remove its data from this device)</string>
     <string name="add_account">Add Account</string>
+
+    <!-- HoYoLab Sync Tutorial -->
+    <string name="instruction_guide">Instruction Guide</string>
+    <string name="open_a_desktop_browser">Open a Desktop Browser</string>
+    <string name="navigate_to_zzz_battle_record">Navigate to the Zenless Zone Zero Battle Records.</string>
+    <string name="hoyolab_zzz_game_record">HoYoLab > Zenless Zone Zero > Battle Record.</string>
+    <string name="open_developer_tools">Open Developer Tools</string>
+    <string name="press_f12_to_open_developer_tools_cookies">Press F12 to open Developer Tools > Application > Cookies.</string>
+    <string name="copy_ltoken_ltuid_paste_them_into_the_form">Copy the values of ltoken_v2 and ltuid_v2, then paste them into the form.</string>
+    <string name="frequently_asked_questions">Frequently Asked Questions</string>
+    <string name="unable_to_link">Unable to link or link failed?</string>
+    <string name="please_try_again_using_incognito_mode">Please try again using your browser’s Incognito Mode.</string>
+    <string name="there_are_two_ltoken_values_which_one_should_i_choose">There are two ltoken_v2 values, which one should I choose?</string>
+    <string name="either_one_works">Either one works.</string>
+    <string name="i_still_have_other_questions">I still have other questions!!!</string>
+    <string name="provide_feedback_via_suggestions_or_report_your_issue_on_github">Feel free to provide feedback via Suggestions or report your issue on GitHub.</string>
+    <string name="image_example">Image Example</string>
 
     <!-- HoYoLab Card -->
     <string name="engagement_today">Engagement Today</string>

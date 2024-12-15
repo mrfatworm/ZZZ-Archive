@@ -20,7 +20,7 @@ import feature.wengine.components.WEngineFilterBottomSheet
 import feature.wengine.components.WEnginesListFilterCard
 import feature.wengine.model.WEnginesListState
 import org.jetbrains.compose.resources.stringResource
-import ui.components.ZzzTopBar
+import ui.components.TopBarScaffold
 import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
@@ -41,7 +41,7 @@ fun WEnginesListScreenSingle(
     val isFiltered = uiState.selectedRarity.isNotEmpty() || uiState.selectedSpecialties.isNotEmpty()
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
         AnimatedVisibility(AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
-            ZzzTopBar(title = stringResource(Res.string.w_engines), onBackClick = {
+            TopBarScaffold(title = stringResource(Res.string.w_engines), onBackClick = {
                 onAction(WEnginesListAction.ClickBack)
             }, actions = {
                 ZzzIconButton(iconRes = if (isFiltered) Res.drawable.ic_filter_filled else Res.drawable.ic_filter,

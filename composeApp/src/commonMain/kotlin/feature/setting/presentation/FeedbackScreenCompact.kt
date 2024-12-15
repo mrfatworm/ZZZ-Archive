@@ -26,7 +26,7 @@ import feature.setting.components.FeedbackFormCard
 import feature.setting.model.FeedbackState
 import feature.setting.model.feedbackIssueTypes
 import org.jetbrains.compose.resources.stringResource
-import ui.components.ZzzTopBar
+import ui.components.TopBarScaffold
 import ui.components.buttons.ZzzPrimaryButton
 import ui.theme.AppTheme
 import ui.utils.contentPaddingInScaffold
@@ -42,12 +42,11 @@ fun FeedbackScreenCompact(
     onAction: (FeedbackAction) -> Unit
 ) {
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
-        ZzzTopBar(
+        TopBarScaffold(
             title = stringResource(Res.string.feedback), onBackClick = {
                 onAction(FeedbackAction.ClickBack)
             }
         )
-
     }) { contentPadding ->
         Column(
             modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
@@ -57,6 +56,7 @@ fun FeedbackScreenCompact(
             var issueTextFieldValue by remember { mutableStateOf("") }
             var nicknameTextFieldValue by remember { mutableStateOf("") }
             var selectedIssue by remember { mutableStateOf(feedbackIssueTypes.first()) }
+
             FeedbackFormCard(uiState,
                 issueTextFieldValue,
                 nicknameTextFieldValue,
@@ -69,7 +69,9 @@ fun FeedbackScreenCompact(
                 onIssueSelected = {
                     selectedIssue = it
                 })
+
             Spacer(modifier = Modifier.weight(1f))
+
             if (uiState.invalidForm) {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
@@ -79,6 +81,7 @@ fun FeedbackScreenCompact(
                     style = AppTheme.typography.titleSmall
                 )
             }
+
             ZzzPrimaryButton(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(Res.string.submit_form),
@@ -92,6 +95,7 @@ fun FeedbackScreenCompact(
                     )
                 )
             }
+
             Spacer(Modifier.size(AppTheme.spacing.s300))
         }
     }

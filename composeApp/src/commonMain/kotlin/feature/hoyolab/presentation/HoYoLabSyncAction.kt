@@ -13,5 +13,6 @@ sealed class HoYoLabSyncAction {
     data class SetDefaultAccount(val uid: String) : HoYoLabSyncAction()
     data class DeleteAccount(val uid: String) : HoYoLabSyncAction()
     data class ShowAddAccountDialog(val isVisible: Boolean) : HoYoLabSyncAction()
+    data object NavigateToFeedback : HoYoLabSyncAction()
     data object ClickBack : HoYoLabSyncAction()
 }

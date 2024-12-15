@@ -16,11 +16,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.hoyolab.components.AccountsListItemCard
 import feature.hoyolab.components.AddHoYoLabAccountCard
+import feature.hoyolab.components.HoYoLabAnnouncementCard
+import feature.hoyolab.components.HoYoLabSyncGuildCard
 import feature.hoyolab.model.HoYoLabSyncState
 import org.jetbrains.compose.resources.stringResource
-import ui.components.ZzzTopBar
+import ui.components.TopBarRound
+import ui.components.TopBarScaffold
 import ui.components.buttons.ZzzPrimaryButton
 import ui.theme.AppTheme
+import ui.utils.AdaptiveLayoutType
 import ui.utils.contentGap
 import ui.utils.contentPaddingInScaffold
 import zzzarchive.composeapp.generated.resources.Res
@@ -34,18 +38,25 @@ fun HoYoLabSyncScreenSingle(
     onAction: (HoYoLabSyncAction) -> Unit
 ) {
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
-        ZzzTopBar(
-            title = stringResource(Res.string.hoyolab_sync), onBackClick = {
-                onAction(HoYoLabSyncAction.ClickBack)
-            }
-        )
-
+        if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
+            TopBarScaffold(
+                title = stringResource(Res.string.hoyolab_sync), onBackClick = {
+                    onAction(HoYoLabSyncAction.ClickBack)
+                }
+            )
+        }
     }) { contentPadding ->
         Column(
             modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
                 .contentPaddingInScaffold(contentPadding),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
+            if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Medium) {
+                TopBarRound(title = stringResource(Res.string.hoyolab_sync), onBackClick = {
+                    onAction(HoYoLabSyncAction.ClickBack)
+                })
+            }
+            HoYoLabAnnouncementCard()
             if (uiState.syncedAccounts.isEmpty()) {
                 AddHoYoLabAccountCard(
                     errorMessage = uiState.errorMessage,
@@ -82,6 +93,9 @@ fun HoYoLabSyncScreenSingle(
                     ) { onAction(HoYoLabSyncAction.ShowAddAccountDialog(true)) }
                 }
             }
+            HoYoLabSyncGuildCard(navigateToFeedback = {
+                onAction(HoYoLabSyncAction.NavigateToFeedback)
+            })
         }
     }
 

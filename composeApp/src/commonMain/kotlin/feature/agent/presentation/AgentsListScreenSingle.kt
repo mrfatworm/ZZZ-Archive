@@ -20,7 +20,7 @@ import feature.agent.components.AgentFilterBottomSheet
 import feature.agent.components.AgentsListFilterCard
 import feature.agent.model.AgentsListState
 import org.jetbrains.compose.resources.stringResource
-import ui.components.ZzzTopBar
+import ui.components.TopBarScaffold
 import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
@@ -43,7 +43,8 @@ fun AgentsListScreenSingle(
         uiState.selectedRarity.isNotEmpty() || uiState.selectedAttributes.isNotEmpty() || uiState.selectedSpecialties.isNotEmpty() || uiState.selectedFactionId != 0
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
         AnimatedVisibility(AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
-            ZzzTopBar(title = stringResource(Res.string.agents),
+            TopBarScaffold(
+                title = stringResource(Res.string.agents),
                 onBackClick = {
                     onAction(AgentsListAction.ClickBack)
                 },

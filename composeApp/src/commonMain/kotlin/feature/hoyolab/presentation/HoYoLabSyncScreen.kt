@@ -15,12 +15,13 @@ import ui.theme.AppTheme
 import ui.utils.ContentType
 
 @Composable
-fun HoYoLabSyncScreen(onBackClick: () -> Unit) {
+fun HoYoLabSyncScreen(onBackClick: () -> Unit, navigateToFeedback: () -> Unit) {
     val viewModel: HoYoLabSyncViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     HoYoLabSyncScreenContent(uiState, onAction = { action ->
         when (action) {
             HoYoLabSyncAction.ClickBack -> onBackClick()
+            is HoYoLabSyncAction.NavigateToFeedback -> navigateToFeedback()
             else -> viewModel.onAction(action)
         }
     })

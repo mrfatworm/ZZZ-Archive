@@ -16,7 +16,7 @@ import feature.drive.components.DrivesListCard
 import feature.drive.data.database.emptyDriveListItemEntity
 import feature.drive.model.DrivesListState
 import org.jetbrains.compose.resources.stringResource
-import ui.components.ZzzTopBar
+import ui.components.TopBarScaffold
 import ui.components.dialogs.DriveDetailDialog
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
@@ -32,7 +32,7 @@ fun DrivesListScreenSingle(
     val openDetailDialog = remember { mutableStateOf(false) }
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
         AnimatedVisibility(AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
-            ZzzTopBar(
+            TopBarScaffold(
                 title = stringResource(Res.string.drives),
                 onBackClick = {
                     onAction(DrivesListAction.ClickBack)

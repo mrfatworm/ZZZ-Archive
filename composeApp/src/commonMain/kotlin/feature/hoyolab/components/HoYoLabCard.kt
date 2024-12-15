@@ -333,15 +333,15 @@ private fun SignButton(signResult: String?, onSignClick: () -> Unit) {
             modifier = Modifier.size(AppTheme.size.iconSize),
             imageVector = vectorResource(if (signResult == "OK") Res.drawable.ic_check_circle else Res.drawable.ic_calendar_clock),
             contentDescription = null,
-            tint = if (signResult == "OK") AppTheme.colors.primary else AppTheme.colors.onHoveredMask.copy(
-                alpha = if (signResult == null) 1f else 0.5f
-            )
+            tint = if (signResult == "OK") AppTheme.colors.primary else AppTheme.colors.onHoveredMask
         )
         Text(
-            text = if (signResult == null) stringResource(Res.string.check_in)
-            else if (signResult == "OK") stringResource(Res.string.check_in_success)
-            else signResult,
-            color = AppTheme.colors.onHoveredMask.copy(alpha = if (signResult == null) 1f else 0.5f),
+            text = when (signResult) {
+                null -> stringResource(Res.string.check_in)
+                "OK" -> stringResource(Res.string.check_in_success)
+                else -> signResult
+            },
+            color = AppTheme.colors.onHoveredMask,
             style = AppTheme.typography.labelSmall,
             maxLines = 1
         )

@@ -20,7 +20,7 @@ import feature.bangboo.components.BangbooFilterBottomSheet
 import feature.bangboo.components.BangbooListFilterCard
 import feature.bangboo.model.BangbooListState
 import org.jetbrains.compose.resources.stringResource
-import ui.components.ZzzTopBar
+import ui.components.TopBarScaffold
 import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
@@ -43,7 +43,8 @@ fun BangbooListScreenSingle(
         uiState.selectedRarity.isNotEmpty() || uiState.selectedAttributes.isNotEmpty()
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
         AnimatedVisibility(AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
-            ZzzTopBar(title = stringResource(Res.string.bangboo),
+            TopBarScaffold(
+                title = stringResource(Res.string.bangboo),
                 onBackClick = {
                     onAction(BangbooListAction.ClickBack)
                 },

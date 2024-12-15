@@ -24,14 +24,13 @@ import feature.setting.components.FeedbackFormCard
 import feature.setting.model.FeedbackState
 import feature.setting.model.feedbackIssueTypes
 import org.jetbrains.compose.resources.stringResource
-import ui.components.buttons.ZzzIconButton
+import ui.components.TopBarRound
 import ui.components.buttons.ZzzPrimaryButton
 import ui.theme.AppTheme
 import ui.utils.contentGap
 import ui.utils.contentPadding
 import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.back
-import zzzarchive.composeapp.generated.resources.ic_arrow_back
+import zzzarchive.composeapp.generated.resources.feedback
 import zzzarchive.composeapp.generated.resources.ic_arrow_up
 import zzzarchive.composeapp.generated.resources.invalid_feedback_form
 import zzzarchive.composeapp.generated.resources.submit_form
@@ -49,13 +48,10 @@ fun FeedbackScreenMedium(
             .contentPadding(),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
-        ZzzIconButton(
-            iconRes = Res.drawable.ic_arrow_back,
-            contentDescriptionRes = Res.string.back,
-            onClick = {
-                onAction(FeedbackAction.ClickBack)
-            }
-        )
+        TopBarRound(title = stringResource(Res.string.feedback), onBackClick = {
+            onAction(FeedbackAction.ClickBack)
+        })
+
         FeedbackFormCard(uiState,
             issueTextFieldValue,
             nicknameTextFieldValue,
@@ -68,6 +64,7 @@ fun FeedbackScreenMedium(
             onIssueSelected = {
                 selectedIssue = it
             })
+
         if (uiState.invalidForm) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
@@ -77,6 +74,7 @@ fun FeedbackScreenMedium(
                 style = AppTheme.typography.titleSmall
             )
         }
+
         ZzzPrimaryButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(Res.string.submit_form),

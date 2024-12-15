@@ -17,17 +17,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.hoyolab.components.AccountsListItemCard
 import feature.hoyolab.components.AddHoYoLabAccountCard
+import feature.hoyolab.components.HoYoLabAnnouncementCard
+import feature.hoyolab.components.HoYoLabSyncGuildCard
 import feature.hoyolab.model.HoYoLabSyncState
 import org.jetbrains.compose.resources.stringResource
-import ui.components.buttons.ZzzIconButton
+import ui.components.TopBarRound
 import ui.components.buttons.ZzzPrimaryButton
 import ui.utils.containerGap
 import ui.utils.contentGap
 import ui.utils.contentPadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.add_account
+import zzzarchive.composeapp.generated.resources.hoyolab_sync
 import zzzarchive.composeapp.generated.resources.ic_add
-import zzzarchive.composeapp.generated.resources.ic_arrow_back
 
 @Composable
 fun HoYoLabSyncScreenDual(
@@ -39,9 +41,11 @@ fun HoYoLabSyncScreenDual(
             Modifier.weight(1f).contentPadding(),
             verticalArrangement = Arrangement.spacedBy(containerGap())
         ) {
-            ZzzIconButton(iconRes = Res.drawable.ic_arrow_back, onClick = {
+            TopBarRound(title = stringResource(Res.string.hoyolab_sync), onBackClick = {
                 onAction(HoYoLabSyncAction.ClickBack)
             })
+
+            HoYoLabAnnouncementCard()
 
             if (uiState.syncedAccounts.isEmpty()) {
                 AddHoYoLabAccountCard(
@@ -84,7 +88,9 @@ fun HoYoLabSyncScreenDual(
 
         }
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).contentPadding()) {
-
+            HoYoLabSyncGuildCard(navigateToFeedback = {
+                onAction(HoYoLabSyncAction.NavigateToFeedback)
+            })
         }
     }
 
