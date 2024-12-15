@@ -14,8 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.banner.components.AnnouncementBanner
 import feature.cover_image.components.CoverImageCard
+import feature.hoyolab.components.HoYoLabCard
 import feature.news.components.NewsPagerCard
 import feature.pixiv.components.PixivTopicCard
+import ui.navigation.Screen
 import ui.utils.contentGap
 import ui.utils.contentPadding
 
@@ -39,6 +41,11 @@ fun HomeScreenSingle(
         )
         CoverImageCard(uiState.coverImage)
         NewsPagerCard(uiState.newsList)
+        HoYoLabCard(uiState.gameRecord, uiState.signResult, onSignClick = {
+            onAction(HomeAction.Sign)
+        }, onAddAccountClick = {
+            onAction(HomeAction.NavigateTo(Screen.HoYoLabSync.route))
+        })
         PixivTopicCard(uiState.pixivTopics) {
             onAction(HomeAction.ChangePixivTag(it))
         }

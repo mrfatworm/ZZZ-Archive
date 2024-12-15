@@ -43,6 +43,7 @@ import feature.hoyolab.data.crypto.ZzzCryptoImpl
 import feature.hoyolab.data.database.HoYoLabAccountDB
 import feature.hoyolab.data.repository.HoYoLabRepository
 import feature.hoyolab.data.repository.HoYoLabRepositoryImpl
+import feature.hoyolab.domain.GameRecordUseCase
 import feature.hoyolab.domain.HoYoLabManageUseCase
 import feature.hoyolab.domain.HoYoLabPreferenceUseCase
 import feature.hoyolab.presentation.HoYoLabSyncViewModel
@@ -158,6 +159,7 @@ val sharedModule = module {
     single<UiScaleUseCase> { UiScaleUseCase(get()) }
     single<HoYoLabManageUseCase> { HoYoLabManageUseCase(get(), get(), get()) }
     single<HoYoLabPreferenceUseCase> { HoYoLabPreferenceUseCase(get()) }
+    single<GameRecordUseCase> { GameRecordUseCase(get(), get(), get(), get(), get()) }
 
     // ViewModels
     viewModelOf(::SplashViewModel)

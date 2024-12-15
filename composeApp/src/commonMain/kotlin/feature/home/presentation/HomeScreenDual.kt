@@ -14,12 +14,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.banner.components.AnnouncementBanner
 import feature.cover_image.components.CoverImageCard
+import feature.hoyolab.components.HoYoLabCard
 import feature.news.components.NewsPagerCard
 import feature.pixiv.components.PixivTopicCard
 import ui.components.cards.AgentsListCard
 import ui.components.cards.BangbooListCard
 import ui.components.cards.DrivesListCard
 import ui.components.cards.WEnginesListCard
+import ui.navigation.Screen
 import ui.theme.AppTheme
 import ui.utils.containerGap
 import ui.utils.contentGap
@@ -42,7 +44,11 @@ fun HomeScreenDual(
                 verticalArrangement = Arrangement.spacedBy(contentGap())
             ) {
                 CoverImageCard(uiState.coverImage)
-                // HoYoLabCard()
+                HoYoLabCard(uiState.gameRecord, uiState.signResult, onSignClick = {
+                    onAction(HomeAction.Sign)
+                }, onAddAccountClick = {
+                    onAction(HomeAction.NavigateTo(Screen.HoYoLabSync.route))
+                })
                 PixivTopicCard(uiState.pixivTopics) {
                     onAction(HomeAction.ChangePixivTag(it))
                 }

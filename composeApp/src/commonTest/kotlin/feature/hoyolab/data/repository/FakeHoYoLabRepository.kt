@@ -7,10 +7,14 @@ package feature.hoyolab.data.repository
 
 import feature.hoyolab.data.database.HoYoLabAccountEntity
 import feature.hoyolab.data.database.stubHoYoLabAccountEntity
+import feature.hoyolab.model.GameRecordResponse
 import feature.hoyolab.model.PlayerBasicInfo
 import feature.hoyolab.model.PlayerDetailResponse
+import feature.hoyolab.model.SignResponse
+import feature.hoyolab.model.stubGameRecordResponse
 import feature.hoyolab.model.stubPlayerBasicInfo
 import feature.hoyolab.model.stubPlayerDetailResponse
+import feature.hoyolab.model.stubSignResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -30,7 +34,7 @@ class FakeHoYoLabRepository : HoYoLabRepository {
         emit(accountListInDB)
     }
 
-    override suspend fun getAccountFromDB(uid: Int): Flow<HoYoLabAccountEntity> = flow {
+    override suspend fun getAccountFromDB(uid: Int): Flow<HoYoLabAccountEntity?> = flow {
         emit(accountListInDB.find { it.uid == uid } ?: throw Exception("Account not found"))
     }
 
@@ -88,6 +92,31 @@ class FakeHoYoLabRepository : HoYoLabRepository {
             Result.failure(Exception())
         } else {
             Result.success(stubPlayerDetailResponse)
+        }
+    }
+
+    override suspend fun requestGameRecord(
+        uid: Int,
+        region: String,
+        lToken: String,
+        ltUid: String
+    ): Result<GameRecordResponse> {
+        return if (isError) {
+            Result.failure(Exception())
+        } else {
+            Result.success(stubGameRecordResponse)
+        }
+    }
+
+    override suspend fun requestSign(
+        languageCode: String,
+        lToken: String,
+        ltUid: String
+    ): Result<SignResponse> {
+        return if (isError) {
+            Result.failure(Exception())
+        } else {
+            Result.success(stubSignResponse)
         }
     }
 }

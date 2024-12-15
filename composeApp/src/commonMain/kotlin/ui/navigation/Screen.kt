@@ -91,8 +91,8 @@ sealed class Screen(
         route = "function", textRes = Res.string.function
     )
 
-    data object HoYoLabConnect : Screen(
-        route = "hoyolabConnect", textRes = Res.string.hoyolab_sync
+    data object HoYoLabSync : Screen(
+        route = "hoyolabSync", textRes = Res.string.hoyolab_sync
     )
 
 

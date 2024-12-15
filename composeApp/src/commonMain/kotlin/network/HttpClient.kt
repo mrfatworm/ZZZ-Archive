@@ -87,10 +87,6 @@ fun createGoogleDocHttpClient(engine: HttpClientEngine): HttpClient {
                 explicitNulls = false
             })
         }
-        install(Logging) {
-            logger = Logger.SIMPLE
-            level = LogLevel.ALL
-        }
         defaultRequest {
             url {
                 takeFrom("https://docs.google.com")

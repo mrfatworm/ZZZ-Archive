@@ -16,4 +16,5 @@ sealed interface HomeAction {
     data class ChangePixivTag(val tag: String) : HomeAction
     data class NavigateTo(val route: String) : HomeAction
     data class DismissBanner(val id: Int) : HomeAction
+    data object Sign : HomeAction
 }

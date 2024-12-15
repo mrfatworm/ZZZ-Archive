@@ -10,6 +10,7 @@ import feature.hoyolab.data.database.HoYoLabAccountEntity
 import feature.hoyolab.data.repository.HoYoLabRepository
 import feature.setting.data.PreferencesRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.datetime.Clock
@@ -89,7 +90,7 @@ class HoYoLabManageUseCase(
     }
 
     suspend fun reSyncAccount(uid: Int) {
-        val account = hoYoLabRepository.getAccountFromDB(uid)
+        val account = hoYoLabRepository.getAccountFromDB(uid).filterNotNull()
         val decryptedLToken = zzzCryptoImpl.decryptData(account.first().lToken)
         val decryptedLtUid = zzzCryptoImpl.decryptData(account.first().ltUid)
         requestUserInfoAndSave(account.first().region, decryptedLToken, decryptedLtUid)

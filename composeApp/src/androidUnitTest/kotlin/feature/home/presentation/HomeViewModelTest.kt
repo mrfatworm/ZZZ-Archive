@@ -18,6 +18,10 @@ import feature.cover_image.data.database.stubCoverImageListItemEntity
 import feature.cover_image.domain.CoverImageUseCase
 import feature.drive.data.database.stubDrivesListItemEntity
 import feature.drive.domain.DrivesListUseCase
+import feature.hoyolab.data.database.stubHoYoLabAccountEntity
+import feature.hoyolab.domain.GameRecordUseCase
+import feature.hoyolab.model.stubGameRecordResponse
+import feature.hoyolab.model.stubSignResponse
 import feature.news.data.stubOfficialNewsDataResponse
 import feature.news.domain.OfficialNewsUseCase
 import feature.news.model.stubOfficialNewsState
@@ -49,6 +53,7 @@ class HomeViewModelTest {
     private val bangbooListUseCase = mockk<BangbooListUseCase>()
     private val drivesListUseCase = mockk<DrivesListUseCase>()
     private val updateDatabaseUseCase = mockk<UpdateDatabaseUseCase>()
+    private val gameRecordUseCase = mockk<GameRecordUseCase>()
     private lateinit var viewModel: HomeViewModel
 
     @BeforeTest
@@ -65,6 +70,14 @@ class HomeViewModelTest {
         coEvery { officialNewsUseCase.convertToOfficialNewsState(any()) } returns listOf(
             stubOfficialNewsState
         )
+        coEvery { gameRecordUseCase.getDefaultUid() } returns flowOf(1300051361)
+        coEvery { gameRecordUseCase.getDefaultHoYoLabAccount(any()) } returns flowOf(
+            stubHoYoLabAccountEntity
+        )
+        coEvery { gameRecordUseCase.getGameRecordPeriodically(any()) } returns flowOf(
+            Result.success(stubGameRecordResponse.data)
+        )
+        coEvery { gameRecordUseCase.sign() } returns Result.success(stubSignResponse)
         coEvery { agentsListUseCase.invoke() } returns flowOf(stubAgentsList)
         coEvery { wEnginesListUseCase.invoke() } returns flowOf(stubWEnginesList)
         coEvery { bangbooListUseCase.invoke() } returns flowOf(stubBangbooList)
@@ -78,7 +91,8 @@ class HomeViewModelTest {
             wEnginesListUseCase,
             bangbooListUseCase,
             drivesListUseCase,
-            updateDatabaseUseCase
+            updateDatabaseUseCase,
+            gameRecordUseCase
         )
     }
 
@@ -94,11 +108,20 @@ class HomeViewModelTest {
         assertEquals(state.bangbooList, stubBangbooList)
         assertEquals(state.drivesList, listOf(stubDrivesListItemEntity))
         coVerify { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() }
+        coVerify { gameRecordUseCase.getDefaultUid() }
+        coVerify { gameRecordUseCase.getDefaultHoYoLabAccount(any()) }
+        coVerify { gameRecordUseCase.getGameRecordPeriodically(any()) }
     }
 
     @Test
     fun `Set banner ignore id as one THEN ignore banner data`() = runTest {
         viewModel.closeBannerAndIgnoreId(1)
         coVerify { bannerUseCase.setBannerIgnoreId(1) }
+    }
+
+    @Test
+    fun `Sign success`() = runTest {
+        viewModel.onAction(HomeAction.Sign)
+        coVerify { gameRecordUseCase.sign() }
     }
 }

@@ -5,11 +5,10 @@
 
 package ui.components.buttons
 
-import androidx.compose.foundation.border
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
@@ -23,7 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.theme.AppTheme
@@ -95,12 +93,7 @@ fun ZzzButton(
     onClick: () -> Unit
 ) {
     Button(
-        modifier = modifier.pointerHoverIcon(if (enabled) PointerIcon.Hand else PointerIcon.Default)
-            .border(
-                width = if (hasBorder) AppTheme.size.borderWidth else 0.dp,
-            color = if (hasBorder) AppTheme.colors.buttonBorder else Color.Transparent,
-            shape = CircleShape
-        ),
+        modifier = modifier.pointerHoverIcon(if (enabled) PointerIcon.Hand else PointerIcon.Default),
         shape = AppTheme.shape.round,
         colors = ButtonColors(
             containerColor = containerColor,
@@ -108,6 +101,10 @@ fun ZzzButton(
             disabledContainerColor = disabledContainerColor,
             disabledContentColor = disabledContentColor
         ),
+        border = if (hasBorder) BorderStroke(
+            AppTheme.size.borderWidth,
+            AppTheme.colors.buttonBorder
+        ) else null,
         enabled = enabled,
         elevation = elevation,
         interactionSource = interactionSource,
@@ -117,7 +114,7 @@ fun ZzzButton(
             Icon(
                 modifier = Modifier
                     .padding(end = AppTheme.spacing.s300)
-                    .size(AppTheme.size.largeIconSize),
+                    .size(AppTheme.size.iconSize),
                 imageVector = vectorResource(iconRes),
                 contentDescription = null
             )

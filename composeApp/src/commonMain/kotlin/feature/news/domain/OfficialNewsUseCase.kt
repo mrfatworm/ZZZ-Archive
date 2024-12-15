@@ -11,7 +11,6 @@ import feature.news.data.OfficialNewsRepository
 import feature.news.model.OfficialNewsState
 import feature.setting.domain.LanguageUseCase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -27,12 +26,12 @@ class OfficialNewsUseCase(
     fun getNewsPeriodically(
         perMinutes: Int, amount: Int
     ): Flow<Result<List<OfficialNewsListItem>>> = flow {
-        val languageNewsCode = languageUseCase.getLanguage().first().officialCode
         while (true) {
+            val languageNewsCode = languageUseCase.getLanguage().first().officialCode
             emit(officialNewsRepository.getNews(amount, languageNewsCode))
             delay(perMinutes * 60 * 1000L)
         }
-    }.flowOn(Dispatchers.IO)
+    }.flowOn(Dispatchers.Default)
 
     suspend fun convertToOfficialNewsState(newsList: List<OfficialNewsListItem>): List<OfficialNewsState> {
         val languageNewsCode = languageUseCase.getLanguage().first().officialCode

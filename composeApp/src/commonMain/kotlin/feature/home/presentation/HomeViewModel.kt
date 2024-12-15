@@ -14,12 +14,16 @@ import feature.banner.domain.BannerUseCase
 import feature.cover_image.domain.CoverImageUseCase
 import feature.drive.domain.DrivesListUseCase
 import feature.home.model.pixivTagDropdownItems
+import feature.hoyolab.data.mapper.toGameRecordState
+import feature.hoyolab.domain.GameRecordUseCase
 import feature.news.domain.OfficialNewsUseCase
 import feature.pixiv.domain.PixivUseCase
 import feature.wengine.domain.WEnginesListUseCase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -32,7 +36,8 @@ class HomeViewModel(
     private val wEnginesListUseCase: WEnginesListUseCase,
     private val bangbooListUseCase: BangbooListUseCase,
     private val drivesListUseCase: DrivesListUseCase,
-    private val updateDatabaseUseCase: UpdateDatabaseUseCase
+    private val updateDatabaseUseCase: UpdateDatabaseUseCase,
+    private val gameRecordUseCase: GameRecordUseCase
 ) : ViewModel() {
 
     private var ignoreBannerId = 0
@@ -45,6 +50,7 @@ class HomeViewModel(
             launch { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() }
             launch { fetchBanner() }
             launch { observeCoverImage() }
+            launch { observeDefaultAccount() }
             launch { fetchZzzOfficialNewsEveryTenMinutes() }
             launch { fetchPixivTopic() }
             launch { observeAgentsList() }
@@ -65,6 +71,12 @@ class HomeViewModel(
             is HomeAction.ChangePixivTag -> {
                 viewModelScope.launch {
                     fetchPixivTopic(action.tag)
+                }
+            }
+
+            is HomeAction.Sign -> {
+                viewModelScope.launch {
+                    sign()
                 }
             }
 
@@ -101,8 +113,27 @@ class HomeViewModel(
         }
     }
 
+    private suspend fun observeDefaultAccount() {
+        gameRecordUseCase.getDefaultUid().collect {
+            val defaultAccount = gameRecordUseCase.getDefaultHoYoLabAccount(it).firstOrNull()
+                ?: return@collect
+            _uiState.update { state ->
+                state.copy(
+                    gameRecord = emptyGameRecordState.copy(
+                        nickname = defaultAccount.nickName,
+                        server = defaultAccount.regionName,
+                        uid = defaultAccount.uid.toString(),
+                        profileUrl = defaultAccount.profileUrl,
+                        cardUrl = defaultAccount.cardUrl
+                    )
+                )
+            }
+            fetchGameRecordEveryTenMinutes()
+        }
+    }
+
     private suspend fun fetchZzzOfficialNewsEveryTenMinutes() {
-        newsUseCase.getNewsPeriodically(10, 5).collect { result ->
+        newsUseCase.getNewsPeriodically(10, 6).collect { result ->
             result.fold(onSuccess = { newsList ->
                 _uiState.update { state ->
                     state.copy(newsList = newsUseCase.convertToOfficialNewsState(newsList))
@@ -113,7 +144,29 @@ class HomeViewModel(
         }
     }
 
-    suspend fun fetchPixivTopic(zzzTag: String = pixivTagDropdownItems.first().tagOnPixiv) {
+    private fun fetchGameRecordEveryTenMinutes() {
+        viewModelScope.launch {
+            gameRecordUseCase.getGameRecordPeriodically(10).collect { result ->
+                result.fold(onSuccess = { gameRecord ->
+                    _uiState.update { state ->
+                        state.copy(
+                            gameRecord = gameRecord.toGameRecordState(
+                                state.gameRecord.nickname,
+                                state.gameRecord.server,
+                                state.gameRecord.uid,
+                                state.gameRecord.profileUrl,
+                                state.gameRecord.cardUrl
+                            )
+                        )
+                    }
+                }, onFailure = {
+                    println("get game record error: ${it.message}")
+                })
+            }
+        }
+    }
+
+    private suspend fun fetchPixivTopic(zzzTag: String = pixivTagDropdownItems.first().tagOnPixiv) {
         val result = pixivUseCase.invoke(zzzTag)
         result.fold(onSuccess = { pixivTopic ->
             _uiState.update {
@@ -122,6 +175,25 @@ class HomeViewModel(
         }, onFailure = {
             println("get pixiv topic error: ${it.message}")
         })
+    }
+
+    private suspend fun sign() {
+        _uiState.update { state ->
+            state.copy(signResult = " =U= ")
+        }
+        gameRecordUseCase.sign().fold(onSuccess = {
+            _uiState.update { state ->
+                state.copy(signResult = it.message)
+            }
+        }, onFailure = {
+            _uiState.update { state ->
+                state.copy(signResult = it.message)
+            }
+        })
+        delay(5000)
+        _uiState.update { state ->
+            state.copy(signResult = null)
+        }
     }
 
     private suspend fun observeAgentsList() {

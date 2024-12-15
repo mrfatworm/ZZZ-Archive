@@ -31,7 +31,7 @@
     <string name="unknown_error">Unknown Error</string>
     <string name="visible">Visible</string>
     <string name="invisible">Invisible</string>
-
+    <string name="under_development">Under Development</string>
 
     <!-- Sub System -->
     <string name="home">Home</string>
@@ -77,15 +77,6 @@
 
     <!-- Home -->
     <string name="pixiv_hot">Pixiv Hot</string>
-    <string name="engagement_today">Engagement Today</string>
-    <string name="scratch_card">Scratch Card</string>
-    <string name="video_store">Video Store</string>
-    <string name="bounty_commissions">Bounty Commissions</string>
-    <string name="investigate_point">Investigate Point</string>
-    <string name="incomplete">Incomplete</string>
-    <string name="open">Open</string>
-    <string name="check_in">Check In</string>
-    <string name="under_development">Under Development</string>
 
     <!-- Agent Detail -->
     <string name="attributes">Attributes</string>
@@ -181,5 +172,22 @@
     <string name="hoyolab_connect_announcement">The information submitted on this page is only used for processing requests in HoYoLab and is encrypted and stored on your device. We do not collect any data.</string>
     <string name="remove_account_hint">Do you want to disconnect the account?\n(remove its data from this device)</string>
     <string name="add_account">Add Account</string>
+
+    <!-- HoYoLab Card -->
+    <string name="engagement_today">Engagement Today</string>
+    <string name="scratch_card">Scratch Card</string>
+    <string name="video_store">Video Store</string>
+    <string name="bounty_commissions">Bounty Commissions</string>
+    <string name="investigate_point">Investigate Point</string>
+    <string name="incomplete">Incomplete</string>
+    <string name="open">Open</string>
+    <string name="check_in">Check In</string>
+    <string name="check_in_success">Check In Success !</string>
+    <string name="ready_to_settle">Ready to Settle</string>
+    <string name="operating">Operating</string>
+    <string name="not_operating">Not Operating</string>
+    <string name="purchasable">Purchasable</string>
+    <string name="purchased">Purchased</string>
+    <string name="ridu_weekly">Ridu Weekly</string>
 
 </resources>

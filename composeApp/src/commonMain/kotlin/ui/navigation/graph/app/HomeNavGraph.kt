@@ -44,7 +44,7 @@ fun NavGraphBuilder.homeNavGraph(navActions: NavActions) {
                         )
                     )
                 },
-                onBannerNavigate = { route ->
+                navigateTo = { route ->
                     navActions.navigationToRoute(route)
                 }
             )

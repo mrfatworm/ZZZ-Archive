@@ -31,6 +31,7 @@
     <string name="unknown_error">未知的錯誤</string>
     <string name="visible">顯示</string>
     <string name="invisible">隱藏</string>
+    <string name="under_development">開發中功能</string>
 
     <!-- Sub System -->
     <string name="home">首頁</string>
@@ -76,15 +77,6 @@
 
     <!-- Home -->
     <string name="pixiv_hot">Pixiv 熱門</string>
-    <string name="engagement_today">今日活躍度</string>
-    <string name="scratch_card">刮刮樂</string>
-    <string name="video_store">錄音帶店</string>
-    <string name="bounty_commissions">懸賞委託</string>
-    <string name="investigate_point">調查點數</string>
-    <string name="incomplete">未完成</string>
-    <string name="open">營業中</string>
-    <string name="check_in">簽到</string>
-    <string name="under_development">開發中功能</string>
 
     <!-- Agent Detail -->
     <string name="attributes">屬性</string>
@@ -180,5 +172,22 @@
     <string name="hoyolab_connect_announcement">本頁面提交的資料僅用於 HoYoLab 的請求處理，並加密儲存在您的裝置中。我們不會蒐集任何資訊。</string>
     <string name="remove_account_hint">是否取消帳號連結\n（從本裝置清除該帳號資料）</string>
     <string name="add_account">新增帳號</string>
+
+    <!-- HoYoLab Card -->
+    <string name="engagement_today">今日活躍度</string>
+    <string name="scratch_card">刮刮樂</string>
+    <string name="video_store">錄音帶店</string>
+    <string name="bounty_commissions">懸賞委託</string>
+    <string name="investigate_point">調查點數</string>
+    <string name="incomplete">未完成</string>
+    <string name="open">營業中</string>
+    <string name="check_in">簽到</string>
+    <string name="check_in_success">簽到成功！</string>
+    <string name="ready_to_settle">可結算</string>
+    <string name="operating">營業中</string>
+    <string name="not_operating">未營業</string>
+    <string name="purchasable">可購買</string>
+    <string name="purchased">已購買</string>
+    <string name="ridu_weekly">麗都週記</string>
 
 </resources>

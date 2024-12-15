@@ -74,7 +74,7 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
                 navActions.navigationTo(Screen.Feedback)
             },
             onHoYoLabClick = {
-                navActions.navigationTo(Screen.HoYoLabConnect)
+                navActions.navigationTo(Screen.HoYoLabSync)
             }
         )
     }
@@ -84,7 +84,7 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
         }
     }
 
-    composable(Screen.HoYoLabConnect.route) {
+    composable(Screen.HoYoLabSync.route) {
         HoYoLabSyncScreen() {
             navActions.back()
         }

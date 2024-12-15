@@ -24,7 +24,7 @@ fun HomeScreen(
     onAgentDetailClick: (Int) -> Unit,
     onWEngineDetailClick: (Int) -> Unit,
     onBangbooDetailClick: (Int) -> Unit,
-    onBannerNavigate: (String) -> Unit
+    navigateTo: (String) -> Unit
 ) {
     val viewModel: HomeViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsState()
@@ -48,7 +48,7 @@ fun HomeScreen(
             }
 
             is HomeAction.NavigateTo -> {
-                onBannerNavigate(actions.route)
+                navigateTo(actions.route)
             }
 
             else -> viewModel.onAction(actions)

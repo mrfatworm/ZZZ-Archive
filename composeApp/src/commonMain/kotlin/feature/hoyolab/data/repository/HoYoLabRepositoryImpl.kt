@@ -8,8 +8,10 @@ package feature.hoyolab.data.repository
 import feature.hoyolab.data.database.HoYoLabAccountDao
 import feature.hoyolab.data.database.HoYoLabAccountEntity
 import feature.hoyolab.data.mapper.toPlayerAccountInfo
+import feature.hoyolab.model.GameRecordResponse
 import feature.hoyolab.model.PlayerBasicInfo
 import feature.hoyolab.model.PlayerDetailResponse
+import feature.hoyolab.model.SignResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withTimeout
 import network.HoYoLabHttp
@@ -43,10 +45,41 @@ class HoYoLabRepositoryImpl(
         }
     }
 
+    override suspend fun requestGameRecord(
+        uid: Int,
+        region: String,
+        lToken: String,
+        ltUid: String
+    ): Result<GameRecordResponse> {
+        return try {
+            val result = withTimeout(httpClient.defaultTimeout) {
+                httpClient.requestGameRecord(uid, region, lToken, ltUid)
+            }
+            Result.success(result)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun requestSign(
+        languageCode: String,
+        lToken: String,
+        ltUid: String
+    ): Result<SignResponse> {
+        return try {
+            val result = withTimeout(httpClient.defaultTimeout) {
+                httpClient.requestSign(languageCode, lToken, ltUid)
+            }
+            Result.success(result)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     override suspend fun getAllAccountsFromDB(): Flow<List<HoYoLabAccountEntity>> =
         hoYoLabAccountDao.getAccountList()
 
-    override suspend fun getAccountFromDB(uid: Int): Flow<HoYoLabAccountEntity> =
+    override suspend fun getAccountFromDB(uid: Int): Flow<HoYoLabAccountEntity?> =
         hoYoLabAccountDao.getAccount(uid)
 
     override suspend fun addAccountToDB(
