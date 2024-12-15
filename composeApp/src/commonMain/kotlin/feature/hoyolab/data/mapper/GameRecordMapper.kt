@@ -16,9 +16,15 @@ import feature.hoyolab.model.VhsSaleState
 import feature.hoyolab.model.WeeklyTaskState
 
 fun GameRecordData.toGameRecordState(
-    nickname: String, server: String, uid: String, profileUrl: String, cardUrl: String
+    hasAccount: Boolean,
+    nickname: String,
+    server: String,
+    uid: String,
+    profileUrl: String,
+    cardUrl: String
 ): GameRecordState {
     return GameRecordState(
+        hasAccount = hasAccount,
         nickname = nickname,
         server = server,
         uid = uid,

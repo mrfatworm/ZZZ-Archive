@@ -27,8 +27,8 @@ data class Size(
 
 fun provideSize(scale: Float = 1f): Size = Size(
     maxContainerWidth = 1440.dp * scale,
-    rarityItemMediumSize = 108.dp * scale,
-    rarityItemSmallSize = 72.dp * scale,
+    rarityItemMediumSize = 100.dp * scale,
+    rarityItemSmallSize = 64.dp * scale,
     galleryItemSize = 144.dp * scale,
     maxDialogWidth = 320.dp * scale,
     minDialogWidth = 240.dp * scale,

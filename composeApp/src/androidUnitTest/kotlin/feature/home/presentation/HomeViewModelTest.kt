@@ -108,6 +108,11 @@ class HomeViewModelTest {
         assertEquals(state.bangbooList, stubBangbooList)
         assertEquals(state.drivesList, listOf(stubDrivesListItemEntity))
         coVerify { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() }
+    }
+
+    @Test
+    fun `On app resume THEN get default account`() = runTest {
+        viewModel.onResume()
         coVerify { gameRecordUseCase.getDefaultUid() }
         coVerify { gameRecordUseCase.getDefaultHoYoLabAccount(any()) }
         coVerify { gameRecordUseCase.getGameRecordPeriodically(any()) }

@@ -6,6 +6,7 @@
 package feature.hoyolab.model
 
 data class GameRecordState(
+    val hasAccount: Boolean,
     val nickname: String,
     val server: String,
     val uid: String,
@@ -57,6 +58,7 @@ data class WeeklyTaskState(
 )
 
 val subGameRecordState = GameRecordState(
+    hasAccount = true,
     nickname = "mrfatworm",
     server = "Asia",
     uid = "1300051361",

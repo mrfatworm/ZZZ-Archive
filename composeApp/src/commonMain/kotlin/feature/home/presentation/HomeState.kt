@@ -37,6 +37,7 @@ data class HomeState(
 
 
 val emptyGameRecordState = GameRecordState(
+    hasAccount = false,
     nickname = "----",
     server = "Server",
     uid = "0000000000",

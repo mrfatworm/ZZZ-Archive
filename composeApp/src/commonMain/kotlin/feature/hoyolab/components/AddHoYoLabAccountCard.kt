@@ -5,6 +5,7 @@
 
 package feature.hoyolab.components
 
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,6 +25,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import feature.hoyolab.model.ServersList
 import feature.setting.components.SettingItem
 import org.jetbrains.compose.resources.stringResource
@@ -50,7 +53,13 @@ fun AddHoYoLabAccountCard(errorMessage: String, onSubmit: (String, String, Strin
     var isLTokenError by remember { (mutableStateOf(false)) }
     var isLtUidError by remember { (mutableStateOf(false)) }
     var isServerRegionError by remember { (mutableStateOf(false)) }
-    ContentCard(hasDefaultPadding = false) {
+    val focusManager = LocalFocusManager.current
+
+    ContentCard(modifier = Modifier.pointerInput(Unit) {
+        detectTapGestures(onTap = {
+            focusManager.clearFocus()
+        })
+    }, hasDefaultPadding = false) {
         Spacer(Modifier.size(AppTheme.spacing.s200))
         ServerTypeItem(ServersList.entries.dropLast(1),
             isError = isServerRegionError,

@@ -50,7 +50,6 @@ class HomeViewModel(
             launch { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() }
             launch { fetchBanner() }
             launch { observeCoverImage() }
-            launch { observeDefaultAccount() }
             launch { fetchZzzOfficialNewsEveryTenMinutes() }
             launch { fetchPixivTopic() }
             launch { observeAgentsList() }
@@ -81,6 +80,12 @@ class HomeViewModel(
             }
 
             else -> {}
+        }
+    }
+
+    fun onResume() {
+        viewModelScope.launch {
+            observeDefaultAccount()
         }
     }
 
@@ -115,11 +120,12 @@ class HomeViewModel(
 
     private suspend fun observeDefaultAccount() {
         gameRecordUseCase.getDefaultUid().collect {
-            val defaultAccount = gameRecordUseCase.getDefaultHoYoLabAccount(it).firstOrNull()
-                ?: return@collect
+            val defaultAccount =
+                gameRecordUseCase.getDefaultHoYoLabAccount(it).firstOrNull() ?: return@collect
             _uiState.update { state ->
                 state.copy(
                     gameRecord = emptyGameRecordState.copy(
+                        hasAccount = true,
                         nickname = defaultAccount.nickName,
                         server = defaultAccount.regionName,
                         uid = defaultAccount.uid.toString(),
@@ -151,6 +157,7 @@ class HomeViewModel(
                     _uiState.update { state ->
                         state.copy(
                             gameRecord = gameRecord.toGameRecordState(
+                                state.gameRecord.hasAccount,
                                 state.gameRecord.nickname,
                                 state.gameRecord.server,
                                 state.gameRecord.uid,
@@ -178,6 +185,7 @@ class HomeViewModel(
     }
 
     private suspend fun sign() {
+        if (uiState.value.signResult != null) return
         _uiState.update { state ->
             state.copy(signResult = " =U= ")
         }

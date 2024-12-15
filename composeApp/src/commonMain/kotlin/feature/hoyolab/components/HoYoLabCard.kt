@@ -87,11 +87,10 @@ fun HoYoLabCard(
     onSignClick: () -> Unit,
     onAddAccountClick: () -> Unit
 ) {
-    val hasAccount = uiState.uid != "0000000000"
     ContentCard(modifier = Modifier.fillMaxWidth()) {
-        Header(uiState, hasAccount, signResult, onSignClick, onAddAccountClick)
+        Header(uiState, signResult, onSignClick, onAddAccountClick)
         Spacer(Modifier.size(AppTheme.spacing.s400))
-        if (hasAccount) {
+        if (uiState.hasAccount) {
             FlowRow(
                 horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
                 verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
@@ -106,7 +105,6 @@ fun HoYoLabCard(
 @Composable
 private fun Header(
     uiState: GameRecordState,
-    hasAccount: Boolean,
     signResult: String?,
     onSignClick: () -> Unit,
     onAddAccountClick: () -> Unit
@@ -118,7 +116,7 @@ private fun Header(
             contentScale = ContentScale.Crop,
             filterQuality = FilterQuality.High,
             error = {
-                if (hasAccount) {
+                if (uiState.hasAccount) {
                     ImageNotFound()
                 } else {
                     Image(
@@ -142,7 +140,7 @@ private fun Header(
                 PlayerEnergy(uiState)
             }
         }
-        if (!hasAccount) {
+        if (!uiState.hasAccount) {
             Spacer(Modifier.fillMaxSize().background(AppTheme.colors.hoveredMask))
             ZzzOutlineButton(
                 modifier = Modifier.align(Alignment.Center),
@@ -172,7 +170,7 @@ private fun PlayerInfo(modifier: Modifier, uiState: GameRecordState) {
             overflow = TextOverflow.Ellipsis,
             color = AppTheme.colors.onSurface,
             style = AppTheme.typography.labelMedium,
-            borderColor = AppTheme.colors.border
+            borderColor = AppTheme.colors.surfaceLow
         )
 
         OutlinedText(
@@ -182,7 +180,7 @@ private fun PlayerInfo(modifier: Modifier, uiState: GameRecordState) {
             overflow = TextOverflow.Ellipsis,
             color = AppTheme.colors.onSurface,
             style = AppTheme.typography.labelSmall,
-            borderColor = AppTheme.colors.border
+            borderColor = AppTheme.colors.surfaceLow
         )
     }
 }
