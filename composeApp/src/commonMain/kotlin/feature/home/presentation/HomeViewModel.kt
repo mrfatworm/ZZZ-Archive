@@ -19,11 +19,15 @@ import feature.hoyolab.domain.GameRecordUseCase
 import feature.news.domain.OfficialNewsUseCase
 import feature.pixiv.domain.PixivUseCase
 import feature.wengine.domain.WEnginesListUseCase
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -40,24 +44,24 @@ class HomeViewModel(
     private val gameRecordUseCase: GameRecordUseCase
 ) : ViewModel() {
 
-    private var ignoreBannerId = 0
-    private var _uiState = MutableStateFlow(HomeState())
-    val uiState = _uiState.asStateFlow()
+    private var gameRecordJob: Job? = null
+    private var officialNewsJob: Job? = null
 
-    init {
-        viewModelScope.launch {
-            launch { ignoreBannerId = bannerUseCase.getBannerIgnoreId().first() }
-            launch { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() }
-            launch { fetchBanner() }
-            launch { observeCoverImage() }
-            launch { fetchZzzOfficialNewsEveryTenMinutes() }
-            launch { fetchPixivTopic() }
-            launch { observeAgentsList() }
-            launch { observeWEnginesList() }
-            launch { observeBangbooList() }
-            launch { observeDrivesList() }
-        }
-    }
+    private var _uiState = MutableStateFlow(HomeState())
+    val uiState = _uiState.onStart {
+        observeDefaultAccount()
+        updateDatabaseUseCase.updateAssetsIfNewVersionAvailable()
+        observeCoverImage()
+        observeAgentsList()
+        observeWEnginesList()
+        observeBangbooList()
+        observeDrivesList()
+        fetchBanner()
+        fetchPixivTopic()
+        fetchZzzOfficialNewsEveryTenMinutes()
+    }.stateIn(
+        viewModelScope, SharingStarted.WhileSubscribed(5000L), _uiState.value
+    )
 
     fun onAction(action: HomeAction) {
         when (action) {
@@ -83,45 +87,35 @@ class HomeViewModel(
         }
     }
 
-    fun onResume() {
-        viewModelScope.launch {
-            observeDefaultAccount()
-        }
-    }
-
-    suspend fun closeBannerAndIgnoreId(id: Int) {
-        ignoreBannerId = id
+    private suspend fun closeBannerAndIgnoreId(id: Int) {
         bannerUseCase.setBannerIgnoreId(id)
         _uiState.update { state ->
             state.copy(banner = null)
         }
     }
 
-    private suspend fun fetchBanner() {
-        val result = bannerUseCase.invoke()
+    private fun fetchBanner() = bannerUseCase.invoke().onEach { result ->
         result.fold(onSuccess = { banner ->
-            if (banner.id > ignoreBannerId) {
-                _uiState.update {
-                    it.copy(banner = banner)
-                }
+            _uiState.update {
+                it.copy(banner = banner)
             }
         }, onFailure = {
             println("get banner error: ${it.message}")
         })
-    }
+    }.launchIn(viewModelScope)
 
-    private suspend fun observeCoverImage() {
-        coverImageUseCase.invoke().collect { coverImagesList ->
-            _uiState.update {
-                it.copy(coverImage = coverImagesList)
-            }
+    private suspend fun observeCoverImage() = coverImageUseCase.invoke().onEach { coverImagesList ->
+        _uiState.update {
+            it.copy(coverImage = coverImagesList)
         }
-    }
+    }.launchIn(viewModelScope)
 
-    private suspend fun observeDefaultAccount() {
-        gameRecordUseCase.getDefaultUid().collect {
+
+    private fun observeDefaultAccount() =
+        gameRecordUseCase.getDefaultUid().onEach { defaultAccountUid ->
             val defaultAccount =
-                gameRecordUseCase.getDefaultHoYoLabAccount(it).firstOrNull() ?: return@collect
+                gameRecordUseCase.getDefaultHoYoLabAccount(defaultAccountUid).firstOrNull()
+                    ?: return@onEach
             _uiState.update { state ->
                 state.copy(
                     gameRecord = emptyGameRecordState.copy(
@@ -135,11 +129,11 @@ class HomeViewModel(
                 )
             }
             fetchGameRecordEveryTenMinutes()
-        }
-    }
+        }.launchIn(viewModelScope)
 
-    private suspend fun fetchZzzOfficialNewsEveryTenMinutes() {
-        newsUseCase.getNewsPeriodically(10, 6).collect { result ->
+    private fun fetchZzzOfficialNewsEveryTenMinutes() {
+        officialNewsJob?.cancel()
+        officialNewsJob = newsUseCase.getNewsPeriodically(10, 6).onEach { result ->
             result.fold(onSuccess = { newsList ->
                 _uiState.update { state ->
                     state.copy(newsList = newsUseCase.convertToOfficialNewsState(newsList))
@@ -147,42 +141,41 @@ class HomeViewModel(
             }, onFailure = {
                 println("get news error: ${it.message}")
             })
-        }
+        }.launchIn(viewModelScope)
     }
 
     private fun fetchGameRecordEveryTenMinutes() {
-        viewModelScope.launch {
-            gameRecordUseCase.getGameRecordPeriodically(10).collect { result ->
-                result.fold(onSuccess = { gameRecord ->
-                    _uiState.update { state ->
-                        state.copy(
-                            gameRecord = gameRecord.toGameRecordState(
-                                state.gameRecord.hasAccount,
-                                state.gameRecord.nickname,
-                                state.gameRecord.server,
-                                state.gameRecord.uid,
-                                state.gameRecord.profileUrl,
-                                state.gameRecord.cardUrl
-                            )
+        gameRecordJob?.cancel()
+        gameRecordJob = gameRecordUseCase.getGameRecordPeriodically(10).onEach { result ->
+            result.fold(onSuccess = { gameRecord ->
+                _uiState.update { state ->
+                    state.copy(
+                        gameRecord = gameRecord.toGameRecordState(
+                            state.gameRecord.hasAccount,
+                            state.gameRecord.nickname,
+                            state.gameRecord.server,
+                            state.gameRecord.uid,
+                            state.gameRecord.profileUrl,
+                            state.gameRecord.cardUrl
                         )
-                    }
-                }, onFailure = {
-                    println("get game record error: ${it.message}")
-                })
-            }
-        }
+                    )
+                }
+            }, onFailure = {
+                println("get game record error: ${it.message}")
+            })
+        }.launchIn(viewModelScope)
     }
 
-    private suspend fun fetchPixivTopic(zzzTag: String = pixivTagDropdownItems.first().tagOnPixiv) {
-        val result = pixivUseCase.invoke(zzzTag)
-        result.fold(onSuccess = { pixivTopic ->
-            _uiState.update {
-                it.copy(pixivTopics = pixivTopic)
-            }
-        }, onFailure = {
-            println("get pixiv topic error: ${it.message}")
-        })
-    }
+    private fun fetchPixivTopic(zzzTag: String = pixivTagDropdownItems.first().tagOnPixiv) =
+        pixivUseCase.invoke(zzzTag).onEach { result ->
+            result.fold(onSuccess = { pixivTopic ->
+                _uiState.update {
+                    it.copy(pixivTopics = pixivTopic.body.illustManga.data)
+                }
+            }, onFailure = {
+                println("get pixiv topic error: ${it.message}")
+            })
+        }.launchIn(viewModelScope)
 
     private suspend fun sign() {
         if (uiState.value.signResult != null) return
@@ -198,41 +191,34 @@ class HomeViewModel(
                 state.copy(signResult = it.message)
             }
         })
-        delay(5000)
+        delay(5000) // Cooldown
         _uiState.update { state ->
             state.copy(signResult = null)
         }
     }
 
-    private suspend fun observeAgentsList() {
-        agentsListUseCase.invoke().collect { agentsList ->
-            _uiState.update {
-                it.copy(agentsList = agentsList)
-            }
+    private suspend fun observeAgentsList() = agentsListUseCase.invoke().onEach { agentsList ->
+        _uiState.update {
+            it.copy(agentsList = agentsList)
         }
-    }
+    }.launchIn(viewModelScope)
 
-    private suspend fun observeWEnginesList() {
-        wEnginesListUseCase.invoke().collect { wEnginesList ->
+    private suspend fun observeWEnginesList() =
+        wEnginesListUseCase.invoke().onEach { wEnginesList ->
             _uiState.update {
                 it.copy(wEnginesList = wEnginesList)
             }
-        }
-    }
+        }.launchIn(viewModelScope)
 
-    private suspend fun observeBangbooList() {
-        bangbooListUseCase.invoke().collect { bangbooList ->
-            _uiState.update {
-                it.copy(bangbooList = bangbooList)
-            }
+    private suspend fun observeBangbooList() = bangbooListUseCase.invoke().onEach { bangbooList ->
+        _uiState.update {
+            it.copy(bangbooList = bangbooList)
         }
-    }
+    }.launchIn(viewModelScope)
 
-    private suspend fun observeDrivesList() {
-        drivesListUseCase.invoke().collect { drivesList ->
-            _uiState.update {
-                it.copy(drivesList = drivesList)
-            }
+    private suspend fun observeDrivesList() = drivesListUseCase.invoke().onEach { drivesList ->
+        _uiState.update {
+            it.copy(drivesList = drivesList)
         }
-    }
+    }.launchIn(viewModelScope)
 }

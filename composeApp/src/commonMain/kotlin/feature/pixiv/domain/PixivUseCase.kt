@@ -6,8 +6,12 @@
 package feature.pixiv.domain
 
 import feature.pixiv.data.PixivRepository
+import feature.pixiv.data.PixivTopicResponse
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class PixivUseCase(private val repository: PixivRepository) {
-    suspend fun invoke(zzzTag: String) =
-        repository.getZzzTopic(zzzTag).map { it.body.illustManga.data }
+    fun invoke(zzzTag: String): Flow<Result<PixivTopicResponse>> = flow {
+        emit(repository.getZzzTopic(zzzTag))
+    }
 }

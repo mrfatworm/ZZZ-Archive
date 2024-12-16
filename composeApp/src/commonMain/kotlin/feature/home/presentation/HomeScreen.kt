@@ -6,11 +6,10 @@
 package feature.home.presentation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.lifecycle.compose.LifecycleResumeEffect
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.dialogs.BannerDialog
 import ui.theme.AppTheme
@@ -28,11 +27,7 @@ fun HomeScreen(
     navigateTo: (String) -> Unit
 ) {
     val viewModel: HomeViewModel = koinViewModel()
-    val uiState by viewModel.uiState.collectAsState()
-    LifecycleResumeEffect(key1 = viewModel) {
-        viewModel.onResume()
-        onPauseOrDispose { }
-    }
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     HomeScreenContent(uiState, onAction = { actions ->
         when (actions) {
             HomeAction.ClickAgentsOverview -> onAgentsOverviewClick()

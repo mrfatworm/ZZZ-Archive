@@ -136,7 +136,7 @@ private fun Header(
                 horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
                 verticalAlignment = Alignment.Bottom
             ) {
-                PlayerInfo(Modifier.weight(1f), uiState)
+                PlayerInfo(Modifier.weight(1f), uiState, onAddAccountClick)
                 PlayerEnergy(uiState)
             }
         }
@@ -153,9 +153,11 @@ private fun Header(
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-private fun PlayerInfo(modifier: Modifier, uiState: GameRecordState) {
+private fun PlayerInfo(
+    modifier: Modifier, uiState: GameRecordState, onAddAccountClick: () -> Unit
+) {
     SubcomposeAsyncImage(modifier = Modifier.size(AppTheme.size.extraLargeIconSize)
-        .clip(CircleShape),
+        .clip(CircleShape).clickable { onAddAccountClick() },
         model = uiState.profileUrl,
         contentDescription = stringResource(Res.string.user_profile_image),
         error = {

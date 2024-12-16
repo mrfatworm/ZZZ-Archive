@@ -9,11 +9,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PixivTopicResponse(val body: Body) {
-    fun getPopularArticles(): List<RecentArticle> {
-        return body.illustManga.data
-    }
-}
+data class PixivTopicResponse(val body: Body)
 
 @Serializable
 @SerialName("illustManga")

@@ -10,12 +10,10 @@ import feature.news.data.OfficialNewsListItem
 import feature.news.data.OfficialNewsRepository
 import feature.news.model.OfficialNewsState
 import feature.setting.domain.LanguageUseCase
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.serialization.json.Json
 
 class OfficialNewsUseCase(
@@ -31,7 +29,7 @@ class OfficialNewsUseCase(
             emit(officialNewsRepository.getNews(amount, languageNewsCode))
             delay(perMinutes * 60 * 1000L)
         }
-    }.flowOn(Dispatchers.Default)
+    }
 
     suspend fun convertToOfficialNewsState(newsList: List<OfficialNewsListItem>): List<OfficialNewsState> {
         val languageNewsCode = languageUseCase.getLanguage().first().officialCode

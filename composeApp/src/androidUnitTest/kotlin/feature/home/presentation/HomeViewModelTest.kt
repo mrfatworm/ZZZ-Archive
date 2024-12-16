@@ -32,6 +32,7 @@ import feature.wengine.model.stubWEnginesList
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -59,11 +60,10 @@ class HomeViewModelTest {
     @BeforeTest
     fun setup() {
         coEvery { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() } returns Unit
-        coEvery { bannerUseCase.invoke() } returns Result.success(stubBannerResponse)
-        coEvery { bannerUseCase.getBannerIgnoreId() } returns flowOf(0)
+        coEvery { bannerUseCase.invoke() } returns flowOf(Result.success(stubBannerResponse))
         coEvery { bannerUseCase.setBannerIgnoreId(any()) } returns Unit
         coEvery { coverImageUseCase.invoke() } returns flowOf(listOf(stubCoverImageListItemEntity))
-        coEvery { pixivUseCase.invoke(any()) } returns Result.success(stubPixivTopicResponse.getPopularArticles())
+        coEvery { pixivUseCase.invoke(any()) } returns flowOf(Result.success(stubPixivTopicResponse))
         coEvery {
             officialNewsUseCase.getNewsPeriodically(any(), any())
         } returns flowOf(Result.success(stubOfficialNewsDataResponse.data.list))
@@ -98,21 +98,16 @@ class HomeViewModelTest {
 
     @Test
     fun `Init data success`() = runTest {
-        val state = viewModel.uiState.value
+        val state = viewModel.uiState.first()
         assertEquals(state.banner, stubBannerResponse)
         assertEquals(state.coverImage, listOf(stubCoverImageListItemEntity))
-        assertEquals(state.pixivTopics, stubPixivTopicResponse.getPopularArticles())
+        assertEquals(state.pixivTopics, stubPixivTopicResponse.body.illustManga.data)
         assertEquals(state.newsList.first(), stubOfficialNewsState)
         assertEquals(state.agentsList, stubAgentsList)
         assertEquals(state.wEnginesList, stubWEnginesList)
         assertEquals(state.bangbooList, stubBangbooList)
         assertEquals(state.drivesList, listOf(stubDrivesListItemEntity))
         coVerify { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() }
-    }
-
-    @Test
-    fun `On app resume THEN get default account`() = runTest {
-        viewModel.onResume()
         coVerify { gameRecordUseCase.getDefaultUid() }
         coVerify { gameRecordUseCase.getDefaultHoYoLabAccount(any()) }
         coVerify { gameRecordUseCase.getGameRecordPeriodically(any()) }
@@ -120,7 +115,7 @@ class HomeViewModelTest {
 
     @Test
     fun `Set banner ignore id as one THEN ignore banner data`() = runTest {
-        viewModel.closeBannerAndIgnoreId(1)
+        viewModel.onAction(HomeAction.DismissBanner(1))
         coVerify { bannerUseCase.setBannerIgnoreId(1) }
     }
 
