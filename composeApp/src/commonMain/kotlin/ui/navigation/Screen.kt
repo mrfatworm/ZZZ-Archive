@@ -94,6 +94,4 @@ sealed class Screen(
     data object HoYoLabSync : Screen(
         route = "hoyolabSync", textRes = Res.string.hoyolab_sync
     )
-
-
 }
