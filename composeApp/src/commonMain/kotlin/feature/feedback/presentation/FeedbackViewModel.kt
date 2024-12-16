@@ -3,16 +3,16 @@
  * License: MIT
  */
 
-package feature.setting.presentation
+package feature.feedback.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import feature.feedback.domain.GoogleDocUseCase
+import feature.feedback.model.FeedbackIssueType
+import feature.feedback.model.FeedbackState
+import feature.feedback.model.feedbackIssueTypes
 import feature.setting.domain.AppInfoUseCase
-import feature.setting.domain.GoogleDocUseCase
 import feature.setting.domain.LanguageUseCase
-import feature.setting.model.FeedbackIssueType
-import feature.setting.model.FeedbackState
-import feature.setting.model.feedbackIssueTypes
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

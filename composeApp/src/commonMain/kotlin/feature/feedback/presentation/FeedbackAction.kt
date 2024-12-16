@@ -3,9 +3,9 @@
  * License: MIT
  */
 
-package feature.setting.presentation
+package feature.feedback.presentation
 
-import feature.setting.model.FeedbackIssueType
+import feature.feedback.model.FeedbackIssueType
 
 sealed interface FeedbackAction {
     data class SubmitForm(

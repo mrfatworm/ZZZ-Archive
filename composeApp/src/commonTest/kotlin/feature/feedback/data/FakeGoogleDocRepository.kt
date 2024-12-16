@@ -3,7 +3,7 @@
  * License: MIT License
  */
 
-package feature.setting.data
+package feature.feedback.data
 
 
 class FakeGoogleDocRepository : GoogleDocRepository {

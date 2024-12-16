@@ -3,7 +3,7 @@
  * License: MIT License
  */
 
-package feature.setting.model
+package feature.feedback.model
 
 import org.jetbrains.compose.resources.StringResource
 import zzzarchive.composeapp.generated.resources.Res

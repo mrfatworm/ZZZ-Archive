@@ -3,7 +3,7 @@
  * License: MIT License
  */
 
-package feature.setting.data
+package feature.feedback.data
 
 import kotlinx.coroutines.withTimeout
 import network.GoogleDocHttp

@@ -3,7 +3,7 @@
  * License: MIT
  */
 
-package feature.setting.presentation
+package feature.feedback.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,9 +20,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import feature.setting.components.FeedbackFormCard
-import feature.setting.model.FeedbackState
-import feature.setting.model.feedbackIssueTypes
+import feature.feedback.components.FeedbackFormCard
+import feature.feedback.model.FeedbackState
+import feature.feedback.model.feedbackIssueTypes
 import org.jetbrains.compose.resources.stringResource
 import ui.components.TopBarRound
 import ui.components.buttons.ZzzPrimaryButton

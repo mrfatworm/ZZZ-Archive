@@ -3,9 +3,9 @@
  * License: MIT
  */
 
-package feature.setting.domain
+package feature.feedback.domain
 
-import feature.setting.data.GoogleDocRepository
+import feature.feedback.data.GoogleDocRepository
 
 class GoogleDocUseCase(private val repository: GoogleDocRepository) {
     suspend fun submitFeedbackForm(

@@ -3,14 +3,14 @@
  * License: MIT
  */
 
-package feature.setting.presentation
+package feature.feedback.presentation
 
 
 import MainDispatcherRule
+import feature.feedback.domain.GoogleDocUseCase
+import feature.feedback.model.feedbackIssueTypes
 import feature.setting.domain.AppInfoUseCase
-import feature.setting.domain.GoogleDocUseCase
 import feature.setting.domain.LanguageUseCase
-import feature.setting.model.feedbackIssueTypes
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk

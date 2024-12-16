@@ -3,9 +3,9 @@
  * License: MIT
  */
 
-package feature.setting.domain
+package feature.feedback.domain
 
-import feature.setting.data.FakeGoogleDocRepository
+import feature.feedback.data.FakeGoogleDocRepository
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals

@@ -3,7 +3,7 @@
  * License: MIT
  */
 
-package feature.setting.presentation
+package feature.feedback.presentation
 
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import feature.setting.model.FeedbackState
+import feature.feedback.model.FeedbackState
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.dialogs.SingleActionDialog

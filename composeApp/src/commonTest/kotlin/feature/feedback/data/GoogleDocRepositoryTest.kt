@@ -3,7 +3,7 @@
  * License: MIT
  */
 
-package feature.setting.data
+package feature.feedback.data
 
 import kotlinx.coroutines.test.runTest
 import network.FakeGoogleDocHttp

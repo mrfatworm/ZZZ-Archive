@@ -12,8 +12,8 @@ import feature.agent.presentation.AgentsListScreen
 import feature.bangboo.presentation.BangbooDetailScreen
 import feature.bangboo.presentation.BangbooListScreen
 import feature.drive.presentation.DrivesListScreen
+import feature.feedback.presentation.FeedbackScreen
 import feature.hoyolab.presentation.HoYoLabSyncScreen
-import feature.setting.presentation.FeedbackScreen
 import feature.setting.presentation.SettingScreen
 import feature.wengine.presentation.WEngineDetailScreen
 import feature.wengine.presentation.WEnginesListScreen
