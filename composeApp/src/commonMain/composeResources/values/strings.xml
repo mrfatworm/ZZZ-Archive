@@ -76,7 +76,8 @@
     <string name="strike">Strike</string>
 
     <!-- Home -->
-    <string name="pixiv_hot">Pixiv Hot</string>
+    <string name="popular">Popular</string>
+    <string name="forum_popular">Forum Hot</string>
 
     <!-- Agent Detail -->
     <string name="attributes">Attributes</string>

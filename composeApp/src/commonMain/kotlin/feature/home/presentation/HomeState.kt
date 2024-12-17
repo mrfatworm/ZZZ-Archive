@@ -5,11 +5,9 @@
 
 package feature.home.presentation
 
-import feature.agent.model.AgentListItem
-import feature.bangboo.model.BangbooListItem
 import feature.banner.data.BannerResponse
 import feature.cover_image.data.database.CoverImageListItemEntity
-import feature.drive.data.database.DrivesListItemEntity
+import feature.forum.model.AllForumResponse
 import feature.hoyolab.model.BountyCommissionState
 import feature.hoyolab.model.CoffeeState
 import feature.hoyolab.model.EnergyState
@@ -20,7 +18,6 @@ import feature.hoyolab.model.VhsSaleState
 import feature.hoyolab.model.WeeklyTaskState
 import feature.news.model.OfficialNewsListItem
 import feature.pixiv.data.RecentArticle
-import feature.wengine.model.WEnginesListItem
 
 data class HomeState(
     val banner: BannerResponse? = null,
@@ -29,10 +26,7 @@ data class HomeState(
     val pixivTopics: List<RecentArticle> = emptyList(),
     val gameRecord: GameRecordState = emptyGameRecordState,
     val signResult: String? = null,
-    val agentsList: List<AgentListItem> = emptyList(),
-    val wEnginesList: List<WEnginesListItem> = emptyList(),
-    val bangbooList: List<BangbooListItem> = emptyList(),
-    val drivesList: List<DrivesListItemEntity> = emptyList()
+    val allForum: AllForumResponse? = null,
 )
 
 

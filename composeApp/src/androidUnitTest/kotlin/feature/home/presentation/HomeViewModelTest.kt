@@ -8,16 +8,12 @@ package feature.home.presentation
 
 import MainDispatcherRule
 import database.UpdateDatabaseUseCase
-import feature.agent.domain.AgentsListUseCase
-import feature.agent.model.stubAgentsList
-import feature.bangboo.domain.BangbooListUseCase
-import feature.bangboo.model.stubBangbooList
 import feature.banner.data.stubBannerResponse
 import feature.banner.domain.BannerUseCase
 import feature.cover_image.data.database.stubCoverImageListItemEntity
 import feature.cover_image.domain.CoverImageUseCase
-import feature.drive.data.database.stubDrivesListItemEntity
-import feature.drive.domain.DrivesListUseCase
+import feature.forum.domain.ForumUseCase
+import feature.forum.model.stubAllForumResponse
 import feature.hoyolab.data.database.stubHoYoLabAccountEntity
 import feature.hoyolab.domain.GameRecordUseCase
 import feature.hoyolab.model.stubGameRecordResponse
@@ -27,8 +23,6 @@ import feature.news.domain.OfficialNewsUseCase
 import feature.news.model.stubOfficialNewsListItem
 import feature.pixiv.data.stubPixivTopicResponse
 import feature.pixiv.domain.PixivUseCase
-import feature.wengine.domain.WEnginesListUseCase
-import feature.wengine.model.stubWEnginesList
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -49,12 +43,9 @@ class HomeViewModelTest {
     private val coverImageUseCase = mockk<CoverImageUseCase>()
     private val pixivUseCase = mockk<PixivUseCase>()
     private val officialNewsUseCase = mockk<OfficialNewsUseCase>()
-    private val agentsListUseCase = mockk<AgentsListUseCase>()
-    private val wEnginesListUseCase = mockk<WEnginesListUseCase>()
-    private val bangbooListUseCase = mockk<BangbooListUseCase>()
-    private val drivesListUseCase = mockk<DrivesListUseCase>()
     private val updateDatabaseUseCase = mockk<UpdateDatabaseUseCase>()
     private val gameRecordUseCase = mockk<GameRecordUseCase>()
+    private val forumUseCase = mockk<ForumUseCase>()
     private lateinit var viewModel: HomeViewModel
 
     @BeforeTest
@@ -79,19 +70,15 @@ class HomeViewModelTest {
             Result.success(stubGameRecordResponse.data)
         )
         coEvery { gameRecordUseCase.sign() } returns Result.success(stubSignResponse)
-        coEvery { agentsListUseCase.invoke() } returns flowOf(stubAgentsList)
-        coEvery { wEnginesListUseCase.invoke() } returns flowOf(stubWEnginesList)
-        coEvery { bangbooListUseCase.invoke() } returns flowOf(stubBangbooList)
-        coEvery { drivesListUseCase.invoke() } returns flowOf(listOf(stubDrivesListItemEntity))
+        coEvery { forumUseCase.getAllForumListPeriodically(any()) } returns flowOf(
+            stubAllForumResponse
+        )
         viewModel = HomeViewModel(
             bannerUseCase,
             coverImageUseCase,
             pixivUseCase,
             officialNewsUseCase,
-            agentsListUseCase,
-            wEnginesListUseCase,
-            bangbooListUseCase,
-            drivesListUseCase,
+            forumUseCase,
             updateDatabaseUseCase,
             gameRecordUseCase
         )
@@ -104,10 +91,7 @@ class HomeViewModelTest {
         assertEquals(listOf(stubCoverImageListItemEntity), state.coverImage)
         assertEquals(stubPixivTopicResponse.body.illustManga.data, state.pixivTopics)
         assertEquals(stubOfficialNewsListItem, state.newsList.first())
-        assertEquals(stubAgentsList, state.agentsList)
-        assertEquals(stubWEnginesList, state.wEnginesList)
-        assertEquals(stubBangbooList, state.bangbooList)
-        assertEquals(listOf(stubDrivesListItemEntity), state.drivesList)
+        assertEquals(stubAllForumResponse, state.allForum)
         coVerify { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() }
         coVerify { gameRecordUseCase.getDefaultUid() }
         coVerify { gameRecordUseCase.getDefaultHoYoLabAccount(any()) }

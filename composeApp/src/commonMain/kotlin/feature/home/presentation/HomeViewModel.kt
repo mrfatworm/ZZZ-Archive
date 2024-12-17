@@ -8,17 +8,14 @@ package feature.home.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import database.UpdateDatabaseUseCase
-import feature.agent.domain.AgentsListUseCase
-import feature.bangboo.domain.BangbooListUseCase
 import feature.banner.domain.BannerUseCase
 import feature.cover_image.domain.CoverImageUseCase
-import feature.drive.domain.DrivesListUseCase
+import feature.forum.domain.ForumUseCase
 import feature.home.model.pixivTagDropdownItems
 import feature.hoyolab.data.mapper.toGameRecordState
 import feature.hoyolab.domain.GameRecordUseCase
 import feature.news.domain.OfficialNewsUseCase
 import feature.pixiv.domain.PixivUseCase
-import feature.wengine.domain.WEnginesListUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -36,10 +33,7 @@ class HomeViewModel(
     private val coverImageUseCase: CoverImageUseCase,
     private val pixivUseCase: PixivUseCase,
     private val newsUseCase: OfficialNewsUseCase,
-    private val agentsListUseCase: AgentsListUseCase,
-    private val wEnginesListUseCase: WEnginesListUseCase,
-    private val bangbooListUseCase: BangbooListUseCase,
-    private val drivesListUseCase: DrivesListUseCase,
+    private val forumUseCase: ForumUseCase,
     private val updateDatabaseUseCase: UpdateDatabaseUseCase,
     private val gameRecordUseCase: GameRecordUseCase
 ) : ViewModel() {
@@ -48,15 +42,11 @@ class HomeViewModel(
     private var officialNewsJob: Job? = null
     private var defaultAccountJob: Job? = null
     private var coverImageJob: Job? = null
-    private var agentsListJob: Job? = null
-    private var wEnginesListJob: Job? = null
-    private var bangbooListJob: Job? = null
-    private var drivesListJob: Job? = null
+    private var allForumJob: Job? = null
     private var pixivTopicJob: Job? = null
 
     private var _uiState = MutableStateFlow(HomeState())
     val uiState = _uiState.onStart {
-        // If you leave here more than 8s ,back to home screen will trigger it
         updateDatabaseUseCase.updateAssetsIfNewVersionAvailable()
         updatePixivTopic()
         updateBanner()
@@ -68,10 +58,7 @@ class HomeViewModel(
         updateOfficialNewsEveryTenMinutes()
         observeDefaultAccount()
         observeCoverImage()
-        observeAgentsList()
-        observeWEnginesList()
-        observeBangbooList()
-        observeDrivesList()
+        updateForumListEveryTenMinutes()
         observePixivTopic()
     }
 
@@ -186,6 +173,17 @@ class HomeViewModel(
         }.launchIn(viewModelScope)
     }
 
+    private fun updateForumListEveryTenMinutes() {
+        allForumJob?.cancel()
+        allForumJob = viewModelScope.launch {
+            forumUseCase.getAllForumListPeriodically(10).collect { allForum ->
+                _uiState.update {
+                    it.copy(allForum = allForum)
+                }
+            }
+        }
+    }
+
     private fun observePixivTopic() {
         pixivTopicJob?.cancel()
         pixivTopicJob = pixivUseCase.invoke().onEach { pixivArticleList ->
@@ -218,48 +216,4 @@ class HomeViewModel(
         }
     }
 
-    private fun observeAgentsList() {
-        agentsListJob?.cancel()
-        agentsListJob = viewModelScope.launch {
-            agentsListUseCase.invoke().collect { agentsList ->
-                _uiState.update {
-                    it.copy(agentsList = agentsList)
-                }
-            }
-        }
-    }
-
-    private fun observeWEnginesList() {
-        wEnginesListJob?.cancel()
-        wEnginesListJob = viewModelScope.launch {
-            wEnginesListUseCase.invoke().collect { wEnginesList ->
-                _uiState.update {
-                    it.copy(wEnginesList = wEnginesList)
-                }
-            }
-        }
-    }
-
-
-    private fun observeBangbooList() {
-        bangbooListJob?.cancel()
-        bangbooListJob = viewModelScope.launch {
-            bangbooListUseCase.invoke().collect { bangbooList ->
-                _uiState.update {
-                    it.copy(bangbooList = bangbooList)
-                }
-            }
-        }
-    }
-
-    private fun observeDrivesList() {
-        drivesListJob?.cancel()
-        drivesListJob = viewModelScope.launch {
-            drivesListUseCase.invoke().collect { drivesList ->
-                _uiState.update {
-                    it.copy(drivesList = drivesList)
-                }
-            }
-        }
-    }
 }

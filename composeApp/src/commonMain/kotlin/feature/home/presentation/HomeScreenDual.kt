@@ -14,13 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.banner.components.AnnouncementBanner
 import feature.cover_image.components.CoverImageCard
+import feature.forum.compoenents.TwitterCard
 import feature.hoyolab.components.HoYoLabCard
 import feature.news.components.NewsPagerCard
-import feature.pixiv.components.PixivTopicCard
-import ui.components.cards.AgentsListCard
-import ui.components.cards.BangbooListCard
-import ui.components.cards.DrivesListCard
-import ui.components.cards.WEnginesListCard
+import feature.pixiv.components.PixivCard
 import ui.navigation.Screen
 import ui.theme.AppTheme
 import ui.utils.containerGap
@@ -49,9 +46,10 @@ fun HomeScreenDual(
                 }, onAddAccountClick = {
                     onAction(HomeAction.NavigateTo(Screen.HoYoLabSync.route))
                 })
-                PixivTopicCard(uiState.pixivTopics) {
+                PixivCard(uiState.pixivTopics) {
                     onAction(HomeAction.ChangePixivTag(it))
                 }
+                TwitterCard(uiState.allForum?.twitter ?: emptyList())
             }
 
             Column(
@@ -59,24 +57,7 @@ fun HomeScreenDual(
                 verticalArrangement = Arrangement.spacedBy(contentGap())
             ) {
                 NewsPagerCard(uiState.newsList)
-                AgentsListCard(agentsList = uiState.agentsList, onAgentsOverviewClick = {
-                    onAction(HomeAction.ClickAgentsOverview)
-                }, onAgentDetailClick = {
-                    onAction(HomeAction.ClickAgent(it))
-                })
-                WEnginesListCard(wEnginesList = uiState.wEnginesList, onWEnginesOverviewClick = {
-                    onAction(HomeAction.ClickWEnginesOverview)
-                }, onWEngineDetailClick = {
-                    onAction(HomeAction.ClickWEngine(it))
-                })
-                BangbooListCard(bangbooList = uiState.bangbooList, onBangbooOverviewClick = {
-                    onAction(HomeAction.ClickBangbooOverview)
-                }, onBangbooDetailClick = {
-                    onAction(HomeAction.ClickBangboo(it))
-                })
-                DrivesListCard(drivesList = uiState.drivesList) {
-                    onAction(HomeAction.ClickDrivesOverview)
-                }
+
             }
         }
     }

@@ -39,6 +39,9 @@ import feature.feedback.data.GoogleDocRepository
 import feature.feedback.data.GoogleDocRepositoryImpl
 import feature.feedback.domain.GoogleDocUseCase
 import feature.feedback.presentation.FeedbackViewModel
+import feature.forum.data.ForumRepository
+import feature.forum.data.ForumRepositoryImpl
+import feature.forum.domain.ForumUseCase
 import feature.home.data.AssetVersionRepository
 import feature.home.data.AssetVersionRepositoryImpl
 import feature.home.presentation.HomeViewModel
@@ -135,6 +138,7 @@ val sharedModule = module {
     single<DriveRepository> { DriveRepositoryImpl(get(), get()) }
     single<GoogleDocRepository> { GoogleDocRepositoryImpl(get()) }
     single<HoYoLabRepository> { HoYoLabRepositoryImpl(get(), get()) }
+    single<ForumRepository> { ForumRepositoryImpl(get()) }
     single<ZzzCrypto> { ZzzCryptoImpl() }
 
     // Use cases
@@ -160,6 +164,7 @@ val sharedModule = module {
     single<HoYoLabManageUseCase> { HoYoLabManageUseCase(get(), get(), get()) }
     single<HoYoLabPreferenceUseCase> { HoYoLabPreferenceUseCase(get()) }
     single<GameRecordUseCase> { GameRecordUseCase(get(), get(), get(), get(), get()) }
+    single<ForumUseCase> { ForumUseCase(get()) }
 
     // ViewModels
     viewModelOf(::SplashViewModel)

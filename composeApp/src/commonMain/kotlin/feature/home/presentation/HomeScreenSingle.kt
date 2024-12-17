@@ -14,9 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.banner.components.AnnouncementBanner
 import feature.cover_image.components.CoverImageCard
+import feature.forum.compoenents.TwitterCard
 import feature.hoyolab.components.HoYoLabCard
 import feature.news.components.NewsPagerCard
-import feature.pixiv.components.PixivTopicCard
+import feature.pixiv.components.PixivCard
 import ui.navigation.Screen
 import ui.utils.contentGap
 import ui.utils.contentPadding
@@ -46,8 +47,9 @@ fun HomeScreenSingle(
         }, onAddAccountClick = {
             onAction(HomeAction.NavigateTo(Screen.HoYoLabSync.route))
         })
-        PixivTopicCard(uiState.pixivTopics) {
+        PixivCard(uiState.pixivTopics) {
             onAction(HomeAction.ChangePixivTag(it))
         }
+        TwitterCard(uiState.allForum?.twitter ?: emptyList())
     }
 }

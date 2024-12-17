@@ -8,6 +8,8 @@ package di
 import database.RoomDatabaseFactory
 import datastore.DataStoreFactory
 import io.ktor.client.engine.okhttp.OkHttp
+import network.ForumHttp
+import network.ForumHttpImpl
 import network.GoogleDocHttp
 import network.GoogleDocHttpImpl
 import network.HoYoLabHttp
@@ -31,4 +33,5 @@ actual val platformModule = module {
     single<PixivHttp> { PixivHttpImpl(OkHttp.create()) }
     single<GoogleDocHttp> { GoogleDocHttpImpl(OkHttp.create()) }
     single<HoYoLabHttp> { HoYoLabHttpImpl(OkHttp.create()) }
+    single<ForumHttp> { ForumHttpImpl(OkHttp.create()) }
 }

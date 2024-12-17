@@ -76,7 +76,8 @@
     <string name="sons_of_calydon">卡呂冬之子</string>
 
     <!-- Home -->
-    <string name="pixiv_hot">Pixiv 熱門</string>
+    <string name="popular">熱門</string>
+    <string name="forum_popular">論壇熱門</string>
 
     <!-- Agent Detail -->
     <string name="attributes">屬性</string>

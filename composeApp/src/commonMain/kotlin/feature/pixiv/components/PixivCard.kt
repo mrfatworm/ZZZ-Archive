@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -64,13 +63,13 @@ import ui.utils.drawRowListMask
 import ui.utils.rowListGap
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_favorite
-import zzzarchive.composeapp.generated.resources.pixiv_hot
+import zzzarchive.composeapp.generated.resources.ic_pixiv
+import zzzarchive.composeapp.generated.resources.popular
 import zzzarchive.composeapp.generated.resources.unknown
 
 @Composable
-fun PixivTopicCard(
-    recentArticlesList: List<RecentArticle>,
-    onPixivTagChange: (String) -> Unit
+fun PixivCard(
+    recentArticlesList: List<RecentArticle>, onPixivTagChange: (String) -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered = interactionSource.collectIsHoveredAsState()
@@ -106,25 +105,35 @@ fun PixivTopicCard(
 
 @Composable
 private fun Header(
-    isHovered: Boolean,
-    lazyListState: LazyListState,
-    onPixivTagChange: (String) -> Unit
+    isHovered: Boolean, lazyListState: LazyListState, onPixivTagChange: (String) -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
     HoveredIndicatorHeader(
-        title = stringResource(Res.string.pixiv_hot),
-        isHovered = isHovered,
-        lazyListState = lazyListState,
-        startContent = {
-            TagDropDownButton(onPixivTagChange = {
-                onPixivTagChange(it)
-                coroutineScope.launch {
-                    lazyListState.animateScrollToItem(0)
-                }
-            })
-            Spacer(Modifier.weight(1f))
-        }
-    )
+        title = null, isHovered = isHovered, lazyListState = lazyListState, startContent = {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    modifier = Modifier.size(AppTheme.size.largeIconSize),
+                    imageVector = vectorResource(Res.drawable.ic_pixiv),
+                    contentDescription = "Pixiv",
+                    tint = AppTheme.colors.onSurfaceVariant
+                )
+                Text(
+                    text = stringResource(Res.string.popular),
+                    style = AppTheme.typography.titleMedium,
+                    color = AppTheme.colors.onSurfaceVariant
+                )
+
+                TagDropDownButton(onPixivTagChange = {
+                    onPixivTagChange(it)
+                    coroutineScope.launch {
+                        lazyListState.animateScrollToItem(0)
+                    }
+                })
+            }
+        })
 }
 
 @Composable
@@ -150,7 +159,8 @@ private fun TagDropDownButton(onPixivTagChange: (String) -> Unit) {
                 color = AppTheme.colors.onSurface
             )
         }
-        DropdownMenu(expanded = showTagsList,
+        DropdownMenu(
+            expanded = showTagsList,
             containerColor = AppTheme.colors.surface,
             onDismissRequest = { showTagsList = false }) {
             pixivZzzLikeTags.forEach { tag ->

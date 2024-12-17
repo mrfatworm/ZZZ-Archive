@@ -103,3 +103,21 @@ fun createHoYoLabHttpClient(engine: HttpClientEngine): HttpClient {
         }
     }
 }
+
+fun createForumHttpClient(engine: HttpClientEngine): HttpClient {
+    return HttpClient(engine) {
+        install(ContentNegotiation) {
+            json(Json {
+                prettyPrint = true
+                isLenient = true
+                ignoreUnknownKeys = true
+                explicitNulls = false
+            })
+        }
+        defaultRequest {
+            url {
+                takeFrom("https://script.google.com/macros/s/AKfycbx2fQc_sDvU_eh9tsM8ZJEIfRWUTHim_v3VYklE_wn76yfhYtk8-z1E7JppOPSnA-Qx/exec")
+            }
+        }
+    }
+}

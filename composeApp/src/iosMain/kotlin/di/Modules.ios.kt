@@ -8,6 +8,8 @@ package di
 import database.RoomDatabaseFactory
 import datastore.DataStoreFactory
 import io.ktor.client.engine.darwin.Darwin
+import network.ForumHttp
+import network.ForumHttpImpl
 import network.GoogleDocHttp
 import network.GoogleDocHttpImpl
 import network.HoYoLabHttp
@@ -31,4 +33,5 @@ actual val platformModule = module {
     single<PixivHttp> { PixivHttpImpl(Darwin.create()) }
     single<GoogleDocHttp> { GoogleDocHttpImpl(Darwin.create()) }
     single<HoYoLabHttp> { HoYoLabHttpImpl(Darwin.create()) }
+    single<ForumHttp> { ForumHttpImpl(Darwin.create()) }
 }

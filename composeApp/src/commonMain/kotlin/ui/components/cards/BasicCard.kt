@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -71,54 +72,61 @@ fun CardHeader(
 
 @Composable
 fun HoveredIndicatorHeader(
-    title: String,
+    title: String?,
     isHovered: Boolean,
     lazyListState: LazyListState,
     startContent: @Composable RowScope.() -> Unit = {},
     endContent: @Composable RowScope.() -> Unit = {}
 ) {
     val coroutineScope = rememberCoroutineScope()
-    CardHeader(title = title) {
-        Row(
-            Modifier.padding(horizontal = AppTheme.spacing.s300),
-            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            startContent()
-            AnimatedVisibility(visible = isHovered, enter = fadeIn(), exit = fadeOut()) {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400),
-                    verticalAlignment = Alignment.CenterVertically
+    Row(
+        modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp)
+            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        title?.let {
+            Text(
+                text = title.uppercase(),
+                color = AppTheme.colors.onSurfaceVariant,
+                style = AppTheme.typography.titleMedium
+            )
+        }
+        startContent()
+        Spacer(Modifier.weight(1f))
+        AnimatedVisibility(visible = isHovered, enter = fadeIn(), exit = fadeOut()) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                ZzzIconButton(
+                    iconRes = Res.drawable.ic_arrow_back,
+                    contentDescriptionRes = Res.string.previous,
+                    size = AppTheme.size.smallIconButtonSize
                 ) {
-                    ZzzIconButton(
-                        iconRes = Res.drawable.ic_arrow_back,
-                        contentDescriptionRes = Res.string.previous,
-                        size = AppTheme.size.smallIconButtonSize
-                    ) {
-                        val targetIndex = lazyListState.firstVisibleItemIndex - 3
-                        coroutineScope.launch {
-                            if (targetIndex >= 0) {
-                                lazyListState.animateScrollToItem(targetIndex)
-                            } else {
-                                lazyListState.animateScrollToItem(0)
-                            }
+                    val targetIndex = lazyListState.firstVisibleItemIndex - 3
+                    coroutineScope.launch {
+                        if (targetIndex >= 0) {
+                            lazyListState.animateScrollToItem(targetIndex)
+                        } else {
+                            lazyListState.animateScrollToItem(0)
                         }
                     }
-                    ZzzIconButton(
-                        iconRes = Res.drawable.ic_arrow_next,
-                        contentDescriptionRes = Res.string.previous,
-                        size = AppTheme.size.smallIconButtonSize
-                    ) {
-                        val targetIndex = lazyListState.firstVisibleItemIndex + 3
-                        coroutineScope.launch {
-                            if (lazyListState.canScrollForward) {
-                                lazyListState.animateScrollToItem(targetIndex)
-                            }
+                }
+                ZzzIconButton(
+                    iconRes = Res.drawable.ic_arrow_next,
+                    contentDescriptionRes = Res.string.previous,
+                    size = AppTheme.size.smallIconButtonSize
+                ) {
+                    val targetIndex = lazyListState.firstVisibleItemIndex + 3
+                    coroutineScope.launch {
+                        if (lazyListState.canScrollForward) {
+                            lazyListState.animateScrollToItem(targetIndex)
                         }
                     }
                 }
             }
-            endContent()
         }
+        endContent()
     }
 }
