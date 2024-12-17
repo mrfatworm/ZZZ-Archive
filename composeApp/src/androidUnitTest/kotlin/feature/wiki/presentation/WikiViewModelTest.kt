@@ -41,19 +41,16 @@ class WikiViewModelTest {
         coEvery { bangbooListUseCase.invoke() } returns flowOf(stubBangbooList)
         coEvery { drivesListUseCase.invoke() } returns flowOf(listOf(stubDrivesListItemEntity))
         viewModel = WikiViewModel(
-            agentsListUseCase,
-            wEnginesListUseCase,
-            bangbooListUseCase,
-            drivesListUseCase
+            agentsListUseCase, wEnginesListUseCase, bangbooListUseCase, drivesListUseCase
         )
     }
 
     @Test
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.agentsList, stubAgentsList)
-        assertEquals(state.wEnginesList, stubWEnginesList)
-        assertEquals(state.bangbooList, stubBangbooList)
-        assertEquals(state.drivesList, listOf(stubDrivesListItemEntity))
+        assertEquals(stubAgentsList, state.agentsList)
+        assertEquals(stubWEnginesList, state.wEnginesList)
+        assertEquals(stubBangbooList, state.bangbooList)
+        assertEquals(listOf(stubDrivesListItemEntity), state.drivesList)
     }
 }

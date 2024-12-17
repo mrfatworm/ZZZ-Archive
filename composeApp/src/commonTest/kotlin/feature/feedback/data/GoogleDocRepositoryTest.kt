@@ -26,7 +26,7 @@ class GoogleDocRepositoryTest {
             "deviceName",
             "operatingSystem"
         ).getOrNull()
-        assertEquals(result, Unit)
+        assertEquals(Unit, result)
     }
 
     @Test

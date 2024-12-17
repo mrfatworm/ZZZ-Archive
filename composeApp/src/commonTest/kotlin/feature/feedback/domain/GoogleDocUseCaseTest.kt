@@ -18,7 +18,7 @@ class GoogleDocUseCaseTest {
     @Test
     fun `Submit feedback form`() = runTest {
         val result = googleDocUseCase.submitFeedbackForm("", "", "", "", "", "", "").getOrNull()
-        assertEquals(Unit, result)
+        assertEquals(result, Unit)
     }
 
     @Test

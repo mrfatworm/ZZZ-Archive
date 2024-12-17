@@ -19,13 +19,13 @@ class CoverImageUseCaseTest {
     @Test
     fun `Get cover image list`() = runTest {
         val result = coverImageUseCase.invoke().first()
-        assertEquals(result.first().authorName, "mrfatworm")
+        assertEquals("mrfatworm", result.first().authorName)
     }
 
     @Test
     fun `Request cover image list success`() = runTest {
         val result = coverImageUseCase.updateCoverImagesList().getOrNull()
-        assertEquals(result, Unit)
+        assertEquals(Unit, result)
     }
 
     @Test

@@ -33,9 +33,7 @@ class WEnginesListItemViewModelTest {
         coEvery { wEnginesListUseCase.invoke() } returns flowOf(stubWEnginesList)
         every {
             wEnginesListUseCase.filterWEnginesList(
-                any(),
-                any(),
-                any()
+                any(), any(), any()
             )
         } returns stubWEnginesList.take(1)
         viewModel = WEnginesListViewModel(wEnginesListUseCase)
@@ -44,22 +42,22 @@ class WEnginesListItemViewModelTest {
     @Test
     fun `Init data`() {
         val state = viewModel.uiState.value
-        assertEquals(state.wEnginesList, stubWEnginesList)
+        assertEquals(stubWEnginesList, state.wEnginesList)
     }
 
     @Test
     fun `Filter rarity`() {
         viewModel.onAction(WEnginesListAction.ChangeRarityFilter(setOf(ZzzRarity.RANK_S)))
         val state = viewModel.uiState.value
-        assertEquals(state.filteredWEnginesList.first().id, 44)
-        assertEquals(state.filteredWEnginesList.size, 1)
+        assertEquals(44, state.filteredWEnginesList.first().id)
+        assertEquals(1, state.filteredWEnginesList.size)
     }
 
     @Test
     fun `Filter specialty`() {
         viewModel.onAction(WEnginesListAction.ChangeSpecialtyFilter(setOf(AgentSpecialty.Support)))
         val state = viewModel.uiState.value
-        assertEquals(state.filteredWEnginesList.first().id, 44)
-        assertEquals(state.filteredWEnginesList.size, 1)
+        assertEquals(44, state.filteredWEnginesList.first().id)
+        assertEquals(1, state.filteredWEnginesList.size)
     }
 }

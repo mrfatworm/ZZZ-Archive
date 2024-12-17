@@ -29,13 +29,13 @@ class AgentsListUseCaseTest {
     @Test
     fun `Get agents list success`() = runTest {
         val result = agentsListUseCase.invoke().first()
-        assertEquals(result, stubAgentsList)
+        assertEquals(stubAgentsList, result)
     }
 
     @Test
     fun `Request agents list success`() = runTest {
         val result = agentsListUseCase.updateAgentsList().getOrNull()
-        assertEquals(result, Unit)
+        assertEquals(Unit, result)
     }
 
     @Test
@@ -48,7 +48,7 @@ class AgentsListUseCaseTest {
     @Test
     fun `Get factions list`() {
         val result = agentsListUseCase.getFactionsList(stubAgentsList)
-        assertEquals(result, listOf(Faction(1), Faction(2)))
+        assertEquals(listOf(Faction(1), Faction(2)), result)
     }
 
     @Test
@@ -60,7 +60,7 @@ class AgentsListUseCaseTest {
             selectedSpecialties = emptySet(),
             selectedFactionId = 0
         )
-        assertEquals(result.size, 3)
+        assertEquals(3, result.size)
 
     }
 
@@ -73,8 +73,8 @@ class AgentsListUseCaseTest {
             selectedSpecialties = setOf(AgentSpecialty.Attack),
             selectedFactionId = 0
         )
-        assertEquals(result.first().name, "貓又")
-        assertEquals(result.size, 1)
+        assertEquals("貓又", result.first().name)
+        assertEquals(1, result.size)
     }
 
     @Test
@@ -86,8 +86,8 @@ class AgentsListUseCaseTest {
             selectedSpecialties = emptySet(),
             selectedFactionId = 1
         )
-        assertEquals(result.first().name, "貓又")
-        assertEquals(result.size, 2)
+        assertEquals("貓又", result.first().name)
+        assertEquals(2, result.size)
     }
 
     @Test
@@ -99,8 +99,8 @@ class AgentsListUseCaseTest {
             selectedSpecialties = setOf(AgentSpecialty.Attack),
             selectedFactionId = 1
         )
-        assertEquals(result.first().name, "貓又")
-        assertEquals(result.size, 1)
+        assertEquals("貓又", result.first().name)
+        assertEquals(1, result.size)
     }
 
     @Test
@@ -112,8 +112,8 @@ class AgentsListUseCaseTest {
             selectedSpecialties = setOf(AgentSpecialty.Attack),
             selectedFactionId = 0
         )
-        assertEquals(result.first().name, "可琳")
-        assertEquals(result.size, 1)
+        assertEquals("可琳", result.first().name)
+        assertEquals(1, result.size)
     }
 
     @Test
@@ -125,6 +125,6 @@ class AgentsListUseCaseTest {
             selectedSpecialties = setOf(AgentSpecialty.Support),
             selectedFactionId = 1
         )
-        assertEquals(result, emptyList())
+        assertEquals(emptyList(), result)
     }
 }

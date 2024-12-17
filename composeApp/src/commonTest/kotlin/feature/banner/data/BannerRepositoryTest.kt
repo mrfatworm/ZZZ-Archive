@@ -20,7 +20,7 @@ class BannerRepositoryTest {
     @Test
     fun `Get banner success`() = runTest {
         val result = repository.getBanner("").getOrNull()
-        assertEquals(result, stubBannerResponse)
+        assertEquals(stubBannerResponse, result)
     }
 
     @Test

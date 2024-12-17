@@ -37,6 +37,6 @@ class WEngineDetailViewModelTest {
     @Test
     fun `Init data success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.wEngineDetail, stubWEngineDetail)
+        assertEquals(stubWEngineDetail, state.wEngineDetail)
     }
 }

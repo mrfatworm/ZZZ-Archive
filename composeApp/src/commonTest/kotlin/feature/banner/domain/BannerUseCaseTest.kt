@@ -26,7 +26,7 @@ class BannerUseCaseTest {
     @Test
     fun `Get banner success`() = runTest {
         val result = bannerUseCase.invoke().firstOrNull()
-        assertEquals(result, Result.success(stubBannerResponse))
+        assertEquals(Result.success(stubBannerResponse), result)
     }
 
     @Test

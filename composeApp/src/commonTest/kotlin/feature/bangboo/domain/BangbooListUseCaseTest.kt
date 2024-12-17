@@ -27,13 +27,13 @@ class BangbooListUseCaseTest {
     @Test
     fun `Get bangboo list success`() = runTest {
         val result = bangbooListUseCase.invoke().first()
-        assertEquals(result, stubBangbooList)
+        assertEquals(stubBangbooList, result)
     }
 
     @Test
     fun `Request bangboo list success`() = runTest {
         val result = bangbooListUseCase.updateBangbooList().getOrNull()
-        assertEquals(result, Unit)
+        assertEquals(Unit, result)
     }
 
     @Test
@@ -50,7 +50,7 @@ class BangbooListUseCaseTest {
             selectedRarities = emptySet(),
             selectedAttributes = emptySet(),
         )
-        assertEquals(result.size, 2)
+        assertEquals(2, result.size)
 
     }
 
@@ -61,8 +61,8 @@ class BangbooListUseCaseTest {
             selectedRarities = setOf(ZzzRarity.RANK_A),
             selectedAttributes = setOf(AgentAttribute.Ice),
         )
-        assertEquals(result.first().name, "企鵝布")
-        assertEquals(result.size, 1)
+        assertEquals("企鵝布", result.first().name)
+        assertEquals(1, result.size)
     }
 
     @Test
@@ -72,8 +72,8 @@ class BangbooListUseCaseTest {
             selectedRarities = setOf(ZzzRarity.RANK_S),
             selectedAttributes = setOf(AgentAttribute.Physical)
         )
-        assertEquals(result.first().name, "巴特勒")
-        assertEquals(result.size, 1)
+        assertEquals("巴特勒", result.first().name)
+        assertEquals(1, result.size)
     }
 
     @Test
@@ -83,6 +83,6 @@ class BangbooListUseCaseTest {
             selectedRarities = setOf(ZzzRarity.RANK_S),
             selectedAttributes = setOf(AgentAttribute.Ether)
         )
-        assertEquals(result, emptyList())
+        assertEquals(emptyList(), result)
     }
 }

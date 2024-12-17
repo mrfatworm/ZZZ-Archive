@@ -24,7 +24,7 @@ class BangbooDetailUseCaseTest {
     @Test
     fun `Get bangboo detail success`() = runTest {
         val result = bangbooDetailUseCase.invoke(1).getOrNull()
-        assertEquals(result, stubBangbooDetail)
+        assertEquals(stubBangbooDetail, result)
     }
 
     @Test

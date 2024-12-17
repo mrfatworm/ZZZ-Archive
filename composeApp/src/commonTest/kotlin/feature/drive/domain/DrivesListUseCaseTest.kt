@@ -22,13 +22,13 @@ class DrivesListUseCaseTest {
     @Test
     fun `Get drives list`() = runTest {
         val result = drivesListUseCase.invoke().first()
-        assertEquals(result.first(), stubDrivesListItemEntity)
+        assertEquals(stubDrivesListItemEntity, result.first())
     }
 
     @Test
     fun `Request drives list success`() = runTest {
         val result = drivesListUseCase.updateDrivesList().getOrNull()
-        assertEquals(result, Unit)
+        assertEquals(Unit, result)
     }
 
     @Test

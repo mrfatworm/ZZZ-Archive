@@ -50,7 +50,7 @@ class HoYoLabSyncViewModelTest {
     @Test
     fun `Init data success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.syncedAccounts.first().uid, stubHoYoLabAccountEntity.uid.toString())
+        assertEquals(stubHoYoLabAccountEntity.uid.toString(), state.syncedAccounts.first().uid)
         assertEquals(state.syncedAccounts.first().datetime, "2024-12-12 14:56")
         assertEquals(state.defaultAccountUid, "123456789")
     }

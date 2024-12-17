@@ -26,11 +26,7 @@ class GameRecordUseCaseTest {
     private val zzzCrypto = FakeZzzCrypto()
     private val languageUseCase = FakeLanguageUseCase()
     private val useCase = GameRecordUseCase(
-        hoYoLabRepository,
-        accountDao,
-        preferencesRepository,
-        zzzCrypto,
-        languageUseCase
+        hoYoLabRepository, accountDao, preferencesRepository, zzzCrypto, languageUseCase
     )
 
     @BeforeTest
@@ -42,24 +38,24 @@ class GameRecordUseCaseTest {
     @Test
     fun `Get game record periodically success`() = runTest {
         val result = useCase.getGameRecordPeriodically(1).first()
-        assertEquals(result, Result.success(stubGameRecordResponse.data))
+        assertEquals(Result.success(stubGameRecordResponse.data), result)
     }
 
     @Test
     fun `Sign success`() = runTest {
         val result = useCase.sign()
-        assertEquals(result, Result.success(stubSignResponse))
+        assertEquals(Result.success(stubSignResponse), result)
     }
 
     @Test
     fun `Get default uid success`() = runTest {
         val result = useCase.getDefaultUid().first()
-        assertEquals(result, 1300051361)
+        assertEquals(1300051361, result)
     }
 
     @Test
     fun `Get default ho yo lab account success`() = runTest {
         val result = useCase.getDefaultHoYoLabAccount(1300051361).first()
-        assertEquals(result?.uid, 1300051361)
+        assertEquals(1300051361, result?.uid)
     }
 }

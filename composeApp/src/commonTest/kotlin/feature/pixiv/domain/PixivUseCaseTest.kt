@@ -20,7 +20,7 @@ class PixivUseCaseTest {
     @Test
     fun `Get Pixiv topics success`() = runTest {
         val result = pixivUseCase.invoke("").firstOrNull()
-        assertEquals(result, Result.success(stubPixivTopicResponse))
+        assertEquals(Result.success(stubPixivTopicResponse), result)
     }
 
     @Test

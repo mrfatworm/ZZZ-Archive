@@ -25,51 +25,52 @@ class HoYoLabManageUseCaseTest {
     @Test
     fun `Request user game roles and save to database THEN success`() = runTest {
         val result = useCase.requestUserInfoAndSave("prod_gf_jp", "fake_ltoken", "fake_lt_uid")
-        assertEquals(result, Result.success(Unit))
-        assertEquals(hoYoLabRepository.getAllAccountsFromDB().first().size, 2)
+        assertEquals(Result.success(Unit), result)
+        assertEquals(2, hoYoLabRepository.getAllAccountsFromDB().first().size)
     }
 
     @Test
     fun `GIVEN Accounts list is empty WHEN Request user game roles and save to database THEN success`() =
         runTest {
             hoYoLabRepository.clearAccountList()
-            val result =
-                useCase.requestUserInfoAndSave("prod_gf_jp", "fake_ltoken", "fake_lt_uid")
-            assertEquals(result, Result.success(Unit))
+            val result = useCase.requestUserInfoAndSave("prod_gf_jp", "fake_ltoken", "fake_lt_uid")
+            assertEquals(Result.success(Unit), result)
         }
 
     @Test
     fun `Request user game roles and save to database THEN fail`() = runTest {
         hoYoLabRepository.setError(true)
-        val result = useCase.requestUserInfoAndSave("prod_gf_jp", "fake_ltoken", "fake_lt_uid")
-            .getOrNull()
+        val result =
+            useCase.requestUserInfoAndSave("prod_gf_jp", "fake_ltoken", "fake_lt_uid").getOrNull()
         assertNull(result)
     }
 
     @Test
     fun `Get all accounts from database`() = runTest {
         val result = useCase.getAllAccountsFromDB().first()
-        assertEquals(result, listOf(stubHoYoLabAccountEntity))
+        assertEquals(listOf(stubHoYoLabAccountEntity), result)
     }
 
     @Test
     fun `Delete account from database`() = runTest {
         useCase.deleteAccountFromDB(123456789)
-        assertEquals(hoYoLabRepository.getAllAccountsFromDB().first(), emptyList())
+        val result = hoYoLabRepository.getAllAccountsFromDB().first()
+        assertEquals(emptyList(), result)
     }
 
     @Test
     fun `Convert timestamp to local datetime`() {
         val timeZone = TimeZone.of("Asia/Taipei")
         val result = useCase.convertToLocalDatetime(1734058599802, timeZone)
-        assertEquals(result, "2024-12-13 10:56")
+        assertEquals("2024-12-13 10:56", result)
     }
 
     @Test
     fun `GIVEN empty account list WHEN Add account THEN set account as default`() = runTest {
         hoYoLabRepository.clearAccountList()
         useCase.requestUserInfoAndSave("prod_gf_jp", "fake_ltoken", "fake_lt_uid").getOrNull()
-        assertEquals(preferencesRepository.getDefaultHoYoLabAccountUid().first(), 1300051361)
+        val result = preferencesRepository.getDefaultHoYoLabAccountUid().first()
+        assertEquals(1300051361, result)
     }
 
     @Test
@@ -78,7 +79,8 @@ class HoYoLabManageUseCaseTest {
             useCase.requestUserInfoAndSave("prod_gf_jp", "fake_ltoken", "fake_lt_uid")
             preferencesRepository.setDefaultHoYoLabAccountUid(1300051361)
             useCase.deleteAccountFromDB(1300051361)
-            assertEquals(preferencesRepository.getDefaultHoYoLabAccountUid().first(), 123456789)
+            val result = preferencesRepository.getDefaultHoYoLabAccountUid().first()
+            assertEquals(123456789, result)
         }
 
     @Test
@@ -86,6 +88,7 @@ class HoYoLabManageUseCaseTest {
         runTest {
             preferencesRepository.setDefaultHoYoLabAccountUid(123456789)
             useCase.deleteAccountFromDB(123456789)
-            assertEquals(preferencesRepository.getDefaultHoYoLabAccountUid().first(), 0)
+            val result = preferencesRepository.getDefaultHoYoLabAccountUid().first()
+            assertEquals(0, result)
         }
 }

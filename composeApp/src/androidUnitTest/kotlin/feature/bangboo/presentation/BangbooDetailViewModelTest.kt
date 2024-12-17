@@ -39,6 +39,6 @@ class BangbooDetailViewModelTest {
     @Test
     fun `Init data success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.bangbooDetail, stubBangbooDetail)
+        assertEquals(stubBangbooDetail, state.bangbooDetail)
     }
 }

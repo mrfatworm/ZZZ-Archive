@@ -50,10 +50,10 @@ class FeedbackViewModelTest {
     @Test
     fun `Init Data Success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.language, "en")
-        assertEquals(state.appVersion, "Luciana 2024.11.13")
-        assertEquals(state.deviceName, "Pixel 9 Pro")
-        assertEquals(state.operatingSystem, "Android 35")
+        assertEquals("en", state.language)
+        assertEquals("Luciana 2024.11.13", state.appVersion)
+        assertEquals("Pixel 9 Pro", state.deviceName)
+        assertEquals("Android 35", state.operatingSystem)
     }
 
     @Test
@@ -88,5 +88,4 @@ class FeedbackViewModelTest {
         val state = viewModel.uiState.value
         assertTrue(state.invalidForm)
     }
-
 }

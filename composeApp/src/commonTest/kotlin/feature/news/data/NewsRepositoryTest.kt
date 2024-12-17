@@ -20,7 +20,7 @@ class NewsRepositoryTest {
     @Test
     fun `Get news success`() = runTest {
         val result = repository.getNews(0, "").getOrNull()
-        assertEquals(result, stubOfficialNewsDataResponse.data.list)
+        assertEquals(stubOfficialNewsDataResponse.data.list, result)
     }
 
     @Test

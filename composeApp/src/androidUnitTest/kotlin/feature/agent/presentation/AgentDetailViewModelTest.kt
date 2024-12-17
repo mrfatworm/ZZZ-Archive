@@ -42,8 +42,8 @@ class AgentDetailViewModelTest {
     @Test
     fun `Init data success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.agentDetail, stubAgentDetail)
-        assertEquals(state.drivesList, listOf(stubDrivesListItemEntity))
+        assertEquals(stubAgentDetail, state.agentDetail)
+        assertEquals(listOf(stubDrivesListItemEntity), state.drivesList)
     }
 
     @Test
@@ -51,6 +51,6 @@ class AgentDetailViewModelTest {
         coEvery { agentDetailUseCase.invoke(any()) } returns Result.success(stubAgentDetail)
         viewModel.onAction(AgentDetailAction.Retry)
         val state = viewModel.uiState.value
-        assertEquals(state.agentDetail, stubAgentDetail)
+        assertEquals(stubAgentDetail, state.agentDetail)
     }
 }

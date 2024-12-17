@@ -26,7 +26,7 @@ class HoYoLabRepositoryTest {
     fun `Request user game roles by LToken THEN success`() = runTest {
         val result =
             repository.requestUserGameRolesByLToken("prod_gf_jp", "fake_ltoken", "fake_lt_uid")
-        assertEquals(result, Result.success(listOf(stubPlayerBasicInfo)))
+        assertEquals(Result.success(listOf(stubPlayerBasicInfo)), result)
     }
 
     @Test
@@ -43,7 +43,7 @@ class HoYoLabRepositoryTest {
         val result = repository.requestPlayerDetail(
             1300051361, "prod_gf_jp", "fake_ltoken", "fake_lt_uid"
         )
-        assertEquals(result, Result.success(stubPlayerDetailResponse))
+        assertEquals(Result.success(stubPlayerDetailResponse), result)
     }
 
     @Test
@@ -58,13 +58,13 @@ class HoYoLabRepositoryTest {
     @Test
     fun `Get all accounts from database`() = runTest {
         val result = dao.getAccountList().first()
-        assertEquals(result, listOf(stubHoYoLabAccountEntity))
+        assertEquals(listOf(stubHoYoLabAccountEntity), result)
     }
 
     @Test
     fun `Get account from database`() = runTest {
         val result = dao.getAccount(123456789).first()
-        assertEquals(result, stubHoYoLabAccountEntity)
+        assertEquals(stubHoYoLabAccountEntity, result)
     }
 
     @Test
@@ -77,20 +77,20 @@ class HoYoLabRepositoryTest {
     fun `Add account to database`() = runTest {
         dao.insertAccount(stubHoYoLabAccountEntity)
         val result = dao.getAccountList()
-        assertEquals(result.first(), listOf(stubHoYoLabAccountEntity, stubHoYoLabAccountEntity))
+        assertEquals(listOf(stubHoYoLabAccountEntity, stubHoYoLabAccountEntity), result.first())
     }
 
     @Test
     fun `Delete account from database`() = runTest {
         dao.deleteAccount(123456789)
         val result = dao.getAccountList().firstOrNull()
-        assertEquals(result, emptyList())
+        assertEquals(emptyList(), result)
     }
 
     @Test
     fun `Delete all accounts from database`() = runTest {
         dao.deleteAccountList()
         val result = dao.getAccountList().firstOrNull()
-        assertEquals(result, emptyList())
+        assertEquals(emptyList(), result)
     }
 }

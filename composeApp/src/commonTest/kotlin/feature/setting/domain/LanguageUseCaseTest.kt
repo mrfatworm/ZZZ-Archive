@@ -21,13 +21,13 @@ class LanguageUseCaseTest {
     @Test
     fun `Get language`() = runTest {
         val result = languageUseCase.getLanguage().first()
-        assertEquals(result, Language.English)
+        assertEquals(Language.English, result)
     }
 
     @Test
     fun `Set language`() = runTest {
         languageUseCase.setLanguage(Language.ChineseTraditional.code)
         val result = languageUseCase.getLanguage().first()
-        assertEquals(result, Language.ChineseTraditional)
+        assertEquals(Language.ChineseTraditional, result)
     }
 }

@@ -33,14 +33,14 @@ package feature.setting.data
 //    @Test
 //    fun `Get default language`() {
 //        val defaultLanguage = settingsRepository.getLanguageCode()
-//        assertEquals(defaultLanguage, "")
+//        assertEquals("", defaultLanguage)
 //    }
 //
 //    @Test
 //    fun `Set language to chinese`() {
 //        settingsRepository.setLanguage(Language.ChineseTraditional.code)
 //        val language = settingsRepository.getLanguageCode()
-//        assertEquals(language, Language.ChineseTraditional.code)
+//        assertEquals(Language.ChineseTraditional.code, language)
 //    }
 //
 //    @Test
@@ -49,6 +49,6 @@ package feature.setting.data
 //        val isDarkTheme = settingsRepository.getIsDarkTheme()
 //        val language = settingsRepository.getLanguageCode()
 //        assertTrue(isDarkTheme)
-//        assertEquals(language, "")
+//        assertEquals("", language)
 //    }
 //}

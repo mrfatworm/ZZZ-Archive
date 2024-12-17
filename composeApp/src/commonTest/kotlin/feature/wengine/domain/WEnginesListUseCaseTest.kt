@@ -26,13 +26,13 @@ class WEnginesListUseCaseTest {
     @Test
     fun `Get W-Engines list success`() = runTest {
         val result = wEnginesListUseCase.invoke().first()
-        assertEquals(result, stubWEnginesList)
+        assertEquals(stubWEnginesList, result)
     }
 
     @Test
     fun `Request W-Engines list success`() = runTest {
         val result = wEnginesListUseCase.updateWEnginesList().getOrNull()
-        assertEquals(result, Unit)
+        assertEquals(Unit, result)
     }
 
     @Test
@@ -49,7 +49,7 @@ class WEnginesListUseCaseTest {
             selectedRarities = emptySet(),
             selectedSpecialties = emptySet(),
         )
-        assertEquals(result.size, 2)
+        assertEquals(2, result.size)
 
     }
 
@@ -60,8 +60,8 @@ class WEnginesListUseCaseTest {
             selectedRarities = setOf(ZzzRarity.RANK_A),
             selectedSpecialties = setOf(AgentSpecialty.Support),
         )
-        assertEquals(result.first().name, "好鬥的阿炮")
-        assertEquals(result.size, 1)
+        assertEquals("好鬥的阿炮", result.first().name)
+        assertEquals(1, result.size)
     }
 
     @Test
@@ -71,8 +71,8 @@ class WEnginesListUseCaseTest {
             selectedRarities = setOf(ZzzRarity.RANK_S),
             selectedSpecialties = setOf(AgentSpecialty.Stun),
         )
-        assertEquals(result.first().name, "玉壺青冰")
-        assertEquals(result.size, 1)
+        assertEquals("玉壺青冰", result.first().name)
+        assertEquals(1, result.size)
     }
 
     @Test
@@ -82,6 +82,6 @@ class WEnginesListUseCaseTest {
             selectedRarities = setOf(ZzzRarity.RANK_S),
             selectedSpecialties = setOf(AgentSpecialty.Attack),
         )
-        assertEquals(result, emptyList())
+        assertEquals(emptyList(), result)
     }
 }

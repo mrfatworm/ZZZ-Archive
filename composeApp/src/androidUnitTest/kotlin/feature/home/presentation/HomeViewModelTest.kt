@@ -99,14 +99,14 @@ class HomeViewModelTest {
     @Test
     fun `Init data success`() = runTest {
         val state = viewModel.uiState.first()
-        assertEquals(state.banner, stubBannerResponse)
-        assertEquals(state.coverImage, listOf(stubCoverImageListItemEntity))
-        assertEquals(state.pixivTopics, stubPixivTopicResponse.body.illustManga.data)
-        assertEquals(state.newsList.first(), stubOfficialNewsState)
-        assertEquals(state.agentsList, stubAgentsList)
-        assertEquals(state.wEnginesList, stubWEnginesList)
-        assertEquals(state.bangbooList, stubBangbooList)
-        assertEquals(state.drivesList, listOf(stubDrivesListItemEntity))
+        assertEquals(stubBannerResponse, state.banner)
+        assertEquals(listOf(stubCoverImageListItemEntity), state.coverImage)
+        assertEquals(stubPixivTopicResponse.body.illustManga.data, state.pixivTopics)
+        assertEquals(stubOfficialNewsState, state.newsList.first())
+        assertEquals(stubAgentsList, state.agentsList)
+        assertEquals(stubWEnginesList, state.wEnginesList)
+        assertEquals(stubBangbooList, state.bangbooList)
+        assertEquals(listOf(stubDrivesListItemEntity), state.drivesList)
         coVerify { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() }
         coVerify { gameRecordUseCase.getDefaultUid() }
         coVerify { gameRecordUseCase.getDefaultHoYoLabAccount(any()) }

@@ -24,7 +24,7 @@ class WEngineDetailUseCaseTest {
     @Test
     fun `Get W-Engines list success`() = runTest {
         val result = wEngineDetailUseCase.invoke(1).getOrNull()
-        assertEquals(result, stubWEngineDetail)
+        assertEquals(stubWEngineDetail, result)
     }
 
     @Test

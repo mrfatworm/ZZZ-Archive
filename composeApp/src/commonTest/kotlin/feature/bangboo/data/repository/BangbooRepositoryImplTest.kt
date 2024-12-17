@@ -22,14 +22,14 @@ class BangbooRepositoryImplTest {
     @Test
     fun `WHEN Get bangboo list success THEN return local DB`() = runTest {
         val result = repository.getBangbooList("").first()
-        assertEquals(result.size, 1)
+        assertEquals(1, result.size)
     }
 
     @Test
     fun `WHEN Request bangboo list success THEN return updated DB`() = runTest {
         repository.requestAndUpdateBangbooListDB("")
         val result = repository.getBangbooList("").first()
-        assertEquals(result.size, 3)
+        assertEquals(3, result.size)
     }
 
     @Test
@@ -37,29 +37,29 @@ class BangbooRepositoryImplTest {
         runTest {
             bangbooListDao.deleteBangbooList()
             val result = repository.getBangbooList("").first()
-            assertEquals(result.size, 3)
+            assertEquals(3, result.size)
         }
 
     @Test
     fun `WHEN Request bangboo list error THEN return local DB`() = runTest {
         httpClient.setError(true)
         val result = repository.getBangbooList("").first()
-        assertEquals(result.size, 1)
+        assertEquals(1, result.size)
     }
 
     @Test
     fun `GIVEN bangboo list DB is empty WHEN Request bangboo list error THEN return empty DB`() =
         runTest {
-        httpClient.setError(true)
+            httpClient.setError(true)
             bangbooListDao.deleteBangbooList()
             val result = repository.getBangbooList("").first()
-            assertEquals(result.size, 0)
-    }
+            assertEquals(0, result.size)
+        }
 
     @Test
     fun `Get Bangboo Detail Success`() = runTest {
         val result = repository.getBangbooDetail(6, "").getOrNull()
-        assertEquals(result?.id, 6)
+        assertEquals(6, result?.id)
     }
 
     @Test

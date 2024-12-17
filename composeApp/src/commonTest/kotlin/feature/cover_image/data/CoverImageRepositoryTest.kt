@@ -24,14 +24,14 @@ class CoverImageRepositoryTest {
     @Test
     fun `WHEN Get cover images list success THEN return local DB`() = runTest {
         val result = repository.getCoverImagesList().first()
-        assertEquals(result.size, 1)
+        assertEquals(1, result.size)
     }
 
     @Test
     fun `WHEN Request cover images list success THEN return updated DB`() = runTest {
         repository.requestAndUpdateCoverImagesListDB()
         val result = repository.getCoverImagesList().first()
-        assertEquals(result.size, 2)
+        assertEquals(2, result.size)
     }
 
     @Test
@@ -39,22 +39,22 @@ class CoverImageRepositoryTest {
         runTest {
             database.deleteCoverImagesList()
             val result = repository.getCoverImagesList().first()
-            assertEquals(result.size, 2)
+            assertEquals(2, result.size)
         }
 
     @Test
     fun `WHEN Request cover images list error THEN return local DB`() = runTest {
         httpClient.setError(true)
         val result = repository.getCoverImagesList().first()
-        assertEquals(result.size, 1)
+        assertEquals(1, result.size)
     }
 
     @Test
     fun `GIVEN cover images list DB is empty WHEN Request cover images list error THEN return empty DB`() =
         runTest {
-        httpClient.setError(true)
+            httpClient.setError(true)
             database.deleteCoverImagesList()
             val result = repository.getCoverImagesList().first()
-            assertEquals(result.size, 0)
-    }
+            assertEquals(0, result.size)
+        }
 }

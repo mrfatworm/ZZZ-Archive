@@ -21,14 +21,14 @@ class WEngineRepositoryImplTest {
     @Test
     fun `WHEN Get W-Engines list success THEN return local DB`() = runTest {
         val result = repository.getWEnginesList("").first()
-        assertEquals(result.size, 1)
+        assertEquals(1, result.size)
     }
 
     @Test
     fun `WHEN Request W-Engines list success THEN return updated DB`() = runTest {
         repository.requestAndUpdateWEnginesListDB("")
         val result = repository.getWEnginesList("").first()
-        assertEquals(result.size, 2)
+        assertEquals(2, result.size)
     }
 
     @Test
@@ -36,14 +36,14 @@ class WEngineRepositoryImplTest {
         runTest {
             database.deleteWEnginesList()
             val result = repository.getWEnginesList("").first()
-            assertEquals(result.size, 2)
+            assertEquals(2, result.size)
         }
 
     @Test
     fun `WHEN Request W-Engines list error THEN return local DB`() = runTest {
         httpClient.setError(true)
         val result = repository.getWEnginesList("").first()
-        assertEquals(result.size, 1)
+        assertEquals(1, result.size)
     }
 
     @Test
@@ -52,6 +52,6 @@ class WEngineRepositoryImplTest {
             httpClient.setError(true)
             database.deleteWEnginesList()
             val result = repository.getWEnginesList("").first()
-            assertEquals(result.size, 0)
+            assertEquals(0, result.size)
         }
 }

@@ -49,40 +49,40 @@ class AgentsListViewModelTest {
     @Test
     fun `Init data success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.agentsList, stubAgentsList)
-        assertEquals(state.filteredAgentsList, stubAgentsList)
-        assertEquals(state.factionsList.size, 2)
+        assertEquals(stubAgentsList, state.agentsList)
+        assertEquals(stubAgentsList, state.filteredAgentsList)
+        assertEquals(2, state.factionsList.size)
     }
 
     @Test
     fun `Filter rarity S`() {
         viewModel.onAction(AgentsListAction.ChangeRarityFilter(setOf(ZzzRarity.RANK_S)))
         val state = viewModel.uiState.value
-        assertEquals(state.filteredAgentsList.first().id, 3) // First agent: Nekomiya
-        assertEquals(state.filteredAgentsList.size, 1)
+        assertEquals(3, state.filteredAgentsList.first().id) // First agent: Nekomiya
+        assertEquals(1, state.filteredAgentsList.size)
     }
 
     @Test
     fun `Filter attribute Electric`() {
         viewModel.onAction(AgentsListAction.ChangeAttributeFilter(setOf(AgentAttribute.Electric)))
         val state = viewModel.uiState.value
-        assertEquals(state.filteredAgentsList.first().id, 3) // First agent: Nekomiya
-        assertEquals(state.filteredAgentsList.size, 1)
+        assertEquals(3, state.filteredAgentsList.first().id) // First agent: Nekomiya
+        assertEquals(1, state.filteredAgentsList.size)
     }
 
     @Test
     fun `Filter specialty Stun`() {
         viewModel.onAction(AgentsListAction.ChangeSpecialtyFilter(setOf(AgentSpecialty.Stun)))
         val state = viewModel.uiState.value
-        assertEquals(state.filteredAgentsList.first().id, 3) // First agent: Nekomiya
-        assertEquals(state.filteredAgentsList.size, 1)
+        assertEquals(3, state.filteredAgentsList.first().id) // First agent: Nekomiya
+        assertEquals(1, state.filteredAgentsList.size)
     }
 
     @Test
     fun `Filter faction`() {
         viewModel.onAction(AgentsListAction.ChangeFactionFilter((1)))
         val state = viewModel.uiState.value
-        assertEquals(state.filteredAgentsList.first().id, 3) // First agent: Nekomiya
-        assertEquals(state.filteredAgentsList.size, 1)
+        assertEquals(3, state.filteredAgentsList.first().id) // First agent: Nekomiya
+        assertEquals(1, state.filteredAgentsList.size)
     }
 }

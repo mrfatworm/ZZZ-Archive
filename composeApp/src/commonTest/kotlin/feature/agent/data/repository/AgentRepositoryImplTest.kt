@@ -23,44 +23,44 @@ class AgentRepositoryImplTest {
     @Test
     fun `WHEN Get agents list success THEN return local DB`() = runTest {
         val result = repository.getAgentsList("").first()
-        assertEquals(result.size, 1)
+        assertEquals(1, result.size)
     }
 
     @Test
     fun `WHEN Request agents list success THEN return updated DB`() = runTest {
         repository.requestAndUpdateAgentsListDB("")
         val result = repository.getAgentsList("").first()
-        assertEquals(result.size, 3)
+        assertEquals(3, result.size)
     }
 
     @Test
     fun `GIVEN Agents list DB is empty WHEN Get agents list THEN Auto request and return updated DB`() =
         runTest {
-        agentsListDao.deleteAgentsList()
+            agentsListDao.deleteAgentsList()
             val result = repository.getAgentsList("").first()
-        assertEquals(result.size, 3)
-    }
+            assertEquals(3, result.size)
+        }
 
     @Test
     fun `WHEN Request agents list error THEN return local DB`() = runTest {
         httpClient.setError(true)
         val result = repository.getAgentsList("").first()
-        assertEquals(result.size, 1)
+        assertEquals(1, result.size)
     }
 
     @Test
     fun `GIVEN Agents list DB is empty WHEN Request agents list error THEN return empty DB`() =
         runTest {
-        httpClient.setError(true)
-        agentsListDao.deleteAgentsList()
+            httpClient.setError(true)
+            agentsListDao.deleteAgentsList()
             val result = repository.getAgentsList("").first()
-        assertEquals(result.size, 0)
-    }
+            assertEquals(0, result.size)
+        }
 
     @Test
     fun `Get agent detail success`() = runTest {
         val result = repository.getAgentDetail(20, "").getOrNull()
-        assertEquals(result, stubAgentDetail)
+        assertEquals(stubAgentDetail, result)
     }
 
     @Test

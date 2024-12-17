@@ -16,6 +16,7 @@ import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 class DrivesListViewModelTest {
 
@@ -34,14 +35,14 @@ class DrivesListViewModelTest {
     @Test
     fun `Init data success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.drivesList, listOf(stubDrivesListItemEntity))
+        assertEquals(listOf(stubDrivesListItemEntity), state.drivesList)
     }
 
     @Test
     fun `Select drive`() {
         viewModel.onAction(DrivesListAction.ClickDriveDetail(1))
         val state = viewModel.uiState.value
-        assertEquals(state.selectedDrive?.id, 1)
+        assertEquals(1, state.selectedDrive?.id)
     }
 
     @Test
@@ -49,7 +50,7 @@ class DrivesListViewModelTest {
         viewModel.onAction(DrivesListAction.ClickDriveDetail(1))
         viewModel.onAction(DrivesListAction.DismissDriveDetail)
         val state = viewModel.uiState.value
-        assertEquals(state.selectedDrive, null)
+        assertNull(state.selectedDrive)
 
     }
 }

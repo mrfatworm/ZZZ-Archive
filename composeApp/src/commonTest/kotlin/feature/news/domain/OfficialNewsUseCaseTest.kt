@@ -25,7 +25,7 @@ class OfficialNewsUseCaseTest {
     @Test
     fun `Get new every 10 minutes`() = runTest {
         val result = officialNewsUseCase.getNewsPeriodically(10, 0).first().getOrNull()
-        assertEquals(result, stubOfficialNewsDataResponse.data.list)
+        assertEquals(stubOfficialNewsDataResponse.data.list, result)
     }
 
     @Test

@@ -20,7 +20,7 @@ class PixivRepositoryTest {
     @Test
     fun `Get Pixiv topic success`() = runTest {
         val result = repository.getZzzTopic("").getOrNull()
-        assertEquals(result, stubPixivTopicResponse)
+        assertEquals(stubPixivTopicResponse, result)
     }
 
     @Test
