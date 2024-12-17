@@ -5,7 +5,6 @@
 
 package ui.theme
 
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.unit.dp
 
@@ -21,8 +20,7 @@ data class Shape(
     val r350: RoundedCornerShape,
     val r400: RoundedCornerShape,
     val r450: RoundedCornerShape,
-    val r500: RoundedCornerShape,
-    val round: RoundedCornerShape = CircleShape
+    val r500: RoundedCornerShape
 ) {
     companion object {
         fun regular() = Shape(

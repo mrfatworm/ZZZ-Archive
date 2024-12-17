@@ -23,8 +23,10 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
 import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
+import utils.imageLoaderMemoryCache
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.close
 import zzzarchive.composeapp.generated.resources.ic_close
@@ -54,6 +56,7 @@ fun GalleryDialog(url: String, onDismiss: () -> Unit) {
                     )
                     .transformable(state = state)
                     .fillMaxSize(),
+                imageLoader = imageLoaderMemoryCache(LocalPlatformContext.current),
                 model = url,
                 contentDescription = null,
                 filterQuality = FilterQuality.High

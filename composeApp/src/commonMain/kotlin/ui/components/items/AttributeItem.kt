@@ -26,7 +26,7 @@ fun AttributeItem(title: String, content: String) {
         Text(
             text = title,
             color = AppTheme.colors.onSurfaceVariant,
-            style = AppTheme.typography.labelLarge
+            style = AppTheme.typography.titleMedium
         )
         Text(
             modifier = Modifier.weight(1f),

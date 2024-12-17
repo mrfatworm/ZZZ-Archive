@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
 import feature.agent.model.AgentDetail
 import org.jetbrains.compose.resources.stringResource
 import ui.components.ZzzTag
@@ -30,6 +31,7 @@ import ui.components.buttons.ZzzIconButton
 import ui.components.cards.ContentCard
 import ui.theme.AppTheme
 import ui.utils.drawBottomMask
+import utils.imageLoaderMemoryCache
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.back
 import zzzarchive.composeapp.generated.resources.ic_arrow_back
@@ -58,6 +60,7 @@ fun AgentImageCard(agentDetail: AgentDetail, onBackClick: () -> Unit) {
             )
             AsyncImage(
                 modifier = Modifier.fillMaxWidth(),
+                imageLoader = imageLoaderMemoryCache(LocalPlatformContext.current),
                 model = agentDetail.portraitUrl,
                 contentDescription = null,
             )

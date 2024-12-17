@@ -62,15 +62,17 @@ fun FactionItem(faction: Faction, isSelected: Boolean = false, onFactionClick: (
             model = faction.getFactionThumbnailUrl(),
             contentDescription = stringResource(faction.getFactionNameRes()),
             contentScale = ContentScale.Crop,
-            alpha = 0.7f
+            alpha = if (isSelected) 1f else 0.7f
         )
-        AsyncImage(
-            modifier = Modifier.align(Alignment.Center).fillMaxSize(0.3f).aspectRatio(1f)
-                .blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
-            model = faction.getFactionIconUrl(),
-            contentDescription = null,
-            contentScale = ContentScale.Crop
-        )
+        if (!isSelected) {
+            AsyncImage(
+                modifier = Modifier.align(Alignment.Center).fillMaxSize(0.3f).aspectRatio(1f)
+                    .blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
+                model = faction.getFactionIconUrl(),
+                contentDescription = null,
+                contentScale = ContentScale.Crop
+            )
+        }
         AnimatedVisibility(
             visible = isPressed.value || isHovered.value, enter = fadeIn(), exit = fadeOut()
         ) {

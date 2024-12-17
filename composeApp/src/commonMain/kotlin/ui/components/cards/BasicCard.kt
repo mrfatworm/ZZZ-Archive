@@ -64,7 +64,7 @@ fun CardHeader(
         Text(
             text = title.uppercase(),
             color = AppTheme.colors.onSurfaceVariant,
-            style = AppTheme.typography.titleMedium
+            style = AppTheme.typography.labelLarge
         )
         action()
     }
@@ -89,7 +89,7 @@ fun HoveredIndicatorHeader(
             Text(
                 text = title.uppercase(),
                 color = AppTheme.colors.onSurfaceVariant,
-                style = AppTheme.typography.titleMedium
+                style = AppTheme.typography.labelLarge
             )
         }
         startContent()

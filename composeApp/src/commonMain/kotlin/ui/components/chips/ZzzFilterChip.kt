@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,6 +28,7 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.theme.AppTheme
 
+private val zzzChipShape = CircleShape
 
 @Composable
 fun ZzzFilterChip(
@@ -37,13 +39,13 @@ fun ZzzFilterChip(
     onClick: () -> Unit
 ) {
     Row(
-        modifier = modifier.clip(AppTheme.shape.r300).pointerHoverIcon(PointerIcon.Hand)
+        modifier = modifier.clip(zzzChipShape).pointerHoverIcon(PointerIcon.Hand)
             .clickable(onClick = onClick).background(
                 color = if (selected) AppTheme.colors.primaryContainer else AppTheme.colors.surface
             ).border(
                 width = 1.dp,
                 color = if (selected) Color.Transparent else AppTheme.colors.border,
-                shape = AppTheme.shape.r300
+                shape = zzzChipShape
             ).padding(
                 start = AppTheme.spacing.s300,
                 end = AppTheme.spacing.s350,

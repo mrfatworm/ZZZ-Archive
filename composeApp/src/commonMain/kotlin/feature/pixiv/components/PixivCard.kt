@@ -122,7 +122,7 @@ private fun Header(
                 )
                 Text(
                     text = stringResource(Res.string.popular),
-                    style = AppTheme.typography.titleMedium,
+                    style = AppTheme.typography.labelLarge,
                     color = AppTheme.colors.onSurfaceVariant
                 )
 

@@ -18,7 +18,7 @@ import utils.imageLoaderDiskCache
 fun ZzzArchiveApp() {
     // Initialize the Coil3 image loader
     setSingletonImageLoaderFactory { context ->
-        imageLoaderDiskCache(context, false)
+        imageLoaderDiskCache(context)
     }
     ZzzArchiveTheme {
         val rootNavController = rememberNavController()

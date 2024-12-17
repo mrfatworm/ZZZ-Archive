@@ -127,7 +127,7 @@ private fun BasicInfo(
                 Spacer(Modifier.weight(1f))
                 if (isDefault) {
                     Text(
-                        modifier = Modifier.clip(AppTheme.shape.round)
+                        modifier = Modifier.clip(CircleShape)
                             .background(AppTheme.colors.primaryContainer).padding(
                                 horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s200
                             ),
