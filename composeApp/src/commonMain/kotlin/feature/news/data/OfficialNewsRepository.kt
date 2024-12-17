@@ -6,5 +6,8 @@
 package feature.news.data
 
 interface OfficialNewsRepository {
-    suspend fun getNews(amount: Int, languagePath: String): Result<List<OfficialNewsListItem>>
+    suspend fun getNews(
+        amount: Int,
+        languagePath: String
+    ): Result<List<OfficialNewsListItemResponse>>
 }

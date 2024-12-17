@@ -9,7 +9,6 @@ import feature.banner.data.FakeBannerRepository
 import feature.banner.data.stubBannerResponse
 import feature.setting.data.FakeSystemConfigRepository
 import feature.setting.domain.FakeLanguageUseCase
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -25,21 +24,21 @@ class BannerUseCaseTest {
 
     @Test
     fun `Get banner success`() = runTest {
-        val result = bannerUseCase.invoke().firstOrNull()
-        assertEquals(Result.success(stubBannerResponse), result)
+        val result = bannerUseCase.invoke().getOrNull()
+        assertEquals(stubBannerResponse, result)
     }
 
     @Test
     fun `Get banner error`() = runTest {
         bannerRepository.setError(true)
-        val result = bannerUseCase.invoke().firstOrNull()?.getOrNull()
+        val result = bannerUseCase.invoke().getOrNull()
         assertNull(result)
     }
 
     @Test
     fun `Set ignore id`() = runTest {
         bannerUseCase.setBannerIgnoreId(2)
-        val result = bannerUseCase.invoke().firstOrNull()?.getOrNull()
+        val result = bannerUseCase.invoke().getOrNull()
         assertNull(result)
     }
 }

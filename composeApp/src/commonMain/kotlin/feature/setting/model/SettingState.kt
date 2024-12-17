@@ -9,6 +9,7 @@ import utils.Language
 
 
 data class SettingState(
+    val isDark: Boolean,
     val language: Language = Language.English,
     val uiScale: Float = 1f,
     val fontScale: Float = 1f,
@@ -33,6 +34,7 @@ data class Contributor(
 )
 
 val settingState = SettingState(
+    isDark = true,
     appVersion = "Luciana 2024.11.13",
     contributors = Contributors(
         contributorAmount = 3, author = listOf(

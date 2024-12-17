@@ -15,7 +15,7 @@ class FakeOfficialNewsRepository : OfficialNewsRepository {
     override suspend fun getNews(
         amount: Int,
         languagePath: String
-    ): Result<List<OfficialNewsListItem>> {
+    ): Result<List<OfficialNewsListItemResponse>> {
         return if (isError) {
             Result.failure(Exception())
         } else {

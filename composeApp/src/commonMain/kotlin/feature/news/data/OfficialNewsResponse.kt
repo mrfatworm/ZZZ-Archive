@@ -15,11 +15,11 @@ data class OfficialNewsResponse(
 
 @Serializable
 data class OfficialNewsData(
-    val iTotal: Int, val list: List<OfficialNewsListItem>
+    val iTotal: Int, val list: List<OfficialNewsListItemResponse>
 )
 
 @Serializable
-data class OfficialNewsListItem(
+data class OfficialNewsListItemResponse(
     val sTitle: String,
     val sIntro: String,
     val sExt: String,
@@ -36,7 +36,7 @@ data class NewsBannerResponse(
     val newsBanner: List<NewsBannerItem>
 )
 
-val stubNewsListItem = OfficialNewsListItem(
+val stubNewsListItem = OfficialNewsListItemResponse(
     sTitle = "《絕區零》凱撒角色展示｜卡呂冬的騎行",
     sIntro = "對了，這些人為什麼來招惹我們？」",
     sExt = "{\\\"news-banner\\\":[{\\\"name\\\":\\\"CHT-1920x1080.jpg\\\",\\\"url\\\":\\\"https://fastcdn.hoyoverse.com/content-v2/nap/126022/93934296a401f3337f65e4fd938ea7e4_7828096096202056509.jpg\\\"}]}",

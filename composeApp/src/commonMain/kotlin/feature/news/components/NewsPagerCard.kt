@@ -38,7 +38,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import feature.news.model.OfficialNewsState
+import feature.news.model.OfficialNewsListItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ui.components.PagerIndicator
@@ -46,7 +46,7 @@ import ui.theme.AppTheme
 
 
 @Composable
-fun NewsPagerCard(newsList: List<OfficialNewsState>) {
+fun NewsPagerCard(newsList: List<OfficialNewsListItem>) {
     val pagerState = rememberPagerState(pageCount = { newsList.size })
     val coroutineScope = rememberCoroutineScope()
     Column(
@@ -80,7 +80,7 @@ fun NewsPagerCard(newsList: List<OfficialNewsState>) {
 
 
 @Composable
-fun NewsPagerCardItem(newsState: OfficialNewsState) {
+fun NewsPagerCardItem(newsState: OfficialNewsListItem) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed = interactionSource.collectIsPressedAsState()
     val isHovered = interactionSource.collectIsHoveredAsState()
@@ -108,7 +108,7 @@ fun NewsPagerCardItem(newsState: OfficialNewsState) {
 }
 
 @Composable
-private fun NewsInfo(modifier: Modifier, newsState: OfficialNewsState) {
+private fun NewsInfo(modifier: Modifier, newsState: OfficialNewsListItem) {
     Column(
         modifier.fillMaxWidth().background(AppTheme.colors.hoveredMask)
             .padding(AppTheme.spacing.s400),

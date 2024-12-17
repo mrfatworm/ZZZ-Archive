@@ -12,6 +12,7 @@ class ThemeUseCase(private val preferencesRepository: PreferencesRepository) {
     fun getPreferenceIsDarkTheme(): Flow<Boolean> = preferencesRepository.getIsDarkTheme()
 
     suspend fun setPreferenceIsDarkTheme(isDark: Boolean) {
+        println("SetTheme: $isDark")
         preferencesRepository.setIsDarkTheme(isDark)
     }
 }

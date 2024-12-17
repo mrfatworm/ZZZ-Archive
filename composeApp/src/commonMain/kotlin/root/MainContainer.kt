@@ -16,13 +16,13 @@ import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -66,8 +66,9 @@ fun MainContainer(
     val coroutineScope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val viewModel: MainContainerViewModel = koinViewModel()
-    val isDark by viewModel.isDark.collectAsState(true)
+    val isDark by viewModel.isDark.collectAsStateWithLifecycle()
     var isDarkComposeState by AppTheme.isDark
+    isDarkComposeState = isDark
 
     ModalNavigationDrawer(
         drawerContent = {

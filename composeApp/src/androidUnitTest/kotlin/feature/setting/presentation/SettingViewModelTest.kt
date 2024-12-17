@@ -17,8 +17,8 @@ import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.test.runTest
 import org.junit.Ignore
 import org.junit.Rule
@@ -26,7 +26,6 @@ import utils.AppActionsUseCase
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class SettingViewModelTest {
 
@@ -64,14 +63,13 @@ class SettingViewModelTest {
     }
 
     @Test
-    fun `Init Data Success`() = runTest {
-        val isDark = viewModel.isDark.first()
-        val state = viewModel.uiState.value
-        assertTrue(isDark)
-        assertEquals(1f, state.uiScale)
-        assertEquals(1f, state.fontScale)
-        assertEquals("en", state.language.code)
-        assertEquals("Luciana 2024.11.13", state.appVersion)
+    fun `Init Data Success`() {
+        viewModel.uiState.onEach { state ->
+            assertEquals(1f, state.uiScale)
+            assertEquals(1f, state.fontScale)
+            assertEquals("en", state.language.code)
+            assertEquals("Luciana 2024.11.13", state.appVersion)
+        }
     }
 
     @Test

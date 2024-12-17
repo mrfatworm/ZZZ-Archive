@@ -27,11 +27,11 @@ class GameRecordUseCase(
 ) {
     private suspend fun getGameRecord(): Result<GameRecordData> {
         val defaultAccountUid = preferencesRepository.getDefaultHoYoLabAccountUid().first()
-        val account = accountDao.getAccount(defaultAccountUid).filterNotNull()
-        val region = account.first().region
-        val lToken = zzzCrypto.decryptData(account.first().lToken)
-        val ltUid = zzzCrypto.decryptData(account.first().ltUid)
-        val uid = account.first().uid
+        val account = accountDao.getAccount(defaultAccountUid).filterNotNull().first()
+        val region = account.region
+        val lToken = zzzCrypto.decryptData(account.lToken)
+        val ltUid = zzzCrypto.decryptData(account.ltUid)
+        val uid = account.uid
         val result = hoYoLabRepository.requestGameRecord(uid, region, lToken, ltUid)
         result.fold(onSuccess = {
             return Result.success(it.data)

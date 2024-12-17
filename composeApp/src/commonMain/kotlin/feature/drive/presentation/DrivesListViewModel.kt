@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.drive.domain.DrivesListUseCase
 import feature.drive.model.DrivesListState
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -18,13 +19,13 @@ class DrivesListViewModel(
     private val drivesListUseCase: DrivesListUseCase
 ) : ViewModel() {
 
+    private var drivesListJob: Job? = null
+
     private var _uiState = MutableStateFlow(DrivesListState())
     val uiState = _uiState.asStateFlow()
 
     init {
-        viewModelScope.launch {
-            observeDrivesList()
-        }
+        observeDrivesList()
     }
 
     fun onAction(action: DrivesListAction) {
@@ -35,12 +36,15 @@ class DrivesListViewModel(
         }
     }
 
-    private suspend fun observeDrivesList() {
-        drivesListUseCase.invoke().collect { drivesList ->
-            _uiState.update { currentState ->
-                currentState.copy(
-                    drivesList = drivesList
-                )
+    private fun observeDrivesList() {
+        drivesListJob?.cancel()
+        drivesListJob = viewModelScope.launch {
+            drivesListUseCase.invoke().collect { drivesList ->
+                _uiState.update { currentState ->
+                    currentState.copy(
+                        drivesList = drivesList
+                    )
+                }
             }
         }
     }

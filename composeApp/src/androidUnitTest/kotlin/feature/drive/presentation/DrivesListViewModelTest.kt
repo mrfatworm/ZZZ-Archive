@@ -51,6 +51,5 @@ class DrivesListViewModelTest {
         viewModel.onAction(DrivesListAction.DismissDriveDetail)
         val state = viewModel.uiState.value
         assertNull(state.selectedDrive)
-
     }
 }

@@ -24,7 +24,7 @@ import feature.hoyolab.model.stubGameRecordResponse
 import feature.hoyolab.model.stubSignResponse
 import feature.news.data.stubOfficialNewsDataResponse
 import feature.news.domain.OfficialNewsUseCase
-import feature.news.model.stubOfficialNewsState
+import feature.news.model.stubOfficialNewsListItem
 import feature.pixiv.data.stubPixivTopicResponse
 import feature.pixiv.domain.PixivUseCase
 import feature.wengine.domain.WEnginesListUseCase
@@ -60,15 +60,16 @@ class HomeViewModelTest {
     @BeforeTest
     fun setup() {
         coEvery { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() } returns Unit
-        coEvery { bannerUseCase.invoke() } returns flowOf(Result.success(stubBannerResponse))
+        coEvery { bannerUseCase.invoke() } returns Result.success(stubBannerResponse)
         coEvery { bannerUseCase.setBannerIgnoreId(any()) } returns Unit
         coEvery { coverImageUseCase.invoke() } returns flowOf(listOf(stubCoverImageListItemEntity))
-        coEvery { pixivUseCase.invoke(any()) } returns flowOf(Result.success(stubPixivTopicResponse))
+        coEvery { pixivUseCase.invoke() } returns flowOf(stubPixivTopicResponse.body.illustManga.data)
+        coEvery { pixivUseCase.updateZzzTopic(any()) } returns Result.success(stubPixivTopicResponse)
         coEvery {
             officialNewsUseCase.getNewsPeriodically(any(), any())
         } returns flowOf(Result.success(stubOfficialNewsDataResponse.data.list))
         coEvery { officialNewsUseCase.convertToOfficialNewsState(any()) } returns listOf(
-            stubOfficialNewsState
+            stubOfficialNewsListItem
         )
         coEvery { gameRecordUseCase.getDefaultUid() } returns flowOf(1300051361)
         coEvery { gameRecordUseCase.getDefaultHoYoLabAccount(any()) } returns flowOf(
@@ -102,7 +103,7 @@ class HomeViewModelTest {
         assertEquals(stubBannerResponse, state.banner)
         assertEquals(listOf(stubCoverImageListItemEntity), state.coverImage)
         assertEquals(stubPixivTopicResponse.body.illustManga.data, state.pixivTopics)
-        assertEquals(stubOfficialNewsState, state.newsList.first())
+        assertEquals(stubOfficialNewsListItem, state.newsList.first())
         assertEquals(stubAgentsList, state.agentsList)
         assertEquals(stubWEnginesList, state.wEnginesList)
         assertEquals(stubBangbooList, state.bangbooList)

@@ -6,9 +6,9 @@
 package feature.news.domain
 
 import feature.news.data.NewsBannerResponse
-import feature.news.data.OfficialNewsListItem
+import feature.news.data.OfficialNewsListItemResponse
 import feature.news.data.OfficialNewsRepository
-import feature.news.model.OfficialNewsState
+import feature.news.model.OfficialNewsListItem
 import feature.setting.domain.LanguageUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -20,21 +20,28 @@ class OfficialNewsUseCase(
     private val officialNewsRepository: OfficialNewsRepository,
     private val languageUseCase: LanguageUseCase
 ) {
+    suspend fun getNews(amount: Int): Result<List<OfficialNewsListItemResponse>> {
+        val languageNewsCode = languageUseCase.getLanguage().first().officialCode
+        officialNewsRepository.getNews(amount, languageNewsCode).fold(onSuccess = {
+            return Result.success(it)
+        }, onFailure = {
+            return Result.failure(it)
+        })
+    }
 
     fun getNewsPeriodically(
         perMinutes: Int, amount: Int
-    ): Flow<Result<List<OfficialNewsListItem>>> = flow {
+    ): Flow<Result<List<OfficialNewsListItemResponse>>> = flow {
         while (true) {
-            val languageNewsCode = languageUseCase.getLanguage().first().officialCode
-            emit(officialNewsRepository.getNews(amount, languageNewsCode))
+            emit(getNews(amount))
             delay(perMinutes * 60 * 1000L)
         }
     }
 
-    suspend fun convertToOfficialNewsState(newsList: List<OfficialNewsListItem>): List<OfficialNewsState> {
+    suspend fun convertToOfficialNewsState(newsList: List<OfficialNewsListItemResponse>): List<OfficialNewsListItem> {
         val languageNewsCode = languageUseCase.getLanguage().first().officialCode
         return newsList.map {
-            OfficialNewsState(
+            OfficialNewsListItem(
                 title = it.sTitle,
                 description = it.sIntro,
                 imageUrl = getImageUrl(it.sExt),

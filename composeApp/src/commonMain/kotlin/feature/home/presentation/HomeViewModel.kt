@@ -46,22 +46,34 @@ class HomeViewModel(
 
     private var gameRecordJob: Job? = null
     private var officialNewsJob: Job? = null
+    private var defaultAccountJob: Job? = null
+    private var coverImageJob: Job? = null
+    private var agentsListJob: Job? = null
+    private var wEnginesListJob: Job? = null
+    private var bangbooListJob: Job? = null
+    private var drivesListJob: Job? = null
+    private var pixivTopicJob: Job? = null
 
     private var _uiState = MutableStateFlow(HomeState())
     val uiState = _uiState.onStart {
-        observeDefaultAccount()
+        // If you leave here more than 8s ,back to home screen will trigger it
         updateDatabaseUseCase.updateAssetsIfNewVersionAvailable()
+        updatePixivTopic()
+        updateBanner()
+    }.stateIn(
+        viewModelScope, SharingStarted.WhileSubscribed(8000L), _uiState.value
+    )
+
+    init {
+        updateOfficialNewsEveryTenMinutes()
+        observeDefaultAccount()
         observeCoverImage()
         observeAgentsList()
         observeWEnginesList()
         observeBangbooList()
         observeDrivesList()
-        fetchBanner()
-        fetchPixivTopic()
-        fetchZzzOfficialNewsEveryTenMinutes()
-    }.stateIn(
-        viewModelScope, SharingStarted.WhileSubscribed(5000L), _uiState.value
-    )
+        observePixivTopic()
+    }
 
     fun onAction(action: HomeAction) {
         when (action) {
@@ -73,7 +85,7 @@ class HomeViewModel(
 
             is HomeAction.ChangePixivTag -> {
                 viewModelScope.launch {
-                    fetchPixivTopic(action.tag)
+                    updatePixivTopic(action.tag)
                 }
             }
 
@@ -94,25 +106,31 @@ class HomeViewModel(
         }
     }
 
-    private fun fetchBanner() = bannerUseCase.invoke().onEach { result ->
-        result.fold(onSuccess = { banner ->
+    private suspend fun updateBanner() {
+        bannerUseCase.invoke().fold(onSuccess = { banner ->
             _uiState.update {
                 it.copy(banner = banner)
             }
         }, onFailure = {
-            println("get banner error: ${it.message}")
+            println("get banner result: ${it.message}")
         })
-    }.launchIn(viewModelScope)
+    }
 
-    private suspend fun observeCoverImage() = coverImageUseCase.invoke().onEach { coverImagesList ->
-        _uiState.update {
-            it.copy(coverImage = coverImagesList)
+    private fun observeCoverImage() {
+        coverImageJob?.cancel()
+        coverImageJob = viewModelScope.launch {
+            coverImageUseCase.invoke().collect { coverImagesList ->
+                _uiState.update {
+                    it.copy(coverImage = coverImagesList)
+                }
+            }
         }
-    }.launchIn(viewModelScope)
+    }
 
 
-    private fun observeDefaultAccount() =
-        gameRecordUseCase.getDefaultUid().onEach { defaultAccountUid ->
+    private fun observeDefaultAccount() {
+        defaultAccountJob?.cancel()
+        defaultAccountJob = gameRecordUseCase.getDefaultUid().onEach { defaultAccountUid ->
             val defaultAccount =
                 gameRecordUseCase.getDefaultHoYoLabAccount(defaultAccountUid).firstOrNull()
                     ?: return@onEach
@@ -128,10 +146,12 @@ class HomeViewModel(
                     )
                 )
             }
-            fetchGameRecordEveryTenMinutes()
+            updateGameRecordEveryTenMinutes()
         }.launchIn(viewModelScope)
+    }
 
-    private fun fetchZzzOfficialNewsEveryTenMinutes() {
+
+    private fun updateOfficialNewsEveryTenMinutes() {
         officialNewsJob?.cancel()
         officialNewsJob = newsUseCase.getNewsPeriodically(10, 6).onEach { result ->
             result.fold(onSuccess = { newsList ->
@@ -144,7 +164,7 @@ class HomeViewModel(
         }.launchIn(viewModelScope)
     }
 
-    private fun fetchGameRecordEveryTenMinutes() {
+    private fun updateGameRecordEveryTenMinutes() {
         gameRecordJob?.cancel()
         gameRecordJob = gameRecordUseCase.getGameRecordPeriodically(10).onEach { result ->
             result.fold(onSuccess = { gameRecord ->
@@ -166,16 +186,17 @@ class HomeViewModel(
         }.launchIn(viewModelScope)
     }
 
-    private fun fetchPixivTopic(zzzTag: String = pixivTagDropdownItems.first().tagOnPixiv) =
-        pixivUseCase.invoke(zzzTag).onEach { result ->
-            result.fold(onSuccess = { pixivTopic ->
-                _uiState.update {
-                    it.copy(pixivTopics = pixivTopic.body.illustManga.data)
-                }
-            }, onFailure = {
-                println("get pixiv topic error: ${it.message}")
-            })
+    private fun observePixivTopic() {
+        pixivTopicJob?.cancel()
+        pixivTopicJob = pixivUseCase.invoke().onEach { pixivArticleList ->
+            _uiState.update {
+                it.copy(pixivTopics = pixivArticleList)
+            }
         }.launchIn(viewModelScope)
+    }
+
+    private suspend fun updatePixivTopic(zzzTag: String = pixivTagDropdownItems.first().tagOnPixiv) =
+        pixivUseCase.updateZzzTopic(zzzTag)
 
     private suspend fun sign() {
         if (uiState.value.signResult != null) return
@@ -197,28 +218,48 @@ class HomeViewModel(
         }
     }
 
-    private suspend fun observeAgentsList() = agentsListUseCase.invoke().onEach { agentsList ->
-        _uiState.update {
-            it.copy(agentsList = agentsList)
-        }
-    }.launchIn(viewModelScope)
-
-    private suspend fun observeWEnginesList() =
-        wEnginesListUseCase.invoke().onEach { wEnginesList ->
-            _uiState.update {
-                it.copy(wEnginesList = wEnginesList)
+    private fun observeAgentsList() {
+        agentsListJob?.cancel()
+        agentsListJob = viewModelScope.launch {
+            agentsListUseCase.invoke().collect { agentsList ->
+                _uiState.update {
+                    it.copy(agentsList = agentsList)
+                }
             }
-        }.launchIn(viewModelScope)
-
-    private suspend fun observeBangbooList() = bangbooListUseCase.invoke().onEach { bangbooList ->
-        _uiState.update {
-            it.copy(bangbooList = bangbooList)
         }
-    }.launchIn(viewModelScope)
+    }
 
-    private suspend fun observeDrivesList() = drivesListUseCase.invoke().onEach { drivesList ->
-        _uiState.update {
-            it.copy(drivesList = drivesList)
+    private fun observeWEnginesList() {
+        wEnginesListJob?.cancel()
+        wEnginesListJob = viewModelScope.launch {
+            wEnginesListUseCase.invoke().collect { wEnginesList ->
+                _uiState.update {
+                    it.copy(wEnginesList = wEnginesList)
+                }
+            }
         }
-    }.launchIn(viewModelScope)
+    }
+
+
+    private fun observeBangbooList() {
+        bangbooListJob?.cancel()
+        bangbooListJob = viewModelScope.launch {
+            bangbooListUseCase.invoke().collect { bangbooList ->
+                _uiState.update {
+                    it.copy(bangbooList = bangbooList)
+                }
+            }
+        }
+    }
+
+    private fun observeDrivesList() {
+        drivesListJob?.cancel()
+        drivesListJob = viewModelScope.launch {
+            drivesListUseCase.invoke().collect { drivesList ->
+                _uiState.update {
+                    it.copy(drivesList = drivesList)
+                }
+            }
+        }
+    }
 }

@@ -18,14 +18,14 @@ import feature.hoyolab.model.ProgressState
 import feature.hoyolab.model.SurveyPointsState
 import feature.hoyolab.model.VhsSaleState
 import feature.hoyolab.model.WeeklyTaskState
-import feature.news.model.OfficialNewsState
+import feature.news.model.OfficialNewsListItem
 import feature.pixiv.data.RecentArticle
 import feature.wengine.model.WEnginesListItem
 
 data class HomeState(
     val banner: BannerResponse? = null,
     val coverImage: List<CoverImageListItemEntity> = emptyList(),
-    val newsList: List<OfficialNewsState> = emptyList(),
+    val newsList: List<OfficialNewsListItem> = emptyList(),
     val pixivTopics: List<RecentArticle> = emptyList(),
     val gameRecord: GameRecordState = emptyGameRecordState,
     val signResult: String? = null,
@@ -50,13 +50,13 @@ val emptyGameRecordState = GameRecordState(
         hour = "--",
         minute = "--"
     ),
-    vitality = ProgressState(max = "---", current = "400"),
+    vitality = ProgressState(max = "?", current = "?"),
     vhsSale = VhsSaleState(saleState = "???"),
     cardSign = "???",
-    bountyCommission = BountyCommissionState(num = "--", total = "3"),
-    surveyPoints = SurveyPointsState(num = "----", total = "8000", isMaxLevel = true),
+    bountyCommission = BountyCommissionState(num = "?", total = "?"),
+    surveyPoints = SurveyPointsState(num = "?", total = "?", isMaxLevel = true),
     abyssRefresh = 112191,
-    coffee = CoffeeState(num = "--", total = "--"),
-    weeklyTask = WeeklyTaskState(refreshTime = 112191, curPoint = "----", maxPoint = "1300")
+    coffee = CoffeeState(num = "?", total = "?"),
+    weeklyTask = WeeklyTaskState(refreshTime = 112191, curPoint = "?", maxPoint = "?")
 )
 

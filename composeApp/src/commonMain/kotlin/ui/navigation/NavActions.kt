@@ -59,12 +59,7 @@ class NavActions(private val navController: NavHostController) {
     }
 
     private fun backToTopOfCurrentMainFlow(destination: MainFlow) {
-        navController.navigate(destination.startScreen.route) {
-            popUpTo(navController.graph.findStartDestination().route ?: MainFlow.Home.route) {
-                this.inclusive = false
-            }
-            launchSingleTop = true
-        }
+        navController.popBackStack(route = destination.startScreen.route, inclusive = false)
     }
 }
 

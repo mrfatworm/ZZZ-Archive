@@ -12,7 +12,7 @@ class OfficialNewsRepositoryImpl(private val httpClient: OfficialWebHttp) : Offi
     override suspend fun getNews(
         amount: Int,
         languagePath: String
-    ): Result<List<OfficialNewsListItem>> {
+    ): Result<List<OfficialNewsListItemResponse>> {
         return try {
             val result = withTimeout(httpClient.timeout) {
                 httpClient.requestNews(amount, languagePath)

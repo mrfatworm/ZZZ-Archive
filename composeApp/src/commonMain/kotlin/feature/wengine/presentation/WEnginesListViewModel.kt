@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.wengine.domain.WEnginesListUseCase
 import feature.wengine.model.WEnginesListState
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -18,13 +19,13 @@ class WEnginesListViewModel(
     private val wEnginesListUseCase: WEnginesListUseCase
 ) : ViewModel() {
 
+    private var wEnginesListJob: Job? = null
+
     private var _uiState = MutableStateFlow(WEnginesListState())
     val uiState = _uiState.asStateFlow()
 
     init {
-        viewModelScope.launch {
-            observeWEnginesList()
-        }
+        observeWEnginesList()
     }
 
     fun onAction(action: WEnginesListAction) {
@@ -48,10 +49,13 @@ class WEnginesListViewModel(
         }
     }
 
-    private suspend fun observeWEnginesList() {
-        wEnginesListUseCase.invoke().collect { wEnginesList ->
-            _uiState.update {
-                it.copy(wEnginesList = wEnginesList, filteredWEnginesList = wEnginesList)
+    private fun observeWEnginesList() {
+        wEnginesListJob?.cancel()
+        wEnginesListJob = viewModelScope.launch {
+            wEnginesListUseCase.invoke().collect { wEnginesList ->
+                _uiState.update {
+                    it.copy(wEnginesList = wEnginesList, filteredWEnginesList = wEnginesList)
+                }
             }
         }
     }

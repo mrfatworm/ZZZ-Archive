@@ -13,7 +13,9 @@ import feature.agent.model.stubAgentsList
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import utils.AgentAttribute
 import utils.AgentSpecialty
@@ -47,15 +49,15 @@ class AgentsListViewModelTest {
     }
 
     @Test
-    fun `Init data success`() {
-        val state = viewModel.uiState.value
+    fun `Init data success`() = runTest {
+        val state = viewModel.uiState.first()
         assertEquals(stubAgentsList, state.agentsList)
         assertEquals(stubAgentsList, state.filteredAgentsList)
         assertEquals(2, state.factionsList.size)
     }
 
     @Test
-    fun `Filter rarity S`() {
+    fun `Filter rarity S`() = runTest {
         viewModel.onAction(AgentsListAction.ChangeRarityFilter(setOf(ZzzRarity.RANK_S)))
         val state = viewModel.uiState.value
         assertEquals(3, state.filteredAgentsList.first().id) // First agent: Nekomiya
@@ -63,7 +65,7 @@ class AgentsListViewModelTest {
     }
 
     @Test
-    fun `Filter attribute Electric`() {
+    fun `Filter attribute Electric`() = runTest {
         viewModel.onAction(AgentsListAction.ChangeAttributeFilter(setOf(AgentAttribute.Electric)))
         val state = viewModel.uiState.value
         assertEquals(3, state.filteredAgentsList.first().id) // First agent: Nekomiya
@@ -71,17 +73,17 @@ class AgentsListViewModelTest {
     }
 
     @Test
-    fun `Filter specialty Stun`() {
+    fun `Filter specialty Stun`() = runTest {
         viewModel.onAction(AgentsListAction.ChangeSpecialtyFilter(setOf(AgentSpecialty.Stun)))
-        val state = viewModel.uiState.value
+        val state = viewModel.uiState.first()
         assertEquals(3, state.filteredAgentsList.first().id) // First agent: Nekomiya
         assertEquals(1, state.filteredAgentsList.size)
     }
 
     @Test
-    fun `Filter faction`() {
+    fun `Filter faction`() = runTest {
         viewModel.onAction(AgentsListAction.ChangeFactionFilter((1)))
-        val state = viewModel.uiState.value
+        val state = viewModel.uiState.first()
         assertEquals(3, state.filteredAgentsList.first().id) // First agent: Nekomiya
         assertEquals(1, state.filteredAgentsList.size)
     }

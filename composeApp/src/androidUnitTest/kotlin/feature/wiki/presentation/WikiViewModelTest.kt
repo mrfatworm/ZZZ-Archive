@@ -18,6 +18,7 @@ import feature.wengine.model.stubWEnginesList
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.onEach
 import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -47,10 +48,11 @@ class WikiViewModelTest {
 
     @Test
     fun `Init Data Success`() {
-        val state = viewModel.uiState.value
-        assertEquals(stubAgentsList, state.agentsList)
-        assertEquals(stubWEnginesList, state.wEnginesList)
-        assertEquals(stubBangbooList, state.bangbooList)
-        assertEquals(listOf(stubDrivesListItemEntity), state.drivesList)
+        viewModel.uiState.onEach { state ->
+            assertEquals(stubAgentsList, state.agentsList)
+            assertEquals(stubWEnginesList, state.wEnginesList)
+            assertEquals(stubBangbooList, state.bangbooList)
+            assertEquals(listOf(stubDrivesListItemEntity), state.drivesList)
+        }
     }
 }

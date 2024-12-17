@@ -6,7 +6,7 @@
 package feature.news.model
 
 
-data class OfficialNewsState(
+data class OfficialNewsListItem(
     val title: String,
     val description: String,
     val imageUrl: String,
@@ -14,7 +14,7 @@ data class OfficialNewsState(
     val newsUrl: String
 )
 
-val stubOfficialNewsState = OfficialNewsState(
+val stubOfficialNewsListItem = OfficialNewsListItem(
     title = "《絕區零》凱撒角色展示｜卡呂冬的騎行",
     description = "對了，這些人為什麼來招惹我們？」",
     imageUrl = "https://fastcdn.hoyoverse.com/content-v2/nap/126022/93934296a401f3337f65e4fd938ea7",

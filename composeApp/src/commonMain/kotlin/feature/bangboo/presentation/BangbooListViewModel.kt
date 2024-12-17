@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.bangboo.domain.BangbooListUseCase
 import feature.bangboo.model.BangbooListState
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -18,13 +19,13 @@ class BangbooListViewModel(
     private val bangbooListUseCase: BangbooListUseCase
 ) : ViewModel() {
 
+    private var bangbooListJob: Job? = null
+
     private var _uiState = MutableStateFlow(BangbooListState())
     val uiState = _uiState.asStateFlow()
 
     init {
-        viewModelScope.launch {
-            observeBangbooList()
-        }
+        observeBangbooList()
     }
 
     fun onAction(action: BangbooListAction) {
@@ -48,13 +49,15 @@ class BangbooListViewModel(
         }
     }
 
-    private suspend fun observeBangbooList() {
-        bangbooListUseCase.invoke().collect { bangbooList ->
-            _uiState.update {
-                it.copy(
-                    bangbooList = bangbooList,
-                    filteredBangbooList = bangbooList
-                )
+    private fun observeBangbooList() {
+        bangbooListJob?.cancel()
+        bangbooListJob = viewModelScope.launch {
+            bangbooListUseCase.invoke().collect { bangbooList ->
+                _uiState.update {
+                    it.copy(
+                        bangbooList = bangbooList, filteredBangbooList = bangbooList
+                    )
+                }
             }
         }
     }

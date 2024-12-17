@@ -56,7 +56,7 @@ fun SettingCard(
 ) {
     ContentCard(hasDefaultPadding = false) {
         LanguageSettingItem(uiState.language, onLanguageChange, onRestart)
-        ColorSettingItem(onColorChange)
+        ColorSettingItem(uiState.isDark, onColorChange)
         FontScaleItem(uiState.uiScale, uiState.fontScale, onScaleChange)
         HoYoLabSettingItem(onHoYoLabClick)
     }
@@ -179,11 +179,11 @@ private fun FontScaleItem(
 }
 
 @Composable
-private fun ColorSettingItem(onColorChange: (Boolean) -> Unit) {
+private fun ColorSettingItem(isDarkTheme: Boolean, onColorChange: (Boolean) -> Unit) {
     var showColorThemeDropdown by remember { mutableStateOf(false) }
     SettingItem(title = stringResource(Res.string.color_theme), content = {
         Column(horizontalAlignment = Alignment.End) {
-            var isDarkTheme by AppTheme.isDark
+            //var isDarkTheme by AppTheme.isDark
             val colorThemeList = listOf(Res.string.dark_theme, Res.string.light_theme)
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -216,7 +216,6 @@ private fun ColorSettingItem(onColorChange: (Boolean) -> Unit) {
                     }, onClick = {
                         val isDark = colorTheme == Res.string.dark_theme
                         onColorChange(isDark)
-                        isDarkTheme = isDark
                         showColorThemeDropdown = false
                     })
                 }

@@ -7,7 +7,6 @@ package feature.pixiv.domain
 
 import feature.pixiv.data.FakePixivRepository
 import feature.pixiv.data.stubPixivTopicResponse
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -19,14 +18,14 @@ class PixivUseCaseTest {
 
     @Test
     fun `Get Pixiv topics success`() = runTest {
-        val result = pixivUseCase.invoke("").firstOrNull()
-        assertEquals(Result.success(stubPixivTopicResponse), result)
+        val result = pixivUseCase.updateZzzTopic("").getOrNull()
+        assertEquals(stubPixivTopicResponse, result)
     }
 
     @Test
     fun `Get Pixiv topics error`() = runTest {
         pixivRepository.setError(true)
-        val result = pixivUseCase.invoke("").firstOrNull()?.getOrNull()
+        val result = pixivUseCase.updateZzzTopic("").getOrNull()
         assertNull(result)
     }
 }

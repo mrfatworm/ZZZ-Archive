@@ -7,11 +7,11 @@ package feature.pixiv.domain
 
 import feature.pixiv.data.PixivRepository
 import feature.pixiv.data.PixivTopicResponse
+import feature.pixiv.data.RecentArticle
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 class PixivUseCase(private val repository: PixivRepository) {
-    fun invoke(zzzTag: String): Flow<Result<PixivTopicResponse>> = flow {
-        emit(repository.getZzzTopic(zzzTag))
-    }
+    fun invoke(): Flow<List<RecentArticle>> = repository.getZzzTopic()
+    suspend fun updateZzzTopic(zzzTag: String): Result<PixivTopicResponse> =
+        repository.updateZzzTopic(zzzTag)
 }

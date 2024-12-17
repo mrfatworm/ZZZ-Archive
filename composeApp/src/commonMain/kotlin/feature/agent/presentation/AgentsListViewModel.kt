@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import feature.agent.domain.AgentsListUseCase
 import feature.agent.model.AgentsListState
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -18,23 +19,26 @@ class AgentsListViewModel(
     private val agentsListUseCase: AgentsListUseCase
 ) : ViewModel() {
 
+    private var agentsListJob: Job? = null
+
     private var _uiState = MutableStateFlow(AgentsListState())
     val uiState = _uiState.asStateFlow()
 
     init {
-        viewModelScope.launch {
-            observeAgentsList()
-        }
+        observeAgentsList()
     }
 
-    private suspend fun observeAgentsList() {
-        agentsListUseCase.invoke().collect { agentsList ->
-            _uiState.update {
-                it.copy(
-                    agentsList = agentsList,
-                    filteredAgentsList = agentsList,
-                    factionsList = agentsListUseCase.getFactionsList(agentsList)
-                )
+    private fun observeAgentsList() {
+        agentsListJob?.cancel()
+        agentsListJob = viewModelScope.launch {
+            agentsListUseCase.invoke().collect { agentsList ->
+                _uiState.update {
+                    it.copy(
+                        agentsList = agentsList,
+                        filteredAgentsList = agentsList,
+                        factionsList = agentsListUseCase.getFactionsList(agentsList)
+                    )
+                }
             }
         }
     }

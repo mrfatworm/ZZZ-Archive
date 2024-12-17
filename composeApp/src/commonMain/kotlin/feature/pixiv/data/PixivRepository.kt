@@ -5,6 +5,9 @@
 
 package feature.pixiv.data
 
+import kotlinx.coroutines.flow.Flow
+
 interface PixivRepository {
-    suspend fun getZzzTopic(zzzTag: String): Result<PixivTopicResponse>
+    fun getZzzTopic(): Flow<List<RecentArticle>>
+    suspend fun updateZzzTopic(zzzTag: String): Result<PixivTopicResponse>
 }
