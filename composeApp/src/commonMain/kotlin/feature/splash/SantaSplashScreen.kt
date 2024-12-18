@@ -36,7 +36,7 @@ fun SantaSplashScreen() {
             contentScale = ContentScale.Crop
         )
         Image(
-            modifier = Modifier.align(Alignment.BottomCenter).widthIn(max = 480.dp)
+            modifier = Modifier.align(Alignment.Center).widthIn(max = 480.dp)
                 .fillMaxWidth(0.5f),
             painter = painterResource(Res.drawable.img_santa_lucy),
             contentDescription = null,

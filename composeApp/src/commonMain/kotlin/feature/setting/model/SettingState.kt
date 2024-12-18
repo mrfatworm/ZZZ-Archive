@@ -37,7 +37,7 @@ val settingState = SettingState(
     isDark = true,
     appVersion = "Luciana 2024.11.13",
     contributors = Contributors(
-        contributorAmount = 3, author = listOf(
+        contributorAmount = 4, author = listOf(
             Contributor("mrfatworm"),
         ), developer = listOf(
             Contributor("mrfatworm"),
