@@ -5,7 +5,6 @@
 
 package feature.news.data
 
-import kotlinx.coroutines.withTimeout
 import network.OfficialWebHttp
 
 class OfficialNewsRepositoryImpl(private val httpClient: OfficialWebHttp) : OfficialNewsRepository {
@@ -14,9 +13,7 @@ class OfficialNewsRepositoryImpl(private val httpClient: OfficialWebHttp) : Offi
         languagePath: String
     ): Result<List<OfficialNewsListItemResponse>> {
         return try {
-            val result = withTimeout(httpClient.timeout) {
-                httpClient.requestNews(amount, languagePath)
-            }
+            val result = httpClient.requestNews(amount, languagePath)
             Result.success(result.data.list)
         } catch (e: Exception) {
             Result.failure(e)

@@ -15,7 +15,6 @@ import feature.hoyolab.model.stubSignResponse
 import feature.hoyolab.model.stubUserGameRolesResponse
 
 class FakeHoYoLabHttp : HoYoLabHttp {
-    override val defaultTimeout: Long = 5000L
     private var isError = false
     fun setError(isError: Boolean) {
         this.isError = isError

@@ -16,7 +16,6 @@ import io.ktor.http.path
 
 class OfficialWebHttpImpl(engine: HttpClientEngine) :
     OfficialWebHttp {
-    override val timeout = 5000L
     private val client = createOfficialWebHttpClient(engine)
 
     override suspend fun requestNews(amount: Int, languagePath: String): OfficialNewsResponse =

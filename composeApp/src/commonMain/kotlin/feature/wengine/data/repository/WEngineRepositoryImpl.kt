@@ -14,7 +14,6 @@ import feature.wengine.model.WEnginesListItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withTimeout
 import network.ZzzHttp
 
 class WEngineRepositoryImpl(
@@ -32,9 +31,7 @@ class WEngineRepositoryImpl(
 
     override suspend fun requestAndUpdateWEnginesListDB(languagePath: String): Result<Unit> {
         return try {
-            val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestWEnginesList(languagePath)
-            }
+            val result = httpClient.requestWEnginesList(languagePath)
             wEnginesListDao.setWEnginesList(result.wEngines.map { it.toWEnginesListItemEntity() })
             Result.success(Unit)
         } catch (e: Exception) {
@@ -44,9 +41,7 @@ class WEngineRepositoryImpl(
 
     override suspend fun getWEngineDetail(id: Int, languagePath: String): Result<WEngineDetail> {
         return try {
-            val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestWEngineDetail(id, languagePath)
-            }
+            val result = httpClient.requestWEngineDetail(id, languagePath)
             Result.success(result.toWEngineDetail())
         } catch (e: Exception) {
             Result.failure(e)

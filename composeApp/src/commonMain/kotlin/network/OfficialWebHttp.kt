@@ -9,6 +9,5 @@ import feature.news.data.OfficialNewsResponse
 
 
 interface OfficialWebHttp {
-    val timeout: Long
     suspend fun requestNews(amount: Int, languagePath: String): OfficialNewsResponse
 }

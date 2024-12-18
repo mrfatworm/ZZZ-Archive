@@ -15,7 +15,6 @@ import io.ktor.http.contentType
 import io.ktor.http.path
 
 class PixivHttpImpl(engine: HttpClientEngine) : PixivHttp {
-    override val timeout = 5000L
     private val client = createPixivHttpClient(engine)
 
     override suspend fun requestZzzTopic(zzzTag: String): PixivTopicResponse = client.get {

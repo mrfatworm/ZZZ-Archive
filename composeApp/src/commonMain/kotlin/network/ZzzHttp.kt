@@ -17,7 +17,6 @@ import feature.wengine.model.WEngineDetailResponse
 import feature.wengine.model.WEnginesListResponse
 
 interface ZzzHttp {
-    val defaultTimeout: Long
     suspend fun requestAssetVersion(): AssetVersionResponse
     suspend fun requestCoverImage(): CoverImageListResponse
     suspend fun requestBanner(languagePath: String): BannerResponse

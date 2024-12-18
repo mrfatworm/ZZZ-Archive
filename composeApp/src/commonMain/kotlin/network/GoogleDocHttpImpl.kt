@@ -13,7 +13,6 @@ import io.ktor.http.contentType
 import io.ktor.http.path
 
 class GoogleDocHttpImpl(engine: HttpClientEngine) : GoogleDocHttp {
-    override val timeout = 5000L
     private val client = createGoogleDocHttpClient(engine)
 
     override suspend fun submitFeedbackForm(

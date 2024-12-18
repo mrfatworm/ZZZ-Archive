@@ -10,7 +10,6 @@ import feature.drive.data.database.DrivesListItemEntity
 import feature.drive.data.mapper.toDriveListEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.withTimeout
 import network.ZzzHttp
 
 class DriveRepositoryImpl(
@@ -27,9 +26,7 @@ class DriveRepositoryImpl(
 
     override suspend fun requestAndUpdateDrivesListDB(languagePath: String): Result<Unit> {
         return try {
-            val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestDrivesList(languagePath)
-            }
+            val result = httpClient.requestDrivesList(languagePath)
             drivesListDB.setDrivesList(result.drives.map { it.toDriveListEntity() })
             Result.success(Unit)
         } catch (e: Exception) {

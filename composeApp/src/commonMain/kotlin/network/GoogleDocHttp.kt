@@ -7,7 +7,6 @@ package network
 
 
 interface GoogleDocHttp {
-    val timeout: Long
     suspend fun submitFeedbackForm(
         issueType: String,
         language: String,

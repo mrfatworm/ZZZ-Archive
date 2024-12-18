@@ -14,7 +14,6 @@ import feature.bangboo.model.BangbooListItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withTimeout
 import network.ZzzHttp
 
 class BangbooRepositoryImpl(
@@ -33,9 +32,7 @@ class BangbooRepositoryImpl(
 
     override suspend fun requestAndUpdateBangbooListDB(languagePath: String): Result<Unit> {
         return try {
-            val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestBangbooList(languagePath)
-            }
+            val result = httpClient.requestBangbooList(languagePath)
             bangbooListDB.setBangbooList(result.bangboo.map { it.toBangbooListItemEntity() })
             Result.success(Unit)
         } catch (e: Exception) {
@@ -45,9 +42,7 @@ class BangbooRepositoryImpl(
 
     override suspend fun getBangbooDetail(id: Int, languagePath: String): Result<BangbooDetail> {
         return try {
-            val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestBangbooDetail(id, languagePath)
-            }
+            val result = httpClient.requestBangbooDetail(id, languagePath)
             Result.success(result.toBangbooDetail())
         } catch (e: Exception) {
             Result.failure(e)

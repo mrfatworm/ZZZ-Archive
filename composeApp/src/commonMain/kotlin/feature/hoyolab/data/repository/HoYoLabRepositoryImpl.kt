@@ -13,7 +13,6 @@ import feature.hoyolab.model.PlayerBasicInfo
 import feature.hoyolab.model.PlayerDetailResponse
 import feature.hoyolab.model.SignResponse
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withTimeout
 import network.HoYoLabHttp
 
 class HoYoLabRepositoryImpl(
@@ -23,9 +22,7 @@ class HoYoLabRepositoryImpl(
         region: String, lToken: String, ltUid: String
     ): Result<List<PlayerBasicInfo>> {
         return try {
-            val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestUserGameRolesByLToken(region, lToken, ltUid)
-            }
+            val result = httpClient.requestUserGameRolesByLToken(region, lToken, ltUid)
             Result.success(result.data.list.map { it.toPlayerAccountInfo() })
         } catch (e: Exception) {
             Result.failure(e)
@@ -36,9 +33,7 @@ class HoYoLabRepositoryImpl(
         uid: Int, region: String, lToken: String, ltUid: String
     ): Result<PlayerDetailResponse> {
         return try {
-            val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestPlayerDetail(uid, region, lToken, ltUid)
-            }
+            val result = httpClient.requestPlayerDetail(uid, region, lToken, ltUid)
             Result.success(result)
         } catch (e: Exception) {
             Result.failure(e)
@@ -52,9 +47,7 @@ class HoYoLabRepositoryImpl(
         ltUid: String
     ): Result<GameRecordResponse> {
         return try {
-            val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestGameRecord(uid, region, lToken, ltUid)
-            }
+            val result = httpClient.requestGameRecord(uid, region, lToken, ltUid)
             Result.success(result)
         } catch (e: Exception) {
             Result.failure(e)
@@ -67,9 +60,7 @@ class HoYoLabRepositoryImpl(
         ltUid: String
     ): Result<SignResponse> {
         return try {
-            val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestSign(languageCode, lToken, ltUid)
-            }
+            val result = httpClient.requestSign(languageCode, lToken, ltUid)
             Result.success(result)
         } catch (e: Exception) {
             Result.failure(e)

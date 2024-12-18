@@ -10,7 +10,6 @@ import feature.cover_image.data.database.CoverImagesListDao
 import feature.cover_image.data.mapper.toCoverImageListItemEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.withTimeout
 import network.ZzzHttp
 
 class CoverImageRepositoryImpl(
@@ -27,9 +26,7 @@ class CoverImageRepositoryImpl(
 
     override suspend fun requestAndUpdateCoverImagesListDB(): Result<Unit> {
         return try {
-            val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestCoverImage()
-            }
+            val result = httpClient.requestCoverImage()
             database.setCoverImagesList(result.coverImages.map { it.toCoverImageListItemEntity() })
             Result.success(Unit)
         } catch (e: Exception) {

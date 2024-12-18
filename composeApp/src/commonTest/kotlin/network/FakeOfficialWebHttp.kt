@@ -9,7 +9,6 @@ import feature.news.data.OfficialNewsResponse
 import feature.news.data.stubOfficialNewsDataResponse
 
 class FakeOfficialWebHttp : OfficialWebHttp {
-    override val timeout = 5000L
     private var isError = false
 
     fun setError(isError: Boolean) {

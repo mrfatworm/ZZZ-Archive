@@ -7,7 +7,6 @@ package feature.pixiv.data
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.withTimeout
 import network.PixivHttp
 
 class PixivRepositoryImpl(private val httpClient: PixivHttp) : PixivRepository {
@@ -16,9 +15,7 @@ class PixivRepositoryImpl(private val httpClient: PixivHttp) : PixivRepository {
 
     override suspend fun updateZzzTopic(zzzTag: String): Result<PixivTopicResponse> {
         return try {
-            val result = withTimeout(httpClient.timeout) {
-                httpClient.requestZzzTopic(zzzTag)
-            }
+            val result = httpClient.requestZzzTopic(zzzTag)
             _pixivArticleList.value = result.body.illustManga.data
             Result.success(result)
         } catch (e: Exception) {

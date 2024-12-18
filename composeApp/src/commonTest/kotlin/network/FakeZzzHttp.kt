@@ -28,7 +28,6 @@ import feature.wengine.model.stubWEnginesListResponse
 
 
 class FakeZzzHttp : ZzzHttp {
-    override val defaultTimeout = 5000L
 
     private var isError = false
 

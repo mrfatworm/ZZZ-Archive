@@ -5,7 +5,6 @@
 
 package feature.feedback.data
 
-import kotlinx.coroutines.withTimeout
 import network.GoogleDocHttp
 
 class GoogleDocRepositoryImpl(private val httpClient: GoogleDocHttp) : GoogleDocRepository {
@@ -20,7 +19,6 @@ class GoogleDocRepositoryImpl(private val httpClient: GoogleDocHttp) : GoogleDoc
         operatingSystem: String
     ): Result<Unit> {
         return try {
-            withTimeout(httpClient.timeout) {
                 httpClient.submitFeedbackForm(
                     issueType,
                     language,
@@ -30,7 +28,6 @@ class GoogleDocRepositoryImpl(private val httpClient: GoogleDocHttp) : GoogleDoc
                     deviceName,
                     operatingSystem
                 )
-            }
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)

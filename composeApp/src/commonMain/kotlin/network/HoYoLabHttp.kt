@@ -11,7 +11,6 @@ import feature.hoyolab.model.SignResponse
 import feature.hoyolab.model.UserGameRolesResponse
 
 interface HoYoLabHttp {
-    val defaultTimeout: Long
     suspend fun requestUserGameRolesByLToken(
         region: String, lToken: String, ltUid: String
     ): UserGameRolesResponse

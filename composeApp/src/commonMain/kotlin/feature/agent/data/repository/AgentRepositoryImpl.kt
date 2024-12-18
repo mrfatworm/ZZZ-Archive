@@ -14,7 +14,6 @@ import feature.agent.model.AgentListItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withTimeout
 import network.ZzzHttp
 
 class AgentRepositoryImpl(
@@ -33,9 +32,7 @@ class AgentRepositoryImpl(
 
     override suspend fun requestAndUpdateAgentsListDB(languagePath: String): Result<Unit> {
         try {
-            val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestAgentsList(languagePath)
-            }
+            val result = httpClient.requestAgentsList(languagePath)
             agentsListDB.setAgentsList(result.agents.map { it.toAgentsListItemEntity() })
             return Result.success(Unit)
         } catch (e: Exception) {
@@ -46,9 +43,7 @@ class AgentRepositoryImpl(
 
     override suspend fun getAgentDetail(id: Int, languagePath: String): Result<AgentDetail> {
         return try {
-            val result = withTimeout(httpClient.defaultTimeout) {
-                httpClient.requestAgentDetail(id, languagePath)
-            }
+            val result = httpClient.requestAgentDetail(id, languagePath)
             Result.success(result.toAgentDetail())
         } catch (e: Exception) {
             Result.failure(e)

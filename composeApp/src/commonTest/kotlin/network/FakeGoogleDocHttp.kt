@@ -6,8 +6,6 @@
 package network
 
 class FakeGoogleDocHttp : GoogleDocHttp {
-    override val timeout = 5000L
-
     private var isError = false
 
     fun setError(isError: Boolean) {

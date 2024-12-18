@@ -9,6 +9,5 @@ import feature.pixiv.data.PixivTopicResponse
 
 
 interface PixivHttp {
-    val timeout: Long
     suspend fun requestZzzTopic(zzzTag: String): PixivTopicResponse
 }

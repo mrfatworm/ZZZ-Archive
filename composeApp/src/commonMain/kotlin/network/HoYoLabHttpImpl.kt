@@ -21,7 +21,6 @@ import io.ktor.http.contentType
 import io.ktor.http.takeFrom
 
 class HoYoLabHttpImpl(engine: HttpClientEngine) : HoYoLabHttp {
-    override val defaultTimeout = 5000L
     private val client = createHoYoLabHttpClient(engine)
 
     override suspend fun requestUserGameRolesByLToken(

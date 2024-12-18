@@ -9,7 +9,6 @@ import feature.pixiv.data.PixivTopicResponse
 import feature.pixiv.data.stubPixivTopicResponse
 
 class FakePixivHttp : PixivHttp {
-    override val timeout = 5000L
     private var isError = false
 
     fun setError(isError: Boolean) {

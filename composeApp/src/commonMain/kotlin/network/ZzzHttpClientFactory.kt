@@ -8,6 +8,7 @@ package network
 import com.mrfatworm.zzzarchive.ZzzConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.http.ContentType
@@ -25,6 +26,9 @@ fun createZzzHttpClient(engine: HttpClientEngine): HttpClient {
                 isLenient = true
                 ignoreUnknownKeys = true
             })
+        }
+        install(HttpTimeout) {
+            requestTimeoutMillis = 10000L
         }
 //        install(Logging) {
 //            logger = Logger.SIMPLE
@@ -47,6 +51,9 @@ fun createOfficialWebHttpClient(engine: HttpClientEngine): HttpClient {
                 ignoreUnknownKeys = true
             })
         }
+        install(HttpTimeout) {
+            requestTimeoutMillis = 10000L
+        }
         defaultRequest {
             url {
                 takeFrom("https://sg-public-api-static.hoyoverse.com")
@@ -64,6 +71,9 @@ fun createPixivHttpClient(engine: HttpClientEngine): HttpClient {
                 ignoreUnknownKeys = true
                 explicitNulls = false
             })
+        }
+        install(HttpTimeout) {
+            requestTimeoutMillis = 10000L
         }
         defaultRequest {
             url {
@@ -83,6 +93,9 @@ fun createGoogleDocHttpClient(engine: HttpClientEngine): HttpClient {
                 explicitNulls = false
             })
         }
+        install(HttpTimeout) {
+            requestTimeoutMillis = 10000L
+        }
         defaultRequest {
             url {
                 takeFrom("https://docs.google.com")
@@ -101,6 +114,9 @@ fun createHoYoLabHttpClient(engine: HttpClientEngine): HttpClient {
                 explicitNulls = false
             })
         }
+        install(HttpTimeout) {
+            requestTimeoutMillis = 10000L
+        }
     }
 }
 
@@ -113,6 +129,9 @@ fun createForumHttpClient(engine: HttpClientEngine): HttpClient {
                 ignoreUnknownKeys = true
                 explicitNulls = false
             })
+        }
+        install(HttpTimeout) {
+            requestTimeoutMillis = 15000L
         }
         defaultRequest {
             url {
