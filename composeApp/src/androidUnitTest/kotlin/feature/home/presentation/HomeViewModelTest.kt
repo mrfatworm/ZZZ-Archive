@@ -105,6 +105,13 @@ class HomeViewModelTest {
     }
 
     @Test
+    fun `GIVEN Account is empty WHEN Update HoYoLab card THEN reset card`() = runTest {
+        coEvery { gameRecordUseCase.getDefaultHoYoLabAccount(any()) } returns flowOf(null)
+        val state = viewModel.uiState.first()
+        assertEquals(emptyGameRecordState, state.gameRecord)
+    }
+
+    @Test
     fun `Sign success`() = runTest {
         viewModel.uiState.first()
         viewModel.onAction(HomeAction.Sign)

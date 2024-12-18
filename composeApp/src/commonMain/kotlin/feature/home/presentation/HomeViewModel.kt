@@ -178,20 +178,27 @@ class HomeViewModel(
             gameRecordUseCase.getDefaultUid().collect { defaultAccountUid ->
                 val defaultAccount =
                     gameRecordUseCase.getDefaultHoYoLabAccount(defaultAccountUid).firstOrNull()
-                        ?: return@collect
-                _uiState.update { state ->
-                    state.copy(
-                        gameRecord = emptyGameRecordState.copy(
-                            hasAccount = true,
-                            nickname = defaultAccount.nickName,
-                            server = defaultAccount.regionName,
-                            uid = defaultAccount.uid.toString(),
-                            profileUrl = defaultAccount.profileUrl,
-                            cardUrl = defaultAccount.cardUrl
+                if (defaultAccount != null) {
+                    _uiState.update { state ->
+                        state.copy(
+                            gameRecord = emptyGameRecordState.copy(
+                                hasAccount = true,
+                                nickname = defaultAccount.nickName,
+                                server = defaultAccount.regionName,
+                                uid = defaultAccount.uid.toString(),
+                                profileUrl = defaultAccount.profileUrl,
+                                cardUrl = defaultAccount.cardUrl
+                            )
                         )
-                    )
+                    }
+                    updateGameRecordEveryTenMinutes()
+                } else {
+                    _uiState.update { state ->
+                        state.copy(
+                            gameRecord = emptyGameRecordState
+                        )
+                    }
                 }
-                updateGameRecordEveryTenMinutes()
             }
         }
     }
