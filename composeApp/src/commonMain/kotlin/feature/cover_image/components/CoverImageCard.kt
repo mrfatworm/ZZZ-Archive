@@ -6,6 +6,7 @@
 package feature.cover_image.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
@@ -22,8 +23,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
@@ -32,43 +36,67 @@ import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
+import coil3.compose.SubcomposeAsyncImage
 import feature.cover_image.data.database.CoverImageListItemEntity
+import kotlinx.coroutines.delay
 import ui.components.ImageNotFound
 import ui.theme.AppTheme
 
 
 @Composable
 fun CoverImageCard(coverImages: List<CoverImageListItemEntity>) {
+    if (coverImages.isNotEmpty()) {
+        CoverImage(coverImages)
+    }
+}
+
+@Composable
+private fun CoverImage(
+    coverImages: List<CoverImageListItemEntity>
+) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed = interactionSource.collectIsPressedAsState()
     val isHovered = interactionSource.collectIsHoveredAsState()
-    val coverImage = coverImages.firstOrNull()
+    var currentImageIndex by remember { mutableStateOf(coverImages.size - 1) }// Start from last
+
+    LaunchedEffect(coverImages) {
+        while (true) {
+            delay(15_000L)
+            currentImageIndex = if (currentImageIndex > 0) {
+                currentImageIndex - 1
+            } else {
+                coverImages.size - 1
+            }
+        }
+    }
 
     Box(
-        modifier = Modifier.aspectRatio(1.7f).fillMaxWidth().clip(AppTheme.shape.r400)
+        modifier = Modifier.aspectRatio(1.77f).fillMaxWidth().clip(AppTheme.shape.r400)
     ) {
-        if (coverImage == null) {
-            ImageNotFound()
-        } else {
-            val urlHandler = LocalUriHandler.current
-            AsyncImage(
-                modifier = Modifier.fillMaxSize().pointerHoverIcon(PointerIcon.Hand)
-                    .clickable(
+        val urlHandler = LocalUriHandler.current
+        coverImages.forEachIndexed { index, image ->
+            AnimatedVisibility(
+                visible = index == currentImageIndex,
+                enter = fadeIn(animationSpec = tween(durationMillis = 2000)),
+                exit = fadeOut(animationSpec = tween(durationMillis = 2000))
+            ) {
+                SubcomposeAsyncImage(
+                    modifier = Modifier.fillMaxSize().pointerHoverIcon(PointerIcon.Hand).clickable(
                         interactionSource = interactionSource, indication = null
                     ) {
-                        urlHandler.openUri(coverImage.artworkUrl)
+                        urlHandler.openUri(image.artworkUrl)
                     }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
-                model = coverImage.imageUrl,
-                contentDescription = coverImage.artworkName,
-                contentScale = ContentScale.Crop
-            )
-            AnimatedVisibility(
-                visible = isPressed.value || isHovered.value,
-                enter = fadeIn(),
-                exit = fadeOut()
-            ) {
-                ArtworkInfo(Modifier.align(Alignment.BottomCenter), coverImage)
+                    model = image.imageUrl,
+                    contentDescription = image.artworkName,
+                    contentScale = ContentScale.Crop,
+                    error = {
+                        ImageNotFound()
+                    })
+                AnimatedVisibility(
+                    visible = isPressed.value || isHovered.value, enter = fadeIn(), exit = fadeOut()
+                ) {
+                    ArtworkInfo(coverImage = image)
+                }
             }
         }
     }
@@ -76,7 +104,7 @@ fun CoverImageCard(coverImages: List<CoverImageListItemEntity>) {
 
 
 @Composable
-private fun ArtworkInfo(modifier: Modifier, coverImage: CoverImageListItemEntity) {
+private fun ArtworkInfo(modifier: Modifier = Modifier, coverImage: CoverImageListItemEntity) {
     Column(
         modifier.fillMaxWidth().background(AppTheme.colors.hoveredMask)
             .padding(AppTheme.spacing.s400),
@@ -84,7 +112,8 @@ private fun ArtworkInfo(modifier: Modifier, coverImage: CoverImageListItemEntity
     ) {
         Text(
             modifier = Modifier,
-            text = coverImage.artworkName, color = AppTheme.colors.onHoveredMask,
+            text = coverImage.artworkName,
+            color = AppTheme.colors.onHoveredMask,
             style = AppTheme.typography.titleMedium
         )
         Text(
@@ -94,7 +123,8 @@ private fun ArtworkInfo(modifier: Modifier, coverImage: CoverImageListItemEntity
             style = AppTheme.typography.bodyMedium
         )
         Text(
-            text = coverImage.authorName, color = AppTheme.colors.onHoveredMaskVariant,
+            text = coverImage.authorName,
+            color = AppTheme.colors.onHoveredMaskVariant,
             style = AppTheme.typography.labelMedium
         )
     }
