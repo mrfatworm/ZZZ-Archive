@@ -26,7 +26,6 @@ class ColorScheme(
     val alert: Color = Color.Unspecified,
     val onAlert: Color = Color.Unspecified,
     val imageBorder: Color = Color.Unspecified,
-    val imageInsideBorder: Color = Color.Unspecified,
     val imageBackground: Color = Color.Unspecified,
     val imageTagContainer: Color = Color.Unspecified,
     val imageOnTagContainer: Color = Color.Unspecified,
@@ -38,7 +37,8 @@ class ColorScheme(
     val buttonBorder: Color = Color.Unspecified,
     val hoveredMask: Color = Color.Unspecified,
     val onHoveredMask: Color = Color.Unspecified,
-    val onHoveredMaskVariant: Color = Color.Unspecified
+    val onHoveredMaskVariant: Color = Color.Unspecified,
+    val itemVariant: Color = Color(0x10878787),
 )
 
 internal val darkScheme = ColorScheme(

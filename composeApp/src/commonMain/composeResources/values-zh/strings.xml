@@ -78,6 +78,11 @@
     <!-- Home -->
     <string name="popular">熱門</string>
     <string name="forum_popular">論壇熱門</string>
+    <string name="reddit">Reddit</string>
+    <string name="bahamut">巴哈</string>
+    <string name="ptt">Ptt</string>
+    <string name="nga">NGA</string>
+    <string name="replies">回覆</string>
 
     <!-- Agent Detail -->
     <string name="attributes">屬性</string>

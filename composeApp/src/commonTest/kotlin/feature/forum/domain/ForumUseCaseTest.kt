@@ -1,7 +1,7 @@
 package feature.forum.domain
 
 import feature.forum.data.FakeForumRepository
-import feature.forum.model.stubAllForumResponse
+import feature.forum.model.stubAllForumState
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
@@ -15,7 +15,7 @@ class ForumUseCaseTest {
     @Test
     fun `Get all forum list`() = runTest {
         val result = useCase.getAllForumList().getOrNull()
-        assertEquals(stubAllForumResponse, result)
+        assertEquals(stubAllForumState, result)
     }
 
     @Test
@@ -28,6 +28,6 @@ class ForumUseCaseTest {
     @Test
     fun `Get all forum list periodically success`() = runTest {
         val result = useCase.getAllForumListPeriodically(10).firstOrNull()
-        assertEquals(stubAllForumResponse, result)
+        assertEquals(stubAllForumState, result)
     }
 }

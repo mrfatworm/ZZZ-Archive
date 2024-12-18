@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.banner.components.AnnouncementBanner
 import feature.cover_image.components.CoverImageCard
+import feature.forum.compoenents.AllForumCard
 import feature.forum.compoenents.TwitterCard
 import feature.hoyolab.components.HoYoLabCard
 import feature.news.components.NewsPagerCard
@@ -50,6 +51,7 @@ fun HomeScreenSingle(
         PixivCard(uiState.pixivTopics) {
             onAction(HomeAction.ChangePixivTag(it))
         }
-        TwitterCard(uiState.allForum?.twitter ?: emptyList())
+        TwitterCard(uiState.allForum.twitter)
+        AllForumCard(uiState.allForum)
     }
 }

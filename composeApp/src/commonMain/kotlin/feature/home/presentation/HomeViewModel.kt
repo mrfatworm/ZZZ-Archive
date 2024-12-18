@@ -21,8 +21,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -47,20 +45,17 @@ class HomeViewModel(
 
     private var _uiState = MutableStateFlow(HomeState())
     val uiState = _uiState.onStart {
-        updateDatabaseUseCase.updateAssetsIfNewVersionAvailable()
+        updateForumListEveryTenMinutes()
+        checkVersionAndUpdateDatabase()
         updatePixivTopic()
         updateBanner()
-    }.stateIn(
-        viewModelScope, SharingStarted.WhileSubscribed(8000L), _uiState.value
-    )
-
-    init {
         updateOfficialNewsEveryTenMinutes()
         observeDefaultAccount()
         observeCoverImage()
-        updateForumListEveryTenMinutes()
         observePixivTopic()
-    }
+    }.stateIn(
+        viewModelScope, SharingStarted.WhileSubscribed(5000L), _uiState.value
+    )
 
     fun onAction(action: HomeAction) {
         when (action) {
@@ -71,14 +66,14 @@ class HomeViewModel(
             }
 
             is HomeAction.ChangePixivTag -> {
-                viewModelScope.launch {
-                    updatePixivTopic(action.tag)
-                }
+                updatePixivTopic(action.tag)
             }
 
             is HomeAction.Sign -> {
-                viewModelScope.launch {
-                    sign()
+                if (uiState.value.gameRecord.hasAccount) {
+                    viewModelScope.launch {
+                        sign()
+                    }
                 }
             }
 
@@ -93,6 +88,29 @@ class HomeViewModel(
         }
     }
 
+    private fun updateForumListEveryTenMinutes() {
+        allForumJob?.cancel()
+        allForumJob = viewModelScope.launch {
+            forumUseCase.getAllForumListPeriodically(10).collect { allForum ->
+                _uiState.update {
+                    it.copy(allForum = allForum)
+                }
+            }
+        }
+    }
+
+    private fun checkVersionAndUpdateDatabase() {
+        viewModelScope.launch {
+            updateDatabaseUseCase.updateAssetsIfNewVersionAvailable()
+        }
+    }
+
+    private fun updatePixivTopic(zzzTag: String = pixivTagDropdownItems.first().tagOnPixiv) {
+        viewModelScope.launch {
+            pixivUseCase.updateZzzTopic(zzzTag)
+        }
+    }
+
     private suspend fun updateBanner() {
         bannerUseCase.invoke().fold(onSuccess = { banner ->
             _uiState.update {
@@ -102,6 +120,46 @@ class HomeViewModel(
             println("get banner result: ${it.message}")
         })
     }
+
+    private fun updateGameRecordEveryTenMinutes() {
+        gameRecordJob?.cancel()
+        gameRecordJob = viewModelScope.launch {
+            gameRecordUseCase.getGameRecordPeriodically(10).collect { result ->
+                result.fold(onSuccess = { gameRecord ->
+                    _uiState.update { state ->
+                        state.copy(
+                            gameRecord = gameRecord.toGameRecordState(
+                                state.gameRecord.hasAccount,
+                                state.gameRecord.nickname,
+                                state.gameRecord.server,
+                                state.gameRecord.uid,
+                                state.gameRecord.profileUrl,
+                                state.gameRecord.cardUrl
+                            )
+                        )
+                    }
+                }, onFailure = {
+                    println("get game record error: ${it.message}")
+                })
+            }
+        }
+    }
+
+    private fun updateOfficialNewsEveryTenMinutes() {
+        officialNewsJob?.cancel()
+        officialNewsJob = viewModelScope.launch {
+            newsUseCase.getNewsPeriodically(10, 6).collect { result ->
+                result.fold(onSuccess = { newsList ->
+                    _uiState.update { state ->
+                        state.copy(newsList = newsUseCase.convertToOfficialNewsState(newsList))
+                    }
+                }, onFailure = {
+                    println("get news error: ${it.message}")
+                })
+            }
+        }
+    }
+
 
     private fun observeCoverImage() {
         coverImageJob?.cancel()
@@ -114,90 +172,42 @@ class HomeViewModel(
         }
     }
 
-
     private fun observeDefaultAccount() {
         defaultAccountJob?.cancel()
-        defaultAccountJob = gameRecordUseCase.getDefaultUid().onEach { defaultAccountUid ->
-            val defaultAccount =
-                gameRecordUseCase.getDefaultHoYoLabAccount(defaultAccountUid).firstOrNull()
-                    ?: return@onEach
-            _uiState.update { state ->
-                state.copy(
-                    gameRecord = emptyGameRecordState.copy(
-                        hasAccount = true,
-                        nickname = defaultAccount.nickName,
-                        server = defaultAccount.regionName,
-                        uid = defaultAccount.uid.toString(),
-                        profileUrl = defaultAccount.profileUrl,
-                        cardUrl = defaultAccount.cardUrl
-                    )
-                )
-            }
-            updateGameRecordEveryTenMinutes()
-        }.launchIn(viewModelScope)
-    }
-
-
-    private fun updateOfficialNewsEveryTenMinutes() {
-        officialNewsJob?.cancel()
-        officialNewsJob = newsUseCase.getNewsPeriodically(10, 6).onEach { result ->
-            result.fold(onSuccess = { newsList ->
-                _uiState.update { state ->
-                    state.copy(newsList = newsUseCase.convertToOfficialNewsState(newsList))
-                }
-            }, onFailure = {
-                println("get news error: ${it.message}")
-            })
-        }.launchIn(viewModelScope)
-    }
-
-    private fun updateGameRecordEveryTenMinutes() {
-        gameRecordJob?.cancel()
-        gameRecordJob = gameRecordUseCase.getGameRecordPeriodically(10).onEach { result ->
-            result.fold(onSuccess = { gameRecord ->
+        defaultAccountJob = viewModelScope.launch {
+            gameRecordUseCase.getDefaultUid().collect { defaultAccountUid ->
+                val defaultAccount =
+                    gameRecordUseCase.getDefaultHoYoLabAccount(defaultAccountUid).firstOrNull()
+                        ?: return@collect
                 _uiState.update { state ->
                     state.copy(
-                        gameRecord = gameRecord.toGameRecordState(
-                            state.gameRecord.hasAccount,
-                            state.gameRecord.nickname,
-                            state.gameRecord.server,
-                            state.gameRecord.uid,
-                            state.gameRecord.profileUrl,
-                            state.gameRecord.cardUrl
+                        gameRecord = emptyGameRecordState.copy(
+                            hasAccount = true,
+                            nickname = defaultAccount.nickName,
+                            server = defaultAccount.regionName,
+                            uid = defaultAccount.uid.toString(),
+                            profileUrl = defaultAccount.profileUrl,
+                            cardUrl = defaultAccount.cardUrl
                         )
                     )
                 }
-            }, onFailure = {
-                println("get game record error: ${it.message}")
-            })
-        }.launchIn(viewModelScope)
-    }
-
-    private fun updateForumListEveryTenMinutes() {
-        allForumJob?.cancel()
-        allForumJob = viewModelScope.launch {
-            forumUseCase.getAllForumListPeriodically(10).collect { allForum ->
-                _uiState.update {
-                    it.copy(allForum = allForum)
-                }
+                updateGameRecordEveryTenMinutes()
             }
         }
     }
 
     private fun observePixivTopic() {
         pixivTopicJob?.cancel()
-        pixivTopicJob = pixivUseCase.invoke().onEach { pixivArticleList ->
-            _uiState.update {
-                it.copy(pixivTopics = pixivArticleList)
+        pixivTopicJob = viewModelScope.launch {
+            pixivUseCase.invoke().collect { pixivArticleList ->
+                _uiState.update {
+                    it.copy(pixivTopics = pixivArticleList)
+                }
             }
-        }.launchIn(viewModelScope)
+        }
     }
 
-    private suspend fun updatePixivTopic(zzzTag: String = pixivTagDropdownItems.first().tagOnPixiv) =
-        pixivUseCase.updateZzzTopic(zzzTag)
-
     private suspend fun sign() {
-        if (uiState.value.signResult != null) return
         _uiState.update { state ->
             state.copy(signResult = " =U= ")
         }
@@ -210,10 +220,9 @@ class HomeViewModel(
                 state.copy(signResult = it.message)
             }
         })
-        delay(5000) // Cooldown
+        delay(6000) // Cooldown
         _uiState.update { state ->
             state.copy(signResult = null)
         }
     }
-
 }

@@ -50,6 +50,7 @@ val settingState = SettingState(
             Contributor("rm6alalauau")
         ), bannerArtists = listOf(
             Contributor("EDIBLE", "リン　心象映画"),
+            Contributor("咖卡CAthenal", "工作时间到！"),
         ), specialThanks = listOf(
             Contributor("Zenless Zone Zero"), Contributor("Zenless Zone Zero Wiki (Fandom)")
         )

@@ -34,7 +34,7 @@ private val zzzChipShape = CircleShape
 fun ZzzFilterChip(
     modifier: Modifier = Modifier,
     text: String,
-    iconRes: DrawableResource,
+    iconRes: DrawableResource? = null,
     selected: Boolean,
     onClick: () -> Unit
 ) {
@@ -47,19 +47,19 @@ fun ZzzFilterChip(
                 color = if (selected) Color.Transparent else AppTheme.colors.border,
                 shape = zzzChipShape
             ).padding(
-                start = AppTheme.spacing.s300,
-                end = AppTheme.spacing.s350,
-                top = AppTheme.spacing.s250,
-                bottom = AppTheme.spacing.s250
+                horizontal = AppTheme.spacing.s350,
+                vertical = AppTheme.spacing.s250
             ), horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(
-            modifier = Modifier.size(AppTheme.size.iconSize),
-            imageVector = vectorResource(iconRes),
-            contentDescription = null,
-            tint = if (selected) AppTheme.colors.onPrimaryContainer else AppTheme.colors.onSurface
-        )
+        iconRes?.let {
+            Icon(
+                modifier = Modifier.size(AppTheme.size.iconSize),
+                imageVector = vectorResource(iconRes),
+                contentDescription = null,
+                tint = if (selected) AppTheme.colors.onPrimaryContainer else AppTheme.colors.onSurface
+            )
+        }
         Text(
             text = text,
             color = if (selected) AppTheme.colors.onPrimaryContainer else AppTheme.colors.onSurface,

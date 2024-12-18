@@ -53,20 +53,24 @@ fun ContentCard(
 
 @Composable
 fun CardHeader(
-    title: String, action: @Composable RowScope.() -> Unit = {}
+    title: String,
+    startContent: @Composable RowScope.() -> Unit = {},
+    endContent: @Composable RowScope.() -> Unit = {}
 ) {
     Row(
         modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp)
             .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300),
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {
+        startContent()
         Text(
             text = title.uppercase(),
             color = AppTheme.colors.onSurfaceVariant,
             style = AppTheme.typography.labelLarge
         )
-        action()
+        Spacer(Modifier.weight(1f))
+        endContent()
     }
 }
 

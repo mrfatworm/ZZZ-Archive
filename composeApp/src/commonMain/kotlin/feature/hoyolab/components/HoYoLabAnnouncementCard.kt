@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import org.jetbrains.compose.resources.painterResource
@@ -28,7 +29,9 @@ fun HoYoLabAnnouncementCard() {
         modifier = Modifier.clip(AppTheme.shape.r400).fillMaxWidth()
             .background(AppTheme.colors.primaryContainer).padding(
                 horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300
-            ), horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
+            ),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
             painter = painterResource(Res.drawable.ic_info),

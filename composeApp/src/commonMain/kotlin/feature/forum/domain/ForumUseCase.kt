@@ -1,16 +1,17 @@
 package feature.forum.domain
 
 import feature.forum.data.ForumRepository
-import feature.forum.model.AllForumResponse
+import feature.forum.data.mapper.toAllForumState
+import feature.forum.model.AllForumState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class ForumUseCase(private val repository: ForumRepository) {
-    suspend fun getAllForumList(): Result<AllForumResponse> {
+    suspend fun getAllForumList(): Result<AllForumState> {
         repository.getAllForumList().fold(
             onSuccess = {
-                return Result.success(it)
+                return Result.success(it.toAllForumState())
             },
             onFailure = {
                 return Result.failure(it)
@@ -18,11 +19,11 @@ class ForumUseCase(private val repository: ForumRepository) {
         )
     }
 
-    fun getAllForumListPeriodically(intervalMinutes: Int): Flow<AllForumResponse> = flow {
+    fun getAllForumListPeriodically(intervalMinutes: Int): Flow<AllForumState> = flow {
         while (true) {
             repository.getAllForumList().fold(
                 onSuccess = {
-                    emit(it)
+                    emit(it.toAllForumState())
                 },
                 onFailure = {
                     println("get all forum list error: ${it.message}")

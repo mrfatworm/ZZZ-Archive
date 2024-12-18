@@ -30,14 +30,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import coil3.compose.SubcomposeAsyncImage
-import feature.forum.model.TwitterForumListItem
+import feature.forum.model.TwitterForumListState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.components.ImageNotFound
@@ -52,7 +54,7 @@ import zzzarchive.composeapp.generated.resources.ic_twitter
 import zzzarchive.composeapp.generated.resources.popular
 
 @Composable
-fun TwitterCard(twitterList: List<TwitterForumListItem>) {
+fun TwitterCard(twitterList: List<TwitterForumListState>) {
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered = interactionSource.collectIsHoveredAsState()
     val lazyListState = rememberLazyListState()
@@ -73,10 +75,10 @@ fun TwitterCard(twitterList: List<TwitterForumListItem>) {
         ) {
             items(items = twitterList) { item ->
                 TwitterListItem(
-                    imageUrl = item.image,
+                    imageUrl = item.imgUrl,
                     artworkName = item.title,
                     artworkUrl = item.link,
-                    profileUrl = item.authorProfile,
+                    profileUrl = item.authorUrl,
                     profileName = item.author
                 )
             }
@@ -122,22 +124,26 @@ private fun TwitterListItem(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
-        Box {
-            SubcomposeAsyncImage(
-                modifier = Modifier.fillMaxSize().aspectRatio(1f)
-                    .clip(AppTheme.shape.r400).blur(4.dp),
+        Box(
+            modifier = Modifier.fillMaxSize().aspectRatio(1f).clip(AppTheme.shape.r400)
+                .pointerHoverIcon(PointerIcon.Hand)
+                .clickable(interactionSource = interactionSource, indication = null) {
+                    urlHandler.openUri(artworkUrl)
+                }) {
+            AsyncImage(
+                modifier = Modifier.matchParentSize().blur(8.dp),
                 model = imageUrl,
                 contentScale = ContentScale.Crop,
-                contentDescription = null
+                contentDescription = null,
+                filterQuality = FilterQuality.None
             )
 
             SubcomposeAsyncImage(
-                modifier = Modifier.fillMaxSize().aspectRatio(1f)
-                    .clip(AppTheme.shape.r400).pointerHoverIcon(PointerIcon.Hand)
-                    .clickable(interactionSource = interactionSource, indication = null) {
-                        urlHandler.openUri(artworkUrl)
-                    }, model = imageUrl, contentDescription = artworkName, error = {
-                ImageNotFound()
+                modifier = Modifier.matchParentSize(),
+                model = imageUrl,
+                contentDescription = artworkName,
+                error = {
+                    ImageNotFound()
                 })
         }
         Text(
@@ -151,26 +157,10 @@ private fun TwitterListItem(
             color = AppTheme.colors.onSurfaceVariant,
             maxLines = 1
         )
-        AuthorInfo(profileName, onClick = {
-            urlHandler.openUri(profileUrl)
-        })
-    }
-}
-
-@Composable
-private fun AuthorInfo(
-    profileName: String, onClick: () -> Unit
-) {
-    val interactionSource = remember { MutableInteractionSource() }
-    Row(
-        modifier = Modifier.clickable(
-            interactionSource = interactionSource, indication = null, onClick = onClick
-        ).pointerHoverIcon(PointerIcon.Hand),
-        horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
         Text(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand).clickable {
+                urlHandler.openUri(profileUrl)
+            },
             text = profileName,
             overflow = TextOverflow.Ellipsis,
             style = AppTheme.typography.bodySmall,
@@ -179,3 +169,4 @@ private fun AuthorInfo(
         )
     }
 }
+

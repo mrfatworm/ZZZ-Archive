@@ -13,7 +13,7 @@ import feature.banner.domain.BannerUseCase
 import feature.cover_image.data.database.stubCoverImageListItemEntity
 import feature.cover_image.domain.CoverImageUseCase
 import feature.forum.domain.ForumUseCase
-import feature.forum.model.stubAllForumResponse
+import feature.forum.model.stubAllForumState
 import feature.hoyolab.data.database.stubHoYoLabAccountEntity
 import feature.hoyolab.domain.GameRecordUseCase
 import feature.hoyolab.model.stubGameRecordResponse
@@ -71,7 +71,7 @@ class HomeViewModelTest {
         )
         coEvery { gameRecordUseCase.sign() } returns Result.success(stubSignResponse)
         coEvery { forumUseCase.getAllForumListPeriodically(any()) } returns flowOf(
-            stubAllForumResponse
+            stubAllForumState
         )
         viewModel = HomeViewModel(
             bannerUseCase,
@@ -91,7 +91,7 @@ class HomeViewModelTest {
         assertEquals(listOf(stubCoverImageListItemEntity), state.coverImage)
         assertEquals(stubPixivTopicResponse.body.illustManga.data, state.pixivTopics)
         assertEquals(stubOfficialNewsListItem, state.newsList.first())
-        assertEquals(stubAllForumResponse, state.allForum)
+        assertEquals(stubAllForumState, state.allForum)
         coVerify { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() }
         coVerify { gameRecordUseCase.getDefaultUid() }
         coVerify { gameRecordUseCase.getDefaultHoYoLabAccount(any()) }
@@ -106,6 +106,7 @@ class HomeViewModelTest {
 
     @Test
     fun `Sign success`() = runTest {
+        viewModel.uiState.first()
         viewModel.onAction(HomeAction.Sign)
         coVerify { gameRecordUseCase.sign() }
     }
