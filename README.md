@@ -11,7 +11,7 @@ ZZZ Archive is a companion app for the action game Zenless Zone Zero, where user
 
 ## Adaptive Layout
 
-<img src="/docs/screenshot/adaptive_layout_demo.gif" alt="ZZZArchiveBanner" height="720px">
+<img src="/docs/screenshot/adaptive_layout_demo.gif" alt="ZZZArchiveBanner"  width="1080px">
 
 ## Download
 

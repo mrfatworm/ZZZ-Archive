@@ -11,7 +11,7 @@ ZZZ Archive 是動作遊戲 "絕區零" 的維基應用程式，使用者可查�
 
 ## 響應式設計
 
-<img src="/docs/screenshot/adaptive_layout_demo.gif" alt="ZZZArchiveBanner" height="720px">
+<img src="/docs/screenshot/adaptive_layout_demo.gif" alt="ZZZArchiveBanner"  width="1080px">
 
 ## 下載
 
