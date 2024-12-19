@@ -71,4 +71,3 @@ Thanks to all the contributors who made KMP/CMP possible!
 - [BuildKonfig for KMP](https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/)
 - [Release macOS App](https://www.marcogomiero.com/posts/2024/compose-macos-app-store/)
 - [Design System](https://github.com/felipecastilhos)
-- Cover Artist [EDIBLE](https://www.pixiv.net/users/75576278)
