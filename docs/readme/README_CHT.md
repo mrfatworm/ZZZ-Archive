@@ -1,5 +1,5 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.1.0-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
-[![ComposeMultiplatform](https://img.shields.io/badge/Compose_Multiplatform-1.7.1-blue.svg?style=flat)](https://www.jetbrains.com/compose-multiplatform/)
+[![ComposeMultiplatform](https://img.shields.io/badge/Compose_Multiplatform-1.7.3-blue.svg?style=flat)](https://www.jetbrains.com/compose-multiplatform/)
 
 ![ZZZArchiveBanner](/docs/screenshot/github_cover.webp)
 
