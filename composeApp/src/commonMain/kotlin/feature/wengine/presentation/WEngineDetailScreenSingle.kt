@@ -16,6 +16,7 @@ import feature.wengine.components.WEngineAttributesCard
 import feature.wengine.components.WEngineImageCard
 import feature.wengine.model.WEngineDetailState
 import org.jetbrains.compose.resources.stringResource
+import ui.components.cards.HighLightTextCard
 import ui.components.cards.MaterialsListCard
 import ui.components.cards.TextCard
 import ui.utils.contentGap
@@ -38,7 +39,7 @@ fun WEngineDetailScreenSingle(
             onAction(WEngineDetailAction.ClickBack)
         }
         WEngineAttributesCard(uiState.wEngineDetail)
-        TextCard(stringResource(Res.string.w_engine_effect), uiState.wEngineDetail.skill)
+        HighLightTextCard(stringResource(Res.string.w_engine_effect), uiState.wEngineDetail.skill)
         MaterialsListCard(uiState.wEngineDetail.levelMaterials)
         TextCard(stringResource(Res.string.additional_info), uiState.wEngineDetail.background)
     }

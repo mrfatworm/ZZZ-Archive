@@ -28,6 +28,7 @@ import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.style.TextAlign
 import org.jetbrains.compose.resources.vectorResource
 import ui.theme.AppTheme
+import ui.utils.highlightText
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_arrow_down_ios
 
@@ -71,7 +72,7 @@ fun ExpandableItem(title: String, subtitle: String, description: String) {
                     end = AppTheme.spacing.s400,
                     bottom = AppTheme.spacing.s500
                 ),
-                text = description,
+                text = highlightText(description, AppTheme.colors),
                 style = AppTheme.typography.bodyMedium,
                 color = AppTheme.colors.onSurface
             )

@@ -16,8 +16,8 @@ import feature.bangboo.components.BangbooAttributesCard
 import feature.bangboo.components.BangbooImageCard
 import feature.bangboo.model.BangbooDetailState
 import org.jetbrains.compose.resources.stringResource
+import ui.components.cards.HighLightTextCard
 import ui.components.cards.MaterialsListCard
-import ui.components.cards.TextCard
 import ui.utils.contentGap
 import ui.utils.contentPadding
 import zzzarchive.composeapp.generated.resources.Res
@@ -40,18 +40,18 @@ fun BangbooDetailScreenSingle(
         }
         BangbooAttributesCard(uiState.bangbooDetail)
         MaterialsListCard(uiState.bangbooDetail.levelMaterials)
-        TextCard(
+        HighLightTextCard(
             stringResource(Res.string.active_skill),
             uiState.bangbooDetail.activeSkill.description,
             uiState.bangbooDetail.activeSkill.name
         )
-        TextCard(
+        HighLightTextCard(
             stringResource(Res.string.additional_ability),
             uiState.bangbooDetail.additionalAbility.description,
             uiState.bangbooDetail.additionalAbility.name
         )
         uiState.bangbooDetail.chainAttack?.let {
-            TextCard(
+            HighLightTextCard(
                 stringResource(Res.string.chain_attack),
                 uiState.bangbooDetail.chainAttack.description,
                 uiState.bangbooDetail.chainAttack.name

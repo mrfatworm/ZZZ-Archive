@@ -39,6 +39,11 @@ class ColorScheme(
     val onHoveredMask: Color = Color.Unspecified,
     val onHoveredMaskVariant: Color = Color.Unspecified,
     val itemVariant: Color = Color(0x10878787),
+    val etherColor: Color = Color(0xFFC23268),
+    val fireColor: Color = Color(0xFFF5390A),
+    val iceColor: Color = Color(0xFF20D3D9),
+    val electricColor: Color = Color(0xFF14ABFF),
+    val physicalColor: Color = Color(0xFFF3BD01)
 )
 
 internal val darkScheme = ColorScheme(
