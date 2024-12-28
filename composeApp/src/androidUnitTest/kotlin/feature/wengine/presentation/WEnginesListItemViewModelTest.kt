@@ -47,7 +47,7 @@ class WEnginesListItemViewModelTest {
 
     @Test
     fun `Filter rarity`() {
-        viewModel.onAction(WEnginesListAction.ChangeRarityFilter(setOf(ZzzRarity.RANK_S)))
+        viewModel.onAction(WEnginesListAction.ChangeRarityFilter(setOf(ZzzRarity.RARITY_S)))
         val state = viewModel.uiState.value
         assertEquals(44, state.filteredWEnginesList.first().id)
         assertEquals(1, state.filteredWEnginesList.size)

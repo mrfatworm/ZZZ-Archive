@@ -58,7 +58,7 @@ class AgentsListViewModelTest {
 
     @Test
     fun `Filter rarity S`() = runTest {
-        viewModel.onAction(AgentsListAction.ChangeRarityFilter(setOf(ZzzRarity.RANK_S)))
+        viewModel.onAction(AgentsListAction.ChangeRarityFilter(setOf(ZzzRarity.RARITY_S)))
         val state = viewModel.uiState.value
         assertEquals(3, state.filteredAgentsList.first().id) // First agent: Nekomiya
         assertEquals(1, state.filteredAgentsList.size)

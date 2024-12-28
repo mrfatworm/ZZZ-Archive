@@ -23,7 +23,7 @@ import zzzarchive.composeapp.generated.resources.ic_rare
 fun RarityFilterChipsList(
     selectedRarity: Set<ZzzRarity>, onSelectionChanged: (Set<ZzzRarity>) -> Unit
 ) {
-    val rarities = listOf(ZzzRarity.RANK_S, ZzzRarity.RANK_A)
+    val rarities = listOf(ZzzRarity.RARITY_S, ZzzRarity.RARITY_A)
     FlowRow(
         modifier = Modifier.fillMaxWidth().padding(horizontal = cardPadding()),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),

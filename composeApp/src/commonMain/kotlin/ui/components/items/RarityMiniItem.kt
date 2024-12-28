@@ -56,7 +56,7 @@ fun RarityMiniItem(
     ) {
         Box(
             modifier = Modifier.fillMaxSize().aspectRatio(1f).clip(AppTheme.shape.r300).background(
-                rarity?.color ?: Color.Transparent
+                rarity?.getColor(AppTheme.colors) ?: Color.Transparent
             ).border(
                 AppTheme.size.borderWidth, AppTheme.colors.imageBorder, shape = AppTheme.shape.r300
             )

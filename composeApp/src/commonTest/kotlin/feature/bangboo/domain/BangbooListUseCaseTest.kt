@@ -58,7 +58,7 @@ class BangbooListUseCaseTest {
     fun `Filter Penguinboo`() {
         val result = bangbooListUseCase.filterBangbooList(
             bangbooList = stubBangbooList,
-            selectedRarities = setOf(ZzzRarity.RANK_A),
+            selectedRarities = setOf(ZzzRarity.RARITY_A),
             selectedAttributes = setOf(AgentAttribute.Ice),
         )
         assertEquals("企鵝布", result.first().name)
@@ -69,7 +69,7 @@ class BangbooListUseCaseTest {
     fun `Filter Butler`() {
         val result = bangbooListUseCase.filterBangbooList(
             bangbooList = stubBangbooList,
-            selectedRarities = setOf(ZzzRarity.RANK_S),
+            selectedRarities = setOf(ZzzRarity.RARITY_S),
             selectedAttributes = setOf(AgentAttribute.Physical)
         )
         assertEquals("巴特勒", result.first().name)
@@ -80,7 +80,7 @@ class BangbooListUseCaseTest {
     fun `Filter not match`() {
         val result = bangbooListUseCase.filterBangbooList(
             bangbooList = stubBangbooList,
-            selectedRarities = setOf(ZzzRarity.RANK_S),
+            selectedRarities = setOf(ZzzRarity.RARITY_S),
             selectedAttributes = setOf(AgentAttribute.Ether)
         )
         assertEquals(emptyList(), result)

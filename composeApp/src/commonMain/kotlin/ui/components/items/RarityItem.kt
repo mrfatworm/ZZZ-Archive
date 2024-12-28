@@ -126,5 +126,7 @@ private fun AttributeTag(modifier: Modifier, textRes: StringResource, iconRes: D
 private fun RarityIndicator(modifier: Modifier, rarity: ZzzRarity, isFocus: Boolean = false) {
     val animatedHeight by animateDpAsState(targetValue = if (isFocus) AppTheme.spacing.s300 else 0.dp)
 
-    Spacer(modifier.fillMaxWidth().height(animatedHeight).background(rarity.color))
+    Spacer(
+        modifier.fillMaxWidth().height(animatedHeight).background(rarity.getColor(AppTheme.colors))
+    )
 }

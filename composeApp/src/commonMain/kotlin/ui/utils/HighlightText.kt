@@ -14,20 +14,21 @@ import ui.theme.ColorScheme
 
 fun highlightText(content: String, colorScheme: ColorScheme): AnnotatedString {
     val keywords = mapOf(
-        "以太" to colorScheme.etherColor,
-        " Ether " to colorScheme.etherColor,
-        "火屬性" to colorScheme.fireColor,
-        " Fire " to colorScheme.fireColor,
-        "冰屬性" to colorScheme.iceColor,
-        " Ice " to colorScheme.iceColor,
-        "烈霜" to colorScheme.iceColor,
-        " Forst " to colorScheme.iceColor,
-        "電屬性" to colorScheme.electricColor,
-        " Electric " to colorScheme.electricColor,
-        "物理" to colorScheme.physicalColor,
-        " Physical " to colorScheme.physicalColor
+        "以太" to colorScheme.ether,
+        "以太屬性" to colorScheme.ether,
+        " Ether " to colorScheme.ether,
+        "火屬性" to colorScheme.fire,
+        " Fire " to colorScheme.fire,
+        "冰屬性" to colorScheme.ice,
+        " Ice " to colorScheme.ice,
+        "烈霜" to colorScheme.ice,
+        " Forst " to colorScheme.ice,
+        "電屬性" to colorScheme.electric,
+        " Electric " to colorScheme.electric,
+        "物理" to colorScheme.physical,
+        "物理屬性" to colorScheme.physical,
+        " Physical " to colorScheme.physical
     )
-    val percentagePattern = Regex("""\d+(\.\d+)?%(/\d+(\.\d+)?%)+""")
 
     val annotatedString = buildAnnotatedString {
         append(content)
@@ -43,16 +44,6 @@ fun highlightText(content: String, colorScheme: ColorScheme): AnnotatedString {
                 )
                 startIndex = content.indexOf(keyword, startIndex + keyword.length)
             }
-        }
-
-        percentagePattern.findAll(content).forEach { matchResult ->
-            val start = matchResult.range.first
-            val end = matchResult.range.last + 1
-            addStyle(
-                style = SpanStyle(color = colorScheme.primary),
-                start = start,
-                end = end
-            )
         }
     }
     return annotatedString

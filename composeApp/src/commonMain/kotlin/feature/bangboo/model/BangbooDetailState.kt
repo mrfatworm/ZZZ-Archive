@@ -21,7 +21,7 @@ val emptyBangbooDetail = BangbooDetail(
     name = "",
     imageUrl = "",
     isLeak = false,
-    rarity = ZzzRarity.RANK_D,
+    rarity = ZzzRarity.RARITY_D,
     attribute = AgentAttribute.None,
     basicData = AgentBasicData(
         hp = 0, atk = 0, def = 0

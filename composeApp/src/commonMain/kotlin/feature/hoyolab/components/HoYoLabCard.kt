@@ -58,11 +58,11 @@ import zzzarchive.composeapp.generated.resources.bounty_commissions
 import zzzarchive.composeapp.generated.resources.check_in
 import zzzarchive.composeapp.generated.resources.check_in_success
 import zzzarchive.composeapp.generated.resources.engagement_today
-import zzzarchive.composeapp.generated.resources.ic_bolt
 import zzzarchive.composeapp.generated.resources.ic_calendar_clock
 import zzzarchive.composeapp.generated.resources.ic_check_circle
 import zzzarchive.composeapp.generated.resources.ic_link
 import zzzarchive.composeapp.generated.resources.ic_warning
+import zzzarchive.composeapp.generated.resources.img_battery_charge
 import zzzarchive.composeapp.generated.resources.img_hoyolab_card_preview
 import zzzarchive.composeapp.generated.resources.investigate_point
 import zzzarchive.composeapp.generated.resources.not_operating
@@ -197,20 +197,17 @@ private fun PlayerEnergy(uiState: GameRecordState) {
     )
 
     Row(
-        modifier = Modifier.background(AppTheme.colors.hoveredMask, CircleShape)
-            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s250).clip(
-                CircleShape
-            ),
+        modifier = Modifier.clip(CircleShape).background(AppTheme.colors.hoveredMask)
+            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s250),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {
         val isFull = uiState.energy.progress.current == uiState.energy.progress.max
 
-        Icon(
+        Image(
             modifier = Modifier.scale(if (isFull) scale else 1f).size(AppTheme.size.iconSize),
-            imageVector = vectorResource(Res.drawable.ic_bolt),
+            painter = painterResource(Res.drawable.img_battery_charge),
             contentDescription = null,
-            tint = AppTheme.colors.secondary
         )
         Text(
             text = "${uiState.energy.progress.current} / ${uiState.energy.progress.max}",

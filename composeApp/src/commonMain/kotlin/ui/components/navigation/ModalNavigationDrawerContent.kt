@@ -138,9 +138,9 @@ fun ModalNavigationDrawerContent(
 
 @Composable
 private fun navigationDrawerItemColors() = NavigationDrawerItemDefaults.colors(
-    selectedContainerColor = AppTheme.colors.primary,
-    selectedIconColor = AppTheme.colors.onPrimary,
-    selectedTextColor = AppTheme.colors.onPrimary,
+    selectedContainerColor = AppTheme.colors.primaryContainer,
+    selectedIconColor = AppTheme.colors.onPrimaryContainer,
+    selectedTextColor = AppTheme.colors.onPrimaryContainer,
     unselectedContainerColor = Color.Transparent,
     unselectedIconColor = AppTheme.colors.onSurfaceContainer,
     unselectedTextColor = AppTheme.colors.onSurfaceContainer

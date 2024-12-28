@@ -23,7 +23,7 @@ val stubWEnginesList = listOf(
         name = "好鬥的阿炮",
         imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset//W-Engine/Image/44.webp",
         isLeak = false,
-        rarity = ZzzRarity.RANK_A,
+        rarity = ZzzRarity.RARITY_A,
         specialty = AgentSpecialty.Support,
     ),
     WEnginesListItem(
@@ -31,7 +31,7 @@ val stubWEnginesList = listOf(
         name = "玉壺青冰",
         imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset//W-Engine/Image/45.webp",
         isLeak = false,
-        rarity = ZzzRarity.RANK_S,
+        rarity = ZzzRarity.RARITY_S,
         specialty = AgentSpecialty.Stun,
     )
 )

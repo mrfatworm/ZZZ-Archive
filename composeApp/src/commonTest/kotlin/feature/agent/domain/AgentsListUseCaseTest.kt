@@ -68,7 +68,7 @@ class AgentsListUseCaseTest {
     fun `Filter Nekomiya`() {
         val result = agentsListUseCase.filterAgentsList(
             agentsList = stubAgentsList,
-            selectedRarities = setOf(ZzzRarity.RANK_S),
+            selectedRarities = setOf(ZzzRarity.RARITY_S),
             selectedAttributes = setOf(AgentAttribute.Physical),
             selectedSpecialties = setOf(AgentSpecialty.Attack),
             selectedFactionId = 0
@@ -94,7 +94,7 @@ class AgentsListUseCaseTest {
     fun `Filter faction Gentle House and Nekomiya`() {
         val result = agentsListUseCase.filterAgentsList(
             agentsList = stubAgentsList,
-            selectedRarities = setOf(ZzzRarity.RANK_S),
+            selectedRarities = setOf(ZzzRarity.RARITY_S),
             selectedAttributes = setOf(AgentAttribute.Physical),
             selectedSpecialties = setOf(AgentSpecialty.Attack),
             selectedFactionId = 1
@@ -107,7 +107,7 @@ class AgentsListUseCaseTest {
     fun `Filter Colin`() {
         val result = agentsListUseCase.filterAgentsList(
             agentsList = stubAgentsList,
-            selectedRarities = setOf(ZzzRarity.RANK_A),
+            selectedRarities = setOf(ZzzRarity.RARITY_A),
             selectedAttributes = setOf(AgentAttribute.Physical),
             selectedSpecialties = setOf(AgentSpecialty.Attack),
             selectedFactionId = 0
@@ -120,7 +120,7 @@ class AgentsListUseCaseTest {
     fun `Filter not match`() {
         val result = agentsListUseCase.filterAgentsList(
             agentsList = stubAgentsList,
-            selectedRarities = setOf(ZzzRarity.RANK_S),
+            selectedRarities = setOf(ZzzRarity.RARITY_S),
             selectedAttributes = setOf(AgentAttribute.Ether),
             selectedSpecialties = setOf(AgentSpecialty.Support),
             selectedFactionId = 1

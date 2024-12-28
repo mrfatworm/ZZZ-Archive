@@ -57,7 +57,7 @@ class WEnginesListUseCaseTest {
     fun `Filter Kaboom the Cannon`() {
         val result = wEnginesListUseCase.filterWEnginesList(
             wEnginesList = stubWEnginesList,
-            selectedRarities = setOf(ZzzRarity.RANK_A),
+            selectedRarities = setOf(ZzzRarity.RARITY_A),
             selectedSpecialties = setOf(AgentSpecialty.Support),
         )
         assertEquals("好鬥的阿炮", result.first().name)
@@ -68,7 +68,7 @@ class WEnginesListUseCaseTest {
     fun `Filter Ice-Jade Teapot`() {
         val result = wEnginesListUseCase.filterWEnginesList(
             wEnginesList = stubWEnginesList,
-            selectedRarities = setOf(ZzzRarity.RANK_S),
+            selectedRarities = setOf(ZzzRarity.RARITY_S),
             selectedSpecialties = setOf(AgentSpecialty.Stun),
         )
         assertEquals("玉壺青冰", result.first().name)
@@ -79,7 +79,7 @@ class WEnginesListUseCaseTest {
     fun `Filter not match`() {
         val result = wEnginesListUseCase.filterWEnginesList(
             wEnginesList = stubWEnginesList,
-            selectedRarities = setOf(ZzzRarity.RANK_S),
+            selectedRarities = setOf(ZzzRarity.RARITY_S),
             selectedSpecialties = setOf(AgentSpecialty.Attack),
         )
         assertEquals(emptyList(), result)

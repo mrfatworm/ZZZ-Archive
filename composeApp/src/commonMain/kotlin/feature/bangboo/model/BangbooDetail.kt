@@ -30,7 +30,7 @@ val stubBangbooDetail = BangbooDetail(
     name = "共鳴布",
     imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Bangboo/Profile/6.webp",
     isLeak = false,
-    rarity = ZzzRarity.RANK_S,
+    rarity = ZzzRarity.RARITY_S,
     attribute = AgentAttribute.Ether,
     basicData = AgentBasicData(
         hp = 4210, atk = 8057, def = 72

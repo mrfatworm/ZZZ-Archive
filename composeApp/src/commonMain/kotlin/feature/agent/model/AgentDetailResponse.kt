@@ -71,7 +71,7 @@ data class RarityItem(
     }
 
     fun getRarity(): ZzzRarity {
-        return ZzzRarity.entries.find { it.level == rarity } ?: ZzzRarity.RANK_A
+        return ZzzRarity.entries.find { it.level == rarity } ?: ZzzRarity.RARITY_A
     }
 }
 
