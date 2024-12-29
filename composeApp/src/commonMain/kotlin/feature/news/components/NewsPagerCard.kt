@@ -47,35 +47,37 @@ import ui.theme.AppTheme
 
 @Composable
 fun NewsPagerCard(newsList: List<OfficialNewsListItem>) {
-    val pagerState = rememberPagerState(pageCount = { newsList.size })
-    val coroutineScope = rememberCoroutineScope()
-    Column(
-        Modifier.clip(AppTheme.shape.r400).background(AppTheme.colors.surfaceContainer)
-            .padding(bottom = AppTheme.spacing.s400),
-        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
-    ) {
-        HorizontalPager(modifier = Modifier, state = pagerState) { currentPager ->
-            NewsPagerCardItem(newsList[currentPager])
+    if (newsList.isNotEmpty()) {
+        val pagerState = rememberPagerState(pageCount = { newsList.size })
+        val coroutineScope = rememberCoroutineScope()
+        Column(
+            Modifier.clip(AppTheme.shape.r400).background(AppTheme.colors.surfaceContainer)
+                .padding(bottom = AppTheme.spacing.s400),
+            verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
+        ) {
+            HorizontalPager(modifier = Modifier, state = pagerState) { currentPager ->
+                NewsPagerCardItem(newsList[currentPager])
+            }
+            PagerIndicator(
+                modifier = Modifier,
+                pageCount = pagerState.pageCount,
+                currentPage = pagerState.currentPage,
+                onClick = {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(it)
+                    }
+                })
         }
-        PagerIndicator(modifier = Modifier,
-            pageCount = pagerState.pageCount,
-            currentPage = pagerState.currentPage,
-            onClick = {
-                coroutineScope.launch {
-                    pagerState.animateScrollToPage(it)
-                }
-            })
-    }
 
-    LaunchedEffect(key1 = pagerState.settledPage) {
-        launch {
-            delay(8000)
-            val target =
-                if (pagerState.currentPage == pagerState.pageCount - 1) 0 else pagerState.currentPage + 1
-            pagerState.animateScrollToPage(target)
+        LaunchedEffect(key1 = pagerState.settledPage) {
+            launch {
+                delay(8000)
+                val target =
+                    if (pagerState.currentPage == pagerState.pageCount - 1) 0 else pagerState.currentPage + 1
+                pagerState.animateScrollToPage(target)
+            }
         }
     }
-
 }
 
 
