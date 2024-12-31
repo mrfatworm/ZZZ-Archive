@@ -5,6 +5,7 @@
 
 package ui.navigation.graph
 
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import feature.agent.presentation.AgentDetailScreen
@@ -29,7 +30,10 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
         })
     }
 
-    composable(route = Screen.AgentDetail.route, arguments = Screen.AgentDetail.navArguments) {
+    composable(
+        route = Screen.AgentDetail.route, arguments = Screen.AgentDetail.navArguments,
+        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
+        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }) {
         AgentDetailScreen(wEngineClick = { id ->
             navActions.navigationToRoute(Screen.WEngineDetail.createRoute(id))
         }, onBackClick = { navActions.back() })
@@ -45,7 +49,10 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
         })
     }
 
-    composable(Screen.WEngineDetail.route, arguments = Screen.WEngineDetail.navArguments) {
+    composable(
+        Screen.WEngineDetail.route, arguments = Screen.WEngineDetail.navArguments,
+        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
+        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }) {
         WEngineDetailScreen(onBackClick = { navActions.back() })
     }
 
@@ -59,7 +66,10 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
         })
     }
 
-    composable(Screen.BangbooDetail.route, arguments = Screen.BangbooDetail.navArguments) {
+    composable(
+        route = Screen.BangbooDetail.route, arguments = Screen.BangbooDetail.navArguments,
+        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
+        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }) {
         BangbooDetailScreen(onBackClick = { navActions.back() })
     }
 
@@ -69,25 +79,27 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
         })
     }
     composable(Screen.Setting.route) {
-        SettingScreen(
-            onFeedbackClick = {
-                navActions.navigationTo(Screen.Feedback)
-            },
-            onHoYoLabClick = {
-                navActions.navigationTo(Screen.HoYoLabSync)
-            }
-        )
+        SettingScreen(onFeedbackClick = {
+            navActions.navigationTo(Screen.Feedback)
+        }, onHoYoLabClick = {
+            navActions.navigationTo(Screen.HoYoLabSync)
+        })
     }
-    composable(Screen.Feedback.route) {
+    composable(
+        route = Screen.Feedback.route,
+        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
+        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }) {
         FeedbackScreen {
             navActions.back()
         }
     }
 
-    composable(Screen.HoYoLabSync.route) {
+    composable(
+        route = Screen.HoYoLabSync.route,
+        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
+        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }) {
         HoYoLabSyncScreen(onBackClick = { navActions.back() }, navigateToFeedback = {
             navActions.navigationTo(Screen.Feedback)
         })
-
     }
 }

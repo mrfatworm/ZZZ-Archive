@@ -24,7 +24,7 @@ fun RootNavGraph(
     NavHost(
         modifier = modifier,
         navController = rootNavController,
-        startDestination = RootFlow.Splash.route,
+        startDestination = RootFlow.Splash.route
     ) {
         composable(RootFlow.Splash.route) {
             SplashScreen(

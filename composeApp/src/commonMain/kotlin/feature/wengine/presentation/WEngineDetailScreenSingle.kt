@@ -5,6 +5,7 @@
 
 package feature.wengine.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,6 +20,7 @@ import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.HighLightTextCard
 import ui.components.cards.MaterialsListCard
 import ui.components.cards.TextCard
+import ui.theme.AppTheme
 import ui.utils.contentGap
 import ui.utils.contentPadding
 import zzzarchive.composeapp.generated.resources.Res
@@ -32,7 +34,7 @@ fun WEngineDetailScreenSingle(
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-            .contentPadding(),
+            .background(AppTheme.colors.surface).contentPadding(),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         WEngineImageCard(uiState.wEngineDetail) {

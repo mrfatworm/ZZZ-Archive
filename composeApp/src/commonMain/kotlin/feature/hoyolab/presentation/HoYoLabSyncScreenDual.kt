@@ -5,6 +5,7 @@
 
 package feature.hoyolab.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,6 +24,7 @@ import feature.hoyolab.model.HoYoLabSyncState
 import org.jetbrains.compose.resources.stringResource
 import ui.components.TopBarRound
 import ui.components.buttons.ZzzPrimaryButton
+import ui.theme.AppTheme
 import ui.utils.containerGap
 import ui.utils.contentGap
 import ui.utils.contentPadding
@@ -33,10 +35,12 @@ import zzzarchive.composeapp.generated.resources.ic_add
 
 @Composable
 fun HoYoLabSyncScreenDual(
-    uiState: HoYoLabSyncState,
-    onAction: (HoYoLabSyncAction) -> Unit
+    uiState: HoYoLabSyncState, onAction: (HoYoLabSyncAction) -> Unit
 ) {
-    Row(horizontalArrangement = Arrangement.spacedBy(containerGap())) {
+    Row(
+        modifier = Modifier.background(AppTheme.colors.surface),
+        horizontalArrangement = Arrangement.spacedBy(containerGap())
+    ) {
         Column(
             Modifier.weight(1f).contentPadding(),
             verticalArrangement = Arrangement.spacedBy(containerGap())
@@ -49,8 +53,7 @@ fun HoYoLabSyncScreenDual(
 
             if (uiState.syncedAccounts.isEmpty()) {
                 AddHoYoLabAccountCard(
-                    errorMessage = uiState.errorMessage,
-                    onSubmit = { serverRegion, lToken, ltUid ->
+                    errorMessage = uiState.errorMessage, onSubmit = { serverRegion, lToken, ltUid ->
                         onAction(
                             HoYoLabSyncAction.ConnectToHoYoLabAndAdd(
                                 serverRegion, lToken, ltUid

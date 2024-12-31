@@ -31,8 +31,7 @@ fun BangbooDetailScreenSingle(
     onAction: (BangbooDetailAction) -> Unit,
 ) {
     Column(
-        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-            .contentPadding(),
+        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).contentPadding(),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         BangbooImageCard(uiState.bangbooDetail) {

@@ -5,6 +5,7 @@
 
 package feature.agent.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,6 +24,7 @@ import feature.agent.components.SuggestWEnginesCard
 import feature.agent.model.AgentDetailState
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.TextCard
+import ui.theme.AppTheme
 import ui.utils.contentGap
 import ui.utils.contentPadding
 import zzzarchive.composeapp.generated.resources.Res
@@ -35,7 +37,7 @@ fun AgentDetailScreenSingle(
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-            .contentPadding(),
+            .background(AppTheme.colors.surface).contentPadding(),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         AgentImageCard(uiState.agentDetail) {

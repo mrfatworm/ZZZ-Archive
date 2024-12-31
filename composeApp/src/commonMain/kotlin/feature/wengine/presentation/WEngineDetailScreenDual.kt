@@ -5,6 +5,7 @@
 
 package feature.wengine.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,6 +20,7 @@ import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.HighLightTextCard
 import ui.components.cards.MaterialsListCard
 import ui.components.cards.TextCard
+import ui.theme.AppTheme
 import ui.utils.containerGap
 import ui.utils.contentGap
 import ui.utils.contentPadding
@@ -28,13 +30,14 @@ import zzzarchive.composeapp.generated.resources.w_engine_effect
 
 @Composable
 fun WEngineDetailScreenDual(
-    uiState: WEngineDetailState,
-    onAction: (WEngineDetailAction) -> Unit
+    uiState: WEngineDetailState, onAction: (WEngineDetailAction) -> Unit
 ) {
-    Row(horizontalArrangement = Arrangement.spacedBy(containerGap())) {
+    Row(
+        modifier = Modifier.background(AppTheme.colors.surface),
+        horizontalArrangement = Arrangement.spacedBy(containerGap())
+    ) {
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
-                .contentPadding(),
+            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState()).contentPadding(),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             WEngineImageCard(uiState.wEngineDetail) {
@@ -44,13 +47,11 @@ fun WEngineDetailScreenDual(
         }
 
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
-                .contentPadding(),
+            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState()).contentPadding(),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             HighLightTextCard(
-                stringResource(Res.string.w_engine_effect),
-                uiState.wEngineDetail.skill
+                stringResource(Res.string.w_engine_effect), uiState.wEngineDetail.skill
             )
             MaterialsListCard(uiState.wEngineDetail.levelMaterials)
             TextCard(stringResource(Res.string.additional_info), uiState.wEngineDetail.background)

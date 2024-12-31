@@ -5,6 +5,7 @@
 
 package feature.feedback.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -44,7 +45,8 @@ fun FeedbackScreenMedium(
     var nicknameTextFieldValue by remember { mutableStateOf("") }
     var selectedIssue by remember { mutableStateOf(feedbackIssueTypes.first()) }
     Column(
-        modifier = Modifier.widthIn(max = 640.dp).verticalScroll(rememberScrollState())
+        modifier = Modifier.background(AppTheme.colors.surface).widthIn(max = 640.dp)
+            .verticalScroll(rememberScrollState())
             .contentPadding(),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {

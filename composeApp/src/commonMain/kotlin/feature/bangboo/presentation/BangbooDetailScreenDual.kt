@@ -5,6 +5,7 @@
 
 package feature.bangboo.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,7 @@ import feature.bangboo.model.BangbooDetailState
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.HighLightTextCard
 import ui.components.cards.MaterialsListCard
+import ui.theme.AppTheme
 import ui.utils.contentGap
 import ui.utils.contentPadding
 import zzzarchive.composeapp.generated.resources.Res
@@ -30,10 +32,12 @@ fun BangbooDetailScreenDual(
     uiState: BangbooDetailState,
     onAction: (BangbooDetailAction) -> Unit,
 ) {
-    Row(horizontalArrangement = Arrangement.spacedBy(contentGap())) {
+    Row(
+        modifier = Modifier.background(AppTheme.colors.surface),
+        horizontalArrangement = Arrangement.spacedBy(contentGap())
+    ) {
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
-                .contentPadding(),
+            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState()).contentPadding(),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             BangbooImageCard(uiState.bangbooDetail) {
@@ -43,8 +47,7 @@ fun BangbooDetailScreenDual(
         }
 
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
-                .contentPadding(),
+            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState()).contentPadding(),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             MaterialsListCard(uiState.bangbooDetail.levelMaterials)
