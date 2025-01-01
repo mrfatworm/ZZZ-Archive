@@ -7,6 +7,7 @@ package feature.drive.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,7 +16,8 @@ import feature.drive.components.DriveDetailCard
 import feature.drive.components.DrivesListCard
 import feature.drive.model.DrivesListState
 import ui.utils.containerGap
-import ui.utils.contentPadding
+import ui.utils.horizontalSafePadding
+import ui.utils.verticalSafePadding
 
 @Composable
 fun DrivesListScreenDual(
@@ -23,7 +25,7 @@ fun DrivesListScreenDual(
     onAction: (DrivesListAction) -> Unit,
 ) {
     Row(
-        modifier = Modifier.contentPadding(),
+        modifier = Modifier.padding(horizontalSafePadding()).padding(verticalSafePadding()),
         horizontalArrangement = Arrangement.spacedBy(containerGap())
     ) {
         DrivesListCard(

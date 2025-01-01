@@ -57,9 +57,9 @@ fun BangbooListScreenSingle(
                         })
                 })
         }
-    }) { contentPadding ->
+    }) { scaffoldPadding ->
         Column(
-            modifier = Modifier.contentPaddingInScaffold(contentPadding)
+            modifier = Modifier.contentPaddingInScaffold(scaffoldPadding)
         ) {
             BangbooListFilterCard(
                 modifier = Modifier.weight(1f),

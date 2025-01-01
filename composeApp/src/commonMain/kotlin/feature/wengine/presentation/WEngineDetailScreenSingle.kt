@@ -9,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -22,19 +23,20 @@ import ui.components.cards.MaterialsListCard
 import ui.components.cards.TextCard
 import ui.theme.AppTheme
 import ui.utils.contentGap
-import ui.utils.contentPadding
+import ui.utils.horizontalSafePadding
+import ui.utils.verticalSafePadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.additional_info
 import zzzarchive.composeapp.generated.resources.w_engine_effect
 
 @Composable
 fun WEngineDetailScreenSingle(
-    uiState: WEngineDetailState,
-    onAction: (WEngineDetailAction) -> Unit
+    uiState: WEngineDetailState, onAction: (WEngineDetailAction) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-            .background(AppTheme.colors.surface).contentPadding(),
+            .background(AppTheme.colors.surface).padding(horizontalSafePadding())
+            .padding(verticalSafePadding()),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         WEngineImageCard(uiState.wEngineDetail) {

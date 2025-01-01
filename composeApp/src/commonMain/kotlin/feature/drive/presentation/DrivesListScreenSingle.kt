@@ -39,9 +39,9 @@ fun DrivesListScreenSingle(
                 }
             )
         }
-    }) { contentPadding ->
+    }) { scaffoldPadding ->
         Column(
-            modifier = Modifier.contentPaddingInScaffold(contentPadding)
+            modifier = Modifier.contentPaddingInScaffold(scaffoldPadding)
         ) {
             DrivesListCard(
                 modifier = Modifier.weight(1f),

@@ -9,6 +9,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -21,7 +23,8 @@ import ui.components.cards.HighLightTextCard
 import ui.components.cards.MaterialsListCard
 import ui.theme.AppTheme
 import ui.utils.contentGap
-import ui.utils.contentPadding
+import ui.utils.horizontalSafePadding
+import ui.utils.verticalSafePadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.active_skill
 import zzzarchive.composeapp.generated.resources.additional_ability
@@ -33,11 +36,13 @@ fun BangbooDetailScreenDual(
     onAction: (BangbooDetailAction) -> Unit,
 ) {
     Row(
-        modifier = Modifier.background(AppTheme.colors.surface),
+        modifier = Modifier.fillMaxSize().background(AppTheme.colors.surface)
+            .padding(horizontalSafePadding()),
         horizontalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState()).contentPadding(),
+            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
+                .padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             BangbooImageCard(uiState.bangbooDetail) {
@@ -47,7 +52,8 @@ fun BangbooDetailScreenDual(
         }
 
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState()).contentPadding(),
+            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
+                .padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             MaterialsListCard(uiState.bangbooDetail.levelMaterials)

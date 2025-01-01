@@ -9,6 +9,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -26,7 +28,8 @@ import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.TextCard
 import ui.theme.AppTheme
 import ui.utils.contentGap
-import ui.utils.contentPadding
+import ui.utils.horizontalSafePadding
+import ui.utils.verticalSafePadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.agent_background
 
@@ -36,12 +39,13 @@ fun AgentDetailScreenDual(
     onAction: (AgentDetailAction) -> Unit,
 ) {
     Row(
-        modifier = Modifier.background(AppTheme.colors.surface),
+        modifier = Modifier.fillMaxSize().background(AppTheme.colors.surface)
+            .padding(horizontalSafePadding()),
         horizontalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
-                .contentPadding(),
+                .padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             AgentImageCard(uiState.agentDetail) {
@@ -52,7 +56,7 @@ fun AgentDetailScreenDual(
 
         Column(
             modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
-                .contentPadding(),
+                .padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             AgentMaterialsCard(uiState.agentDetail.levelMaterial)

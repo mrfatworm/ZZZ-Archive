@@ -52,9 +52,9 @@ fun WEnginesListScreenSingle(
                     })
             })
         }
-    }) { contentPadding ->
+    }) { scaffoldPadding ->
         Column(
-            modifier = Modifier.contentPaddingInScaffold(contentPadding)
+            modifier = Modifier.contentPaddingInScaffold(scaffoldPadding)
         ) {
             WEnginesListFilterCard(modifier = Modifier.weight(1f),
                 uiState = uiState,

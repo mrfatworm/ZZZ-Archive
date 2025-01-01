@@ -5,6 +5,7 @@
 
 package feature.feedback.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,7 +35,7 @@ fun FeedbackScreen(onBackClick: () -> Unit) {
             detectTapGestures(onTap = {
                 focusManager.clearFocus()
             })
-        },
+        }.background(AppTheme.colors.surface),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         FeedbackScreenContent(uiState, onAction = { actions ->

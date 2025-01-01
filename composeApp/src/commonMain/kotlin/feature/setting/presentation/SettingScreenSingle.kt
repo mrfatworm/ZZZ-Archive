@@ -8,6 +8,7 @@ package feature.setting.presentation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -18,7 +19,8 @@ import feature.setting.components.OtherInfoCard
 import feature.setting.components.SettingCard
 import feature.setting.model.SettingState
 import ui.utils.contentGap
-import ui.utils.contentPadding
+import ui.utils.horizontalSafePadding
+import ui.utils.verticalSafePadding
 
 @Composable
 fun SettingScreenSingle(
@@ -27,7 +29,7 @@ fun SettingScreenSingle(
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-            .contentPadding(),
+            .padding(horizontalSafePadding()).padding(verticalSafePadding()),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         SettingCard(

@@ -6,11 +6,11 @@
 package root
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ModalNavigationDrawer
@@ -38,9 +38,7 @@ import ui.navigation.NavActions
 import ui.navigation.graph.MainNavGraph
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
-import ui.utils.containerGap
-import ui.utils.containerPadding
-import ui.utils.contentPadding
+import ui.utils.verticalSafePadding
 
 @Composable
 fun MainContainer(
@@ -119,15 +117,13 @@ fun MainFuncContent(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        Row(
-            modifier = Modifier.weight(1f).containerPadding(),
-            horizontalArrangement = Arrangement.spacedBy(containerGap())
-        ) {
+        Row(modifier = Modifier.weight(1f)) {
             AnimatedVisibility(
                 visible = AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Medium || AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Expanded
             ) {
                 ZzzArchiveNavigationRail(
-                    modifier = Modifier.fillMaxHeight().contentPadding(),
+                    modifier = Modifier.fillMaxHeight().padding(start = AppTheme.spacing.s300)
+                        .padding(verticalSafePadding()),
                     selectedMainFlow = selectedMainFlow,
                     navActions = mainNavActions,
                     onDrawerClicked = onDrawerClicked,

@@ -45,10 +45,10 @@ fun HoYoLabSyncScreenSingle(
                 }
             )
         }
-    }) { contentPadding ->
+    }) { scaffoldPadding ->
         Column(
             modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-                .contentPaddingInScaffold(contentPadding),
+                .contentPaddingInScaffold(scaffoldPadding),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Medium) {

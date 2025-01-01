@@ -5,10 +5,10 @@
 
 package feature.feedback.presentation
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -29,7 +29,8 @@ import ui.components.TopBarRound
 import ui.components.buttons.ZzzPrimaryButton
 import ui.theme.AppTheme
 import ui.utils.contentGap
-import ui.utils.contentPadding
+import ui.utils.horizontalSafePadding
+import ui.utils.verticalSafePadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.feedback
 import zzzarchive.composeapp.generated.resources.ic_arrow_up
@@ -45,9 +46,10 @@ fun FeedbackScreenMedium(
     var nicknameTextFieldValue by remember { mutableStateOf("") }
     var selectedIssue by remember { mutableStateOf(feedbackIssueTypes.first()) }
     Column(
-        modifier = Modifier.background(AppTheme.colors.surface).widthIn(max = 640.dp)
+        modifier = Modifier.widthIn(max = 640.dp)
             .verticalScroll(rememberScrollState())
-            .contentPadding(),
+            .padding(horizontalSafePadding())
+            .padding(verticalSafePadding()),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         TopBarRound(title = stringResource(Res.string.feedback), onBackClick = {

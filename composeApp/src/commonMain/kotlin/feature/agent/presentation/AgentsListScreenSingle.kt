@@ -57,9 +57,9 @@ fun AgentsListScreenSingle(
                         })
                 })
         }
-    }) { contentPadding ->
+    }) { scaffoldPadding ->
         Column(
-            modifier = Modifier.contentPaddingInScaffold(contentPadding)
+            modifier = Modifier.contentPaddingInScaffold(scaffoldPadding)
         ) {
             AgentsListFilterCard(
                 modifier = Modifier.weight(1f),

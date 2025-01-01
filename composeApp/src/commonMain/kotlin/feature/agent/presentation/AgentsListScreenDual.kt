@@ -7,6 +7,7 @@ package feature.agent.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -16,7 +17,8 @@ import feature.agent.components.FactionItem
 import feature.agent.model.AgentsListState
 import ui.theme.AppTheme
 import ui.utils.containerGap
-import ui.utils.contentPadding
+import ui.utils.horizontalSafePadding
+import ui.utils.verticalSafePadding
 
 @Composable
 fun AgentsListScreenDual(
@@ -24,11 +26,11 @@ fun AgentsListScreenDual(
     onAction: (AgentsListAction) -> Unit
 ) {
     Row(
-        modifier = Modifier.contentPadding(),
+        modifier = Modifier.padding(horizontalSafePadding()),
         horizontalArrangement = Arrangement.spacedBy(containerGap())
     ) {
         AgentsListFilterCard(
-            modifier = Modifier.weight(0.7f),
+            modifier = Modifier.weight(0.7f).padding(verticalSafePadding()),
             uiState = uiState,
             onAgentClick = {
                 onAction(AgentsListAction.ClickAgent(it))
@@ -45,6 +47,7 @@ fun AgentsListScreenDual(
         )
         LazyColumn(
             modifier = Modifier.weight(0.3f),
+            contentPadding = verticalSafePadding(),
             verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)
         ) {
             items(items = uiState.factionsList, key = { it.id }) { faction ->

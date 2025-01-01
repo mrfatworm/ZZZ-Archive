@@ -47,10 +47,10 @@ fun FeedbackScreenCompact(
                 onAction(FeedbackAction.ClickBack)
             }
         )
-    }) { contentPadding ->
+    }) { scaffoldPadding ->
         Column(
             modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-                .contentPaddingInScaffold(contentPadding),
+                .contentPaddingInScaffold(scaffoldPadding),
             verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s350)
         ) {
             var issueTextFieldValue by remember { mutableStateOf("") }

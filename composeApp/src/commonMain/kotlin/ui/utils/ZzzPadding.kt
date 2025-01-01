@@ -17,53 +17,40 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ui.theme.AppTheme
 
-// Parent horizontal padding for Expanded and Medium layout
+// Horizontal padding for Container
 @Composable
-fun Modifier.containerPadding() = this.padding(
-    start = when (AppTheme.adaptiveLayoutType) {
-        AdaptiveLayoutType.Expanded -> AppTheme.spacing.s300
-        AdaptiveLayoutType.Medium -> AppTheme.spacing.s300
-        AdaptiveLayoutType.Compact -> 0.dp
-    }, end = when (AppTheme.adaptiveLayoutType) {
+fun horizontalSafePadding() = PaddingValues(
+    horizontal = when (AppTheme.adaptiveLayoutType) {
         AdaptiveLayoutType.Expanded -> AppTheme.spacing.s400
-        AdaptiveLayoutType.Medium -> AppTheme.spacing.s400
-        AdaptiveLayoutType.Compact -> 0.dp
-    }, top = 0.dp, bottom = 0.dp
+        AdaptiveLayoutType.Medium -> AppTheme.spacing.s350
+        AdaptiveLayoutType.Compact -> AppTheme.spacing.s300
+    }
 )
 
-// Parent horizontal gap for Expanded and Medium layout
+// Vertical edge-to-edge Padding for Container
 @Composable
-fun containerGap() = when (AppTheme.adaptiveLayoutType) {
-    AdaptiveLayoutType.Expanded -> AppTheme.spacing.s400
-    AdaptiveLayoutType.Medium -> AppTheme.spacing.s350
-    AdaptiveLayoutType.Compact -> 0.dp
-}
-
-// Padding for each container to match edge-to-edge
-@Composable
-fun Modifier.contentPadding(): Modifier {
+fun verticalSafePadding(): PaddingValues {
     val topPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     val bottomPadding = WindowInsets.systemBars.asPaddingValues().calculateBottomPadding()
     val spacing = AppTheme.spacing
-    return this.padding(
-        horizontal = when (AppTheme.adaptiveLayoutType) {
-            AdaptiveLayoutType.Expanded -> 0.dp
-            AdaptiveLayoutType.Medium -> 0.dp
-            AdaptiveLayoutType.Compact -> spacing.s300
-        }
-    ).padding(
+    return PaddingValues(
         top = if (topPadding > 0.dp) topPadding else when (AppTheme.adaptiveLayoutType) {
             AdaptiveLayoutType.Expanded -> spacing.s400
-            AdaptiveLayoutType.Medium -> spacing.s400
+            AdaptiveLayoutType.Medium -> spacing.s350
             AdaptiveLayoutType.Compact -> spacing.s300
         },
         bottom = if (bottomPadding > 0.dp) bottomPadding else when (AppTheme.adaptiveLayoutType) {
             AdaptiveLayoutType.Expanded -> spacing.s400
-            AdaptiveLayoutType.Medium -> spacing.s400
+            AdaptiveLayoutType.Medium -> spacing.s350
             AdaptiveLayoutType.Compact -> spacing.s300
         }
     )
 }
+
+// Horizontal gap for dual or more panel layout
+@Composable
+fun containerGap() = AppTheme.spacing.s400
+
 
 // Padding for each container inside scaffold
 @Composable

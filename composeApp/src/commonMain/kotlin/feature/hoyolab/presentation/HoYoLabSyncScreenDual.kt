@@ -9,7 +9,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -27,7 +29,8 @@ import ui.components.buttons.ZzzPrimaryButton
 import ui.theme.AppTheme
 import ui.utils.containerGap
 import ui.utils.contentGap
-import ui.utils.contentPadding
+import ui.utils.horizontalSafePadding
+import ui.utils.verticalSafePadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.add_account
 import zzzarchive.composeapp.generated.resources.hoyolab_sync
@@ -38,11 +41,12 @@ fun HoYoLabSyncScreenDual(
     uiState: HoYoLabSyncState, onAction: (HoYoLabSyncAction) -> Unit
 ) {
     Row(
-        modifier = Modifier.background(AppTheme.colors.surface),
+        modifier = Modifier.fillMaxSize().background(AppTheme.colors.surface)
+            .padding(horizontalSafePadding()),
         horizontalArrangement = Arrangement.spacedBy(containerGap())
     ) {
         Column(
-            Modifier.weight(1f).contentPadding(),
+            Modifier.weight(1f).padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(containerGap())
         ) {
             TopBarRound(title = stringResource(Res.string.hoyolab_sync), onBackClick = {
@@ -90,7 +94,9 @@ fun HoYoLabSyncScreenDual(
             }
 
         }
-        Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).contentPadding()) {
+        Column(
+            Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(verticalSafePadding())
+        ) {
             HoYoLabSyncGuildCard(navigateToFeedback = {
                 onAction(HoYoLabSyncAction.NavigateToFeedback)
             })

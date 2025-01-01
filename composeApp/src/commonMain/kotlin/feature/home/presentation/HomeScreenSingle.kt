@@ -8,6 +8,7 @@ package feature.home.presentation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -21,7 +22,8 @@ import feature.news.components.NewsPagerCard
 import feature.pixiv.components.PixivCard
 import ui.navigation.Screen
 import ui.utils.contentGap
-import ui.utils.contentPadding
+import ui.utils.horizontalSafePadding
+import ui.utils.verticalSafePadding
 
 @Composable
 fun HomeScreenSingle(
@@ -31,7 +33,7 @@ fun HomeScreenSingle(
 ) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-            .contentPadding(),
+            .padding(horizontalSafePadding()).padding(verticalSafePadding()),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         AnnouncementBanner(
