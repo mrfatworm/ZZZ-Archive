@@ -26,14 +26,16 @@ import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.bahamut
 import zzzarchive.composeapp.generated.resources.forum_popular
 import zzzarchive.composeapp.generated.resources.ic_attribute_fire
+import zzzarchive.composeapp.generated.resources.nga
 import zzzarchive.composeapp.generated.resources.ptt
 import zzzarchive.composeapp.generated.resources.reddit
 
 val forumSite = listOf(
     Res.string.reddit,
     Res.string.bahamut,
-    Res.string.ptt
-) // , Res.string.nga
+    Res.string.ptt,
+    Res.string.nga
+)
 
 @Composable
 fun AllForumCard(uiState: AllForumState) {
@@ -66,7 +68,7 @@ fun AllForumCard(uiState: AllForumState) {
                 0 -> RedditList(uiState.reddit)
                 1 -> BahamutList(uiState.bahamut)
                 2 -> PttList(uiState.ptt)
-                // 3 -> NgaList(uiState.nga)
+                3 -> NgaList(uiState.nga)
             }
         }
     }

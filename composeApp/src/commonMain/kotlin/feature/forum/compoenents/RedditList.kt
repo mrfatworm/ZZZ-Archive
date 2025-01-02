@@ -3,12 +3,9 @@ package feature.forum.compoenents
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -16,17 +13,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.FilterQuality
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
-import coil3.compose.SubcomposeAsyncImage
 import feature.forum.model.RedditForumListState
 import org.jetbrains.compose.resources.vectorResource
-import ui.components.ImageNotFound
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_reddit_comment
@@ -49,37 +38,16 @@ private fun RedditListItem(
     modifier: Modifier = Modifier, reddit: RedditForumListState, isVariantColor: Boolean = false
 ) {
     Row(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
             .background(if (isVariantColor) AppTheme.colors.itemVariant else AppTheme.colors.surfaceContainer)
             .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s350)
     ) {
-        Box(
-            modifier = Modifier.height(AppTheme.size.rarityItemSmallSize).aspectRatio(1.33f)
-                .clip(AppTheme.shape.r300)
-        ) {
-            AsyncImage(
-                modifier = Modifier.matchParentSize().blur(8.dp),
-                model = reddit.imgUrl,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                filterQuality = FilterQuality.None
-            )
-            SubcomposeAsyncImage(
-                modifier = Modifier.matchParentSize().clip(AppTheme.shape.r300),
-                model = reddit.imgUrl,
-                contentDescription = null,
-                filterQuality = FilterQuality.None,
-                error = {
-                    ImageNotFound()
-                })
-        }
+        ForumThumbnailImage(reddit.imgUrl)
         Column(
-            modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
         ) {
             Text(
-                modifier = Modifier.fillMaxWidth(),
                 text = reddit.title,
                 color = AppTheme.colors.onSurfaceContainer,
                 style = AppTheme.typography.bodyMedium,
