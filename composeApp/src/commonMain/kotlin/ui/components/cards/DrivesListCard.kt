@@ -32,7 +32,6 @@ import ui.components.dialogs.DriveDetailDialog
 import ui.components.items.RarityItem
 import ui.theme.AppTheme
 import ui.utils.cardPaddingWithHeader
-import ui.utils.drawRowListMask
 import ui.utils.rowListGap
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.all_drives
@@ -73,11 +72,6 @@ fun DrivesListCard(
             }
         }
         LazyRow(
-            modifier = Modifier.drawRowListMask(
-                colorScheme = AppTheme.colors,
-                startEnable = lazyListState.canScrollBackward,
-                endEnable = lazyListState.canScrollForward
-            ),
             state = lazyListState,
             contentPadding = cardPaddingWithHeader(),
             horizontalArrangement = rowListGap()

@@ -21,9 +21,7 @@ import ui.components.cards.ContentCard
 import ui.components.cards.HoveredIndicatorHeader
 import ui.components.dialogs.GalleryDialog
 import ui.components.items.GalleryImageItem
-import ui.theme.AppTheme
 import ui.utils.cardPaddingWithHeader
-import ui.utils.drawRowListMask
 import ui.utils.rowListGap
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.gallery
@@ -50,11 +48,6 @@ fun GalleryCard(agentDetail: AgentDetail) {
             lazyListState = lazyListState
         )
         LazyRow(
-            modifier = Modifier.drawRowListMask(
-                colorScheme = AppTheme.colors,
-                startEnable = lazyListState.canScrollBackward,
-                endEnable = lazyListState.canScrollForward
-            ),
             state = lazyListState,
             contentPadding = cardPaddingWithHeader(),
             horizontalArrangement = rowListGap()

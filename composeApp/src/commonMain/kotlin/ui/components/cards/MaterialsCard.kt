@@ -18,9 +18,7 @@ import androidx.compose.ui.Modifier
 import feature.agent.model.LevelMaterial
 import org.jetbrains.compose.resources.stringResource
 import ui.components.items.RarityMiniItem
-import ui.theme.AppTheme
 import ui.utils.cardPaddingWithHeader
-import ui.utils.drawRowListMask
 import ui.utils.rowListGap
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.materials
@@ -36,11 +34,6 @@ fun MaterialsListCard(materialsList: List<LevelMaterial>) {
     ) {
         Header(isHovered.value, lazyListState)
         LazyRow(
-            modifier = Modifier.drawRowListMask(
-                colorScheme = AppTheme.colors,
-                startEnable = lazyListState.canScrollBackward,
-                endEnable = lazyListState.canScrollForward
-            ),
             state = lazyListState,
             contentPadding = cardPaddingWithHeader(),
             horizontalArrangement = rowListGap()

@@ -47,7 +47,6 @@ import ui.components.cards.ContentCard
 import ui.components.cards.HoveredIndicatorHeader
 import ui.theme.AppTheme
 import ui.utils.cardPaddingWithHeader
-import ui.utils.drawRowListMask
 import ui.utils.rowListGap
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_twitter
@@ -64,11 +63,6 @@ fun TwitterCard(twitterList: List<TwitterForumListState>) {
     ) {
         Header(isHovered.value, lazyListState)
         LazyRow(
-            modifier = Modifier.drawRowListMask(
-                colorScheme = AppTheme.colors,
-                startEnable = lazyListState.canScrollBackward,
-                endEnable = lazyListState.canScrollForward
-            ),
             state = lazyListState,
             contentPadding = cardPaddingWithHeader(),
             horizontalArrangement = rowListGap()

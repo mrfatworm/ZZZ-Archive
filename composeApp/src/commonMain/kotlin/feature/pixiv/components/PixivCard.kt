@@ -59,7 +59,6 @@ import ui.components.cards.ContentCard
 import ui.components.cards.HoveredIndicatorHeader
 import ui.theme.AppTheme
 import ui.utils.cardPaddingWithHeader
-import ui.utils.drawRowListMask
 import ui.utils.rowListGap
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_favorite
@@ -80,11 +79,6 @@ fun PixivCard(
     ) {
         Header(isHovered.value, lazyListState, onPixivTagChange)
         LazyRow(
-            modifier = Modifier.drawRowListMask(
-                colorScheme = AppTheme.colors,
-                startEnable = lazyListState.canScrollBackward,
-                endEnable = lazyListState.canScrollForward
-            ),
             state = lazyListState,
             contentPadding = cardPaddingWithHeader(),
             horizontalArrangement = rowListGap()

@@ -19,9 +19,7 @@ import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.ContentCard
 import ui.components.cards.HoveredIndicatorHeader
 import ui.components.items.RarityMiniItem
-import ui.theme.AppTheme
 import ui.utils.cardPaddingWithHeader
-import ui.utils.drawRowListMask
 import ui.utils.rowListGap
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.suggest_w_engines
@@ -41,11 +39,6 @@ fun SuggestWEnginesCard(wEnginesList: List<RarityItem>, wEngineClick: (Int) -> U
             lazyListState = lazyListState
         )
         LazyRow(
-            modifier = Modifier.drawRowListMask(
-                colorScheme = AppTheme.colors,
-                startEnable = lazyListState.canScrollBackward,
-                endEnable = lazyListState.canScrollForward
-            ),
             state = lazyListState,
             contentPadding = cardPaddingWithHeader(),
             horizontalArrangement = rowListGap()
