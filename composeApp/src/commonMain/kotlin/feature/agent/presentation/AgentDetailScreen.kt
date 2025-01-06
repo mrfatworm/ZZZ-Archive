@@ -25,6 +25,8 @@ fun AgentDetailScreen(
     if (uiState.error != null) {
         ErrorScreen(uiState.error!!, onAction = {
             viewModel.onAction(AgentDetailAction.Retry)
+        }, onBack = {
+            onBackClick()
         })
     } else {
         AgentDetailContent(uiState, onAction = { action ->

@@ -19,8 +19,12 @@ fun BangbooDetailScreen(onBackClick: () -> Unit) {
     val viewModel: BangbooDetailViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     if (uiState.error != null) {
-        ErrorScreen(message = uiState.error!!,
-            onAction = { viewModel.onAction(BangbooDetailAction.Retry) })
+        ErrorScreen(
+            message = uiState.error!!,
+            onAction = { viewModel.onAction(BangbooDetailAction.Retry) },
+            onBack = {
+                onBackClick()
+            })
     } else {
         BangbooDetailContent(uiState, onAction = { action ->
             when (action) {

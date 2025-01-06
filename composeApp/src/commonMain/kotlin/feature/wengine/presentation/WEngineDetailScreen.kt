@@ -19,7 +19,12 @@ fun WEngineDetailScreen(onBackClick: () -> Unit) {
     val viewModel: WEngineDetailViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     if (uiState.error != null) {
-        ErrorScreen(uiState.error!!, onAction = { viewModel.onAction(WEngineDetailAction.Retry) })
+        ErrorScreen(
+            uiState.error!!,
+            onAction = { viewModel.onAction(WEngineDetailAction.Retry) },
+            onBack = {
+                onBackClick()
+            })
     } else {
         WEngineDetailContent(uiState) { actions ->
             when (actions) {
