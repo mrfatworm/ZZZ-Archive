@@ -14,6 +14,7 @@ import zzzarchive.composeapp.generated.resources.gentle_house
 import zzzarchive.composeapp.generated.resources.obol_squad
 import zzzarchive.composeapp.generated.resources.section_6
 import zzzarchive.composeapp.generated.resources.sons_of_calydon
+import zzzarchive.composeapp.generated.resources.stars_of_lyra
 import zzzarchive.composeapp.generated.resources.unknown
 import zzzarchive.composeapp.generated.resources.victoria_housekeeping
 
@@ -29,6 +30,7 @@ data class Faction(
             5 -> Res.string.section_6
             6 -> Res.string.criminal_investigation_special_response_team
             7 -> Res.string.sons_of_calydon
+            8 -> Res.string.stars_of_lyra
             else -> Res.string.unknown
         }
     }

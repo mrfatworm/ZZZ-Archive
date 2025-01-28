@@ -61,6 +61,11 @@
     <string name="anomaly">Anomaly</string>
     <string name="defense">Defense</string>
 
+    <!-- Attack Type -->
+    <string name="pierce">Pierce</string>
+    <string name="slash">Slash</string>
+    <string name="strike">Strike</string>
+
     <!-- Faction -->
     <string name="gentle_house">Gentle House</string>
     <string name="victoria_housekeeping">Victoria Housekeeping</string>
@@ -69,11 +74,7 @@
     <string name="section_6">Section 6</string>
     <string name="criminal_investigation_special_response_team">Criminal Investigation Special Response Team</string>
     <string name="sons_of_calydon">Sons of Calydon</string>
-
-    <!-- Attack Type -->
-    <string name="pierce">Pierce</string>
-    <string name="slash">Slash</string>
-    <string name="strike">Strike</string>
+    <string name="stars_of_lyra">Stars of Lyra</string>
 
     <!-- Home -->
     <string name="popular">Popular</string>
