@@ -10,6 +10,7 @@ import feature.drive.data.database.DrivesListItemEntity
 import feature.drive.data.mapper.toDriveListEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import network.ZzzHttp
 
 class DriveRepositoryImpl(
@@ -21,7 +22,7 @@ class DriveRepositoryImpl(
         if (cachedDrivesList.first().isEmpty()) {
             requestAndUpdateDrivesListDB(languagePath)
         }
-        return drivesListDB.getDrivesList()
+        return drivesListDB.getDrivesList().map { it.reversed() }
     }
 
     override suspend fun requestAndUpdateDrivesListDB(languagePath: String): Result<Unit> {
