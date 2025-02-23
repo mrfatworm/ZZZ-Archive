@@ -24,3 +24,7 @@ enum class ZzzRarity(val level: Int, val code: String) {
 fun findRarity(level: Int): ZzzRarity {
     return ZzzRarity.entries.find { it.level == level } ?: ZzzRarity.RARITY_D
 }
+
+fun findRarityFromHoYoLab(level: String): ZzzRarity {
+    return ZzzRarity.entries.find { it.code == level } ?: ZzzRarity.RARITY_D
+}

@@ -7,7 +7,7 @@ package feature.hoyolab.domain
 
 import feature.hoyolab.data.crypto.FakeZzzCrypto
 import feature.hoyolab.data.database.stubHoYoLabAccountEntity
-import feature.hoyolab.data.repository.FakeHoYoLabRepository
+import feature.hoyolab.data.repository.FakeHoYoLabConfigRepository
 import feature.setting.data.FakePreferenceRepository
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -17,7 +17,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class HoYoLabManageUseCaseTest {
-    private val hoYoLabRepository = FakeHoYoLabRepository()
+    private val hoYoLabRepository = FakeHoYoLabConfigRepository()
     private val zzzCrypto = FakeZzzCrypto()
     private val preferencesRepository = FakePreferenceRepository()
     private val useCase = HoYoLabManageUseCase(hoYoLabRepository, zzzCrypto, preferencesRepository)

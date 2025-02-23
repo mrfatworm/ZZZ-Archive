@@ -58,13 +58,14 @@ import zzzarchive.composeapp.generated.resources.bounty_commissions
 import zzzarchive.composeapp.generated.resources.check_in
 import zzzarchive.composeapp.generated.resources.check_in_success
 import zzzarchive.composeapp.generated.resources.engagement_today
+import zzzarchive.composeapp.generated.resources.ic_arrow_next_ios
 import zzzarchive.composeapp.generated.resources.ic_calendar_clock
 import zzzarchive.composeapp.generated.resources.ic_check_circle
 import zzzarchive.composeapp.generated.resources.ic_link
 import zzzarchive.composeapp.generated.resources.ic_warning
 import zzzarchive.composeapp.generated.resources.img_battery_charge
 import zzzarchive.composeapp.generated.resources.img_hoyolab_card_preview
-import zzzarchive.composeapp.generated.resources.investigate_point
+import zzzarchive.composeapp.generated.resources.my_agent
 import zzzarchive.composeapp.generated.resources.not_operating
 import zzzarchive.composeapp.generated.resources.operating
 import zzzarchive.composeapp.generated.resources.purchasable
@@ -84,7 +85,8 @@ fun HoYoLabCard(
     uiState: GameRecordState,
     signResult: String?,
     onSignClick: () -> Unit,
-    onAddAccountClick: () -> Unit
+    onAddAccountClick: () -> Unit,
+    onMyAgentClick: () -> Unit
 ) {
     ContentCard(modifier = Modifier.fillMaxWidth()) {
         Header(uiState, signResult, onSignClick, onAddAccountClick)
@@ -95,7 +97,7 @@ fun HoYoLabCard(
                 verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
             ) {
                 DailyMission(Modifier.weight(1f), uiState)
-                WeeklyMission(Modifier.weight(1f), uiState)
+                WeeklyMission(Modifier.weight(1f), uiState, onMyAgentClick)
             }
         }
     }
@@ -109,7 +111,8 @@ private fun Header(
     onAddAccountClick: () -> Unit
 ) {
     Box(modifier = Modifier.clip(AppTheme.shape.r400).height(120.dp)) {
-        SubcomposeAsyncImage(modifier = Modifier.fillMaxSize().clip(AppTheme.shape.r400),
+        SubcomposeAsyncImage(
+            modifier = Modifier.fillMaxSize().clip(AppTheme.shape.r400),
             model = uiState.cardUrl,
             contentDescription = stringResource(Res.string.user_profile_image),
             contentScale = ContentScale.Crop,
@@ -154,8 +157,9 @@ private fun Header(
 private fun PlayerInfo(
     modifier: Modifier, uiState: GameRecordState, onAddAccountClick: () -> Unit
 ) {
-    SubcomposeAsyncImage(modifier = Modifier.size(AppTheme.size.extraLargeIconSize)
-        .clip(CircleShape).clickable { onAddAccountClick() },
+    SubcomposeAsyncImage(
+        modifier = Modifier.size(AppTheme.size.extraLargeIconSize).clip(CircleShape)
+            .clickable { onAddAccountClick() },
         model = uiState.profileUrl,
         contentDescription = stringResource(Res.string.user_profile_image),
         error = {
@@ -245,27 +249,51 @@ private fun DailyMission(modifier: Modifier, uiState: GameRecordState) {
 }
 
 @Composable
-private fun WeeklyMission(modifier: Modifier, uiState: GameRecordState) {
+private fun WeeklyMission(
+    modifier: Modifier, uiState: GameRecordState, onMyAgentClick: () -> Unit
+) {
     val remainOneDay = uiState.weeklyTask.refreshTime < 86400
     Column(
-        modifier = modifier.clip(AppTheme.shape.r400).widthIn(min = minFlowRowElementWidth)
+        modifier.widthIn(min = minFlowRowElementWidth), verticalArrangement = Arrangement.spacedBy(
+            AppTheme.spacing.s300
+        )
     ) {
-        PlayerTodoItem(
-            title = stringResource(Res.string.bounty_commissions),
-            content = "${uiState.bountyCommission.num} / ${uiState.bountyCommission.total}",
-            isWarning = remainOneDay && (uiState.bountyCommission.total > uiState.bountyCommission.num)
-        )
-        PlayerTodoItem(
-            title = stringResource(Res.string.investigate_point),
-            content = "${uiState.surveyPoints.num} / ${uiState.surveyPoints.total}",
-            isWarning = remainOneDay && (uiState.surveyPoints.total > uiState.surveyPoints.num)
-        )
-        PlayerTodoItem(
-            title = stringResource(Res.string.ridu_weekly),
-            content = "${uiState.weeklyTask.curPoint} / ${uiState.weeklyTask.maxPoint}",
-            isWarning = remainOneDay && (uiState.weeklyTask.curPoint < uiState.weeklyTask.maxPoint)
-        )
+        Column(
+            modifier = Modifier.fillMaxWidth().clip(AppTheme.shape.r400)
+        ) {
+            PlayerTodoItem(
+                title = stringResource(Res.string.bounty_commissions),
+                content = "${uiState.bountyCommission.num} / ${uiState.bountyCommission.total}",
+                isWarning = remainOneDay && (uiState.bountyCommission.total > uiState.bountyCommission.num)
+            )
+            PlayerTodoItem(
+                title = stringResource(Res.string.ridu_weekly),
+                content = "${uiState.weeklyTask.curPoint} / ${uiState.weeklyTask.maxPoint}",
+                isWarning = remainOneDay && (uiState.weeklyTask.curPoint < uiState.weeklyTask.maxPoint)
+            )
+        }
+
+        Row(
+            modifier = Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand).clickable {
+                onMyAgentClick()
+            }.padding(horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s200),
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300, Alignment.End),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = stringResource(Res.string.my_agent),
+                color = AppTheme.colors.onSurfaceVariant,
+                style = AppTheme.typography.titleSmall
+            )
+            Icon(
+                modifier = Modifier.size(AppTheme.size.smallIconSize),
+                imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),
+                contentDescription = null,
+                tint = AppTheme.colors.onSurfaceVariant
+            )
+        }
     }
+
 }
 
 @Composable

@@ -8,7 +8,7 @@ package feature.hoyolab.domain
 import feature.hoyolab.data.crypto.FakeZzzCrypto
 import feature.hoyolab.data.database.FakeHoYoLabAccountDao
 import feature.hoyolab.data.database.stubHoYoLabAccountEntity
-import feature.hoyolab.data.repository.FakeHoYoLabRepository
+import feature.hoyolab.data.repository.FakeHoYoLabConfigRepository
 import feature.hoyolab.model.stubGameRecordResponse
 import feature.hoyolab.model.stubSignResponse
 import feature.setting.data.FakePreferenceRepository
@@ -20,7 +20,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class GameRecordUseCaseTest {
-    private val hoYoLabRepository = FakeHoYoLabRepository()
+    private val hoYoLabRepository = FakeHoYoLabConfigRepository()
     private val accountDao = FakeHoYoLabAccountDao()
     private val preferencesRepository = FakePreferenceRepository()
     private val zzzCrypto = FakeZzzCrypto()

@@ -17,10 +17,10 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
-class HoYoLabRepositoryTest {
+class HoYoLabConfigRepositoryTest {
     private val dao = FakeHoYoLabAccountDao()
     private val httpClient = FakeHoYoLabHttp()
-    private val repository = HoYoLabRepositoryImpl(httpClient, dao)
+    private val repository = HoYoLabConfigRepositoryImpl(httpClient, dao)
 
     @Test
     fun `Request user game roles by LToken THEN success`() = runTest {

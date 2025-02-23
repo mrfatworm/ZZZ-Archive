@@ -18,7 +18,7 @@ import feature.hoyolab.model.stubSignResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class FakeHoYoLabRepository : HoYoLabRepository {
+class FakeHoYoLabConfigRepository : HoYoLabConfigRepository {
     private var isError = false
     private val accountListInDB = mutableListOf(stubHoYoLabAccountEntity)
 

@@ -65,6 +65,7 @@ class HoYoLabSyncViewModel(
             else -> {}
         }
     }
+
     private suspend fun observeDefaultAccountUid() {
         hoYoLabPreferenceUseCase.getDefaultHoYoLabAccountUid().collect { uid ->
             _uiState.update { state ->

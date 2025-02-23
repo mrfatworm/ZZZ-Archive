@@ -6,6 +6,7 @@
 package network
 
 import feature.hoyolab.model.GameRecordResponse
+import feature.hoyolab.model.MyAgentListResponse
 import feature.hoyolab.model.PlayerDetailResponse
 import feature.hoyolab.model.SignResponse
 import feature.hoyolab.model.UserGameRolesResponse
@@ -75,6 +76,24 @@ class HoYoLabHttpImpl(engine: HttpClientEngine) : HoYoLabHttp {
         cookie("ltoken_v2", lToken)
         cookie("ltuid_v2", ltUid)
         header("x-rpc-signgame", "zzz")
+        contentType(ContentType.Application.Json)
+    }.body()
+
+    override suspend fun requestMyAgentList(
+        languageCode: String,
+        uid: Int,
+        region: String,
+        lToken: String,
+        ltUid: String
+    ): MyAgentListResponse = client.get {
+        url {
+            takeFrom("https://sg-public-api.hoyolab.com/event/game_record_zzz/api/zzz/avatar/basic")
+        }
+        parameter("server", region)
+        parameter("role_id", uid)
+        cookie("ltoken_v2", lToken)
+        cookie("ltuid_v2", ltUid)
+        header("x-rpc-lang", languageCode)
         contentType(ContentType.Application.Json)
     }.body()
 }

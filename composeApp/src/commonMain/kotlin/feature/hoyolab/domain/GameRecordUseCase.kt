@@ -7,7 +7,7 @@ package feature.hoyolab.domain
 
 import feature.hoyolab.data.crypto.ZzzCrypto
 import feature.hoyolab.data.database.HoYoLabAccountDao
-import feature.hoyolab.data.repository.HoYoLabRepository
+import feature.hoyolab.data.repository.HoYoLabConfigRepository
 import feature.hoyolab.model.GameRecordData
 import feature.hoyolab.model.SignResponse
 import feature.setting.data.PreferencesRepository
@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 
 class GameRecordUseCase(
-    private val hoYoLabRepository: HoYoLabRepository,
+    private val hoYoLabConfigRepository: HoYoLabConfigRepository,
     private val accountDao: HoYoLabAccountDao,
     private val preferencesRepository: PreferencesRepository,
     private val zzzCrypto: ZzzCrypto,
@@ -32,7 +32,7 @@ class GameRecordUseCase(
         val lToken = zzzCrypto.decryptData(account.lToken)
         val ltUid = zzzCrypto.decryptData(account.ltUid)
         val uid = account.uid
-        val result = hoYoLabRepository.requestGameRecord(uid, region, lToken, ltUid)
+        val result = hoYoLabConfigRepository.requestGameRecord(uid, region, lToken, ltUid)
         result.fold(onSuccess = {
             return Result.success(it.data)
         }, onFailure = {
@@ -53,7 +53,7 @@ class GameRecordUseCase(
         val languageCode = languageUseCase.getLanguage().first().officialCode
         val lToken = zzzCrypto.decryptData(account.first().lToken)
         val ltUid = zzzCrypto.decryptData(account.first().ltUid)
-        val result = hoYoLabRepository.requestSign(languageCode, lToken, ltUid)
+        val result = hoYoLabConfigRepository.requestSign(languageCode, lToken, ltUid)
         result.fold(onSuccess = {
             return Result.success(it)
         }, onFailure = {

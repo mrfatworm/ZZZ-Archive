@@ -6,10 +6,12 @@
 package network
 
 import feature.hoyolab.model.GameRecordResponse
+import feature.hoyolab.model.MyAgentListResponse
 import feature.hoyolab.model.PlayerDetailResponse
 import feature.hoyolab.model.SignResponse
 import feature.hoyolab.model.UserGameRolesResponse
 import feature.hoyolab.model.stubGameRecordResponse
+import feature.hoyolab.model.stubMyAgentListResponse
 import feature.hoyolab.model.stubPlayerDetailResponse
 import feature.hoyolab.model.stubSignResponse
 import feature.hoyolab.model.stubUserGameRolesResponse
@@ -59,5 +61,18 @@ class FakeHoYoLabHttp : HoYoLabHttp {
             throw Exception("Fake error")
         }
         return stubSignResponse
+    }
+
+    override suspend fun requestMyAgentList(
+        languageCode: String,
+        uid: Int,
+        region: String,
+        lToken: String,
+        ltUid: String
+    ): MyAgentListResponse {
+        if (isError) {
+            throw Exception("Fake error")
+        }
+        return stubMyAgentListResponse
     }
 }

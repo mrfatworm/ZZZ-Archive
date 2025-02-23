@@ -12,7 +12,7 @@ import feature.hoyolab.model.PlayerDetailResponse
 import feature.hoyolab.model.SignResponse
 import kotlinx.coroutines.flow.Flow
 
-interface HoYoLabRepository {
+interface HoYoLabConfigRepository {
     suspend fun requestUserGameRolesByLToken(
         region: String, lToken: String, ltUid: String
     ): Result<List<PlayerBasicInfo>>

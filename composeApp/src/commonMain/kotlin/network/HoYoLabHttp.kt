@@ -6,6 +6,7 @@
 package network
 
 import feature.hoyolab.model.GameRecordResponse
+import feature.hoyolab.model.MyAgentListResponse
 import feature.hoyolab.model.PlayerDetailResponse
 import feature.hoyolab.model.SignResponse
 import feature.hoyolab.model.UserGameRolesResponse
@@ -24,4 +25,8 @@ interface HoYoLabHttp {
     ): GameRecordResponse
 
     suspend fun requestSign(languageCode: String, lToken: String, ltUid: String): SignResponse
+
+    suspend fun requestMyAgentList(
+        languageCode: String, uid: Int, region: String, lToken: String, ltUid: String
+    ): MyAgentListResponse
 }

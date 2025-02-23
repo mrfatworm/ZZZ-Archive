@@ -15,6 +15,7 @@ import feature.bangboo.presentation.BangbooListScreen
 import feature.drive.presentation.DrivesListScreen
 import feature.feedback.presentation.FeedbackScreen
 import feature.hoyolab.presentation.HoYoLabSyncScreen
+import feature.hoyolab.presentation.MyAgentsListScreen
 import feature.setting.presentation.SettingScreen
 import feature.wengine.presentation.WEngineDetailScreen
 import feature.wengine.presentation.WEnginesListScreen
@@ -100,6 +101,15 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
         exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }) {
         HoYoLabSyncScreen(onBackClick = { navActions.back() }, navigateToFeedback = {
             navActions.navigationTo(Screen.Feedback)
+        })
+    }
+
+    composable(
+        route = Screen.MyAgent.route,
+        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
+        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }) {
+        MyAgentsListScreen(onBackClick = {
+            navActions.back()
         })
     }
 }

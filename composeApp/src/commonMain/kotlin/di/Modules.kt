@@ -48,12 +48,16 @@ import feature.home.presentation.HomeViewModel
 import feature.hoyolab.data.crypto.ZzzCrypto
 import feature.hoyolab.data.crypto.ZzzCryptoImpl
 import feature.hoyolab.data.database.HoYoLabAccountDB
-import feature.hoyolab.data.repository.HoYoLabRepository
-import feature.hoyolab.data.repository.HoYoLabRepositoryImpl
+import feature.hoyolab.data.repository.HoYoLabAgentRepository
+import feature.hoyolab.data.repository.HoYoLabAgentRepositoryImpl
+import feature.hoyolab.data.repository.HoYoLabConfigRepository
+import feature.hoyolab.data.repository.HoYoLabConfigRepositoryImpl
 import feature.hoyolab.domain.GameRecordUseCase
+import feature.hoyolab.domain.HoYoLabAgentUseCase
 import feature.hoyolab.domain.HoYoLabManageUseCase
 import feature.hoyolab.domain.HoYoLabPreferenceUseCase
 import feature.hoyolab.presentation.HoYoLabSyncViewModel
+import feature.hoyolab.presentation.MyAgentsListViewModel
 import feature.news.data.OfficialNewsRepository
 import feature.news.data.OfficialNewsRepositoryImpl
 import feature.news.domain.OfficialNewsUseCase
@@ -137,7 +141,8 @@ val sharedModule = module {
     single<BangbooRepository> { BangbooRepositoryImpl(get(), get()) }
     single<DriveRepository> { DriveRepositoryImpl(get(), get()) }
     single<GoogleDocRepository> { GoogleDocRepositoryImpl(get()) }
-    single<HoYoLabRepository> { HoYoLabRepositoryImpl(get(), get()) }
+    single<HoYoLabConfigRepository> { HoYoLabConfigRepositoryImpl(get(), get()) }
+    single<HoYoLabAgentRepository> { HoYoLabAgentRepositoryImpl(get()) }
     single<ForumRepository> { ForumRepositoryImpl(get()) }
     single<ZzzCrypto> { ZzzCryptoImpl() }
 
@@ -162,6 +167,7 @@ val sharedModule = module {
     }
     single<UiScaleUseCase> { UiScaleUseCase(get()) }
     single<HoYoLabManageUseCase> { HoYoLabManageUseCase(get(), get(), get()) }
+    single<HoYoLabAgentUseCase> { HoYoLabAgentUseCase(get(), get(), get(), get(), get()) }
     single<HoYoLabPreferenceUseCase> { HoYoLabPreferenceUseCase(get()) }
     single<GameRecordUseCase> { GameRecordUseCase(get(), get(), get(), get(), get()) }
     single<ForumUseCase> { ForumUseCase(get()) }
@@ -181,4 +187,5 @@ val sharedModule = module {
     viewModelOf(::SettingViewModel)
     viewModelOf(::FeedbackViewModel)
     viewModelOf(::HoYoLabSyncViewModel)
+    viewModelOf(::MyAgentsListViewModel)
 }

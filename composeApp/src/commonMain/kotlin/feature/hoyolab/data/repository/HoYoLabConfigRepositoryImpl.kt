@@ -15,9 +15,9 @@ import feature.hoyolab.model.SignResponse
 import kotlinx.coroutines.flow.Flow
 import network.HoYoLabHttp
 
-class HoYoLabRepositoryImpl(
+class HoYoLabConfigRepositoryImpl(
     private val httpClient: HoYoLabHttp, private val hoYoLabAccountDao: HoYoLabAccountDao
-) : HoYoLabRepository {
+) : HoYoLabConfigRepository {
     override suspend fun requestUserGameRolesByLToken(
         region: String, lToken: String, ltUid: String
     ): Result<List<PlayerBasicInfo>> {

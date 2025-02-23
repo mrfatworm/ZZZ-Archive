@@ -19,6 +19,7 @@ import zzzarchive.composeapp.generated.resources.function
 import zzzarchive.composeapp.generated.resources.home
 import zzzarchive.composeapp.generated.resources.hoyolab_sync
 import zzzarchive.composeapp.generated.resources.ic_help
+import zzzarchive.composeapp.generated.resources.my_agent
 import zzzarchive.composeapp.generated.resources.setting
 import zzzarchive.composeapp.generated.resources.unknown
 import zzzarchive.composeapp.generated.resources.w_engines
@@ -94,4 +95,9 @@ sealed class Screen(
     data object HoYoLabSync : Screen(
         route = "hoyolabSync", textRes = Res.string.hoyolab_sync
     )
+
+    data object MyAgent : Screen(
+        route = "myAgent", textRes = Res.string.my_agent
+    )
+
 }

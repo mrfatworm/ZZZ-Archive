@@ -7,7 +7,7 @@ package feature.hoyolab.domain
 
 import feature.hoyolab.data.crypto.ZzzCrypto
 import feature.hoyolab.data.database.HoYoLabAccountEntity
-import feature.hoyolab.data.repository.HoYoLabRepository
+import feature.hoyolab.data.repository.HoYoLabConfigRepository
 import feature.setting.data.PreferencesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
@@ -20,19 +20,19 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
 class HoYoLabManageUseCase(
-    private val hoYoLabRepository: HoYoLabRepository,
+    private val hoYoLabConfigRepository: HoYoLabConfigRepository,
     private val zzzCryptoImpl: ZzzCrypto,
     private val preferencesRepository: PreferencesRepository
 ) {
     suspend fun requestUserInfoAndSave(
         region: String, lToken: String, ltUid: String
     ): Result<Unit> {
-        val result = hoYoLabRepository.requestUserGameRolesByLToken(region, lToken, ltUid)
+        val result = hoYoLabConfigRepository.requestUserGameRolesByLToken(region, lToken, ltUid)
         result.fold(onSuccess = { accountInfo ->
             if (accountInfo.isEmpty()) {
                 return Result.failure(Exception("No account found"))
             } else {
-                val playerDetailResult = hoYoLabRepository.requestPlayerDetail(
+                val playerDetailResult = hoYoLabConfigRepository.requestPlayerDetail(
                     accountInfo.first().uid.toInt(),
                     region,
                     lToken,
@@ -75,7 +75,7 @@ class HoYoLabManageUseCase(
         val currentTime = Clock.System.now().toEpochMilliseconds()
         val encryptLToken = zzzCryptoImpl.encryptData(lToken)
         val encryptLtUid = zzzCryptoImpl.encryptData(ltUid)
-        hoYoLabRepository.addAccountToDB(
+        hoYoLabConfigRepository.addAccountToDB(
             uid.toInt(),
             region,
             regionName,
@@ -90,24 +90,24 @@ class HoYoLabManageUseCase(
     }
 
     suspend fun reSyncAccount(uid: Int) {
-        val account = hoYoLabRepository.getAccountFromDB(uid).filterNotNull()
+        val account = hoYoLabConfigRepository.getAccountFromDB(uid).filterNotNull()
         val decryptedLToken = zzzCryptoImpl.decryptData(account.first().lToken)
         val decryptedLtUid = zzzCryptoImpl.decryptData(account.first().ltUid)
         requestUserInfoAndSave(account.first().region, decryptedLToken, decryptedLtUid)
     }
 
     suspend fun getAllAccountsFromDB(): Flow<List<HoYoLabAccountEntity>> =
-        hoYoLabRepository.getAllAccountsFromDB()
+        hoYoLabConfigRepository.getAllAccountsFromDB()
 
     private suspend fun setDefaultAccountIfFirstAccount(uid: String) {
-        if (hoYoLabRepository.getAllAccountsFromDB().firstOrNull()?.isEmpty() == true) {
+        if (hoYoLabConfigRepository.getAllAccountsFromDB().firstOrNull()?.isEmpty() == true) {
             preferencesRepository.setDefaultHoYoLabAccountUid(uid.toInt())
         }
     }
 
 
     suspend fun deleteAccountFromDB(uid: Int) {
-        hoYoLabRepository.deleteAccountFromDB(uid)
+        hoYoLabConfigRepository.deleteAccountFromDB(uid)
         resetDefaultIfDeletedDefaultAccount(uid)
     }
 
@@ -115,7 +115,8 @@ class HoYoLabManageUseCase(
     private suspend fun resetDefaultIfDeletedDefaultAccount(uid: Int) {
         if (preferencesRepository.getDefaultHoYoLabAccountUid().first() == uid) {
             preferencesRepository.setDefaultHoYoLabAccountUid(
-                hoYoLabRepository.getAllAccountsFromDB().firstOrNull()?.firstOrNull()?.uid ?: 0
+                hoYoLabConfigRepository.getAllAccountsFromDB().firstOrNull()?.firstOrNull()?.uid
+                    ?: 0
             )
         }
     }
