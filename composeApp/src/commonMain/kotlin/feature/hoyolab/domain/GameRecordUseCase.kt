@@ -29,15 +29,21 @@ class GameRecordUseCase(
         val defaultAccountUid = preferencesRepository.getDefaultHoYoLabAccountUid().first()
         val account = accountDao.getAccount(defaultAccountUid).filterNotNull().first()
         val region = account.region
-        val lToken = zzzCrypto.decryptData(account.lToken)
-        val ltUid = zzzCrypto.decryptData(account.ltUid)
         val uid = account.uid
-        val result = hoYoLabConfigRepository.requestGameRecord(uid, region, lToken, ltUid)
-        result.fold(onSuccess = {
-            return Result.success(it.data)
-        }, onFailure = {
-            return Result.failure(it)
-        })
+        try {
+            val lToken = zzzCrypto.decryptData(account.lToken)
+            val ltUid = zzzCrypto.decryptData(account.ltUid)
+            hoYoLabConfigRepository.requestGameRecord(uid, region, lToken, ltUid).fold(onSuccess = {
+                return Result.success(it.data)
+            }, onFailure = {
+                return Result.failure(it)
+            })
+        } catch (e: Exception) {
+            accountDao.deleteAccountList()
+            preferencesRepository.setDefaultHoYoLabAccountUid(0)
+            return Result.failure(e)
+        }
+
     }
 
     fun getGameRecordPeriodically(perMinutes: Int): Flow<Result<GameRecordData>> = flow {
