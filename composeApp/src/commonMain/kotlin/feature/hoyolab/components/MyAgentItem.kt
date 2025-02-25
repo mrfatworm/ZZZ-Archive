@@ -77,17 +77,27 @@ fun MyAgentItem(
                 CinemaCountTag(Modifier.align(Alignment.TopEnd), rank)
             }
 
-            RarityIndicator(Modifier.align(Alignment.BottomStart), rarity)
+            Column(
+                modifier = Modifier.align(Alignment.BottomStart).fillMaxWidth()
+                    .background(AppTheme.colors.hoveredMask).padding(top = AppTheme.spacing.s100),
+                verticalArrangement = Arrangement.spacedBy(
+                    AppTheme.spacing.s100
+                )
+            ) {
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = "Lv $level",
+                    textAlign = TextAlign.Center,
+                    overflow = TextOverflow.Ellipsis,
+                    style = AppTheme.typography.labelMedium,
+                    color = AppTheme.colors.onHoveredMaskVariant,
+                    maxLines = 1
+                )
+                RarityIndicator(rarity = rarity)
+            }
+
         }
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = "Lv $level",
-            textAlign = TextAlign.Center,
-            overflow = TextOverflow.Ellipsis,
-            style = AppTheme.typography.labelLarge,
-            color = AppTheme.colors.onSurfaceVariant,
-            maxLines = 1
-        )
+
     }
 }
 
@@ -95,17 +105,17 @@ fun MyAgentItem(
 private fun CinemaCountTag(modifier: Modifier, cinemaCount: Int) {
     Text(
         modifier = modifier.background(
-            AppTheme.colors.imageTagContainer,
+            AppTheme.colors.hoveredMask,
             RoundedCornerShape(bottomStart = AppTheme.spacing.s300)
         ).padding(horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s200),
         text = cinemaCount.toString(),
-        color = AppTheme.colors.imageOnTagContainer,
-        style = AppTheme.typography.labelLarge
+        color = AppTheme.colors.onHoveredMask,
+        style = AppTheme.typography.titleMedium
     )
 }
 
 @Composable
-private fun RarityIndicator(modifier: Modifier, rarity: ZzzRarity) {
+private fun RarityIndicator(modifier: Modifier = Modifier, rarity: ZzzRarity) {
     Spacer(
         modifier.fillMaxWidth().height(AppTheme.spacing.s300)
             .background(rarity.getColor(AppTheme.colors))

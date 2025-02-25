@@ -5,6 +5,7 @@
 
 package feature.hoyolab.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,6 +18,7 @@ import feature.hoyolab.components.MyAgentsListCard
 import feature.hoyolab.model.MyAgentsListState
 import org.jetbrains.compose.resources.stringResource
 import ui.components.TopBarRound
+import ui.theme.AppTheme
 import ui.utils.contentGap
 import ui.utils.horizontalSafePadding
 import ui.utils.verticalSafePadding
@@ -31,6 +33,7 @@ fun MyAgentsListScreenMedium(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(AppTheme.colors.surface)
             .verticalScroll(rememberScrollState())
             .padding(horizontalSafePadding())
             .padding(verticalSafePadding()),

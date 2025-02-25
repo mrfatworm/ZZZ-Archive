@@ -254,9 +254,7 @@ private fun WeeklyMission(
 ) {
     val remainOneDay = uiState.weeklyTask.refreshTime < 86400
     Column(
-        modifier.widthIn(min = minFlowRowElementWidth), verticalArrangement = Arrangement.spacedBy(
-            AppTheme.spacing.s300
-        )
+        modifier.widthIn(min = minFlowRowElementWidth)
     ) {
         Column(
             modifier = Modifier.fillMaxWidth().clip(AppTheme.shape.r400)
@@ -276,7 +274,7 @@ private fun WeeklyMission(
         Row(
             modifier = Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand).clickable {
                 onMyAgentClick()
-            }.padding(horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s200),
+            }.padding(horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s300),
             horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300, Alignment.End),
             verticalAlignment = Alignment.CenterVertically
         ) {
