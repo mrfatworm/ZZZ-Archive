@@ -10,6 +10,8 @@ import feature.hoyolab.model.MyAgentListResponse
 import feature.hoyolab.model.PlayerDetailResponse
 import feature.hoyolab.model.SignResponse
 import feature.hoyolab.model.UserGameRolesResponse
+import feature.hoyolab.model.my_agent_detail.MyAgentDetailResponse
+import feature.hoyolab.model.my_agent_detail.stubMyAgentDetailResponse
 import feature.hoyolab.model.stubGameRecordResponse
 import feature.hoyolab.model.stubMyAgentListResponse
 import feature.hoyolab.model.stubPlayerDetailResponse
@@ -74,5 +76,19 @@ class FakeHoYoLabHttp : HoYoLabHttp {
             throw Exception("Fake error")
         }
         return stubMyAgentListResponse
+    }
+
+    override suspend fun requestMyAgentDetail(
+        languageCode: String,
+        uid: Int,
+        region: String,
+        agentId: Int,
+        lToken: String,
+        ltUid: String
+    ): MyAgentDetailResponse {
+        if (isError) {
+            throw Exception("Fake error")
+        }
+        return stubMyAgentDetailResponse
     }
 }

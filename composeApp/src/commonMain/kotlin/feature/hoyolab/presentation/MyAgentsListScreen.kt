@@ -15,7 +15,7 @@ import ui.utils.AdaptiveLayoutType
 
 @Composable
 fun MyAgentsListScreen(
-    onAgentClick: (Int) -> Unit = {},
+    onAgentClick: (Int) -> Unit,
     onBackClick: () -> Unit
 ) {
     val viewModel: MyAgentsListViewModel = koinViewModel()

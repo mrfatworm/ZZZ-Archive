@@ -57,6 +57,7 @@ import feature.hoyolab.domain.HoYoLabAgentUseCase
 import feature.hoyolab.domain.HoYoLabManageUseCase
 import feature.hoyolab.domain.HoYoLabPreferenceUseCase
 import feature.hoyolab.presentation.HoYoLabSyncViewModel
+import feature.hoyolab.presentation.MyAgentDetailViewModel
 import feature.hoyolab.presentation.MyAgentsListViewModel
 import feature.news.data.OfficialNewsRepository
 import feature.news.data.OfficialNewsRepositoryImpl
@@ -188,4 +189,5 @@ val sharedModule = module {
     viewModelOf(::FeedbackViewModel)
     viewModelOf(::HoYoLabSyncViewModel)
     viewModelOf(::MyAgentsListViewModel)
+    viewModelOf(::MyAgentDetailViewModel)
 }

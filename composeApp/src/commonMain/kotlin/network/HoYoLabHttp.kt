@@ -10,6 +10,7 @@ import feature.hoyolab.model.MyAgentListResponse
 import feature.hoyolab.model.PlayerDetailResponse
 import feature.hoyolab.model.SignResponse
 import feature.hoyolab.model.UserGameRolesResponse
+import feature.hoyolab.model.my_agent_detail.MyAgentDetailResponse
 
 interface HoYoLabHttp {
     suspend fun requestUserGameRolesByLToken(
@@ -29,4 +30,8 @@ interface HoYoLabHttp {
     suspend fun requestMyAgentList(
         languageCode: String, uid: Int, region: String, lToken: String, ltUid: String
     ): MyAgentListResponse
+
+    suspend fun requestMyAgentDetail(
+        languageCode: String, uid: Int, region: String, agentId: Int, lToken: String, ltUid: String
+    ): MyAgentDetailResponse
 }

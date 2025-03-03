@@ -15,6 +15,7 @@ import feature.bangboo.presentation.BangbooListScreen
 import feature.drive.presentation.DrivesListScreen
 import feature.feedback.presentation.FeedbackScreen
 import feature.hoyolab.presentation.HoYoLabSyncScreen
+import feature.hoyolab.presentation.MyAgentDetailScreen
 import feature.hoyolab.presentation.MyAgentsListScreen
 import feature.setting.presentation.SettingScreen
 import feature.wengine.presentation.WEngineDetailScreen
@@ -105,10 +106,23 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
     }
 
     composable(
-        route = Screen.MyAgent.route,
+        route = Screen.MyAgentsList.route,
         enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
         exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }) {
-        MyAgentsListScreen(onBackClick = {
+        MyAgentsListScreen(
+            onAgentClick = { id ->
+                navActions.navigationToRoute(Screen.MyAgentDetail.createRoute(id))
+            },
+            onBackClick = {
+            navActions.back()
+        })
+    }
+
+    composable(
+        route = Screen.MyAgentDetail.route, arguments = Screen.MyAgentDetail.navArguments,
+        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
+        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }) {
+        MyAgentDetailScreen(onBackClick = {
             navActions.back()
         })
     }

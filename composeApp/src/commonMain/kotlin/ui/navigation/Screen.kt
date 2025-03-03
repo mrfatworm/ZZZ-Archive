@@ -96,8 +96,16 @@ sealed class Screen(
         route = "hoyolabSync", textRes = Res.string.hoyolab_sync
     )
 
-    data object MyAgent : Screen(
+    data object MyAgentsList : Screen(
         route = "myAgent", textRes = Res.string.my_agent
     )
+
+    data object MyAgentDetail : Screen(
+        route = "myAgentDetail/{agentId}", navArguments = listOf(navArgument("agentId") {
+            type = NavType.IntType
+        })
+    ) {
+        fun createRoute(agentId: Int) = "myAgentDetail/$agentId"
+    }
 
 }

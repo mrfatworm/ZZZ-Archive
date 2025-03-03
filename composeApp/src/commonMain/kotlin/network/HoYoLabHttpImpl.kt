@@ -10,6 +10,7 @@ import feature.hoyolab.model.MyAgentListResponse
 import feature.hoyolab.model.PlayerDetailResponse
 import feature.hoyolab.model.SignResponse
 import feature.hoyolab.model.UserGameRolesResponse
+import feature.hoyolab.model.my_agent_detail.MyAgentDetailResponse
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.cookie
@@ -91,6 +92,26 @@ class HoYoLabHttpImpl(engine: HttpClientEngine) : HoYoLabHttp {
         }
         parameter("server", region)
         parameter("role_id", uid)
+        cookie("ltoken_v2", lToken)
+        cookie("ltuid_v2", ltUid)
+        header("x-rpc-lang", languageCode)
+        contentType(ContentType.Application.Json)
+    }.body()
+
+    override suspend fun requestMyAgentDetail(
+        languageCode: String,
+        uid: Int,
+        region: String,
+        agentId: Int,
+        lToken: String,
+        ltUid: String
+    ): MyAgentDetailResponse = client.get {
+        url {
+            takeFrom("https://sg-public-api.hoyolab.com/event/game_record_zzz/api/zzz/avatar/info")
+        }
+        parameter("server", region)
+        parameter("role_id", uid)
+        parameter("id_list[]", agentId)
         cookie("ltoken_v2", lToken)
         cookie("ltuid_v2", ltUid)
         header("x-rpc-lang", languageCode)

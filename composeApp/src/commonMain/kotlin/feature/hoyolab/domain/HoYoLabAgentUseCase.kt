@@ -4,6 +4,7 @@ import feature.hoyolab.data.crypto.ZzzCrypto
 import feature.hoyolab.data.database.HoYoLabAccountDao
 import feature.hoyolab.data.repository.HoYoLabAgentRepository
 import feature.hoyolab.model.MyAgentListItem
+import feature.hoyolab.model.my_agent_detail.MyAgentDetailListItem
 import feature.setting.data.PreferencesRepository
 import feature.setting.domain.LanguageUseCase
 import kotlinx.coroutines.flow.filterNotNull
@@ -26,6 +27,23 @@ class HoYoLabAgentUseCase(
         val ltUid = zzzCrypto.decryptData(account.ltUid)
         val uid = account.uid
         val result = repository.requestPlayerAgentList(languageCode, uid, region, lToken, ltUid)
+        result.fold(onSuccess = {
+            return Result.success(it)
+        }, onFailure = {
+            return Result.failure(it)
+        })
+    }
+
+    suspend fun getAgentDetail(agentId: Int): Result<MyAgentDetailListItem> {
+        val defaultAccountUid = preferencesRepository.getDefaultHoYoLabAccountUid().first()
+        val account = accountDao.getAccount(defaultAccountUid).filterNotNull().first()
+        val languageCode = languageUseCase.getLanguage().first().officialCode
+        val region = account.region
+        val lToken = zzzCrypto.decryptData(account.lToken)
+        val ltUid = zzzCrypto.decryptData(account.ltUid)
+        val uid = account.uid
+        val result =
+            repository.requestPlayerAgentDetail(languageCode, uid, region, lToken, ltUid, agentId)
         result.fold(onSuccess = {
             return Result.success(it)
         }, onFailure = {

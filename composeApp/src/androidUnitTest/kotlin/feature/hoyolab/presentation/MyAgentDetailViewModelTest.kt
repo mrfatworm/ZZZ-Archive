@@ -7,8 +7,9 @@ package feature.hoyolab.presentation
 
 
 import MainDispatcherRule
+import androidx.lifecycle.SavedStateHandle
 import feature.hoyolab.domain.HoYoLabAgentUseCase
-import feature.hoyolab.model.stubMyAgentsList
+import feature.hoyolab.model.my_agent_detail.stubMyAgentDetailListItem
 import io.mockk.coEvery
 import io.mockk.mockk
 import org.junit.Rule
@@ -16,26 +17,29 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class MyAgentsListViewModelTest {
+class MyAgentDetailViewModelTest {
 
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
     private val hoYoLabAgentUseCase = mockk<HoYoLabAgentUseCase>()
-    private lateinit var viewModel: MyAgentsListViewModel
+    private val savedStateHandle = SavedStateHandle().apply {
+        set("agentId", 1)
+    }
+    private lateinit var viewModel: MyAgentDetailViewModel
 
     @BeforeTest
     fun setup() {
         coEvery {
-            hoYoLabAgentUseCase.getAgentsList()
-        } returns Result.success(stubMyAgentsList)
+            hoYoLabAgentUseCase.getAgentDetail(any())
+        } returns Result.success(stubMyAgentDetailListItem)
 
-        viewModel = MyAgentsListViewModel(hoYoLabAgentUseCase)
+        viewModel = MyAgentDetailViewModel(savedStateHandle, hoYoLabAgentUseCase)
     }
 
     @Test
     fun `Init data success`() {
         val state = viewModel.uiState.value
-        assertEquals(state.agentsList, stubMyAgentsList)
+        assertEquals(state.agentDetail, stubMyAgentDetailListItem)
     }
 }

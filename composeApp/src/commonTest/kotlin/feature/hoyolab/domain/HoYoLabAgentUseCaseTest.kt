@@ -9,6 +9,7 @@ import feature.hoyolab.data.crypto.FakeZzzCrypto
 import feature.hoyolab.data.database.FakeHoYoLabAccountDao
 import feature.hoyolab.data.database.stubHoYoLabAccountEntity
 import feature.hoyolab.data.repository.FakeHoYoLabAgentRepository
+import feature.hoyolab.model.my_agent_detail.stubMyAgentDetailListItem
 import feature.hoyolab.model.stubMyAgentsList
 import feature.setting.data.FakePreferenceRepository
 import feature.setting.domain.FakeLanguageUseCase
@@ -37,5 +38,11 @@ class HoYoLabAgentUseCaseTest {
     fun `Get agents list THEN success`() = runTest {
         val result = useCase.getAgentsList()
         assertEquals(Result.success(stubMyAgentsList), result)
+    }
+
+    @Test
+    fun `Get agent detail THEN success`() = runTest {
+        val result = useCase.getAgentDetail(1)
+        assertEquals(Result.success(stubMyAgentDetailListItem), result)
     }
 }

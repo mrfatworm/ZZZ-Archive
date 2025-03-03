@@ -50,7 +50,7 @@ fun HomeScreenDual(
                 }, onAddAccountClick = {
                     onAction(HomeAction.NavigateTo(Screen.HoYoLabSync.route))
                 }, onMyAgentClick = {
-                    onAction(HomeAction.NavigateTo(Screen.MyAgent.route))
+                    onAction(HomeAction.NavigateTo(Screen.MyAgentsList.route))
                 })
                 PixivCard(uiState.pixivTopics) {
                     onAction(HomeAction.ChangePixivTag(it))
