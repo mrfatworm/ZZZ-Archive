@@ -14,7 +14,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import feature.hoyolab.components.my_agent_detail.MyAgentDrivesCard
 import feature.hoyolab.components.my_agent_detail.MyAgentImageCard
+import feature.hoyolab.components.my_agent_detail.MyAgentPropertiesCard
 import feature.hoyolab.components.my_agent_detail.MyAgentSkillRowCard
 import feature.hoyolab.components.my_agent_detail.MyAgentWeaponScoreCard
 import feature.hoyolab.model.my_agent_detail.MyAgentDetailState
@@ -49,6 +51,16 @@ fun MyAgentDetailScreenSingle(
         MyAgentWeaponScoreCard(
             weapon = uiState.agentDetail.weapon,
             hit = uiState.agentDetail.equipPlanInfo?.validPropertyCnt
+        )
+        MyAgentPropertiesCard(
+            properties = uiState.agentDetail.properties,
+            planProperties = uiState.agentDetail.equipPlanInfo?.gameDefault?.propertyList
+                ?: emptyList()
+        )
+        MyAgentDrivesCard(
+            drives = uiState.agentDetail.equip,
+            planProperties = uiState.agentDetail.equipPlanInfo?.gameDefault?.propertyList
+                ?: emptyList()
         )
     }
 }

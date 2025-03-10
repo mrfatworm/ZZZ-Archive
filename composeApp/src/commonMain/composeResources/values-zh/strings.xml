@@ -218,6 +218,6 @@
     <string name="my_agent">我的代理人</string>
     <string name="w_engine_not_equipped">音擎未裝備</string>
     <string name="effective_sub_stats">有效詞條</string>
-    <string name="hit">命中</string>
+    <string name="hit">命中 %1$d</string>
 
 </resources>

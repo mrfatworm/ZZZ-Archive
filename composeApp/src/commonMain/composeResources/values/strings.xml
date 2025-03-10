@@ -218,6 +218,6 @@
     <string name="my_agent">My Agent</string>
     <string name="w_engine_not_equipped">W-Engine Not Equipped</string>
     <string name="effective_sub_stats">Effective Sub Stats</string>
-    <string name="hit">Hit</string>
+    <string name="hit">Hit %1$d</string>
 
 </resources>
