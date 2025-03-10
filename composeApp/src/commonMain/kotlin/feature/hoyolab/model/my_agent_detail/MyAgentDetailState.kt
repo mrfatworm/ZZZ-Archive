@@ -27,5 +27,7 @@ val emptyMyAgentDetailListItem = MyAgentDetailListItem(
     attribute = AgentAttribute.None,
     equip = emptyList(),
     weapon = emptyMyAgentDetailWeaponResponse,
-    properties = emptyList()
+    properties = emptyList(),
+    skills = emptyList(),
+    equipPlanInfo = null
 )

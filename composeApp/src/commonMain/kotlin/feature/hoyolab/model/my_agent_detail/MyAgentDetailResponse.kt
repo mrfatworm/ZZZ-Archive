@@ -31,11 +31,12 @@ data class MyAgentDetailItemResponse(
     @SerialName("group_icon_path") val groupIconPath: String,
     @SerialName("hollow_icon_path") val hollowIconPath: String,
     val equip: List<MyAgentDetailEquipResponse>,
-    val weapon: MyAgentDetailWeaponResponse,
+    val weapon: MyAgentDetailWeaponResponse? = null,
     val properties: List<MyAgentDetailPropertyResponse>,
+    val skills: List<MyAgentDetailSkill>,
     val rank: Int,
     @SerialName("role_vertical_painting_url") val roleVerticalPaintingUrl: String,
-    @SerialName("equip_plan_info") val equipPlanInfo: MyAgentDetailEquipPlanResponse,
+    @SerialName("equip_plan_info") val equipPlanInfo: MyAgentDetailEquipPlanResponse? = null,
     @SerialName("us_full_name") val usFullName: String,
     @SerialName("vertical_painting_color") val verticalPaintingColor: String,
     @SerialName("sub_element_type") val subElementType: Int
@@ -81,6 +82,7 @@ val stubMyAgentDetailResponse = MyAgentDetailResponse(
                         final = "1858"
                     )
                 ),
+                skills = listOf(stubMyAgentDetailSkill),
                 rank = 1,
                 roleVerticalPaintingUrl = "https://act-webstatic.hoyoverse.com/game_record/zzzv2/role_vertical_painting/role_vertical_painting_1251.png",
                 equipPlanInfo = stubMyAgentDetailEquipPlanResponse,

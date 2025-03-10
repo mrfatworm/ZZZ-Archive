@@ -24,6 +24,8 @@ fun MyAgentDetailItemResponse.toMyAgentDetailListItem(): MyAgentDetailListItem {
         attribute = findAgentAttributeFromHoYoLab(elementType),
         equip = equip,
         weapon = weapon,
-        properties = properties
+        properties = properties,
+        skills = skills,
+        equipPlanInfo = equipPlanInfo
     )
 }

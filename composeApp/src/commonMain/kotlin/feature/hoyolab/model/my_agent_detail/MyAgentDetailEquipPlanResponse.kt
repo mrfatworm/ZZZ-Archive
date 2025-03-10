@@ -13,8 +13,11 @@ data class MyAgentDetailEquipPlanResponse(
     val type: Int,
     @SerialName("game_default") val gameDefault: MyAgentDetailEquipPlanGameDefault,
     @SerialName("cultivate_info") val cultivateInfo: MyAgentDetailEquipPlanCultivateInfo,
-    @SerialName("custom_info") val customInfo: MyAgentDetailEquipPlanCustomInfo
+    @SerialName("custom_info") val customInfo: MyAgentDetailEquipPlanCustomInfo,
+    @SerialName("valid_property_cnt") val validPropertyCnt: Int,
+    @SerialName("plan_only_special_property") val planOnlySpecialProperty: Boolean
 )
+
 
 @Serializable
 data class MyAgentDetailEquipPlanGameDefault(
@@ -135,5 +138,7 @@ val stubMyAgentDetailEquipPlanResponse = MyAgentDetailEquipPlanResponse(
                 isSelect = false
             )
         )
-    )
+    ),
+    validPropertyCnt = 21,
+    planOnlySpecialProperty = false
 )

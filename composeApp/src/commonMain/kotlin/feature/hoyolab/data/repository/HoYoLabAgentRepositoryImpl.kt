@@ -41,6 +41,7 @@ class HoYoLabAgentRepositoryImpl(private val httpClient: HoYoLabHttp) : HoYoLabA
                 httpClient.requestMyAgentDetail(languageCode, uid, region, agentId, lToken, ltUid)
             Result.success(result.data.avatarList[0].toMyAgentDetailListItem())
         } catch (e: Exception) {
+            print("Error: $e")
             Result.failure(e)
         }
     }

@@ -14,6 +14,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import feature.hoyolab.components.my_agent_detail.MyAgentImageCard
+import feature.hoyolab.components.my_agent_detail.MyAgentSkillRowCard
+import feature.hoyolab.components.my_agent_detail.MyAgentWeaponScoreCard
 import feature.hoyolab.model.my_agent_detail.MyAgentDetailState
 import ui.components.TopBarRound
 import ui.theme.AppTheme
@@ -34,5 +37,18 @@ fun MyAgentDetailScreenSingle(
         TopBarRound(uiState.agentDetail.name, onBackClick = {
             onAction(MyAgentDetailAction.ClickBack)
         })
+        MyAgentImageCard(
+            modifier = Modifier,
+            imageUrl = uiState.agentDetail.imageUrl,
+            name = uiState.agentDetail.name,
+            level = uiState.agentDetail.level,
+            rank = uiState.agentDetail.rank
+        )
+        MyAgentSkillRowCard(skills = uiState.agentDetail.skills)
+
+        MyAgentWeaponScoreCard(
+            weapon = uiState.agentDetail.weapon,
+            hit = uiState.agentDetail.equipPlanInfo?.validPropertyCnt
+        )
     }
 }

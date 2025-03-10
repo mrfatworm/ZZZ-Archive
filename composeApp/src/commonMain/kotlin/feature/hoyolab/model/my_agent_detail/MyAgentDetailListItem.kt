@@ -20,8 +20,10 @@ data class MyAgentDetailListItem(
     val specialty: AgentSpecialty,
     val attribute: AgentAttribute,
     val equip: List<MyAgentDetailEquipResponse>,
-    val weapon: MyAgentDetailWeaponResponse,
+    val weapon: MyAgentDetailWeaponResponse?,
     val properties: List<MyAgentDetailPropertyResponse>,
+    val skills: List<MyAgentDetailSkill>,
+    val equipPlanInfo: MyAgentDetailEquipPlanResponse?
 )
 
 val stubMyAgentDetailListItem = MyAgentDetailListItem(
@@ -42,6 +44,8 @@ val stubMyAgentDetailListItem = MyAgentDetailListItem(
         ), MyAgentDetailPropertyResponse(
             propertyName = "攻擊力", propertyId = 2, base = "1442", add = "416", final = "1858"
         )
-    )
+    ),
+    skills = listOf(stubMyAgentDetailSkill),
+    equipPlanInfo = null
 )
 

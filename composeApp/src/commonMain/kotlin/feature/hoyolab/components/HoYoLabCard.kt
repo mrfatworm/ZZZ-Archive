@@ -254,7 +254,8 @@ private fun WeeklyMission(
 ) {
     val remainOneDay = uiState.weeklyTask.refreshTime < 86400
     Column(
-        modifier.widthIn(min = minFlowRowElementWidth)
+        modifier.widthIn(min = minFlowRowElementWidth),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
     ) {
         Column(
             modifier = Modifier.fillMaxWidth().clip(AppTheme.shape.r400)

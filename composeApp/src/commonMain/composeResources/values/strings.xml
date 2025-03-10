@@ -179,7 +179,6 @@
     <string name="hoyolab_sync_announcement">The information submitted on this page is solely used for processing requests in HoYoLab and is encrypted and stored on your device. We do not collect any data.</string>
     <string name="remove_account_hint">Do you want to disconnect the account?\n(remove its data from this device)</string>
     <string name="add_account">Add Account</string>
-    <string name="my_agent">My Agent</string>
 
     <!-- HoYoLab Sync Tutorial -->
     <string name="instruction_guide">Instruction Guide</string>
@@ -214,5 +213,11 @@
     <string name="purchasable">Purchasable</string>
     <string name="purchased">Purchased</string>
     <string name="ridu_weekly">Ridu Weekly</string>
+
+    <!-- My Agent -->
+    <string name="my_agent">My Agent</string>
+    <string name="w_engine_not_equipped">W-Engine Not Equipped</string>
+    <string name="effective_sub_stats">Effective Sub Stats</string>
+    <string name="hit">Hit</string>
 
 </resources>
