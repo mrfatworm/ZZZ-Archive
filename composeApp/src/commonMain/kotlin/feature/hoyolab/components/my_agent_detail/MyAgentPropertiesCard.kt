@@ -14,6 +14,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import feature.hoyolab.model.my_agent_detail.MyAgentDetailEquipPlanProperty
@@ -62,6 +66,8 @@ private fun MyAgentPropertyItem(
     highlight: Boolean = false,
     isVariantColor: Boolean = false
 ) {
+    val titleSmall = AppTheme.typography.titleSmall
+    var titleFontSize by remember { mutableStateOf(titleSmall.fontSize) }
     Row(
         modifier = modifier.background(if (isVariantColor) AppTheme.colors.itemVariant else AppTheme.colors.surfaceContainer)
             .padding(
@@ -74,8 +80,15 @@ private fun MyAgentPropertyItem(
             modifier = Modifier.weight(1f),
             text = title,
             color = if (highlight) AppTheme.colors.primary else AppTheme.colors.onSurfaceVariant,
-            style = AppTheme.typography.titleSmall,
+            style = titleSmall,
             maxLines = 1,
+            fontSize = titleFontSize,
+            onTextLayout = {
+                if (it.hasVisualOverflow) {
+                    // smaller font size
+                    titleFontSize = titleFontSize * 0.9
+                }
+            }
         )
         Text(
             text = value,

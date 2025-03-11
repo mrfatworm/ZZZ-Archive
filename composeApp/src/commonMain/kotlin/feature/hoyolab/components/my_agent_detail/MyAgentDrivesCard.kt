@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.FlowRowOverflow
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,7 +19,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -46,7 +48,6 @@ fun MyAgentDrivesCard(
         modifier = modifier.fillMaxWidth(),
         maxItemsInEachRow = 3,
         maxLines = 3,
-        overflow = FlowRowOverflow.Visible,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -134,6 +135,8 @@ private fun MyAgentDriveHeader(drive: MyAgentDetailEquipResponse) {
 private fun MyAgentDriveMainPropertyItem(
     modifier: Modifier = Modifier, title: String, value: String
 ) {
+    val titleSmall = AppTheme.typography.titleSmall
+    var titleFontSize by remember { mutableStateOf(titleSmall.fontSize) }
     Row(
         modifier = modifier.background(AppTheme.colors.surfaceContainer).padding(
             horizontal = AppTheme.spacing.s350, vertical = AppTheme.spacing.s300
@@ -146,7 +149,14 @@ private fun MyAgentDriveMainPropertyItem(
             text = title,
             color = AppTheme.colors.onSurfaceContainer,
             style = AppTheme.typography.titleSmall,
+            fontSize = titleFontSize,
             maxLines = 1,
+            onTextLayout = {
+                if (it.hasVisualOverflow) {
+                    // smaller font size
+                    titleFontSize = titleFontSize * 0.9
+                }
+            }
         )
         Text(
             text = value,

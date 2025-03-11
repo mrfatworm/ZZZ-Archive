@@ -9,12 +9,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.hoyolab.components.my_agent_detail.MyAgentDrivesCard
+import feature.hoyolab.components.my_agent_detail.MyAgentFooterCard
 import feature.hoyolab.components.my_agent_detail.MyAgentImageCard
 import feature.hoyolab.components.my_agent_detail.MyAgentPropertiesCard
 import feature.hoyolab.components.my_agent_detail.MyAgentSkillRowCard
@@ -61,6 +64,9 @@ fun MyAgentDetailScreenSingle(
             drives = uiState.agentDetail.equip,
             planProperties = uiState.agentDetail.equipPlanInfo?.gameDefault?.propertyList
                 ?: emptyList()
+        )
+        MyAgentFooterCard(
+            modifier = Modifier.fillMaxWidth().height(AppTheme.size.rarityItemMediumSize)
         )
     }
 }

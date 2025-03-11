@@ -41,7 +41,7 @@ fun MyAgentWeaponScoreCard(
     modifier: Modifier = Modifier, weapon: MyAgentDetailWeaponResponse?, hit: Int?
 ) {
     ContentCard(modifier = modifier) {
-        Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)) {
+        Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)) {
             if (weapon != null) {
                 MyWeapon(
                     Modifier.weight(1f), weapon.icon, weapon.name, weapon.level, weapon.star
@@ -100,7 +100,7 @@ private fun MyWeaponEmpty(modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            modifier = Modifier.size(96.dp),
+            modifier = Modifier.size(AppTheme.size.extraLargeIconSize),
             imageVector = vectorResource(Res.drawable.ic_do_not_disturb_on),
             contentDescription = null,
             tint = AppTheme.colors.onSurfaceVariant
@@ -113,7 +113,7 @@ private fun MyWeaponEmpty(modifier: Modifier = Modifier) {
                 ),
             text = stringResource(Res.string.w_engine_not_equipped),
             color = AppTheme.colors.surfaceContainer,
-            style = AppTheme.typography.headlineSmall
+            style = AppTheme.typography.labelLarge
         )
     }
 }

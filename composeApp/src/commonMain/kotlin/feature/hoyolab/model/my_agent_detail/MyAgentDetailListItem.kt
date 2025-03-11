@@ -46,6 +46,6 @@ val stubMyAgentDetailListItem = MyAgentDetailListItem(
         )
     ),
     skills = listOf(stubMyAgentDetailSkill),
-    equipPlanInfo = null
+    equipPlanInfo = stubMyAgentDetailEquipPlanResponse
 )
 
