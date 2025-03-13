@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
+import ui.components.ZzzSwitch
 import ui.theme.AppTheme
 
 @Composable
@@ -33,5 +34,22 @@ fun SettingItem(title: String, content: @Composable () -> Unit, onClick: () -> U
             color = AppTheme.colors.onSurfaceVariant
         )
         content()
+    }
+}
+
+@Composable
+fun SettingSwitchItem(title: String, state: Boolean, onCheckChange: (Boolean) -> Unit) {
+    Row(
+        modifier = Modifier.fillMaxWidth()
+            .padding(horizontal = AppTheme.spacing.s400),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = title,
+            style = AppTheme.typography.titleMedium,
+            color = AppTheme.colors.onSurfaceVariant
+        )
+        ZzzSwitch(checkState = state, onCheckChange)
     }
 }

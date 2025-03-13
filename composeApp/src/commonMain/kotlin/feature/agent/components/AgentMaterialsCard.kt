@@ -14,8 +14,6 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -25,9 +23,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import feature.agent.model.AgentLevelMaterial
 import org.jetbrains.compose.resources.stringResource
+import ui.components.ZzzSwitch
 import ui.components.cards.ContentCard
 import ui.components.cards.HoveredIndicatorHeader
 import ui.components.items.RarityMiniItem
@@ -90,17 +88,7 @@ private fun Header(
                 style = AppTheme.typography.labelMedium,
                 color = AppTheme.colors.onSurfaceVariant
             )
-            Switch(
-                checked = checkState,
-                onCheckedChange = { onCheckChange(it) },
-                colors = SwitchDefaults.colors(
-                    uncheckedThumbColor = AppTheme.colors.buttonBorder,
-                    uncheckedBorderColor = AppTheme.colors.buttonBorder,
-                    uncheckedTrackColor = Color.Transparent,
-                    checkedThumbColor = Color.White,
-                    checkedTrackColor = AppTheme.colors.primaryContainer
-                )
-            )
+            ZzzSwitch(checkState, onCheckChange)
         }
     }
 }

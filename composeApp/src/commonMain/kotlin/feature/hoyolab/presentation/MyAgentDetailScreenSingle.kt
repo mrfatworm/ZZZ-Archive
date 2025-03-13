@@ -11,11 +11,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import feature.hoyolab.components.my_agent_detail.MyAgentDetailTopBar
 import feature.hoyolab.components.my_agent_detail.MyAgentDrivesCard
 import feature.hoyolab.components.my_agent_detail.MyAgentFooterCard
 import feature.hoyolab.components.my_agent_detail.MyAgentImageCard
@@ -23,7 +25,6 @@ import feature.hoyolab.components.my_agent_detail.MyAgentPropertiesCard
 import feature.hoyolab.components.my_agent_detail.MyAgentSkillRowCard
 import feature.hoyolab.components.my_agent_detail.MyAgentWeaponScoreCard
 import feature.hoyolab.model.my_agent_detail.MyAgentDetailState
-import ui.components.TopBarRound
 import ui.theme.AppTheme
 import ui.utils.contentGap
 import ui.utils.horizontalSafePadding
@@ -39,16 +40,14 @@ fun MyAgentDetailScreenSingle(
             .padding(verticalSafePadding()),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
-        TopBarRound(uiState.agentDetail.name, onBackClick = {
-            onAction(MyAgentDetailAction.ClickBack)
-        })
+        MyAgentDetailTopBar(uiState, onAction)
         MyAgentImageCard(
-            modifier = Modifier,
-            imageUrl = uiState.agentDetail.imageUrl,
-            name = uiState.agentDetail.name,
-            level = uiState.agentDetail.level,
-            rank = uiState.agentDetail.rank
-        )
+            modifier = Modifier.heightIn(
+                max = AppTheme.size.minDialogWidth,
+                min = AppTheme.size.galleryItemSize
+            ),
+            uiState = uiState,
+            onApply = { onAction(MyAgentDetailAction.AdjustImageDone) })
         MyAgentSkillRowCard(skills = uiState.agentDetail.skills)
 
         MyAgentWeaponScoreCard(

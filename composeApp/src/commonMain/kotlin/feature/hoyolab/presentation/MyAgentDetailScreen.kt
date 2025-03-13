@@ -19,6 +19,7 @@ fun MyAgentDetailScreen(onBackClick: () -> Unit) {
     MyAgentDetailContent(uiState = uiState.value, onAction = { action ->
         when (action) {
             MyAgentDetailAction.ClickBack -> onBackClick()
+            else -> viewModel.onAction(action)
         }
     })
 }

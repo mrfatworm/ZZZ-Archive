@@ -219,5 +219,12 @@
     <string name="w_engine_not_equipped">音擎未裝備</string>
     <string name="effective_sub_stats">有效詞條</string>
     <string name="hit">命中 %1$d</string>
+    <string name="display_uid">顯示 UID</string>
+    <string name="custom_image">自訂圖片</string>
+    <string name="image_url">圖片網址</string>
+    <string name="author_name_optional">作者名稱（選填）</string>
+    <string name="zoom_in">放大</string>
+    <string name="zoom_out">縮小</string>
+    <string name="background_blur">背景模糊</string>
 
 </resources>

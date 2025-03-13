@@ -16,6 +16,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import feature.hoyolab.components.my_agent_detail.MyAgentDetailTopBar
 import feature.hoyolab.components.my_agent_detail.MyAgentDrivesCard
 import feature.hoyolab.components.my_agent_detail.MyAgentFooterCard
 import feature.hoyolab.components.my_agent_detail.MyAgentImageCard
@@ -23,7 +24,6 @@ import feature.hoyolab.components.my_agent_detail.MyAgentPropertiesCard
 import feature.hoyolab.components.my_agent_detail.MyAgentSkillColumnCard
 import feature.hoyolab.components.my_agent_detail.MyAgentWeaponScoreCard
 import feature.hoyolab.model.my_agent_detail.MyAgentDetailState
-import ui.components.TopBarRound
 import ui.theme.AppTheme
 import ui.utils.contentGap
 import ui.utils.horizontalSafePadding
@@ -32,30 +32,27 @@ import ui.utils.verticalSafePadding
 @Composable
 fun MyAgentDetailScreenDual(
     uiState: MyAgentDetailState,
-    onAction: (MyAgentDetailAction) -> Unit,
+    onAction: (MyAgentDetailAction) -> Unit
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth()
-            .background(AppTheme.colors.surface).padding(horizontalSafePadding()),
+        modifier = Modifier.fillMaxWidth().background(AppTheme.colors.surface)
+            .padding(horizontalSafePadding()),
         horizontalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         Column(
             modifier = Modifier.weight(1f).padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
-            TopBarRound(title = uiState.agentDetail.name, onBackClick = {
-                onAction(MyAgentDetailAction.ClickBack)
-            })
+
+            MyAgentDetailTopBar(uiState, onAction)
             Row(
                 modifier = Modifier.weight(1f),
                 horizontalArrangement = Arrangement.spacedBy(contentGap())
             ) {
                 MyAgentImageCard(
                     modifier = Modifier.weight(1f),
-                    imageUrl = uiState.agentDetail.imageUrl,
-                    name = uiState.agentDetail.name,
-                    level = uiState.agentDetail.level,
-                    rank = uiState.agentDetail.rank
+                    uiState = uiState,
+                    onApply = { onAction(MyAgentDetailAction.AdjustImageDone) }
                 )
                 MyAgentSkillColumnCard(
                     modifier = Modifier.fillMaxHeight(), skills = uiState.agentDetail.skills

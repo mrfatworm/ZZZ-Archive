@@ -219,5 +219,12 @@
     <string name="w_engine_not_equipped">W-Engine Not Equipped</string>
     <string name="effective_sub_stats">Effective Sub Stats</string>
     <string name="hit">Hit %1$d</string>
+    <string name="display_uid">Display UID</string>
+    <string name="custom_image">Custom Image</string>
+    <string name="image_url">Image URL</string>
+    <string name="author_name_optional">Author Name (optional)</string>
+    <string name="zoom_in">Zoom In</string>
+    <string name="zoom_out">Zoom Out</string>
+    <string name="background_blur">Background Blur</string>
 
 </resources>

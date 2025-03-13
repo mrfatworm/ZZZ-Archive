@@ -11,7 +11,14 @@ import utils.ZzzRarity
 
 data class MyAgentDetailState(
     val agentDetail: MyAgentDetailListItem = emptyMyAgentDetailListItem,
-    val score: String = "",
+    val showUid: Boolean = false,
+    val uid: String = "",
+    val isCustomImage: Boolean = false,
+    val customImgUrl: String = "",
+    val customImgAuthor: String = "",
+    val hasBlurBackground: Boolean = false,
+    val isImageEditMode: Boolean = false,
+    val adjustMode: Boolean = false,
     val errorMessage: String = ""
 )
 
