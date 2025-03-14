@@ -49,7 +49,7 @@ fun MyAgentWeaponScoreCard(
             } else {
                 MyWeaponEmpty(Modifier.weight(1f))
             }
-            Score(hit = hit ?: 0)
+            // Score(hit = hit ?: 0)
         }
     }
 }

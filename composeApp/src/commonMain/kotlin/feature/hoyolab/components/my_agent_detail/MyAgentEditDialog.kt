@@ -107,7 +107,8 @@ private fun Content(
                         ),
                     hint = stringResource(Res.string.image_url),
                     value = customImageUrl,
-                    onValueChange = { customImageUrl = it }
+                    onValueChange = { customImageUrl = it },
+                    maxLines = 2
                 )
                 ZzzTextFiled(
                     modifier = Modifier.fillMaxWidth()
@@ -117,7 +118,8 @@ private fun Content(
                         ),
                     hint = stringResource(Res.string.author_name_optional),
                     value = customImageAuthor,
-                    onValueChange = { customImageAuthor = it }
+                    onValueChange = { customImageAuthor = it },
+                    maxLines = 1
                 )
                 SettingSwitchItem(stringResource(Res.string.background_blur), hasBlurBackground) {
                     hasBlurBackground = it

@@ -39,7 +39,7 @@ class MyAgentDetailViewModel(
                         customImgUrl = if (action.isCustom) action.imageUrl else "",
                         customImgAuthor = if (action.isCustom) action.author else "",
                         hasBlurBackground = if (action.isCustom) action.hasBlurBackground else false,
-                        adjustMode = true
+                        adjustMode = action.isCustom
                     )
                 }
             }

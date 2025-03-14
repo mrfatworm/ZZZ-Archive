@@ -63,6 +63,7 @@ class MyAgentDetailViewModelTest {
             )
         )
         val state = viewModel.uiState.value
+        assertEquals(state.showUid, true)
         assertEquals(state.isCustomImage, true)
         assertEquals(state.customImgUrl, "customUrl")
         assertEquals(state.customImgAuthor, "customAuthor")

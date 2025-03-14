@@ -43,8 +43,7 @@ fun MyAgentDetailScreenSingle(
         MyAgentDetailTopBar(uiState, onAction)
         MyAgentImageCard(
             modifier = Modifier.heightIn(
-                max = AppTheme.size.minDialogWidth,
-                min = AppTheme.size.galleryItemSize
+                max = AppTheme.size.minDialogWidth
             ),
             uiState = uiState,
             onApply = { onAction(MyAgentDetailAction.AdjustImageDone) })
