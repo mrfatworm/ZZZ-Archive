@@ -109,9 +109,9 @@ kotlin {
 }
 
 
-val zzzVersionName = "Luciana 2024.12.18"
-val bundleVersionName = "1.1.0"
-val versionCode = 4
+val zzzVersionName = "Luciana 2025.03.14"
+val bundleVersionName = "1.2.0"
+val zzzVersionCode = 6
 val zzzPackageId = "com.mrfatworm.zzzarchive"
 
 android {
@@ -122,7 +122,7 @@ android {
         applicationId = zzzPackageId
         minSdk = 26
         targetSdk = 35
-        versionCode = this@Build_gradle.versionCode
+        versionCode = zzzVersionCode
         versionName = zzzVersionName
 
 
