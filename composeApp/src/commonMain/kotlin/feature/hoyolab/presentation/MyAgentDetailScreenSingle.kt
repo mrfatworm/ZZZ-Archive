@@ -55,14 +55,9 @@ fun MyAgentDetailScreenSingle(
         )
         MyAgentPropertiesCard(
             properties = uiState.agentDetail.properties,
-            planProperties = uiState.agentDetail.equipPlanInfo?.gameDefault?.propertyList
-                ?: emptyList()
+            planProperties = uiState.planProperties
         )
-        MyAgentDrivesCard(
-            drives = uiState.agentDetail.equip,
-            planProperties = uiState.agentDetail.equipPlanInfo?.gameDefault?.propertyList
-                ?: emptyList()
-        )
+        MyAgentDrivesCard(drives = uiState.agentDetail.equip)
         MyAgentFooterCard(
             modifier = Modifier.fillMaxWidth().height(AppTheme.size.rarityItemMediumSize)
         )

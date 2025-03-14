@@ -15,7 +15,8 @@ data class MyAgentDetailEquipPlanResponse(
     @SerialName("cultivate_info") val cultivateInfo: MyAgentDetailEquipPlanCultivateInfo,
     @SerialName("custom_info") val customInfo: MyAgentDetailEquipPlanCustomInfo,
     @SerialName("valid_property_cnt") val validPropertyCnt: Int,
-    @SerialName("plan_only_special_property") val planOnlySpecialProperty: Boolean
+    @SerialName("plan_only_special_property") val planOnlySpecialProperty: Boolean,
+    @SerialName("plan_effective_property_list") val planEffectivePropertyList: List<MyAgentDetailEquipPlanProperty>
 )
 
 
@@ -140,5 +141,6 @@ val stubMyAgentDetailEquipPlanResponse = MyAgentDetailEquipPlanResponse(
         )
     ),
     validPropertyCnt = 21,
-    planOnlySpecialProperty = false
+    planOnlySpecialProperty = false,
+    planEffectivePropertyList = emptyList()
 )

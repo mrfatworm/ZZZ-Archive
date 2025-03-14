@@ -11,6 +11,7 @@ import utils.ZzzRarity
 
 data class MyAgentDetailState(
     val agentDetail: MyAgentDetailListItem = emptyMyAgentDetailListItem,
+    val planProperties: List<MyAgentDetailEquipPlanProperty> = emptyList(),
     val showUid: Boolean = false,
     val uid: String = "",
     val isCustomImage: Boolean = false,

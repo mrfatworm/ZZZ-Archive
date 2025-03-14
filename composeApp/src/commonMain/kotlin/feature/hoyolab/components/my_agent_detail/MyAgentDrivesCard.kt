@@ -28,7 +28,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import feature.hoyolab.model.my_agent_detail.MyAgentDetailEquipPlanProperty
 import feature.hoyolab.model.my_agent_detail.MyAgentDetailEquipResponse
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.ContentCard
@@ -40,8 +39,7 @@ import zzzarchive.composeapp.generated.resources.hit
 @Composable
 fun MyAgentDrivesCard(
     modifier: Modifier = Modifier,
-    drives: List<MyAgentDetailEquipResponse>,
-    planProperties: List<MyAgentDetailEquipPlanProperty>
+    drives: List<MyAgentDetailEquipResponse>
 ) {
     if (drives.isEmpty()) return
     FlowRow(
@@ -54,8 +52,7 @@ fun MyAgentDrivesCard(
         for (drive in drives) {
             MyAgentDriveItem(
                 modifier = Modifier.weight(1f).widthIn(min = 160.dp),
-                drive = drive,
-                planProperties = planProperties
+                drive = drive
             )
         }
     }
@@ -64,8 +61,7 @@ fun MyAgentDrivesCard(
 @Composable
 private fun MyAgentDriveItem(
     modifier: Modifier = Modifier,
-    drive: MyAgentDetailEquipResponse,
-    planProperties: List<MyAgentDetailEquipPlanProperty>
+    drive: MyAgentDetailEquipResponse
 ) {
     ContentCard(modifier = modifier.width(IntrinsicSize.Min), hasDefaultPadding = false) {
         Column(modifier = Modifier) {
@@ -77,7 +73,8 @@ private fun MyAgentDriveItem(
                 MyAgentDriveSubPropertyItem(
                     title = subProperty.propertyName,
                     value = subProperty.base,
-                    highlight = planProperties.find { it.name == subProperty.propertyName } != null)
+                    highlight = subProperty.valid
+                )
             }
         }
     }

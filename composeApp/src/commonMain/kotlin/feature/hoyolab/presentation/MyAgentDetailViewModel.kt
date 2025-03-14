@@ -54,8 +54,14 @@ class MyAgentDetailViewModel(
 
     private suspend fun updateMyAgentDetailFromHoYoLab() {
         hoYoLabAgentUseCase.getAgentDetail(agentId).fold(onSuccess = {
+            val planProperties =
+                if (it.equipPlanInfo?.planEffectivePropertyList?.isNotEmpty() == true) {
+                    it.equipPlanInfo.planEffectivePropertyList
+                } else {
+                    it.equipPlanInfo?.gameDefault?.propertyList ?: emptyList()
+                }
             _uiState.update { state ->
-                state.copy(agentDetail = it)
+                state.copy(agentDetail = it, planProperties = planProperties)
             }
         }, onFailure = {
             _uiState.update { state ->

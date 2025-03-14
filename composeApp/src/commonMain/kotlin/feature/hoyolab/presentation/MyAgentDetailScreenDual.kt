@@ -70,14 +70,11 @@ fun MyAgentDetailScreenDual(
         ) {
             MyAgentPropertiesCard(
                 properties = uiState.agentDetail.properties,
-                planProperties = uiState.agentDetail.equipPlanInfo?.gameDefault?.propertyList
-                    ?: emptyList()
+                planProperties = uiState.planProperties
             )
             MyAgentDrivesCard(
                 modifier = Modifier.verticalScroll(rememberScrollState()),
-                drives = uiState.agentDetail.equip,
-                planProperties = uiState.agentDetail.equipPlanInfo?.gameDefault?.propertyList
-                    ?: emptyList()
+                drives = uiState.agentDetail.equip
             )
             MyAgentFooterCard(modifier = Modifier.weight(1f).fillMaxWidth())
         }
