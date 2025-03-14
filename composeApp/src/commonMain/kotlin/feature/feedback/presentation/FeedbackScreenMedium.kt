@@ -82,7 +82,8 @@ fun FeedbackScreenMedium(
         ZzzPrimaryButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(Res.string.submit_form),
-            iconRes = Res.drawable.ic_arrow_up
+            iconRes = Res.drawable.ic_arrow_up,
+            enabled = !uiState.isLoading
         ) {
             onAction(
                 FeedbackAction.SubmitForm(

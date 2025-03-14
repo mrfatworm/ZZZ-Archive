@@ -23,7 +23,8 @@ data class FeedbackState(
     val operatingSystem: String = "",
     val showSubmitSuccessDialog: Boolean = false,
     val invalidForm: Boolean = false,
-    val invalidMessage: StringResource = Res.string.unknown_error
+    val invalidMessage: StringResource = Res.string.unknown_error,
+    val isLoading: Boolean = false
 )
 
 data class FeedbackIssueType(

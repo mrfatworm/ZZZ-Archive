@@ -75,6 +75,7 @@ class FeedbackViewModel(
     private suspend fun postGoogleDoc(
         issueTypeIndex: FeedbackIssueType, issueContent: String, nickname: String
     ) {
+        _uiState.update { it.copy(isLoading = true) }
         val result = googleDocUseCase.submitFeedbackForm(
             issueTypeIndex.chtString,
             uiState.value.language,
@@ -85,11 +86,11 @@ class FeedbackViewModel(
             uiState.value.operatingSystem
         )
         result.fold(onSuccess = {
-            _uiState.update { it.copy(showSubmitSuccessDialog = true) }
+            _uiState.update { it.copy(showSubmitSuccessDialog = true, isLoading = false) }
         }, onFailure = {
             _uiState.update {
                 it.copy(
-                    invalidForm = true, invalidMessage = Res.string.unknown_error
+                    invalidForm = true, invalidMessage = Res.string.unknown_error, isLoading = false
                 )
             }
         })
