@@ -110,7 +110,7 @@ kotlin {
 
 
 val zzzVersionName = "Luciana 2025.03.14"
-val bundleVersionName = "1.2.0"
+val bundleVersionName = "1.1.32"
 val zzzVersionCode = 6
 val zzzPackageId = "com.mrfatworm.zzzarchive"
 
@@ -174,6 +174,9 @@ compose.desktop {
         val isAppStoreRelease = project.property("macOsAppStoreRelease").toString().toBoolean()
 
         nativeDistributions {
+            if (isAppStoreRelease) {
+                appResourcesRootDir.set(project.layout.projectDirectory.dir("resources"))
+            }
             targetFormats(TargetFormat.Dmg, TargetFormat.Pkg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = desktopPackageName
             packageVersion = bundleVersionName
@@ -202,10 +205,21 @@ compose.desktop {
                     entitlementsFile.set(project.file("config/macos/entitlements.plist"))
                     runtimeEntitlementsFile.set(project.file("config/macos/runtime-entitlements.plist"))
                 }
+
+                infoPlist {
+                    extraKeysRawXml = macExtraPlistKeys
+                }
             }
         }
     }
 }
+
+
+val macExtraPlistKeys: String
+    get() = """
+      <key>ITSAppUsesNonExemptEncryption</key>
+      <false/>
+    """.trimIndent()
 
 // Ref: https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/
 project.extra.set("buildkonfig.flavor", currentBuildVariant())

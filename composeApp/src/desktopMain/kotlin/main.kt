@@ -11,6 +11,7 @@ import zzzarchive.composeapp.generated.resources.img_logo
 import java.awt.Dimension
 
 fun main() {
+    configureSQLiteDriver()
     initKoin()
     application {
         Window(
@@ -22,5 +23,13 @@ fun main() {
             window.minimumSize = Dimension(400, 300)
             ZzzArchiveApp()
         }
+    }
+}
+
+fun configureSQLiteDriver() {
+    val isSandboxed = System.getenv("APP_SANDBOX_CONTAINER_ID") != null
+    if (isSandboxed) {
+        val resourcesPath = System.getProperty("compose.application.resources.dir")
+        System.setProperty("androidx.sqlite.driver.bundled.path", resourcesPath)
     }
 }

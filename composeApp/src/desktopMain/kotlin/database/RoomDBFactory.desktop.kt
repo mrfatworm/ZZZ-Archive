@@ -19,11 +19,9 @@ actual class RoomDatabaseFactory {
 
     private inline fun <reified T : RoomDatabase> createDB(databaseName: String): RoomDatabase.Builder<T> {
         val os = System.getProperty("os.name").lowercase()
-        val userHome = System.getProperty("user.home")
         val appDataDir = when {
             os.contains("win") -> File(System.getenv("APPDATA"), "ZZZ Archive")
-            os.contains("mac") -> File(userHome, "Library/Application Support/ZZZ Archive")
-            else -> File(userHome, ".local/share/ZZZ Archive")
+            else -> File(System.getProperty("java.io.tmpdir"), databaseName)
         }
 
         if (!appDataDir.exists()) {
