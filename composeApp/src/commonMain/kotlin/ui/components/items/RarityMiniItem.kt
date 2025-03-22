@@ -44,7 +44,7 @@ fun RarityMiniItem(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     Column(
-        modifier = modifier.width(AppTheme.size.rarityItemSmallSize)
+        modifier = modifier.width(AppTheme.size.s64)
             .pointerHoverIcon(if (onClick != null) PointerIcon.Hand else PointerIcon.Default)
             .clickable(interactionSource = interactionSource, indication = null) {
                 if (onClick != null) {

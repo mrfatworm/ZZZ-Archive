@@ -87,7 +87,7 @@ private fun MyAgentDriveHeader(drive: MyAgentDetailEquipResponse) {
 
     Row {
         AsyncImage(
-            modifier = Modifier.size(AppTheme.size.rarityItemSmallSize),
+            modifier = Modifier.size(AppTheme.size.s64),
             model = drive.icon,
             contentDescription = null
         )

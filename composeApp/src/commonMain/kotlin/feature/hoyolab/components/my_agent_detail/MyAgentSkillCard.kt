@@ -94,7 +94,7 @@ fun MyAgentSkillRowCard(
 
 @Composable
 private fun MyAgentSkillItem(imgRes: DrawableResource, level: Int) {
-    Box(Modifier.size(AppTheme.size.extraLargeIconSize)) {
+    Box(Modifier.size(AppTheme.size.s48)) {
         Image(
             modifier = Modifier.fillMaxSize(),
             painter = painterResource(imgRes),

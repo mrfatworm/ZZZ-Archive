@@ -58,7 +58,7 @@ private fun FeedbackItem(onClick: () -> Unit) {
             horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
         ) {
             Icon(
-                modifier = Modifier.size(AppTheme.size.smallIconSize),
+                modifier = Modifier.size(AppTheme.size.iconSmall),
                 imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurfaceVariant
@@ -77,7 +77,7 @@ private fun PrivacyPolicyItem() {
             horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
         ) {
             Icon(
-                modifier = Modifier.size(AppTheme.size.smallIconSize),
+                modifier = Modifier.size(AppTheme.size.iconSmall),
                 imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurfaceVariant
@@ -99,13 +99,13 @@ private fun OpenSourceItem() {
                 horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
             ) {
                 Icon(
-                    modifier = Modifier.size(AppTheme.size.largeIconSize),
+                    modifier = Modifier.size(AppTheme.size.iconLarge),
                     imageVector = vectorResource(Res.drawable.ic_figma),
                     contentDescription = "Figma",
                     tint = Color.Unspecified
                 )
                 Icon(
-                    modifier = Modifier.size(AppTheme.size.largeIconSize),
+                    modifier = Modifier.size(AppTheme.size.iconLarge),
                     imageVector = vectorResource(Res.drawable.ic_github),
                     contentDescription = "GitHub",
                     tint = AppTheme.colors.onSurfaceContainer
@@ -161,7 +161,7 @@ fun OpenSourceItem(
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s350)
     ) {
         Icon(
-            modifier = Modifier.size(AppTheme.size.extraLargeIconSize),
+            modifier = Modifier.size(AppTheme.size.s48),
             imageVector = vectorResource(iconRes),
             contentDescription = null,
             tint = if (isTintIcon) AppTheme.colors.onSurfaceContainer else Color.Unspecified

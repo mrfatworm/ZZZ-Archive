@@ -89,7 +89,7 @@ private fun Header(isHovered: Boolean, lazyListState: LazyListState) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    modifier = Modifier.size(AppTheme.size.largeIconSize),
+                    modifier = Modifier.size(AppTheme.size.iconLarge),
                     imageVector = vectorResource(Res.drawable.ic_twitter),
                     contentDescription = "X",
                     tint = AppTheme.colors.onSurfaceVariant
@@ -114,7 +114,7 @@ private fun TwitterListItem(
     val interactionSource = remember { MutableInteractionSource() }
     val urlHandler = LocalUriHandler.current
     Column(
-        modifier = Modifier.width(AppTheme.size.galleryItemSize),
+        modifier = Modifier.width(AppTheme.size.s144),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {

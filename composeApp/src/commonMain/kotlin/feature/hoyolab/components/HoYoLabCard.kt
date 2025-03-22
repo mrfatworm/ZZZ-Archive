@@ -158,7 +158,7 @@ private fun PlayerInfo(
     modifier: Modifier, uiState: GameRecordState, onAddAccountClick: () -> Unit
 ) {
     SubcomposeAsyncImage(
-        modifier = Modifier.size(AppTheme.size.extraLargeIconSize).clip(CircleShape)
+        modifier = Modifier.size(AppTheme.size.s48).clip(CircleShape)
             .clickable { onAddAccountClick() },
         model = uiState.profileUrl,
         contentDescription = stringResource(Res.string.user_profile_image),
@@ -209,7 +209,7 @@ private fun PlayerEnergy(uiState: GameRecordState) {
         val isFull = uiState.energy.progress.current == uiState.energy.progress.max
 
         Image(
-            modifier = Modifier.scale(if (isFull) scale else 1f).size(AppTheme.size.iconSize),
+            modifier = Modifier.scale(if (isFull) scale else 1f).size(AppTheme.size.icon),
             painter = painterResource(Res.drawable.img_battery_charge),
             contentDescription = null,
         )
@@ -285,7 +285,7 @@ private fun WeeklyMission(
                 style = AppTheme.typography.titleSmall
             )
             Icon(
-                modifier = Modifier.size(AppTheme.size.smallIconSize),
+                modifier = Modifier.size(AppTheme.size.iconSmall),
                 imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurfaceVariant
@@ -324,7 +324,7 @@ fun PlayerTodoItem(
         )
         if (isDone) {
             Icon(
-                modifier = Modifier.size(AppTheme.size.iconSize),
+                modifier = Modifier.size(AppTheme.size.icon),
                 imageVector = vectorResource(Res.drawable.ic_check_circle),
                 contentDescription = null,
                 tint = AppTheme.colors.primary
@@ -332,7 +332,7 @@ fun PlayerTodoItem(
         }
         if (isWarning) {
             Icon(
-                modifier = Modifier.size(AppTheme.size.iconSize),
+                modifier = Modifier.size(AppTheme.size.icon),
                 imageVector = vectorResource(Res.drawable.ic_warning),
                 contentDescription = null,
                 tint = AppTheme.colors.secondary
@@ -354,7 +354,7 @@ private fun SignButton(signResult: String?, onSignClick: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            modifier = Modifier.size(AppTheme.size.iconSize),
+            modifier = Modifier.size(AppTheme.size.icon),
             imageVector = vectorResource(if (signResult == "OK") Res.drawable.ic_check_circle else Res.drawable.ic_calendar_clock),
             contentDescription = null,
             tint = if (signResult == "OK") AppTheme.colors.primary else AppTheme.colors.onHoveredMask

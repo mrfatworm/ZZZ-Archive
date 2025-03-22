@@ -106,7 +106,7 @@ fun HoveredIndicatorHeader(
                 ZzzIconButton(
                     iconRes = Res.drawable.ic_arrow_back,
                     contentDescriptionRes = Res.string.previous,
-                    size = AppTheme.size.smallIconButtonSize
+                    size = AppTheme.size.iconButtonSmall
                 ) {
                     val targetIndex = lazyListState.firstVisibleItemIndex - 3
                     coroutineScope.launch {
@@ -120,7 +120,7 @@ fun HoveredIndicatorHeader(
                 ZzzIconButton(
                     iconRes = Res.drawable.ic_arrow_next,
                     contentDescriptionRes = Res.string.previous,
-                    size = AppTheme.size.smallIconButtonSize
+                    size = AppTheme.size.iconButtonSmall
                 ) {
                     val targetIndex = lazyListState.firstVisibleItemIndex + 3
                     coroutineScope.launch {

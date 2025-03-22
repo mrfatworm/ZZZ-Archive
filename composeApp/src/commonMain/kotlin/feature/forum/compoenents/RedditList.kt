@@ -60,7 +60,7 @@ private fun RedditListItem(
                 ), verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    modifier = Modifier.size(AppTheme.size.iconSize),
+                    modifier = Modifier.size(AppTheme.size.icon),
                     imageVector = vectorResource(Res.drawable.ic_up_vote),
                     contentDescription = "Up Vote",
                     tint = AppTheme.colors.onSurfaceVariant
@@ -71,7 +71,7 @@ private fun RedditListItem(
                     style = AppTheme.typography.labelSmall
                 )
                 Icon(
-                    modifier = Modifier.size(AppTheme.size.iconSize),
+                    modifier = Modifier.size(AppTheme.size.icon),
                     imageVector = vectorResource(Res.drawable.ic_reddit_comment),
                     contentDescription = "Comment",
                     tint = AppTheme.colors.onSurfaceVariant

@@ -55,7 +55,7 @@ fun ContributorsCard(contributors: Contributors) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    modifier = Modifier.size(AppTheme.size.smallIconSize),
+                    modifier = Modifier.size(AppTheme.size.iconSmall),
                     imageVector = vectorResource(Res.drawable.ic_people),
                     contentDescription = null,
                     tint = AppTheme.colors.onSurfaceVariant

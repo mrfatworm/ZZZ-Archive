@@ -20,7 +20,7 @@ import ui.theme.AppTheme
 @Composable
 fun ForumThumbnailImage(imgUrl: String) {
     Box(
-        modifier = Modifier.height(AppTheme.size.forumImageSize).aspectRatio(1.33f)
+        modifier = Modifier.height(AppTheme.size.s72).aspectRatio(1.33f)
             .clip(AppTheme.shape.r300)
     ) {
         if (imgUrl == "") {

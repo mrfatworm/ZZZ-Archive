@@ -12,12 +12,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.components.ZzzSlider
@@ -37,7 +39,7 @@ import kotlin.math.round
 
 @Composable
 fun ScaleFontSizeDialog(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     uiScaleValue: Float,
     fontScaleValue: Float,
     onApply: (Float, Float) -> Unit,
@@ -45,7 +47,7 @@ fun ScaleFontSizeDialog(
 ) {
     var uiScale by AppTheme.uiScale
     var fontScale by AppTheme.fontScale
-    BasicDialog(modifier = modifier, onDismissRequest = {
+    BasicDialog(modifier = modifier.widthIn(max = 720.dp), onDismissRequest = {
         uiScale = uiScaleValue
         fontScale = fontScaleValue
         onDismiss()

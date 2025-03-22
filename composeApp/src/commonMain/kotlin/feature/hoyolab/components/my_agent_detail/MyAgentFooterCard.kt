@@ -25,7 +25,7 @@ import zzzarchive.composeapp.generated.resources.ic_do_not_disturb_on
 fun MyAgentFooterCard(modifier: Modifier = Modifier) {
     val icon = vectorResource(Res.drawable.ic_do_not_disturb_on)
     val iconColor = AppTheme.colors.onSurfaceVariant
-    val iconSize = AppTheme.size.iconSize
+    val iconSize = AppTheme.size.icon
     ContentCard(modifier = modifier) {
         Box(modifier = Modifier.fillMaxSize()) {
             Text(

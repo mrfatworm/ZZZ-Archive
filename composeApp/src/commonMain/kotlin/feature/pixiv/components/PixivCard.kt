@@ -109,7 +109,7 @@ private fun Header(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    modifier = Modifier.size(AppTheme.size.largeIconSize),
+                    modifier = Modifier.size(AppTheme.size.iconLarge),
                     imageVector = vectorResource(Res.drawable.ic_pixiv),
                     contentDescription = "Pixiv",
                     tint = AppTheme.colors.onSurfaceVariant
@@ -142,7 +142,7 @@ private fun TagDropDownButton(onPixivTagChange: (String) -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)) {
             Icon(
-                modifier = Modifier.size(AppTheme.size.iconSize),
+                modifier = Modifier.size(AppTheme.size.icon),
                 imageVector = vectorResource(Res.drawable.ic_favorite),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurface
@@ -191,7 +191,7 @@ private fun PixivTopicItem(
             .data(artworkUrl).size(Size.ORIGINAL).build()
     )
     Column(
-        modifier = Modifier.width(AppTheme.size.galleryItemSize),
+        modifier = Modifier.width(AppTheme.size.s144),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
@@ -243,7 +243,7 @@ private fun AuthorInfo(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
-            modifier = Modifier.size(AppTheme.size.iconSize).aspectRatio(1f).clip(CircleShape)
+            modifier = Modifier.size(AppTheme.size.icon).aspectRatio(1f).clip(CircleShape)
         ) {
             if (profileUrl != null) {
                 Image(

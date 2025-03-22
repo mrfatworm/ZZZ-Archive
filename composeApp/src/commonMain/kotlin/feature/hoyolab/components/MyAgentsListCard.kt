@@ -29,7 +29,7 @@ fun MyAgentsListCard(
         hasDefaultPadding = false,
     ) {
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(AppTheme.size.rarityItemMediumSize),
+            columns = GridCells.Adaptive(AppTheme.size.s100),
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(cardPadding()),
             horizontalArrangement = gridListHorizontalGap(),

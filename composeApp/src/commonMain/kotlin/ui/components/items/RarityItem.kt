@@ -63,7 +63,7 @@ fun RarityItem(
     val isHovered = interactionSource.collectIsHoveredAsState()
 
     Column(
-        modifier = modifier.width(AppTheme.size.rarityItemMediumSize)
+        modifier = modifier.width(AppTheme.size.s100)
             .pointerHoverIcon(PointerIcon.Hand)
             .clickable(interactionSource = interactionSource, indication = null) {
                 onClick()
@@ -115,7 +115,7 @@ private fun AttributeTag(modifier: Modifier, textRes: StringResource, iconRes: D
         modifier = modifier.background(
             AppTheme.colors.imageTagContainer,
             RoundedCornerShape(bottomStart = AppTheme.spacing.s300)
-        ).padding(AppTheme.spacing.s200).size(AppTheme.size.iconSize),
+        ).padding(AppTheme.spacing.s200).size(AppTheme.size.icon),
         imageVector = vectorResource(iconRes),
         contentDescription = stringResource(textRes),
         tint = AppTheme.colors.imageOnTagContainer

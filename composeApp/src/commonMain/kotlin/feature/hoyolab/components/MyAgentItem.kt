@@ -50,7 +50,7 @@ fun MyAgentItem(
     val interactionSource = remember { MutableInteractionSource() }
 
     Column(
-        modifier = modifier.width(AppTheme.size.rarityItemMediumSize)
+        modifier = modifier.width(AppTheme.size.s100)
             .pointerHoverIcon(PointerIcon.Hand)
             .clickable(interactionSource = interactionSource, indication = null) {
                 onClick()

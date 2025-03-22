@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -21,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import feature.setting.model.SettingState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -83,7 +81,7 @@ private fun LanguageSettingItem(
                     color = AppTheme.colors.onSurface
                 )
                 Icon(
-                    modifier = Modifier.size(AppTheme.size.smallIconSize),
+                    modifier = Modifier.size(AppTheme.size.iconSmall),
                     imageVector = vectorResource(Res.drawable.ic_arrow_down_ios),
                     contentDescription = null,
                     tint = AppTheme.colors.onSurfaceVariant
@@ -154,7 +152,7 @@ private fun FontScaleItem(
                 color = AppTheme.colors.onSurface
             )
             Icon(
-                modifier = Modifier.size(AppTheme.size.smallIconSize),
+                modifier = Modifier.size(AppTheme.size.iconSmall),
                 imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurfaceVariant
@@ -164,8 +162,6 @@ private fun FontScaleItem(
     when {
         openUiScaleDialog.value -> {
             ScaleFontSizeDialog(
-                // Override max width to avoid UI Shaking
-                modifier = Modifier.widthIn(max = 720.dp),
                 uiScaleValue = uiScaleValue,
                 fontScaleValue = fontScaleValue,
                 onApply = { uiScale, fontScale ->
@@ -197,7 +193,7 @@ private fun ColorSettingItem(isDarkTheme: Boolean, onColorChange: (Boolean) -> U
                     color = AppTheme.colors.onSurface
                 )
                 Icon(
-                    modifier = Modifier.size(AppTheme.size.smallIconSize),
+                    modifier = Modifier.size(AppTheme.size.iconSmall),
                     imageVector = vectorResource(Res.drawable.ic_arrow_down_ios),
                     contentDescription = null,
                     tint = AppTheme.colors.onSurfaceVariant
@@ -232,7 +228,7 @@ private fun HoYoLabSettingItem(onClick: () -> Unit) {
             horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
         ) {
             Icon(
-                modifier = Modifier.size(AppTheme.size.smallIconSize),
+                modifier = Modifier.size(AppTheme.size.iconSmall),
                 imageVector = vectorResource(Res.drawable.ic_arrow_next_ios),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurfaceVariant

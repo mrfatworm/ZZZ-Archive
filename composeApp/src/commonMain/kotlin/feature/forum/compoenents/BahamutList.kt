@@ -74,7 +74,7 @@ private fun BahamutListItem(
                 }
                 Spacer(Modifier.weight(1f))
                 Icon(
-                    modifier = Modifier.size(AppTheme.size.iconSize),
+                    modifier = Modifier.size(AppTheme.size.icon),
                     imageVector = vectorResource(Res.drawable.ic_like),
                     contentDescription = "GP",
                     tint = AppTheme.colors.onSurfaceVariant

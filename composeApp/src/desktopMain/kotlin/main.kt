@@ -15,7 +15,7 @@ fun main() {
     application {
         Window(
             onCloseRequest = ::exitApplication,
-            state = rememberWindowState(width = 1280.dp, height = 960.dp),
+            state = rememberWindowState(width = 1280.dp, height = 900.dp),
             title = stringResource(Res.string.app_name),
             icon = painterResource(Res.drawable.img_logo)
         ) {

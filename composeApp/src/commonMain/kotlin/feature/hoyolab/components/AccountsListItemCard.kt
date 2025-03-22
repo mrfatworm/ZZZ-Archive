@@ -96,7 +96,8 @@ private fun BasicInfo(
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        SubcomposeAsyncImage(modifier = Modifier.size(AppTheme.size.extraLargeIconSize)
+        SubcomposeAsyncImage(
+            modifier = Modifier.size(AppTheme.size.s48)
             .clip(CircleShape),
             model = uiState.profileUrl,
             contentDescription = stringResource(Res.string.user_profile_image),
@@ -115,7 +116,7 @@ private fun BasicInfo(
                     style = AppTheme.typography.labelLarge
                 )
                 Icon(
-                    modifier = Modifier.size(AppTheme.size.iconSize).clickable {
+                    modifier = Modifier.size(AppTheme.size.icon).clickable {
                         if (syncable) {
                             sync()
                         }

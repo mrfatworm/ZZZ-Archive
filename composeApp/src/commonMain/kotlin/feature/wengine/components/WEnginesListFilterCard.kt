@@ -57,7 +57,7 @@ fun WEnginesListFilterCard(
         }
         LazyVerticalGrid(
             state = lazyGridState,
-            columns = GridCells.Adaptive(AppTheme.size.rarityItemMediumSize),
+            columns = GridCells.Adaptive(AppTheme.size.s100),
             modifier = Modifier.fillMaxSize().drawColumnListMask(
                 colorScheme = AppTheme.colors,
                 topEnable = lazyGridState.canScrollBackward,

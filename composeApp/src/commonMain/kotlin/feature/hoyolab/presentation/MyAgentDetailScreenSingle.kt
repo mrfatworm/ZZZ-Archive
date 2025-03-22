@@ -43,7 +43,7 @@ fun MyAgentDetailScreenSingle(
         MyAgentDetailTopBar(uiState, onAction)
         MyAgentImageCard(
             modifier = Modifier.heightIn(
-                max = AppTheme.size.minDialogWidth
+                max = AppTheme.size.s240
             ),
             uiState = uiState,
             onApply = { onAction(MyAgentDetailAction.AdjustImageDone) })
@@ -59,7 +59,7 @@ fun MyAgentDetailScreenSingle(
         )
         MyAgentDrivesCard(drives = uiState.agentDetail.equip)
         MyAgentFooterCard(
-            modifier = Modifier.fillMaxWidth().height(AppTheme.size.rarityItemMediumSize)
+            modifier = Modifier.fillMaxWidth().height(AppTheme.size.s100)
         )
     }
 }

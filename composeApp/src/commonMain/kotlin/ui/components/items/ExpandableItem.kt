@@ -56,7 +56,7 @@ fun ExpandableItem(title: String, subtitle: String, description: String) {
                 color = AppTheme.colors.onSurfaceVariant
             )
             Icon(
-                modifier = Modifier.size(AppTheme.size.smallIconSize).graphicsLayer {
+                modifier = Modifier.size(AppTheme.size.iconSmall).graphicsLayer {
                     rotationZ = if (expanded) 180f else 0f
                 },
                 imageVector = vectorResource(Res.drawable.ic_arrow_down_ios),

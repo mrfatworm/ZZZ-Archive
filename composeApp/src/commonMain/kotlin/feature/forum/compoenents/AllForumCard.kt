@@ -44,7 +44,7 @@ fun AllForumCard(uiState: AllForumState) {
     ContentCard(hasDefaultPadding = false) {
         CardHeader(title = stringResource(Res.string.forum_popular), startContent = {
             Icon(
-                modifier = Modifier.size(AppTheme.size.largeIconSize),
+                modifier = Modifier.size(AppTheme.size.iconLarge),
                 imageVector = vectorResource(Res.drawable.ic_attribute_fire),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurfaceVariant

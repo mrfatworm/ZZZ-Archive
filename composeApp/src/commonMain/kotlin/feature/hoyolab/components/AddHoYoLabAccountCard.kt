@@ -140,7 +140,7 @@ private fun ServerTypeItem(
             ) {
                 if (isError) {
                     Icon(
-                        modifier = Modifier.size(AppTheme.size.iconSize),
+                        modifier = Modifier.size(AppTheme.size.icon),
                         imageVector = vectorResource(Res.drawable.ic_warning),
                         contentDescription = stringResource(Res.string.unknown_error),
                         tint = AppTheme.colors.secondary
@@ -152,7 +152,7 @@ private fun ServerTypeItem(
                     color = AppTheme.colors.onSurface
                 )
                 Icon(
-                    modifier = Modifier.size(AppTheme.size.smallIconSize),
+                    modifier = Modifier.size(AppTheme.size.iconSmall),
                     imageVector = vectorResource(Res.drawable.ic_arrow_down_ios),
                     contentDescription = null,
                     tint = AppTheme.colors.onSurfaceVariant

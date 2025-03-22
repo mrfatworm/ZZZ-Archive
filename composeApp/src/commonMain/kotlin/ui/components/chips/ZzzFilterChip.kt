@@ -54,7 +54,7 @@ fun ZzzFilterChip(
     ) {
         iconRes?.let {
             Icon(
-                modifier = Modifier.size(AppTheme.size.iconSize),
+                modifier = Modifier.size(AppTheme.size.icon),
                 imageVector = vectorResource(iconRes),
                 contentDescription = null,
                 tint = if (selected) AppTheme.colors.onPrimaryContainer else AppTheme.colors.onSurface

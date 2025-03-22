@@ -81,7 +81,7 @@ private fun MyWeapon(
             Row {
                 for (i in 1..5) {
                     Icon(
-                        modifier = Modifier.size(AppTheme.size.iconSize),
+                        modifier = Modifier.size(AppTheme.size.icon),
                         imageVector = vectorResource(if (i <= star) Res.drawable.ic_star_filled else Res.drawable.ic_star),
                         contentDescription = null,
                         tint = AppTheme.colors.onSurfaceContainer
@@ -100,7 +100,7 @@ private fun MyWeaponEmpty(modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            modifier = Modifier.size(AppTheme.size.extraLargeIconSize),
+            modifier = Modifier.size(AppTheme.size.s48),
             imageVector = vectorResource(Res.drawable.ic_do_not_disturb_on),
             contentDescription = null,
             tint = AppTheme.colors.onSurfaceVariant
@@ -129,7 +129,7 @@ private fun Score(modifier: Modifier = Modifier, hit: Int) {
         )
     ) {
         Box(
-            modifier = Modifier.size(AppTheme.size.rarityItemSmallSize).border(
+            modifier = Modifier.size(AppTheme.size.s64).border(
                 AppTheme.size.borderWidth, scoreState.color, CircleShape
             ), contentAlignment = Alignment.Center
         ) {

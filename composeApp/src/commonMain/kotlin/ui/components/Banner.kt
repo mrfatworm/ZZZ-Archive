@@ -74,7 +74,7 @@ fun Banner(
         if (closable) {
             IconButton(onClick = onClosed) {
                 Icon(
-                    modifier = Modifier.size(AppTheme.size.iconSize),
+                    modifier = Modifier.size(AppTheme.size.icon),
                     imageVector = vectorResource(Res.drawable.ic_close),
                     contentDescription = stringResource(Res.string.close),
                     tint = contentColor

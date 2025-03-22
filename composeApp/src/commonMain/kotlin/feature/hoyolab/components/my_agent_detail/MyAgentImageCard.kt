@@ -193,14 +193,14 @@ private fun OnImageIconButton(
     onClick: () -> Unit
 ) {
     IconButton(
-        modifier = Modifier.size(AppTheme.size.smallIconButtonSize),
+        modifier = Modifier.size(AppTheme.size.iconButtonSmall),
         colors = IconButtonDefaults.iconButtonColors().copy(
             containerColor = AppTheme.colors.hoveredMask, contentColor = tint
         ),
         onClick = onClick
     ) {
         Icon(
-            modifier = Modifier.size(AppTheme.size.iconSize),
+            modifier = Modifier.size(AppTheme.size.icon),
             imageVector = vectorResource(iconRes),
             contentDescription = stringResource(contentDescriptionRes)
         )
