@@ -16,11 +16,13 @@ import feature.hoyolab.data.mapper.toGameRecordState
 import feature.hoyolab.domain.GameRecordUseCase
 import feature.news.domain.OfficialNewsUseCase
 import feature.pixiv.domain.PixivUseCase
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -33,7 +35,8 @@ class HomeViewModel(
     private val newsUseCase: OfficialNewsUseCase,
     private val forumUseCase: ForumUseCase,
     private val updateDatabaseUseCase: UpdateDatabaseUseCase,
-    private val gameRecordUseCase: GameRecordUseCase
+    private val gameRecordUseCase: GameRecordUseCase,
+    dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private var gameRecordJob: Job? = null
@@ -53,7 +56,7 @@ class HomeViewModel(
         observeDefaultAccount()
         observeCoverImage()
         observePixivTopic()
-    }.stateIn(
+    }.flowOn(dispatcher).stateIn(
         viewModelScope, SharingStarted.WhileSubscribed(5000L), _uiState.value
     )
 
@@ -148,8 +151,9 @@ class HomeViewModel(
     private fun updateOfficialNewsEveryTenMinutes() {
         officialNewsJob?.cancel()
         officialNewsJob = viewModelScope.launch {
-            newsUseCase.getNewsPeriodically(10, 6).collect { result ->
+            newsUseCase.getNewsPeriodically(1, 6).collect { result ->
                 result.fold(onSuccess = { newsList ->
+                    println("get news success")
                     _uiState.update { state ->
                         state.copy(newsList = newsUseCase.convertToOfficialNewsState(newsList))
                     }

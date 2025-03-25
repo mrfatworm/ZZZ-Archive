@@ -26,8 +26,10 @@ import feature.pixiv.domain.PixivUseCase
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import kotlin.test.BeforeTest
@@ -48,6 +50,7 @@ class HomeViewModelTest {
     private val forumUseCase = mockk<ForumUseCase>()
     private lateinit var viewModel: HomeViewModel
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @BeforeTest
     fun setup() {
         coEvery { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() } returns Unit
@@ -80,7 +83,8 @@ class HomeViewModelTest {
             officialNewsUseCase,
             forumUseCase,
             updateDatabaseUseCase,
-            gameRecordUseCase
+            gameRecordUseCase,
+            UnconfinedTestDispatcher()
         )
     }
 

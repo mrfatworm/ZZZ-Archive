@@ -84,6 +84,9 @@ import feature.wengine.domain.WEnginesListUseCase
 import feature.wengine.presentation.WEngineDetailViewModel
 import feature.wengine.presentation.WEnginesListViewModel
 import feature.wiki.presentation.WikiViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.qualifier.named
@@ -172,6 +175,8 @@ val sharedModule = module {
     single<HoYoLabPreferenceUseCase> { HoYoLabPreferenceUseCase(get()) }
     single<GameRecordUseCase> { GameRecordUseCase(get(), get(), get(), get(), get()) }
     single<ForumUseCase> { ForumUseCase(get()) }
+
+    single<CoroutineDispatcher> { Dispatchers.IO }
 
     // ViewModels
     viewModelOf(::SplashViewModel)
