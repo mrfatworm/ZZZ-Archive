@@ -9,7 +9,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -21,7 +20,7 @@ import feature.hoyolab.components.my_agent_detail.MyAgentDrivesCard
 import feature.hoyolab.components.my_agent_detail.MyAgentFooterCard
 import feature.hoyolab.components.my_agent_detail.MyAgentImageCard
 import feature.hoyolab.components.my_agent_detail.MyAgentPropertiesCard
-import feature.hoyolab.components.my_agent_detail.MyAgentSkillColumnCard
+import feature.hoyolab.components.my_agent_detail.MyAgentSkillRowCard
 import feature.hoyolab.components.my_agent_detail.MyAgentWeaponScoreCard
 import feature.hoyolab.model.my_agent_detail.MyAgentDetailState
 import ui.theme.AppTheme
@@ -45,19 +44,14 @@ fun MyAgentDetailScreenDual(
         ) {
 
             MyAgentDetailTopBar(uiState, onAction)
-            Row(
+            MyAgentImageCard(
                 modifier = Modifier.weight(1f),
-                horizontalArrangement = Arrangement.spacedBy(contentGap())
-            ) {
-                MyAgentImageCard(
-                    modifier = Modifier.weight(1f),
-                    uiState = uiState,
-                    onApply = { onAction(MyAgentDetailAction.AdjustImageDone) }
-                )
-                MyAgentSkillColumnCard(
-                    modifier = Modifier.fillMaxHeight(), skills = uiState.agentDetail.skills
-                )
-            }
+                uiState = uiState,
+                onApply = { onAction(MyAgentDetailAction.AdjustImageDone) }
+            )
+            MyAgentSkillRowCard(
+                modifier = Modifier.fillMaxWidth(), skills = uiState.agentDetail.skills
+            )
             MyAgentWeaponScoreCard(
                 weapon = uiState.agentDetail.weapon,
                 hit = uiState.agentDetail.equipPlanInfo?.validPropertyCnt

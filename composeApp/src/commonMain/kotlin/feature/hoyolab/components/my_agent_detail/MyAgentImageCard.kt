@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -66,8 +67,8 @@ fun MyAgentImageCard(
     modifier: Modifier = Modifier, uiState: MyAgentDetailState, onApply: () -> Unit
 ) {
     val agentDetail = uiState.agentDetail
-    ContentCard(hasDefaultPadding = false) {
-        Box(modifier = modifier) {
+    ContentCard(modifier = modifier, hasDefaultPadding = false) {
+        Box(modifier = Modifier.fillMaxSize()) {
             var scale by remember { mutableStateOf(1f) }
             var offset by remember { mutableStateOf(Offset.Zero) }
             val state = rememberTransformableState { zoomChange, offsetChange, _ ->
