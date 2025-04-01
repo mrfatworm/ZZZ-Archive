@@ -22,7 +22,7 @@ import feature.hoyolab.components.my_agent_detail.MyAgentDrivesCard
 import feature.hoyolab.components.my_agent_detail.MyAgentFooterCard
 import feature.hoyolab.components.my_agent_detail.MyAgentImageCard
 import feature.hoyolab.components.my_agent_detail.MyAgentPropertiesCard
-import feature.hoyolab.components.my_agent_detail.MyAgentSkillRowCard
+import feature.hoyolab.components.my_agent_detail.MyAgentSkillCard
 import feature.hoyolab.components.my_agent_detail.MyAgentWeaponScoreCard
 import feature.hoyolab.model.my_agent_detail.MyAgentDetailState
 import ui.theme.AppTheme
@@ -47,7 +47,7 @@ fun MyAgentDetailScreenSingle(
             ),
             uiState = uiState,
             onApply = { onAction(MyAgentDetailAction.AdjustImageDone) })
-        MyAgentSkillRowCard(skills = uiState.agentDetail.skills)
+        MyAgentSkillCard(skills = uiState.agentDetail.skills)
 
         MyAgentWeaponScoreCard(
             weapon = uiState.agentDetail.weapon,

@@ -9,7 +9,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -35,79 +34,68 @@ import zzzarchive.composeapp.generated.resources.img_skill_special_attack
 import zzzarchive.composeapp.generated.resources.img_skill_ultimate
 
 @Composable
-fun MyAgentSkillColumnCard(
-    modifier: Modifier = Modifier, skills: List<MyAgentDetailSkill>
-) {
-    ContentCard(modifier = modifier) {
-        Column(verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)) {
-            MyAgentSkillItem(
-                Res.drawable.img_skill_basic_attack, skills.find { it.skillType == 0 }?.level ?: 0
-            )
-            MyAgentSkillItem(
-                Res.drawable.img_skill_dodge, skills.find { it.skillType == 2 }?.level ?: 0
-            )
-            MyAgentSkillItem(
-                Res.drawable.img_skill_quick_assist, skills.find { it.skillType == 6 }?.level ?: 0
-            )
-            MyAgentSkillItem(
-                Res.drawable.img_skill_special_attack, skills.find { it.skillType == 1 }?.level ?: 0
-            )
-            MyAgentSkillItem(
-                Res.drawable.img_skill_ultimate, skills.find { it.skillType == 3 }?.level ?: 0
-            )
-            Spacer(Modifier.weight(1f))
-            MyAgentSkillItem(
-                Res.drawable.img_skill_core_passive, skills.find { it.skillType == 5 }?.level ?: 0
-            )
-        }
-    }
-}
-
-@Composable
-fun MyAgentSkillRowCard(
+fun MyAgentSkillCard(
     modifier: Modifier = Modifier, skills: List<MyAgentDetailSkill>
 ) {
     ContentCard(modifier = modifier) {
         Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)) {
             MyAgentSkillItem(
-                Res.drawable.img_skill_basic_attack, skills.find { it.skillType == 0 }?.level ?: 0
+                Res.drawable.img_skill_basic_attack,
+                skills.find { it.skillType == 0 }?.level.toString()
             )
             MyAgentSkillItem(
-                Res.drawable.img_skill_dodge, skills.find { it.skillType == 2 }?.level ?: 0
+                Res.drawable.img_skill_dodge, skills.find { it.skillType == 2 }?.level.toString()
             )
             MyAgentSkillItem(
-                Res.drawable.img_skill_quick_assist, skills.find { it.skillType == 6 }?.level ?: 0
+                Res.drawable.img_skill_quick_assist,
+                skills.find { it.skillType == 6 }?.level.toString()
             )
             MyAgentSkillItem(
-                Res.drawable.img_skill_special_attack, skills.find { it.skillType == 1 }?.level ?: 0
+                Res.drawable.img_skill_special_attack,
+                skills.find { it.skillType == 1 }?.level.toString()
             )
             MyAgentSkillItem(
-                Res.drawable.img_skill_ultimate, skills.find { it.skillType == 3 }?.level ?: 0
+                Res.drawable.img_skill_ultimate, skills.find { it.skillType == 3 }?.level.toString()
             )
             Spacer(Modifier.weight(1f))
             MyAgentSkillItem(
-                Res.drawable.img_skill_core_passive, skills.find { it.skillType == 5 }?.level ?: 0
+                Res.drawable.img_skill_core_passive,
+                convertNumberToDisplayChar(skills.find { it.skillType == 5 }?.level ?: 0)
             )
         }
     }
 }
 
 @Composable
-private fun MyAgentSkillItem(imgRes: DrawableResource, level: Int) {
+private fun MyAgentSkillItem(imgRes: DrawableResource, level: String?) {
     Box(Modifier.size(AppTheme.size.s48)) {
         Image(
             modifier = Modifier.fillMaxSize(),
             painter = painterResource(imgRes),
             contentDescription = null
         )
-        Text(
-            modifier = Modifier.align(Alignment.BottomEnd).clip(CircleShape)
-                .background(AppTheme.colors.surface).padding(
-                    horizontal = AppTheme.spacing.s250, vertical = AppTheme.spacing.s100
-                ),
-            text = level.toString(),
-            color = AppTheme.colors.onSurface,
-            style = AppTheme.typography.labelSmall
-        )
+        level?.let {
+            Text(
+                modifier = Modifier.align(Alignment.BottomEnd).clip(CircleShape)
+                    .background(AppTheme.colors.surface).padding(
+                        horizontal = AppTheme.spacing.s250, vertical = AppTheme.spacing.s100
+                    ),
+                text = level,
+                color = AppTheme.colors.onSurface,
+                style = AppTheme.typography.labelSmall
+            )
+        }
+    }
+}
+
+private fun convertNumberToDisplayChar(number: Int): String? {
+    return when (number) {
+        2 -> "A"
+        3 -> "B"
+        4 -> "C"
+        5 -> "D"
+        6 -> "E"
+        7 -> "F"
+        else -> null
     }
 }
