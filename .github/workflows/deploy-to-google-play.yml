@@ -59,8 +59,3 @@ jobs:
           track: internal
           whatsNewDirectory: whatsNew/
           status: completed
-
-      # Clean up sensitive files
-      - name: Clean up
-        run: |
-          rm -f keystore.jks
