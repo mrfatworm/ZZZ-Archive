@@ -12,7 +12,7 @@ jobs:
   unit_test:
     uses: ./.github/workflows/job_test_debug.yml
 
-  build-and-deploy:
+  deploy-to-google-play:
     runs-on: ubuntu-latest
     needs: [ unit_test, lint ]
 
@@ -53,6 +53,16 @@ jobs:
       - name: Build Android AAB
         run: ./gradlew :composeApp:bundleLiveRelease
 
+      # Sign KeyStore
+      - name: Sign Release
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEYSTORE }}
+          keyStorePassword: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
+          alias: ${{ secrets.SIGNING_KEY_ALIAS }}
+          keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
+
       # Upload AAB to Google Play Internal Testing (Internal track)
       - name: Deploy to Google Play Internal Testing
         uses: r0adkll/upload-google-play@v1
@@ -61,7 +71,7 @@ jobs:
           packageName: com.mrfatworm.zzzarchive
           releaseFiles: composeApp/Live/release/composeApp-Live-release.aab
           track: internal
-          whatsNewDirectory: whatsnew-en-US.txt
+          whatsNewDirectory: whatsNew/
           status: completed
 
       # Clean up sensitive files
