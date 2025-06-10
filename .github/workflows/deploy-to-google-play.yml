@@ -55,7 +55,7 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
           packageName: com.mrfatworm.zzzarchive
-          releaseFiles: composeApp/Live/release/composeApp-Live-release.aab
+          releaseFiles: composeApp/build/outputs/bundle/LiveRelease/composeApp-Live-release.aab
           track: internal
           whatsNewDirectory: whatsNew/
           status: completed
