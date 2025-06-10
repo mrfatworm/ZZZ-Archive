@@ -24,3 +24,4 @@ captures
 /composeApp/config/macos/runtime-entitlements.plist
 /composeApp/schemas/*
 /composeApp/src/commonMain/kotlin/feature/hoyolab/data/crypto/AesKey.kt
+/keystore.properties

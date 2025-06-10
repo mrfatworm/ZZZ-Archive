@@ -3,6 +3,7 @@ import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
+import java.io.FileInputStream
 import java.util.Properties
 import java.util.regex.Pattern
 
@@ -114,6 +115,10 @@ val bundleVersionName = "1.1.35"
 val zzzVersionCode = 6
 val zzzPackageId = "com.mrfatworm.zzzarchive"
 
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+val keystoreProperties = Properties()
+keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+
 android {
     namespace = "com.mrfatworm.zzzarchive"
     compileSdk = 35
@@ -129,9 +134,24 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file(
+                keystoreProperties["storeFile"]
+                    ?: throw GradleException("Keystore file not provided")
+            )
+            storePassword = (keystoreProperties["storePassword"]
+                ?: throw GradleException("Keystore password not provided")).toString()
+            keyAlias = (keystoreProperties["keyAlias"]
+                ?: throw GradleException("Key alias not provided")).toString()
+            keyPassword = (keystoreProperties["keyPassword"]
+                ?: throw GradleException("Key password not provided")).toString()
+        }
+    }
 
     buildTypes {
         release {
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
@@ -139,6 +159,7 @@ android {
             )
         }
     }
+
 
     flavorDimensions.add("variant")
     productFlavors {
