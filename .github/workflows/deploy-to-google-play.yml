@@ -35,20 +35,6 @@ jobs:
       - name: Set up local.properties
         run: echo "AES_KEY=${{ secrets.AES_KEY }}" > local.properties
 
-      # Decode Base64-encoded keystore
-      - name: Decode Keystore
-        run: echo "${{ secrets.SIGNING_KEYSTORE }}" | base64 --decode > keystore.jks
-
-      # Build the keystore.properties
-      - name: Set up keystore.properties
-        run: |
-          cat <<EOF > keystore.properties
-          storeFile:${{ github.workspace }}/keystore.jks
-          storePassword:${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
-          keyPassword:${{ secrets.SIGNING_KEY_ALIAS }}
-          keyAlias:${{ secrets.SIGNING_KEY_PASSWORD }}
-          EOF
-
       # Build the Android AAB (or APK if preferred)
       - name: Build Android AAB
         run: ./gradlew :composeApp:bundleLiveRelease
@@ -57,7 +43,7 @@ jobs:
       - name: Sign Release
         uses: r0adkll/sign-android-release@v1
         with:
-          releaseDirectory: app/build/outputs/bundle/release
+          releaseDirectory: composeApp/Live/release
           signingKeyBase64: ${{ secrets.SIGNING_KEYSTORE }}
           keyStorePassword: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
           alias: ${{ secrets.SIGNING_KEY_ALIAS }}
