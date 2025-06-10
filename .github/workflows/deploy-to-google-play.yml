@@ -43,7 +43,7 @@ jobs:
       - name: Sign Release
         uses: r0adkll/sign-android-release@v1
         with:
-          releaseDirectory: composeApp/Live/release
+          releaseDirectory: composeApp/build/outputs/bundle/LiveRelease
           signingKeyBase64: ${{ secrets.SIGNING_KEYSTORE }}
           keyStorePassword: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
           alias: ${{ secrets.SIGNING_KEY_ALIAS }}
