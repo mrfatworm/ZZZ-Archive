@@ -81,7 +81,7 @@ fun ZzzArchiveTheme(content: @Composable () -> Unit) {
     val fixedSize = mutableStateOf(provideSize(uiScale.value))
 
     AdaptiveLayout(adaptiveLayoutType, contentType)
-    SystemAppearance(!isDark.value)
+    SystemAppearance(isDark.value)
 
     CompositionLocalProvider(
         localColorScheme provides colorScheme,

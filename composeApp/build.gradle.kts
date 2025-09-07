@@ -106,6 +106,7 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.cryptography.provider.jdk)
+            implementation(libs.flatlaf)
         }
 
         dependencies {

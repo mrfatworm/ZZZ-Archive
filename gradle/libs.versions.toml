@@ -9,6 +9,7 @@ composeHotReload = "1.0.0-beta03"
 compose-plugin = "1.8.2"
 cryptography = "0.4.0"
 datastore = "1.1.7"
+flatlaf = "3.6.1"
 kotlin = "2.2.0"
 kotlinx-coroutines = "1.10.2"
 kotlin-datetime = "0.7.0"
@@ -69,6 +70,9 @@ okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
 cryptography-core = { module = "dev.whyoleg.cryptography:cryptography-core", version.ref = "cryptography"}
 cryptography-provider-jdk = { module = "dev.whyoleg.cryptography:cryptography-provider-jdk", version.ref = "cryptography"}
 cryptography-provider-apple = { module = "dev.whyoleg.cryptography:cryptography-provider-apple", version.ref = "cryptography"}
+
+#=== Desktop Theme
+flatlaf = { module = "com.formdev:flatlaf", version.ref = "flatlaf" }
 
 #=== Test
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
