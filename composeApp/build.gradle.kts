@@ -109,16 +109,15 @@ kotlin {
             implementation(libs.cryptography.provider.jdk)
         }
 
-        dependencies {
-            ksp(libs.androidx.room.compiler)
-        }
-
         room {
             schemaDirectory("$projectDir/schemas")
         }
     }
 }
 
+dependencies {
+    ksp(libs.androidx.room.compiler)
+}
 
 val zzzVersionName = "1.3.0"
 val zzzVersionCode = 8

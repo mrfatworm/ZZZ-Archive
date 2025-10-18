@@ -75,15 +75,17 @@ fun HighlightAgentListItem(
         )
 
         // Faction Background Image
-        AsyncImage(
-            modifier = Modifier
-                .align(Alignment.Center)
-                .fillMaxWidth(0.38f)
-                .alpha(0.2f),
-            model = uiState.faction.getFactionIconUrl(),
-            contentDescription = null,
-            contentScale = ContentScale.FillWidth
-        )
+        Box(modifier = Modifier.matchParentSize()) {
+            AsyncImage(
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .fillMaxWidth(0.38f)
+                    .alpha(0.2f),
+                model = uiState.faction.getFactionIconUrl(),
+                contentDescription = null,
+                contentScale = ContentScale.FillWidth
+            )
+        }
 
         Row(
             modifier = Modifier
