@@ -13,6 +13,8 @@ sealed interface AgentsListAction {
 
     data class ChangeFactionFilter(val factionId: Int) : AgentsListAction
 
+    data object ClearFilter : AgentsListAction
+
     data class ClickAgent(val agentId: Int) : AgentsListAction
 
     data object ClickBack : AgentsListAction

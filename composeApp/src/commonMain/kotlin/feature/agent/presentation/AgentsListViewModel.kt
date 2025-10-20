@@ -73,6 +73,18 @@ class AgentsListViewModel(private val agentsListUseCase: AgentsListUseCase) : Vi
                 filterAgentsList()
             }
 
+            is AgentsListAction.ClearFilter -> {
+                _uiState.update {
+                    it.copy(
+                        selectedRarity = emptySet(),
+                        selectedAttributes = emptySet(),
+                        selectedSpecialties = emptySet(),
+                        selectedFactionId = 0
+                    )
+                }
+                filterAgentsList()
+            }
+
             is AgentsListAction.ClickAgent -> {}
 
             AgentsListAction.ClickBack -> {}

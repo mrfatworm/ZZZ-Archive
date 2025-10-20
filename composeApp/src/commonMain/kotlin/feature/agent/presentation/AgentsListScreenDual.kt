@@ -12,7 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import feature.agent.components.AgentsListFilterCard
+import feature.agent.components.AgentsList
 import feature.agent.components.FactionItem
 import feature.agent.model.AgentsListState
 import ui.theme.AppTheme
@@ -29,18 +29,9 @@ fun AgentsListScreenDual(
         modifier = Modifier.padding(horizontalSafePadding()),
         horizontalArrangement = Arrangement.spacedBy(containerGap())
     ) {
-        AgentsListFilterCard(
-            modifier = Modifier.weight(0.7f).padding(verticalSafePadding()),
-            uiState = uiState,
-            onRarityChipSelectionChanged = {
-                onAction(AgentsListAction.ChangeRarityFilter(it))
-            },
-            onAttributeChipSelectionChanged = {
-                onAction(AgentsListAction.ChangeAttributeFilter(it))
-            },
-            onSpecialtyChipSelectionChanged = {
-                onAction(AgentsListAction.ChangeSpecialtyFilter(it))
-            }
+        AgentsList(
+            modifier = Modifier.weight(0.7f),
+            uiState = uiState
         )
         LazyColumn(
             modifier = Modifier.weight(0.3f),
