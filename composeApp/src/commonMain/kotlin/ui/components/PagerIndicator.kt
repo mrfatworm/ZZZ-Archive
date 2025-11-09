@@ -27,10 +27,10 @@ private val focusedIndicatorSize = 16.dp
 
 @Composable
 fun PagerIndicator(
-    modifier: Modifier,
     pageCount: Int,
     currentPage: Int,
-    onClick: (Int) -> Unit
+    modifier: Modifier = Modifier,
+    onClick: (Int) -> Unit = {}
 ) {
     Row(
         modifier

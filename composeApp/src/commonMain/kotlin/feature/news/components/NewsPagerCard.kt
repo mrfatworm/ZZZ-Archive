@@ -53,14 +53,13 @@ fun NewsPagerCard(newsList: List<OfficialNewsListItem>) {
             Modifier
                 .clip(AppTheme.shape.r400)
                 .background(AppTheme.colors.surfaceContainer)
-                .padding(bottom = AppTheme.spacing.s400),
+                .padding(bottom = AppTheme.spacing.s200),
             verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
         ) {
             HorizontalPager(modifier = Modifier, state = pagerState) { currentPager ->
                 NewsPagerCardItem(newsList[currentPager])
             }
             PagerIndicator(
-                modifier = Modifier,
                 pageCount = pagerState.pageCount,
                 currentPage = pagerState.currentPage,
                 onClick = {
@@ -73,7 +72,7 @@ fun NewsPagerCard(newsList: List<OfficialNewsListItem>) {
 
         LaunchedEffect(key1 = pagerState.settledPage) {
             launch {
-                delay(8000)
+                delay(6000)
                 val target =
                     if (pagerState.currentPage == pagerState.pageCount - 1) 0 else pagerState.currentPage + 1
                 pagerState.animateScrollToPage(target)
