@@ -50,7 +50,7 @@ instructions for contributing to this Kotlin Multiplatform project.
    ./gradlew run
    
    # Hot reload development
-   ./gradlew runHot
+   ./gradlew desktopRun
    ```
 
 ## Code Quality Standards

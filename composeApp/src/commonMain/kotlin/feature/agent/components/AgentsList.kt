@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyGridState
@@ -87,6 +88,9 @@ fun AgentsList(
                     isShowMaterialDialog = true
                 }
             )
+        }
+        item(span = { GridItemSpan(this.maxLineSpan) }) {
+            Spacer(modifier = Modifier.size(AppTheme.size.s64))
         }
     }
     if (isShowMaterialDialog) {

@@ -95,8 +95,8 @@ fun AgentsListContent(
                 }
 
                 FloatingActionButton(
-                    containerColor = AppTheme.colors.surfaceContainer,
-                    contentColor = if (isFiltered) AppTheme.colors.primary else AppTheme.colors.onSurfaceContainer,
+                    containerColor = AppTheme.colors.primary,
+                    contentColor = AppTheme.colors.onPrimary,
                     onClick = {
                         showBottomSheet = true
                     }
