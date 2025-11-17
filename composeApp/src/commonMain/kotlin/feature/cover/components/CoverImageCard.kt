@@ -24,10 +24,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
@@ -43,29 +40,28 @@ import ui.components.ImageNotFound
 import ui.theme.AppTheme
 
 @Composable
-fun CoverImageCard(coverImages: List<CoverImageListItemEntity>) {
-    if (coverImages.isNotEmpty()) {
-        CoverImage(coverImages)
-    }
-}
+fun CoverImageCard(
+    coverImages: List<CoverImageListItemEntity>,
+    currentIndex: Int,
+    onIndexChange: (Int) -> Unit
+) {
+    if (coverImages.isEmpty()) return
 
-@Composable
-private fun CoverImage(coverImages: List<CoverImageListItemEntity>) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed = interactionSource.collectIsPressedAsState()
     val isHovered = interactionSource.collectIsHoveredAsState()
-    var currentImageIndex by remember { mutableStateOf(coverImages.size - 1) } // Start from last
+    val displayedIndex =
+        currentIndex.coerceIn(0, coverImages.lastIndex) // Start from last available index
 
-    LaunchedEffect(coverImages) {
-        while (true) {
-            delay(15_000L)
-            currentImageIndex =
-                if (currentImageIndex > 0) {
-                    currentImageIndex - 1
-                } else {
-                    coverImages.size - 1
-                }
-        }
+    LaunchedEffect(displayedIndex, coverImages) {
+        delay(8_000L)
+        val nextIndex =
+            if (displayedIndex > 0) {
+                displayedIndex - 1
+            } else {
+                coverImages.lastIndex
+            }
+        onIndexChange(nextIndex)
     }
 
     Box(
@@ -74,7 +70,7 @@ private fun CoverImage(coverImages: List<CoverImageListItemEntity>) {
         val urlHandler = LocalUriHandler.current
         coverImages.forEachIndexed { index, image ->
             AnimatedVisibility(
-                visible = index == currentImageIndex,
+                visible = index == displayedIndex,
                 enter = fadeIn(animationSpec = tween(durationMillis = 2000)),
                 exit = fadeOut(animationSpec = tween(durationMillis = 2000))
             ) {

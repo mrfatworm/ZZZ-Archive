@@ -72,6 +72,10 @@ class HomeViewModel(
                 updatePixivTopic(action.tag)
             }
 
+            is HomeAction.UpdateCoverImageIndex -> {
+                updateCoverImageIndex(action.index)
+            }
+
             is HomeAction.Sign -> {
                 if (uiState.value.gameRecord.hasAccount) {
                     viewModelScope.launch {
@@ -121,7 +125,7 @@ class HomeViewModel(
                 it.copy(banner = banner)
             }
         }, onFailure = {
-            println("get banner result: ${it.message}")
+            // Do nothing
         })
     }
 
@@ -172,11 +176,36 @@ class HomeViewModel(
         coverImageJob =
             viewModelScope.launch {
                 coverImageUseCase.invoke().collect { coverImagesList ->
-                    _uiState.update {
-                        it.copy(coverImage = coverImagesList)
+                    _uiState.update { state ->
+                        val validIndex =
+                            if (coverImagesList.isEmpty()) {
+                                0
+                            } else if (state.coverImageIndex in coverImagesList.indices) {
+                                state.coverImageIndex
+                            } else {
+                                coverImagesList.lastIndex
+                            }
+                        state.copy(coverImage = coverImagesList, coverImageIndex = validIndex)
                     }
                 }
             }
+    }
+
+    private fun updateCoverImageIndex(index: Int) {
+        _uiState.update { state ->
+            val upperBound = state.coverImage.lastIndex
+            val newIndex =
+                if (upperBound < 0) {
+                    0
+                } else {
+                    index.coerceIn(0, upperBound)
+                }
+            if (newIndex == state.coverImageIndex) {
+                state
+            } else {
+                state.copy(coverImageIndex = newIndex)
+            }
+        }
     }
 
     private fun observeDefaultAccount() {

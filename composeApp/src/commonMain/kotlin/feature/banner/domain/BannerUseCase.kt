@@ -21,10 +21,10 @@ class BannerUseCase(
             bannerRepository
                 .getBanner(languageUseCase.getLanguage().first().officialCode)
                 .getOrNull()
-        if (getBannerIgnoreId().first() < (bannerResponse?.id ?: 0)) {
-            return Result.success(bannerResponse!!)
+        return if (getBannerIgnoreId().first() < (bannerResponse?.id ?: 0)) {
+            Result.success(bannerResponse!!)
         } else {
-            return Result.failure(Exception("No new banner"))
+            Result.failure(Exception("No new banner"))
         }
     }
 

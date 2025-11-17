@@ -22,6 +22,7 @@ import feature.pixiv.model.PixivArticleItem
 data class HomeState(
     val banner: BannerResponse? = null,
     val coverImage: List<CoverImageListItemEntity> = emptyList(),
+    val coverImageIndex: Int = 0,
     val newsList: List<OfficialNewsListItem> = emptyList(),
     val pixivTopics: List<PixivArticleItem> = emptyList(),
     val gameRecord: GameRecordState = emptyGameRecordState,

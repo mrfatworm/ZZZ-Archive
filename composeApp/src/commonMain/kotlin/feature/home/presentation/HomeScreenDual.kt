@@ -49,7 +49,11 @@ fun HomeScreenDual(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(contentGap())
             ) {
-                CoverImageCard(uiState.coverImage)
+                CoverImageCard(
+                    coverImages = uiState.coverImage,
+                    currentIndex = uiState.coverImageIndex,
+                    onIndexChange = { onAction(HomeAction.UpdateCoverImageIndex(it)) }
+                )
                 HoYoLabCard(uiState.gameRecord, uiState.signResult, onSignClick = {
                     onAction(HomeAction.Sign)
                 }, onAddAccountClick = {
