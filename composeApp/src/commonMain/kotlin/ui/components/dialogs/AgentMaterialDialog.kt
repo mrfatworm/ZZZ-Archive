@@ -21,10 +21,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.resources.stringResource
 import ui.components.buttons.ZzzIconButton
+import ui.components.buttons.ZzzPrimaryButton
 import ui.components.items.RarityMiniItem
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.close
+import zzzarchive.composeapp.generated.resources.gallery
 import zzzarchive.composeapp.generated.resources.ic_close
 import zzzarchive.composeapp.generated.resources.materials
 
@@ -35,6 +37,7 @@ fun AgentMaterialDialog(
     skillMaterialUrls: List<String>,
     levelMaterialUrls: List<String>,
     wEngineMaterialUrls: List<String>,
+    onGalleryClick: () -> Unit,
     onDismiss: () -> Unit
 ) {
     BasicDialog(onDismissRequest = onDismiss) {
@@ -94,6 +97,11 @@ fun AgentMaterialDialog(
                     RarityMiniItem(imgUrl = it)
                 }
             }
+            ZzzPrimaryButton(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(Res.string.gallery),
+                onClick = onGalleryClick
+            )
         }
     }
 }

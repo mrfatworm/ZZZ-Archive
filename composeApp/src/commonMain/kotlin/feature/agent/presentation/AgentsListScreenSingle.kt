@@ -20,6 +20,7 @@ fun AgentsListScreenSingle(
 ) {
     AgentsList(
         modifier = Modifier.fillMaxSize().padding(horizontalSafePadding()),
-        uiState = uiState
+        uiState = uiState,
+        onGalleryClick = { onAction(AgentsListAction.ClickGallery(it)) }
     )
 }

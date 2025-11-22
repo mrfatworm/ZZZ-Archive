@@ -31,7 +31,8 @@ fun AgentsListScreenDual(
     ) {
         AgentsList(
             modifier = Modifier.weight(0.7f),
-            uiState = uiState
+            uiState = uiState,
+            onGalleryClick = { onAction(AgentsListAction.ClickGallery(it)) }
         )
         LazyColumn(
             modifier = Modifier.weight(0.3f),

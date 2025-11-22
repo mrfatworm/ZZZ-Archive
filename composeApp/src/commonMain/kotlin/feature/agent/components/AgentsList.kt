@@ -36,7 +36,8 @@ import ui.utils.verticalSafePadding
 fun AgentsList(
     modifier: Modifier,
     uiState: AgentsListState,
-    lazyGridState: LazyGridState = rememberLazyGridState()
+    lazyGridState: LazyGridState = rememberLazyGridState(),
+    onGalleryClick: (Int) -> Unit
 ) {
     var isShowMaterialDialog by remember { mutableStateOf(false) }
     var selectedAgent by remember { mutableStateOf(stubAgentsList[0]) }
@@ -100,6 +101,10 @@ fun AgentsList(
             skillMaterialUrls = selectedAgent.skillMaterialUrls,
             levelMaterialUrls = selectedAgent.levelMaterialUrls,
             wEngineMaterialUrls = selectedAgent.wEngineMaterialUrls,
+            onGalleryClick = {
+                isShowMaterialDialog = false
+                onGalleryClick(selectedAgent.id)
+            },
             onDismiss = { isShowMaterialDialog = false }
         )
     }
