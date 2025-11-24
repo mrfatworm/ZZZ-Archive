@@ -24,7 +24,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
@@ -40,28 +43,19 @@ import ui.components.ImageNotFound
 import ui.theme.AppTheme
 
 @Composable
-fun CoverImageCard(
-    coverImages: List<CoverImageListItemEntity>,
-    currentIndex: Int,
-    onIndexChange: (Int) -> Unit
-) {
+fun CoverImageCard(coverImages: List<CoverImageListItemEntity>) {
     if (coverImages.isEmpty()) return
 
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed = interactionSource.collectIsPressedAsState()
     val isHovered = interactionSource.collectIsHoveredAsState()
-    val displayedIndex =
-        currentIndex.coerceIn(0, coverImages.lastIndex) // Start from last available index
+    var displayedIndex by remember { mutableStateOf(coverImages.lastIndex) }
 
-    LaunchedEffect(displayedIndex, coverImages) {
-        delay(8_000L)
-        val nextIndex =
-            if (displayedIndex > 0) {
-                displayedIndex - 1
-            } else {
-                coverImages.lastIndex
-            }
-        onIndexChange(nextIndex)
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(8_000L)
+            displayedIndex = if (displayedIndex - 1 < 0) coverImages.lastIndex else displayedIndex - 1
+        }
     }
 
     Box(

@@ -15,6 +15,4 @@ sealed interface HomeAction {
     data class DismissBanner(val id: Int) : HomeAction
 
     data object Sign : HomeAction
-
-    data class UpdateCoverImageIndex(val index: Int) : HomeAction
 }

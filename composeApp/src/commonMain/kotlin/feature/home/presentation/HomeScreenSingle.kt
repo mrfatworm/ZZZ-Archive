@@ -40,11 +40,7 @@ fun HomeScreenSingle(
             })
         }
         item {
-            CoverImageCard(
-                coverImages = uiState.coverImage,
-                currentIndex = uiState.coverImageIndex,
-                onIndexChange = { onAction(HomeAction.UpdateCoverImageIndex(it)) }
-            )
+            CoverImageCard(coverImages = uiState.coverImage)
         }
         item {
             NewsPagerCard(uiState.newsList)
