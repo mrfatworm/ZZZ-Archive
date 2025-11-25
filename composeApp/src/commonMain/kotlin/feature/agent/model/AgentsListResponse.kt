@@ -30,33 +30,33 @@ data class AgentListItemResponse(
 val stubAgentsListResponse =
     AgentsListResponse(
         agents =
-        listOf(
-            AgentListItemResponse(
-                id = 3,
-                name = "貓又",
-                isHighlight = false,
-                rarity = 5,
-                specialty = "attack",
-                attribute = "physical",
-                factionId = 1
-            ),
-            AgentListItemResponse(
-                id = 4,
-                name = "安比",
-                isHighlight = false,
-                rarity = 4,
-                specialty = "stun",
-                attribute = "electric",
-                factionId = 1
-            ),
-            AgentListItemResponse(
-                id = 16,
-                name = "可琳",
-                isHighlight = false,
-                rarity = 4,
-                specialty = "attack",
-                attribute = "physical",
-                factionId = 2
+            listOf(
+                AgentListItemResponse(
+                    id = 3,
+                    name = "貓又",
+                    isHighlight = false,
+                    rarity = 5,
+                    specialty = "attack",
+                    attribute = "physical",
+                    factionId = 1
+                ),
+                AgentListItemResponse(
+                    id = 4,
+                    name = "安比",
+                    isHighlight = false,
+                    rarity = 4,
+                    specialty = "stun",
+                    attribute = "electric",
+                    factionId = 1
+                ),
+                AgentListItemResponse(
+                    id = 16,
+                    name = "可琳",
+                    isHighlight = false,
+                    rarity = 4,
+                    specialty = "attack",
+                    attribute = "physical",
+                    factionId = 2
+                )
             )
-        )
     )

@@ -132,12 +132,12 @@ private fun TagDropDownButton(onPixivTagChange: (String) -> Unit) {
         var tagText by remember { mutableStateOf(pixivZzzLikeTags.first().tagText) }
         Row(
             modifier =
-            Modifier
-                .clip(AppTheme.shape.r300)
-                .clickable { showTagsList = true }
-                .pointerHoverIcon(PointerIcon.Hand)
-                .background(AppTheme.colors.surface)
-                .padding(horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s200),
+                Modifier
+                    .clip(AppTheme.shape.r300)
+                    .clickable { showTagsList = true }
+                    .pointerHoverIcon(PointerIcon.Hand)
+                    .background(AppTheme.colors.surface)
+                    .padding(horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s200),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
         ) {
@@ -183,12 +183,12 @@ private fun PixivTopicItem(pixivArticle: PixivArticleItem) {
     val imageState =
         rememberAsyncImagePainter(
             model =
-            ImageRequest
-                .Builder(LocalPlatformContext.current)
-                .httpHeaders(header)
-                .data(pixivArticle.artworkImageUrl)
-                .size(Size.ORIGINAL)
-                .build()
+                ImageRequest
+                    .Builder(LocalPlatformContext.current)
+                    .httpHeaders(header)
+                    .data(pixivArticle.artworkImageUrl)
+                    .size(Size.ORIGINAL)
+                    .build()
         )
     Column(
         modifier = Modifier.width(AppTheme.size.s144),
@@ -197,23 +197,23 @@ private fun PixivTopicItem(pixivArticle: PixivArticleItem) {
     ) {
         Box(
             modifier =
-            Modifier
-                .fillMaxSize()
-                .aspectRatio(1f)
-                .clip(AppTheme.shape.r400)
+                Modifier
+                    .fillMaxSize()
+                    .aspectRatio(1f)
+                    .clip(AppTheme.shape.r400)
         ) {
             if (pixivArticle.artworkImageUrl.isNotEmpty()) {
                 Image(
                     modifier =
-                    Modifier
-                        .fillMaxSize()
-                        .pointerHoverIcon(PointerIcon.Hand)
-                        .clickable(
-                            interactionSource = interactionSource,
-                            indication = null
-                        ) {
-                            urlHandler.openUri(pixivArticle.artworkUrl)
-                        },
+                        Modifier
+                            .fillMaxSize()
+                            .pointerHoverIcon(PointerIcon.Hand)
+                            .clickable(
+                                interactionSource = interactionSource,
+                                indication = null
+                            ) {
+                                urlHandler.openUri(pixivArticle.artworkUrl)
+                            },
                     painter = imageState,
                     contentDescription = pixivArticle.title
                 )
@@ -223,15 +223,15 @@ private fun PixivTopicItem(pixivArticle: PixivArticleItem) {
         }
         Text(
             modifier =
-            Modifier
-                .fillMaxWidth()
-                .pointerHoverIcon(PointerIcon.Hand)
-                .clickable(
-                    interactionSource = interactionSource,
-                    indication = null
-                ) {
-                    urlHandler.openUri(pixivArticle.artworkUrl)
-                },
+                Modifier
+                    .fillMaxWidth()
+                    .pointerHoverIcon(PointerIcon.Hand)
+                    .clickable(
+                        interactionSource = interactionSource,
+                        indication = null
+                    ) {
+                        urlHandler.openUri(pixivArticle.artworkUrl)
+                    },
             text = pixivArticle.title,
             overflow = TextOverflow.Ellipsis,
             style = AppTheme.typography.labelMedium,
@@ -260,21 +260,21 @@ private fun AuthorInfo(
     val imageState =
         rememberAsyncImagePainter(
             model =
-            ImageRequest
-                .Builder(LocalPlatformContext.current)
-                .httpHeaders(header)
-                .data(profileUrl)
-                .size(Size.ORIGINAL)
-                .build()
+                ImageRequest
+                    .Builder(LocalPlatformContext.current)
+                    .httpHeaders(header)
+                    .data(profileUrl)
+                    .size(Size.ORIGINAL)
+                    .build()
         )
     Row(
         modifier =
-        Modifier
-            .clickable(
-                interactionSource = interactionSource,
-                indication = null,
-                onClick = onClick
-            ).pointerHoverIcon(PointerIcon.Hand),
+            Modifier
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null,
+                    onClick = onClick
+                ).pointerHoverIcon(PointerIcon.Hand),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {

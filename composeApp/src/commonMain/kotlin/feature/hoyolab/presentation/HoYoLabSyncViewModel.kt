@@ -78,17 +78,17 @@ class HoYoLabSyncViewModel(
             _uiState.update { state ->
                 state.copy(
                     syncedAccounts =
-                    accountList.map {
-                        SyncedAccountsListItem(
-                            uid = it.uid.toString(),
-                            regionName = it.regionName,
-                            level = it.level.toString(),
-                            nickname = it.nickName,
-                            profileUrl = it.profileUrl,
-                            cardUrl = it.cardUrl,
-                            datetime = hoYoLabManageUseCase.convertToLocalDatetime(it.updatedAt)
-                        )
-                    }
+                        accountList.map {
+                            SyncedAccountsListItem(
+                                uid = it.uid.toString(),
+                                regionName = it.regionName,
+                                level = it.level.toString(),
+                                nickname = it.nickName,
+                                profileUrl = it.profileUrl,
+                                cardUrl = it.cardUrl,
+                                datetime = hoYoLabManageUseCase.convertToLocalDatetime(it.updatedAt)
+                            )
+                        }
                 )
             }
         }

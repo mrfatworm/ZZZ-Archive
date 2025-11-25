@@ -26,7 +26,9 @@ fun SettingScreen(
     SettingScreenContent(uiState) { action ->
         when (action) {
             SettingAction.ClickFeedback -> onFeedbackClick()
+
             SettingAction.ClickHoYoLab -> onHoYoLabClick()
+
             else -> {
                 coroutineScope.launch {
                     viewModel.onAction(action)

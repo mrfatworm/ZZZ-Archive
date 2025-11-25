@@ -46,10 +46,10 @@ fun FeedbackScreenCompact(
     }) { scaffoldPadding ->
         Column(
             modifier =
-            Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .contentPaddingInScaffold(scaffoldPadding),
+                Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .contentPaddingInScaffold(scaffoldPadding),
             verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s350)
         ) {
             FeedbackFormCard(

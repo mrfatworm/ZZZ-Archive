@@ -40,20 +40,20 @@ fun ZzzFilterChip(
 ) {
     Row(
         modifier =
-        modifier
-            .clip(zzzChipShape)
-            .pointerHoverIcon(PointerIcon.Hand)
-            .clickable(onClick = onClick)
-            .background(
-                color = if (selected) AppTheme.colors.primaryContainer else AppTheme.colors.surface
-            ).border(
-                width = 1.dp,
-                color = if (selected) Color.Transparent else AppTheme.colors.border,
-                shape = zzzChipShape
-            ).padding(
-                horizontal = AppTheme.spacing.s350,
-                vertical = AppTheme.spacing.s250
-            ),
+            modifier
+                .clip(zzzChipShape)
+                .pointerHoverIcon(PointerIcon.Hand)
+                .clickable(onClick = onClick)
+                .background(
+                    color = if (selected) AppTheme.colors.primaryContainer else AppTheme.colors.surface
+                ).border(
+                    width = 1.dp,
+                    color = if (selected) Color.Transparent else AppTheme.colors.border,
+                    shape = zzzChipShape
+                ).padding(
+                    horizontal = AppTheme.spacing.s350,
+                    vertical = AppTheme.spacing.s250
+                ),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {

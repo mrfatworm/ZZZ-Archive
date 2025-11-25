@@ -35,6 +35,7 @@ class MyAgentDetailViewModel(
     fun onAction(action: MyAgentDetailAction) {
         when (action) {
             MyAgentDetailAction.ClickBack -> {}
+
             is MyAgentDetailAction.ConfirmEditImage -> {
                 _uiState.update { state ->
                     state.copy(

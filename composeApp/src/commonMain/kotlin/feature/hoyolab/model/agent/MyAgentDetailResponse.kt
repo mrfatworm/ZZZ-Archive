@@ -57,47 +57,47 @@ val stubMyAgentDetailResponse =
         retCode = 0,
         message = "OK",
         data =
-        MyAgentDetailDataResponse(
-            avatarList =
-            listOf(
-                MyAgentDetailItemResponse(
-                    id = 1251,
-                    level = 60,
-                    nameMi18n = "青衣",
-                    fullNameMi18n = "青衣",
-                    elementType = 203,
-                    campNameMi18n = "刑偵特勤組",
-                    avatarProfession = 2,
-                    rarity = "S",
-                    groupIconPath = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u66fwb/033f6219c3e923be69fe41d80818eb8c.png",
-                    hollowIconPath = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u66fwb/b48ab775e50814d8e30e56f6cf6a55d0.png",
-                    equip = listOf(stubEquipResponse),
-                    weapon = stubMyAgentDetailWeaponResponse,
-                    properties =
+            MyAgentDetailDataResponse(
+                avatarList =
                     listOf(
-                        MyAgentDetailPropertyResponse(
-                            propertyName = "生命值",
-                            propertyId = 1,
-                            base = "8250",
-                            add = "3167",
-                            final = "11417"
-                        ),
-                        MyAgentDetailPropertyResponse(
-                            propertyName = "攻擊力",
-                            propertyId = 2,
-                            base = "1442",
-                            add = "416",
-                            final = "1858"
+                        MyAgentDetailItemResponse(
+                            id = 1251,
+                            level = 60,
+                            nameMi18n = "青衣",
+                            fullNameMi18n = "青衣",
+                            elementType = 203,
+                            campNameMi18n = "刑偵特勤組",
+                            avatarProfession = 2,
+                            rarity = "S",
+                            groupIconPath = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u66fwb/033f6219c3e923be69fe41d80818eb8c.png",
+                            hollowIconPath = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u66fwb/b48ab775e50814d8e30e56f6cf6a55d0.png",
+                            equip = listOf(stubEquipResponse),
+                            weapon = stubMyAgentDetailWeaponResponse,
+                            properties =
+                                listOf(
+                                    MyAgentDetailPropertyResponse(
+                                        propertyName = "生命值",
+                                        propertyId = 1,
+                                        base = "8250",
+                                        add = "3167",
+                                        final = "11417"
+                                    ),
+                                    MyAgentDetailPropertyResponse(
+                                        propertyName = "攻擊力",
+                                        propertyId = 2,
+                                        base = "1442",
+                                        add = "416",
+                                        final = "1858"
+                                    )
+                                ),
+                            skills = listOf(stubMyAgentDetailSkillResponse),
+                            rank = 1,
+                            roleVerticalPaintingUrl = "https://act-webstatic.hoyoverse.com/game_record/zzzv2/role_vertical_painting/role_vertical_painting_1251.png",
+                            equipPlanInfo = stubMyAgentDetailEquipPlanResponse,
+                            usFullName = "Qing Yi",
+                            verticalPaintingColor = "#28c79d",
+                            subElementType = 0
                         )
-                    ),
-                    skills = listOf(stubMyAgentDetailSkillResponse),
-                    rank = 1,
-                    roleVerticalPaintingUrl = "https://act-webstatic.hoyoverse.com/game_record/zzzv2/role_vertical_painting/role_vertical_painting_1251.png",
-                    equipPlanInfo = stubMyAgentDetailEquipPlanResponse,
-                    usFullName = "Qing Yi",
-                    verticalPaintingColor = "#28c79d",
-                    subElementType = 0
-                )
+                    )
             )
-        )
     )

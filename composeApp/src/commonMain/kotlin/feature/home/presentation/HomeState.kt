@@ -38,13 +38,13 @@ val emptyGameRecordState =
         profileUrl = "",
         cardUrl = "",
         energy =
-        EnergyState(
-            progress = ProgressState(max = "240", current = "---"),
-            restore = 6803,
-            dayType = 1,
-            hour = "--",
-            minute = "--"
-        ),
+            EnergyState(
+                progress = ProgressState(max = "240", current = "---"),
+                restore = 6803,
+                dayType = 1,
+                hour = "--",
+                minute = "--"
+            ),
         vitality = ProgressState(max = "?", current = "?"),
         vhsSale = VhsSaleState(saleState = "???"),
         cardSign = "???",

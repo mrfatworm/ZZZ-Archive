@@ -44,12 +44,12 @@ fun PagerIndicator(
             val size = if (currentPage == page) focusedIndicatorSize else unfocusedIndicatorSize
             Box(
                 modifier =
-                Modifier
-                    .clickable { onClick(page) }
-                    .padding(AppTheme.spacing.s200)
-                    .clip(AppTheme.shape.r250)
-                    .background(color = color)
-                    .size(height = unfocusedIndicatorSize, width = size)
+                    Modifier
+                        .clickable { onClick(page) }
+                        .padding(AppTheme.spacing.s200)
+                        .clip(AppTheme.shape.r250)
+                        .background(color = color)
+                        .size(height = unfocusedIndicatorSize, width = size)
             )
         }
     }

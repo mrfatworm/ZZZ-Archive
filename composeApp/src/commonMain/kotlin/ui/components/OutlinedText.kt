@@ -66,10 +66,10 @@ fun OutlinedText(
             minLines = minLines,
             onTextLayout = onTextLayout,
             style =
-            style.copy(
-                shadow = null,
-                drawStyle = borderDrawStyle
-            )
+                style.copy(
+                    shadow = null,
+                    drawStyle = borderDrawStyle
+                )
         )
 
         Text(

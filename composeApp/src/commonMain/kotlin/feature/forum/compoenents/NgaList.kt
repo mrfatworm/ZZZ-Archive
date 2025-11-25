@@ -24,9 +24,9 @@ fun NgaList(ngaList: List<NgaForumListState>) {
         for (index in ngaList.indices) {
             NgaListItem(
                 modifier =
-                Modifier.clickable {
-                    urlHandler.openUri(ngaList[index].link)
-                },
+                    Modifier.clickable {
+                        urlHandler.openUri(ngaList[index].link)
+                    },
                 nga = ngaList[index],
                 isVariantColor = index % 2 == 0
             )
@@ -42,10 +42,10 @@ private fun NgaListItem(
 ) {
     Column(
         modifier =
-        modifier
-            .fillMaxWidth()
-            .background(if (isVariantColor) AppTheme.colors.itemVariant else AppTheme.colors.surfaceContainer)
-            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
+            modifier
+                .fillMaxWidth()
+                .background(if (isVariantColor) AppTheme.colors.itemVariant else AppTheme.colors.surfaceContainer)
+                .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
         Text(

@@ -1,5 +1,5 @@
-[![Kotlin](https://img.shields.io/badge/Kotlin-2.2.20-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
-[![ComposeMultiplatform](https://img.shields.io/badge/Compose_Multiplatform-1.9.1-blue.svg?style=flat)](https://www.jetbrains.com/compose-multiplatform/)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.2.21-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
+[![ComposeMultiplatform](https://img.shields.io/badge/Compose_Multiplatform-1.10.0-beta02-blue.svg?style=flat)](https://www.jetbrains.com/compose-multiplatform/)
 
 ![ZZZArchiveBanner](/docs/screenshot/github_cover.webp)
 
@@ -25,10 +25,6 @@ ZZZ Archive 是動作遊戲 "絕區零" 的維基應用程式，使用者可查�
 
 [![Screen Flow Chart (Figma Community)](/docs/screenshot/img_figma_screen_flow_chart.webp)](https://www.figma.com/community/file/1441663496302710815/zzz-archive)
 
-## 即時進度看板
-
-[![Kanban (Figma Community)](/docs/screenshot/img_figma_kanban.webp)](https://www.figma.com/design/j8DMjEOYnDhlDrablx4JYZ/Kanban-ZZZ-Archive?node-id=0-1&t=sLbk3v7npmSm1ZLc-1)
-
 ## 設計系統
 
 ![DesignSystem](/docs/screenshot/img_design_system.webp)
@@ -40,7 +36,7 @@ ZZZ Archive 是動作遊戲 "絕區零" 的維基應用程式，使用者可查�
    ./gradlew run
    
    # Hot reload development
-   ./gradlew runHot
+   ./gradlew hotRunDesktop
    ```
 
 ## 參與專案開發
@@ -56,7 +52,6 @@ ZZZ Archive 是動作遊戲 "絕區零" 的維基應用程式，使用者可查�
 - JetBrains Adaptive Layout
 - JetBrains Navigation Compose
 - JetBrains Lifecycle ViewModel
-- JetBrains Compose Hot Reload
 - Androidx Room Database
 - Androidx DataStore
 - Koin

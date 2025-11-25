@@ -43,10 +43,10 @@ fun HoYoLabSyncScreenDual(
 ) {
     Row(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .background(AppTheme.colors.surface)
-            .padding(horizontalSafePadding()),
+            Modifier
+                .fillMaxSize()
+                .background(AppTheme.colors.surface)
+                .padding(horizontalSafePadding()),
         horizontalArrangement = Arrangement.spacedBy(containerGap())
     ) {
         Column(

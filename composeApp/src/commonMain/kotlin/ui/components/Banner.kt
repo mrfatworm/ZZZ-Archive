@@ -50,11 +50,11 @@ fun Banner(
 
     Row(
         modifier =
-        modifier
-            .clip(AppTheme.shape.r400)
-            .fillMaxWidth()
-            .background(containerColor)
-            .padding(start = AppTheme.spacing.s400, end = AppTheme.spacing.s200),
+            modifier
+                .clip(AppTheme.shape.r400)
+                .fillMaxWidth()
+                .background(containerColor)
+                .padding(start = AppTheme.spacing.s400, end = AppTheme.spacing.s200),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -69,9 +69,9 @@ fun Banner(
         actionTextRes?.let {
             Text(
                 modifier =
-                Modifier
-                    .clickable(onClick = onActionClicked)
-                    .padding(vertical = AppTheme.spacing.s200),
+                    Modifier
+                        .clickable(onClick = onActionClicked)
+                        .padding(vertical = AppTheme.spacing.s200),
                 text = stringResource(actionTextRes),
                 color = contentColor,
                 style = AppTheme.typography.titleSmall,

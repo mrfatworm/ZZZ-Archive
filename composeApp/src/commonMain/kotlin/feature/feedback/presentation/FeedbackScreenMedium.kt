@@ -39,11 +39,11 @@ fun FeedbackScreenMedium(
 ) {
     Column(
         modifier =
-        Modifier
-            .widthIn(max = 640.dp)
-            .verticalScroll(rememberScrollState())
-            .padding(horizontalSafePadding())
-            .padding(verticalSafePadding()),
+            Modifier
+                .widthIn(max = 640.dp)
+                .verticalScroll(rememberScrollState())
+                .padding(horizontalSafePadding())
+                .padding(verticalSafePadding()),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         TopBarRound(title = stringResource(Res.string.feedback), onBackClick = {

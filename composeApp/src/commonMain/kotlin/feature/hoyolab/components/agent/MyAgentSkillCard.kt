@@ -83,14 +83,14 @@ private fun MyAgentSkillItem(
         level?.let {
             Text(
                 modifier =
-                Modifier
-                    .align(Alignment.BottomEnd)
-                    .clip(CircleShape)
-                    .background(AppTheme.colors.surface)
-                    .padding(
-                        horizontal = AppTheme.spacing.s250,
-                        vertical = AppTheme.spacing.s100
-                    ),
+                    Modifier
+                        .align(Alignment.BottomEnd)
+                        .clip(CircleShape)
+                        .background(AppTheme.colors.surface)
+                        .padding(
+                            horizontal = AppTheme.spacing.s250,
+                            vertical = AppTheme.spacing.s100
+                        ),
                 text = level,
                 color = AppTheme.colors.onSurface,
                 style = AppTheme.typography.labelSmall

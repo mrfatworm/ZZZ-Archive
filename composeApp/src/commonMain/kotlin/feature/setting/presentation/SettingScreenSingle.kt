@@ -29,11 +29,11 @@ fun SettingScreenSingle(
 ) {
     Column(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontalSafePadding())
-            .padding(verticalSafePadding()),
+            Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(horizontalSafePadding())
+                .padding(verticalSafePadding()),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         SettingCard(

@@ -88,6 +88,7 @@ class AgentsListViewModel(private val agentsListUseCase: AgentsListUseCase) : Vi
             is AgentsListAction.ClickAgent -> {}
 
             AgentsListAction.ClickBack -> {}
+
             is AgentsListAction.ClickGallery -> {}
         }
     }

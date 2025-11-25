@@ -102,9 +102,9 @@ private fun BasicInfo(
     ) {
         SubcomposeAsyncImage(
             modifier =
-            Modifier
-                .size(AppTheme.size.s48)
-                .clip(CircleShape),
+                Modifier
+                    .size(AppTheme.size.s48)
+                    .clip(CircleShape),
             model = uiState.profileUrl,
             contentDescription = stringResource(Res.string.user_profile_image),
             error = {
@@ -124,13 +124,13 @@ private fun BasicInfo(
                 )
                 Icon(
                     modifier =
-                    Modifier
-                        .size(AppTheme.size.icon)
-                        .clickable {
-                            if (syncable) {
-                                sync()
-                            }
-                        },
+                        Modifier
+                            .size(AppTheme.size.icon)
+                            .clickable {
+                                if (syncable) {
+                                    sync()
+                                }
+                            },
                     imageVector = vectorResource(Res.drawable.ic_refresh),
                     contentDescription = stringResource(Res.string.sync),
                     tint = AppTheme.colors.onSurfaceVariant.copy(alpha = if (syncable) 1f else 0.5f)
@@ -139,13 +139,13 @@ private fun BasicInfo(
                 if (isDefault) {
                     Text(
                         modifier =
-                        Modifier
-                            .clip(CircleShape)
-                            .background(AppTheme.colors.primaryContainer)
-                            .padding(
-                                horizontal = AppTheme.spacing.s300,
-                                vertical = AppTheme.spacing.s200
-                            ),
+                            Modifier
+                                .clip(CircleShape)
+                                .background(AppTheme.colors.primaryContainer)
+                                .padding(
+                                    horizontal = AppTheme.spacing.s300,
+                                    vertical = AppTheme.spacing.s200
+                                ),
                         text = stringResource(Res.string.default),
                         color = AppTheme.colors.onPrimaryContainer,
                         style = AppTheme.typography.labelSmall

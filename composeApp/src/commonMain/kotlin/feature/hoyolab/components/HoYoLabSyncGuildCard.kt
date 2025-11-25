@@ -54,12 +54,12 @@ fun HoYoLabSyncGuildCard(navigateToFeedback: () -> Unit) {
         CardHeader(stringResource(Res.string.instruction_guide))
         Column(
             modifier =
-            Modifier.fillMaxWidth().padding(
-                start = AppTheme.spacing.s400,
-                end = AppTheme.spacing.s400,
-                top = AppTheme.spacing.s300,
-                bottom = AppTheme.spacing.s400
-            ),
+                Modifier.fillMaxWidth().padding(
+                    start = AppTheme.spacing.s400,
+                    end = AppTheme.spacing.s400,
+                    top = AppTheme.spacing.s300,
+                    bottom = AppTheme.spacing.s400
+                ),
             verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s450)
         ) {
             Text(
@@ -93,9 +93,9 @@ private fun StepTwo() {
             val urlHandler = LocalUriHandler.current
             Text(
                 modifier =
-                Modifier.pointerHoverIcon(PointerIcon.Hand).clickable {
-                    urlHandler.openUri(url)
-                },
+                    Modifier.pointerHoverIcon(PointerIcon.Hand).clickable {
+                        urlHandler.openUri(url)
+                    },
                 text = url,
                 color = AppTheme.colors.primary,
                 style = AppTheme.typography.bodySmall
@@ -200,7 +200,7 @@ fun FrequentQuestions(navigateToFeedback: () -> Unit) {
             )
             Text(
                 text =
-                "A: " + stringResource(Res.string.provide_feedback_via_suggestions_or_report_your_issue_on_github),
+                    "A: " + stringResource(Res.string.provide_feedback_via_suggestions_or_report_your_issue_on_github),
                 color = AppTheme.colors.onSurfaceVariant,
                 style = AppTheme.typography.bodySmall
             )

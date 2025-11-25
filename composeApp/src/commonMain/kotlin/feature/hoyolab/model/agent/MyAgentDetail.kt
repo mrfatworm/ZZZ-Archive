@@ -95,22 +95,22 @@ val stubMyAgentDetail =
         equip = listOf(stubEquipResponse.toMyAgentDetailEquip()),
         weapon = stubMyAgentDetailWeaponResponse.toMyAgentDetailWeapon(),
         properties =
-        listOf(
-            MyAgentDetailProperty(
-                name = "生命值",
-                id = 1,
-                base = "8250",
-                add = "3167",
-                final = "11417"
+            listOf(
+                MyAgentDetailProperty(
+                    name = "生命值",
+                    id = 1,
+                    base = "8250",
+                    add = "3167",
+                    final = "11417"
+                ),
+                MyAgentDetailProperty(
+                    name = "攻擊力",
+                    id = 2,
+                    base = "1442",
+                    add = "416",
+                    final = "1858"
+                )
             ),
-            MyAgentDetailProperty(
-                name = "攻擊力",
-                id = 2,
-                base = "1442",
-                add = "416",
-                final = "1858"
-            )
-        ),
         skills = listOf(stubMyAgentDetailSkillResponse.toMyAgentDetailSkill()),
         equipPlanInfo = stubMyAgentDetailEquipPlanResponse.toMyAgentDetailEquipPlan()
     )

@@ -31,11 +31,11 @@ fun SpecialtyFilterChips(
 
     FlowRow(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .conditional(maxLine != Int.MAX_VALUE) {
-                horizontalScroll(rememberScrollState())
-            }.padding(horizontal = cardPadding()),
+            Modifier
+                .fillMaxWidth()
+                .conditional(maxLine != Int.MAX_VALUE) {
+                    horizontalScroll(rememberScrollState())
+                }.padding(horizontal = cardPadding()),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {

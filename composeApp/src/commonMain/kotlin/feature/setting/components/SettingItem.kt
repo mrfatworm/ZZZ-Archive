@@ -27,11 +27,11 @@ fun SettingItem(
 ) {
     Row(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .pointerHoverIcon(PointerIcon.Hand)
-            .clickable(onClick = onClick)
-            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
+            Modifier
+                .fillMaxWidth()
+                .pointerHoverIcon(PointerIcon.Hand)
+                .clickable(onClick = onClick)
+                .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -52,9 +52,9 @@ fun SettingSwitchItem(
 ) {
     Row(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .padding(horizontal = AppTheme.spacing.s400),
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = AppTheme.spacing.s400),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

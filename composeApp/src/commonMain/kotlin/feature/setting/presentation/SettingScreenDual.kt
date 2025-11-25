@@ -34,10 +34,10 @@ fun SettingScreenDual(
     ) {
         Column(
             modifier =
-            Modifier
-                .weight(1f)
-                .verticalScroll(rememberScrollState())
-                .padding(verticalSafePadding()),
+                Modifier
+                    .weight(1f)
+                    .verticalScroll(rememberScrollState())
+                    .padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             SettingCard(uiState = uiState, onLanguageChange = {
@@ -59,10 +59,10 @@ fun SettingScreenDual(
 
         Column(
             modifier =
-            Modifier
-                .weight(1f)
-                .verticalScroll(rememberScrollState())
-                .padding(verticalSafePadding()),
+                Modifier
+                    .weight(1f)
+                    .verticalScroll(rememberScrollState())
+                    .padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             ContributorsCard(uiState.contributors)

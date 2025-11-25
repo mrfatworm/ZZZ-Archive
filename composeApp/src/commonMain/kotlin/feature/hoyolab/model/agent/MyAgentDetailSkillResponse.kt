@@ -23,10 +23,10 @@ val stubMyAgentDetailSkillResponse =
         level = 12,
         skillType = 0,
         items =
-        listOf(
-            MyAgentDetailSkillItemResponse(
-                title = "普通攻擊：不許動！",
-                text = "交替使用體術、手槍和以太鹿彈，向前方進行至多五段的攻擊，造成物理傷害和以太傷害。"
+            listOf(
+                MyAgentDetailSkillItemResponse(
+                    title = "普通攻擊：不許動！",
+                    text = "交替使用體術、手槍和以太鹿彈，向前方進行至多五段的攻擊，造成物理傷害和以太傷害。"
+                )
             )
-        )
     )

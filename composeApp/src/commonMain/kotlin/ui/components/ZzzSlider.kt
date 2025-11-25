@@ -35,12 +35,12 @@ fun ZzzSlider(
         valueRange = valueRange,
         steps = steps,
         colors =
-        SliderDefaults.colors(
-            thumbColor = AppTheme.colors.primary,
-            activeTrackColor = AppTheme.colors.primary,
-            inactiveTrackColor = AppTheme.colors.surface,
-            inactiveTickColor = AppTheme.colors.primary
-        ),
+            SliderDefaults.colors(
+                thumbColor = AppTheme.colors.primary,
+                activeTrackColor = AppTheme.colors.primary,
+                inactiveTrackColor = AppTheme.colors.surface,
+                inactiveTickColor = AppTheme.colors.primary
+            ),
         thumb = {
             Icon(
                 modifier = Modifier.size(36.dp),

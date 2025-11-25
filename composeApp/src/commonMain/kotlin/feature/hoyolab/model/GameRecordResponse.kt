@@ -60,22 +60,22 @@ val stubGameRecordResponse =
         retCode = 0,
         message = "OK",
         data =
-        GameRecordData(
-            energy =
-            Energy(
-                progress = Progress(max = 240, current = 221),
-                restore = 6803,
-                dayType = 1,
-                hour = 22,
-                minute = 43
-            ),
-            vitality = Progress(max = 400, current = 0),
-            vhsSale = VhsSale(saleState = "SaleStateDone"),
-            cardSign = "CardSignNo",
-            bountyCommission = BountyCommission(num = 0, total = 4),
-            surveyPoints = SurveyPoints(num = 0, total = 8000, isMaxLevel = true),
-            abyssRefresh = 112191,
-            coffee = Coffee(num = 0, total = 0),
-            weeklyTask = WeeklyTask(refreshTime = 112191, curPoint = 1050, maxPoint = 1300)
-        )
+            GameRecordData(
+                energy =
+                    Energy(
+                        progress = Progress(max = 240, current = 221),
+                        restore = 6803,
+                        dayType = 1,
+                        hour = 22,
+                        minute = 43
+                    ),
+                vitality = Progress(max = 400, current = 0),
+                vhsSale = VhsSale(saleState = "SaleStateDone"),
+                cardSign = "CardSignNo",
+                bountyCommission = BountyCommission(num = 0, total = 4),
+                surveyPoints = SurveyPoints(num = 0, total = 8000, isMaxLevel = true),
+                abyssRefresh = 112191,
+                coffee = Coffee(num = 0, total = 0),
+                weeklyTask = WeeklyTask(refreshTime = 112191, curPoint = 1050, maxPoint = 1300)
+            )
     )

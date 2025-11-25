@@ -166,10 +166,10 @@ private fun PlayerInfo(
 ) {
     SubcomposeAsyncImage(
         modifier =
-        Modifier
-            .size(AppTheme.size.s48)
-            .clip(CircleShape)
-            .clickable { onAddAccountClick() },
+            Modifier
+                .size(AppTheme.size.s48)
+                .clip(CircleShape)
+                .clickable { onAddAccountClick() },
         model = uiState.profileUrl,
         contentDescription = stringResource(Res.string.user_profile_image),
         error = {
@@ -209,18 +209,18 @@ private fun PlayerEnergy(uiState: GameRecordState) {
         initialValue = 1f,
         targetValue = 1.4f,
         animationSpec =
-        infiniteRepeatable(
-            animation = tween(durationMillis = 400, easing = EaseInOut),
-            repeatMode = RepeatMode.Reverse
-        )
+            infiniteRepeatable(
+                animation = tween(durationMillis = 400, easing = EaseInOut),
+                repeatMode = RepeatMode.Reverse
+            )
     )
 
     Row(
         modifier =
-        Modifier
-            .clip(CircleShape)
-            .background(AppTheme.colors.hoveredMask)
-            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s250),
+            Modifier
+                .clip(CircleShape)
+                .background(AppTheme.colors.hoveredMask)
+                .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s250),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -259,11 +259,11 @@ private fun DailyMission(
         PlayerTodoItem(
             title = stringResource(Res.string.scratch_card),
             content =
-            if (uiState.cardSign == "CardSignNo") {
-                stringResource(Res.string.purchasable)
-            } else {
-                stringResource(Res.string.purchased)
-            }
+                if (uiState.cardSign == "CardSignNo") {
+                    stringResource(Res.string.purchasable)
+                } else {
+                    stringResource(Res.string.purchased)
+                }
         )
         PlayerTodoItem(
             title = stringResource(Res.string.video_store),
@@ -301,12 +301,12 @@ private fun WeeklyMission(
 
         Row(
             modifier =
-            Modifier
-                .fillMaxWidth()
-                .pointerHoverIcon(PointerIcon.Hand)
-                .clickable {
-                    onMyAgentClick()
-                }.padding(horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s300),
+                Modifier
+                    .fillMaxWidth()
+                    .pointerHoverIcon(PointerIcon.Hand)
+                    .clickable {
+                        onMyAgentClick()
+                    }.padding(horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s300),
             horizontalArrangement = Arrangement.spacedBy(space = AppTheme.spacing.s300, alignment = Alignment.End),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -335,10 +335,10 @@ fun PlayerTodoItem(
 ) {
     Row(
         modifier =
-        modifier
-            .fillMaxWidth()
-            .background(AppTheme.colors.surface)
-            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
+            modifier
+                .fillMaxWidth()
+                .background(AppTheme.colors.surface)
+                .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -381,40 +381,40 @@ private fun SignButton(
 ) {
     Row(
         modifier =
-        Modifier
-            .clip(CircleShape)
-            .clickable {
-                if (signResult == null) {
-                    onSignClick()
-                }
-            }.pointerHoverIcon(PointerIcon.Hand)
-            .background(color = AppTheme.colors.hoveredMask, shape = CircleShape)
-            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s250),
+            Modifier
+                .clip(CircleShape)
+                .clickable {
+                    if (signResult == null) {
+                        onSignClick()
+                    }
+                }.pointerHoverIcon(PointerIcon.Hand)
+                .background(color = AppTheme.colors.hoveredMask, shape = CircleShape)
+                .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s250),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
             modifier = Modifier.size(AppTheme.size.icon),
             imageVector =
-            vectorResource(
-                if (signResult ==
-                    "OK"
-                ) {
-                    Res.drawable.ic_check_circle
-                } else {
-                    Res.drawable.ic_calendar_clock
-                }
-            ),
+                vectorResource(
+                    if (signResult ==
+                        "OK"
+                    ) {
+                        Res.drawable.ic_check_circle
+                    } else {
+                        Res.drawable.ic_calendar_clock
+                    }
+                ),
             contentDescription = null,
             tint = if (signResult == "OK") AppTheme.colors.primary else AppTheme.colors.onHoveredMask
         )
         Text(
             text =
-            when (signResult) {
-                null -> stringResource(Res.string.check_in)
-                "OK" -> stringResource(Res.string.check_in_success)
-                else -> signResult
-            },
+                when (signResult) {
+                    null -> stringResource(Res.string.check_in)
+                    "OK" -> stringResource(Res.string.check_in_success)
+                    else -> signResult
+                },
             color = AppTheme.colors.onHoveredMask,
             style = AppTheme.typography.labelSmall,
             maxLines = 1

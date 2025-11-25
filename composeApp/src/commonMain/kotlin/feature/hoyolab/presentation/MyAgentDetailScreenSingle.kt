@@ -37,20 +37,20 @@ fun MyAgentDetailScreenSingle(
 ) {
     Column(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .background(AppTheme.colors.surface)
-            .padding(horizontalSafePadding())
-            .padding(verticalSafePadding()),
+            Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .background(AppTheme.colors.surface)
+                .padding(horizontalSafePadding())
+                .padding(verticalSafePadding()),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         MyAgentDetailTopBar(uiState, onAction)
         MyAgentImageCard(
             modifier =
-            Modifier.heightIn(
-                max = AppTheme.size.s240
-            ),
+                Modifier.heightIn(
+                    max = AppTheme.size.s240
+                ),
             uiState = uiState,
             onApply = { onAction(MyAgentDetailAction.AdjustImageDone) }
         )

@@ -86,13 +86,13 @@ private fun MyWeapon(
 
             Text(
                 modifier =
-                Modifier
-                    .clip(AppTheme.shape.r300)
-                    .background(AppTheme.colors.onSurfaceVariant)
-                    .padding(
-                        horizontal = AppTheme.spacing.s200,
-                        vertical = AppTheme.spacing.s100
-                    ),
+                    Modifier
+                        .clip(AppTheme.shape.r300)
+                        .background(AppTheme.colors.onSurfaceVariant)
+                        .padding(
+                            horizontal = AppTheme.spacing.s200,
+                            vertical = AppTheme.spacing.s100
+                        ),
                 text = "Lv $level",
                 color = AppTheme.colors.surfaceContainer,
                 style = AppTheme.typography.labelMedium
@@ -102,15 +102,15 @@ private fun MyWeapon(
                     Icon(
                         modifier = Modifier.size(AppTheme.size.icon),
                         imageVector =
-                        vectorResource(
-                            if (i <=
-                                star
-                            ) {
-                                Res.drawable.ic_star_filled
-                            } else {
-                                Res.drawable.ic_star
-                            }
-                        ),
+                            vectorResource(
+                                if (i <=
+                                    star
+                                ) {
+                                    Res.drawable.ic_star_filled
+                                } else {
+                                    Res.drawable.ic_star
+                                }
+                            ),
                         contentDescription = null,
                         tint = AppTheme.colors.onSurfaceContainer
                     )
@@ -136,13 +136,13 @@ private fun MyWeaponEmpty(modifier: Modifier = Modifier) {
 
         Text(
             modifier =
-            Modifier
-                .clip(AppTheme.shape.r300)
-                .background(AppTheme.colors.onSurfaceVariant)
-                .padding(
-                    horizontal = AppTheme.spacing.s300,
-                    vertical = AppTheme.spacing.s200
-                ),
+                Modifier
+                    .clip(AppTheme.shape.r300)
+                    .background(AppTheme.colors.onSurfaceVariant)
+                    .padding(
+                        horizontal = AppTheme.spacing.s300,
+                        vertical = AppTheme.spacing.s200
+                    ),
             text = stringResource(Res.string.w_engine_not_equipped),
             color = AppTheme.colors.surfaceContainer,
             style = AppTheme.typography.labelLarge
@@ -161,17 +161,17 @@ private fun Score(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement =
-        Arrangement.spacedBy(
-            AppTheme.spacing.s400
-        )
+            Arrangement.spacedBy(
+                AppTheme.spacing.s400
+            )
     ) {
         Box(
             modifier =
-            Modifier.size(AppTheme.size.s64).border(
-                AppTheme.size.largeBorder,
-                scoreState.color,
-                CircleShape
-            ),
+                Modifier.size(AppTheme.size.s64).border(
+                    AppTheme.size.largeBorder,
+                    scoreState.color,
+                    CircleShape
+                ),
             contentAlignment = Alignment.Center
         ) {
             Text(

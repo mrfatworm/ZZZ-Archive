@@ -36,11 +36,11 @@ fun ZzzTextFiled(
 ) {
     OutlinedTextField(
         modifier =
-        modifier.border(
-            AppTheme.size.border,
-            if (isError) AppTheme.colors.alert else AppTheme.colors.border,
-            AppTheme.shape.r400
-        ),
+            modifier.border(
+                AppTheme.size.border,
+                if (isError) AppTheme.colors.alert else AppTheme.colors.border,
+                AppTheme.shape.r400
+            ),
         value = value,
         onValueChange = onValueChange,
         placeholder = {
@@ -63,17 +63,17 @@ fun ZzzTextFiled(
         interactionSource = interactionSource,
         shape = AppTheme.shape.r400,
         colors =
-        OutlinedTextFieldDefaults.colors().copy(
-            unfocusedTextColor = AppTheme.colors.onSurface,
-            unfocusedContainerColor = AppTheme.colors.surface,
-            unfocusedIndicatorColor = AppTheme.colors.surface,
-            focusedTextColor = AppTheme.colors.onSurface,
-            focusedContainerColor = AppTheme.colors.surface,
-            focusedIndicatorColor = AppTheme.colors.primary,
-            cursorColor = AppTheme.colors.primary,
-            errorTextColor = AppTheme.colors.onSurface,
-            errorContainerColor = AppTheme.colors.surface,
-            errorIndicatorColor = AppTheme.colors.alert
-        )
+            OutlinedTextFieldDefaults.colors().copy(
+                unfocusedTextColor = AppTheme.colors.onSurface,
+                unfocusedContainerColor = AppTheme.colors.surface,
+                unfocusedIndicatorColor = AppTheme.colors.surface,
+                focusedTextColor = AppTheme.colors.onSurface,
+                focusedContainerColor = AppTheme.colors.surface,
+                focusedIndicatorColor = AppTheme.colors.primary,
+                cursorColor = AppTheme.colors.primary,
+                errorTextColor = AppTheme.colors.onSurface,
+                errorContainerColor = AppTheme.colors.surface,
+                errorIndicatorColor = AppTheme.colors.alert
+            )
     )
 }

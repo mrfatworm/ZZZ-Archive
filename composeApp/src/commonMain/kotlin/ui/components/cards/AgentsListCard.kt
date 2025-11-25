@@ -56,13 +56,13 @@ fun AgentsListCard(
             if (showViewAll) {
                 Text(
                     modifier =
-                    Modifier
-                        .clip(AppTheme.shape.r300)
-                        .clickable { onAgentsOverviewClick() }
-                        .pointerHoverIcon(PointerIcon.Hand)
-                        .background(AppTheme.colors.surface)
-                        .border(width = 1.dp, color = AppTheme.colors.border, shape = AppTheme.shape.r300)
-                        .padding(AppTheme.spacing.s300),
+                        Modifier
+                            .clip(AppTheme.shape.r300)
+                            .clickable { onAgentsOverviewClick() }
+                            .pointerHoverIcon(PointerIcon.Hand)
+                            .background(AppTheme.colors.surface)
+                            .border(width = 1.dp, color = AppTheme.colors.border, shape = AppTheme.shape.r300)
+                            .padding(AppTheme.spacing.s300),
                     text = stringResource(Res.string.all_agents),
                     style = AppTheme.typography.labelMedium,
                     color = AppTheme.colors.onSurface

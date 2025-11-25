@@ -30,9 +30,9 @@ fun PttList(pttList: List<PttForumListState>) {
         pttList.forEach { pttItem ->
             PttListItem(
                 modifier =
-                Modifier.clickable {
-                    urlHandler.openUri(pttItem.link)
-                },
+                    Modifier.clickable {
+                        urlHandler.openUri(pttItem.link)
+                    },
                 ptt = pttItem
             )
         }
@@ -55,11 +55,11 @@ private fun PttListItem(
 
     Row(
         modifier =
-        modifier
-            .fillMaxWidth()
-            .clip(AppTheme.shape.r200)
-            .background(AppTheme.colors.surfaceContainer)
-            .padding(AppTheme.spacing.s350),
+            modifier
+                .fillMaxWidth()
+                .clip(AppTheme.shape.r200)
+                .background(AppTheme.colors.surfaceContainer)
+                .padding(AppTheme.spacing.s350),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {

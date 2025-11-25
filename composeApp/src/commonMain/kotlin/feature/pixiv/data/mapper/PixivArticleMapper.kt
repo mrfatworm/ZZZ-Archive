@@ -14,20 +14,20 @@ fun PixivTopicResponse.toPixivArticleList(): List<PixivArticleItem> =
             id = recentArticle.id.orEmpty(),
             title = recentArticle.title.orEmpty(),
             artworkUrl =
-            if (recentArticle.id == null) {
-                "https://www.pixiv.net"
-            } else {
-                "https://www.pixiv.net/artworks/${recentArticle.id}"
-            },
+                if (recentArticle.id == null) {
+                    "https://www.pixiv.net"
+                } else {
+                    "https://www.pixiv.net/artworks/${recentArticle.id}"
+                },
             artworkImageUrl = recentArticle.url.orEmpty(),
             profileId = recentArticle.userId.orEmpty(),
             profileName = recentArticle.userName.orEmpty(),
             profileUrl =
-            if (recentArticle.userId == null) {
-                "https://www.pixiv.net"
-            } else {
-                "https://www.pixiv.net/users/${recentArticle.userId}"
-            },
+                if (recentArticle.userId == null) {
+                    "https://www.pixiv.net"
+                } else {
+                    "https://www.pixiv.net/users/${recentArticle.userId}"
+                },
             profileImageUrl = recentArticle.profileImageUrl.orEmpty()
         )
     } ?: emptyList()

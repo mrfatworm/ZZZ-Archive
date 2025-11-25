@@ -55,6 +55,7 @@ fun AgentsListScreen(
                 }
 
                 AgentsListAction.ClickBack -> onBackClick()
+
                 else -> viewModel.onAction(action)
             }
         }

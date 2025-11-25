@@ -122,14 +122,14 @@ private fun TwitterListItem(
     ) {
         Box(
             modifier =
-            Modifier
-                .fillMaxSize()
-                .aspectRatio(1f)
-                .clip(AppTheme.shape.r400)
-                .pointerHoverIcon(PointerIcon.Hand)
-                .clickable(interactionSource = interactionSource, indication = null) {
-                    urlHandler.openUri(artworkUrl)
-                }
+                Modifier
+                    .fillMaxSize()
+                    .aspectRatio(1f)
+                    .clip(AppTheme.shape.r400)
+                    .pointerHoverIcon(PointerIcon.Hand)
+                    .clickable(interactionSource = interactionSource, indication = null) {
+                        urlHandler.openUri(artworkUrl)
+                    }
         ) {
             AsyncImage(
                 modifier = Modifier.matchParentSize().blur(8.dp),
@@ -150,12 +150,12 @@ private fun TwitterListItem(
         }
         Text(
             modifier =
-            Modifier
-                .fillMaxWidth()
-                .pointerHoverIcon(PointerIcon.Hand)
-                .clickable(interactionSource = interactionSource, indication = null) {
-                    urlHandler.openUri(artworkUrl)
-                },
+                Modifier
+                    .fillMaxWidth()
+                    .pointerHoverIcon(PointerIcon.Hand)
+                    .clickable(interactionSource = interactionSource, indication = null) {
+                        urlHandler.openUri(artworkUrl)
+                    },
             text = artworkName,
             overflow = TextOverflow.Ellipsis,
             style = AppTheme.typography.labelMedium,
@@ -164,9 +164,9 @@ private fun TwitterListItem(
         )
         Text(
             modifier =
-            Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand).clickable {
-                urlHandler.openUri(profileUrl)
-            },
+                Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand).clickable {
+                    urlHandler.openUri(profileUrl)
+                },
             text = profileName,
             overflow = TextOverflow.Ellipsis,
             style = AppTheme.typography.bodySmall,

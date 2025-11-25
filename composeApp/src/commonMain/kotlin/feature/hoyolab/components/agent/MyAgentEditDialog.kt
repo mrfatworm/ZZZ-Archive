@@ -105,12 +105,12 @@ private fun Content(
             Column {
                 ZzzTextFiled(
                     modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            horizontal = AppTheme.spacing.s400,
-                            vertical = AppTheme.spacing.s200
-                        ),
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                horizontal = AppTheme.spacing.s400,
+                                vertical = AppTheme.spacing.s200
+                            ),
                     hint = stringResource(Res.string.image_url),
                     value = customImageUrl,
                     onValueChange = { customImageUrl = it },
@@ -118,12 +118,12 @@ private fun Content(
                 )
                 ZzzTextFiled(
                     modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            horizontal = AppTheme.spacing.s400,
-                            vertical = AppTheme.spacing.s200
-                        ),
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                horizontal = AppTheme.spacing.s400,
+                                vertical = AppTheme.spacing.s200
+                            ),
                     hint = stringResource(Res.string.author_name_optional),
                     value = customImageAuthor,
                     onValueChange = { customImageAuthor = it },

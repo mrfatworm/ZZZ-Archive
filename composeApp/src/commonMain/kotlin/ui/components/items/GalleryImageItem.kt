@@ -22,10 +22,10 @@ fun GalleryImageItem(
 ) {
     AsyncImage(
         modifier =
-        Modifier
-            .clickable { onClick() }
-            .height(AppTheme.size.s144)
-            .background(AppTheme.colors.surface, AppTheme.shape.r400),
+            Modifier
+                .clickable { onClick() }
+                .height(AppTheme.size.s144)
+                .background(AppTheme.colors.surface, AppTheme.shape.r400),
         imageLoader = imageLoaderMemoryCache(LocalPlatformContext.current),
         model = url,
         contentDescription = null

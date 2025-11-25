@@ -28,12 +28,12 @@ fun UnderDevelopScreen() {
         DVDScreensaver(
             modifier = Modifier.fillMaxSize(),
             colors =
-            listOf(
-                AppTheme.colors.primary,
-                AppTheme.colors.onSurfaceVariant,
-                AppTheme.colors.secondary,
-                AppTheme.colors.onSurface
-            ),
+                listOf(
+                    AppTheme.colors.primary,
+                    AppTheme.colors.onSurfaceVariant,
+                    AppTheme.colors.secondary,
+                    AppTheme.colors.onSurface
+                ),
             imageSize = 64
         )
     }

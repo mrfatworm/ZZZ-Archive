@@ -63,13 +63,13 @@ fun TopBarScaffold(
             Spacer(Modifier.size(AppTheme.spacing.s400))
         },
         colors =
-        TopAppBarDefaults.topAppBarColors(
-            containerColor = AppTheme.colors.surfaceContainer,
-            scrolledContainerColor = Color.Unspecified,
-            navigationIconContentColor = AppTheme.colors.onSurfaceContainer,
-            titleContentColor = AppTheme.colors.onSurfaceContainer,
-            actionIconContentColor = AppTheme.colors.onSurfaceContainer
-        )
+            TopAppBarDefaults.topAppBarColors(
+                containerColor = AppTheme.colors.surfaceContainer,
+                scrolledContainerColor = Color.Unspecified,
+                navigationIconContentColor = AppTheme.colors.onSurfaceContainer,
+                titleContentColor = AppTheme.colors.onSurfaceContainer,
+                actionIconContentColor = AppTheme.colors.onSurfaceContainer
+            )
     )
 }
 
@@ -82,11 +82,11 @@ fun TopBarRound(
 ) {
     Box(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .clip(CircleShape)
-            .background(AppTheme.colors.surfaceContainer)
-            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300)
+            Modifier
+                .fillMaxWidth()
+                .clip(CircleShape)
+                .background(AppTheme.colors.surfaceContainer)
+                .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300)
     ) {
         Text(
             modifier = Modifier.align(Alignment.Center).fillMaxWidth(),

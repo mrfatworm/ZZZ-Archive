@@ -23,27 +23,27 @@ fun Modifier.drawRowListMask(
     if (startEnable) {
         drawRect(
             brush =
-            Brush.horizontalGradient(
-                listOf(
-                    colorScheme.surfaceContainer,
-                    colorScheme.surfaceContainer.copy(alpha = 0.0f)
-                ),
-                startX = 0f,
-                endX = width.toPx()
-            )
+                Brush.horizontalGradient(
+                    listOf(
+                        colorScheme.surfaceContainer,
+                        colorScheme.surfaceContainer.copy(alpha = 0.0f)
+                    ),
+                    startX = 0f,
+                    endX = width.toPx()
+                )
         )
     }
     if (endEnable) {
         drawRect(
             brush =
-            Brush.horizontalGradient(
-                listOf(
-                    colorScheme.surfaceContainer.copy(alpha = 0.0f),
-                    colorScheme.surfaceContainer
-                ),
-                startX = size.width - width.toPx(),
-                endX = size.width
-            )
+                Brush.horizontalGradient(
+                    listOf(
+                        colorScheme.surfaceContainer.copy(alpha = 0.0f),
+                        colorScheme.surfaceContainer
+                    ),
+                    startX = size.width - width.toPx(),
+                    endX = size.width
+                )
         )
     }
 }
@@ -59,27 +59,27 @@ fun Modifier.drawColumnListMask(
     if (topEnable) {
         drawRect(
             brush =
-            Brush.verticalGradient(
-                listOf(
-                    colorScheme.surfaceContainer,
-                    colorScheme.surfaceContainer.copy(alpha = 0.0f)
-                ),
-                startY = 0f,
-                endY = height.toPx()
-            )
+                Brush.verticalGradient(
+                    listOf(
+                        colorScheme.surfaceContainer,
+                        colorScheme.surfaceContainer.copy(alpha = 0.0f)
+                    ),
+                    startY = 0f,
+                    endY = height.toPx()
+                )
         )
     }
     if (bottomEnable) {
         drawRect(
             brush =
-            Brush.verticalGradient(
-                listOf(
-                    colorScheme.surfaceContainer.copy(alpha = 0.0f),
-                    colorScheme.surfaceContainer
-                ),
-                startY = size.height - height.toPx(),
-                endY = size.height
-            )
+                Brush.verticalGradient(
+                    listOf(
+                        colorScheme.surfaceContainer.copy(alpha = 0.0f),
+                        colorScheme.surfaceContainer
+                    ),
+                    startY = size.height - height.toPx(),
+                    endY = size.height
+                )
         )
     }
 }
@@ -91,13 +91,13 @@ fun Modifier.drawBottomMask(
     drawContent()
     drawRect(
         brush =
-        Brush.verticalGradient(
-            listOf(
-                colorScheme.surfaceContainer.copy(alpha = 0.0f),
-                colorScheme.surfaceContainer
-            ),
-            startY = size.height - height.toPx(),
-            endY = size.height
-        )
+            Brush.verticalGradient(
+                listOf(
+                    colorScheme.surfaceContainer.copy(alpha = 0.0f),
+                    colorScheme.surfaceContainer
+                ),
+                startY = size.height - height.toPx(),
+                endY = size.height
+            )
     )
 }

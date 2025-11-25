@@ -30,14 +30,14 @@ fun ZzzTag(
 ) {
     Row(
         modifier =
-        modifier
-            .clip(AppTheme.shape.r300)
-            .background(AppTheme.colors.surface)
-            .border(
-                width = AppTheme.size.border,
-                color = AppTheme.colors.border,
-                shape = AppTheme.shape.r300
-            ).padding(horizontal = AppTheme.spacing.s350, vertical = AppTheme.spacing.s300),
+            modifier
+                .clip(AppTheme.shape.r300)
+                .background(AppTheme.colors.surface)
+                .border(
+                    width = AppTheme.size.border,
+                    color = AppTheme.colors.border,
+                    shape = AppTheme.shape.r300
+                ).padding(horizontal = AppTheme.spacing.s350, vertical = AppTheme.spacing.s300),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {

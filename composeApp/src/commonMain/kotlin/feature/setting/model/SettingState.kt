@@ -32,29 +32,29 @@ val settingState =
         isDark = true,
         appVersion = "Luciana 2024.11.13",
         contributors =
-        Contributors(
-            contributorAmount = 0,
-            developer =
-            listOf(
-                Contributor("mrfatworm")
-            ),
-            uiUxDesigner =
-            listOf(
-                Contributor("mrfatworm")
-            ),
-            translation =
-            listOf(
-                Contributor(name = "mrfatworm", description = "zh, us")
-            ),
-            dataIntegration =
-            listOf(
-                Contributor("mrfatworm"),
-                Contributor("rm6alalauau")
-            ),
-            specialThanks =
-            listOf(
-                Contributor(name = "Zenless Zone Zero"),
-                Contributor(name = "Zenless Zone Zero Wiki (Fandom)")
+            Contributors(
+                contributorAmount = 0,
+                developer =
+                    listOf(
+                        Contributor("mrfatworm")
+                    ),
+                uiUxDesigner =
+                    listOf(
+                        Contributor("mrfatworm")
+                    ),
+                translation =
+                    listOf(
+                        Contributor(name = "mrfatworm", description = "zh, us")
+                    ),
+                dataIntegration =
+                    listOf(
+                        Contributor("mrfatworm"),
+                        Contributor("rm6alalauau")
+                    ),
+                specialThanks =
+                    listOf(
+                        Contributor(name = "Zenless Zone Zero"),
+                        Contributor(name = "Zenless Zone Zero Wiki (Fandom)")
+                    )
             )
-        )
     )

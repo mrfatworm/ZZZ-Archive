@@ -71,12 +71,12 @@ private fun MyAgentPropertyItem(
     var titleFontSize by remember { mutableStateOf(titleSmall.fontSize) }
     Row(
         modifier =
-        modifier
-            .background(if (isVariantColor) AppTheme.colors.itemVariant else AppTheme.colors.surfaceContainer)
-            .padding(
-                horizontal = AppTheme.spacing.s400,
-                vertical = AppTheme.spacing.s300
-            ),
+            modifier
+                .background(if (isVariantColor) AppTheme.colors.itemVariant else AppTheme.colors.surfaceContainer)
+                .padding(
+                    horizontal = AppTheme.spacing.s400,
+                    vertical = AppTheme.spacing.s300
+                ),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {

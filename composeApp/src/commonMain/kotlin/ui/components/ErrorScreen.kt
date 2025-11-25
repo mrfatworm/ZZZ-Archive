@@ -32,10 +32,10 @@ fun ErrorScreen(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement =
-        Arrangement.spacedBy(
-            space = AppTheme.spacing.s300,
-            alignment = Alignment.CenterVertically
-        )
+            Arrangement.spacedBy(
+                space = AppTheme.spacing.s300,
+                alignment = Alignment.CenterVertically
+            )
     ) {
         Text(
             text = message,

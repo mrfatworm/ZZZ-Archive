@@ -151,15 +151,15 @@ fun OpenSourceItem(
 ) {
     Column(
         modifier =
-        modifier
-            .clip(AppTheme.shape.r400)
-            .clickable {
-                onClick()
-            }.border(
-                AppTheme.size.border,
-                AppTheme.colors.buttonBorder,
-                AppTheme.shape.r400
-            ).padding(AppTheme.spacing.s400),
+            modifier
+                .clip(AppTheme.shape.r400)
+                .clickable {
+                    onClick()
+                }.border(
+                    AppTheme.size.border,
+                    AppTheme.colors.buttonBorder,
+                    AppTheme.shape.r400
+                ).padding(AppTheme.spacing.s400),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s350)
     ) {

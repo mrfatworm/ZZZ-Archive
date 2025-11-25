@@ -42,11 +42,11 @@ fun ExpandableItem(
     Column {
         Row(
             modifier =
-            Modifier
-                .fillMaxWidth()
-                .pointerHoverIcon(PointerIcon.Hand)
-                .clickable { expanded = !expanded }
-                .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300),
+                Modifier
+                    .fillMaxWidth()
+                    .pointerHoverIcon(PointerIcon.Hand)
+                    .clickable { expanded = !expanded }
+                    .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300),
             horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -64,9 +64,9 @@ fun ExpandableItem(
             )
             Icon(
                 modifier =
-                Modifier.size(AppTheme.size.iconSmall).graphicsLayer {
-                    rotationZ = if (expanded) 180f else 0f
-                },
+                    Modifier.size(AppTheme.size.iconSmall).graphicsLayer {
+                        rotationZ = if (expanded) 180f else 0f
+                    },
                 imageVector = vectorResource(Res.drawable.ic_arrow_down_ios),
                 contentDescription = null,
                 tint = AppTheme.colors.onSurfaceVariant
@@ -75,12 +75,12 @@ fun ExpandableItem(
         AnimatedVisibility(visible = expanded) {
             Text(
                 modifier =
-                Modifier.padding(
-                    start = AppTheme.spacing.s400,
-                    top = AppTheme.spacing.s300,
-                    end = AppTheme.spacing.s400,
-                    bottom = AppTheme.spacing.s500
-                ),
+                    Modifier.padding(
+                        start = AppTheme.spacing.s400,
+                        top = AppTheme.spacing.s300,
+                        end = AppTheme.spacing.s400,
+                        bottom = AppTheme.spacing.s500
+                    ),
                 text = highlightText(description, AppTheme.colors),
                 style = AppTheme.typography.bodyMedium,
                 color = AppTheme.colors.onSurface

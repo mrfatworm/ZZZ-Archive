@@ -70,15 +70,15 @@ fun CoverImageCard(coverImages: List<CoverImageListItemEntity>) {
             ) {
                 SubcomposeAsyncImage(
                     modifier =
-                    Modifier
-                        .fillMaxSize()
-                        .pointerHoverIcon(PointerIcon.Hand)
-                        .clickable(
-                            interactionSource = interactionSource,
-                            indication = null
-                        ) {
-                            urlHandler.openUri(image.artworkUrl)
-                        }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
+                        Modifier
+                            .fillMaxSize()
+                            .pointerHoverIcon(PointerIcon.Hand)
+                            .clickable(
+                                interactionSource = interactionSource,
+                                indication = null
+                            ) {
+                                urlHandler.openUri(image.artworkUrl)
+                            }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
                     model = image.imageUrl,
                     contentDescription = image.artworkName,
                     contentScale = ContentScale.Crop,

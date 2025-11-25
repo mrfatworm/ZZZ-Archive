@@ -107,8 +107,8 @@ fun MainFuncContent(
         Row(modifier = Modifier.weight(1f)) {
             AnimatedVisibility(
                 visible =
-                AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Medium ||
-                    AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Expanded
+                    AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Medium ||
+                        AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Expanded
             ) {
                 ZzzArchiveNavigationRail(
                     modifier = Modifier
@@ -139,7 +139,7 @@ fun MainFuncContent(
             }
         AnimatedVisibility(
             visible =
-            AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact && isBottomNavItem != null
+                AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact && isBottomNavItem != null
         ) {
             ZzzArchiveBottomNavigationBar(
                 selectedMainFlow = selectedDestination,

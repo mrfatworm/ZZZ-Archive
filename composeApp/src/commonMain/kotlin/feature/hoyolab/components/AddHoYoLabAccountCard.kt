@@ -60,11 +60,11 @@ fun AddHoYoLabAccountCard(
 
     ContentCard(
         modifier =
-        Modifier.pointerInput(Unit) {
-            detectTapGestures(onTap = {
-                focusManager.clearFocus()
-            })
-        },
+            Modifier.pointerInput(Unit) {
+                detectTapGestures(onTap = {
+                    focusManager.clearFocus()
+                })
+            },
         hasDefaultPadding = false
     ) {
         Spacer(Modifier.size(AppTheme.spacing.s200))
@@ -167,13 +167,13 @@ private fun ServerTypeItem(
                 }
                 Text(
                     text =
-                    if (selectedServerType ==
-                        ServersList.None
-                    ) {
-                        pleaseSelectText
-                    } else {
-                        selectedServerType.localName
-                    },
+                        if (selectedServerType ==
+                            ServersList.None
+                        ) {
+                            pleaseSelectText
+                        } else {
+                            selectedServerType.localName
+                        },
                     style = AppTheme.typography.labelMedium,
                     color = AppTheme.colors.onSurface
                 )

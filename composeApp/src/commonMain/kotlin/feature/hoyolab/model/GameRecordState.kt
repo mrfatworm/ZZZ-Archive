@@ -52,13 +52,13 @@ val subGameRecordState =
         profileUrl = "https://example.com/profile",
         cardUrl = "https://example.com/card",
         energy =
-        EnergyState(
-            progress = ProgressState(max = "240", current = "221"),
-            restore = 6803,
-            dayType = 1,
-            hour = "22",
-            minute = "43"
-        ),
+            EnergyState(
+                progress = ProgressState(max = "240", current = "221"),
+                restore = 6803,
+                dayType = 1,
+                hour = "22",
+                minute = "43"
+            ),
         vitality = ProgressState(max = "400", current = "0"),
         vhsSale = VhsSaleState(saleState = "SaleStateDone"),
         cardSign = "CardSignNo",

@@ -21,11 +21,11 @@ import ui.theme.AppTheme
 @Composable
 fun horizontalSafePadding() = PaddingValues(
     horizontal =
-    when (AppTheme.adaptiveLayoutType) {
-        AdaptiveLayoutType.Expanded -> AppTheme.spacing.s400
-        AdaptiveLayoutType.Medium -> AppTheme.spacing.s350
-        AdaptiveLayoutType.Compact -> AppTheme.spacing.s300
-    }
+        when (AppTheme.adaptiveLayoutType) {
+            AdaptiveLayoutType.Expanded -> AppTheme.spacing.s400
+            AdaptiveLayoutType.Medium -> AppTheme.spacing.s350
+            AdaptiveLayoutType.Compact -> AppTheme.spacing.s300
+        }
 )
 
 // Vertical edge-to-edge Padding for Container
@@ -36,25 +36,25 @@ fun verticalSafePadding(): PaddingValues {
     val spacing = AppTheme.spacing
     return PaddingValues(
         top =
-        if (topPadding > 0.dp) {
-            topPadding
-        } else {
-            when (AppTheme.adaptiveLayoutType) {
-                AdaptiveLayoutType.Expanded -> spacing.s400
-                AdaptiveLayoutType.Medium -> spacing.s350
-                AdaptiveLayoutType.Compact -> spacing.s300
-            }
-        },
+            if (topPadding > 0.dp) {
+                topPadding
+            } else {
+                when (AppTheme.adaptiveLayoutType) {
+                    AdaptiveLayoutType.Expanded -> spacing.s400
+                    AdaptiveLayoutType.Medium -> spacing.s350
+                    AdaptiveLayoutType.Compact -> spacing.s300
+                }
+            },
         bottom =
-        if (bottomPadding > 0.dp) {
-            bottomPadding
-        } else {
-            when (AppTheme.adaptiveLayoutType) {
-                AdaptiveLayoutType.Expanded -> spacing.s400
-                AdaptiveLayoutType.Medium -> spacing.s350
-                AdaptiveLayoutType.Compact -> spacing.s300
+            if (bottomPadding > 0.dp) {
+                bottomPadding
+            } else {
+                when (AppTheme.adaptiveLayoutType) {
+                    AdaptiveLayoutType.Expanded -> spacing.s400
+                    AdaptiveLayoutType.Medium -> spacing.s350
+                    AdaptiveLayoutType.Compact -> spacing.s300
+                }
             }
-        }
     )
 }
 

@@ -1,7 +1,6 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec
 import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.compose.reload.gradle.ComposeHotRun
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 import java.util.Properties
@@ -12,7 +11,6 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.composeHotReload)
     alias(libs.plugins.kotlinter)
     alias(libs.plugins.buildKonfig)
     alias(libs.plugins.kotlin.serialization)
@@ -51,6 +49,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            // wait for BOM
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -283,10 +282,6 @@ kotlinter {
     ignoreFormatFailures = false
     ignoreLintFailures = false
     reporters = arrayOf("checkstyle", "plain")
-}
-
-tasks.register<ComposeHotRun>("runHot") {
-    mainClass.set("MainKt")
 }
 
 fun Project.getAndroidBuildVariantOrNull(): String? {

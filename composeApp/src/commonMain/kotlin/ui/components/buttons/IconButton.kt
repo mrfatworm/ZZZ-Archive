@@ -39,10 +39,10 @@ fun ZzzIconButton(
         modifier = modifier.pointerHoverIcon(if (enabled) PointerIcon.Hand else PointerIcon.Default).size(size),
         color = AppTheme.colors.surface,
         border =
-        BorderStroke(
-            width = AppTheme.size.border,
-            color = AppTheme.colors.border
-        ),
+            BorderStroke(
+                width = AppTheme.size.border,
+                color = AppTheme.colors.border
+            ),
         shape = CircleShape,
         interactionSource = interactionSource,
         enabled = enabled,
@@ -52,13 +52,13 @@ fun ZzzIconButton(
             modifier = Modifier.padding(AppTheme.spacing.s300),
             imageVector = vectorResource(iconRes),
             contentDescription =
-            if (contentDescriptionRes == null) {
-                null
-            } else {
-                stringResource(
-                    contentDescriptionRes
-                )
-            },
+                if (contentDescriptionRes == null) {
+                    null
+                } else {
+                    stringResource(
+                        contentDescriptionRes
+                    )
+                },
             tint = tint.copy(alpha = if (enabled) 1f else 0.38f)
         )
     }

@@ -45,43 +45,43 @@ fun RarityMiniItem(
     val interactionSource = remember { MutableInteractionSource() }
     Column(
         modifier =
-        modifier
-            .width(AppTheme.size.s64)
-            .pointerHoverIcon(if (onClick != null) PointerIcon.Hand else PointerIcon.Default)
-            .clickable(interactionSource = interactionSource, indication = null) {
-                if (onClick != null) {
-                    onClick()
-                }
-            },
+            modifier
+                .width(AppTheme.size.s64)
+                .pointerHoverIcon(if (onClick != null) PointerIcon.Hand else PointerIcon.Default)
+                .clickable(interactionSource = interactionSource, indication = null) {
+                    if (onClick != null) {
+                        onClick()
+                    }
+                },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
     ) {
         Box(
             modifier =
-            Modifier
-                .fillMaxSize()
-                .aspectRatio(1f)
-                .clip(AppTheme.shape.r300)
-                .background(
-                    rarity?.getColor(AppTheme.colors) ?: Color.Transparent
-                ).border(
-                    width = AppTheme.size.border,
-                    color = AppTheme.colors.imageBorder,
-                    shape = AppTheme.shape.r300
-                )
+                Modifier
+                    .fillMaxSize()
+                    .aspectRatio(1f)
+                    .clip(AppTheme.shape.r300)
+                    .background(
+                        rarity?.getColor(AppTheme.colors) ?: Color.Transparent
+                    ).border(
+                        width = AppTheme.size.border,
+                        color = AppTheme.colors.imageBorder,
+                        shape = AppTheme.shape.r300
+                    )
         ) {
             Box(
                 modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(if (rarity == null) 1f else 0.86f)
-                    .background(AppTheme.colors.imageBackground)
-                    .border(
-                        width = AppTheme.size.largeBorder,
-                        color = AppTheme.colors.surfaceContainer,
-                        shape = AppTheme.shape.r300
-                    )
-                    .padding(AppTheme.size.largeBorder)
+                    Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(if (rarity == null) 1f else 0.86f)
+                        .background(AppTheme.colors.imageBackground)
+                        .border(
+                            width = AppTheme.size.largeBorder,
+                            color = AppTheme.colors.surfaceContainer,
+                            shape = AppTheme.shape.r300
+                        )
+                        .padding(AppTheme.size.largeBorder)
             ) {
                 SubcomposeAsyncImage(
                     modifier = Modifier.fillMaxSize(),

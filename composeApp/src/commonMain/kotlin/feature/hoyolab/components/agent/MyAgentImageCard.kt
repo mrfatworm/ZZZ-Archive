@@ -95,22 +95,22 @@ fun MyAgentImageCard(
             }
             AsyncImage(
                 modifier =
-                Modifier
-                    .align(Alignment.Center)
-                    .fillMaxWidth()
-                    .graphicsLayer(
-                        scaleX = scale,
-                        scaleY = scale,
-                        translationX = offset.x * scale,
-                        translationY = offset.y * scale
-                    ).transformable(state = state, enabled = uiState.adjustMode),
+                    Modifier
+                        .align(Alignment.Center)
+                        .fillMaxWidth()
+                        .graphicsLayer(
+                            scaleX = scale,
+                            scaleY = scale,
+                            translationX = offset.x * scale,
+                            translationY = offset.y * scale
+                        ).transformable(state = state, enabled = uiState.adjustMode),
                 model =
-                ImageRequest
-                    .Builder(LocalPlatformContext.current)
-                    .data(if (uiState.isCustomImage) uiState.customImgUrl else agentDetail.imageUrl)
-                    .diskCachePolicy(CachePolicy.DISABLED)
-                    .size(Size.ORIGINAL)
-                    .build(),
+                    ImageRequest
+                        .Builder(LocalPlatformContext.current)
+                        .data(if (uiState.isCustomImage) uiState.customImgUrl else agentDetail.imageUrl)
+                        .diskCachePolicy(CachePolicy.DISABLED)
+                        .size(Size.ORIGINAL)
+                        .build(),
                 contentDescription = null
             )
             AgentInfo(agentDetail)
@@ -125,15 +125,15 @@ fun MyAgentImageCard(
             if (uiState.customImgAuthor.isNotEmpty()) {
                 Text(
                     modifier =
-                    Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(AppTheme.spacing.s350)
-                        .clip(AppTheme.shape.r300)
-                        .background(AppTheme.colors.onSurfaceVariant)
-                        .padding(
-                            horizontal = AppTheme.spacing.s300,
-                            vertical = AppTheme.spacing.s200
-                        ),
+                        Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(AppTheme.spacing.s350)
+                            .clip(AppTheme.shape.r300)
+                            .background(AppTheme.colors.onSurfaceVariant)
+                            .padding(
+                                horizontal = AppTheme.spacing.s300,
+                                vertical = AppTheme.spacing.s200
+                            ),
                     text = uiState.customImgAuthor,
                     color = AppTheme.colors.surfaceContainer,
                     style = AppTheme.typography.labelMedium
@@ -165,13 +165,13 @@ private fun AgentInfo(agentDetail: MyAgentDetail) {
         )
         Text(
             modifier =
-            Modifier
-                .clip(AppTheme.shape.r300)
-                .background(AppTheme.colors.onSurfaceVariant)
-                .padding(
-                    horizontal = AppTheme.spacing.s300,
-                    vertical = AppTheme.spacing.s200
-                ),
+                Modifier
+                    .clip(AppTheme.shape.r300)
+                    .background(AppTheme.colors.onSurfaceVariant)
+                    .padding(
+                        horizontal = AppTheme.spacing.s300,
+                        vertical = AppTheme.spacing.s200
+                    ),
             text = "M${agentDetail.mindscapes}",
             color = AppTheme.colors.surfaceContainer,
             style = AppTheme.typography.labelMedium
@@ -220,10 +220,10 @@ private fun OnImageIconButton(
     IconButton(
         modifier = Modifier.size(AppTheme.size.iconButtonSmall),
         colors =
-        IconButtonDefaults.iconButtonColors().copy(
-            containerColor = AppTheme.colors.hoveredMask,
-            contentColor = tint
-        ),
+            IconButtonDefaults.iconButtonColors().copy(
+                containerColor = AppTheme.colors.hoveredMask,
+                contentColor = tint
+            ),
         onClick = onClick
     ) {
         Icon(

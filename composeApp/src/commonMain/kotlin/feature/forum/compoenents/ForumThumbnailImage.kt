@@ -19,10 +19,10 @@ import ui.theme.AppTheme
 fun ForumThumbnailImage(imgUrl: String) {
     Box(
         modifier =
-        Modifier
-            .height(AppTheme.size.s72)
-            .aspectRatio(4 / 3f)
-            .clip(AppTheme.shape.r300)
+            Modifier
+                .height(AppTheme.size.s72)
+                .aspectRatio(4 / 3f)
+                .clip(AppTheme.shape.r300)
     ) {
         AsyncImage(
             modifier = Modifier.matchParentSize().blur(8.dp),

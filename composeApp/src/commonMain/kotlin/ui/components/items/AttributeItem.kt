@@ -22,10 +22,10 @@ fun AttributeItem(
 ) {
     Row(
         modifier =
-        Modifier.padding(
-            horizontal = AppTheme.spacing.s400,
-            vertical = AppTheme.spacing.s300
-        ),
+            Modifier.padding(
+                horizontal = AppTheme.spacing.s400,
+                vertical = AppTheme.spacing.s300
+            ),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400),
         verticalAlignment = Alignment.CenterVertically
     ) {

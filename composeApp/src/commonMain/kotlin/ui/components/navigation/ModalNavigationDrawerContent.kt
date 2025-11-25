@@ -59,13 +59,13 @@ fun ModalNavigationDrawerContent(
 ) {
     Column(
         modifier =
-        Modifier
-            .fillMaxHeight()
-            .clip(AppTheme.shape.r200)
-            .widthIn(min = navigationDrawerMinWidth, max = navigationDrawerMaxWidth)
-            .background(AppTheme.colors.surfaceContainer)
-            .padding(horizontal = AppTheme.spacing.s400)
-            .padding(verticalSafePadding())
+            Modifier
+                .fillMaxHeight()
+                .clip(AppTheme.shape.r200)
+                .widthIn(min = navigationDrawerMinWidth, max = navigationDrawerMaxWidth)
+                .background(AppTheme.colors.surfaceContainer)
+                .padding(horizontal = AppTheme.spacing.s400)
+                .padding(verticalSafePadding())
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().padding(AppTheme.spacing.s400),

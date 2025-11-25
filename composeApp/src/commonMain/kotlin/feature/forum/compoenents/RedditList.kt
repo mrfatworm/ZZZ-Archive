@@ -28,9 +28,9 @@ fun RedditList(redditList: List<RedditForumListState>) {
         for (index in redditList.indices) {
             RedditListItem(
                 modifier =
-                Modifier.clickable {
-                    urlHandler.openUri(redditList[index].link)
-                },
+                    Modifier.clickable {
+                        urlHandler.openUri(redditList[index].link)
+                    },
                 reddit = redditList[index],
                 isVariantColor = index % 2 == 0
             )
@@ -46,9 +46,9 @@ private fun RedditListItem(
 ) {
     Row(
         modifier =
-        modifier
-            .background(if (isVariantColor) AppTheme.colors.itemVariant else AppTheme.colors.surfaceContainer)
-            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
+            modifier
+                .background(if (isVariantColor) AppTheme.colors.itemVariant else AppTheme.colors.surfaceContainer)
+                .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s350)
     ) {
         val hasImageUrl = reddit.imgUrl.isNotEmpty()
@@ -68,10 +68,10 @@ private fun RedditListItem(
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement =
-                Arrangement.spacedBy(
-                    AppTheme.spacing.s300,
-                    Alignment.End
-                ),
+                    Arrangement.spacedBy(
+                        AppTheme.spacing.s300,
+                        Alignment.End
+                    ),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(

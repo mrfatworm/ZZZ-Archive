@@ -73,13 +73,13 @@ fun DVDScreensaver(
         }
         Icon(
             modifier =
-            Modifier
-                .size(imageSize.dp)
-                .graphicsLayer {
-                    translationX = dvdState.offsetX
-                    translationY = dvdState.offsetY
-                }.background(colors[currentColorIndex], CircleShape)
-                .padding(AppTheme.spacing.s300),
+                Modifier
+                    .size(imageSize.dp)
+                    .graphicsLayer {
+                        translationX = dvdState.offsetX
+                        translationY = dvdState.offsetY
+                    }.background(colors[currentColorIndex], CircleShape)
+                    .padding(AppTheme.spacing.s300),
             imageVector = vectorResource(Res.drawable.ic_bangboo), // Replace with your logo
             contentDescription = "DVD screen saver logo",
             tint = AppTheme.colors.surface

@@ -92,14 +92,14 @@ fun NewsPagerCardItem(newsState: OfficialNewsListItem) {
         val urlHandler = LocalUriHandler.current
         AsyncImage(
             modifier =
-            Modifier
-                .fillMaxSize()
-                .clickable(
-                    interactionSource = interactionSource,
-                    indication = null
-                ) {
-                    urlHandler.openUri(newsState.newsUrl)
-                }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
+                Modifier
+                    .fillMaxSize()
+                    .clickable(
+                        interactionSource = interactionSource,
+                        indication = null
+                    ) {
+                        urlHandler.openUri(newsState.newsUrl)
+                    }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
             model = newsState.imageUrl,
             contentDescription = newsState.title,
             contentScale = ContentScale.Crop

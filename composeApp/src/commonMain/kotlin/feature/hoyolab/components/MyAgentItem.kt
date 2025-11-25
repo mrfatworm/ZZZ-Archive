@@ -54,19 +54,19 @@ fun MyAgentItem(
 
     Column(
         modifier =
-        modifier
-            .border(
-                width = AppTheme.size.border,
-                color = AppTheme.colors.imageBorder,
-                shape = AppTheme.shape.r300
-            )
-            .clip(AppTheme.shape.r300)
-            .pointerHoverIcon(PointerIcon.Hand)
-            .clickable(
-                interactionSource = interactionSource,
-                indication = null,
-                onClick = onClick
-            ),
+            modifier
+                .border(
+                    width = AppTheme.size.border,
+                    color = AppTheme.colors.imageBorder,
+                    shape = AppTheme.shape.r300
+                )
+                .clip(AppTheme.shape.r300)
+                .pointerHoverIcon(PointerIcon.Hand)
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null,
+                    onClick = onClick
+                ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box {
@@ -126,11 +126,11 @@ private fun CinemaCountTag(
 ) {
     Text(
         modifier =
-        modifier
-            .background(
-                AppTheme.colors.hoveredMask,
-                RoundedCornerShape(bottomStart = AppTheme.spacing.s300)
-            ).padding(AppTheme.spacing.s200),
+            modifier
+                .background(
+                    AppTheme.colors.hoveredMask,
+                    RoundedCornerShape(bottomStart = AppTheme.spacing.s300)
+                ).padding(AppTheme.spacing.s200),
         text = cinemaCount.toString(),
         color = AppTheme.colors.onHoveredMask,
         style = AppTheme.typography.labelLarge

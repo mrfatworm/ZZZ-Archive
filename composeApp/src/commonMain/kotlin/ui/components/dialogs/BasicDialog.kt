@@ -24,10 +24,10 @@ fun BasicDialog(
         Card(
             modifier = modifier,
             colors =
-            CardDefaults.cardColors(
-                containerColor = AppTheme.colors.surfaceContainer,
-                contentColor = AppTheme.colors.onSurfaceContainer
-            )
+                CardDefaults.cardColors(
+                    containerColor = AppTheme.colors.surfaceContainer,
+                    contentColor = AppTheme.colors.onSurfaceContainer
+                )
         ) {
             content()
         }

@@ -20,12 +20,12 @@ fun ZzzSwitch(
         checked = checkState,
         onCheckedChange = { onCheckChange(it) },
         colors =
-        SwitchDefaults.colors(
-            uncheckedThumbColor = AppTheme.colors.buttonBorder,
-            uncheckedBorderColor = AppTheme.colors.buttonBorder,
-            uncheckedTrackColor = Color.Companion.Transparent,
-            checkedThumbColor = Color.Companion.White,
-            checkedTrackColor = AppTheme.colors.primary
-        )
+            SwitchDefaults.colors(
+                uncheckedThumbColor = AppTheme.colors.buttonBorder,
+                uncheckedBorderColor = AppTheme.colors.buttonBorder,
+                uncheckedTrackColor = Color.Companion.Transparent,
+                checkedThumbColor = Color.Companion.White,
+                checkedTrackColor = AppTheme.colors.primary
+            )
     )
 }

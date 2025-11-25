@@ -94,9 +94,9 @@ private fun MyAgentDriveHeader(drive: MyAgentDetailEquip) {
         Column(
             modifier = Modifier.padding(AppTheme.spacing.s300),
             verticalArrangement =
-            Arrangement.spacedBy(
-                AppTheme.spacing.s400
-            )
+                Arrangement.spacedBy(
+                    AppTheme.spacing.s400
+                )
         ) {
             Text(
                 text = drive.name,
@@ -117,13 +117,13 @@ private fun MyAgentDriveHeader(drive: MyAgentDetailEquip) {
 
                 Text(
                     modifier =
-                    Modifier
-                        .clip(AppTheme.shape.r200)
-                        .background(AppTheme.colors.onSurfaceVariant)
-                        .padding(
-                            horizontal = AppTheme.spacing.s200,
-                            vertical = AppTheme.spacing.s100
-                        ),
+                        Modifier
+                            .clip(AppTheme.shape.r200)
+                            .background(AppTheme.colors.onSurfaceVariant)
+                            .padding(
+                                horizontal = AppTheme.spacing.s200,
+                                vertical = AppTheme.spacing.s100
+                            ),
                     text = stringResource(Res.string.hit, totalHit),
                     color = AppTheme.colors.surfaceContainer,
                     style = AppTheme.typography.labelSmall
@@ -143,10 +143,10 @@ private fun MyAgentDriveMainPropertyItem(
     var titleFontSize by remember { mutableStateOf(titleSmall.fontSize) }
     Row(
         modifier =
-        modifier.background(AppTheme.colors.surfaceContainer).padding(
-            horizontal = AppTheme.spacing.s350,
-            vertical = AppTheme.spacing.s300
-        ),
+            modifier.background(AppTheme.colors.surfaceContainer).padding(
+                horizontal = AppTheme.spacing.s350,
+                vertical = AppTheme.spacing.s300
+            ),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -181,10 +181,10 @@ private fun MyAgentDriveSubPropertyItem(
 ) {
     Row(
         modifier =
-        modifier.background(AppTheme.colors.surfaceContainer).padding(
-            horizontal = AppTheme.spacing.s350,
-            vertical = AppTheme.spacing.s250
-        ),
+            modifier.background(AppTheme.colors.surfaceContainer).padding(
+                horizontal = AppTheme.spacing.s350,
+                vertical = AppTheme.spacing.s250
+            ),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {

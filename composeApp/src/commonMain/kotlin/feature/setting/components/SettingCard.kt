@@ -194,13 +194,13 @@ private fun ColorSettingItem(
             ) {
                 Text(
                     text =
-                    if (isDarkTheme) {
-                        stringResource(Res.string.dark_theme)
-                    } else {
-                        stringResource(
-                            Res.string.light_theme
-                        )
-                    },
+                        if (isDarkTheme) {
+                            stringResource(Res.string.dark_theme)
+                        } else {
+                            stringResource(
+                                Res.string.light_theme
+                            )
+                        },
                     style = AppTheme.typography.labelMedium,
                     color = AppTheme.colors.onSurface
                 )

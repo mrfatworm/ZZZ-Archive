@@ -134,14 +134,14 @@ class HomeViewModel(
                         _uiState.update { state ->
                             state.copy(
                                 gameRecord =
-                                gameRecord.toGameRecordState(
-                                    hasAccount = state.gameRecord.hasAccount,
-                                    nickname = state.gameRecord.nickname,
-                                    server = state.gameRecord.server,
-                                    uid = state.gameRecord.uid,
-                                    profileUrl = state.gameRecord.profileUrl,
-                                    cardUrl = state.gameRecord.cardUrl
-                                )
+                                    gameRecord.toGameRecordState(
+                                        hasAccount = state.gameRecord.hasAccount,
+                                        nickname = state.gameRecord.nickname,
+                                        server = state.gameRecord.server,
+                                        uid = state.gameRecord.uid,
+                                        profileUrl = state.gameRecord.profileUrl,
+                                        cardUrl = state.gameRecord.cardUrl
+                                    )
                             )
                         }
                     }, onFailure = {
@@ -190,14 +190,14 @@ class HomeViewModel(
                         _uiState.update { state ->
                             state.copy(
                                 gameRecord =
-                                emptyGameRecordState.copy(
-                                    hasAccount = true,
-                                    nickname = defaultAccount.nickName,
-                                    server = defaultAccount.regionName,
-                                    uid = defaultAccount.uid.toString(),
-                                    profileUrl = defaultAccount.profileUrl,
-                                    cardUrl = defaultAccount.cardUrl
-                                )
+                                    emptyGameRecordState.copy(
+                                        hasAccount = true,
+                                        nickname = defaultAccount.nickName,
+                                        server = defaultAccount.regionName,
+                                        uid = defaultAccount.uid.toString(),
+                                        profileUrl = defaultAccount.profileUrl,
+                                        cardUrl = defaultAccount.cardUrl
+                                    )
                             )
                         }
                         updateGameRecordEveryTenMinutes()

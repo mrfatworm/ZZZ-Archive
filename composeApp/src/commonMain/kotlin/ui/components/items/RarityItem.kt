@@ -59,32 +59,32 @@ fun RarityItem(
 
     Column(
         modifier =
-        modifier
-            .width(AppTheme.size.s100)
-            .pointerHoverIcon(PointerIcon.Hand)
-            .clickable(interactionSource = interactionSource, indication = null) {
-                onClick()
-            },
+            modifier
+                .width(AppTheme.size.s100)
+                .pointerHoverIcon(PointerIcon.Hand)
+                .clickable(interactionSource = interactionSource, indication = null) {
+                    onClick()
+                },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s250)
     ) {
         Box(
             modifier =
-            Modifier
-                .aspectRatio(1f)
-                .fillMaxSize()
-                .clip(AppTheme.shape.r300)
-                .background(
-                    AppTheme.colors.surfaceContainer
-                ).border(
-                    width = if (isHovered) AppTheme.size.largeBorder else AppTheme.size.border,
-                    color = if (isHovered) {
-                        rarity?.getColor(AppTheme.colors) ?: AppTheme.colors.imageBorder
-                    } else {
-                        AppTheme.colors.imageBorder
-                    },
-                    shape = AppTheme.shape.r300
-                )
+                Modifier
+                    .aspectRatio(1f)
+                    .fillMaxSize()
+                    .clip(AppTheme.shape.r300)
+                    .background(
+                        AppTheme.colors.surfaceContainer
+                    ).border(
+                        width = if (isHovered) AppTheme.size.largeBorder else AppTheme.size.border,
+                        color = if (isHovered) {
+                            rarity?.getColor(AppTheme.colors) ?: AppTheme.colors.imageBorder
+                        } else {
+                            AppTheme.colors.imageBorder
+                        },
+                        shape = AppTheme.shape.r300
+                    )
         ) {
             rarity?.let {
                 RarityBackground(
@@ -138,12 +138,12 @@ private fun AttributeTag(
 ) {
     Icon(
         modifier =
-        modifier
-            .background(
-                AppTheme.colors.imageTagContainer,
-                RoundedCornerShape(bottomStart = AppTheme.spacing.s300)
-            ).padding(AppTheme.spacing.s200)
-            .size(AppTheme.size.icon),
+            modifier
+                .background(
+                    AppTheme.colors.imageTagContainer,
+                    RoundedCornerShape(bottomStart = AppTheme.spacing.s300)
+                ).padding(AppTheme.spacing.s200)
+                .size(AppTheme.size.icon),
         imageVector = vectorResource(iconRes),
         contentDescription = stringResource(textRes),
         tint = AppTheme.colors.imageOnTagContainer

@@ -35,10 +35,10 @@ fun HomeScreenDual(
 ) {
     Column(
         modifier =
-        Modifier
-            .verticalScroll(rememberScrollState())
-            .padding(horizontalSafePadding())
-            .padding(verticalSafePadding()),
+            Modifier
+                .verticalScroll(rememberScrollState())
+                .padding(horizontalSafePadding())
+                .padding(verticalSafePadding()),
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
         AnnouncementBanner(uiState.banner, onActionClicked = onOpenBannerDialog, onClosed = {

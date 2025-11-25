@@ -35,10 +35,10 @@ fun MyAgentDetailScreenDual(
 ) {
     Row(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .background(AppTheme.colors.surface)
-            .padding(horizontalSafePadding()),
+            Modifier
+                .fillMaxWidth()
+                .background(AppTheme.colors.surface)
+                .padding(horizontalSafePadding()),
         horizontalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         Column(

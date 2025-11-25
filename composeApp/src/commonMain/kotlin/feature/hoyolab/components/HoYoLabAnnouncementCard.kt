@@ -27,14 +27,14 @@ import zzzarchive.composeapp.generated.resources.ic_info
 fun HoYoLabAnnouncementCard() {
     Row(
         modifier =
-        Modifier
-            .clip(AppTheme.shape.r400)
-            .fillMaxWidth()
-            .background(AppTheme.colors.primaryContainer)
-            .padding(
-                horizontal = AppTheme.spacing.s400,
-                vertical = AppTheme.spacing.s300
-            ),
+            Modifier
+                .clip(AppTheme.shape.r400)
+                .fillMaxWidth()
+                .background(AppTheme.colors.primaryContainer)
+                .padding(
+                    horizontal = AppTheme.spacing.s400,
+                    vertical = AppTheme.spacing.s300
+                ),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {

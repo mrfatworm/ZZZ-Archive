@@ -30,48 +30,48 @@ fun GameRecordData.toGameRecordState(
     profileUrl = profileUrl,
     cardUrl = cardUrl,
     energy =
-    EnergyState(
-        progress =
-        ProgressState(
-            max = energy.progress.max.toString(),
-            current = energy.progress.current.toString()
+        EnergyState(
+            progress =
+                ProgressState(
+                    max = energy.progress.max.toString(),
+                    current = energy.progress.current.toString()
+                ),
+            restore = energy.restore,
+            dayType = energy.dayType,
+            hour = energy.hour.toString(),
+            minute = energy.minute.toString()
         ),
-        restore = energy.restore,
-        dayType = energy.dayType,
-        hour = energy.hour.toString(),
-        minute = energy.minute.toString()
-    ),
     vitality =
-    ProgressState(
-        max = vitality.max.toString(),
-        current = vitality.current.toString()
-    ),
+        ProgressState(
+            max = vitality.max.toString(),
+            current = vitality.current.toString()
+        ),
     vhsSale =
-    VhsSaleState(
-        saleState = vhsSale.saleState
-    ),
+        VhsSaleState(
+            saleState = vhsSale.saleState
+        ),
     cardSign = cardSign,
     bountyCommission =
-    BountyCommissionState(
-        num = bountyCommission?.num?.toString() ?: "?",
-        total = bountyCommission?.total?.toString() ?: "?"
-    ),
+        BountyCommissionState(
+            num = bountyCommission?.num?.toString() ?: "?",
+            total = bountyCommission?.total?.toString() ?: "?"
+        ),
     abyssRefresh = abyssRefresh,
     coffee =
-    CoffeeState(
-        num = coffee?.num?.toString() ?: "?",
-        total = coffee?.total.toString()
-    ),
+        CoffeeState(
+            num = coffee?.num?.toString() ?: "?",
+            total = coffee?.total.toString()
+        ),
     surveyPoints =
-    SurveyPointsState(
-        num = surveyPoints?.num?.toString() ?: "?",
-        total = surveyPoints?.total?.toString() ?: "?",
-        isMaxLevel = surveyPoints?.isMaxLevel ?: false
-    ),
+        SurveyPointsState(
+            num = surveyPoints?.num?.toString() ?: "?",
+            total = surveyPoints?.total?.toString() ?: "?",
+            isMaxLevel = surveyPoints?.isMaxLevel ?: false
+        ),
     weeklyTask =
-    WeeklyTaskState(
-        refreshTime = weeklyTask?.refreshTime ?: 0L,
-        curPoint = weeklyTask?.curPoint?.toString() ?: "?",
-        maxPoint = weeklyTask?.maxPoint?.toString() ?: "?"
-    )
+        WeeklyTaskState(
+            refreshTime = weeklyTask?.refreshTime ?: 0L,
+            curPoint = weeklyTask?.curPoint?.toString() ?: "?",
+            maxPoint = weeklyTask?.maxPoint?.toString() ?: "?"
+        )
 )

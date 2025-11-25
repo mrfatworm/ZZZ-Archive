@@ -55,18 +55,18 @@ fun HighlightAgentListItem(
 
     Box(
         modifier =
-        modifier
-            .widthIn(min = AppTheme.size.s280)
-            .clip(AppTheme.shape.r300)
-            .pointerHoverIcon(PointerIcon.Hand)
-            .clickable(interactionSource = interactionSource, indication = null, onClick = onClick)
-            .background(
-                AppTheme.colors.surfaceContainer
-            ).border(
-                width = if (isHovered) AppTheme.size.largeBorder else AppTheme.size.border,
-                color = if (isHovered) uiState.rarity.getColor(AppTheme.colors) else AppTheme.colors.imageBorder,
-                shape = AppTheme.shape.r300
-            )
+            modifier
+                .widthIn(min = AppTheme.size.s280)
+                .clip(AppTheme.shape.r300)
+                .pointerHoverIcon(PointerIcon.Hand)
+                .clickable(interactionSource = interactionSource, indication = null, onClick = onClick)
+                .background(
+                    AppTheme.colors.surfaceContainer
+                ).border(
+                    width = if (isHovered) AppTheme.size.largeBorder else AppTheme.size.border,
+                    color = if (isHovered) uiState.rarity.getColor(AppTheme.colors) else AppTheme.colors.imageBorder,
+                    shape = AppTheme.shape.r300
+                )
     ) {
         RarityBackground(
             modifier = Modifier.matchParentSize(),

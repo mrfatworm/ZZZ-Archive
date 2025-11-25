@@ -32,12 +32,12 @@ fun MyAgentsListScreenMedium(
 ) {
     Column(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .background(AppTheme.colors.surface)
-            .verticalScroll(rememberScrollState())
-            .padding(horizontalSafePadding())
-            .padding(verticalSafePadding()),
+            Modifier
+                .fillMaxSize()
+                .background(AppTheme.colors.surface)
+                .verticalScroll(rememberScrollState())
+                .padding(horizontalSafePadding())
+                .padding(verticalSafePadding()),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         TopBarRound(title = stringResource(Res.string.my_agent), onBackClick = {

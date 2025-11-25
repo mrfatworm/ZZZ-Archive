@@ -68,29 +68,29 @@ val stubMyAgentDetailWeaponResponse =
         icon = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u66fwb/31467ac20432a38772f396fdda6ecccb.png",
         rarity = "S",
         properties =
-        listOf(
-            MyAgentPropertyResponse(
-                propertyName = "衝擊力",
-                propertyId = 12202,
-                base = "18%",
-                level = 0,
-                valid = false,
-                systemId = 0,
-                add = 0
-            )
-        ),
+            listOf(
+                MyAgentPropertyResponse(
+                    propertyName = "衝擊力",
+                    propertyId = 12202,
+                    base = "18%",
+                    level = 0,
+                    valid = false,
+                    systemId = 0,
+                    add = 0
+                )
+            ),
         mainProperties =
-        listOf(
-            MyAgentPropertyResponse(
-                propertyName = "基礎攻擊力",
-                propertyId = 12101,
-                base = "684",
-                level = 0,
-                valid = false,
-                systemId = 0,
-                add = 0
-            )
-        ),
+            listOf(
+                MyAgentPropertyResponse(
+                    propertyName = "基礎攻擊力",
+                    propertyId = 12101,
+                    base = "684",
+                    level = 0,
+                    valid = false,
+                    systemId = 0,
+                    add = 0
+                )
+            ),
         talentTitle = "束縛上鎖",
         talentContent = "攻擊命中敵人時，<color=#FFFFFF>[普通攻擊]</color>造成的傷害和失衡值提升<color=#2BAD00>7.5%</color>，最多疊加5層，持續8秒，同一招式內最多觸發一次，每層效果單獨結算持續時間。",
         profession = 2
@@ -105,64 +105,64 @@ val stubEquipResponse =
         icon = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u66fwb/27968286f55d2d47afdd68b1a7f89ab4.png",
         rarity = "S",
         properties =
-        listOf(
-            MyAgentPropertyResponse(
-                propertyName = "防禦力",
-                propertyId = 13102,
-                base = "19.2%",
-                level = 4,
-                valid = false,
-                systemId = 131,
-                add = 3
+            listOf(
+                MyAgentPropertyResponse(
+                    propertyName = "防禦力",
+                    propertyId = 13102,
+                    base = "19.2%",
+                    level = 4,
+                    valid = false,
+                    systemId = 131,
+                    add = 3
+                ),
+                MyAgentPropertyResponse(
+                    propertyName = "防禦力",
+                    propertyId = 13103,
+                    base = "15",
+                    level = 1,
+                    valid = false,
+                    systemId = 131,
+                    add = 0
+                ),
+                MyAgentPropertyResponse(
+                    propertyName = "暴擊率",
+                    propertyId = 20103,
+                    base = "2.4%",
+                    level = 1,
+                    valid = false,
+                    systemId = 201,
+                    add = 0
+                ),
+                MyAgentPropertyResponse(
+                    propertyName = "暴擊傷害",
+                    propertyId = 21103,
+                    base = "9.6%",
+                    level = 2,
+                    valid = false,
+                    systemId = 211,
+                    add = 1
+                )
             ),
-            MyAgentPropertyResponse(
-                propertyName = "防禦力",
-                propertyId = 13103,
-                base = "15",
-                level = 1,
-                valid = false,
-                systemId = 131,
-                add = 0
-            ),
-            MyAgentPropertyResponse(
-                propertyName = "暴擊率",
-                propertyId = 20103,
-                base = "2.4%",
-                level = 1,
-                valid = false,
-                systemId = 201,
-                add = 0
-            ),
-            MyAgentPropertyResponse(
-                propertyName = "暴擊傷害",
-                propertyId = 21103,
-                base = "9.6%",
-                level = 2,
-                valid = false,
-                systemId = 211,
-                add = 1
-            )
-        ),
         mainProperties =
-        listOf(
-            MyAgentPropertyResponse(
-                propertyName = "生命值",
-                propertyId = 11103,
-                base = "2200",
-                level = 1,
-                valid = false,
-                systemId = 111,
-                add = 0
-            )
-        ),
+            listOf(
+                MyAgentPropertyResponse(
+                    propertyName = "生命值",
+                    propertyId = 11103,
+                    base = "2200",
+                    level = 1,
+                    valid = false,
+                    systemId = 111,
+                    add = 0
+                )
+            ),
         equipSuit =
-        MyAgentEquipSuitResponse(
-            suitId = 31200,
-            name = "震星迪斯可",
-            own = 4,
-            desc1 = "衝擊力+6%。",
-            desc2 = "<color=#FFFFFF>[普通攻擊]</color>、<color=#FFFFFF>[衝刺攻擊]</color>、<color=#FFFFFF>[閃避反擊]</color>對主要攻擊目標造成的失衡值提升20%。"
-        ),
+            MyAgentEquipSuitResponse(
+                suitId = 31200,
+                name = "震星迪斯可",
+                own = 4,
+                desc1 = "衝擊力+6%。",
+                desc2 = "<color=#FFFFFF>[普通攻擊]</color>、<color=#FFFFFF>[衝刺攻擊]</color>、<color=#FFFFFF>[閃避反擊]</color>對主要攻擊目標造成的失衡值提升20%。"
+            ),
         equipmentType = 1,
         invalidPropertyCnt = 4,
         allHit = false

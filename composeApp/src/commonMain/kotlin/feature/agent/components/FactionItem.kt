@@ -51,27 +51,27 @@ fun FactionItem(
 
     Box(
         modifier =
-        Modifier
-            .aspectRatio(16 / 9f)
-            .fillMaxWidth()
-            .clip(AppTheme.shape.r400)
-            .border(
-                width = AppTheme.size.largeBorder,
-                color = if (isSelected) AppTheme.colors.primary else Color.Transparent,
-                shape = AppTheme.shape.r400
-            ).pointerHoverIcon(PointerIcon.Hand)
-            .clickable(
-                interactionSource = interactionSource,
-                indication = null
-            ) {
-                onFactionClick()
-            }
+            Modifier
+                .aspectRatio(16 / 9f)
+                .fillMaxWidth()
+                .clip(AppTheme.shape.r400)
+                .border(
+                    width = AppTheme.size.largeBorder,
+                    color = if (isSelected) AppTheme.colors.primary else Color.Transparent,
+                    shape = AppTheme.shape.r400
+                ).pointerHoverIcon(PointerIcon.Hand)
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null
+                ) {
+                    onFactionClick()
+                }
     ) {
         AsyncImage(
             modifier =
-            Modifier
-                .fillMaxSize()
-                .blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
+                Modifier
+                    .fillMaxSize()
+                    .blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
             model = faction.getFactionThumbnailUrl(),
             contentDescription = stringResource(faction.getFactionNameRes()),
             contentScale = ContentScale.Crop,
@@ -80,11 +80,11 @@ fun FactionItem(
         if (!isSelected) {
             AsyncImage(
                 modifier =
-                Modifier
-                    .align(Alignment.Center)
-                    .fillMaxSize(0.3f)
-                    .aspectRatio(1f)
-                    .blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
+                    Modifier
+                        .align(Alignment.Center)
+                        .fillMaxSize(0.3f)
+                        .aspectRatio(1f)
+                        .blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
                 model = faction.getFactionIconUrl(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop

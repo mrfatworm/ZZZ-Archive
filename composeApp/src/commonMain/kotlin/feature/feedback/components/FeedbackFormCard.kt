@@ -84,10 +84,10 @@ private fun IssueTextField(
 ) {
     Column(
         modifier =
-        Modifier.padding(
-            horizontal = AppTheme.spacing.s400,
-            vertical = AppTheme.spacing.s350
-        ),
+            Modifier.padding(
+                horizontal = AppTheme.spacing.s400,
+                vertical = AppTheme.spacing.s350
+            ),
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)
     ) {
         ZzzTextFiled(
@@ -165,9 +165,9 @@ private fun SettingItemText(
 ) {
     Row(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

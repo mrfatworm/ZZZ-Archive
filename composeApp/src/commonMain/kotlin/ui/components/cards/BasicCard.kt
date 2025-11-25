@@ -43,10 +43,10 @@ fun ContentCard(
 ) {
     Column(
         modifier =
-        modifier
-            .clip(AppTheme.shape.r400)
-            .background(AppTheme.colors.surfaceContainer)
-            .padding(if (hasDefaultPadding) cardPadding() else 0.dp)
+            modifier
+                .clip(AppTheme.shape.r400)
+                .background(AppTheme.colors.surfaceContainer)
+                .padding(if (hasDefaultPadding) cardPadding() else 0.dp)
     ) {
         content()
     }
@@ -60,10 +60,10 @@ fun CardHeader(
 ) {
     Row(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .heightIn(min = 56.dp)
-            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300),
+            Modifier
+                .fillMaxWidth()
+                .heightIn(min = 56.dp)
+                .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -89,10 +89,10 @@ fun HoveredIndicatorHeader(
     val coroutineScope = rememberCoroutineScope()
     Row(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .heightIn(min = 56.dp)
-            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300),
+            Modifier
+                .fillMaxWidth()
+                .heightIn(min = 56.dp)
+                .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {

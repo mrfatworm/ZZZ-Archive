@@ -147,9 +147,9 @@ fun ZzzArchiveTheme(content: @Composable () -> Unit) {
     ) {
         Box(
             modifier =
-            Modifier
-                .fillMaxSize()
-                .background(color = AppTheme.colors.surface)
+                Modifier
+                    .fillMaxSize()
+                    .background(color = AppTheme.colors.surface)
         ) {
             content()
         }

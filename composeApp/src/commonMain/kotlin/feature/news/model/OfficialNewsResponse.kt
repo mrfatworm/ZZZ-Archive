@@ -71,11 +71,11 @@ val stubOfficialNewsDataResponseResponse =
         retCode = 0,
         message = "OK",
         data =
-        OfficialNewsDataResponse(
-            iTotal = 396,
-            list =
-            listOf(
-                stubNewsListItem
+            OfficialNewsDataResponse(
+                iTotal = 396,
+                list =
+                    listOf(
+                        stubNewsListItem
+                    )
             )
-        )
     )

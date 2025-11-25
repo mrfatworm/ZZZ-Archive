@@ -35,12 +35,12 @@ fun DoubleActionDialog(
     BasicDialog(onDismissRequest = onDismiss) {
         Column(
             modifier =
-            Modifier.padding(
-                start = AppTheme.spacing.s500,
-                top = AppTheme.spacing.s500,
-                end = AppTheme.spacing.s500,
-                bottom = AppTheme.spacing.s400
-            ),
+                Modifier.padding(
+                    start = AppTheme.spacing.s500,
+                    top = AppTheme.spacing.s500,
+                    end = AppTheme.spacing.s500,
+                    bottom = AppTheme.spacing.s400
+                ),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s500)
         ) {

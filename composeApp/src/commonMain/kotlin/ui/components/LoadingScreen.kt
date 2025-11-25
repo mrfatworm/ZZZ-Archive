@@ -34,10 +34,10 @@ fun LoadingScreen() {
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement =
-        Arrangement.spacedBy(
-            AppTheme.spacing.s400,
-            Alignment.CenterVertically
-        )
+            Arrangement.spacedBy(
+                AppTheme.spacing.s400,
+                Alignment.CenterVertically
+            )
     ) {
         val infiniteTransition = rememberInfiniteTransition(label = "Rotate Animation")
         val rotateAnimation =
@@ -48,9 +48,9 @@ fun LoadingScreen() {
             )
         Icon(
             modifier =
-            Modifier.size(96.dp).graphicsLayer {
-                rotationZ = rotateAnimation.value
-            },
+                Modifier.size(96.dp).graphicsLayer {
+                    rotationZ = rotateAnimation.value
+                },
             imageVector = vectorResource(Res.drawable.ic_bangboo),
             contentDescription = "Bangboo Gu Lu Gu Lu",
             tint = AppTheme.colors.onSurfaceVariant

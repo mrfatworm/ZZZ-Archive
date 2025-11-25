@@ -49,10 +49,10 @@ fun ContributorsCard(contributors: Contributors) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement =
-                Arrangement.spacedBy(
-                    space = AppTheme.spacing.s300,
-                    alignment = Alignment.CenterHorizontally
-                ),
+                    Arrangement.spacedBy(
+                        space = AppTheme.spacing.s300,
+                        alignment = Alignment.CenterHorizontally
+                    ),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
