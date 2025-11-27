@@ -42,7 +42,10 @@ import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil3.compose.LocalPlatformContext
 import coil3.compose.SubcomposeAsyncImage
+import coil3.request.ImageRequest
+import coil3.size.Size
 import feature.hoyolab.model.GameRecordState
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -117,7 +120,10 @@ private fun Header(
     Box(modifier = Modifier.clip(AppTheme.shape.r400).height(120.dp)) {
         SubcomposeAsyncImage(
             modifier = Modifier.fillMaxSize().clip(AppTheme.shape.r400),
-            model = uiState.cardUrl,
+            model = ImageRequest.Builder(LocalPlatformContext.current)
+                .data(uiState.cardUrl)
+                .size(Size.ORIGINAL)
+                .build(),
             contentDescription = stringResource(Res.string.user_profile_image),
             contentScale = ContentScale.Crop,
             error = {

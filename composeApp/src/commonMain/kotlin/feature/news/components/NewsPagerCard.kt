@@ -38,6 +38,9 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
+import coil3.request.ImageRequest
+import coil3.size.Size
 import feature.news.model.OfficialNewsListItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -82,7 +85,7 @@ fun NewsPagerCard(newsList: List<OfficialNewsListItem>) {
 }
 
 @Composable
-fun NewsPagerCardItem(newsState: OfficialNewsListItem) {
+private fun NewsPagerCardItem(newsState: OfficialNewsListItem) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed = interactionSource.collectIsPressedAsState()
     val isHovered = interactionSource.collectIsHoveredAsState()
@@ -100,7 +103,10 @@ fun NewsPagerCardItem(newsState: OfficialNewsListItem) {
                     ) {
                         urlHandler.openUri(newsState.newsUrl)
                     }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
-            model = newsState.imageUrl,
+            model = ImageRequest.Builder(LocalPlatformContext.current)
+                .data(newsState.imageUrl)
+                .size(Size.ORIGINAL)
+                .build(),
             contentDescription = newsState.title,
             contentScale = ContentScale.Crop
         )

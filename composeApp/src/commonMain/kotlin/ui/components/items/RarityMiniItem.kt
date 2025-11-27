@@ -29,7 +29,10 @@ import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import coil3.compose.LocalPlatformContext
 import coil3.compose.SubcomposeAsyncImage
+import coil3.request.ImageRequest
+import coil3.size.Size
 import ui.components.ImageNotFound
 import ui.theme.AppTheme
 import utils.ZzzRarity
@@ -85,7 +88,10 @@ fun RarityMiniItem(
             ) {
                 SubcomposeAsyncImage(
                     modifier = Modifier.fillMaxSize(),
-                    model = imgUrl,
+                    model = ImageRequest.Builder(LocalPlatformContext.current)
+                        .data(imgUrl)
+                        .size(Size.ORIGINAL)
+                        .build(),
                     contentDescription = null,
                     error = {
                         ImageNotFound()

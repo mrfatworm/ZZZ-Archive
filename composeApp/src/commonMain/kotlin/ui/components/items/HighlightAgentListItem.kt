@@ -38,6 +38,9 @@ import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
+import coil3.request.ImageRequest
+import coil3.size.Size
 import feature.agent.model.AgentListItem
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -100,7 +103,10 @@ fun HighlightAgentListItem(
                 AsyncImage(
                     modifier = Modifier
                         .matchParentSize(),
-                    model = uiState.imageUrl,
+                    model = ImageRequest.Builder(LocalPlatformContext.current)
+                        .data(uiState.imageUrl)
+                        .size(Size.ORIGINAL)
+                        .build(),
                     contentDescription = null,
                     contentScale = ContentScale.FillHeight
                 )
