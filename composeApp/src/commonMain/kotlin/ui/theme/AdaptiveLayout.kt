@@ -8,7 +8,7 @@ package ui.theme
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.window.core.layout.WindowWidthSizeClass
+import androidx.window.core.layout.WindowSizeClass
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
 
@@ -17,27 +17,15 @@ fun AdaptiveLayout(
     adaptiveLayoutType: MutableState<AdaptiveLayoutType>,
     contentType: MutableState<ContentType>
 ) {
-    val adaptiveInfo = currentWindowAdaptiveInfo()
-    val windowSizeClass = adaptiveInfo.windowSizeClass.windowWidthSizeClass
-    when (windowSizeClass) {
-        WindowWidthSizeClass.COMPACT -> {
-            adaptiveLayoutType.value = AdaptiveLayoutType.Compact
-            contentType.value = ContentType.Single
-        }
-
-        WindowWidthSizeClass.MEDIUM -> {
-            adaptiveLayoutType.value = AdaptiveLayoutType.Medium
-            contentType.value = ContentType.Single
-        }
-
-        WindowWidthSizeClass.EXPANDED -> {
-            adaptiveLayoutType.value = AdaptiveLayoutType.Expanded
-            contentType.value = ContentType.Dual
-        }
-
-        else -> {
-            adaptiveLayoutType.value = AdaptiveLayoutType.Compact
-            contentType.value = ContentType.Single
-        }
+    val windowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
+    if (windowSizeClass.isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND)) {
+        adaptiveLayoutType.value = AdaptiveLayoutType.Expanded
+        contentType.value = ContentType.Dual
+    } else if (windowSizeClass.isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND)) {
+        adaptiveLayoutType.value = AdaptiveLayoutType.Medium
+        contentType.value = ContentType.Single
+    } else {
+        adaptiveLayoutType.value = AdaptiveLayoutType.Compact
+        contentType.value = ContentType.Single
     }
 }
