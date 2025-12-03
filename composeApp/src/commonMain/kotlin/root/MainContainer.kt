@@ -33,6 +33,7 @@ import ui.components.navigation.ModalNavigationDrawerContent
 import ui.components.navigation.ZzzArchiveBottomNavigationBar
 import ui.components.navigation.ZzzArchiveNavigationRail
 import ui.navigation.NAV_BOTTOM_MAIN_FLOW
+import ui.navigation.NAV_RAIL_MAIN_FLOW
 import ui.navigation.NavActions
 import ui.navigation.graph.MainNavGraph
 import ui.theme.AppTheme
@@ -73,15 +74,23 @@ fun MainContainer(rootNavActions: NavActions) {
         drawerState = drawerState,
         gesturesEnabled = false
     ) {
+        val canNavigateBack = selectedDestination != null &&
+            NAV_RAIL_MAIN_FLOW.none { mainFlow ->
+                selectedDestination.hasRoute(mainFlow.route.startScreen::class)
+            }
         MainFuncContent(
             mainFunNavController = mainFunNavController,
             mainNavActions = mainFunNavActions,
             rootNavActions = rootNavActions,
             selectedDestination = selectedDestination,
+            canNavigateBack = canNavigateBack,
             onDrawerClicked = {
                 coroutineScope.launch {
                     drawerState.open()
                 }
+            },
+            onBackClick = {
+                mainFunNavActions.back()
             },
             onThemeChanged = {
                 coroutineScope.launch {
@@ -98,7 +107,9 @@ fun MainFuncContent(
     mainNavActions: NavActions,
     rootNavActions: NavActions,
     selectedDestination: NavDestination?,
+    canNavigateBack: Boolean,
     onDrawerClicked: () -> Unit,
+    onBackClick: () -> Unit,
     onThemeChanged: () -> Unit
 ) {
     Column(
@@ -115,7 +126,9 @@ fun MainFuncContent(
                         .fillMaxHeight(),
                     selectedMainFlow = selectedDestination,
                     navActions = mainNavActions,
+                    canNavigateBack = canNavigateBack,
                     onDrawerClicked = onDrawerClicked,
+                    onBackClick = onBackClick,
                     onThemeChanged = onThemeChanged
                 )
             }

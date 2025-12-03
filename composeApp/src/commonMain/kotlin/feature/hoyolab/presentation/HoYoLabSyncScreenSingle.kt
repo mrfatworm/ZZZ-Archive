@@ -20,7 +20,6 @@ import feature.hoyolab.components.HoYoLabAnnouncementCard
 import feature.hoyolab.components.HoYoLabSyncGuildCard
 import feature.hoyolab.model.HoYoLabSyncState
 import org.jetbrains.compose.resources.stringResource
-import ui.components.TopBarRound
 import ui.components.TopBarScaffold
 import ui.components.buttons.ZzzPrimaryButton
 import ui.theme.AppTheme
@@ -55,11 +54,6 @@ fun HoYoLabSyncScreenSingle(
                     .contentPaddingInScaffold(scaffoldPadding),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
-            if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Medium) {
-                TopBarRound(title = stringResource(Res.string.hoyolab_sync), onBackClick = {
-                    onAction(HoYoLabSyncAction.ClickBack)
-                })
-            }
             HoYoLabAnnouncementCard()
             if (uiState.syncedAccounts.isEmpty()) {
                 AddHoYoLabAccountCard(

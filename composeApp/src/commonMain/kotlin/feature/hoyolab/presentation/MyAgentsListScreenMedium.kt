@@ -16,14 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.hoyolab.components.MyAgentsListCard
 import feature.hoyolab.model.MyAgentsListState
-import org.jetbrains.compose.resources.stringResource
-import ui.components.TopBarRound
 import ui.theme.AppTheme
 import ui.utils.contentGap
 import ui.utils.horizontalSafePadding
 import ui.utils.verticalSafePadding
-import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.my_agent
 
 @Composable
 fun MyAgentsListScreenMedium(
@@ -40,10 +36,6 @@ fun MyAgentsListScreenMedium(
                 .padding(verticalSafePadding()),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
-        TopBarRound(title = stringResource(Res.string.my_agent), onBackClick = {
-            onAction(MyAgentsListAction.ClickBack)
-        })
-
         MyAgentsListCard(
             modifier = Modifier.weight(1f),
             uiState = uiState,

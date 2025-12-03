@@ -34,7 +34,9 @@ import ui.navigation.NavActions
 import ui.theme.AppTheme
 import ui.utils.verticalSafePadding
 import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.back
 import zzzarchive.composeapp.generated.resources.dark_theme
+import zzzarchive.composeapp.generated.resources.ic_arrow_back_ios
 import zzzarchive.composeapp.generated.resources.ic_moon
 import zzzarchive.composeapp.generated.resources.ic_nav
 import zzzarchive.composeapp.generated.resources.ic_sun
@@ -46,7 +48,9 @@ fun ZzzArchiveNavigationRail(
     modifier: Modifier,
     selectedMainFlow: NavDestination?,
     navActions: NavActions,
+    canNavigateBack: Boolean,
     onDrawerClicked: () -> Unit,
+    onBackClick: () -> Unit,
     onThemeChanged: () -> Unit
 ) {
     Column(
@@ -58,13 +62,21 @@ fun ZzzArchiveNavigationRail(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
     ) {
-        NavigationRailItem(selected = false, onClick = onDrawerClicked, icon = {
-            Icon(
-                imageVector = vectorResource(Res.drawable.ic_nav),
-                contentDescription = stringResource(Res.string.navigation_drawer),
-                tint = AppTheme.colors.onSurfaceVariant
-            )
-        })
+        NavigationRailItem(
+            selected = false,
+            onClick = if (canNavigateBack) onBackClick else onDrawerClicked,
+            icon = {
+                Icon(
+                    imageVector = vectorResource(
+                        if (canNavigateBack) Res.drawable.ic_arrow_back_ios else Res.drawable.ic_nav
+                    ),
+                    contentDescription = stringResource(
+                        if (canNavigateBack) Res.string.back else Res.string.navigation_drawer
+                    ),
+                    tint = AppTheme.colors.onSurfaceVariant
+                )
+            }
+        )
         Spacer(Modifier.height(AppTheme.spacing.s300))
         Column(
             modifier = Modifier.fillMaxHeight().verticalScroll(rememberScrollState()),

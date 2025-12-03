@@ -20,14 +20,12 @@ import androidx.compose.ui.unit.dp
 import feature.feedback.components.FeedbackFormCard
 import feature.feedback.model.FeedbackState
 import org.jetbrains.compose.resources.stringResource
-import ui.components.TopBarRound
 import ui.components.buttons.ZzzPrimaryButton
 import ui.theme.AppTheme
 import ui.utils.contentGap
 import ui.utils.horizontalSafePadding
 import ui.utils.verticalSafePadding
 import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.feedback
 import zzzarchive.composeapp.generated.resources.ic_arrow_up
 import zzzarchive.composeapp.generated.resources.invalid_feedback_form
 import zzzarchive.composeapp.generated.resources.submit_form
@@ -46,10 +44,6 @@ fun FeedbackScreenMedium(
                 .padding(verticalSafePadding()),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
-        TopBarRound(title = stringResource(Res.string.feedback), onBackClick = {
-            onAction(FeedbackAction.ClickBack)
-        })
-
         FeedbackFormCard(
             feedbackState = uiState,
             onIssueSelected = {

@@ -24,7 +24,6 @@ import feature.hoyolab.components.HoYoLabAnnouncementCard
 import feature.hoyolab.components.HoYoLabSyncGuildCard
 import feature.hoyolab.model.HoYoLabSyncState
 import org.jetbrains.compose.resources.stringResource
-import ui.components.TopBarRound
 import ui.components.buttons.ZzzPrimaryButton
 import ui.theme.AppTheme
 import ui.utils.containerGap
@@ -33,7 +32,6 @@ import ui.utils.horizontalSafePadding
 import ui.utils.verticalSafePadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.add_account
-import zzzarchive.composeapp.generated.resources.hoyolab_sync
 import zzzarchive.composeapp.generated.resources.ic_add
 
 @Composable
@@ -53,10 +51,6 @@ fun HoYoLabSyncScreenDual(
             Modifier.weight(1f).padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(containerGap())
         ) {
-            TopBarRound(title = stringResource(Res.string.hoyolab_sync), onBackClick = {
-                onAction(HoYoLabSyncAction.ClickBack)
-            })
-
             HoYoLabAnnouncementCard()
 
             if (uiState.syncedAccounts.isEmpty()) {
