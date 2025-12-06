@@ -35,6 +35,7 @@ import com.mrfatworm.zzzarchive.ZzzConfig
 import ui.components.buttons.ZzzIconButton
 import ui.components.dialogs.GalleryFullScreenDialog
 import ui.theme.AppTheme
+import ui.utils.AdaptiveLayoutType
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.back
 import zzzarchive.composeapp.generated.resources.ic_arrow_back
@@ -63,11 +64,14 @@ fun AgentGalleryScreen(
                     containerColor = Color.Transparent
                 ),
                 navigationIcon = {
-                    ZzzIconButton(
-                        iconRes = Res.drawable.ic_arrow_back,
-                        contentDescriptionRes = Res.string.back,
-                        onClick = onBackClick
-                    )
+                    if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
+                        ZzzIconButton(
+                            modifier = Modifier.padding(start = AppTheme.spacing.s400),
+                            iconRes = Res.drawable.ic_arrow_back,
+                            contentDescriptionRes = Res.string.back,
+                            onClick = onBackClick
+                        )
+                    }
                 }
             )
         }

@@ -15,7 +15,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import feature.hoyolab.components.agent.MyAgentDetailTopBar
 import feature.hoyolab.components.agent.MyAgentDrivesCard
 import feature.hoyolab.components.agent.MyAgentFooterCard
 import feature.hoyolab.components.agent.MyAgentImageCard
@@ -45,11 +44,10 @@ fun MyAgentDetailScreenDual(
             modifier = Modifier.weight(1f).padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
-            MyAgentDetailTopBar(uiState, onAction)
             MyAgentImageCard(
                 modifier = Modifier.weight(1f),
                 uiState = uiState,
-                onApply = { onAction(MyAgentDetailAction.AdjustImageDone) }
+                onAction = onAction
             )
             MyAgentSkillCard(
                 modifier = Modifier.fillMaxWidth(),

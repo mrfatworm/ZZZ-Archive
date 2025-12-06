@@ -47,16 +47,22 @@ import coil3.request.ImageRequest
 import coil3.size.Size
 import feature.hoyolab.model.agent.MyAgentDetail
 import feature.hoyolab.model.agent.MyAgentDetailState
+import feature.hoyolab.presentation.MyAgentDetailAction
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.components.OutlinedText
+import ui.components.buttons.ZzzIconButton
 import ui.components.cards.ContentCard
 import ui.theme.AppTheme
+import ui.utils.AdaptiveLayoutType
 import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.back
 import zzzarchive.composeapp.generated.resources.ic_add
+import zzzarchive.composeapp.generated.resources.ic_arrow_back
 import zzzarchive.composeapp.generated.resources.ic_check
+import zzzarchive.composeapp.generated.resources.ic_edit
 import zzzarchive.composeapp.generated.resources.ic_minus
 import zzzarchive.composeapp.generated.resources.zoom_in
 import zzzarchive.composeapp.generated.resources.zoom_out
@@ -66,7 +72,7 @@ import zzzarchive.composeapp.generated.resources.zoom_out
 fun MyAgentImageCard(
     modifier: Modifier = Modifier,
     uiState: MyAgentDetailState,
-    onApply: () -> Unit
+    onAction: (MyAgentDetailAction) -> Unit
 ) {
     val agentDetail = uiState.agentDetail
     ContentCard(modifier = modifier, hasDefaultPadding = false) {
@@ -93,6 +99,7 @@ fun MyAgentImageCard(
                     filterQuality = FilterQuality.None
                 )
             }
+
             AsyncImage(
                 modifier =
                     Modifier
@@ -113,15 +120,23 @@ fun MyAgentImageCard(
                         .build(),
                 contentDescription = null
             )
-            AgentInfo(agentDetail)
+
+            AgentInfo(
+                agentDetail = agentDetail,
+                onBackClick = { onAction(MyAgentDetailAction.ClickBack) }
+            )
+
             if (uiState.adjustMode) {
                 ImagePositionController(
                     modifier = Modifier.align(Alignment.TopEnd).padding(AppTheme.spacing.s400),
                     onZoomIn = { scale *= 1.1f },
                     onZoomOut = { scale *= 0.9f },
-                    onApply = onApply
+                    onApply = {
+                        onAction(MyAgentDetailAction.AdjustImageDone)
+                    }
                 )
             }
+
             if (uiState.customImgAuthor.isNotEmpty()) {
                 Text(
                     modifier =
@@ -139,17 +154,47 @@ fun MyAgentImageCard(
                     style = AppTheme.typography.labelMedium
                 )
             }
+            val openEditDialog = remember { mutableStateOf(false) }
+
+            ZzzIconButton(
+                iconRes = Res.drawable.ic_edit,
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(AppTheme.spacing.s400)
+            ) {
+                openEditDialog.value = true
+            }
+
+            when {
+                openEditDialog.value -> {
+                    MyAgentEditDialog(uiState, onAction) {
+                        openEditDialog.value = false
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
 @OptIn(ExperimentalComposeUiApi::class)
-private fun AgentInfo(agentDetail: MyAgentDetail) {
+private fun AgentInfo(
+    agentDetail: MyAgentDetail,
+    onBackClick: () -> Unit
+) {
     Column(
         modifier = Modifier.padding(AppTheme.spacing.s400),
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
+        if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
+            ZzzIconButton(
+                modifier = Modifier,
+                iconRes = Res.drawable.ic_arrow_back,
+                contentDescriptionRes = Res.string.back,
+                onClick = onBackClick
+            )
+        }
+
         OutlinedText(
             text = agentDetail.name,
             color = AppTheme.colors.onSurfaceContainer,
@@ -157,12 +202,14 @@ private fun AgentInfo(agentDetail: MyAgentDetail) {
             borderColor = AppTheme.colors.surfaceLow,
             borderDrawStyle = Stroke(width = 8f, join = StrokeJoin.Round)
         )
+
         OutlinedText(
             text = "Lv. ${agentDetail.level}",
             color = AppTheme.colors.onSurfaceContainer,
             style = AppTheme.typography.labelLarge,
             borderColor = AppTheme.colors.surfaceLow
         )
+
         Text(
             modifier =
                 Modifier
