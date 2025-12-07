@@ -1,5 +1,5 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.2.21-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
-[![ComposeMultiplatform](https://img.shields.io/badge/Compose_Multiplatform-1.10.0-beta02-blue.svg?style=flat)](https://www.jetbrains.com/compose-multiplatform/)
+[![ComposeMultiplatform](https://img.shields.io/badge/Compose_Multiplatform-1.10.0.beta02-blue.svg?style=flat)](https://www.jetbrains.com/compose-multiplatform/)
 
 ![ZZZArchiveBanner](/docs/screenshot/github_cover.webp)
 
@@ -15,15 +15,15 @@ ZZZ Archive 是動作遊戲 "絕區零" 的維基應用程式，使用者可查�
 
 ## 下載
 
-[![Get it on Google Play](/docs/screenshot/img_google_play.webp)](https://play.google.com/store/apps/details?id=com.mrfatworm.zzzarchive)
-[![Get apk on GitHub](/docs/screenshot/img_github_apk.webp)](https://github.com/mrfatworm/ZZZ-Archive/releases/latest)
-[![Get it on App Store (iOS)](/docs/screenshot/img_app_store_ios.webp)](https://apps.apple.com/tw/app/zzz-archive/id6738107658)
-[![Get it on Microsoft Store](/docs/screenshot/img_microoft_store.webp)](https://apps.microsoft.com/detail/9p5h3ccmzl9z)
-[![Get it on App Store (macOS)](/docs/screenshot/img_app_store_mac.webp)](https://apps.apple.com/tw/app/zzz-archive/id6738107658)
+<a href="https://play.google.com/store/apps/details?id=com.mrfatworm.zzzarchive"><img alt="Get it on Google Play" src="docs/screenshot/img_google_play.webp" height="48px"/></a>
+<a href="https://github.com/mrfatworm/ZZZ-Archive/releases/latest"><img alt="Get apk on GitHub" src="docs/screenshot/img_github_apk.webp" height="48px"/></a>
+<a href="https://apps.apple.com/tw/app/zzz-archive/id6738107658"><img alt="Get it on App Store (iOS)" src="docs/screenshot/img_app_store_ios.webp" height="48px"/></a>
+<a href="https://apps.microsoft.com/detail/9p5h3ccmzl9z"><img alt="Get it on Microsoft Store" src="docs/screenshot/img_microoft_store.webp" height="48px"/></a>
+<a href="https://apps.apple.com/tw/app/zzz-archive/id6738107658"><img alt="Get it on App Store (macOS)" src="docs/screenshot/img_app_store_mac.webp" height="48px"/></a>
 
 ## UI 設計
 
-[![Screen Flow Chart (Figma Community)](/docs/screenshot/img_figma_screen_flow_chart.webp)](https://www.figma.com/community/file/1441663496302710815/zzz-archive)
+<a href="https://www.figma.com/community/file/1441663496302710815/zzz-archive"><img alt="Screen Flow Chart (Figma Community)" src="docs/screenshot/img_figma_screen_flow_chart.webp" height="64px"/></a>
 
 ## 設計系統
 
