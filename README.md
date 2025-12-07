@@ -1,5 +1,5 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.2.21-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
-[![ComposeMultiplatform](https://img.shields.io/badge/Compose_Multiplatform-1.10.0-beta02-blue.svg?style=flat)](https://www.jetbrains.com/compose-multiplatform/)
+[![ComposeMultiplatform](https://img.shields.io/badge/Compose_Multiplatform-1.10.0.beta02-blue.svg?style=flat)](https://www.jetbrains.com/compose-multiplatform/)
 
 ![ZZZArchiveBanner](docs/screenshot/github_cover.webp)
 
@@ -44,7 +44,6 @@ ZZZ Archive is a companion app for the action game Zenless Zone Zero, where user
 - We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for detailed
   information
 - UI/UX design contribution... (Coming soon)
--
 
 ## Library
 
