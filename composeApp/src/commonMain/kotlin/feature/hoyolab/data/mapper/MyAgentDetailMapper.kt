@@ -101,7 +101,8 @@ fun MyAgentDetailEquipPlanResponse.toMyAgentDetailEquipPlan(): MyAgentDetailEqui
         ),
         validPropertyCnt = validPropertyCnt ?: 0,
         planOnlySpecialProperty = planOnlySpecialProperty ?: false,
-        planEffectivePropertyList = planEffectivePropertyList?.map { it.toEquipPlanProperty() } ?: emptyList()
+        planEffectivePropertyList = planEffectivePropertyList?.map { it.toEquipPlanProperty() } ?: emptyList(),
+        equipRating = equipRating
     )
 
 fun MyAgentPropertyResponse.toMyAgentProperty(): MyAgentDriveProperty = MyAgentDriveProperty(

@@ -6,14 +6,12 @@
 package feature.hoyolab.components.agent
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import feature.hoyolab.model.agent.MyAgentDetailEquipPlan
 import feature.hoyolab.model.agent.MyAgentDetailWeapon
-import feature.hoyolab.model.agent.getScoreState
+import feature.hoyolab.model.agent.getEquipRatingState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.components.cards.ContentCard
@@ -71,13 +69,20 @@ private fun MyWeapon(
     level: Int,
     star: Int
 ) {
-    Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)
+    ) {
+        val wEngineSize = 96.dp
         AsyncImage(
-            modifier = Modifier.size(96.dp),
+            modifier = Modifier.size(wEngineSize),
             model = imgUrl,
             contentDescription = null
         )
-        Column(verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s350)) {
+        Column(
+            modifier = Modifier.height(wEngineSize),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
             Text(
                 text = name,
                 color = AppTheme.colors.onSurfaceContainer,
@@ -156,45 +161,35 @@ private fun Score(
     equipPlan: MyAgentDetailEquipPlan.MyAgentEquipPlan
 ) {
     val validPropertyCnt = equipPlan.validPropertyCnt
-    val scoreState = getScoreState(validPropertyCnt)
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement =
-            Arrangement.spacedBy(
-                AppTheme.spacing.s400
-            )
-    ) {
-        Box(
-            modifier =
-                Modifier.size(AppTheme.size.s64).border(
-                    AppTheme.size.largeBorder,
-                    scoreState.color,
-                    CircleShape
-                ),
-            contentAlignment = Alignment.Center
+    val ratingState = getEquipRatingState(equipRating = equipPlan.equipRating)
+
+    // Hide the Score block if equipRating is ER_Default or null
+    if (ratingState != null) {
+        Column(
+            modifier = modifier,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = scoreState.symbol,
+                text = ratingState.symbol,
                 textAlign = TextAlign.Center,
-                color = scoreState.color,
-                style = AppTheme.typography.headlineLarge
+                color = ratingState.color,
+                style = AppTheme.typography.scoreRegular
             )
-        }
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = stringResource(Res.string.effective_sub_stats),
-                color = AppTheme.colors.onSurfaceVariant,
-                style = AppTheme.typography.bodyMedium
-            )
-            Text(
-                text = validPropertyCnt.toString(),
-                color = AppTheme.colors.onSurfaceContainer,
-                style = AppTheme.typography.labelLarge
-            )
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = stringResource(Res.string.effective_sub_stats),
+                    color = AppTheme.colors.onSurfaceVariant,
+                    style = AppTheme.typography.bodyMedium
+                )
+                Text(
+                    text = validPropertyCnt.toString(),
+                    color = AppTheme.colors.onSurfaceContainer,
+                    style = AppTheme.typography.labelLarge
+                )
+            }
         }
     }
 }

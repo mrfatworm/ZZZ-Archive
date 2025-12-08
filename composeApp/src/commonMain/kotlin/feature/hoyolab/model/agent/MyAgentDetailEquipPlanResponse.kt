@@ -16,6 +16,7 @@ data class MyAgentDetailEquipPlanResponse(
     @SerialName("custom_info") val customInfo: EquipPlanCustomInfoResponse? = null,
     @SerialName("valid_property_cnt") val validPropertyCnt: Int? = null,
     @SerialName("plan_only_special_property") val planOnlySpecialProperty: Boolean? = null,
+    @SerialName("equip_rating") val equipRating: String? = null,
     @SerialName("plan_effective_property_list") val planEffectivePropertyList: List<EquipPlanPropertyResponse>? = null
 )
 

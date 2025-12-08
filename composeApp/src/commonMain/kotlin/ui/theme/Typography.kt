@@ -13,6 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.Font
 import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.bitcount_grid_double_light
 import zzzarchive.composeapp.generated.resources.noto_sans_black
 import zzzarchive.composeapp.generated.resources.noto_sans_bold
 import zzzarchive.composeapp.generated.resources.noto_sans_medium
@@ -34,7 +35,8 @@ class Typography(
     val labelSmall: TextStyle = TextStyle(),
     val bodyLarge: TextStyle = TextStyle(),
     val bodyMedium: TextStyle = TextStyle(),
-    val bodySmall: TextStyle = TextStyle()
+    val bodySmall: TextStyle = TextStyle(),
+    val scoreRegular: TextStyle = TextStyle()
 )
 
 @Composable
@@ -46,6 +48,10 @@ fun provideTypography(scale: Float = 1f): Typography {
             Font(Res.font.noto_sans_bold, FontWeight.Bold),
             Font(Res.font.noto_sans_black, FontWeight.Black)
         )
+
+    val bitCountGridDouble = FontFamily(
+        Font(Res.font.bitcount_grid_double_light, FontWeight.Light)
+    )
 
     return Typography(
         displayLarge =
@@ -161,6 +167,12 @@ fun provideTypography(scale: Float = 1f): Typography {
                 fontSize = 12.sp * scale,
                 lineHeight = 16.sp * scale,
                 letterSpacing = 0.4.sp
+            ),
+        scoreRegular =
+            TextStyle(
+                fontFamily = bitCountGridDouble,
+                fontWeight = FontWeight.Light,
+                fontSize = 64.sp * scale
             )
     )
 }

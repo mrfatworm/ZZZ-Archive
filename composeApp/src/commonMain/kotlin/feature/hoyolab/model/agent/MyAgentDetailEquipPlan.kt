@@ -17,7 +17,8 @@ sealed class MyAgentDetailEquipPlan {
         val cultivateInfo: CultivateInfo,
         val validPropertyCnt: Int,
         val planOnlySpecialProperty: Boolean,
-        val planEffectivePropertyList: List<EquipPlanProperty>
+        val planEffectivePropertyList: List<EquipPlanProperty>,
+        val equipRating: String?
     ) : MyAgentDetailEquipPlan()
 }
 
@@ -127,5 +128,6 @@ val stubMyAgentDetailEquipPlan =
             ),
         validPropertyCnt = 21,
         planOnlySpecialProperty = false,
-        planEffectivePropertyList = emptyList()
+        planEffectivePropertyList = emptyList(),
+        equipRating = "ER_SS"
     )
