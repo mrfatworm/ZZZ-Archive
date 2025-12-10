@@ -183,7 +183,7 @@ private fun MyAgentDriveSubPropertyItem(
         modifier =
             modifier.background(AppTheme.colors.surfaceContainer).padding(
                 horizontal = AppTheme.spacing.s350,
-                vertical = AppTheme.spacing.s250
+                vertical = AppTheme.spacing.s200
             ),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
@@ -192,13 +192,13 @@ private fun MyAgentDriveSubPropertyItem(
             modifier = Modifier.weight(1f),
             text = title,
             color = if (highlight) AppTheme.colors.primary else AppTheme.colors.onSurfaceVariant,
-            style = AppTheme.typography.bodySmall,
+            style = AppTheme.typography.bodyMedium,
             maxLines = 1
         )
         Text(
             text = value,
             color = if (highlight) AppTheme.colors.primary else AppTheme.colors.onSurfaceVariant,
-            style = AppTheme.typography.labelSmall
+            style = if (highlight) AppTheme.typography.labelMedium else AppTheme.typography.bodyMedium
         )
     }
 }

@@ -32,7 +32,7 @@ fun MyAgentFooterCard(modifier: Modifier = Modifier) {
                 modifier = Modifier.align(Alignment.Center),
                 text = stringResource(Res.string.app_name),
                 color = AppTheme.colors.onSurfaceVariant,
-                style = AppTheme.typography.headlineSmall
+                style = AppTheme.typography.titleLarge
             )
             Icon(
                 modifier = Modifier.align(Alignment.TopStart).size(iconSize),

@@ -90,7 +90,7 @@ fun MyAgentImageCard(
                     offset = Offset.Zero
                 }
             }
-            if (uiState.hasBlurBackground) {
+            if (uiState.hasBlurBackground && uiState.isCustomImage) {
                 AsyncImage(
                     modifier = Modifier.matchParentSize().blur(8.dp),
                     model = uiState.customImgUrl,
@@ -126,17 +126,6 @@ fun MyAgentImageCard(
                 onBackClick = { onAction(MyAgentDetailAction.ClickBack) }
             )
 
-            if (uiState.adjustMode) {
-                ImagePositionController(
-                    modifier = Modifier.align(Alignment.TopEnd).padding(AppTheme.spacing.s400),
-                    onZoomIn = { scale *= 1.1f },
-                    onZoomOut = { scale *= 0.9f },
-                    onApply = {
-                        onAction(MyAgentDetailAction.AdjustImageDone)
-                    }
-                )
-            }
-
             if (uiState.customImgAuthor.isNotEmpty()) {
                 Text(
                     modifier =
@@ -154,15 +143,40 @@ fun MyAgentImageCard(
                     style = AppTheme.typography.labelMedium
                 )
             }
+
+            if (uiState.showUid) {
+                OutlinedText(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .padding(AppTheme.spacing.s400),
+                    text = uiState.uid,
+                    color = AppTheme.colors.onSurfaceContainer,
+                    style = AppTheme.typography.labelLarge,
+                    borderColor = AppTheme.colors.surfaceLow
+                )
+            }
+
             val openEditDialog = remember { mutableStateOf(false) }
 
-            ZzzIconButton(
-                iconRes = Res.drawable.ic_edit,
+            Row(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
-                    .padding(AppTheme.spacing.s400)
+                    .padding(AppTheme.spacing.s400),
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                openEditDialog.value = true
+                if (uiState.adjustMode) {
+                    ImagePositionController(
+                        onZoomIn = { scale *= 1.1f },
+                        onZoomOut = { scale *= 0.9f },
+                        onApply = {
+                            onAction(MyAgentDetailAction.AdjustImageDone)
+                        }
+                    )
+                }
+                ZzzIconButton(iconRes = Res.drawable.ic_edit) {
+                    openEditDialog.value = true
+                }
             }
 
             when {

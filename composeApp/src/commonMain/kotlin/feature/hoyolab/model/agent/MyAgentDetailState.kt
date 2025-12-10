@@ -17,7 +17,7 @@ data class MyAgentDetailState(
     val isCustomImage: Boolean = false,
     val customImgUrl: String = "",
     val customImgAuthor: String = "",
-    val hasBlurBackground: Boolean = false,
+    val hasBlurBackground: Boolean = true,
     val isImageEditMode: Boolean = false,
     val adjustMode: Boolean = false,
     val errorMessage: String = ""
