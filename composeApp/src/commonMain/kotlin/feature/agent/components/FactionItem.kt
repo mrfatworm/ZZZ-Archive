@@ -35,6 +35,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
+import coil3.request.ImageRequest
+import coil3.size.Size
 import feature.agent.model.Faction
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.AppTheme
@@ -72,7 +75,10 @@ fun FactionItem(
                 Modifier
                     .fillMaxSize()
                     .blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
-            model = faction.getFactionThumbnailUrl(),
+            model = ImageRequest.Builder(LocalPlatformContext.current)
+                .data(faction.getFactionThumbnailUrl())
+                .size(Size.ORIGINAL)
+                .build(),
             contentDescription = stringResource(faction.getFactionNameRes()),
             contentScale = ContentScale.Crop,
             alpha = if (isSelected) 1f else 0.7f

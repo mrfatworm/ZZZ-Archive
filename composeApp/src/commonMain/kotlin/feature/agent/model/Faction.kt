@@ -11,6 +11,7 @@ import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.belobog_heavy_industries
 import zzzarchive.composeapp.generated.resources.criminal_investigation_special_response_team
 import zzzarchive.composeapp.generated.resources.gentle_house
+import zzzarchive.composeapp.generated.resources.krampus_compliance_authority
 import zzzarchive.composeapp.generated.resources.mockingbird
 import zzzarchive.composeapp.generated.resources.obol_squad
 import zzzarchive.composeapp.generated.resources.section_6
@@ -36,6 +37,7 @@ data class Faction(val id: Int) {
         10 -> Res.string.mockingbird
         11 -> Res.string.yunkui_summit
         12 -> Res.string.spook_shack
+        13 -> Res.string.krampus_compliance_authority
         else -> Res.string.unknown
     }
 
