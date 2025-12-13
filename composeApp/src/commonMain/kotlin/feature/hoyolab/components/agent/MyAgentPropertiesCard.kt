@@ -83,20 +83,20 @@ private fun MyAgentPropertyItem(
         Text(
             modifier = Modifier.weight(1f),
             text = title,
-            color = if (highlight) AppTheme.colors.primary else AppTheme.colors.onSurfaceVariant,
+            color = if (highlight) AppTheme.colors.rarityS else AppTheme.colors.onSurfaceVariant,
             style = titleSmall,
             maxLines = 1,
             fontSize = titleFontSize,
             onTextLayout = {
                 if (it.hasVisualOverflow) {
                     // smaller font size
-                    titleFontSize = titleFontSize * 0.9
+                    titleFontSize *= 0.9
                 }
             }
         )
         Text(
             text = value,
-            color = if (highlight) AppTheme.colors.primary else AppTheme.colors.onSurfaceContainer,
+            color = if (highlight) AppTheme.colors.rarityS else AppTheme.colors.onSurfaceContainer,
             style = AppTheme.typography.labelMedium
         )
     }

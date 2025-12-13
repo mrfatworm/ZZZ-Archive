@@ -191,13 +191,13 @@ private fun MyAgentDriveSubPropertyItem(
         Text(
             modifier = Modifier.weight(1f),
             text = title,
-            color = if (highlight) AppTheme.colors.primary else AppTheme.colors.onSurfaceVariant,
+            color = if (highlight) AppTheme.colors.rarityS else AppTheme.colors.onSurfaceVariant,
             style = AppTheme.typography.bodyMedium,
             maxLines = 1
         )
         Text(
             text = value,
-            color = if (highlight) AppTheme.colors.primary else AppTheme.colors.onSurfaceVariant,
+            color = if (highlight) AppTheme.colors.rarityS else AppTheme.colors.onSurfaceVariant,
             style = if (highlight) AppTheme.typography.labelMedium else AppTheme.typography.bodyMedium
         )
     }
