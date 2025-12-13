@@ -22,6 +22,7 @@ platform :ios do
     update_code_signing_settings(
       use_automatic_signing: false,
       path: "iosApp.xcodeproj",
+      code_sign_identity: "Apple Distribution",
       profile_name: ENV["MATCH_PROVISIONING_PROFILE_MAPPING"] || "match AppStore com.mrfatworm.zzzarchive", # Change if using different name
       targets: ["iosApp"],
       build_configurations: ["Production Release"]
