@@ -41,6 +41,7 @@ fun AgentsList(
 ) {
     var isShowMaterialDialog by remember { mutableStateOf(false) }
     var selectedAgent by remember { mutableStateOf(stubAgentsList[0]) }
+    var lastClickedAgentId by remember { mutableStateOf<Int?>(null) }
     LazyVerticalGrid(
         state = lazyGridState,
         columns = GridCells.Adaptive(AppTheme.size.s100),
@@ -62,8 +63,15 @@ fun AgentsList(
                         HighlightAgentListItem(
                             modifier = Modifier.weight(1f),
                             uiState = agent,
+                            isSelected = agent.id == lastClickedAgentId,
+                            onHover = { isHovered ->
+                                if (isHovered && agent.id != lastClickedAgentId) {
+                                    lastClickedAgentId = null
+                                }
+                            },
                             onClick = {
                                 selectedAgent = agent
+                                lastClickedAgentId = agent.id
                                 isShowMaterialDialog = true
                             }
                         )
@@ -84,8 +92,15 @@ fun AgentsList(
                 rarity = agent.rarity,
                 attribute = agent.attribute,
                 imgUrl = agent.imageUrl,
+                isSelected = agent.id == lastClickedAgentId,
+                onHover = { isHovered ->
+                    if (isHovered && agent.id != lastClickedAgentId) {
+                        lastClickedAgentId = null
+                    }
+                },
                 onClick = {
                     selectedAgent = agent
+                    lastClickedAgentId = agent.id
                     isShowMaterialDialog = true
                 }
             )

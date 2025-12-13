@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -51,10 +52,16 @@ import utils.ZzzRarity
 fun HighlightAgentListItem(
     modifier: Modifier = Modifier,
     uiState: AgentListItem,
+    isSelected: Boolean = false,
+    onHover: (Boolean) -> Unit = {},
     onClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered by interactionSource.collectIsHoveredAsState()
+
+    LaunchedEffect(isHovered) {
+        onHover(isHovered)
+    }
 
     Box(
         modifier =
@@ -66,15 +73,19 @@ fun HighlightAgentListItem(
                 .background(
                     AppTheme.colors.surfaceContainer
                 ).border(
-                    width = if (isHovered) AppTheme.size.largeBorder else AppTheme.size.border,
-                    color = if (isHovered) uiState.rarity.getColor(AppTheme.colors) else AppTheme.colors.imageBorder,
+                    width = if (isHovered || isSelected) AppTheme.size.largeBorder else AppTheme.size.border,
+                    color = if (isHovered || isSelected) {
+                        uiState.rarity.getColor(AppTheme.colors)
+                    } else {
+                        AppTheme.colors.imageBorder
+                    },
                     shape = AppTheme.shape.r300
                 )
     ) {
         RarityBackground(
             modifier = Modifier.matchParentSize(),
             rarity = uiState.rarity,
-            isFocus = isHovered
+            isFocus = isHovered || isSelected
         )
 
         // Faction Background Image

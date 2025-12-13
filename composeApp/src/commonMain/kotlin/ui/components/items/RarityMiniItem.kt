@@ -51,11 +51,16 @@ fun RarityMiniItem(
             modifier
                 .width(AppTheme.size.s64)
                 .pointerHoverIcon(if (onClick != null) PointerIcon.Hand else PointerIcon.Default)
-                .clickable(interactionSource = interactionSource, indication = null) {
+                .then(
                     if (onClick != null) {
-                        onClick()
+                        Modifier.clickable(
+                            interactionSource = interactionSource,
+                            indication = null
+                        ) { onClick() }
+                    } else {
+                        Modifier
                     }
-                },
+                ),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
     ) {

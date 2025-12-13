@@ -23,6 +23,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -54,11 +55,17 @@ fun RarityItem(
     rarity: ZzzRarity? = null,
     attribute: AgentAttribute? = null,
     specialty: AgentSpecialty? = null,
+    isSelected: Boolean = false,
     placeHolder: @Composable () -> Unit = { ImageNotFound() },
+    onHover: (Boolean) -> Unit = {},
     onClick: () -> Unit = {}
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered by interactionSource.collectIsHoveredAsState()
+
+    LaunchedEffect(isHovered) {
+        onHover(isHovered)
+    }
 
     Column(
         modifier =
@@ -80,8 +87,8 @@ fun RarityItem(
                     .background(
                         AppTheme.colors.surfaceContainer
                     ).border(
-                        width = if (isHovered) AppTheme.size.largeBorder else AppTheme.size.border,
-                        color = if (isHovered) {
+                        width = if (isHovered || isSelected) AppTheme.size.largeBorder else AppTheme.size.border,
+                        color = if (isHovered || isSelected) {
                             rarity?.getColor(AppTheme.colors) ?: AppTheme.colors.imageBorder
                         } else {
                             AppTheme.colors.imageBorder
@@ -93,7 +100,7 @@ fun RarityItem(
                 RarityBackground(
                     modifier = Modifier.matchParentSize(),
                     rarity = rarity,
-                    isFocus = isHovered
+                    isFocus = isHovered || isSelected
                 )
             }
             SubcomposeAsyncImage(
