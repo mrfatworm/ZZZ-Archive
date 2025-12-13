@@ -35,6 +35,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,13 +44,13 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
 import coil3.compose.SubcomposeAsyncImage
 import coil3.request.ImageRequest
 import coil3.size.Size
 import com.mrfatworm.zzzarchive.ZzzConfig
+import kotlinx.coroutines.launch
 import ui.components.ImageNotFound
 import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
@@ -128,6 +129,7 @@ private fun AgentGalleryScreenSingle(
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val pagerHeight = maxHeight / 5
         val pagerState = rememberPagerState(pageCount = { imageUrls.size })
+        val scope = rememberCoroutineScope()
 
         ZoomableImage(
             url = selectedImageUrl,
@@ -137,7 +139,7 @@ private fun AgentGalleryScreenSingle(
         HorizontalPager(
             state = pagerState,
             pageSize = PageSize.Fixed(pagerHeight * (16f / 9f)),
-            contentPadding = PaddingValues(horizontal = AppTheme.spacing.s400),
+            contentPadding = PaddingValues(horizontal = AppTheme.spacing.s500),
             pageSpacing = AppTheme.spacing.s350,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -147,7 +149,12 @@ private fun AgentGalleryScreenSingle(
             GalleryThumbnail(
                 url = imageUrls[page],
                 isSelected = imageUrls[page] == selectedImageUrl,
-                onClick = { onImageSelected(imageUrls[page]) },
+                onClick = {
+                    onImageSelected(imageUrls[page])
+                    scope.launch {
+                        pagerState.animateScrollToPage(page)
+                    }
+                },
                 modifier = Modifier
                     .fillMaxHeight()
                     .aspectRatio(16f / 9f)
@@ -165,7 +172,7 @@ private fun AgentGalleryScreenDual(
     Row(modifier = Modifier.fillMaxSize()) {
         Box(
             modifier = Modifier
-                .weight(4f)
+                .weight(3.5f)
                 .fillMaxHeight()
         ) {
             ZoomableImage(
@@ -202,8 +209,8 @@ private fun GalleryThumbnail(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val borderColor = if (isSelected) AppTheme.colors.primary else Color.Transparent
-    val borderWidth = if (isSelected) AppTheme.size.largeBorder else 0.dp
+    val borderColor = if (isSelected) AppTheme.colors.primary else AppTheme.colors.onSurfaceVariant
+    val borderWidth = if (isSelected) AppTheme.size.largeBorder else AppTheme.size.border
 
     Box(
         modifier = modifier
