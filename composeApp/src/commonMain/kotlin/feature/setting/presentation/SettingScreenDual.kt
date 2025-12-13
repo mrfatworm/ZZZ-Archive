@@ -17,6 +17,7 @@ import feature.setting.components.ContributorsCard
 import feature.setting.components.LicenseCard
 import feature.setting.components.OtherInfoCard
 import feature.setting.components.SettingCard
+import feature.setting.components.SponsorshipCard
 import feature.setting.model.SettingState
 import ui.utils.containerGap
 import ui.utils.contentGap
@@ -54,6 +55,7 @@ fun SettingScreenDual(
             OtherInfoCard(onFeedbackClick = {
                 onAction(SettingAction.ClickFeedback)
             })
+            SponsorshipCard()
             LicenseCard(uiState.appVersion)
         }
 
