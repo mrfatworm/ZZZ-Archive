@@ -1,0 +1,6 @@
+app_identifier "com.mrfatworm.zzzarchive" # The bundle identifier of your app
+apple_id "mrfatworm@gmail.com" # Your Apple email address
+
+# For multiple teams, you can specify:
+itc_team_id "127443336" # App Store Connect Team ID
+team_id "5RZ88PQ5L8" # Developer Portal Team ID

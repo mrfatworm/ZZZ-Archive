@@ -1,0 +1,54 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    setup_ci
+
+    # -------------------------------------------------------------------------
+    # Signing Strategy
+    # -------------------------------------------------------------------------
+    # You have two main options for signing:
+    # 1. 'match' (Recommended): Stores certificates in a private git repo.
+    #    Run 'fastlane match appstore' locally to generate, then uncomment below:
+    # match(type: "appstore", readonly: is_ci)
+    
+    # 2. Manual/GitHub Secrets: Setup certificates via GitHub Actions secrets.
+    #    The workflow file handles decoding the P12 and Profile.
+    #    We then force the project to use manual signing for the build.
+    
+    # This action updates the project to use manual signing and the specific profile
+    # Update 'ZZZ Archive' and 'com.mrfatworm.zzzarchive' if they differ.
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      path: "iosApp.xcodeproj",
+      profile_name: ENV["MATCH_PROVISIONING_PROFILE_MAPPING"] || "match AppStore com.mrfatworm.zzzarchive", # Change if using different name
+      targets: ["iosApp"],
+      build_configurations: ["Production Release"]
+    )
+    
+    # -------------------------------------------------------------------------
+    # Build
+    # -------------------------------------------------------------------------
+    # Corresponds to building the release version
+    build_app(
+      scheme: "iosApp",
+      project: "iosApp.xcodeproj",
+      configuration: "Production Release",
+      export_method: "app-store",
+      # If you encounter export issues, uncomment and adjust:
+       export_options: {
+         provisioningProfiles: { 
+           "com.mrfatworm.zzzarchive" => ENV["MATCH_PROVISIONING_PROFILE_MAPPING"] || "match AppStore com.mrfatworm.zzzarchive"
+         }
+       }
+    )
+
+    # -------------------------------------------------------------------------
+    # Upload
+    # -------------------------------------------------------------------------
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true
+    )
+  end
+end
