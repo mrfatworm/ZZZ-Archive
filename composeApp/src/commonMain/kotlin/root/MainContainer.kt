@@ -72,7 +72,7 @@ fun MainContainer(rootNavActions: NavActions) {
             )
         },
         drawerState = drawerState,
-        gesturesEnabled = false
+        gesturesEnabled = drawerState.isOpen
     ) {
         val canNavigateBack = selectedDestination != null &&
             NAV_RAIL_MAIN_FLOW.none { mainFlow ->
