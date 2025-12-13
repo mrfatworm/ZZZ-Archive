@@ -53,8 +53,6 @@ fun AddHoYoLabAccountCard(
     var lToken by remember { mutableStateOf("") }
     var ltUid by remember { mutableStateOf("") }
     var selectedServerRegion by remember { mutableStateOf(ServersList.None) }
-    var isLTokenError by remember { (mutableStateOf(false)) }
-    var isLtUidError by remember { (mutableStateOf(false)) }
     var isServerRegionError by remember { (mutableStateOf(false)) }
     val focusManager = LocalFocusManager.current
 
@@ -83,22 +81,22 @@ fun AddHoYoLabAccountCard(
         ) {
             SecretTextField(hint = "ltoken", value = lToken, onValueChange = {
                 lToken = it
-                isLTokenError = it.isEmpty()
             })
             SecretTextField(hint = "ltuid", value = ltUid, onValueChange = {
                 ltUid = it
-                isLtUidError = it.isEmpty()
             })
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = errorMessage, color = AppTheme.colors.alert)
+                Text(
+                    text = errorMessage,
+                    color = AppTheme.colors.alert,
+                    modifier = Modifier.weight(1f)
+                )
 
                 ZzzPrimaryButton(text = stringResource(Res.string.sync), onClick = {
                     if (lToken.isEmpty() || ltUid.isEmpty() || selectedServerRegion == ServersList.None) {
-                        isLTokenError = lToken.isEmpty()
-                        isLtUidError = ltUid.isEmpty()
                         isServerRegionError = selectedServerRegion == ServersList.None
                     } else {
                         onSubmit(
