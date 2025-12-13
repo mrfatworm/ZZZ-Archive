@@ -8,20 +8,30 @@ package feature.agent.presentation
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.rememberTransformableState
+import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PageSize
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,13 +39,23 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
+import coil3.compose.SubcomposeAsyncImage
+import coil3.request.ImageRequest
+import coil3.size.Size
 import com.mrfatworm.zzzarchive.ZzzConfig
+import ui.components.ImageNotFound
 import ui.components.buttons.ZzzIconButton
-import ui.components.dialogs.GalleryFullScreenDialog
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
+import ui.utils.ContentType
+import ui.utils.verticalSafePadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.back
 import zzzarchive.composeapp.generated.resources.ic_arrow_back
@@ -53,7 +73,8 @@ fun AgentGalleryScreen(
         "https://raw.githubusercontent.com/$path/Agent/Mindscape/Full/$agentId.webp",
         "https://raw.githubusercontent.com/$path/W-Engine/Match-Agent/$agentId.webp"
     )
-    var selectedImageUrl by remember { mutableStateOf<String?>(null) }
+    var selectedImageUrl by remember { mutableStateOf(imageUrls.first()) }
+    val contentType = AppTheme.contentType
 
     Scaffold(
         containerColor = AppTheme.colors.surface,
@@ -75,53 +96,189 @@ fun AgentGalleryScreen(
                 }
             )
         }
-    ) { paddingValues ->
-        Column(
+    ) { _ ->
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(paddingValues)
-                .padding(AppTheme.spacing.s400),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)
+                .padding(verticalSafePadding())
         ) {
-            imageUrls.forEach { url ->
-                GalleryImage(
-                    url = url,
-                    onClick = { selectedImageUrl = it }
+            if (contentType == ContentType.Single) {
+                AgentGalleryScreenSingle(
+                    imageUrls = imageUrls,
+                    selectedImageUrl = selectedImageUrl,
+                    onImageSelected = { selectedImageUrl = it }
+                )
+            } else {
+                AgentGalleryScreenDual(
+                    imageUrls = imageUrls,
+                    selectedImageUrl = selectedImageUrl,
+                    onImageSelected = { selectedImageUrl = it }
                 )
             }
         }
     }
+}
 
-    selectedImageUrl?.let { url ->
-        GalleryFullScreenDialog(
-            url = url,
-            onDismiss = { selectedImageUrl = null }
+@Composable
+private fun AgentGalleryScreenSingle(
+    imageUrls: List<String>,
+    selectedImageUrl: String,
+    onImageSelected: (String) -> Unit
+) {
+    BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+        val pagerHeight = maxHeight / 5
+        val pagerState = rememberPagerState(pageCount = { imageUrls.size })
+
+        ZoomableImage(
+            url = selectedImageUrl,
+            modifier = Modifier.fillMaxSize()
+        )
+
+        HorizontalPager(
+            state = pagerState,
+            pageSize = PageSize.Fixed(pagerHeight * (16f / 9f)),
+            contentPadding = PaddingValues(horizontal = AppTheme.spacing.s400),
+            pageSpacing = AppTheme.spacing.s350,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .height(pagerHeight)
+        ) { page ->
+            GalleryThumbnail(
+                url = imageUrls[page],
+                isSelected = imageUrls[page] == selectedImageUrl,
+                onClick = { onImageSelected(imageUrls[page]) },
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .aspectRatio(16f / 9f)
+            )
+        }
+    }
+}
+
+@Composable
+private fun AgentGalleryScreenDual(
+    imageUrls: List<String>,
+    selectedImageUrl: String,
+    onImageSelected: (String) -> Unit
+) {
+    Row(modifier = Modifier.fillMaxSize()) {
+        Box(
+            modifier = Modifier
+                .weight(4f)
+                .fillMaxHeight()
+        ) {
+            ZoomableImage(
+                url = selectedImageUrl,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+
+        LazyColumn(
+            contentPadding = PaddingValues(AppTheme.spacing.s400),
+            verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400),
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxHeight()
+        ) {
+            items(imageUrls) { url ->
+                GalleryThumbnail(
+                    url = url,
+                    isSelected = url == selectedImageUrl,
+                    onClick = { onImageSelected(url) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(16f / 9f)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun GalleryThumbnail(
+    url: String,
+    isSelected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val borderColor = if (isSelected) AppTheme.colors.primary else Color.Transparent
+    val borderWidth = if (isSelected) AppTheme.size.largeBorder else 0.dp
+
+    Box(
+        modifier = modifier
+            .clip(AppTheme.shape.r400)
+            .background(AppTheme.colors.surfaceContainer.copy(alpha = 0.7f))
+            .border(
+                width = borderWidth,
+                color = borderColor,
+                shape = AppTheme.shape.r400
+            )
+            .clickable(onClick = onClick)
+    ) {
+        SubcomposeAsyncImage(
+            model = ImageRequest.Builder(LocalPlatformContext.current)
+                .data(url)
+                .size(Size.ORIGINAL)
+                .build(),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            error = {
+                ImageNotFound()
+            }
         )
     }
 }
 
 @Composable
-fun GalleryImage(
+private fun ZoomableImage(
     url: String,
-    onClick: (String) -> Unit
+    modifier: Modifier = Modifier
 ) {
+    var scale by remember { mutableStateOf(1f) }
+    var offset by remember { mutableStateOf(Offset.Zero) }
+
+    // Reset zoom when url changes
+    LaunchedEffect(url) {
+        scale = 1f
+        offset = Offset.Zero
+    }
+
+    val state = rememberTransformableState { zoomChange, offsetChange, _ ->
+        scale = (scale * zoomChange).coerceIn(0.7f, 5f)
+        offset += offsetChange
+    }
+
     Box(
-        modifier = Modifier
-            .widthIn(max = AppTheme.size.s400)
-            .fillMaxWidth()
-            .clip(AppTheme.shape.r400)
-            .background(AppTheme.colors.surfaceContainer)
-            .border(
-                width = AppTheme.size.border,
-                color = AppTheme.colors.imageBorder,
-                shape = AppTheme.shape.r400
+        modifier = modifier
+            .pointerInput(Unit) {
+                awaitPointerEventScope {
+                    while (true) {
+                        val event = awaitPointerEvent()
+                        // Mouse scroll event (desktop support if needed, or just extra)
+                        event.changes.forEach { pointerInputChange ->
+                            val scrollDelta = pointerInputChange.scrollDelta
+                            if (scrollDelta != Offset.Zero) {
+                                val zoomChange = 1 - scrollDelta.y * 0.08f
+                                scale = (scale * zoomChange).coerceIn(0.7f, 5f)
+                            }
+                        }
+                    }
+                }
+            }
+            .transformable(state = state)
+            .graphicsLayer(
+                scaleX = scale,
+                scaleY = scale,
+                translationX = offset.x,
+                translationY = offset.y
             )
-            .clickable { onClick(url) }
     ) {
         AsyncImage(
-            model = url,
+            model = ImageRequest.Builder(LocalPlatformContext.current)
+                .data(url)
+                .size(Size.ORIGINAL)
+                .build(),
             contentDescription = null,
             modifier = Modifier.fillMaxSize()
         )
