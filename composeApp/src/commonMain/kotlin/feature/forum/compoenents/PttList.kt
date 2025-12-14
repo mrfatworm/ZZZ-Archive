@@ -1,5 +1,4 @@
 package feature.forum.compoenents
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +18,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import feature.forum.model.PttForumListState
 import ui.theme.AppTheme
+import ui.utils.openUriSafe
 
 @Composable
 fun PttList(pttList: List<PttForumListState>) {
@@ -31,7 +31,7 @@ fun PttList(pttList: List<PttForumListState>) {
             PttListItem(
                 modifier =
                     Modifier.clickable {
-                        urlHandler.openUri(pttItem.link)
+                        urlHandler.openUriSafe(pttItem.link)
                     },
                 ptt = pttItem
             )

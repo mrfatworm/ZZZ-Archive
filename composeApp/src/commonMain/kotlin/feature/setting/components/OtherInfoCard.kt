@@ -4,7 +4,6 @@
  */
 
 package feature.setting.components
-
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -31,6 +30,7 @@ import org.jetbrains.compose.resources.vectorResource
 import ui.components.ZzzTag
 import ui.components.cards.ContentCard
 import ui.theme.AppTheme
+import ui.utils.openUriSafe
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.feedback
 import zzzarchive.composeapp.generated.resources.ic_arrow_next_ios
@@ -81,7 +81,7 @@ private fun PrivacyPolicyItem() {
             )
         }
     }, onClick = {
-        urlHandler.openUri("https://hackmd.io/p3BDitRVTF2GQpawLRylRA")
+        urlHandler.openUriSafe("https://hackmd.io/p3BDitRVTF2GQpawLRylRA")
     })
 }
 
@@ -123,7 +123,7 @@ private fun OpenSourceItem() {
                     label = "CC-BY-SA 4.0",
                     isTintIcon = false,
                     onClick = {
-                        urlHandler.openUri("https://www.figma.com/@mrfatworm")
+                        urlHandler.openUriSafe("https://www.figma.com/@mrfatworm")
                     }
                 )
                 OpenSourceItem(
@@ -132,7 +132,7 @@ private fun OpenSourceItem() {
                     title = "GitHub",
                     label = "MIT",
                     onClick = {
-                        urlHandler.openUri("https://github.com/mrfatworm/ZZZ-Archive")
+                        urlHandler.openUriSafe("https://github.com/mrfatworm/ZZZ-Archive")
                     }
                 )
             }

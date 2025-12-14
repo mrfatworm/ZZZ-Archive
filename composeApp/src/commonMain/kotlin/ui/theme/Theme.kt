@@ -8,6 +8,9 @@ package ui.theme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -15,9 +18,14 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
+import ui.utils.SnackbarController
+import ui.utils.rememberSafeUriHandler
+import ui.utils.rememberSnackbarController
 
 /**
  * Ref:
@@ -66,6 +74,9 @@ private val LocalContentType = staticCompositionLocalOf<ContentType> {
 }
 private val LocalThemeController = staticCompositionLocalOf<ThemeController> {
     error("No ThemeController provided")
+}
+val LocalSnackbarController = staticCompositionLocalOf<SnackbarController> {
+    error("No SnackbarController provided")
 }
 
 @Stable
@@ -128,6 +139,9 @@ fun ZzzArchiveTheme(content: @Composable () -> Unit) {
         )
     }
 
+    val snackbarController = rememberSnackbarController()
+    val safeUriHandler = rememberSafeUriHandler(snackbarController = snackbarController)
+
     val colorScheme: ColorScheme = if (themeController.isDark.value) darkScheme else lightScheme
     val typography = provideTypography(themeController.fontScale.value)
     val size = provideSize(themeController.uiScale.value)
@@ -143,7 +157,9 @@ fun ZzzArchiveTheme(content: @Composable () -> Unit) {
         LocalShape provides Shape.regular(),
         LocalAdaptiveLayoutType provides adaptiveLayoutType.value,
         LocalContentType provides contentType.value,
-        LocalThemeController provides themeController
+        LocalThemeController provides themeController,
+        LocalSnackbarController provides snackbarController,
+        LocalUriHandler provides safeUriHandler
     ) {
         Box(
             modifier =
@@ -152,6 +168,13 @@ fun ZzzArchiveTheme(content: @Composable () -> Unit) {
                     .background(color = AppTheme.colors.surface)
         ) {
             content()
+            SnackbarHost(
+                hostState = snackbarController.snackbarHostState,
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .navigationBarsPadding()
+                    .imePadding()
+            )
         }
     }
 }

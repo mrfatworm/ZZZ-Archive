@@ -4,7 +4,6 @@
  */
 
 package feature.forum.compoenents
-
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -47,6 +46,7 @@ import ui.components.cards.ContentCard
 import ui.components.cards.HoveredIndicatorHeader
 import ui.theme.AppTheme
 import ui.utils.cardPaddingWithHeader
+import ui.utils.openUriSafe
 import ui.utils.rowListGap
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_twitter
@@ -128,7 +128,7 @@ private fun TwitterListItem(
                     .clip(AppTheme.shape.r400)
                     .pointerHoverIcon(PointerIcon.Hand)
                     .clickable(interactionSource = interactionSource, indication = null) {
-                        urlHandler.openUri(artworkUrl)
+                        urlHandler.openUriSafe(artworkUrl)
                     }
         ) {
             AsyncImage(
@@ -154,7 +154,7 @@ private fun TwitterListItem(
                     .fillMaxWidth()
                     .pointerHoverIcon(PointerIcon.Hand)
                     .clickable(interactionSource = interactionSource, indication = null) {
-                        urlHandler.openUri(artworkUrl)
+                        urlHandler.openUriSafe(artworkUrl)
                     },
             text = artworkName,
             overflow = TextOverflow.Ellipsis,
@@ -165,7 +165,7 @@ private fun TwitterListItem(
         Text(
             modifier =
                 Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand).clickable {
-                    urlHandler.openUri(profileUrl)
+                    urlHandler.openUriSafe(profileUrl)
                 },
             text = profileName,
             overflow = TextOverflow.Ellipsis,

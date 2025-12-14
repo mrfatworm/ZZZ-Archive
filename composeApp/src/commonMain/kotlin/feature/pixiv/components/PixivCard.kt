@@ -59,6 +59,7 @@ import ui.components.cards.ContentCard
 import ui.components.cards.HoveredIndicatorHeader
 import ui.theme.AppTheme
 import ui.utils.cardPaddingWithHeader
+import ui.utils.openUriSafe
 import ui.utils.rowListGap
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_favorite
@@ -212,7 +213,7 @@ private fun PixivTopicItem(pixivArticle: PixivArticleItem) {
                                 interactionSource = interactionSource,
                                 indication = null
                             ) {
-                                urlHandler.openUri(pixivArticle.artworkUrl)
+                                urlHandler.openUriSafe(pixivArticle.artworkUrl)
                             },
                     painter = imageState,
                     contentDescription = pixivArticle.title
@@ -230,7 +231,7 @@ private fun PixivTopicItem(pixivArticle: PixivArticleItem) {
                         interactionSource = interactionSource,
                         indication = null
                     ) {
-                        urlHandler.openUri(pixivArticle.artworkUrl)
+                        urlHandler.openUriSafe(pixivArticle.artworkUrl)
                     },
             text = pixivArticle.title,
             overflow = TextOverflow.Ellipsis,
@@ -243,7 +244,7 @@ private fun PixivTopicItem(pixivArticle: PixivArticleItem) {
             profileUrl = pixivArticle.profileImageUrl,
             header = header,
             onClick = {
-                urlHandler.openUri(pixivArticle.profileUrl)
+                urlHandler.openUriSafe(pixivArticle.profileUrl)
             }
         )
     }

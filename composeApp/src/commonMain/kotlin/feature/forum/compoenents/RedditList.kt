@@ -1,5 +1,4 @@
 package feature.forum.compoenents
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +16,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import feature.forum.model.RedditForumListState
 import org.jetbrains.compose.resources.vectorResource
 import ui.theme.AppTheme
+import ui.utils.openUriSafe
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_reddit_comment
 import zzzarchive.composeapp.generated.resources.ic_up_vote
@@ -29,7 +29,7 @@ fun RedditList(redditList: List<RedditForumListState>) {
             RedditListItem(
                 modifier =
                     Modifier.clickable {
-                        urlHandler.openUri(redditList[index].link)
+                        urlHandler.openUriSafe(redditList[index].link)
                     },
                 reddit = redditList[index],
                 isVariantColor = index % 2 == 0

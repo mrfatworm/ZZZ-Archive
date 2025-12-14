@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">ZZZ Archive</string>
     <string name="unknown">未知 ?</string>
+    <string name="unable_to_open_link">無法開啟連結: %s</string>
 
     <!-- Common -->
     <string name="navigation_drawer">導航列</string>

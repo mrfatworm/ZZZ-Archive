@@ -4,7 +4,6 @@
  */
 
 package feature.setting.components
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,6 +24,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.components.cards.ContentCard
 import ui.theme.AppTheme
+import ui.utils.openUriSafe
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.buymeacoffee
 import zzzarchive.composeapp.generated.resources.ic_happy
@@ -70,14 +70,14 @@ fun SponsorshipCard() {
                     textRes = Res.string.buymeacoffee,
                     color = Color(0xFFFFDD00), // Buy Me a Coffee yellow
                     contentColor = Color.Black,
-                    onClick = { uriHandler.openUri("https://buymeacoffee.com/mrfatworm") }
+                    onClick = { uriHandler.openUriSafe("https://buymeacoffee.com/mrfatworm") }
                 )
                 SponsorshipButton(
                     modifier = Modifier.weight(1f),
                     textRes = Res.string.ko_fi,
                     color = Color(0xFF29ABE0), // Ko-fi blue
                     contentColor = Color.White,
-                    onClick = { uriHandler.openUri("https://ko-fi.com/mrfatworm") }
+                    onClick = { uriHandler.openUriSafe("https://ko-fi.com/mrfatworm") }
                 )
             }
         }

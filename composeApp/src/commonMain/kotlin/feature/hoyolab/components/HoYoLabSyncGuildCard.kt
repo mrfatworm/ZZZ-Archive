@@ -27,6 +27,7 @@ import ui.components.buttons.ZzzOutlineButton
 import ui.components.cards.CardHeader
 import ui.components.cards.ContentCard
 import ui.theme.AppTheme
+import ui.utils.openUriSafe
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.copy_ltoken_ltuid_paste_them_into_the_form
 import zzzarchive.composeapp.generated.resources.either_one_works
@@ -94,7 +95,7 @@ private fun StepTwo() {
             Text(
                 modifier =
                     Modifier.pointerHoverIcon(PointerIcon.Hand).clickable {
-                        urlHandler.openUri(url)
+                        urlHandler.openUriSafe(url)
                     },
                 text = url,
                 color = AppTheme.colors.primary,
@@ -219,7 +220,7 @@ fun FrequentQuestions(navigateToFeedback: () -> Unit) {
             navigateToFeedback()
         }
         ZzzIconButton(iconRes = Res.drawable.ic_github) {
-            urlHandler.openUri("https://github.com/mrfatworm/ZZZ-Archive")
+            urlHandler.openUriSafe("https://github.com/mrfatworm/ZZZ-Archive")
         }
     }
 }

@@ -4,7 +4,6 @@
  */
 
 package feature.cover.components
-
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -44,6 +43,7 @@ import feature.cover.data.database.CoverImageListItemEntity
 import kotlinx.coroutines.delay
 import ui.components.ImageNotFound
 import ui.theme.AppTheme
+import ui.utils.openUriSafe
 
 @Composable
 fun CoverImageCard(coverImages: List<CoverImageListItemEntity>) {
@@ -80,7 +80,7 @@ fun CoverImageCard(coverImages: List<CoverImageListItemEntity>) {
                                 interactionSource = interactionSource,
                                 indication = null
                             ) {
-                                urlHandler.openUri(image.artworkUrl)
+                                urlHandler.openUriSafe(image.artworkUrl)
                             }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
                     model = ImageRequest.Builder(LocalPlatformContext.current)
                         .data(image.imageUrl)

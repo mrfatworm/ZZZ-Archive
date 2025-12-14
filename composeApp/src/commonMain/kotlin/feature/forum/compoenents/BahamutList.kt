@@ -1,5 +1,4 @@
 package feature.forum.compoenents
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -20,6 +19,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import feature.forum.model.BahamutForumListState
 import org.jetbrains.compose.resources.vectorResource
 import ui.theme.AppTheme
+import ui.utils.openUriSafe
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_like
 
@@ -31,7 +31,7 @@ fun BahamutList(bahamutList: List<BahamutForumListState>) {
             BahamutListItem(
                 modifier =
                     Modifier.clickable {
-                        urlHandler.openUri(bahamutList[index].link)
+                        urlHandler.openUriSafe(bahamutList[index].link)
                     },
                 bahamut = bahamutList[index],
                 isVariantColor = index % 2 == 0

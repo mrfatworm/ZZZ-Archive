@@ -4,7 +4,6 @@
  */
 
 package feature.news.components
-
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -46,6 +45,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ui.components.PagerIndicator
 import ui.theme.AppTheme
+import ui.utils.openUriSafe
 
 @Composable
 fun NewsPagerCard(newsList: List<OfficialNewsListItem>) {
@@ -101,7 +101,7 @@ private fun NewsPagerCardItem(newsState: OfficialNewsListItem) {
                         interactionSource = interactionSource,
                         indication = null
                     ) {
-                        urlHandler.openUri(newsState.newsUrl)
+                        urlHandler.openUriSafe(newsState.newsUrl)
                     }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
             model = ImageRequest.Builder(LocalPlatformContext.current)
                 .data(newsState.imageUrl)

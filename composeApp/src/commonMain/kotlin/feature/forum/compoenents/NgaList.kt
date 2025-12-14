@@ -1,5 +1,4 @@
 package feature.forum.compoenents
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import feature.forum.model.NgaForumListState
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.AppTheme
+import ui.utils.openUriSafe
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.replies
 
@@ -25,7 +25,7 @@ fun NgaList(ngaList: List<NgaForumListState>) {
             NgaListItem(
                 modifier =
                     Modifier.clickable {
-                        urlHandler.openUri(ngaList[index].link)
+                        urlHandler.openUriSafe(ngaList[index].link)
                     },
                 nga = ngaList[index],
                 isVariantColor = index % 2 == 0

@@ -4,7 +4,6 @@
  */
 
 package ui.components.dialogs
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,6 +22,7 @@ import org.jetbrains.compose.resources.stringResource
 import ui.components.buttons.ZzzIconButton
 import ui.components.buttons.ZzzOutlineButton
 import ui.theme.AppTheme
+import ui.utils.openUriSafe
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.announcement
 import zzzarchive.composeapp.generated.resources.close
@@ -77,7 +77,7 @@ fun BannerDialog(
                     iconRes = Res.drawable.ic_link,
                     text = urlDesc
                 ) {
-                    urlHandler.openUri(url)
+                    urlHandler.openUriSafe(url)
                 }
             }
         }
