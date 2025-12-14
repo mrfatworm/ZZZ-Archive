@@ -65,6 +65,7 @@ Thanks to all the contributors who made KMP/CMP possible!
 
 - English
 - Traditional Chinese
+- Japanese
 
 ## Special Thanks
 

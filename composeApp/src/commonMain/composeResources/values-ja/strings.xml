@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="app_name">ZZZ Archive</string>
+    <string name="unknown">不明 ?</string>
+    <string name="unable_to_open_link">リンクを開けません: %s</string>
+
+    <!-- Common -->
+    <string name="navigation_drawer">ナビゲーションドロワー</string>
+    <string name="yes">はい</string>
+    <string name="no">いいえ</string>
+    <string name="confirm">確認</string>
+    <string name="cancel">キャンセル</string>
+    <string name="close">閉じる</string>
+    <string name="clear">クリア</string>
+    <string name="delete">削除</string>
+    <string name="retry">再試行</string>
+    <string name="apply">適用</string>
+    <string name="back">戻る</string>
+    <string name="previous">前へ</string>
+    <string name="next">次へ</string>
+    <string name="loading">読み込み中...</string>
+    <string name="view_detail">詳細を見る</string>
+    <string name="view_all">すべて見る</string>
+    <string name="announcement">お知らせ</string>
+    <string name="filter">フィルター</string>
+    <string name="default">デフォルト</string>
+    <string name="default_value">デフォルト</string>
+    <string name="set_as_default">デフォルトに設定</string>
+    <string name="customize">カスタマイズ</string>
+    <string name="multiply">倍率</string>
+    <string name="bangboo_speak">ウンナ～ウンナ</string>
+    <string name="unknown_error">不明なエラー</string>
+    <string name="visible">表示</string>
+    <string name="invisible">非表示</string>
+    <string name="under_development">開発中</string>
+
+    <!-- Sub System -->
+    <string name="home">ホーム</string>
+    <string name="agents">エージェント</string>
+    <string name="all_agents">全エージェント</string>
+    <string name="w_engines">音動機</string>
+    <string name="all_w_engines">全音動機</string>
+    <string name="drives">ドライブディスク</string>
+    <string name="all_drives">全ドライブディスク</string>
+    <string name="bangboo">ボンプ</string>
+    <string name="all_bangboo">全ボンプ</string>
+    <string name="setting">設定</string>
+    <string name="wiki">Wiki</string>
+    <string name="function">ツール</string>
+
+    <!-- Attribute -->
+    <string name="ether">エーテル</string>
+    <string name="fire">炎</string>
+    <string name="ice">氷</string>
+    <string name="electric">電気</string>
+    <string name="physical">物理</string>
+
+    <!-- Specialty -->
+    <string name="attack">強攻</string>
+    <string name="stun">撃破</string>
+    <string name="support">支援</string>
+    <string name="anomaly">異常</string>
+    <string name="defense">防護</string>
+    <string name="rupture">打破</string>
+
+    <!-- Attack Type -->
+    <string name="pierce">貫通</string>
+    <string name="slash">斬撃</string>
+    <string name="strike">打撃</string>
+
+    <!-- Faction -->
+    <string name="gentle_house">邪兎屋</string>
+    <string name="victoria_housekeeping">ヴィクトリア家政</string>
+    <string name="belobog_heavy_industries">白祇重工</string>
+    <string name="obol_squad">オボルス小隊</string>
+    <string name="section_6">対ホロウ特別行動部第六課</string>
+    <string name="criminal_investigation_special_response_team">特務捜査班</string>
+    <string name="sons_of_calydon">カリュドーンの子</string>
+    <string name="stars_of_lyra">スターズ・オブ・リラ</string>
+    <string name="silver_squad">シルバー小隊</string>
+    <string name="mockingbird">モッキンバード</string>
+    <string name="yunkui_summit">雲嶽山</string>
+    <string name="spook_shack">怪啖屋</string>
+    <string name="krampus_compliance_authority">クランプスの黒枝</string>
+
+    <!-- Home -->
+    <string name="popular">人気</string>
+    <string name="forum_popular">フォーラム人気</string>
+    <string name="reddit">Reddit</string>
+    <string name="bahamut">バハムート</string>
+    <string name="ptt">Ptt</string>
+    <string name="nga">NGA</string>
+    <string name="replies">返信</string>
+
+    <!-- Agent Detail -->
+    <string name="attributes">属性</string>
+    <string name="hp">HP</string>
+    <string name="atk">攻撃力</string>
+    <string name="def">防御力</string>
+    <string name="hp_atk_def">HP / 攻撃 / 防御</string>
+    <string name="materials">素材</string>
+    <string name="skills">スキル</string>
+    <string name="expand_all">すべて展開</string>
+    <string name="basic_attack">通常攻撃</string>
+    <string name="dodge">回避</string>
+    <string name="dash_attack">ダッシュ攻撃</string>
+    <string name="dodge_counter">回避反撃</string>
+    <string name="quick_assist">クイック支援</string>
+    <string name="defensive_assist">パリィ支援</string>
+    <string name="assist_follow_up">支援急襲</string>
+    <string name="special_attack">特殊スキル</string>
+    <string name="ex_special_attack">強化特殊スキル</string>
+    <string name="chain_attack">連携スキル</string>
+    <string name="ultimate">終結スキル</string>
+    <string name="core_passive">コアスキル</string>
+    <string name="additional_ability">追加能力</string>
+    <string name="mindscape_cinema">心象映画</string>
+    <string name="suggest_w_engines">おすすめ音動機</string>
+    <string name="suggest_drives">おすすめドライブディスク</string>
+    <string name="agent_background">エージェント設定</string>
+    <string name="gallery">ギャラリー</string>
+
+    <!-- W-Engine Detail -->
+    <string name="w_engine_effect">音動機効果</string>
+    <string name="additional_info">追加情報</string>
+
+    <!-- Bangboo Detail -->
+    <string name="active_skill">アクティブスキル</string>
+
+    <!-- Drive Detail -->
+    <string name="piece_set">%1$d セット</string>
+    <string name="piece_set_short">%1$dセット</string>
+
+    <!-- Setting -->
+    <string name="language">言語</string>
+    <string name="color_theme">カラーテーマ</string>
+    <string name="light_theme">ライトテーマ</string>
+    <string name="dark_theme">ダークテーマ</string>
+    <string name="ui_scale">UIスケール</string>
+    <string name="font_scale">フォントスケール</string>
+    <string name="ui_scale_warning">UIとテキストサイズを調整します。\n\n警告：デフォルト以外のサイズはレイアウト崩れを引き起こす可能性があります</string>
+    <string name="hoyolab_account">HoYoLabアカウント</string>
+    <string name="feedback">フィードバック</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="open_source">オープンソース</string>
+    <string name="coming_soon">近日公開</string>
+    <string name="resource_licence">本アプリで使用しているゲーム画像、アニメーション、音声、テキストは主にZenless Zone Zero Wiki（Fandom）から取得しており、ゲーム情報をより良く提示するためにのみ使用されています。これらの素材の著作権はゼンレスゾーンゼロ/miHoYoに帰属します。特に明記がない限り、その他のコンテンツはクリエイティブ・コモンズ 表示-継承 4.0 国際（CC BY-SA 4.0）ライセンスの下で提供されています。</string>
+    <string name="code_licence">GitHubのオープンソースコードはMITライセンスの下で提供されています。</string>
+    <string name="contributors">コントリビューター</string>
+    <string name="author">作者</string>
+    <string name="developer">開発者</string>
+    <string name="ui_ux_designers">UI/UXデザイナー</string>
+    <string name="localization">ローカライズ</string>
+    <string name="data_integration">データ統合</string>
+    <string name="banner_artists">バナーアーティスト</string>
+    <string name="special_thanks">スペシャルサンクス</string>
+    <string name="restart_hint">変更を適用するにはアプリの再起動が必要です。\n今すぐ再起動しますか？</string>
+    <string name="restart">再起動</string>
+    <string name="later">後で</string>
+
+    <!-- Feedback -->
+    <string name="issue_type">問題の種類</string>
+    <string name="please_select">選択してください</string>
+    <string name="crash_or_bug">クラッシュまたはバグ</string>
+    <string name="incorrect_content">不正確なコンテンツ</string>
+    <string name="suggestion">提案</string>
+    <string name="other">その他</string>
+    <string name="input_your_issue">問題を入力してください</string>
+    <string name="your_email_optional">メールアドレス（任意）</string>
+    <string name="app_version">アプリバージョン</string>
+    <string name="device_name">デバイス名</string>
+    <string name="operating_system">OS</string>
+    <string name="submit_form">送信</string>
+    <string name="invalid_feedback_form">問題の種類が未選択か、問題内容が空です。</string>
+    <string name="form_submit_success">フォームが送信されました。フィードバックありがとうございます！</string>
+
+    <!-- HoYoLab Sync -->
+    <string name="hoyolab_sync">HoYoLab連携</string>
+    <string name="sync">連携</string>
+    <string name="unsync">連携解除</string>
+    <string name="game_server">ゲームサーバー</string>
+    <string name="account_not_found">アカウントが見つかりません</string>
+    <string name="invalid_hoYoLab_form">ゲームサーバーが未選択か、入力欄が空です。</string>
+    <string name="update_at">%1$s 更新</string>
+    <string name="user_profile_image">ユーザープロフィール画像</string>
+    <string name="hoyolab_sync_announcement">このページで送信される情報はHoYoLabへのリクエスト処理にのみ使用され、お使いのデバイスに暗号化されて保存されます。データの収集は一切行いません。</string>
+    <string name="remove_account_hint">アカウントの連携を解除しますか？\n（このデバイスからデータを削除します）</string>
+    <string name="add_account">アカウントを追加</string>
+
+    <!-- HoYoLab Sync Tutorial -->
+    <string name="instruction_guide">使い方ガイド</string>
+    <string name="open_a_desktop_browser">デスクトップブラウザを開く</string>
+    <string name="navigate_to_zzz_battle_record">ゼンレスゾーンゼロの戦績ページへ移動</string>
+    <string name="hoyolab_zzz_game_record">HoYoLab > ゼンレスゾーンゼロ > 戦績</string>
+    <string name="open_developer_tools">開発者ツールを開く</string>
+    <string name="press_f12_to_open_developer_tools_cookies">F12キーを押して開発者ツールを開く > Application > Cookies</string>
+    <string name="copy_ltoken_ltuid_paste_them_into_the_form">ltoken_v2とltuid_v2の値をコピーし、フォームに貼り付けてください</string>
+    <string name="frequently_asked_questions">よくある質問</string>
+    <string name="unable_to_link">連携できない、または連携に失敗しましたか？</string>
+    <string name="please_try_again_using_incognito_mode">ブラウザのシークレットモードで再度お試しください。</string>
+    <string name="there_are_two_ltoken_values_which_one_should_i_choose">ltoken_v2が2つありますが、どちらを選べばよいですか？</string>
+    <string name="either_one_works">どちらでも大丈夫です。</string>
+    <string name="i_still_have_other_questions">まだ他に質問があります！！！</string>
+    <string name="provide_feedback_via_suggestions_or_report_your_issue_on_github">フィードバックで提案いただくか、GitHubで問題を報告してください。</string>
+    <string name="image_example">画像例</string>
+
+    <!-- HoYoLab Card -->
+    <string name="engagement_today">本日の活躍度</string>
+    <string name="scratch_card">スクラッチカード</string>
+    <string name="video_store">レコードショップ</string>
+    <string name="bounty_commissions">賞金依頼</string>
+    <string name="investigate_point">調査ポイント</string>
+    <string name="incomplete">未完了</string>
+    <string name="open">営業中</string>
+    <string name="check_in">チェックイン</string>
+    <string name="check_in_success">チェックイン成功！</string>
+    <string name="ready_to_settle">精算可能</string>
+    <string name="operating">営業中</string>
+    <string name="not_operating">営業外</string>
+    <string name="purchasable">購入可能</string>
+    <string name="purchased">購入済み</string>
+    <string name="ridu_weekly">リーデュウィークリー</string>
+
+    <!-- My Agent -->
+    <string name="my_agent">マイエージェント</string>
+    <string name="w_engine_not_equipped">音動機未装備</string>
+    <string name="effective_sub_stats">有効サブステータス</string>
+    <string name="hit">命中 %1$d</string>
+    <string name="display_uid">UIDを表示</string>
+    <string name="custom_image">カスタム画像</string>
+    <string name="image_url">画像URL</string>
+    <string name="author_name_optional">作者名（任意）</string>
+    <string name="zoom_in">拡大</string>
+    <string name="zoom_out">縮小</string>
+    <string name="background_blur">背景ぼかし</string>
+
+    <!-- Sponsorship -->
+    <string name="sponsorship_title">スポンサーシップ</string>
+    <string name="sponsorship_description">ユーザーの皆様へ\nZZZ Archiveをご愛用いただきありがとうございます！\n各プラットフォームでの維持には費用がかかり、多くの時間と労力を費やしています。\nもしお役に立てましたら、下記リンクから少額のご支援をいただけると幸いです。ご支援に感謝いたします！</string>
+    <string name="buymeacoffee">Buy Me a Coffee</string>
+    <string name="ko_fi">Ko-fi</string>
+
+</resources>
