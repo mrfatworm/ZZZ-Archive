@@ -34,8 +34,11 @@ class OfficialNewsUseCase(
         }
     }
 
-    suspend fun getNewsList(amount: Int): Result<List<OfficialNewsListItem>> = getNews(amount).map { response ->
-        response.toOfficialNewsList()
+    suspend fun getNewsList(amount: Int): Result<List<OfficialNewsListItem>> {
+        val officialCode = languageUseCase.getLanguage().first().officialCode
+        return getNews(amount).map { response ->
+            response.toOfficialNewsList(officialCode)
+        }
     }
 
     fun getNewsListPeriodically(

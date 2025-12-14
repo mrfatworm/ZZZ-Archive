@@ -14,6 +14,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
+import utils.Language
 
 class OfficialNewsUseCaseTest {
     private val newsRepository = FakeOfficialNewsRepository()
@@ -50,12 +51,12 @@ class OfficialNewsUseCaseTest {
     @Test
     fun `Get news list success`() = runTest {
         val result = officialNewsUseCase.getNewsList(10).getOrNull()
-        assertEquals(stubOfficialNewsDataResponseResponse.toOfficialNewsList(), result)
+        assertEquals(stubOfficialNewsDataResponseResponse.toOfficialNewsList(Language.English.officialCode), result)
     }
 
     @Test
     fun `Get news list periodically success`() = runTest {
         val result = officialNewsUseCase.getNewsListPeriodically(perMinutes = 10, amount = 0).first().getOrNull()
-        assertEquals(stubOfficialNewsDataResponseResponse.toOfficialNewsList(), result)
+        assertEquals(stubOfficialNewsDataResponseResponse.toOfficialNewsList(Language.English.officialCode), result)
     }
 }
