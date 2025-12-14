@@ -1,8 +1,10 @@
 package feature.forum.compoenents
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
@@ -14,10 +16,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
+import androidx.compose.ui.unit.dp
 import feature.forum.model.AllForumState
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
+import ui.components.ZzzLoadingIndicator
 import ui.components.cards.CardHeader
 import ui.components.cards.ContentCard
 import ui.components.chips.ZzzFilterChip
@@ -61,17 +65,23 @@ fun AllForumCard(uiState: AllForumState) {
                 }
             }
         )
-        HorizontalPager(
-            modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
-            state = pagerState,
-            verticalAlignment = Alignment.Top,
-            userScrollEnabled = false
-        ) { currentPager ->
-            when (currentPager) {
-                0 -> RedditList(uiState.reddit)
-                1 -> BahamutList(uiState.bahamut)
-                2 -> PttList(uiState.ptt)
-                3 -> NgaList(uiState.nga)
+        if (uiState.reddit.isEmpty() && uiState.bahamut.isEmpty() && uiState.ptt.isEmpty() && uiState.nga.isEmpty()) {
+            Box(modifier = Modifier.fillMaxWidth().height(200.dp), contentAlignment = Alignment.Center) {
+                ZzzLoadingIndicator()
+            }
+        } else {
+            HorizontalPager(
+                modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
+                state = pagerState,
+                verticalAlignment = Alignment.Top,
+                userScrollEnabled = false
+            ) { currentPager ->
+                when (currentPager) {
+                    0 -> RedditList(uiState.reddit)
+                    1 -> BahamutList(uiState.bahamut)
+                    2 -> PttList(uiState.ptt)
+                    3 -> NgaList(uiState.nga)
+                }
             }
         }
     }
