@@ -20,12 +20,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
@@ -34,7 +35,6 @@ import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
@@ -43,7 +43,6 @@ import coil3.size.Size
 import feature.news.model.OfficialNewsListItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ui.components.PagerIndicator
 import ui.theme.AppTheme
 import ui.utils.openUriSafe
 
@@ -51,25 +50,25 @@ import ui.utils.openUriSafe
 fun NewsPagerCard(newsList: List<OfficialNewsListItem>) {
     if (newsList.isNotEmpty()) {
         val pagerState = rememberPagerState(pageCount = { newsList.size })
-        val coroutineScope = rememberCoroutineScope()
-        Column(
+        val interactionSource = remember { MutableInteractionSource() }
+
+        Box(
             Modifier
                 .clip(AppTheme.shape.r400)
                 .background(AppTheme.colors.surfaceContainer)
-                .padding(bottom = AppTheme.spacing.s200),
-            verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
         ) {
             HorizontalPager(modifier = Modifier, state = pagerState) { currentPager ->
-                NewsPagerCardItem(newsList[currentPager])
+                NewsPagerCardItem(
+                    newsState = newsList[currentPager],
+                    interactionSource = interactionSource
+                )
             }
-            PagerIndicator(
-                pageCount = pagerState.pageCount,
-                currentPage = pagerState.currentPage,
-                onClick = {
-                    coroutineScope.launch {
-                        pagerState.animateScrollToPage(it)
-                    }
-                }
+
+            NewsIndicator(
+                pagerState = pagerState,
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(AppTheme.spacing.s400)
             )
         }
 
@@ -85,8 +84,29 @@ fun NewsPagerCard(newsList: List<OfficialNewsListItem>) {
 }
 
 @Composable
-private fun NewsPagerCardItem(newsState: OfficialNewsListItem) {
-    val interactionSource = remember { MutableInteractionSource() }
+private fun NewsIndicator(
+    pagerState: PagerState,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .clip(CircleShape)
+            .background(AppTheme.colors.hoveredMask)
+            .padding(horizontal = AppTheme.spacing.s350, vertical = AppTheme.spacing.s250)
+    ) {
+        Text(
+            text = "${pagerState.currentPage + 1} / ${pagerState.pageCount}",
+            style = AppTheme.typography.labelMedium,
+            color = AppTheme.colors.onHoveredMask
+        )
+    }
+}
+
+@Composable
+private fun NewsPagerCardItem(
+    newsState: OfficialNewsListItem,
+    interactionSource: MutableInteractionSource
+) {
     val isPressed = interactionSource.collectIsPressedAsState()
     val isHovered = interactionSource.collectIsHoveredAsState()
     Box(
@@ -147,8 +167,7 @@ private fun NewsInfo(
             modifier = Modifier.fillMaxWidth(),
             text = newsState.date,
             color = AppTheme.colors.onHoveredMaskVariant,
-            style = AppTheme.typography.labelMedium,
-            textAlign = TextAlign.End
+            style = AppTheme.typography.labelMedium
         )
     }
 }

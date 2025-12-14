@@ -17,9 +17,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -33,7 +30,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -48,11 +44,8 @@ import coil3.size.Size
 import feature.hoyolab.model.agent.MyAgentDetail
 import feature.hoyolab.model.agent.MyAgentDetailState
 import feature.hoyolab.presentation.MyAgentDetailAction
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.resources.vectorResource
 import ui.components.OutlinedText
+import ui.components.buttons.OnImageIconButton
 import ui.components.buttons.ZzzIconButton
 import ui.components.cards.ContentCard
 import ui.theme.AppTheme
@@ -268,29 +261,5 @@ private fun ImagePositionController(
         ) {
             onApply()
         }
-    }
-}
-
-@Composable
-private fun OnImageIconButton(
-    iconRes: DrawableResource,
-    contentDescriptionRes: StringResource,
-    tint: Color = AppTheme.colors.onHoveredMask,
-    onClick: () -> Unit
-) {
-    IconButton(
-        modifier = Modifier.size(AppTheme.size.iconButtonSmall),
-        colors =
-            IconButtonDefaults.iconButtonColors().copy(
-                containerColor = AppTheme.colors.hoveredMask,
-                contentColor = tint
-            ),
-        onClick = onClick
-    ) {
-        Icon(
-            modifier = Modifier.size(AppTheme.size.icon),
-            imageVector = vectorResource(iconRes),
-            contentDescription = stringResource(contentDescriptionRes)
-        )
     }
 }
