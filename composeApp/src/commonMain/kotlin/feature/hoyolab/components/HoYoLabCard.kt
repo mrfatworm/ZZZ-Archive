@@ -65,6 +65,7 @@ import zzzarchive.composeapp.generated.resources.ic_arrow_next_ios
 import zzzarchive.composeapp.generated.resources.ic_calendar_clock
 import zzzarchive.composeapp.generated.resources.ic_check_circle
 import zzzarchive.composeapp.generated.resources.ic_link
+import zzzarchive.composeapp.generated.resources.ic_star_filled
 import zzzarchive.composeapp.generated.resources.ic_warning
 import zzzarchive.composeapp.generated.resources.img_battery_charge
 import zzzarchive.composeapp.generated.resources.img_hoyolab_card_preview
@@ -316,6 +317,12 @@ private fun WeeklyMission(
             horizontalArrangement = Arrangement.spacedBy(space = AppTheme.spacing.s300, alignment = Alignment.End),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            Icon(
+                modifier = Modifier.size(AppTheme.size.iconSmall),
+                imageVector = vectorResource(Res.drawable.ic_star_filled),
+                contentDescription = null,
+                tint = AppTheme.colors.rarityS
+            )
             Text(
                 text = stringResource(Res.string.my_agent),
                 color = AppTheme.colors.onSurfaceVariant,
