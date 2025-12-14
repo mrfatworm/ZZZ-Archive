@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -59,7 +60,7 @@ fun SponsorshipCard() {
             Text(
                 text = stringResource(Res.string.sponsorship_description),
                 style = AppTheme.typography.bodyMedium,
-                color = AppTheme.colors.onSurfaceContainer
+                color = AppTheme.colors.onSurfaceVariant
             )
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -104,7 +105,12 @@ private fun SponsorshipButton(
         Text(
             text = stringResource(textRes),
             style = AppTheme.typography.labelMedium,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            maxLines = 1,
+            autoSize = TextAutoSize.StepBased(
+                minFontSize = AppTheme.typography.labelMedium.fontSize * 0.7,
+                maxFontSize = AppTheme.typography.labelMedium.fontSize
+            )
         )
     }
 }

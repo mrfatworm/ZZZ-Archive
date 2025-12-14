@@ -17,7 +17,6 @@ import feature.setting.components.ContributorsCard
 import feature.setting.components.LicenseCard
 import feature.setting.components.OtherInfoCard
 import feature.setting.components.SettingCard
-import feature.setting.components.SponsorshipCard
 import feature.setting.model.SettingState
 import ui.utils.contentGap
 import ui.utils.horizontalSafePadding
@@ -58,8 +57,8 @@ fun SettingScreenSingle(
         OtherInfoCard(onFeedbackClick = {
             onAction(SettingAction.ClickFeedback)
         })
-        SponsorshipCard()
         LicenseCard(uiState.appVersion)
+        // SponsorshipCard()
         ContributorsCard(uiState.contributors)
     }
 }
