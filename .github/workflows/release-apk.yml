@@ -31,6 +31,7 @@ jobs:
         run: ./gradlew :composeApp:assembleLiveRelease
 
       - name: Sign Release
+        id: sign_app
         uses: r0adkll/sign-android-release@v1
         env:
           BUILD_TOOLS_VERSION: "34.0.0"
@@ -42,7 +43,7 @@ jobs:
           keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
 
       - name: Rename APK
-        run: mv composeApp/build/outputs/apk/Live/release/composeApp-Live-release-signed.apk composeApp/build/outputs/apk/Live/release/ZZZ-Archive-${{ inputs.version_tag }}.apk
+        run: mv "${{ steps.sign_app.outputs.signedReleaseFile }}" composeApp/build/outputs/apk/Live/release/ZZZ-Archive-${{ inputs.version_tag }}.apk
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
