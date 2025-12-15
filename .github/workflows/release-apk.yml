@@ -1,0 +1,53 @@
+name: Manual APK Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_tag:
+        description: 'Version Tag (e.g. v1.2.3)'
+        required: true
+        type: string
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: set up JDK 18
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '18'
+          cache: gradle
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Set up local.properties
+        run: echo "AES_KEY=${{ secrets.AES_KEY }}" > local.properties
+
+      - name: Build Android APK
+        run: ./gradlew :composeApp:assembleLiveRelease
+
+      - name: Sign Release
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: composeApp/build/outputs/apk/Live/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEYSTORE }}
+          keyStorePassword: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
+          alias: ${{ secrets.SIGNING_KEY_ALIAS }}
+          keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
+
+      - name: Rename APK
+        run: mv composeApp/build/outputs/apk/Live/release/composeApp-Live-release-signed.apk composeApp/build/outputs/apk/Live/release/ZZZ-Archive-${{ inputs.version_tag }}.apk
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.version_tag }}
+          name: Release ${{ inputs.version_tag }}
+          body_path: docs/release_notes.txt
+          files: composeApp/build/outputs/apk/Live/release/ZZZ-Archive-${{ inputs.version_tag }}.apk
+          draft: false
+          prerelease: false

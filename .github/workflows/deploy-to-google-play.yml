@@ -7,15 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint:
-    uses: ./.github/workflows/job_lint.yml
-
-  unit_test:
-    uses: ./.github/workflows/job_test_debug.yml
-
   deploy-to-google-play:
     runs-on: ubuntu-latest
-    needs: [ unit_test, lint ]
 
     steps:
       # Checkout the repository

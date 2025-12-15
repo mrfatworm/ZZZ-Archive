@@ -1,0 +1,19 @@
+### ✨ New Features
+- Add Japanese language support
+- Add agent gallery screen & New AgentGalleryScreen UI
+- Add Agent List Filter FAB and Merge BottomSheet
+- Add back button to navigation rail
+- Add Krampus Compliance Authority faction
+- Add loading indicator for forum card
+- Add safe URI handling with Snackbar feedback
+
+### 🐛 Fixes
+- Navigation Drawer cannot close by clicking outside
+- Prevent error message from pushing button off-screen
+- News URL multi-language support
+
+### 🚀 Improvements
+- UI tweaks and style adjustments
+- Scroll to selected thumbnail in agent gallery
+- Update my agent score rule and UI
+- Internal refactoring and dependency updates
