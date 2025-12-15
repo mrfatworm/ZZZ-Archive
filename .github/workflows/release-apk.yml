@@ -32,6 +32,8 @@ jobs:
 
       - name: Sign Release
         uses: r0adkll/sign-android-release@v1
+        env:
+          BUILD_TOOLS_VERSION: "34.0.0"
         with:
           releaseDirectory: composeApp/build/outputs/apk/Live/release
           signingKeyBase64: ${{ secrets.SIGNING_KEYSTORE }}
