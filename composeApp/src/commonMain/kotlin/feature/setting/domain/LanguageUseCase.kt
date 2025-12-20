@@ -22,11 +22,21 @@ interface LanguageUseCase {
 class LanguageUseCaseImpl(private val preferencesRepository: PreferencesRepository) : LanguageUseCase {
     override fun getLanguage(): Flow<Language> = flow {
         val langCode = preferencesRepository.getLanguageCode().first()
-        val deviceLanguage: String = Locale.current.language
+        val currentLocale = Locale.current
         val language =
             if (langCode == "") {
-                Language.entries.firstOrNull { it.code == deviceLanguage }
-                    ?: Language.English
+                if (currentLocale.language == "zh") {
+                    if (currentLocale.region == "CN" || currentLocale.region == "SG" ||
+                        currentLocale.script == "Hans"
+                    ) {
+                        Language.ChineseSimplified
+                    } else {
+                        Language.ChineseTraditional
+                    }
+                } else {
+                    Language.entries.firstOrNull { it.code == currentLocale.language }
+                        ?: Language.English
+                }
             } else {
                 Language.entries.firstOrNull { it.code == langCode } ?: Language.English
             }
