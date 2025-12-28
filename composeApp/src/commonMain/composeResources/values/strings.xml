@@ -56,6 +56,7 @@
     <string name="physical">Physical</string>
 
     <!-- Specialty -->
+    <string name="specialty">Specialty</string>
     <string name="attack">Attack</string>
     <string name="stun">Stun</string>
     <string name="support">Support</string>
@@ -69,6 +70,7 @@
     <string name="strike">Strike</string>
 
     <!-- Faction -->
+    <string name="faction">Faction</string>
     <string name="gentle_house">Gentle House</string>
     <string name="victoria_housekeeping">Victoria Housekeeping</string>
     <string name="belobog_heavy_industries">Belobog Heavy Industries</string>
@@ -93,6 +95,7 @@
     <string name="replies">Replies</string>
 
     <!-- Agent Detail -->
+    <string name="rarity">Rarity</string>
     <string name="attributes">Attributes</string>
     <string name="hp">HP</string>
     <string name="atk">ATK</string>

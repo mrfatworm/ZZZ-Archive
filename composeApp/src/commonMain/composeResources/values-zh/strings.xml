@@ -56,6 +56,7 @@
     <string name="physical">物理</string>
 
     <!-- Specialty -->
+    <string name="specialty">特性</string>
     <string name="attack">強攻</string>
     <string name="stun">擊破</string>
     <string name="support">支援</string>
@@ -69,6 +70,7 @@
     <string name="strike">打擊</string>
 
     <!-- Faction -->
+    <string name="faction">陣營</string>
     <string name="gentle_house">狡兔屋</string>
     <string name="victoria_housekeeping">維多利亞居家服務</string>
     <string name="belobog_heavy_industries">白祇重工</string>
@@ -93,6 +95,7 @@
     <string name="replies">回覆</string>
 
     <!-- Agent Detail -->
+    <string name="rarity">稀有度</string>
     <string name="attributes">屬性</string>
     <string name="hp">生命值</string>
     <string name="atk">攻擊力</string>

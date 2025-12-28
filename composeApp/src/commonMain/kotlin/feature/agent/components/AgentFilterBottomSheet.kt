@@ -8,9 +8,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.agent.model.AgentsListState
+import org.jetbrains.compose.resources.stringResource
 import ui.components.ZzzBottomSheet
 import ui.components.chips.AttributeFilterChipsList
 import ui.components.chips.FactionFilterChipsList
@@ -20,6 +22,9 @@ import ui.theme.AppTheme
 import utils.AgentAttribute
 import utils.AgentSpecialty
 import utils.ZzzRarity
+import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.attributes
+import zzzarchive.composeapp.generated.resources.rarity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,7 +42,7 @@ fun AgentFilterBottomSheet(
             modifier = Modifier
                 .padding(horizontal = AppTheme.spacing.s300)
                 .navigationBarsPadding(),
-            verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s450)
+            verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)
         ) {
             RarityFilterChipsList(
                 selectedRarity = uiState.selectedRarity,
