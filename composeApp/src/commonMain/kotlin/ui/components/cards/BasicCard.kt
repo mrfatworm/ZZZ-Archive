@@ -25,6 +25,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.dropShadow
+import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import ui.components.buttons.ZzzIconButton
@@ -44,6 +46,13 @@ fun ContentCard(
     Column(
         modifier =
             modifier
+                .dropShadow(
+                    shape = AppTheme.shape.r400,
+                    shadow = Shadow(
+                        radius = 4.dp,
+                        alpha = 0.05f
+                    )
+                )
                 .clip(AppTheme.shape.r400)
                 .background(AppTheme.colors.surfaceContainer)
                 .padding(if (hasDefaultPadding) cardPadding() else 0.dp)
