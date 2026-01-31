@@ -52,7 +52,7 @@ fun ZzzTag(
         Text(
             text = text,
             color = AppTheme.colors.onSurface,
-            style = AppTheme.typography.labelMedium,
+            style = AppTheme.typography.labelSmall,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
