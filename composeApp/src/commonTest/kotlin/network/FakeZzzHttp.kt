@@ -39,7 +39,7 @@ class FakeZzzHttp : ZzzHttp {
         stubCoverImageResponse
     }
 
-    override suspend fun requestAgentsList(languagePath: String): AgentsListResponse = if (isError) {
+    override suspend fun requestAgentsList(): AgentsListResponse = if (isError) {
         throw Exception()
     } else {
         stubAgentsListResponse

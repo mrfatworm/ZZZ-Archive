@@ -47,7 +47,7 @@ class HomeViewModel(
         _uiState
             .onStart {
                 updateForumListEveryTenMinutes()
-                checkVersionAndUpdateDatabase()
+                updateCoverImages()
                 updatePixivTopic()
                 updateBanner()
                 updateOfficialNewsEveryTenMinutes()
@@ -56,8 +56,8 @@ class HomeViewModel(
                 observePixivTopic()
             }.stateIn(
                 viewModelScope,
-                SharingStarted.WhileSubscribed(5000L),
-                _uiState.value
+                started = SharingStarted.WhileSubscribed(10000L),
+                initialValue = _uiState.value
             )
 
     fun onAction(action: HomeAction) {
@@ -103,9 +103,9 @@ class HomeViewModel(
             }
     }
 
-    private fun checkVersionAndUpdateDatabase() {
+    private fun updateCoverImages() {
         viewModelScope.launch {
-            updateDatabaseUseCase.updateAssetsIfNewVersionAvailable()
+            updateDatabaseUseCase.updateCoverImages()
         }
     }
 

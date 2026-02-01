@@ -7,22 +7,39 @@ package feature.agent.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import database.UpdateDatabaseUseCase
 import feature.agent.domain.AgentsListUseCase
 import feature.agent.model.AgentsListState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class AgentsListViewModel(private val agentsListUseCase: AgentsListUseCase) : ViewModel() {
+class AgentsListViewModel(
+    private val agentsListUseCase: AgentsListUseCase,
+    private val updateDatabaseUseCase: UpdateDatabaseUseCase
+) : ViewModel() {
     private var agentsListJob: Job? = null
 
     private var _uiState = MutableStateFlow(AgentsListState())
-    val uiState = _uiState.asStateFlow()
+    val uiState = _uiState
+        .onStart {
+            updateAgentsList()
+            observeAgentsList()
+        }
+        .stateIn(
+            viewModelScope,
+            started = SharingStarted.WhileSubscribed(15000L),
+            initialValue = _uiState.value
+        )
 
-    init {
-        observeAgentsList()
+    private fun updateAgentsList() {
+        viewModelScope.launch {
+            updateDatabaseUseCase.updateAgentsList()
+        }
     }
 
     private fun observeAgentsList() {

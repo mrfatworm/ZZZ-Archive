@@ -50,7 +50,7 @@ class HomeViewModelTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @BeforeTest
     fun setup() {
-        coEvery { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() } returns Unit
+        coEvery { updateDatabaseUseCase.updateCoverImages() } returns Unit
         coEvery { bannerUseCase.invoke() } returns Result.success(stubBannerResponse)
         coEvery { bannerUseCase.setBannerIgnoreId(any()) } returns Unit
         coEvery { coverImageUseCase.invoke() } returns flowOf(listOf(stubCoverImageListItemEntity))
@@ -91,7 +91,7 @@ class HomeViewModelTest {
         assertEquals(stubPixivTopicResponse.toPixivArticleList(), state.pixivTopics)
         assertEquals(stubOfficialNewsListItem, state.newsList.first())
         assertEquals(stubAllForumState, state.allForum)
-        coVerify { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() }
+        coVerify { updateDatabaseUseCase.updateCoverImages() }
         coVerify { gameRecordUseCase.getDefaultUid() }
         coVerify { gameRecordUseCase.getDefaultHoYoLabAccount(any()) }
         coVerify { gameRecordUseCase.getGameRecordPeriodically(any()) }

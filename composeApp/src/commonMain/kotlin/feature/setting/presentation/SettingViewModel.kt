@@ -7,7 +7,6 @@ package feature.setting.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import database.UpdateDatabaseUseCase
 import feature.setting.domain.AppInfoUseCase
 import feature.setting.domain.LanguageUseCase
 import feature.setting.domain.ThemeUseCase
@@ -28,8 +27,7 @@ class SettingViewModel(
     private val uiScaleUseCase: UiScaleUseCase,
     private val appInfoUseCase: AppInfoUseCase,
     private val appActionsUseCase: AppActionsUseCase,
-    private val languageUseCase: LanguageUseCase,
-    private val updateDatabaseUseCase: UpdateDatabaseUseCase
+    private val languageUseCase: LanguageUseCase
 ) : ViewModel() {
     private var isDarkThemeJob: Job? = null
     private var languageJob: Job? = null
@@ -138,7 +136,6 @@ class SettingViewModel(
     }
 
     private suspend fun setLanguage(langCode: String) {
-        updateDatabaseUseCase.resetWikiDatabaseVersion()
         languageUseCase.setLanguage(langCode)
     }
 

@@ -54,8 +54,7 @@ class SettingViewModelTest {
                 uiScaleUseCase,
                 appInfoUseCase,
                 appActionsUseCase,
-                languageUseCase,
-                updateDatabaseUseCase
+                languageUseCase
             )
     }
 

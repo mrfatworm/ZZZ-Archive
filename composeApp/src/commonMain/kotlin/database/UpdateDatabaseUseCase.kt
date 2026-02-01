@@ -7,40 +7,16 @@ package database
 
 import feature.agent.data.repository.AgentRepository
 import feature.cover.data.repository.CoverImageRepository
-import feature.home.data.AssetVersionRepository
-import feature.setting.data.SystemConfigRepository
-import kotlinx.coroutines.flow.first
 
 class UpdateDatabaseUseCase(
-    private val assetVersionRepository: AssetVersionRepository,
     private val coverImageRepository: CoverImageRepository,
-    private val agentRepository: AgentRepository,
-    private val systemConfigRepository: SystemConfigRepository
+    private val agentRepository: AgentRepository
 ) {
-    suspend fun updateAssetsIfNewVersionAvailable() {
-        assetVersionRepository.requestAssetVersion().onSuccess { assetVersionResponse ->
-            if (assetVersionResponse.coverImagesList >
-                systemConfigRepository
-                    .getCoverImageDBVersion()
-                    .first()
-            ) {
-                coverImageRepository.requestAndUpdateCoverImagesListDB().onSuccess {
-                    systemConfigRepository.setCoverImageDBVersion(assetVersionResponse.coverImagesList)
-                }
-            }
-            if (assetVersionResponse.agentsList >
-                systemConfigRepository
-                    .getAgentListDBVersion()
-                    .first()
-            ) {
-                agentRepository.requestAndUpdateAgentsListDB().onSuccess {
-                    systemConfigRepository.setAgentListDBVersion(assetVersionResponse.agentsList)
-                }
-            }
-        }
+    suspend fun updateCoverImages() {
+        coverImageRepository.requestAndUpdateCoverImagesListDB()
     }
 
-    suspend fun resetWikiDatabaseVersion() {
-        systemConfigRepository.setAgentListDBVersion(0)
+    suspend fun updateAgentsList() {
+        agentRepository.requestAndUpdateAgentsListDB()
     }
 }

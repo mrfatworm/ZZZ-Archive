@@ -17,11 +17,11 @@ class FakeAgentRepository : AgentRepository {
         this.isError = isError
     }
 
-    override suspend fun getAgentsList(languagePath: String): Flow<List<AgentListItem>> = flow {
+    override suspend fun getAgentsList(): Flow<List<AgentListItem>> = flow {
         emit(stubAgentsList)
     }
 
-    override suspend fun requestAndUpdateAgentsListDB(languagePath: String): Result<Unit> = if (isError) {
+    override suspend fun requestAndUpdateAgentsListDB(): Result<Unit> = if (isError) {
         Result.failure(Exception())
     } else {
         Result.success(Unit)

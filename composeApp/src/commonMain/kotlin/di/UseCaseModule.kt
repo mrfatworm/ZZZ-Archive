@@ -26,7 +26,7 @@ val useCaseModule = module {
     single<AppInfoUseCase> { AppInfoUseCase() }
     single<ThemeUseCase> { ThemeUseCase(get()) }
     single<UpdateDatabaseUseCase> {
-        UpdateDatabaseUseCase(get(), get(), get(), get())
+        UpdateDatabaseUseCase(get(), get())
     }
     single<UiScaleUseCase> { UiScaleUseCase(get()) }
     single<HoYoLabManageUseCase> { HoYoLabManageUseCase(get(), get(), get()) }
