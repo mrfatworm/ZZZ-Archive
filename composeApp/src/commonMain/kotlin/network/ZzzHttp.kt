@@ -17,5 +17,5 @@ interface ZzzHttp {
 
     suspend fun requestBanner(languagePath: String): BannerResponse
 
-    suspend fun requestAgentsList(languagePath: String): AgentsListResponse
+    suspend fun requestAgentsList(): AgentsListResponse
 }

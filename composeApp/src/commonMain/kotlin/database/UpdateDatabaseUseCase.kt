@@ -9,18 +9,15 @@ import feature.agent.data.repository.AgentRepository
 import feature.cover.data.repository.CoverImageRepository
 import feature.home.data.AssetVersionRepository
 import feature.setting.data.SystemConfigRepository
-import feature.setting.domain.LanguageUseCase
 import kotlinx.coroutines.flow.first
 
 class UpdateDatabaseUseCase(
     private val assetVersionRepository: AssetVersionRepository,
     private val coverImageRepository: CoverImageRepository,
     private val agentRepository: AgentRepository,
-    private val systemConfigRepository: SystemConfigRepository,
-    private val languageUseCase: LanguageUseCase
+    private val systemConfigRepository: SystemConfigRepository
 ) {
     suspend fun updateAssetsIfNewVersionAvailable() {
-        val language = languageUseCase.getLanguage().first().officialCode
         assetVersionRepository.requestAssetVersion().onSuccess { assetVersionResponse ->
             if (assetVersionResponse.coverImagesList >
                 systemConfigRepository
@@ -36,7 +33,7 @@ class UpdateDatabaseUseCase(
                     .getAgentListDBVersion()
                     .first()
             ) {
-                agentRepository.requestAndUpdateAgentsListDB(language).onSuccess {
+                agentRepository.requestAndUpdateAgentsListDB().onSuccess {
                     systemConfigRepository.setAgentListDBVersion(assetVersionResponse.agentsList)
                 }
             }

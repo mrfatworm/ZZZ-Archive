@@ -15,19 +15,19 @@ import kotlinx.coroutines.flow.map
 import network.ZzzHttp
 
 class AgentRepositoryImpl(private val httpClient: ZzzHttp, private val agentsListDB: AgentsListDao) : AgentRepository {
-    override suspend fun getAgentsList(languagePath: String): Flow<List<AgentListItem>> {
+    override suspend fun getAgentsList(): Flow<List<AgentListItem>> {
         val cachedAgentsList = agentsListDB.getAgentsList()
         if (cachedAgentsList.first().isEmpty()) {
-            requestAndUpdateAgentsListDB(languagePath)
+            requestAndUpdateAgentsListDB()
         }
         return agentsListDB.getAgentsList().map { localAgentsList ->
             localAgentsList.map { it.toAgentListItem() }.reversed()
         }
     }
 
-    override suspend fun requestAndUpdateAgentsListDB(languagePath: String): Result<Unit> {
+    override suspend fun requestAndUpdateAgentsListDB(): Result<Unit> {
         try {
-            val result = httpClient.requestAgentsList(languagePath)
+            val result = httpClient.requestAgentsList()
             agentsListDB.setAgentsList(result.agents.map { it.toAgentsListItemEntity() })
             return Result.success(Unit)
         } catch (e: Exception) {
