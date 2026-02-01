@@ -8,6 +8,7 @@ package feature.agent.model
 import com.mrfatworm.zzzarchive.ZzzConfig
 import org.jetbrains.compose.resources.StringResource
 import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.angels_of_delusion
 import zzzarchive.composeapp.generated.resources.belobog_heavy_industries
 import zzzarchive.composeapp.generated.resources.criminal_investigation_special_response_team
 import zzzarchive.composeapp.generated.resources.gentle_house
@@ -38,6 +39,7 @@ data class Faction(val id: Int) {
         11 -> Res.string.yunkui_summit
         12 -> Res.string.spook_shack
         13 -> Res.string.krampus_compliance_authority
+        14 -> Res.string.angels_of_delusion
         else -> Res.string.unknown
     }
 
