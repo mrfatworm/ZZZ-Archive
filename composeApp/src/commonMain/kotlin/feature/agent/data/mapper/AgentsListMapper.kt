@@ -27,7 +27,8 @@ fun AgentListItemResponse.toAgentsListItemEntity(path: String = ZzzConfig.ASSET_
         attribute = attribute.orEmpty(),
         factionId = factionId ?: 0,
         materialId = material ?: 0,
-        weeklyMaterialId = weeklyMaterial ?: 0
+        weeklyMaterialId = weeklyMaterial ?: 0,
+        portraitCount = portraitCount ?: 1
     )
 
 fun AgentsListItemEntity.toAgentListItem(): AgentListItem = AgentListItem(
@@ -66,7 +67,8 @@ fun AgentsListItemEntity.toAgentListItem(): AgentListItem = AgentListItem(
         AgentSpecialty.Defense -> listOf(44, 45, 46)
         AgentSpecialty.Rupture -> listOf(72, 73, 74)
         AgentSpecialty.None -> emptyList()
-    }.map { getMaterialUrl(id = it) }
+    }.map { getMaterialUrl(id = it) },
+    portraitCount = portraitCount
 )
 
 private fun getMaterialUrl(

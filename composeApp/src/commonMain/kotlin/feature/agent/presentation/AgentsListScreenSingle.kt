@@ -21,6 +21,6 @@ fun AgentsListScreenSingle(
     AgentsList(
         modifier = Modifier.fillMaxSize().padding(horizontalSafePadding()),
         uiState = uiState,
-        onGalleryClick = { onAction(AgentsListAction.ClickGallery(it)) }
+        onGalleryClick = { id, portraitCount -> onAction(AgentsListAction.ClickGallery(id, portraitCount)) }
     )
 }

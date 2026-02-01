@@ -34,5 +34,5 @@ sealed interface Screen {
     data class MyAgentDetail(val id: Int) : Screen
 
     @Serializable
-    data class AgentGallery(val id: Int) : Screen
+    data class AgentGallery(val id: Int, val portraitCount: Int) : Screen
 }

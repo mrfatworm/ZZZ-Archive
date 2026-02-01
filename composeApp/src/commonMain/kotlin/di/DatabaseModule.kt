@@ -12,6 +12,7 @@ val databaseModule = module {
         get<RoomDatabaseFactory>()
             .createAgentListDatabase()
             .setDriver(BundledSQLiteDriver())
+            .fallbackToDestructiveMigration(true)
             .build()
     }
     single {

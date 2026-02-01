@@ -32,7 +32,7 @@ fun AgentsListScreenDual(
         AgentsList(
             modifier = Modifier.weight(0.7f),
             uiState = uiState,
-            onGalleryClick = { onAction(AgentsListAction.ClickGallery(it)) }
+            onGalleryClick = { id, portraitCount -> onAction(AgentsListAction.ClickGallery(id, portraitCount)) }
         )
         LazyColumn(
             modifier = Modifier.weight(0.3f),

@@ -65,11 +65,16 @@ import zzzarchive.composeapp.generated.resources.ic_arrow_back
 @Composable
 fun AgentGalleryScreen(
     agentId: Int,
+    portraitCount: Int,
     onBackClick: () -> Unit
 ) {
     val path = ZzzConfig.ASSET_PATH
+    val extraPortraitImages = (1 until portraitCount).map { i ->
+        "https://raw.githubusercontent.com/$path/Agent/Portrait/$agentId-$i.webp"
+    }
     val imageUrls = listOf(
-        "https://raw.githubusercontent.com/$path/Agent/Portrait/$agentId.webp",
+        "https://raw.githubusercontent.com/$path/Agent/Portrait/$agentId.webp"
+    ) + extraPortraitImages + listOf(
         "https://raw.githubusercontent.com/$path/Agent/Mindscape/Partial/$agentId.webp",
         "https://raw.githubusercontent.com/$path/Agent/Mindscape/Full/$agentId.webp",
         "https://raw.githubusercontent.com/$path/W-Engine/Match-Agent/$agentId.webp"

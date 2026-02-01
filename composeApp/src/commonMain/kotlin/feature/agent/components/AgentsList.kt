@@ -37,7 +37,7 @@ fun AgentsList(
     modifier: Modifier,
     uiState: AgentsListState,
     lazyGridState: LazyGridState = rememberLazyGridState(),
-    onGalleryClick: (Int) -> Unit
+    onGalleryClick: (Int, Int) -> Unit
 ) {
     var isShowMaterialDialog by remember { mutableStateOf(false) }
     var selectedAgent by remember { mutableStateOf(stubAgentsList[0]) }
@@ -118,7 +118,7 @@ fun AgentsList(
             wEngineMaterialUrls = selectedAgent.wEngineMaterialUrls,
             onGalleryClick = {
                 isShowMaterialDialog = false
-                onGalleryClick(selectedAgent.id)
+                onGalleryClick(selectedAgent.id, selectedAgent.portraitCount)
             },
             onDismiss = { isShowMaterialDialog = false }
         )

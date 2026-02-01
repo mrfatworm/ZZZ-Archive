@@ -37,7 +37,7 @@ import zzzarchive.composeapp.generated.resources.ic_filter_filled
 @Composable
 fun AgentsListScreen(
     onAgentClick: (Int) -> Unit,
-    onGalleryClick: (Int) -> Unit,
+    onGalleryClick: (Int, Int) -> Unit,
     onBackClick: () -> Unit
 ) {
     val viewModel: AgentsListViewModel = koinViewModel()
@@ -51,7 +51,7 @@ fun AgentsListScreen(
                 }
 
                 is AgentsListAction.ClickGallery -> {
-                    onGalleryClick(action.agentId)
+                    onGalleryClick(action.agentId, action.portraitCount)
                 }
 
                 AgentsListAction.ClickBack -> onBackClick()

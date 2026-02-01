@@ -23,8 +23,8 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
     composable<Screen.AgentsList> {
         AgentsListScreen(onAgentClick = { id ->
             navActions.navigationTo(Screen.AgentDetail(id))
-        }, onGalleryClick = { id ->
-            navActions.navigationTo(Screen.AgentGallery(id))
+        }, onGalleryClick = { id, portraitCount ->
+            navActions.navigationTo(Screen.AgentGallery(id, portraitCount))
         }, onBackClick = {
             navActions.back()
         })
@@ -34,6 +34,7 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
         val args = it.toRoute<Screen.AgentGallery>()
         AgentGalleryScreen(
             agentId = args.id,
+            portraitCount = args.portraitCount,
             onBackClick = {
                 navActions.back()
             }

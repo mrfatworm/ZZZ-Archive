@@ -22,7 +22,8 @@ data class AgentListItem(
     val weeklyMaterialUrl: String,
     val skillMaterialUrls: List<String>,
     val levelMaterialUrls: List<String>,
-    val wEngineMaterialUrls: List<String>
+    val wEngineMaterialUrls: List<String>,
+    val portraitCount: Int = 1
 )
 
 @Suppress("ktlint:standard:max-line-length")

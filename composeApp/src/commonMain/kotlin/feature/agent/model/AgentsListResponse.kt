@@ -24,7 +24,9 @@ data class AgentListItemResponse(
     val factionId: Int? = null,
     val material: Int? = null,
     @SerialName("weekly_material")
-    val weeklyMaterial: Int? = null
+    val weeklyMaterial: Int? = null,
+    @SerialName("portrait_count")
+    val portraitCount: Int? = null
 )
 
 val stubAgentsListResponse =

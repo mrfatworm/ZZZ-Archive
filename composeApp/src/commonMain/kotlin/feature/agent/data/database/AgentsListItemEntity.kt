@@ -19,7 +19,8 @@ data class AgentsListItemEntity(
     val attribute: String,
     val factionId: Int,
     val materialId: Int,
-    val weeklyMaterialId: Int
+    val weeklyMaterialId: Int,
+    val portraitCount: Int
 )
 
 @Suppress("ktlint:standard:max-line-length")
@@ -34,5 +35,6 @@ val stubAgentsListItemEntity =
         attribute = "physical",
         factionId = 1,
         materialId = 0,
-        weeklyMaterialId = 0
+        weeklyMaterialId = 0,
+        portraitCount = 1
     )
