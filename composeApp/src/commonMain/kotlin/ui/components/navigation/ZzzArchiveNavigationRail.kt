@@ -9,11 +9,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.verticalScroll
@@ -57,6 +62,7 @@ fun ZzzArchiveNavigationRail(
         modifier
             .background(color = AppTheme.colors.surfaceContainer, shape = AppTheme.shape.r200)
             .widthIn(min = 80.dp)
+            .windowInsetsPadding(WindowInsets.displayCutout.only(WindowInsetsSides.Start))
             .padding(verticalSafePadding())
             .selectableGroup(),
         horizontalAlignment = Alignment.CenterHorizontally,
