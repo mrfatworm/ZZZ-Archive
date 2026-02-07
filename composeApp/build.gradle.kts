@@ -118,8 +118,8 @@ dependencies {
     ksp(libs.androidx.room.compiler)
 }
 
-val zzzVersionName = "1.6.4"
-val zzzVersionCode = 11
+val zzzVersionName = "1.7.0"
+val zzzVersionCode = 12
 val zzzPackageId = "com.mrfatworm.zzzarchive"
 
 android {
