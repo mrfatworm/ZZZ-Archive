@@ -19,7 +19,6 @@ ZZZ Archive is a companion app for the action game Zenless Zone Zero, where user
 <a href="https://github.com/mrfatworm/ZZZ-Archive/releases/latest"><img alt="Get apk on GitHub" src="docs/screenshot/img_github_apk.webp" height="48px"/></a>
 <a href="https://apps.apple.com/tw/app/zzz-archive/id6738107658"><img alt="Get it on App Store (iOS)" src="docs/screenshot/img_app_store_ios.webp" height="48px"/></a>
 <a href="https://apps.microsoft.com/detail/9p5h3ccmzl9z"><img alt="Get it on Microsoft Store" src="docs/screenshot/img_microoft_store.webp" height="48px"/></a>
-<a href="https://apps.apple.com/tw/app/zzz-archive/id6738107658"><img alt="Get it on App Store (macOS)" src="docs/screenshot/img_app_store_mac.webp" height="48px"/></a>
 
 ## UI Design
 
