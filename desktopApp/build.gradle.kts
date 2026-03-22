@@ -40,7 +40,7 @@ dependencies {
 val zzzVersionName = "1.7.0"
 val zzzVersionCode = 12
 val zzzPackageId = "com.mrfatworm.zzzarchive"
-val isLive = System.getenv("VARIANT") == "Live"
+val isLive = providers.environmentVariable("VARIANT").orNull == "Live"
 val desktopPackageId = if (isLive) zzzPackageId else "$zzzPackageId.dev"
 val macExtraPlistKeys: String
     get() = """

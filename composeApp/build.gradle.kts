@@ -1,6 +1,4 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import java.util.Properties
-import java.util.regex.Pattern
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -129,28 +127,31 @@ val zzzPackageId = "com.mrfatworm.zzzarchive"
 fun Project.getAndroidBuildVariantOrNull(): String? {
     val variants = setOf("Dev", "Live")
     val taskRequestsStr = gradle.startParameter.taskRequests.toString()
-    val pattern: Pattern = if (taskRequestsStr.contains("assemble")) {
-        Pattern.compile("assemble(\\w+)(Release|Debug)")
+    val regex = if ("assemble" in taskRequestsStr) {
+        Regex("assemble(\\w+)(Release|Debug)")
     } else {
-        Pattern.compile("bundle(\\w+)(Release|Debug)")
+        Regex("bundle(\\w+)(Release|Debug)")
     }
-    val matcher = pattern.matcher(taskRequestsStr)
-    val variant = if (matcher.find()) matcher.group(1) else null
-    return if (variant in variants) variant else null
+    val variant = regex.find(taskRequestsStr)?.groupValues?.get(1)
+    return variant?.takeIf { it in variants }
 }
 
 fun Project.currentBuildVariant(): String {
     val variants = setOf("Dev", "Live")
     return getAndroidBuildVariantOrNull()
-        ?: System.getenv("VARIANT")?.takeIf { it in variants }
+        ?: providers.environmentVariable("VARIANT").orNull?.takeIf { it in variants }
         ?: "Dev"
 }
 
-val localProperties = project.rootProject.file("local.properties")
-val aesKey: String =
-    Properties().apply { if (localProperties.exists()) load(localProperties.inputStream()) }
-        .getProperty("AES_KEY")
-        ?: "eryuQ00pQZ16die2sfaPerkoGwQVM9jXACLNAMPHM/M=" // Fake key for open-source
+val localPropertiesFile = project.rootProject.file("local.properties")
+val aesKey: String = if (localPropertiesFile.exists()) {
+    localPropertiesFile.readLines()
+        .firstOrNull { it.startsWith("AES_KEY=") }
+        ?.substringAfter("=")
+        ?: "eryuQ00pQZ16die2sfaPerkoGwQVM9jXACLNAMPHM/M="
+} else {
+    "eryuQ00pQZ16die2sfaPerkoGwQVM9jXACLNAMPHM/M=" // Fake key for open-source
+}
 
 buildConfig {
     packageName = zzzPackageId
