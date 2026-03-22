@@ -4,8 +4,6 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinter)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.room)
 }
 
 dependencies {
@@ -19,11 +17,6 @@ dependencies {
     implementation(libs.compose.uiToolingPreview)
     debugImplementation(libs.compose.uiTooling)
     testImplementation(libs.mockk)
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
-
-    ksp(libs.androidx.room.compiler)
 }
 
 android {

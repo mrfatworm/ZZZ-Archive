@@ -1,12 +1,11 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+
 plugins {
     alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinter)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.room)
 }
 
 kotlin {
@@ -29,12 +28,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.swing)
     implementation(libs.cryptography.provider.jdk)
     implementation(libs.compose.uiToolingPreview)
-
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
-
-    ksp(libs.androidx.room.compiler)
 }
 val zzzPackageId = libs.versions.zzzPackageId.get()
 val isLive = providers.environmentVariable("VARIANT").orNull == "Live"
