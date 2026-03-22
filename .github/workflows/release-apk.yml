@@ -31,7 +31,7 @@ jobs:
         run: echo "AES_KEY=${{ secrets.AES_KEY }}" > local.properties
 
       - name: Build Android APK
-        run: ./gradlew :composeApp:assembleLiveRelease
+        run: ./gradlew :androidApp:assembleLiveRelease
 
       - name: Sign Release
         id: sign_app
@@ -39,14 +39,14 @@ jobs:
         env:
           BUILD_TOOLS_VERSION: "34.0.0"
         with:
-          releaseDirectory: composeApp/build/outputs/apk/Live/release
+          releaseDirectory: androidApp/build/outputs/apk/Live/release
           signingKeyBase64: ${{ secrets.SIGNING_KEYSTORE }}
           keyStorePassword: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
           alias: ${{ secrets.SIGNING_KEY_ALIAS }}
           keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
 
       - name: Rename APK
-        run: mv "${{ steps.sign_app.outputs.signedReleaseFile }}" composeApp/build/outputs/apk/Live/release/ZZZ-Archive-${{ inputs.version_tag }}.apk
+        run: mv "${{ steps.sign_app.outputs.signedReleaseFile }}" androidApp/build/outputs/apk/Live/release/ZZZ-Archive-${{ inputs.version_tag }}.apk
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
@@ -54,6 +54,6 @@ jobs:
           tag_name: ${{ inputs.version_tag }}
           name: Release ${{ inputs.version_tag }}
           body_path: docs/release_notes.txt
-          files: composeApp/build/outputs/apk/Live/release/ZZZ-Archive-${{ inputs.version_tag }}.apk
+          files: androidApp/build/outputs/apk/Live/release/ZZZ-Archive-${{ inputs.version_tag }}.apk
           draft: false
           prerelease: false

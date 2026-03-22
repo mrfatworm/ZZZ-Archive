@@ -1,42 +1,18 @@
-import com.codingfeline.buildkonfig.compiler.FieldSpec
-import org.jetbrains.compose.ExperimentalComposeLibrary
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
-import java.util.Properties
-import java.util.regex.Pattern
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinter)
-    alias(libs.plugins.buildKonfig)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.buildConfig)
 }
 
 kotlin {
-    jvmToolchain(17)
-    androidTarget {
-        //https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-test.html
-        @OptIn(ExperimentalKotlinGradlePluginApi::class) instrumentedTestVariant.sourceSetTree.set(
-            KotlinSourceSetTree.test
-        )
-    }
-
-    targets.configureEach {
-        compilations.configureEach {
-            compileTaskProvider.get().compilerOptions {
-                freeCompilerArgs.add("-Xexpect-actual-classes")
-            }
-        }
-    }
-
-    jvm("desktop")
-
     listOf(
         iosX64(), iosArm64(), iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -47,15 +23,30 @@ kotlin {
         }
     }
 
+    jvm("desktop")
+
+    androidLibrary {
+        namespace = "com.mrfatworm.zzzarchive.composeApp"
+        compileSdk = 36
+        minSdk = 26
+
+        androidResources {
+            enable = true
+        }
+        withHostTest {
+            isIncludeAndroidResources = true
+            isReturnDefaultValues = true
+        }
+    }
+
     sourceSets {
         commonMain.dependencies {
-            // wait for BOM
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
+            implementation(libs.compose.runtime)
+            implementation(libs.compose.foundation)
+            implementation(libs.compose.material3)
+            implementation(libs.compose.ui)
+            implementation(libs.compose.components.resources)
+            implementation(libs.compose.uiToolingPreview)
             implementation(libs.navigation.compose)
             implementation(libs.compose.adaptive)
             implementation(libs.kotlinx.coroutines)
@@ -75,25 +66,18 @@ kotlin {
         }
 
         commonTest.dependencies {
-            implementation(kotlin("test-annotations-common"))
             implementation(libs.kotlin.test)
-            @OptIn(ExperimentalComposeLibrary::class) implementation(compose.uiTest)
+            implementation(libs.kotlinx.coroutines.test)
         }
 
-        val desktopMain by getting
+        val androidHostTest by getting
+        androidHostTest.dependencies {
+            implementation(libs.mockk)
+        }
 
         androidMain.dependencies {
-            implementation(compose.preview)
-            implementation(libs.androidx.activity.compose)
-            implementation(libs.koin.android)
-            implementation(libs.koin.compose)
             implementation(libs.ktor.client.okhttp)
-            implementation(libs.androidx.core.splashscreen)
-            implementation(libs.cryptography.provider.jdk)
-        }
-
-        androidUnitTest.dependencies {
-            implementation(libs.mockk)
+            implementation(libs.compose.uiToolingPreview)
         }
 
         iosMain.dependencies {
@@ -101,11 +85,10 @@ kotlin {
             implementation(libs.cryptography.provider.apple)
         }
 
+        val desktopMain by getting
+
         desktopMain.dependencies {
-            implementation(compose.desktop.currentOs)
             implementation(libs.ktor.client.okhttp)
-            implementation(libs.kotlinx.coroutines.swing)
-            implementation(libs.cryptography.provider.jdk)
         }
 
         room {
@@ -114,169 +97,15 @@ kotlin {
     }
 }
 
+compose.resources {
+    publicResClass = true
+}
+
 dependencies {
     ksp(libs.androidx.room.compiler)
+    androidRuntimeClasspath(libs.compose.uiTooling)
 }
 
-val zzzVersionName = "1.7.0"
-val zzzVersionCode = 12
-val zzzPackageId = "com.mrfatworm.zzzarchive"
-
-android {
-    namespace = "com.mrfatworm.zzzarchive"
-    compileSdk = 36
-
-    defaultConfig {
-        applicationId = zzzPackageId
-        minSdk = 26
-        targetSdk = 36
-        versionCode = zzzVersionCode
-        versionName = zzzVersionName
-
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
-            )
-        }
-    }
-
-    flavorDimensions.add("variant")
-    productFlavors {
-        create("Dev") {
-            dimension = "variant"
-            applicationIdSuffix = ".dev"
-            versionNameSuffix = " Beta"
-            resValue("string", "app_name_variant", "ZZZ Archive-Beta")
-        }
-
-        create("Live") {
-            isDefault = true
-            dimension = "variant"
-            resValue("string", "app_name_variant", "ZZZ Archive")
-        }
-    }
-    testOptions {
-        unitTests.isReturnDefaultValues = true
-    }
-}
-
-compose.desktop {
-    application {
-        mainClass = "MainKt"
-
-        val desktopPackageName: String
-        val desktopPackageId: String
-        if ((System.getenv("VARIANT") ?: "") == "Live") {
-            desktopPackageName = "ZZZ Archive"
-            desktopPackageId = zzzPackageId
-        } else {
-            desktopPackageName = "ZZZ Archive Dev"
-            desktopPackageId = "$zzzPackageId.dev"
-        }
-
-        val isAppStoreRelease = project.property("macOsAppStoreRelease").toString().toBoolean()
-
-        nativeDistributions {
-            modules("jdk.unsupported")
-            if (isAppStoreRelease) {
-                appResourcesRootDir.set(project.layout.projectDirectory.dir("resources"))
-            }
-            targetFormats(TargetFormat.Dmg, TargetFormat.Pkg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = desktopPackageName
-            packageVersion = zzzVersionName
-            description = "Zenless Zone Zero Wiki App"
-            copyright = "© 2024 mrfatworm. All rights reserved."
-            linux {
-                iconFile.set(project.file("desktopLogo/Logo.png"))
-            }
-            windows {
-                iconFile.set(project.file("desktopLogo/Logo.ico"))
-            }
-            // Ref: https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/
-            macOS {
-                iconFile.set(project.file("desktopLogo/Logo.icns"))
-                bundleID = desktopPackageId
-                signing {
-                    sign.set(true)
-                    identity.set("JHAN CHENG LI")
-                }
-                minimumSystemVersion = "12.0"
-                appStore = isAppStoreRelease
-
-                if (isAppStoreRelease) {
-                    provisioningProfile.set(project.file("config/macos/embedded.provisionprofile"))
-                    runtimeProvisioningProfile.set(project.file("config/macos/runtime.provisionprofile"))
-                    entitlementsFile.set(project.file("config/macos/entitlements.plist"))
-                    runtimeEntitlementsFile.set(project.file("config/macos/runtime-entitlements.plist"))
-                }
-
-                infoPlist {
-                    extraKeysRawXml = macExtraPlistKeys
-                }
-            }
-        }
-    }
-}
-
-
-val macExtraPlistKeys: String
-    get() = """
-      <key>ITSAppUsesNonExemptEncryption</key>
-      <false/>
-    """.trimIndent()
-
-// Ref: https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/
-project.extra.set("buildkonfig.flavor", currentBuildVariant())
-val localProperties = project.rootProject.file("local.properties")
-val aesKey: String =
-    Properties().apply { load(localProperties.inputStream()) }.getProperty("AES_KEY")
-        ?: "eryuQ00pQZ16die2sfaPerkoGwQVM9jXACLNAMPHM/M=" // Fake key for open-source
-
-buildkonfig {
-    packageName = zzzPackageId
-    objectName = "ZzzConfig"
-    exposeObjectWithName = "ZzzConfig"
-
-    defaultConfigs {
-        buildConfigField(
-            FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset"
-        )
-        buildConfigField(
-            FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api"
-        )
-        buildConfigField(FieldSpec.Type.STRING, "VERSION", "$zzzVersionName-Beta")
-        buildConfigField(FieldSpec.Type.STRING, "AES_KEY", aesKey)
-    }
-
-    defaultConfigs("Dev") {
-        buildConfigField(
-            FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset"
-        )
-        buildConfigField(
-            FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api"
-        )
-        buildConfigField(FieldSpec.Type.STRING, "VERSION", "$zzzVersionName-Beta")
-        buildConfigField(FieldSpec.Type.STRING, "AES_KEY", aesKey)
-    }
-
-    defaultConfigs("Live") {
-        buildConfigField(
-            FieldSpec.Type.STRING, "ASSET_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Asset"
-        )
-        buildConfigField(
-            FieldSpec.Type.STRING, "API_PATH", "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Api"
-        )
-        buildConfigField(FieldSpec.Type.STRING, "VERSION", zzzVersionName)
-        buildConfigField(FieldSpec.Type.STRING, "AES_KEY", aesKey)
-    }
-}
 
 kotlinter {
     ignoreFormatFailures = false
@@ -287,23 +116,55 @@ kotlinter {
 fun Project.getAndroidBuildVariantOrNull(): String? {
     val variants = setOf("Dev", "Live")
     val taskRequestsStr = gradle.startParameter.taskRequests.toString()
-    val pattern: Pattern = if (taskRequestsStr.contains("assemble")) {
-        Pattern.compile("assemble(\\w+)(Release|Debug)")
+    val regex = if ("assemble" in taskRequestsStr) {
+        Regex("assemble(\\w+)(Release|Debug)")
     } else {
-        Pattern.compile("bundle(\\w+)(Release|Debug)")
+        Regex("bundle(\\w+)(Release|Debug)")
     }
-
-    val matcher = pattern.matcher(taskRequestsStr)
-    val variant = if (matcher.find()) matcher.group(1) else null
-    return if (variant in variants) {
-        variant
-    } else {
-        null
-    }
+    val variant = regex.find(taskRequestsStr)?.groupValues?.get(1)
+    return variant?.takeIf { it in variants }
 }
 
-private fun Project.currentBuildVariant(): String {
+fun Project.currentBuildVariant(): String {
     val variants = setOf("Dev", "Live")
-    return getAndroidBuildVariantOrNull() ?: System.getenv()["VARIANT"].toString()
-        .takeIf { it in variants } ?: "Dev"
+    return getAndroidBuildVariantOrNull()
+        ?: providers.environmentVariable("VARIANT").orNull?.takeIf { it in variants }
+        ?: "Dev"
 }
+
+val localPropertiesFile = project.rootProject.file("local.properties")
+val aesKey: String = if (localPropertiesFile.exists()) {
+    localPropertiesFile.readLines()
+        .firstOrNull { it.startsWith("AES_KEY=") }
+        ?.substringAfter("=")
+        ?: "eryuQ00pQZ16die2sfaPerkoGwQVM9jXACLNAMPHM/M="
+} else {
+    "eryuQ00pQZ16die2sfaPerkoGwQVM9jXACLNAMPHM/M=" // Fake key for open-source
+}
+
+val zzzVersionName = libs.versions.zzzVersionName.get()
+
+buildConfig {
+    packageName = libs.versions.zzzPackageId.get()
+    className = "ZzzConfig"
+
+    val variant = currentBuildVariant()
+    val isLive = variant == "Live"
+
+    buildConfigField<String>(
+        "ASSET_PATH",
+        if (isLive) "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Asset"
+        else "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset"
+    )
+    buildConfigField<String>(
+        "API_PATH",
+        if (isLive) "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Api"
+        else "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api"
+    )
+    buildConfigField<String>(
+        "VERSION",
+        if (isLive) zzzVersionName else "$zzzVersionName-Beta"
+    )
+    buildConfigField<String>("AES_KEY", aesKey)
+}
+

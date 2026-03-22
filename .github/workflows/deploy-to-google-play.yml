@@ -31,13 +31,13 @@ jobs:
 
       # Build the Android AAB (or APK if preferred)
       - name: Build Android AAB
-        run: ./gradlew :composeApp:bundleLiveRelease
+        run: ./gradlew :androidApp:bundleLiveRelease
 
       # Sign KeyStore
       - name: Sign Release
         uses: r0adkll/sign-android-release@v1
         with:
-          releaseDirectory: composeApp/build/outputs/bundle/LiveRelease
+          releaseDirectory: androidApp/build/outputs/bundle/LiveRelease
           signingKeyBase64: ${{ secrets.SIGNING_KEYSTORE }}
           keyStorePassword: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
           alias: ${{ secrets.SIGNING_KEY_ALIAS }}
@@ -49,7 +49,7 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
           packageName: com.mrfatworm.zzzarchive
-          releaseFiles: composeApp/build/outputs/bundle/LiveRelease/composeApp-Live-release.aab
+          releaseFiles: androidApp/build/outputs/bundle/LiveRelease/androidApp-Live-release.aab
           track: internal
           whatsNewDirectory: whatsNew/
           status: completed

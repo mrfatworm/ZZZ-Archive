@@ -47,10 +47,10 @@ instructions for contributing to this Kotlin Multiplatform project.
 2. **Run on Desktop**:
    ```bash
    # Regular run
-   ./gradlew run
+   ./gradlew :desktopApp:run
    
    # Hot reload development
-   ./gradlew desktopRun
+   ./gradlew :desktopApp:hotRun
    ```
 
 ## Code Quality Standards

@@ -1,5 +1,5 @@
-[![Kotlin](https://img.shields.io/badge/Kotlin-2.2.21-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
-[![ComposeMultiplatform](https://img.shields.io/badge/Compose_Multiplatform-1.10.0.beta02-blue.svg?style=flat)](https://www.jetbrains.com/compose-multiplatform/)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.3.20-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
+[![ComposeMultiplatform](https://img.shields.io/badge/Compose_Multiplatform-1.10.3-blue.svg?style=flat)](https://www.jetbrains.com/compose-multiplatform/)
 
 ![ZZZArchiveBanner](/docs/screenshot/github_cover.webp)
 
@@ -32,10 +32,10 @@ ZZZ Archive 是動作遊戲 "絕區零" 的維基應用程式，使用者可查�
 
 ```bash
    # Regular run
-   ./gradlew run
+   ./gradlew :desktopApp:run
    
    # Hot reload development
-   ./gradlew hotRunDesktop
+   ./gradlew :desktopApp:hotRun
    ```
 
 ## 參與專案開發
@@ -56,7 +56,7 @@ ZZZ Archive 是動作遊戲 "絕區零" 的維基應用程式，使用者可查�
 - Koin
 - Ktor
 - Coil
-- BuildKonfig
+- BuildConfig
 - Okio I/O
 
 ## 多語系支援
@@ -73,6 +73,7 @@ ZZZ Archive 是動作遊戲 "絕區零" 的維基應用程式，使用者可查�
 - [Android Developer Guidelines](https://developer.android.com/)
 - [Android Open Source Project](https://github.com/android)
 - [Compose Multiplatform Wizard](https://github.com/terrakok/Compose-Multiplatform-Wizard)
+- [BuildConfig](https://github.com/gmazzo/gradle-buildconfig-plugin)
 - [BuildKonfig for KMP](https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/)
 - [Release macOS App](https://www.marcogomiero.com/posts/2024/compose-macos-app-store/)
 - [Design System](https://github.com/felipecastilhos)
