@@ -94,6 +94,9 @@ kotlin {
     }
 }
 
+compose.resources {
+    publicResClass = true
+}
 
 dependencies {
     ksp(libs.androidx.room.compiler)
