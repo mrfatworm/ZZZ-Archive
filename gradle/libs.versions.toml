@@ -1,4 +1,7 @@
 [versions]
+zzzVersionName = "1.7.0"
+zzzVersionCode = "12"
+zzzPackageId = "com.mrfatworm.zzzarchive"
 agp = "9.1.0"
 androidx-activityCompose = "1.13.0"
 androidx-lifecycle = "2.10.0"

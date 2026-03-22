@@ -120,10 +120,6 @@ kotlinter {
     reporters = arrayOf("checkstyle", "plain")
 }
 
-val zzzVersionName = "1.7.0"
-val zzzVersionCode = 12
-val zzzPackageId = "com.mrfatworm.zzzarchive"
-
 fun Project.getAndroidBuildVariantOrNull(): String? {
     val variants = setOf("Dev", "Live")
     val taskRequestsStr = gradle.startParameter.taskRequests.toString()
@@ -153,8 +149,10 @@ val aesKey: String = if (localPropertiesFile.exists()) {
     "eryuQ00pQZ16die2sfaPerkoGwQVM9jXACLNAMPHM/M=" // Fake key for open-source
 }
 
+val zzzVersionName = libs.versions.zzzVersionName.get()
+
 buildConfig {
-    packageName = zzzPackageId
+    packageName = libs.versions.zzzPackageId.get()
     className = "ZzzConfig"
 
     val variant = currentBuildVariant()

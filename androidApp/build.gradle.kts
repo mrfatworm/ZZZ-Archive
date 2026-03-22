@@ -26,20 +26,16 @@ dependencies {
     ksp(libs.androidx.room.compiler)
 }
 
-val zzzVersionName = "1.7.0"
-val zzzVersionCode = 12
-val zzzPackageId = "com.mrfatworm.zzzarchive"
-
 android {
     namespace = "com.mrfatworm.zzzarchive"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = zzzPackageId
+        applicationId = libs.versions.zzzPackageId.get()
         minSdk = 26
         targetSdk = 36
-        versionCode = zzzVersionCode
-        versionName = zzzVersionName
+        versionCode = libs.versions.zzzVersionCode.get().toInt()
+        versionName = libs.versions.zzzVersionName.get()
     }
 
     flavorDimensions.add("variant")

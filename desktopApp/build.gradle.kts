@@ -36,10 +36,7 @@ dependencies {
 
     ksp(libs.androidx.room.compiler)
 }
-
-val zzzVersionName = "1.7.0"
-val zzzVersionCode = 12
-val zzzPackageId = "com.mrfatworm.zzzarchive"
+val zzzPackageId = libs.versions.zzzPackageId.get()
 val isLive = providers.environmentVariable("VARIANT").orNull == "Live"
 val desktopPackageId = if (isLive) zzzPackageId else "$zzzPackageId.dev"
 val macExtraPlistKeys: String
@@ -61,7 +58,7 @@ compose.desktop {
             }
             targetFormats(TargetFormat.Dmg, TargetFormat.Pkg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = desktopPackageId
-            packageVersion = zzzVersionName
+            packageVersion = libs.versions.zzzVersionName.get()
             description = "Zenless Zone Zero Wiki App"
             copyright = "© 2024 mrfatworm. All rights reserved."
             linux {
