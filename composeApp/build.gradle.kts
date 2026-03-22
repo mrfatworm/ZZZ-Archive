@@ -1,4 +1,6 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
+import java.util.regex.Pattern
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -8,6 +10,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.buildConfig)
 }
 
 kotlin {
@@ -70,6 +73,7 @@ kotlin {
         }
 
         androidMain.dependencies {
+            implementation(libs.ktor.client.okhttp)
             implementation(libs.compose.uiToolingPreview)
         }
 
@@ -78,11 +82,18 @@ kotlin {
             implementation(libs.cryptography.provider.apple)
         }
 
+        val desktopMain by getting
+
+        desktopMain.dependencies {
+            implementation(libs.ktor.client.okhttp)
+        }
+
         room {
             schemaDirectory("$projectDir/schemas")
         }
     }
 }
+
 
 dependencies {
     ksp(libs.androidx.room.compiler)
@@ -92,4 +103,54 @@ dependencies {
 val zzzVersionName = "1.7.0"
 val zzzVersionCode = 12
 val zzzPackageId = "com.mrfatworm.zzzarchive"
+
+fun Project.getAndroidBuildVariantOrNull(): String? {
+    val variants = setOf("Dev", "Live")
+    val taskRequestsStr = gradle.startParameter.taskRequests.toString()
+    val pattern: Pattern = if (taskRequestsStr.contains("assemble")) {
+        Pattern.compile("assemble(\\w+)(Release|Debug)")
+    } else {
+        Pattern.compile("bundle(\\w+)(Release|Debug)")
+    }
+    val matcher = pattern.matcher(taskRequestsStr)
+    val variant = if (matcher.find()) matcher.group(1) else null
+    return if (variant in variants) variant else null
+}
+
+fun Project.currentBuildVariant(): String {
+    val variants = setOf("Dev", "Live")
+    return getAndroidBuildVariantOrNull()
+        ?: System.getenv("VARIANT")?.takeIf { it in variants }
+        ?: "Dev"
+}
+
+val localProperties = project.rootProject.file("local.properties")
+val aesKey: String =
+    Properties().apply { if (localProperties.exists()) load(localProperties.inputStream()) }
+        .getProperty("AES_KEY")
+        ?: "eryuQ00pQZ16die2sfaPerkoGwQVM9jXACLNAMPHM/M=" // Fake key for open-source
+
+buildConfig {
+    packageName = zzzPackageId
+    className = "ZzzConfig"
+
+    val variant = currentBuildVariant()
+    val isLive = variant == "Live"
+
+    buildConfigField<String>(
+        "ASSET_PATH",
+        if (isLive) "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Asset"
+        else "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset"
+    )
+    buildConfigField<String>(
+        "API_PATH",
+        if (isLive) "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Api"
+        else "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api"
+    )
+    buildConfigField<String>(
+        "VERSION",
+        if (isLive) zzzVersionName else "$zzzVersionName-Beta"
+    )
+    buildConfigField<String>("AES_KEY", aesKey)
+}
 

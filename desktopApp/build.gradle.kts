@@ -12,7 +12,8 @@ dependencies {
     implementation(projects.composeApp)
 
     implementation(compose.desktop.currentOs)
-    implementation(libs.ktor.client.okhttp)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.components.resources)
     implementation(libs.kotlinx.coroutines.swing)
     implementation(libs.cryptography.provider.jdk)
     implementation(libs.compose.uiToolingPreview)
@@ -27,6 +28,8 @@ dependencies {
 val zzzVersionName = "1.7.0"
 val zzzVersionCode = 12
 val zzzPackageId = "com.mrfatworm.zzzarchive"
+val isLive = System.getenv("VARIANT") == "Live"
+val desktopPackageId = if (isLive) zzzPackageId else "$zzzPackageId.dev"
 val macExtraPlistKeys: String
     get() = """
       <key>ITSAppUsesNonExemptEncryption</key>
@@ -45,7 +48,7 @@ compose.desktop {
                 appResourcesRootDir.set(project.layout.projectDirectory.dir("resources"))
             }
             targetFormats(TargetFormat.Dmg, TargetFormat.Pkg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = zzzPackageId
+            packageName = desktopPackageId
             packageVersion = zzzVersionName
             description = "Zenless Zone Zero Wiki App"
             copyright = "© 2024 mrfatworm. All rights reserved."
@@ -58,7 +61,7 @@ compose.desktop {
             // Ref: https://sujanpoudel.me/blogs/managing-configurations-for-different-environments-in-kmp/
             macOS {
                 iconFile.set(project.file("desktopLogo/Logo.icns"))
-                bundleID = zzzPackageId
+                bundleID = desktopPackageId
                 signing {
                     sign.set(true)
                     identity.set("JHAN CHENG LI")

@@ -14,7 +14,6 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
-    implementation(libs.ktor.client.okhttp)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.cryptography.provider.jdk)
     implementation(libs.compose.uiToolingPreview)
@@ -41,6 +40,25 @@ android {
         targetSdk = 36
         versionCode = zzzVersionCode
         versionName = zzzVersionName
+    }
+
+    flavorDimensions.add("variant")
+    productFlavors {
+        create("Dev") {
+            isDefault = true
+            dimension = "variant"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = " Beta"
+            resValue("string", "app_name_variant", "ZZZ Archive-Beta")
+        }
+        create("Live") {
+            dimension = "variant"
+            resValue("string", "app_name_variant", "ZZZ Archive")
+        }
+    }
+
+    buildFeatures {
+        resValues = true
     }
 
     buildTypes {
