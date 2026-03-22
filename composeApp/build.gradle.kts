@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlinter)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
@@ -74,6 +75,7 @@ kotlin {
 
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(libs.kotlinx.coroutines.test)
         }
 
         androidMain.dependencies {
@@ -105,6 +107,13 @@ compose.resources {
 dependencies {
     ksp(libs.androidx.room.compiler)
     androidRuntimeClasspath(libs.compose.uiTooling)
+}
+
+
+kotlinter {
+    ignoreFormatFailures = false
+    ignoreLintFailures = false
+    reporters = arrayOf("checkstyle", "plain")
 }
 
 val zzzVersionName = "1.7.0"
