@@ -24,7 +24,11 @@ kotlin {
         }
     }
 
-    jvm("desktop")
+    jvm("desktop") {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_17
+        }
+    }
 
     androidLibrary {
         namespace = "com.mrfatworm.zzzarchive.composeApp"
