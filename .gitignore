@@ -20,8 +20,8 @@ captures
 /composeApp/Live/release/*
 /androidApp/Dev/release/*
 /androidApp/Live/release/*
-/composeApp/config/macos/embedded.provisionprofile
-/composeApp/config/macos/runtime.provisionprofile
-/composeApp/config/macos/entitlements.plist
-/composeApp/config/macos/runtime-entitlements.plist
+/desktopApp/config/macos/embedded.provisionprofile
+/desktopApp/config/macos/runtime.provisionprofile
+/desktopApp/config/macos/entitlements.plist
+/desktopApp/config/macos/runtime-entitlements.plist
 /composeApp/schemas/*
