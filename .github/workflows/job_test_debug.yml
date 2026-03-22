@@ -26,4 +26,4 @@ jobs:
 
       # Run Tests Build
     - name: Run tests
-      run: ./gradlew :composeApp:testDevDebugUnitTest
+      run: ./gradlew :composeApp:testAndroidHostTest
