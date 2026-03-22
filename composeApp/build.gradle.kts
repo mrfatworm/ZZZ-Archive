@@ -23,20 +23,13 @@ kotlin {
         }
     }
 
-    jvm("desktop") {
-        compilerOptions {
-            jvmTarget = JvmTarget.JVM_17
-        }
-    }
+    jvm("desktop")
 
     androidLibrary {
         namespace = "com.mrfatworm.zzzarchive.composeApp"
         compileSdk = 36
         minSdk = 26
 
-        compilerOptions {
-            jvmTarget = JvmTarget.JVM_17
-        }
         androidResources {
             enable = true
         }
