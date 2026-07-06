@@ -25,7 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import coil3.compose.SubcomposeAsyncImage
+import com.github.panpf.sketch.SubcomposeAsyncImage
 import feature.hoyolab.model.SyncedAccountsListItem
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -105,7 +105,7 @@ private fun BasicInfo(
                 Modifier
                     .size(AppTheme.size.s48)
                     .clip(CircleShape),
-            model = uiState.profileUrl,
+            uri = uiState.profileUrl,
             contentDescription = stringResource(Res.string.user_profile_image),
             error = {
                 ImageNotFound()

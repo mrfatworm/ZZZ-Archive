@@ -1,63 +1,43 @@
 /*
  * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * Modify from Coil3 sample
- * Ref: https://proandroiddev.com/coil-for-compose-multiplatform-5745ea76356f
  * License: MIT License
  */
 
 package utils
 
-import coil3.ImageLoader
-import coil3.PlatformContext
-import coil3.disk.DiskCache
-import coil3.memory.MemoryCache
-import coil3.request.CachePolicy
-import coil3.request.crossfade
-import coil3.util.DebugLogger
-import okio.FileSystem
+import com.github.panpf.sketch.PlatformContext
+import com.github.panpf.sketch.Sketch
+import com.github.panpf.sketch.cache.DiskCache
+import com.github.panpf.sketch.cache.MemoryCache
+import com.github.panpf.sketch.decode.supportAnimatedWebp
+import com.github.panpf.sketch.request.ImageOptions
+import com.github.panpf.sketch.util.Logger
 
-fun imageLoaderMemoryCache(
+fun newSketch(
     context: PlatformContext,
     debug: Boolean = false
-): ImageLoader = ImageLoader
-    .Builder(context)
-    .memoryCachePolicy(CachePolicy.ENABLED)
-    .memoryCache {
-        MemoryCache
-            .Builder()
-            // Set the max size to 25% of the app's available memory.
-            .maxSizePercent(context, percent = 0.25)
-            .strongReferencesEnabled(true)
+): Sketch = Sketch(context) {
+    // Set the memory cache to 25% of the app's available memory.
+    memoryCache {
+        MemoryCache.Builder(context)
+            .maxSizePercent(0.25)
             .build()
     }
-    // Show a short crossfade when loading images asynchronously.
-    .crossfade(true)
-    .apply {
-        if (debug) {
-            logger(DebugLogger())
-        }
-    }.build()
-
-fun imageLoaderDiskCache(
-    context: PlatformContext,
-    debug: Boolean = false
-): ImageLoader = ImageLoader
-    .Builder(context)
-    .diskCachePolicy(CachePolicy.ENABLED)
-    .networkCachePolicy(CachePolicy.ENABLED)
-    .diskCache {
-        newDiskCache()
+    // Network disk cache in the platform's default cache directory.
+    downloadCacheOptions(
+        DiskCache.Options(maxSize = 512L * 1024 * 1024) // 512MB
+    )
+    // Decode animated WebP on every platform (Android ImageDecoder / Skia).
+    addComponents {
+        supportAnimatedWebp()
     }
     // Show a short crossfade when loading images asynchronously.
-    .crossfade(true)
-    .apply {
-        if (debug) {
-            logger(DebugLogger())
+    globalImageOptions(
+        ImageOptions {
+            crossfade(true)
         }
-    }.build()
-
-fun newDiskCache(): DiskCache = DiskCache
-    .Builder()
-    .directory(FileSystem.SYSTEM_TEMPORARY_DIRECTORY / "image_cache")
-    .maxSizeBytes(512L * 1024 * 1024) // 512MB
-    .build()
+    )
+    if (debug) {
+        logger(level = Logger.Level.Debug)
+    }
+}

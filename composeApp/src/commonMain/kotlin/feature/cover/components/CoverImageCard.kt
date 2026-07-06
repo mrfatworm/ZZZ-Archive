@@ -35,10 +35,9 @@ import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
-import coil3.compose.LocalPlatformContext
-import coil3.compose.SubcomposeAsyncImage
-import coil3.request.ImageRequest
-import coil3.size.Size
+import com.github.panpf.sketch.SubcomposeAsyncImage
+import com.github.panpf.sketch.request.ComposableImageRequest
+import com.github.panpf.sketch.util.Size
 import feature.cover.data.database.CoverImageListItemEntity
 import kotlinx.coroutines.delay
 import ui.components.ImageNotFound
@@ -82,10 +81,9 @@ fun CoverImageCard(coverImages: List<CoverImageListItemEntity>) {
                             ) {
                                 urlHandler.openUriSafe(image.artworkUrl)
                             }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
-                    model = ImageRequest.Builder(LocalPlatformContext.current)
-                        .data(image.imageUrl)
-                        .size(Size.ORIGINAL)
-                        .build(),
+                    request = ComposableImageRequest(image.imageUrl) {
+                        size(Size.Origin)
+                    },
                     contentDescription = image.artworkName,
                     contentScale = ContentScale.Crop,
                     error = {

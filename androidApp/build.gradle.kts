@@ -21,7 +21,7 @@ dependencies {
 
 android {
     namespace = "com.mrfatworm.zzzarchive"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = libs.versions.zzzPackageId.get()

@@ -33,10 +33,9 @@ import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import coil3.compose.LocalPlatformContext
-import coil3.compose.SubcomposeAsyncImage
-import coil3.request.ImageRequest
-import coil3.size.Size
+import com.github.panpf.sketch.SubcomposeAsyncImage
+import com.github.panpf.sketch.request.ComposableImageRequest
+import com.github.panpf.sketch.util.Size
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -105,10 +104,9 @@ fun RarityItem(
             }
             SubcomposeAsyncImage(
                 modifier = Modifier.fillMaxSize(),
-                model = ImageRequest.Builder(LocalPlatformContext.current)
-                    .data(imgUrl)
-                    .size(Size.ORIGINAL)
-                    .build(),
+                request = ComposableImageRequest(imgUrl) {
+                    size(Size.Origin)
+                },
                 contentDescription = name,
                 error = {
                     placeHolder()

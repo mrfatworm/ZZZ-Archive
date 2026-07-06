@@ -36,11 +36,10 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
-import coil3.compose.LocalPlatformContext
-import coil3.request.CachePolicy
-import coil3.request.ImageRequest
-import coil3.size.Size
+import com.github.panpf.sketch.AsyncImage
+import com.github.panpf.sketch.cache.CachePolicy
+import com.github.panpf.sketch.request.ComposableImageRequest
+import com.github.panpf.sketch.util.Size
 import feature.hoyolab.model.agent.MyAgentDetail
 import feature.hoyolab.model.agent.MyAgentDetailState
 import feature.hoyolab.presentation.MyAgentDetailAction
@@ -86,7 +85,7 @@ fun MyAgentImageCard(
             if (uiState.hasBlurBackground && uiState.isCustomImage) {
                 AsyncImage(
                     modifier = Modifier.matchParentSize().blur(8.dp),
-                    model = uiState.customImgUrl,
+                    uri = uiState.customImgUrl,
                     contentScale = ContentScale.Crop,
                     contentDescription = null,
                     filterQuality = FilterQuality.None
@@ -104,13 +103,14 @@ fun MyAgentImageCard(
                             translationX = offset.x * scale,
                             translationY = offset.y * scale
                         ).transformable(state = state, enabled = uiState.adjustMode),
-                model =
-                    ImageRequest
-                        .Builder(LocalPlatformContext.current)
-                        .data(if (uiState.isCustomImage) uiState.customImgUrl else agentDetail.imageUrl)
-                        .diskCachePolicy(CachePolicy.DISABLED)
-                        .size(Size.ORIGINAL)
-                        .build(),
+                request =
+                    ComposableImageRequest(
+                        if (uiState.isCustomImage) uiState.customImgUrl else agentDetail.imageUrl
+                    ) {
+                        downloadCachePolicy(CachePolicy.DISABLED)
+                        resultCachePolicy(CachePolicy.DISABLED)
+                        size(Size.Origin)
+                    },
                 contentDescription = null
             )
 

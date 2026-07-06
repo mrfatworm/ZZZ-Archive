@@ -23,11 +23,10 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import coil3.compose.AsyncImage
-import coil3.compose.LocalPlatformContext
-import coil3.request.CachePolicy
-import coil3.request.ImageRequest
-import coil3.size.Size
+import com.github.panpf.sketch.AsyncImage
+import com.github.panpf.sketch.cache.CachePolicy
+import com.github.panpf.sketch.request.ComposableImageRequest
+import com.github.panpf.sketch.util.Size
 import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
@@ -80,13 +79,12 @@ fun GalleryFullScreenDialog(
                                 }
                             }
                         }.transformable(state = state),
-                model =
-                    ImageRequest
-                        .Builder(LocalPlatformContext.current)
-                        .data(url)
-                        .diskCachePolicy(CachePolicy.DISABLED)
-                        .size(Size.ORIGINAL)
-                        .build(),
+                request =
+                    ComposableImageRequest(url) {
+                        downloadCachePolicy(CachePolicy.DISABLED)
+                        resultCachePolicy(CachePolicy.DISABLED)
+                        size(Size.Origin)
+                    },
                 contentDescription = null,
                 filterQuality = FilterQuality.High
             )

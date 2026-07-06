@@ -36,8 +36,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
-import coil3.compose.SubcomposeAsyncImage
+import com.github.panpf.sketch.AsyncImage
+import com.github.panpf.sketch.SubcomposeAsyncImage
 import feature.forum.model.TwitterForumListState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -133,7 +133,7 @@ private fun TwitterListItem(
         ) {
             AsyncImage(
                 modifier = Modifier.matchParentSize().blur(8.dp),
-                model = imageUrl,
+                uri = imageUrl,
                 contentScale = ContentScale.Crop,
                 contentDescription = null,
                 filterQuality = FilterQuality.None
@@ -141,7 +141,7 @@ private fun TwitterListItem(
 
             SubcomposeAsyncImage(
                 modifier = Modifier.matchParentSize(),
-                model = imageUrl,
+                uri = imageUrl,
                 contentDescription = artworkName,
                 error = {
                     ImageNotFound()

@@ -34,10 +34,9 @@ import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
-import coil3.compose.LocalPlatformContext
-import coil3.request.ImageRequest
-import coil3.size.Size
+import com.github.panpf.sketch.AsyncImage
+import com.github.panpf.sketch.request.ComposableImageRequest
+import com.github.panpf.sketch.util.Size
 import feature.agent.model.Faction
 import org.jetbrains.compose.resources.stringResource
 import ui.theme.AppTheme
@@ -75,10 +74,9 @@ fun FactionItem(
                 Modifier
                     .fillMaxSize()
                     .blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
-            model = ImageRequest.Builder(LocalPlatformContext.current)
-                .data(faction.getFactionThumbnailUrl())
-                .size(Size.ORIGINAL)
-                .build(),
+            request = ComposableImageRequest(faction.getFactionThumbnailUrl()) {
+                size(Size.Origin)
+            },
             contentDescription = stringResource(faction.getFactionNameRes()),
             contentScale = ContentScale.Crop,
             alpha = if (isSelected) 1f else 0.7f
@@ -91,7 +89,7 @@ fun FactionItem(
                         .fillMaxSize(0.3f)
                         .aspectRatio(1f)
                         .blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
-                model = faction.getFactionIconUrl(),
+                uri = faction.getFactionIconUrl(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop
             )

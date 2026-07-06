@@ -14,7 +14,7 @@ plugins {
 
 kotlin {
     listOf(
-        iosX64(), iosArm64(), iosSimulatorArm64()
+        iosArm64(), iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
@@ -27,7 +27,7 @@ kotlin {
 
     androidLibrary {
         namespace = "com.mrfatworm.zzzarchive.composeApp"
-        compileSdk = 36
+        compileSdk = 37
         minSdk = 26
 
         androidResources {
@@ -50,9 +50,10 @@ kotlin {
             implementation(libs.navigation.compose)
             implementation(libs.compose.adaptive)
             implementation(libs.kotlinx.coroutines)
-            implementation(libs.coil.network.ktor)
             implementation(libs.bundles.ktor)
-            implementation(libs.coil.compose)
+            implementation(libs.sketch.compose)
+            implementation(libs.sketch.http.ktor3)
+            implementation(libs.sketch.animated.webp)
             api(libs.koin.core)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.androidx.lifecycle.viewmodel)

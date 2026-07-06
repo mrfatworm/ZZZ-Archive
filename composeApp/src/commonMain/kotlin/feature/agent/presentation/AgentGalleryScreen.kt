@@ -44,11 +44,10 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
-import coil3.compose.AsyncImage
-import coil3.compose.LocalPlatformContext
-import coil3.compose.SubcomposeAsyncImage
-import coil3.request.ImageRequest
-import coil3.size.Size
+import com.github.panpf.sketch.AsyncImage
+import com.github.panpf.sketch.SubcomposeAsyncImage
+import com.github.panpf.sketch.request.ComposableImageRequest
+import com.github.panpf.sketch.util.Size
 import com.mrfatworm.zzzarchive.ZzzConfig
 import kotlinx.coroutines.launch
 import ui.components.ImageNotFound
@@ -229,10 +228,9 @@ private fun GalleryThumbnail(
             .clickable(onClick = onClick)
     ) {
         SubcomposeAsyncImage(
-            model = ImageRequest.Builder(LocalPlatformContext.current)
-                .data(url)
-                .size(Size.ORIGINAL)
-                .build(),
+            request = ComposableImageRequest(url) {
+                size(Size.Origin)
+            },
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             error = {
@@ -287,10 +285,9 @@ private fun ZoomableImage(
             )
     ) {
         AsyncImage(
-            model = ImageRequest.Builder(LocalPlatformContext.current)
-                .data(url)
-                .size(Size.ORIGINAL)
-                .build(),
+            request = ComposableImageRequest(url) {
+                size(Size.Origin)
+            },
             contentDescription = null,
             modifier = Modifier.fillMaxSize()
         )

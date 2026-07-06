@@ -10,6 +10,8 @@ local.properties
 captures
 .externalNativeBuild
 .cxx
+# Kotlin/Native extracts bundled klib sources here during native compilation
+/src-*/
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/

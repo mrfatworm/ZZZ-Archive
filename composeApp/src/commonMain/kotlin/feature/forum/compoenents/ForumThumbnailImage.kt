@@ -10,8 +10,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
-import coil3.compose.SubcomposeAsyncImage
+import com.github.panpf.sketch.AsyncImage
+import com.github.panpf.sketch.SubcomposeAsyncImage
 import ui.components.ImageNotFound
 import ui.theme.AppTheme
 
@@ -26,14 +26,14 @@ fun ForumThumbnailImage(imgUrl: String) {
     ) {
         AsyncImage(
             modifier = Modifier.matchParentSize().blur(8.dp),
-            model = imgUrl,
+            uri = imgUrl,
             contentDescription = null,
             contentScale = ContentScale.Crop,
             filterQuality = FilterQuality.None
         )
         SubcomposeAsyncImage(
             modifier = Modifier.matchParentSize(),
-            model = imgUrl,
+            uri = imgUrl,
             contentDescription = null,
             filterQuality = FilterQuality.None,
             error = {

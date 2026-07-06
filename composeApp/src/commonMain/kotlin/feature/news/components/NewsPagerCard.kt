@@ -36,10 +36,9 @@ import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
-import coil3.compose.LocalPlatformContext
-import coil3.request.ImageRequest
-import coil3.size.Size
+import com.github.panpf.sketch.AsyncImage
+import com.github.panpf.sketch.request.ComposableImageRequest
+import com.github.panpf.sketch.util.Size
 import feature.news.model.OfficialNewsListItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -123,10 +122,9 @@ private fun NewsPagerCardItem(
                     ) {
                         urlHandler.openUriSafe(newsState.newsUrl)
                     }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
-            model = ImageRequest.Builder(LocalPlatformContext.current)
-                .data(newsState.imageUrl)
-                .size(Size.ORIGINAL)
-                .build(),
+            request = ComposableImageRequest(newsState.imageUrl) {
+                size(Size.Origin)
+            },
             contentDescription = newsState.title,
             contentScale = ContentScale.Crop
         )

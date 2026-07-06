@@ -43,12 +43,11 @@ import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextOverflow
-import coil3.compose.LocalPlatformContext
-import coil3.compose.rememberAsyncImagePainter
-import coil3.network.NetworkHeaders
-import coil3.network.httpHeaders
-import coil3.request.ImageRequest
-import coil3.size.Size
+import com.github.panpf.sketch.http.HttpHeaders
+import com.github.panpf.sketch.rememberAsyncImagePainter
+import com.github.panpf.sketch.request.ComposableImageRequest
+import com.github.panpf.sketch.request.httpHeaders
+import com.github.panpf.sketch.util.Size
 import feature.pixiv.model.PixivArticleItem
 import feature.pixiv.model.pixivTagDropdownItems
 import kotlinx.coroutines.launch
@@ -180,16 +179,16 @@ private fun TagDropDownButton(onPixivTagChange: (String) -> Unit) {
 private fun PixivTopicItem(pixivArticle: PixivArticleItem) {
     val interactionSource = remember { MutableInteractionSource() }
     val urlHandler = LocalUriHandler.current
-    val header = NetworkHeaders.Builder().add("Referer", "https://app-api.pixiv.net/").build()
+    val header = HttpHeaders {
+        add("Referer", "https://app-api.pixiv.net/")
+    }
     val imageState =
         rememberAsyncImagePainter(
-            model =
-                ImageRequest
-                    .Builder(LocalPlatformContext.current)
-                    .httpHeaders(header)
-                    .data(pixivArticle.artworkImageUrl)
-                    .size(Size.ORIGINAL)
-                    .build()
+            request =
+                ComposableImageRequest(pixivArticle.artworkImageUrl) {
+                    httpHeaders(header)
+                    size(Size.Origin)
+                }
         )
     Column(
         modifier = Modifier.width(AppTheme.size.s144),
@@ -254,19 +253,17 @@ private fun PixivTopicItem(pixivArticle: PixivArticleItem) {
 private fun AuthorInfo(
     profileName: String,
     profileUrl: String?,
-    header: NetworkHeaders,
+    header: HttpHeaders,
     onClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val imageState =
         rememberAsyncImagePainter(
-            model =
-                ImageRequest
-                    .Builder(LocalPlatformContext.current)
-                    .httpHeaders(header)
-                    .data(profileUrl)
-                    .size(Size.ORIGINAL)
-                    .build()
+            request =
+                ComposableImageRequest(profileUrl) {
+                    httpHeaders(header)
+                    size(Size.Origin)
+                }
         )
     Row(
         modifier =

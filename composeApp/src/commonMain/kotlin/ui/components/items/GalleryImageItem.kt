@@ -10,10 +10,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import coil3.compose.AsyncImage
-import coil3.compose.LocalPlatformContext
+import com.github.panpf.sketch.AsyncImage
 import ui.theme.AppTheme
-import utils.imageLoaderMemoryCache
 
 @Composable
 fun GalleryImageItem(
@@ -26,8 +24,7 @@ fun GalleryImageItem(
                 .clickable { onClick() }
                 .height(AppTheme.size.s144)
                 .background(AppTheme.colors.surface, AppTheme.shape.r400),
-        imageLoader = imageLoaderMemoryCache(LocalPlatformContext.current),
-        model = url,
+        uri = url,
         contentDescription = null
     )
 }

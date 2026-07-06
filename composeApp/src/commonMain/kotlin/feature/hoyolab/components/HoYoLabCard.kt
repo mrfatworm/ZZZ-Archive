@@ -42,10 +42,9 @@ import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import coil3.compose.LocalPlatformContext
-import coil3.compose.SubcomposeAsyncImage
-import coil3.request.ImageRequest
-import coil3.size.Size
+import com.github.panpf.sketch.SubcomposeAsyncImage
+import com.github.panpf.sketch.request.ComposableImageRequest
+import com.github.panpf.sketch.util.Size
 import feature.hoyolab.model.GameRecordState
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -121,10 +120,9 @@ private fun Header(
     Box(modifier = Modifier.clip(AppTheme.shape.r400).height(120.dp)) {
         SubcomposeAsyncImage(
             modifier = Modifier.fillMaxSize().clip(AppTheme.shape.r400),
-            model = ImageRequest.Builder(LocalPlatformContext.current)
-                .data(uiState.cardUrl)
-                .size(Size.ORIGINAL)
-                .build(),
+            request = ComposableImageRequest(uiState.cardUrl) {
+                size(Size.Origin)
+            },
             contentDescription = stringResource(Res.string.user_profile_image),
             contentScale = ContentScale.Crop,
             error = {
@@ -177,7 +175,7 @@ private fun PlayerInfo(
                 .size(AppTheme.size.s48)
                 .clip(CircleShape)
                 .clickable { onAddAccountClick() },
-        model = uiState.profileUrl,
+        uri = uiState.profileUrl,
         contentDescription = stringResource(Res.string.user_profile_image),
         error = {
             ImageNotFound()

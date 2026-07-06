@@ -20,7 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
+import com.github.panpf.sketch.AsyncImage
 import feature.hoyolab.model.agent.MyAgentDetailEquipPlan
 import feature.hoyolab.model.agent.MyAgentDetailWeapon
 import feature.hoyolab.model.agent.getEquipRatingState
@@ -76,7 +76,7 @@ private fun MyWeapon(
         val wEngineSize = 96.dp
         AsyncImage(
             modifier = Modifier.size(wEngineSize),
-            model = imgUrl,
+            uri = imgUrl,
             contentDescription = null
         )
         Column(

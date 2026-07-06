@@ -32,7 +32,7 @@ import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import coil3.compose.SubcomposeAsyncImage
+import com.github.panpf.sketch.SubcomposeAsyncImage
 import ui.components.ImageNotFound
 import ui.theme.AppTheme
 import utils.ZzzRarity
@@ -74,7 +74,7 @@ fun MyAgentItem(
                 modifier = Modifier
                     .aspectRatio(1f)
                     .fillMaxSize(),
-                model = imgUrl,
+                uri = imgUrl,
                 contentDescription = name,
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.TopCenter,

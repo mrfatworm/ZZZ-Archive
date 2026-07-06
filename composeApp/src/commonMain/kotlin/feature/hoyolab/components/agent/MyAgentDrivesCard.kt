@@ -27,7 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
+import com.github.panpf.sketch.AsyncImage
 import feature.hoyolab.model.agent.MyAgentDetailEquip
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.ContentCard
@@ -88,7 +88,7 @@ private fun MyAgentDriveHeader(drive: MyAgentDetailEquip) {
     Row {
         AsyncImage(
             modifier = Modifier.size(AppTheme.size.s64),
-            model = drive.iconUrl,
+            uri = drive.iconUrl,
             contentDescription = null
         )
         Column(

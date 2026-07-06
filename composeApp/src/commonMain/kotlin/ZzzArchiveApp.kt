@@ -7,19 +7,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil3.compose.setSingletonImageLoaderFactory
+import com.github.panpf.sketch.SingletonSketch
 import org.koin.compose.viewmodel.koinViewModel
 import root.InitViewModel
 import ui.navigation.graph.RootNavGraph
 import ui.theme.AppTheme
 import ui.theme.ZzzArchiveTheme
-import utils.imageLoaderDiskCache
+import utils.newSketch
 
 @Composable
 fun ZzzArchiveApp() {
-    // Initialize the Coil3 image loader
-    setSingletonImageLoaderFactory { context ->
-        imageLoaderDiskCache(context)
+    // Initialize the Sketch image loader singleton
+    SingletonSketch.setSafe { context ->
+        newSketch(context)
     }
     ZzzArchiveTheme {
         val viewModel: InitViewModel = koinViewModel()
