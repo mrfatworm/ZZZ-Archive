@@ -54,6 +54,8 @@
     <string name="ice">冰屬性</string>
     <string name="electric">電屬性</string>
     <string name="physical">物理</string>
+    <string name="wind">風屬性</string>
+    <string name="lumiflux">流明</string>
 
     <!-- Specialty -->
     <string name="specialty">特性</string>
@@ -85,6 +87,11 @@
     <string name="spook_shack">怪啖屋</string>
     <string name="krampus_compliance_authority">坎卜斯黑枝</string>
     <string name="angels_of_delusion">妄想天使</string>
+    <string name="metropolitan_order_division">都市秩序部</string>
+    <string name="phaethon">法厄同</string>
+    <string name="external_strategy_department">外務籌策局</string>
+    <string name="covenant_of_dayat">達識結社</string>
+    <string name="airspace_patrol_department">空域巡戍局</string>
 
     <!-- Home -->
     <string name="popular">熱門</string>

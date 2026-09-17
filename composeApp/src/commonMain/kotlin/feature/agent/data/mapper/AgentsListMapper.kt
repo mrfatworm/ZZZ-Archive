@@ -57,6 +57,8 @@ fun AgentsListItemEntity.toAgentListItem(): AgentListItem = AgentListItem(
         AgentAttribute.Ice -> listOf(59, 60, 61)
         AgentAttribute.Electric -> listOf(62, 63, 64)
         AgentAttribute.Ether -> listOf(65, 66, 67)
+        AgentAttribute.Wind -> listOf(75, 76, 77)
+        AgentAttribute.Lumiflux -> listOf(78, 79, 80)
         AgentAttribute.None -> emptyList()
     }.map { getMaterialUrl(id = it) },
     wEngineMaterialUrls = when (findAgentSpecialty(specialty)) {

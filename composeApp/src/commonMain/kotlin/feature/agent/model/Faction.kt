@@ -8,13 +8,18 @@ package feature.agent.model
 import com.mrfatworm.zzzarchive.ZzzConfig
 import org.jetbrains.compose.resources.StringResource
 import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.airspace_patrol_department
 import zzzarchive.composeapp.generated.resources.angels_of_delusion
 import zzzarchive.composeapp.generated.resources.belobog_heavy_industries
+import zzzarchive.composeapp.generated.resources.covenant_of_dayat
 import zzzarchive.composeapp.generated.resources.criminal_investigation_special_response_team
+import zzzarchive.composeapp.generated.resources.external_strategy_department
 import zzzarchive.composeapp.generated.resources.gentle_house
 import zzzarchive.composeapp.generated.resources.krampus_compliance_authority
+import zzzarchive.composeapp.generated.resources.metropolitan_order_division
 import zzzarchive.composeapp.generated.resources.mockingbird
 import zzzarchive.composeapp.generated.resources.obol_squad
+import zzzarchive.composeapp.generated.resources.phaethon
 import zzzarchive.composeapp.generated.resources.section_6
 import zzzarchive.composeapp.generated.resources.silver_squad
 import zzzarchive.composeapp.generated.resources.sons_of_calydon
@@ -40,6 +45,11 @@ data class Faction(val id: Int) {
         12 -> Res.string.spook_shack
         13 -> Res.string.krampus_compliance_authority
         14 -> Res.string.angels_of_delusion
+        15 -> Res.string.metropolitan_order_division
+        16 -> Res.string.phaethon
+        17 -> Res.string.external_strategy_department
+        18 -> Res.string.covenant_of_dayat
+        19 -> Res.string.airspace_patrol_department
         else -> Res.string.unknown
     }
 

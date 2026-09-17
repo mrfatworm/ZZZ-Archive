@@ -54,6 +54,8 @@
     <string name="ice">Ice</string>
     <string name="electric">Electric</string>
     <string name="physical">Physical</string>
+    <string name="wind">Wind</string>
+    <string name="lumiflux">Lumiflux</string>
 
     <!-- Specialty -->
     <string name="specialty">Specialty</string>
@@ -85,6 +87,11 @@
     <string name="spook_shack">Spook Shack</string>
     <string name="krampus_compliance_authority">Krampus Compliance Authority</string>
     <string name="angels_of_delusion">Angels of Delusion</string>
+    <string name="metropolitan_order_division">Metropolitan Order Division</string>
+    <string name="phaethon">Phaethon</string>
+    <string name="external_strategy_department">External Strategy Department</string>
+    <string name="covenant_of_dayat">Covenant of Dayat</string>
+    <string name="airspace_patrol_department">Airspace Patrol Department</string>
 
     <!-- Home -->
     <string name="popular">Popular</string>

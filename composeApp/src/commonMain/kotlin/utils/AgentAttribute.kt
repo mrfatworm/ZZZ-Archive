@@ -17,11 +17,15 @@ import zzzarchive.composeapp.generated.resources.ic_attribute_electric
 import zzzarchive.composeapp.generated.resources.ic_attribute_ether
 import zzzarchive.composeapp.generated.resources.ic_attribute_fire
 import zzzarchive.composeapp.generated.resources.ic_attribute_ice
+import zzzarchive.composeapp.generated.resources.ic_attribute_lumiflux
 import zzzarchive.composeapp.generated.resources.ic_attribute_physical
+import zzzarchive.composeapp.generated.resources.ic_attribute_wind
 import zzzarchive.composeapp.generated.resources.ic_help
 import zzzarchive.composeapp.generated.resources.ice
+import zzzarchive.composeapp.generated.resources.lumiflux
 import zzzarchive.composeapp.generated.resources.physical
 import zzzarchive.composeapp.generated.resources.unknown
+import zzzarchive.composeapp.generated.resources.wind
 
 enum class AgentAttribute(val textRes: StringResource, val iconRes: DrawableResource) {
     Ether(Res.string.ether, Res.drawable.ic_attribute_ether),
@@ -29,6 +33,8 @@ enum class AgentAttribute(val textRes: StringResource, val iconRes: DrawableReso
     Ice(Res.string.ice, Res.drawable.ic_attribute_ice),
     Electric(Res.string.electric, Res.drawable.ic_attribute_electric),
     Physical(Res.string.physical, Res.drawable.ic_attribute_physical),
+    Wind(Res.string.wind, Res.drawable.ic_attribute_wind),
+    Lumiflux(Res.string.lumiflux, Res.drawable.ic_attribute_lumiflux),
     None(Res.string.unknown, Res.drawable.ic_help);
 
     fun getColor(colorScheme: ColorScheme): Color = when (this) {
@@ -37,6 +43,8 @@ enum class AgentAttribute(val textRes: StringResource, val iconRes: DrawableReso
         Ice -> colorScheme.ice
         Electric -> colorScheme.electric
         Physical -> colorScheme.physical
+        Wind -> colorScheme.wind
+        Lumiflux -> colorScheme.lumiflux
         else -> colorScheme.onSurfaceVariant
     }
 }
@@ -50,6 +58,8 @@ fun findAgentAttributeFromHoYoLab(attributeId: Int): AgentAttribute = when (attr
     201 -> AgentAttribute.Fire
     202 -> AgentAttribute.Ice
     203 -> AgentAttribute.Electric
+    204 -> AgentAttribute.Wind
     205 -> AgentAttribute.Ether
+    300 -> AgentAttribute.Lumiflux
     else -> AgentAttribute.None
 }

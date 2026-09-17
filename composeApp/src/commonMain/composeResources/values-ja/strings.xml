@@ -54,6 +54,8 @@
     <string name="ice">氷</string>
     <string name="electric">電気</string>
     <string name="physical">物理</string>
+    <string name="wind">風</string>
+    <string name="lumiflux">流明</string>
 
     <!-- Specialty -->
     <string name="specialty">特性</string>
@@ -85,6 +87,11 @@
     <string name="spook_shack">怪啖屋</string>
     <string name="krampus_compliance_authority">クランプスの黒枝</string>
     <string name="angels_of_delusion">妄想エンジェル</string>
+    <string name="metropolitan_order_division">都市秩序部</string>
+    <string name="phaethon">パエトーン</string>
+    <string name="external_strategy_department">外務計策局</string>
+    <string name="covenant_of_dayat">ダアト結社</string>
+    <string name="airspace_patrol_department">空域巡警局</string>
 
     <!-- Home -->
     <string name="popular">人気</string>
