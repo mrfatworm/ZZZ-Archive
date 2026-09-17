@@ -55,7 +55,7 @@ ZZZ Archive 是動作遊戲 "絕區零" 的維基應用程式，使用者可查�
 - Androidx DataStore
 - Koin
 - Ktor
-- Coil
+- Sketch
 - BuildConfig
 - Okio I/O
 

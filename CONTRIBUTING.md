@@ -129,7 +129,7 @@ This project follows a GitFlow-style model with two long-lived branch roles:
    ./gradlew formatKotlin
    
    # Run tests
-   ./gradlew test
+   ./gradlew :composeApp:testAndroidHostTest :composeApp:desktopTest
    ```
 
 4. **Test on multiple platforms**:
@@ -234,7 +234,14 @@ feature/
 ### Unit Tests
 
 ```bash
-./gradlew :composeApp:testDevDebugUnitTest
+# ViewModel tests (Android host target — this is what CI runs)
+./gradlew :composeApp:testAndroidHostTest
+
+# Repository / UseCase tests in commonTest, on the JVM target
+./gradlew :composeApp:desktopTest
+
+# A single test class or method
+./gradlew :composeApp:desktopTest --tests "*AgentsListUseCaseTest*"
 ```
 
 ### Test Guidelines

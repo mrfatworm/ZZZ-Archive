@@ -27,3 +27,6 @@ captures
 /desktopApp/config/macos/entitlements.plist
 /desktopApp/config/macos/runtime-entitlements.plist
 /composeApp/schemas/*
+
+# Local working notes, not for publication
+docs/temp_plan/

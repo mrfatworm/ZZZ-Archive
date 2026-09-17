@@ -56,7 +56,7 @@ Thanks to all the contributors who made KMP/CMP possible!
 - Androidx DataStore
 - Koin
 - Ktor
-- Coil
+- Sketch
 - BuildConfig
 - Okio I/O
 
