@@ -136,9 +136,7 @@ fun createForumHttpClient(engine: HttpClientEngine): HttpClient = HttpClient(eng
     }
     defaultRequest {
         url {
-            takeFrom(
-                "https://script.google.com/macros/s/AKfycbx2fQc_sDvU_eh9tsM8ZJEIfRWUTHim_v3VYklE_wn76yfhYtk8-z1E7JppOPSnA-Qx/exec"
-            )
+            takeFrom("https://api.zzz-archive.com/")
         }
     }
 }
