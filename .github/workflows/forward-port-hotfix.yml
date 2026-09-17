@@ -1,0 +1,259 @@
+name: Forward-port hotfix to main
+
+# release/** 上的 hotfix commit 自動 cherry-pick 回 main 並開 PR。
+#
+# 為什麼要有這支：release/x.x.x 上修的東西不回到 main，下一版從 main 切出來就把修正回歸掉了，
+# 而且只有已經升級到該版本的使用者會踩到——最難發現的那種。
+#
+# ⚠️ push 事件用的是「被 push 的那個分支」上的這份 workflow 檔。release 分支從 main 切出，
+#    所以本檔只要在切分支前已進 main 就會自動帶過去。
+#
+# 前置：secrets.FORWARD_PORT_TOKEN（PAT，contents + pull_requests 寫入權）。
+# 不用 GITHUB_TOKEN——它開的 PR 不會觸發 on_push_and_pr.yml，forward-port PR 就沒有 CI 把關。
+
+on:
+  push:
+    branches:
+      - "release/**"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  # 同一 release 分支的連續 push 排隊處理，不取消——每次 push 的 commit 範圍都不同，
+  # 取消掉就永久漏掉那一段。
+  group: forward-port-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  forward-port:
+    # 切分支（created）與刪分支（deleted）沒有新 commit 可回流。
+    if: ${{ !github.event.created && !github.event.deleted }}
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      GH_TOKEN: ${{ secrets.FORWARD_PORT_TOKEN }}
+      BASE_REF: ${{ github.ref_name }}
+      BEFORE_SHA: ${{ github.event.before }}
+      AFTER_SHA: ${{ github.event.after }}
+      FORCED: ${{ github.event.forced }}
+
+    steps:
+      - name: Verify token secret
+        # 沒設 PAT 時 checkout 會以看似無關的權限錯誤失敗，先在這裡講清楚。
+        run: |
+          if [ -z "${GH_TOKEN}" ]; then
+            echo "::error::缺 secrets.FORWARD_PORT_TOKEN——請建立一個有 contents / pull_requests 寫入權的 PAT"
+            exit 1
+          fi
+
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.FORWARD_PORT_TOKEN }}
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch pushed commits from release branch
+        run: |
+          set -euo pipefail
+          # main 的歷史不含 release 上的 hotfix commit，需顯式 fetch
+          git fetch origin "$BASE_REF"
+
+      - name: Cherry-pick onto forward-port branch
+        id: cp
+        run: |
+          set -euo pipefail
+
+          # force push 的 before..after 範圍不可靠，自動回流會漏 commit。讓 job 紅燈，
+          # 靠 GitHub 的 workflow 失敗通知提醒人工確認——這裡沒有 Discord 之類的第二管道。
+          if [ "$FORCED" = "true" ]; then
+            echo "::error::$BASE_REF 有 force push，commit 範圍不可靠，已跳過自動 forward-port，請手動確認是否有 hotfix 需回流 main"
+            exit 1
+          fi
+
+          COMMITS=$(git rev-list --reverse "${BEFORE_SHA}..${AFTER_SHA}")
+          if [ -z "$COMMITS" ]; then
+            echo "沒有新 commit，結束"
+            echo "outcome=empty" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          BRANCH="forward-port/${BASE_REF//\//-}-$(git rev-parse --short "$AFTER_SHA")"
+          git switch -C "$BRANCH" origin/main
+
+          CONFLICT=false
+          PICKED=0
+          SUMMARY=""
+          UNMARKED_ALL=""
+
+          for SHA in $COMMITS; do
+            SUBJECT=$(git log -1 --format=%s "$SHA")
+
+            # 版號 bump／release notes 這類不該回流的，在 commit message 裡標 [no-forward-port]。
+            if git log -1 --format=%B "$SHA" | grep -qF '[no-forward-port]'; then
+              echo "⏭  跳過（標記 no-forward-port）：$SUBJECT"
+              SUMMARY="${SUMMARY}- \`${SHA:0:7}\` ${SUBJECT} — 標記跳過"$'\n'
+              continue
+            fi
+
+            # squash merge → 單親 commit；真 merge commit（no-ff）→ 雙親，需 -m 1。
+            # rev-list --parents 印的是「commit 自己 + 全部 parent」，所以雙親 = 3 個 word。
+            WORDS=$(git rev-list --parents -n 1 "$SHA" | wc -w | tr -d ' ')
+            if [ "$WORDS" -ge 3 ]; then MAINLINE="-m 1"; else MAINLINE=""; fi
+
+            if git cherry-pick -x $MAINLINE "$SHA"; then
+              echo "✅ cherry-pick clean：$SUBJECT"
+              SUMMARY="${SUMMARY}- \`${SHA:0:7}\` ${SUBJECT}"$'\n'
+              PICKED=$((PICKED + 1))
+            elif [ -z "$(git status --porcelain)" ]; then
+              # cherry-pick 失敗但工作樹乾淨 = 此修正的改動已存在於 main，無需回流。
+              # （真衝突會留下 unmerged 檔案，git status 必非空，故能可靠區分）
+              git cherry-pick --skip 2>/dev/null || git cherry-pick --quit 2>/dev/null || true
+              echo "ℹ️  已存在於 main，跳過：$SUBJECT"
+              SUMMARY="${SUMMARY}- \`${SHA:0:7}\` ${SUBJECT} — 已在 main"$'\n'
+            else
+              echo "⚠️  cherry-pick conflict：$SUBJECT"
+              CONFLICT=true
+
+              # ⚠️ 只有內容衝突會留下 <<<<<<< 標記。modify/delete 型衝突（一邊改、另一邊
+              # 刪掉整個檔案）git 是直接把單邊結果留在樹上、不畫標記——下面的 add -A 會把
+              # 那個「git 片面決定」的結果照單提交，而審核者照 PR 說明 grep 標記就會漏掉它。
+              # 所以在 add 之前先把未合併路徑分成有標記／無標記兩類記下來。
+              UNMARKED=""
+              while IFS= read -r FILE; do
+                [ -n "$FILE" ] || continue
+                if [ -f "$FILE" ] && grep -qF '<<<<<<<' "$FILE"; then continue; fi
+                UNMARKED="${UNMARKED} \`${FILE}\`"
+              done <<< "$(git diff --name-only --diff-filter=U)"
+
+              git add -A
+              git commit -m "chore: forward-port ${SHA:0:7} to main (含衝突)" \
+                         -m "cherry-picked from ${SHA} — ⚠️ 未解衝突，請手動處理後再合併。"
+              # commit 已清掉單顆 cherry-pick 的狀態，這行是保險：確保下一顆從乾淨狀態開始
+              git cherry-pick --quit 2>/dev/null || true
+
+              if [ -n "$UNMARKED" ]; then
+                UNMARKED_ALL="${UNMARKED_ALL}${UNMARKED}"
+                SUMMARY="${SUMMARY}- \`${SHA:0:7}\` ${SUBJECT} — ⚠️ 衝突（含無標記的新增/刪除型：${UNMARKED} ）"$'\n'
+              else
+                SUMMARY="${SUMMARY}- \`${SHA:0:7}\` ${SUBJECT} — ⚠️ 衝突"$'\n'
+              fi
+              PICKED=$((PICKED + 1))
+            fi
+          done
+
+          if [ "$PICKED" -eq 0 ]; then
+            echo "沒有需要回流的 commit"
+            echo "outcome=nothing" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # --force-with-lease 保護衝突分支上已經做到一半的人工解法
+          git push -u origin "$BRANCH" --force-with-lease
+
+          # 分隔符用隨機值：summary 內容來自 commit subject，固定 EOF 會被同名行截斷
+          DELIM="FP_$(openssl rand -hex 8)"
+          {
+            echo "outcome=picked"
+            echo "branch=$BRANCH"
+            echo "conflict=$CONFLICT"
+            echo "unmarked=$UNMARKED_ALL"
+            echo "summary<<$DELIM"
+            echo "$SUMMARY"
+            echo "$DELIM"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Ensure labels exist
+        if: steps.cp.outputs.outcome == 'picked'
+        # 失敗不擋（label 已存在是最常見的情況），但不吞 stderr——PAT 權限不足時
+        # 這行是唯一的線索，靜音掉會讓人從下游的症狀反推很久。
+        run: |
+          gh label create forward-port          --color 0E8A16 --description "自動 cherry-pick 至 main" || true
+          gh label create forward-port-conflict --color D93F0B --description "forward-port 有衝突，需手動解" || true
+
+      - name: Open forward-port PR
+        id: pr
+        if: steps.cp.outputs.outcome == 'picked'
+        env:
+          BRANCH: ${{ steps.cp.outputs.branch }}
+          CONFLICT: ${{ steps.cp.outputs.conflict }}
+          SUMMARY: ${{ steps.cp.outputs.summary }}
+          UNMARKED: ${{ steps.cp.outputs.unmarked }}
+        run: |
+          set -euo pipefail
+
+          BODY_FILE="$(mktemp)"
+          {
+            echo "## Forward-port（自動）"
+            echo ""
+            echo "把 \`${BASE_REF}\` 上的 hotfix cherry-pick 回 \`main\`。"
+            echo ""
+            echo "- 來源分支：\`${BASE_REF}\`"
+            echo "- 來源 push：\`${BEFORE_SHA:0:7}..${AFTER_SHA:0:7}\`"
+            echo ""
+            echo "### Commits"
+            echo "$SUMMARY"
+            if [ "$CONFLICT" = "true" ]; then
+              echo "> ⚠️ **cherry-pick 有衝突**，本分支已把未解結果提交上來，先處理完再合併。"
+              echo ""
+              if [ -n "$UNMARKED" ]; then
+                echo "> 🔍 下列檔案是**新增/刪除型衝突**（一邊改、另一邊刪掉整個檔案）：樹上**沒有** \`<<<<<<<\` 標記可 grep，"
+                echo "> git 已片面留下單邊結果——可能是把 \`main\` 已刪的檔案復活，也可能是丟掉了 hotfix 的修改。請逐一確認：${UNMARKED}"
+                echo ""
+              fi
+              echo '```bash'
+              echo "git fetch origin && git switch ${BRANCH}"
+              echo "# 解掉衝突檔案後："
+              echo "git add -A && git commit && git push"
+              echo '```'
+            else
+              echo "✅ cherry-pick 乾淨無衝突，CI 綠燈即可 merge。"
+            fi
+          } > "$BODY_FILE"
+
+          TITLE="forward-port: ${BASE_REF} → main"
+          # label 不進 gh pr create：帶 --label 時 label 不存在（PAT 沒有建 label 的權限）
+          # 會讓建 PR 整個失敗，等於一個純提示用的分類決定了回流機制能不能運作。
+          # 改成先把 PR 開出來，label 再以 best-effort 補上。
+          ARGS=(--base main --head "$BRANCH" --title "$TITLE" --body-file "$BODY_FILE")
+          if [ "$CONFLICT" = "true" ]; then
+            ARGS+=(--draft)
+          fi
+
+          ERR_FILE="$(mktemp)"
+          # PR 可能已存在（re-run／同分支再 push）→ 改為留言通知
+          if PR_URL="$(gh pr create "${ARGS[@]}" 2>"$ERR_FILE")"; then
+            echo "Opened: $PR_URL"
+          else
+            PR_URL="$(gh pr list --head "$BRANCH" --base main --state open --json url --jq '.[0].url // empty')"
+            if [ -n "$PR_URL" ]; then
+              gh pr comment "$PR_URL" --body "🔄 forward-port 分支已更新（來源 \`${BASE_REF}\`，push \`${AFTER_SHA:0:7}\`）"
+              echo "Updated existing PR: $PR_URL"
+            else
+              echo "::error::PR 建立失敗且找不到既有 PR：$(cat "$ERR_FILE")"
+              exit 1
+            fi
+          fi
+
+          LABEL_ARGS=(--add-label forward-port)
+          if [ "$CONFLICT" = "true" ]; then
+            LABEL_ARGS+=(--add-label forward-port-conflict)
+          fi
+          gh pr edit "$PR_URL" "${LABEL_ARGS[@]}" \
+            || echo "::warning::label 加不上（PAT 權限？），PR 本身沒問題：$PR_URL"
+
+          echo "::notice::forward-port PR：$PR_URL"
+
+      - name: Flag conflict
+        # draft PR 本身就是可見的信號，但 Actions 摘要上也標一筆，避免只看 run 清單時漏掉。
+        if: steps.cp.outputs.conflict == 'true'
+        run: echo "::warning::forward-port PR 有衝突，需手動解完才能合併"

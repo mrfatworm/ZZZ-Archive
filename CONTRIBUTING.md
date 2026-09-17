@@ -8,6 +8,7 @@ instructions for contributing to this Kotlin Multiplatform project.
 - [Getting Started](#getting-started)
 - [Development Environment](#development-environment)
 - [Code Quality Standards](#code-quality-standards)
+- [Branch Strategy](#branch-strategy)
 - [Pull Request Process](#pull-request-process)
 - [Project Structure](#project-structure)
 - [Architecture Guidelines](#architecture-guidelines)
@@ -80,14 +81,41 @@ style enforcement. Before submitting a PR, ensure your code passes the style che
 - **Naming**: Use descriptive names for classes, functions, and variables
 - **Comments**: Document complex business logic and platform-specific code
 
+## Branch Strategy
+
+This project follows a GitFlow-style model with two long-lived branch roles:
+
+| Branch          | Role                                                                                 |
+|-----------------|--------------------------------------------------------------------------------------|
+| `main`          | Development branch and default base — all feature work merges here.                    |
+| `release/x.x.x` | Release branch for one shipped version, cut from `main` after the version bump lands.  |
+
+- **Feature branches** (`f/xxx`, `fix/xxx`, `refactor/xxx`) branch off `main` and merge back into
+  `main` with **Squash and merge**, keeping one clean commit per change.
+- **Releasing**: bump the version on `main` first, then cut `release/x.x.x` from `main`. Pushing to
+  `release/**` triggers the Google Play and TestFlight deploy workflows.
+- **Hotfixes** for a shipped version are committed on that version's `release/x.x.x` branch.
+- **Hotfixes forward-port automatically**: a push to `release/**` runs
+  `.github/workflows/forward-port-hotfix.yml`, which cherry-picks the new commits onto `main` and
+  opens a PR — a draft PR carrying the unresolved conflict when the cherry-pick conflicts. A fix
+  that never gets back to `main` is silently reverted by the next release cut from `main`, and only
+  users on that version ever hit it. Mark commits that should not flow back (version bumps, release
+  notes) with `[no-forward-port]` in the commit message.
+  *Maintainer setup*: the workflow needs a `FORWARD_PORT_TOKEN` secret (a PAT with `contents` and
+  `pull_requests` write access); `GITHUB_TOKEN` is not usable because the PRs it opens would not
+  trigger CI.
+- **CI** (`on_push_and_pr.yml`) runs lint and unit tests on pushes to `main` / `release/**` and on
+  PRs targeting either.
+
 ## Pull Request Process
 
 ### Before Submitting a PR
 
 1. **Create a feature branch**:
    ```bash
-   # Base on "dev" branch
-   git checkout -b f/your-feature-name
+   # Base on "main" branch
+   git switch main && git pull
+   git switch -c f/your-feature-name
    ```
 
 2. **Make your changes** following the project's architecture and coding standards
@@ -117,7 +145,7 @@ style enforcement. Before submitting a PR, ensure your code passes the style che
 
 6. **Push to your fork**:
    ```bash
-   git push origin feature/your-feature-name
+   git push origin f/your-feature-name
    ```
 
 ### CI Checks
