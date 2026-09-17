@@ -85,13 +85,13 @@ style enforcement. Before submitting a PR, ensure your code passes the style che
 
 This project follows a GitFlow-style model with two long-lived branch roles:
 
-| Branch          | Role                                                                                 |
-|-----------------|--------------------------------------------------------------------------------------|
-| `main`          | Development branch and default base — all feature work merges here.                    |
-| `release/x.x.x` | Release branch for one shipped version, cut from `main` after the version bump lands.  |
+| Branch          | Role                                                                          |
+|-----------------|-------------------------------------------------------------------------------|
+| `main`          | Development branch and default base — all feature work merges here.           |
+| `release/x.x.x` | Release branch for a shipped version, cut from `main` after the version bump. |
 
-- **Feature branches** (`f/xxx`, `fix/xxx`, `refactor/xxx`) branch off `main` and merge back into
-  `main` with **Squash and merge**, keeping one clean commit per change.
+- **Feature branches** (`feature/xxx`, `fix/xxx`, `refactor/xxx`) branch off `main` and merge
+  back into `main` with **Squash and merge**, keeping one clean commit per change.
 - **Releasing**: bump the version on `main` first, then cut `release/x.x.x` from `main`. Pushing to
   `release/**` triggers the Google Play and TestFlight deploy workflows.
 - **Hotfixes** for a shipped version are committed on that version's `release/x.x.x` branch.
@@ -115,7 +115,7 @@ This project follows a GitFlow-style model with two long-lived branch roles:
    ```bash
    # Base on "main" branch
    git switch main && git pull
-   git switch -c f/your-feature-name
+   git switch -c feature/your-feature-name
    ```
 
 2. **Make your changes** following the project's architecture and coding standards
@@ -145,7 +145,7 @@ This project follows a GitFlow-style model with two long-lived branch roles:
 
 6. **Push to your fork**:
    ```bash
-   git push origin f/your-feature-name
+   git push origin feature/your-feature-name
    ```
 
 ### CI Checks
