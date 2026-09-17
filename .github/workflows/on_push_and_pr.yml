@@ -4,13 +4,23 @@ on:
   push:
     branches:
       - main
-      - dev
+      - 'release/**'
 
     paths-ignore:
       - '**.md'
       - "**/*.md"
 
   pull_request:
+    branches:
+      - main
+      - 'release/**'
+
+    # ready_for_review：有衝突的 forward-port PR 以 draft 開出，解完衝突按 ready 時補跑。
+    types: [opened, synchronize, reopened, ready_for_review]
+
+    paths-ignore:
+      - '**.md'
+      - "**/*.md"
 
 jobs:
   lint:

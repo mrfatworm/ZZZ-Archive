@@ -3,7 +3,7 @@ name: Deploy to Google Play Closed Testing
 on:
   push:
     branches:
-      - 'release/*'
+      - 'release/**'
   workflow_dispatch:
 
 jobs:
