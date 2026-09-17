@@ -71,11 +71,6 @@ kotlin {
             implementation(libs.kotlinx.coroutines.test)
         }
 
-        val androidHostTest by getting
-        androidHostTest.dependencies {
-            implementation(libs.mockk)
-        }
-
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.compose.uiToolingPreview)

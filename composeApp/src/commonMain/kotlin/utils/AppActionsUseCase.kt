@@ -6,6 +6,6 @@
 package utils
 
 // Issue: Cannot restart on Desktop and iOS
-expect class AppActionsUseCase {
+interface AppActionsUseCase {
     fun restart()
 }

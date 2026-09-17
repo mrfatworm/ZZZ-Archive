@@ -13,6 +13,9 @@ import kotlinx.coroutines.flow.flow
 class FakeAgentRepository : AgentRepository {
     private var isError = false
 
+    var requestAndUpdateAgentsListDBCount = 0
+        private set
+
     fun setError(isError: Boolean) {
         this.isError = isError
     }
@@ -21,9 +24,12 @@ class FakeAgentRepository : AgentRepository {
         emit(stubAgentsList)
     }
 
-    override suspend fun requestAndUpdateAgentsListDB(): Result<Unit> = if (isError) {
-        Result.failure(Exception())
-    } else {
-        Result.success(Unit)
+    override suspend fun requestAndUpdateAgentsListDB(): Result<Unit> {
+        requestAndUpdateAgentsListDBCount++
+        return if (isError) {
+            Result.failure(Exception())
+        } else {
+            Result.success(Unit)
+        }
     }
 }

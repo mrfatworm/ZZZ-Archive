@@ -16,7 +16,6 @@ dependencies {
     implementation(libs.cryptography.provider.jdk)
     implementation(libs.compose.uiToolingPreview)
     debugImplementation(libs.compose.uiTooling)
-    testImplementation(libs.mockk)
 }
 
 android {

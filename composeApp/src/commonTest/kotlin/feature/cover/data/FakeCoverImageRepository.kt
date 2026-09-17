@@ -14,6 +14,9 @@ import kotlinx.coroutines.flow.flow
 class FakeCoverImageRepository : CoverImageRepository {
     private var isError = false
 
+    var requestAndUpdateCoverImagesListDBCount = 0
+        private set
+
     fun setError(isError: Boolean) {
         this.isError = isError
     }
@@ -22,9 +25,12 @@ class FakeCoverImageRepository : CoverImageRepository {
         emit(listOf(stubCoverImageListItemEntity))
     }
 
-    override suspend fun requestAndUpdateCoverImagesListDB(): Result<Unit> = if (isError) {
-        Result.failure(Exception())
-    } else {
-        Result.success(Unit)
+    override suspend fun requestAndUpdateCoverImagesListDB(): Result<Unit> {
+        requestAndUpdateCoverImagesListDBCount++
+        return if (isError) {
+            Result.failure(Exception())
+        } else {
+            Result.success(Unit)
+        }
     }
 }

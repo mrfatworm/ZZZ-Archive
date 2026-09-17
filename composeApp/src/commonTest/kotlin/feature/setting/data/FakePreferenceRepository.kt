@@ -9,12 +9,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import utils.Language
 
-class FakePreferenceRepository : PreferencesRepository {
-    private var isDarkTheme = true
+class FakePreferenceRepository(
+    private var defaultHoYoLabAccountUid: Int = 0,
+    private var isDarkTheme: Boolean = true,
+    private var uiScale: Float = 1f,
+    private var fontScale: Float = 1f
+) : PreferencesRepository {
     private var language = Language.English.code
-    private var uiScale = 1f
-    private var fontScale = 1f
-    private var defaultHoYoLabAccountUid = 0
 
     override fun getIsDarkTheme(): Flow<Boolean> = flow {
         emit(isDarkTheme)

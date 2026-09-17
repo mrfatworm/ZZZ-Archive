@@ -18,7 +18,6 @@ kotlinter = "5.4.2"
 koin = "4.2.0"
 ksp = "2.3.5"
 ktor = "3.4.1"
-mockk = "1.14.9"
 navigation-compose = "2.9.2"
 okio = "3.17.0"
 room = "2.8.4"
@@ -85,7 +84,6 @@ cryptography-provider-apple = { module = "dev.whyoleg.cryptography:cryptography-
 #=== Test
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
-mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

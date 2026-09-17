@@ -8,8 +8,8 @@ package utils
 import android.content.Context
 import android.content.Intent
 
-actual class AppActionsUseCase(private val context: Context) {
-    actual fun restart() {
+class AppActionsUseCaseImpl(private val context: Context) : AppActionsUseCase {
+    override fun restart() {
         val packageManager = context.packageManager
         val intent = packageManager.getLaunchIntentForPackage(context.packageName)!!
         val componentName = intent.component!!

@@ -8,10 +8,18 @@ package feature.setting.domain
 import com.mrfatworm.zzzarchive.ZzzConfig
 import utils.getPlatform
 
-class AppInfoUseCase {
-    fun getAppVersion(): String = ZzzConfig.VERSION
+interface AppInfoUseCase {
+    fun getAppVersion(): String
 
-    fun getDeviceInfo(): String = getPlatform().deviceName
+    fun getDeviceInfo(): String
 
-    fun getDeviceOs(): String = getPlatform().operatingSystemName
+    fun getDeviceOs(): String
+}
+
+class AppInfoUseCaseImpl : AppInfoUseCase {
+    override fun getAppVersion(): String = ZzzConfig.VERSION
+
+    override fun getDeviceInfo(): String = getPlatform().deviceName
+
+    override fun getDeviceOs(): String = getPlatform().operatingSystemName
 }

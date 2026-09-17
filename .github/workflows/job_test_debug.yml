@@ -5,8 +5,20 @@ on:
 
 jobs:
   test:
-    name: Unit Test
-    runs-on: ubuntu-latest
+    name: Unit Test (${{ matrix.name }})
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # commonTest 是共用的，每個 target 都會跑一次，才驗得到三平台的協程/排程差異。
+          - name: Android host & Desktop
+            os: ubuntu-latest
+            task: ':composeApp:testAndroidHostTest :composeApp:desktopTest'
+          - name: iOS Simulator
+            os: macos-latest
+            task: ':composeApp:iosSimulatorArm64Test'
 
     steps:
     - uses: actions/checkout@v4
@@ -18,6 +30,16 @@ jobs:
         java-version: '18'
         cache: gradle
 
+    # setup-java's gradle cache covers ~/.gradle only; the Kotlin/Native toolchain lives in ~/.konan
+    # and would otherwise be re-downloaded on every iOS run.
+    - name: Cache Kotlin/Native toolchain
+      if: runner.os == 'macOS'
+      uses: actions/cache@v4
+      with:
+        path: ~/.konan
+        key: ${{ runner.os }}-konan-${{ hashFiles('gradle/libs.versions.toml') }}
+        restore-keys: ${{ runner.os }}-konan-
+
     - name: Set up local.properties
       run: echo "AES_KEY=${{ secrets.AES_KEY }}" > local.properties
 
@@ -26,4 +48,4 @@ jobs:
 
       # Run Tests Build
     - name: Run tests
-      run: ./gradlew :composeApp:testAndroidHostTest
+      run: ./gradlew ${{ matrix.task }}

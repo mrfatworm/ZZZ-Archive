@@ -11,6 +11,7 @@ import feature.hoyolab.domain.HoYoLabManageUseCase
 import feature.hoyolab.domain.HoYoLabPreferenceUseCase
 import feature.news.domain.OfficialNewsUseCase
 import feature.setting.domain.AppInfoUseCase
+import feature.setting.domain.AppInfoUseCaseImpl
 import feature.setting.domain.LanguageUseCase
 import feature.setting.domain.LanguageUseCaseImpl
 import feature.setting.domain.ThemeUseCase
@@ -23,7 +24,7 @@ val useCaseModule = module {
     single<LanguageUseCase> { LanguageUseCaseImpl(get()) }
     single<OfficialNewsUseCase> { OfficialNewsUseCase(get(), get()) }
     single<AgentsListUseCase> { AgentsListUseCase(get(), get()) }
-    single<AppInfoUseCase> { AppInfoUseCase() }
+    single<AppInfoUseCase> { AppInfoUseCaseImpl() }
     single<ThemeUseCase> { ThemeUseCase(get()) }
     single<UpdateDatabaseUseCase> {
         UpdateDatabaseUseCase(get(), get())

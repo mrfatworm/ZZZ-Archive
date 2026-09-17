@@ -23,10 +23,11 @@ import network.ZzzHttpImpl
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import utils.AppActionsUseCase
+import utils.AppActionsUseCaseImpl
 
 actual val platformModule =
     module {
-        singleOf(::AppActionsUseCase)
+        single<AppActionsUseCase> { AppActionsUseCaseImpl() }
         singleOf(::RoomDatabaseFactory)
         singleOf(::DataStoreFactory)
         single<ZzzHttp> { ZzzHttpImpl(Darwin.create()) }

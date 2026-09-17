@@ -11,6 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ./gradlew formatKotlin                       # ktlint auto-fix
 ./gradlew :composeApp:testAndroidHostTest    # Unit tests (CI gate) — covers commonTest too
 ./gradlew :composeApp:desktopTest            # Same commonTest, run on the desktop JVM target
+./gradlew :composeApp:iosSimulatorArm64Test  # Same commonTest, run on the iOS simulator (macOS only)
 ```
 
 Run a single test class or method with the standard Gradle filter:
@@ -151,17 +152,24 @@ locale (`values`, `values-zh`, `values-zh-rCN`, `values-ja`), plus `drawable/` a
 
 ## Testing
 
-The split between the two test source sets is deliberate and load-bearing:
+Every test lives in **`commonTest`** — Repository, UseCase, mapper *and* ViewModel — so all three
+platforms run the same suite. There are no mocks: hand-written `Fake*` classes live next to the
+tests they serve (`FakeZzzHttp`, `FakeAgentListDao`, `FakeAgentRepository`, …). Reuse the existing
+Fake instead of reaching for a mocking library.
 
-- **`commonTest`** — Repository, UseCase and mapper tests. Runs on every target. **Fakes, not
-  mocks**: hand-written `Fake*` classes live next to the tests they serve (`FakeZzzHttp`,
-  `FakeAgentListDao`, `FakeAgentRepository`, …). Reuse the existing Fake instead of adding a mock.
-- **`androidHostTest`** — ViewModel tests only. They need `MainDispatcherRule` (a JUnit 4
-  `TestWatcher`) and MockK, neither of which is available in `commonTest`, so ViewModel coverage is
-  Android-host-only. This is the source set CI runs.
+Because UseCases are concrete classes rather than interfaces, a ViewModel test builds the *real*
+UseCase on top of Fake repositories, and asserts against the repository's own state instead of
+verifying calls. Only three collaborators are faked at the UseCase level, because their production
+implementations are platform-bound: `LanguageUseCase`, `AppInfoUseCase` and `AppActionsUseCase`.
 
-`testAndroidHostTest` compiles and runs `commonTest` as well, so it alone is a sufficient local
-gate. `desktopTest` and `iosTest` add only a placeholder test each of their own.
+ViewModels need a `Dispatchers.Main`, which desktop and iOS do not have by default. Test classes
+extend **`MainDispatcherTest`** (`commonTest/kotlin/MainDispatcherTest.kt`), the multiplatform
+replacement for the old JUnit 4 `MainDispatcherRule`; it installs an `UnconfinedTestDispatcher` from
+its `init` block so the ViewModel can be built in a subclass property initializer.
+
+`testAndroidHostTest` compiles and runs `commonTest`, so it is a sufficient local gate, but CI runs
+`testAndroidHostTest` + `desktopTest` on Linux and `iosSimulatorArm64Test` on macOS.
+`desktopTest` and `iosTest` add only a placeholder test each of their own.
 
 ## Conventions
 
