@@ -67,6 +67,8 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
+      # The build variant comes from the Xcode configuration: "Production Release" sets
+      # VARIANT = Live, which the Gradle build phase forwards as -Pzzz.variant=Live.
       - name: Fastlane Beta
         uses: maierj/fastlane-action@v3.1.0
         with:

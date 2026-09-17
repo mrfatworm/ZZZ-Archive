@@ -15,3 +15,15 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.room) apply false
 }
+
+// Resolved once here so the Android flavor, desktop packaging and ZzzConfig can never disagree
+// about which asset branch a build targets. Every module reads it back from its own `extra`.
+val zzzVariant = providers.gradleProperty("zzz.variant").orNull ?: "Dev"
+require(zzzVariant in setOf("Dev", "Live")) {
+    "zzz.variant must be \"Dev\" or \"Live\" but was \"$zzzVariant\". " +
+        "Set it in gradle.properties or pass -Pzzz.variant=Live."
+}
+
+subprojects {
+    extra["zzzVariant"] = zzzVariant
+}

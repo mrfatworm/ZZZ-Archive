@@ -109,25 +109,6 @@ kotlinter {
     reporters = arrayOf("checkstyle", "plain")
 }
 
-fun Project.getAndroidBuildVariantOrNull(): String? {
-    val variants = setOf("Dev", "Live")
-    val taskRequestsStr = gradle.startParameter.taskRequests.toString()
-    val regex = if ("assemble" in taskRequestsStr) {
-        Regex("assemble(\\w+)(Release|Debug)")
-    } else {
-        Regex("bundle(\\w+)(Release|Debug)")
-    }
-    val variant = regex.find(taskRequestsStr)?.groupValues?.get(1)
-    return variant?.takeIf { it in variants }
-}
-
-fun Project.currentBuildVariant(): String {
-    val variants = setOf("Dev", "Live")
-    return getAndroidBuildVariantOrNull()
-        ?: providers.environmentVariable("VARIANT").orNull?.takeIf { it in variants }
-        ?: "Dev"
-}
-
 val localPropertiesFile = project.rootProject.file("local.properties")
 val aesKey: String = if (localPropertiesFile.exists()) {
     localPropertiesFile.readLines()
@@ -139,13 +120,11 @@ val aesKey: String = if (localPropertiesFile.exists()) {
 }
 
 val zzzVersionName = libs.versions.zzzVersionName.get()
+val isLive = project.extra["zzzVariant"] == "Live"
 
 buildConfig {
     packageName = libs.versions.zzzPackageId.get()
     className = "ZzzConfig"
-
-    val variant = currentBuildVariant()
-    val isLive = variant == "Live"
 
     buildConfigField<String>(
         "ASSET_PATH",

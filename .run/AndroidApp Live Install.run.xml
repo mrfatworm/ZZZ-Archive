@@ -1,0 +1,30 @@
+<component name="ProjectRunConfigurationManager">
+  <!-- 正式身分（com.mrfatworm.zzzarchive、main 分支資產）裝到裝置：Android App 類型的
+       run config 吃不到 per-config 的 gradle property，而 Live flavor 只在
+       -Pzzz.variant=Live 下才存在，所以 Live 走 Gradle installLiveDebug＋手動點圖示啟動。 -->
+  <configuration default="false" name="AndroidApp Live Install" type="GradleRunConfiguration" factoryName="Gradle">
+    <ExternalSystemSettings>
+      <option name="executionName" />
+      <option name="externalProjectPath" value="$PROJECT_DIR$" />
+      <option name="externalSystemIdString" value="GRADLE" />
+      <option name="scriptParameters" value="-Pzzz.variant=Live" />
+      <option name="taskDescriptions">
+        <list />
+      </option>
+      <option name="taskNames">
+        <list>
+          <option value=":androidApp:installLiveDebug" />
+        </list>
+      </option>
+      <option name="vmOptions" />
+    </ExternalSystemSettings>
+    <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+    <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+    <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+    <DebugAllEnabled>false</DebugAllEnabled>
+    <RunAsTest>false</RunAsTest>
+    <GradleProfilingDisabled>false</GradleProfilingDisabled>
+    <GradleCoverageDisabled>false</GradleCoverageDisabled>
+    <method v="2" />
+  </configuration>
+</component>

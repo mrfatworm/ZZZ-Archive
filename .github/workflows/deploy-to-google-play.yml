@@ -31,7 +31,7 @@ jobs:
 
       # Build the Android AAB (or APK if preferred)
       - name: Build Android AAB
-        run: ./gradlew :androidApp:bundleLiveRelease
+        run: ./gradlew :androidApp:bundleLiveRelease -Pzzz.variant=Live
 
       # Sign KeyStore
       - name: Sign Release

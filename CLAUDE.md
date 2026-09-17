@@ -21,8 +21,35 @@ Run a single test class or method with the standard Gradle filter:
 ./gradlew :composeApp:desktopTest --tests "*AgentsListUseCaseTest.getFactionsList*"
 ```
 
-Android builds are flavored `Dev` / `Live` (`assembleDevDebug`, `bundleLiveRelease`, …). Desktop
-picks its flavor from the `VARIANT` environment variable instead; anything else defaults to `Dev`.
+The same commands are committed as shared IDE run configurations under `.run/` — `AndroidApp Dev`,
+`AndroidApp Live Install`, `DesktopApp Dev` / `Live` / `Hot Reload`, `Lint Kotlin`, `Format Kotlin`,
+`Unit Tests` and `Unit Tests All Platforms`. They sit outside `.idea/` (which is gitignored) so every
+machine gets the same list. iOS is not among them: it runs from the `iosApp *` entries Android Studio
+generates per machine in `.idea/runConfigurations/`, one per Xcode configuration.
+
+### Build variant
+
+`Dev` / `Live` is decided by **one** Gradle property, `zzz.variant`, defaulting to `Dev` in
+`gradle.properties`. The root `build.gradle.kts` validates it (an unknown value fails the build) and
+hands it to every module through `extra["zzzVariant"]`, which `composeApp` turns into
+`ZzzConfig`, `androidApp` into its product flavor, and `desktopApp` into its package id.
+
+```bash
+./gradlew :androidApp:assembleLiveRelease -Pzzz.variant=Live   # Live
+./gradlew :desktopApp:run                                      # Dev, from gradle.properties
+```
+
+To build Live from the IDE, where `-P` is not available, set `zzz.variant=Live` in
+`~/.gradle/gradle.properties` — it outranks the project file in Gradle's property precedence, so it
+switches the machine without touching a tracked file. Never commit a non-`Dev` value to
+`gradle.properties`; CI asserts the committed default, because a `Live` default would silently point
+every local build at the production asset branch.
+
+Only the flavor named by the property is created, so `assembleLiveRelease` exists **only** under
+`-Pzzz.variant=Live` — a mismatched pair fails as an unknown task rather than quietly shipping the
+wrong asset branch. iOS has no Gradle entry point of its own: each Xcode configuration sets a
+`VARIANT` build setting (`Dev Debug` → `Dev`, `Production Release` → `Live`) and the framework build
+phase forwards it as `-Pzzz.variant`.
 
 ## Architecture
 
@@ -110,7 +137,7 @@ Android/desktop, Darwin on iOS) from `platformModule`.
 Game data is not a real API: it is JSON committed to the separate **`mrfatworm/ZZZ-Archive-Asset`**
 repo and fetched from `raw.githubusercontent.com`. The branch is chosen by build variant — `Live`
 reads that repo's `main`, `Dev` reads its `dev` — via `ZzzConfig.API_PATH` / `ASSET_PATH`, generated
-by the BuildConfig plugin in `composeApp/build.gradle.kts`.
+by the BuildConfig plugin in `composeApp/build.gradle.kts` from `zzz.variant`.
 
 ### DI (Koin)
 

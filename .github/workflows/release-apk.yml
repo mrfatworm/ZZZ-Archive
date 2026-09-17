@@ -31,7 +31,7 @@ jobs:
         run: echo "AES_KEY=${{ secrets.AES_KEY }}" > local.properties
 
       - name: Build Android APK
-        run: ./gradlew :androidApp:assembleLiveRelease
+        run: ./gradlew :androidApp:assembleLiveRelease -Pzzz.variant=Live
 
       - name: Sign Release
         id: sign_app

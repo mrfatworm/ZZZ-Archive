@@ -19,7 +19,7 @@ dependencies {
     implementation(libs.compose.uiToolingPreview)
 }
 val zzzPackageId = libs.versions.zzzPackageId.get()
-val isLive = providers.environmentVariable("VARIANT").orNull == "Live"
+val isLive = project.extra["zzzVariant"] == "Live"
 val desktopPackageId = if (isLive) zzzPackageId else "$zzzPackageId.dev"
 val macExtraPlistKeys: String
     get() = """

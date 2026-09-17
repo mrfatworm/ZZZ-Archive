@@ -24,6 +24,17 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
+    # A committed zzz.variant=Live would silently point every default build at the production asset
+    # branch, and nothing else in the build would complain. Switch machines via
+    # ~/.gradle/gradle.properties instead.
+    - name: Assert committed build variant is Dev
+      run: |
+        variant=$(sed -n 's/^zzz\.variant=//p' gradle.properties)
+        if [ "$variant" != "Dev" ]; then
+          echo "::error file=gradle.properties::zzz.variant must stay Dev in gradle.properties (found \"$variant\")"
+          exit 1
+        fi
+
     - name: Execute Kotlinter Check
       run: ./gradlew lintKotlin
 

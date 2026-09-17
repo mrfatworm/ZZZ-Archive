@@ -18,6 +18,8 @@ dependencies {
     debugImplementation(libs.compose.uiTooling)
 }
 
+val zzzVariant = project.extra["zzzVariant"] as String
+
 android {
     namespace = "com.mrfatworm.zzzarchive"
     compileSdk = 37
@@ -30,18 +32,21 @@ android {
         versionName = libs.versions.zzzVersionName.get()
     }
 
+    // Only the flavor named by zzz.variant is created, so `assembleLiveRelease` exists only under
+    // -Pzzz.variant=Live. A mismatch fails as an unknown task instead of quietly shipping the wrong
+    // asset branch.
     flavorDimensions.add("variant")
     productFlavors {
-        create("Dev") {
+        create(zzzVariant) {
             isDefault = true
             dimension = "variant"
-            applicationIdSuffix = ".dev"
-            versionNameSuffix = " Beta"
-            resValue("string", "app_name_variant", "ZZZ Archive-Beta")
-        }
-        create("Live") {
-            dimension = "variant"
-            resValue("string", "app_name_variant", "ZZZ Archive")
+            if (zzzVariant == "Dev") {
+                applicationIdSuffix = ".dev"
+                versionNameSuffix = " Beta"
+                resValue("string", "app_name_variant", "ZZZ Archive-Beta")
+            } else {
+                resValue("string", "app_name_variant", "ZZZ Archive")
+            }
         }
     }
 
