@@ -22,6 +22,7 @@ class PreferencesRepositoryImpl(private val dataStore: DataStore<Preferences>) :
         const val DEFAULT_UI_SCALE = 1f
         const val DEFAULT_FONT_SCALE = 1f
         const val DEFAULT_HOYOLAB_ACCOUNT_UID = 0
+        const val DEFAULT_HOYOLAB_CREDENTIALS_MIGRATED = false
     }
 
     private val isDarkThemeKey = booleanPreferencesKey("is_dark_theme")
@@ -29,6 +30,7 @@ class PreferencesRepositoryImpl(private val dataStore: DataStore<Preferences>) :
     private val uiScaleKey = floatPreferencesKey("ui_scale")
     private val fontScaleKey = floatPreferencesKey("font_scale")
     private val defaultHoYoLabAccountUidKey = intPreferencesKey("default_hoyolab_account_uid")
+    private val hoYoLabCredentialsMigratedKey = booleanPreferencesKey("hoyolab_credentials_migrated")
 
     override fun getIsDarkTheme(): Flow<Boolean> = dataStore.data.map {
         it[isDarkThemeKey] ?: DEFAULT_IS_DARK_THEME
@@ -68,6 +70,14 @@ class PreferencesRepositoryImpl(private val dataStore: DataStore<Preferences>) :
 
     override suspend fun setDefaultHoYoLabAccountUid(value: Int) {
         dataStore.edit { it[defaultHoYoLabAccountUidKey] = value }
+    }
+
+    override fun getHoYoLabCredentialsMigrated(): Flow<Boolean> = dataStore.data.map {
+        it[hoYoLabCredentialsMigratedKey] ?: DEFAULT_HOYOLAB_CREDENTIALS_MIGRATED
+    }
+
+    override suspend fun setHoYoLabCredentialsMigrated(value: Boolean) {
+        dataStore.edit { it[hoYoLabCredentialsMigratedKey] = value }
     }
 
     override suspend fun clear() {

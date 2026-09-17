@@ -7,6 +7,7 @@ import feature.cover.domain.CoverImageUseCase
 import feature.forum.domain.ForumUseCase
 import feature.hoyolab.domain.GameRecordUseCase
 import feature.hoyolab.domain.HoYoLabAgentUseCase
+import feature.hoyolab.domain.HoYoLabCredentialMigrationUseCase
 import feature.hoyolab.domain.HoYoLabManageUseCase
 import feature.hoyolab.domain.HoYoLabPreferenceUseCase
 import feature.news.domain.OfficialNewsUseCase
@@ -31,6 +32,9 @@ val useCaseModule = module {
     }
     single<UiScaleUseCase> { UiScaleUseCase(get()) }
     single<HoYoLabManageUseCase> { HoYoLabManageUseCase(get(), get(), get()) }
+    single<HoYoLabCredentialMigrationUseCase> {
+        HoYoLabCredentialMigrationUseCase(get(), get(), get(), get(), get())
+    }
     single<HoYoLabAgentUseCase> { HoYoLabAgentUseCase(get(), get(), get(), get(), get()) }
     single<HoYoLabPreferenceUseCase> { HoYoLabPreferenceUseCase(get()) }
     single<GameRecordUseCase> { GameRecordUseCase(get(), get(), get(), get(), get()) }

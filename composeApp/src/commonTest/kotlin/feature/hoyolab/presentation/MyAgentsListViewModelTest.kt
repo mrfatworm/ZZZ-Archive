@@ -6,7 +6,7 @@
 package feature.hoyolab.presentation
 
 import MainDispatcherTest
-import feature.hoyolab.data.crypto.FakeZzzCrypto
+import feature.hoyolab.data.credential.FakeHoYoLabCredentialStore
 import feature.hoyolab.data.database.FakeHoYoLabAccountDao
 import feature.hoyolab.data.database.stubHoYoLabAccountEntity
 import feature.hoyolab.data.repository.FakeHoYoLabAgentRepository
@@ -24,7 +24,7 @@ class MyAgentsListViewModelTest : MainDispatcherTest() {
             repository = agentRepository,
             accountDao = FakeHoYoLabAccountDao(),
             preferencesRepository = FakePreferenceRepository(stubHoYoLabAccountEntity.uid),
-            zzzCrypto = FakeZzzCrypto(),
+            credentialStore = FakeHoYoLabCredentialStore(),
             languageUseCase = FakeLanguageUseCase()
         )
     private val viewModel = MyAgentsListViewModel(hoYoLabAgentUseCase)

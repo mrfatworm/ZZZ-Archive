@@ -19,6 +19,16 @@ data class HoYoLabAccountEntity(
     val nickName: String,
     val profileUrl: String,
     val cardUrl: String,
+    /**
+     * Legacy. The session cookies now live in `HoYoLabCredentialStore`, behind the platform key
+     * store; `HoYoLabCredentialMigrationUseCase` blanks both columns on first launch after the
+     * move. They stay on the entity only because the migration has to read them out of an
+     * already-open database, so the columns cannot be dropped in the same release that stops
+     * using them. Remove both, together with `ZzzCrypto`, `ByteArrayConverter`,
+     * `ZzzConfig.AES_KEY` and the `cryptography-*` dependencies, once the releases that still
+     * run that migration are out of circulation — a real Room migration, since this database has
+     * no destructive shortcut.
+     */
     val lToken: ByteArray,
     val ltUid: ByteArray,
     val updatedAt: Long

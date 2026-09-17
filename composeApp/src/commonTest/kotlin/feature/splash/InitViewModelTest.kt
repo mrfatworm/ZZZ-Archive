@@ -6,6 +6,11 @@
 package feature.splash
 
 import MainDispatcherTest
+import feature.hoyolab.data.credential.FakeHoYoLabCredentialStore
+import feature.hoyolab.data.crypto.FakeZzzCrypto
+import feature.hoyolab.data.repository.FakeHoYoLabConfigRepository
+import feature.hoyolab.domain.HoYoLabCredentialMigrationUseCase
+import feature.hoyolab.domain.HoYoLabManageUseCase
 import feature.setting.data.FakePreferenceRepository
 import feature.setting.domain.FakeAppInfoUseCase
 import feature.setting.domain.FakeLanguageUseCase
@@ -22,12 +27,23 @@ class InitViewModelTest : MainDispatcherTest() {
     private val preferencesRepository =
         FakePreferenceRepository(isDarkTheme = false, uiScale = 1.5f, fontScale = 0.8f)
     private val appInfoUseCase = FakeAppInfoUseCase()
+    private val hoYoLabConfigRepository = FakeHoYoLabConfigRepository()
+    private val credentialStore = FakeHoYoLabCredentialStore()
     private val viewModel =
         InitViewModel(
             themeUseCase = ThemeUseCase(preferencesRepository),
             uiScaleUseCase = UiScaleUseCase(preferencesRepository),
             languageUseCase = FakeLanguageUseCase(),
-            appInfoUseCase = appInfoUseCase
+            appInfoUseCase = appInfoUseCase,
+            hoYoLabCredentialMigrationUseCase =
+                HoYoLabCredentialMigrationUseCase(
+                    hoYoLabConfigRepository = hoYoLabConfigRepository,
+                    credentialStore = credentialStore,
+                    legacyCrypto = FakeZzzCrypto(),
+                    preferencesRepository = preferencesRepository,
+                    hoYoLabManageUseCase =
+                        HoYoLabManageUseCase(hoYoLabConfigRepository, credentialStore, preferencesRepository)
+                )
         )
 
     @Test

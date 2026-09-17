@@ -22,6 +22,10 @@ interface HoYoLabAccountDao {
     @Query("SELECT * FROM HoYoLabAccountEntity WHERE uid = :uid")
     fun getAccount(uid: Int): Flow<HoYoLabAccountEntity?>
 
+    /** See [HoYoLabAccountEntity.lToken]: blanks the columns the credentials used to live in. */
+    @Query("UPDATE HoYoLabAccountEntity SET lToken = '', ltUid = '' WHERE uid = :uid")
+    suspend fun clearLegacyCredentials(uid: Int)
+
     @Query("DELETE FROM HoYoLabAccountEntity WHERE uid = :uid")
     suspend fun deleteAccount(uid: Int)
 

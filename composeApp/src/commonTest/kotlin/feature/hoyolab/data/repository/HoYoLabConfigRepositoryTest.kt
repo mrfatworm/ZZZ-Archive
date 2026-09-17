@@ -99,6 +99,14 @@ class HoYoLabConfigRepositoryTest {
     }
 
     @Test
+    fun `Clear the legacy credential columns`() = runTest {
+        repository.clearLegacyCredentialsInDB(123456789)
+        val account = dao.getAccount(123456789).first()
+        assertEquals(0, account?.lToken?.size)
+        assertEquals(0, account?.ltUid?.size)
+    }
+
+    @Test
     fun `Delete account from database`() = runTest {
         dao.deleteAccount(123456789)
         val result = dao.getAccountList().firstOrNull()

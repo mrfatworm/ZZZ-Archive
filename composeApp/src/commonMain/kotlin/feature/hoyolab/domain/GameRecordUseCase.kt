@@ -5,7 +5,7 @@
 
 package feature.hoyolab.domain
 
-import feature.hoyolab.data.crypto.ZzzCrypto
+import feature.hoyolab.data.credential.HoYoLabCredentialStore
 import feature.hoyolab.data.database.HoYoLabAccountDao
 import feature.hoyolab.data.repository.HoYoLabConfigRepository
 import feature.hoyolab.model.GameRecordData
@@ -22,7 +22,7 @@ class GameRecordUseCase(
     private val hoYoLabConfigRepository: HoYoLabConfigRepository,
     private val accountDao: HoYoLabAccountDao,
     private val preferencesRepository: PreferencesRepository,
-    private val zzzCrypto: ZzzCrypto,
+    private val credentialStore: HoYoLabCredentialStore,
     private val languageUseCase: LanguageUseCase
 ) {
     private suspend fun getGameRecord(): Result<GameRecordData> {
@@ -30,24 +30,23 @@ class GameRecordUseCase(
         val account = accountDao.getAccount(defaultAccountUid).filterNotNull().first()
         val region = account.region
         val uid = account.uid
-        try {
-            val lToken = zzzCrypto.decryptData(account.lToken)
-            val ltUid = zzzCrypto.decryptData(account.ltUid)
-            hoYoLabConfigRepository.requestGameRecord(
-                uid = uid,
-                region = region,
-                lToken = lToken,
-                ltUid = ltUid
-            ).fold(onSuccess = {
-                return Result.success(it.data)
-            }, onFailure = {
-                return Result.failure(it)
-            })
-        } catch (e: Exception) {
-            accountDao.deleteAccountList()
+        // Without a credential the row can never be synced again, so it is dropped rather than
+        // left behind as an account that silently fails on every poll.
+        val credential = credentialStore.read(uid) ?: run {
+            accountDao.deleteAccount(uid)
             preferencesRepository.setDefaultHoYoLabAccountUid(0)
-            return Result.failure(e)
+            return Result.failure(MissingHoYoLabCredentialException(uid))
         }
+        hoYoLabConfigRepository.requestGameRecord(
+            uid = uid,
+            region = region,
+            lToken = credential.lToken,
+            ltUid = credential.ltUid
+        ).fold(onSuccess = {
+            return Result.success(it.data)
+        }, onFailure = {
+            return Result.failure(it)
+        })
     }
 
     fun getGameRecordPeriodically(perMinutes: Int): Flow<Result<GameRecordData>> = flow {
@@ -59,11 +58,16 @@ class GameRecordUseCase(
 
     suspend fun sign(): Result<SignResponse> {
         val defaultAccountUid = preferencesRepository.getDefaultHoYoLabAccountUid().first()
-        val account = accountDao.getAccount(defaultAccountUid).filterNotNull()
+        val account = accountDao.getAccount(defaultAccountUid).filterNotNull().first()
         val languageCode = languageUseCase.getLanguage().first().officialCode
-        val lToken = zzzCrypto.decryptData(account.first().lToken)
-        val ltUid = zzzCrypto.decryptData(account.first().ltUid)
-        val result = hoYoLabConfigRepository.requestSign(languageCode = languageCode, lToken = lToken, ltUid = ltUid)
+        val credential =
+            credentialStore.read(account.uid) ?: return Result.failure(MissingHoYoLabCredentialException(account.uid))
+        val result =
+            hoYoLabConfigRepository.requestSign(
+                languageCode = languageCode,
+                lToken = credential.lToken,
+                ltUid = credential.ltUid
+            )
         result.fold(onSuccess = {
             return Result.success(it)
         }, onFailure = {

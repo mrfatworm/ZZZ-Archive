@@ -190,6 +190,7 @@
     <string name="hoyolab_sync_announcement">本页面提交的数据仅用于 HoYoLab 的请求处理，并加密存储在您的设备中。我们不会收集任何信息。</string>
     <string name="remove_account_hint">是否取消账号关联\n（从本设备清除该账号数据）</string>
     <string name="add_account">添加账号</string>
+    <string name="hoyolab_account_relink_required">在将已保存的凭证移至设备安全存储区时，HoYoLab 账号关联已被取消，请重新关联。</string>
 
     <!-- HoYoLab Sync Tutorial -->
     <string name="instruction_guide">使用教程</string>

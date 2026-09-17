@@ -1,6 +1,6 @@
 package feature.hoyolab.domain
 
-import feature.hoyolab.data.crypto.ZzzCrypto
+import feature.hoyolab.data.credential.HoYoLabCredentialStore
 import feature.hoyolab.data.database.HoYoLabAccountDao
 import feature.hoyolab.data.repository.HoYoLabAgentRepository
 import feature.hoyolab.model.MyAgentListItem
@@ -14,7 +14,7 @@ class HoYoLabAgentUseCase(
     private val repository: HoYoLabAgentRepository,
     private val accountDao: HoYoLabAccountDao,
     private val preferencesRepository: PreferencesRepository,
-    private val zzzCrypto: ZzzCrypto,
+    private val credentialStore: HoYoLabCredentialStore,
     private val languageUseCase: LanguageUseCase
 ) {
     suspend fun getAgentsList(): Result<List<MyAgentListItem>> {
@@ -22,15 +22,14 @@ class HoYoLabAgentUseCase(
         val account = accountDao.getAccount(defaultAccountUid).filterNotNull().first()
         val languageCode = languageUseCase.getLanguage().first().officialCode
         val region = account.region
-        val lToken = zzzCrypto.decryptData(account.lToken)
-        val ltUid = zzzCrypto.decryptData(account.ltUid)
         val uid = account.uid
+        val credential = credentialStore.read(uid) ?: return Result.failure(MissingHoYoLabCredentialException(uid))
         val result = repository.requestPlayerAgentList(
             languageCode = languageCode,
             uid = uid,
             region = region,
-            lToken = lToken,
-            ltUid = ltUid
+            lToken = credential.lToken,
+            ltUid = credential.ltUid
         )
         result.fold(onSuccess = {
             return Result.success(it)
@@ -44,16 +43,15 @@ class HoYoLabAgentUseCase(
         val account = accountDao.getAccount(defaultAccountUid).filterNotNull().first()
         val languageCode = languageUseCase.getLanguage().first().officialCode
         val region = account.region
-        val lToken = zzzCrypto.decryptData(account.lToken)
-        val ltUid = zzzCrypto.decryptData(account.ltUid)
         val uid = account.uid
+        val credential = credentialStore.read(uid) ?: return Result.failure(MissingHoYoLabCredentialException(uid))
         val result =
             repository.requestPlayerAgentDetail(
                 languageCode = languageCode,
                 uid = uid,
                 region = region,
-                lToken = lToken,
-                ltUid = ltUid,
+                lToken = credential.lToken,
+                ltUid = credential.ltUid,
                 agentId = agentId
             )
         result.fold(onSuccess = {

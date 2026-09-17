@@ -120,7 +120,9 @@ class HoYoLabSyncViewModel(
         if (!uiState.value.syncable) return
         _uiState.update { it.copy(syncable = false) }
         viewModelScope.launch {
-            hoYoLabManageUseCase.reSyncAccount(action.uid.toInt())
+            hoYoLabManageUseCase.reSyncAccount(action.uid.toInt()).onFailure { error ->
+                _uiState.update { it.copy(errorMessage = error.message ?: "Unknown error") }
+            }
             delay(8000)
             _uiState.update { it.copy(syncable = true) }
         }

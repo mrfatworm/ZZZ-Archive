@@ -62,6 +62,7 @@ kotlin {
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
             implementation(libs.cryptography.core)
+            implementation(libs.ksafe)
             implementation(libs.kotlinx.datetime)
             implementation(libs.androidx.datastore.core)
         }

@@ -17,7 +17,7 @@ import feature.cover.domain.CoverImageUseCase
 import feature.forum.data.FakeForumRepository
 import feature.forum.domain.ForumUseCase
 import feature.forum.model.stubAllForumState
-import feature.hoyolab.data.crypto.FakeZzzCrypto
+import feature.hoyolab.data.credential.FakeHoYoLabCredentialStore
 import feature.hoyolab.data.database.FakeHoYoLabAccountDao
 import feature.hoyolab.data.database.stubHoYoLabAccountEntity
 import feature.hoyolab.data.repository.FakeHoYoLabConfigRepository
@@ -64,7 +64,7 @@ class HomeViewModelTest : MainDispatcherTest() {
                     hoYoLabConfigRepository = FakeHoYoLabConfigRepository(),
                     accountDao = FakeHoYoLabAccountDao(),
                     preferencesRepository = preferencesRepository,
-                    zzzCrypto = FakeZzzCrypto(),
+                    credentialStore = FakeHoYoLabCredentialStore(),
                     languageUseCase = FakeLanguageUseCase()
                 )
         )

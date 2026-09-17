@@ -7,7 +7,7 @@ package feature.hoyolab.presentation
 
 import MainDispatcherTest
 import androidx.lifecycle.SavedStateHandle
-import feature.hoyolab.data.crypto.FakeZzzCrypto
+import feature.hoyolab.data.credential.FakeHoYoLabCredentialStore
 import feature.hoyolab.data.database.FakeHoYoLabAccountDao
 import feature.hoyolab.data.database.stubHoYoLabAccountEntity
 import feature.hoyolab.data.repository.FakeHoYoLabAgentRepository
@@ -26,7 +26,7 @@ class MyAgentDetailViewModelTest : MainDispatcherTest() {
             repository = FakeHoYoLabAgentRepository(),
             accountDao = FakeHoYoLabAccountDao(),
             preferencesRepository = preferencesRepository,
-            zzzCrypto = FakeZzzCrypto(),
+            credentialStore = FakeHoYoLabCredentialStore(),
             languageUseCase = FakeLanguageUseCase()
         )
     private val savedStateHandle = SavedStateHandle().apply { set("id", 1) }

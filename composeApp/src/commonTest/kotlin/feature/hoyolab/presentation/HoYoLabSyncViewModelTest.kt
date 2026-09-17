@@ -6,7 +6,7 @@
 package feature.hoyolab.presentation
 
 import MainDispatcherTest
-import feature.hoyolab.data.crypto.FakeZzzCrypto
+import feature.hoyolab.data.credential.FakeHoYoLabCredentialStore
 import feature.hoyolab.data.database.stubHoYoLabAccountEntity
 import feature.hoyolab.data.repository.FakeHoYoLabConfigRepository
 import feature.hoyolab.domain.HoYoLabManageUseCase
@@ -22,7 +22,7 @@ class HoYoLabSyncViewModelTest : MainDispatcherTest() {
     private val hoYoLabConfigRepository = FakeHoYoLabConfigRepository()
     private val preferencesRepository = FakePreferenceRepository(stubHoYoLabAccountEntity.uid)
     private val hoYoLabManageUseCase =
-        HoYoLabManageUseCase(hoYoLabConfigRepository, FakeZzzCrypto(), preferencesRepository)
+        HoYoLabManageUseCase(hoYoLabConfigRepository, FakeHoYoLabCredentialStore(), preferencesRepository)
     private val viewModel =
         HoYoLabSyncViewModel(
             hoYoLabManageUseCase,

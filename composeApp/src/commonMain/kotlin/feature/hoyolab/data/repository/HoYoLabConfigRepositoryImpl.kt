@@ -77,8 +77,6 @@ class HoYoLabConfigRepositoryImpl(
         nickName: String,
         profileUrl: String,
         cardUrl: String,
-        lToken: ByteArray,
-        ltUid: ByteArray,
         updatedAt: Long
     ) {
         hoYoLabAccountDao.insertAccount(
@@ -90,12 +88,19 @@ class HoYoLabConfigRepositoryImpl(
                 nickName = nickName,
                 profileUrl = profileUrl,
                 cardUrl = cardUrl,
-                lToken = lToken,
-                ltUid = ltUid,
+                lToken = EMPTY_LEGACY_CREDENTIAL,
+                ltUid = EMPTY_LEGACY_CREDENTIAL,
                 updatedAt = updatedAt
             )
         )
     }
 
+    override suspend fun clearLegacyCredentialsInDB(uid: Int) = hoYoLabAccountDao.clearLegacyCredentials(uid)
+
     override suspend fun deleteAccountFromDB(uid: Int) = hoYoLabAccountDao.deleteAccount(uid)
+
+    private companion object {
+        // The columns still exist; nothing writes a credential into them any more.
+        val EMPTY_LEGACY_CREDENTIAL = ByteArray(0)
+    }
 }

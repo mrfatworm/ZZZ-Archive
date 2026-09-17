@@ -7,6 +7,8 @@ package di
 
 import database.RoomDatabaseFactory
 import datastore.DataStoreFactory
+import eu.anifantakis.lib.ksafe.KSafe
+import eu.anifantakis.lib.ksafe.KSafeConfig
 import io.ktor.client.engine.okhttp.OkHttp
 import network.ForumHttp
 import network.ForumHttpImpl
@@ -30,6 +32,9 @@ actual val platformModule =
         single<AppActionsUseCase> { AppActionsUseCaseImpl() }
         singleOf(::RoomDatabaseFactory)
         singleOf(::DataStoreFactory)
+        // The desktop OS secret store is shared by everything the user runs, so the key slot has
+        // to be namespaced by hand; Android and iOS separate apps for us and ignore the field.
+        single { KSafe(config = KSafeConfig(appNamespace = "com.mrfatworm.zzzarchive")) }
         single<ZzzHttp> { ZzzHttpImpl(OkHttp.create()) }
         single<OfficialWebHttp> { OfficialWebHttpImpl(OkHttp.create()) }
         single<PixivHttp> { PixivHttpImpl(OkHttp.create()) }

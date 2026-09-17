@@ -119,13 +119,43 @@ There are **two Room databases**, split by migration policy rather than by featu
   and `CoverImageListItemEntity`, one DAO each. It is built with
   `fallbackToDestructiveMigration(true)`, so a schema change never needs a hand-written migration.
   New cache tables belong here; only add one if losing its rows is harmless.
-- `HoYoLabAccountDB` stays on its own because it stores credentials the user pasted by hand. It
-  cannot take the destructive shortcut, so keeping it apart keeps the two policies apart.
+- `HoYoLabAccountDB` stays on its own because losing its rows means the user has to link every
+  HoYoLab account by hand again. It cannot take the destructive shortcut, so keeping it apart keeps
+  the two policies apart. The session cookies themselves are **not** in it — see
+  [HoYoLab credentials](#hoyolab-credentials).
 
 `RoomDatabaseFactory.deleteLegacyCacheDatabases()` drops `agent_list.db` and
 `cover_images_list.db`, the pre-consolidation caches, the first time `ZzzCacheDB` is built. It is
 temporary — remove it, and `ZzzCacheDB.LEGACY_DATABASE_NAMES`, once those versions are out of
 circulation.
+
+### HoYoLab credentials
+
+The `ltoken_v2` / `ltuid_v2` cookies the user pastes in are the one genuinely sensitive thing the
+app stores, and they do **not** go into Room. `HoYoLabCredentialStore`
+(`feature/hoyolab/data/credential/`) keeps them in **KSafe**, whose AES-GCM key is held by the
+platform rather than compiled into the binary: Android Keystore, the iOS Keychain, the host OS
+secret store on desktop. Keys are `hoyolab_ltoken_<uid>` / `hoyolab_ltuid_<uid>`, one pair per
+account row. Everything else about an account (uid, region, level, nickname, image urls) stays in
+Room, because the multi-account list is a query.
+
+Desktop is the weak corner and should not be described as hardware-backed: the JVM has no
+Keystore/Keychain equivalent that the app alone can reach, so anything running as the same user can
+still get at the key. What it buys there is a key that differs per machine instead of one shared by
+every install.
+
+Until 1.7.x the cookies sat in Room, AES-CBC encrypted under `ZzzConfig.AES_KEY` — one constant
+baked into the binary, and a *public* constant in any build made from these sources.
+`HoYoLabCredentialMigrationUseCase`, run from `InitViewModel` before anything else, moves them
+across once and blanks the columns; a row it cannot decrypt is unlinked and the user is asked to
+link it again. Until that migration is deleted:
+
+- **The `AES_KEY` CI secret must not be rotated.** Rotating it makes every existing user's cookies
+  undecryptable, and the migration's only answer to that is to unlink the account.
+- `ZzzCrypto` / `ZzzCryptoImpl` / `ByteArrayConverter`, the `lToken` / `ltUid` columns on
+  `HoYoLabAccountEntity`, `ZzzConfig.AES_KEY` and the `cryptography-*` dependencies all exist only
+  to serve it. Remove them together, with a real Room migration, once the releases that still run
+  it are out of circulation.
 
 ### Networking
 

@@ -5,7 +5,8 @@
 
 package feature.hoyolab.domain
 
-import feature.hoyolab.data.crypto.ZzzCrypto
+import feature.hoyolab.data.credential.HoYoLabCredential
+import feature.hoyolab.data.credential.HoYoLabCredentialStore
 import feature.hoyolab.data.database.HoYoLabAccountEntity
 import feature.hoyolab.data.repository.HoYoLabConfigRepository
 import feature.setting.data.PreferencesRepository
@@ -23,7 +24,7 @@ import kotlinx.datetime.toLocalDateTime
 
 class HoYoLabManageUseCase(
     private val hoYoLabConfigRepository: HoYoLabConfigRepository,
-    private val zzzCryptoImpl: ZzzCrypto,
+    private val credentialStore: HoYoLabCredentialStore,
     private val preferencesRepository: PreferencesRepository
 ) {
     suspend fun requestUserInfoAndSave(
@@ -48,7 +49,7 @@ class HoYoLabManageUseCase(
                         ltUid
                     )
                 playerDetailResult.fold(onSuccess = { playerDetail ->
-                    encryptAndSaveToDatabase(
+                    saveAccount(
                         accountInfo.first().uid,
                         region,
                         accountInfo.first().regionName,
@@ -69,8 +70,12 @@ class HoYoLabManageUseCase(
         })
     }
 
+    /**
+     * The credential goes to the platform key store first: an orphaned credential is harmless,
+     * whereas an account row without one can never be synced.
+     */
     @OptIn(ExperimentalTime::class)
-    private suspend fun encryptAndSaveToDatabase(
+    private suspend fun saveAccount(
         uid: String,
         region: String,
         regionName: String,
@@ -83,8 +88,7 @@ class HoYoLabManageUseCase(
     ) {
         setDefaultAccountIfFirstAccount(uid)
         val currentTime = Clock.System.now().toEpochMilliseconds()
-        val encryptLToken = zzzCryptoImpl.encryptData(lToken)
-        val encryptLtUid = zzzCryptoImpl.encryptData(ltUid)
+        credentialStore.save(uid.toInt(), HoYoLabCredential(lToken = lToken, ltUid = ltUid))
         hoYoLabConfigRepository.addAccountToDB(
             uid.toInt(),
             region,
@@ -93,17 +97,15 @@ class HoYoLabManageUseCase(
             nickName,
             profileUrl,
             cardUrl,
-            encryptLToken,
-            encryptLtUid,
             currentTime
         )
     }
 
-    suspend fun reSyncAccount(uid: Int) {
-        val account = hoYoLabConfigRepository.getAccountFromDB(uid).filterNotNull()
-        val decryptedLToken = zzzCryptoImpl.decryptData(account.first().lToken)
-        val decryptedLtUid = zzzCryptoImpl.decryptData(account.first().ltUid)
-        requestUserInfoAndSave(account.first().region, decryptedLToken, decryptedLtUid)
+    suspend fun reSyncAccount(uid: Int): Result<Unit> {
+        val account = hoYoLabConfigRepository.getAccountFromDB(uid).filterNotNull().first()
+        val credential = credentialStore.read(uid)
+            ?: return Result.failure(MissingHoYoLabCredentialException(uid))
+        return requestUserInfoAndSave(account.region, credential.lToken, credential.ltUid)
     }
 
     suspend fun getAllAccountsFromDB(): Flow<List<HoYoLabAccountEntity>> =
@@ -116,6 +118,7 @@ class HoYoLabManageUseCase(
     }
 
     suspend fun deleteAccountFromDB(uid: Int) {
+        credentialStore.delete(uid)
         hoYoLabConfigRepository.deleteAccountFromDB(uid)
         resetDefaultIfDeletedDefaultAccount(uid)
     }

@@ -15,8 +15,9 @@ class FakeHoYoLabAccountDao : HoYoLabAccountDao {
         accountList.add(account)
     }
 
+    // A copy, like the snapshot Room hands out: callers iterate it while deleting rows.
     override fun getAccountList(): Flow<List<HoYoLabAccountEntity>> = flow {
-        emit(accountList)
+        emit(accountList.toList())
     }
 
     override fun getAccount(uid: Int): Flow<HoYoLabAccountEntity> = flow {
@@ -24,6 +25,13 @@ class FakeHoYoLabAccountDao : HoYoLabAccountDao {
             if (it.uid == uid) {
                 emit(it)
             }
+        }
+    }
+
+    override suspend fun clearLegacyCredentials(uid: Int) {
+        val index = accountList.indexOfFirst { it.uid == uid }
+        if (index >= 0) {
+            accountList[index] = accountList[index].copy(lToken = ByteArray(0), ltUid = ByteArray(0))
         }
     }
 

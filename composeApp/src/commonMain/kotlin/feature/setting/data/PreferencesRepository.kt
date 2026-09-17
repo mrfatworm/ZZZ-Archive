@@ -28,5 +28,10 @@ interface PreferencesRepository {
 
     suspend fun setDefaultHoYoLabAccountUid(value: Int)
 
+    /** Whether `HoYoLabCredentialMigrationUseCase` has already run. */
+    fun getHoYoLabCredentialsMigrated(): Flow<Boolean>
+
+    suspend fun setHoYoLabCredentialsMigrated(value: Boolean)
+
     suspend fun clear()
 }

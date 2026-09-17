@@ -7,6 +7,7 @@ package di
 
 import database.RoomDatabaseFactory
 import datastore.DataStoreFactory
+import eu.anifantakis.lib.ksafe.KSafe
 import io.ktor.client.engine.darwin.Darwin
 import network.ForumHttp
 import network.ForumHttpImpl
@@ -30,6 +31,7 @@ actual val platformModule =
         single<AppActionsUseCase> { AppActionsUseCaseImpl() }
         singleOf(::RoomDatabaseFactory)
         singleOf(::DataStoreFactory)
+        single { KSafe() }
         single<ZzzHttp> { ZzzHttpImpl(Darwin.create()) }
         single<OfficialWebHttp> { OfficialWebHttpImpl(Darwin.create()) }
         single<PixivHttp> { PixivHttpImpl(Darwin.create()) }

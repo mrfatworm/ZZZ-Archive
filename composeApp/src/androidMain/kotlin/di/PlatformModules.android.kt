@@ -5,8 +5,10 @@
 
 package di
 
+import android.content.Context
 import database.RoomDatabaseFactory
 import datastore.DataStoreFactory
+import eu.anifantakis.lib.ksafe.KSafe
 import io.ktor.client.engine.okhttp.OkHttp
 import network.ForumHttp
 import network.ForumHttpImpl
@@ -30,6 +32,7 @@ actual val platformModule =
         single<AppActionsUseCase> { AppActionsUseCaseImpl(get()) }
         singleOf(::RoomDatabaseFactory)
         singleOf(::DataStoreFactory)
+        single { KSafe(get<Context>()) }
         single<ZzzHttp> { ZzzHttpImpl(OkHttp.create()) }
         single<OfficialWebHttp> { OfficialWebHttpImpl(OkHttp.create()) }
         single<PixivHttp> { PixivHttpImpl(OkHttp.create()) }

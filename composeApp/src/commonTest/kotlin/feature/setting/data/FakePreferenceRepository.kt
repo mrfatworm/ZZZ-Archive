@@ -13,7 +13,8 @@ class FakePreferenceRepository(
     private var defaultHoYoLabAccountUid: Int = 0,
     private var isDarkTheme: Boolean = true,
     private var uiScale: Float = 1f,
-    private var fontScale: Float = 1f
+    private var fontScale: Float = 1f,
+    private var hoYoLabCredentialsMigrated: Boolean = false
 ) : PreferencesRepository {
     private var language = Language.English.code
 
@@ -55,6 +56,14 @@ class FakePreferenceRepository(
 
     override suspend fun setDefaultHoYoLabAccountUid(value: Int) {
         defaultHoYoLabAccountUid = value
+    }
+
+    override fun getHoYoLabCredentialsMigrated(): Flow<Boolean> = flow {
+        emit(hoYoLabCredentialsMigrated)
+    }
+
+    override suspend fun setHoYoLabCredentialsMigrated(value: Boolean) {
+        hoYoLabCredentialsMigrated = value
     }
 
     override suspend fun clear() {

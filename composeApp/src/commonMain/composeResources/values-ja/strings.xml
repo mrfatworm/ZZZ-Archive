@@ -190,6 +190,7 @@
     <string name="hoyolab_sync_announcement">このページで送信される情報はHoYoLabへのリクエスト処理にのみ使用され、お使いのデバイスに暗号化されて保存されます。データの収集は一切行いません。</string>
     <string name="remove_account_hint">アカウントの連携を解除しますか？\n（このデバイスからデータを削除します）</string>
     <string name="add_account">アカウントを追加</string>
+    <string name="hoyolab_account_relink_required">保存済みの認証情報をデバイスの安全な保管領域へ移行する際に、HoYoLab アカウントの連携が解除されました。もう一度連携してください。</string>
 
     <!-- HoYoLab Sync Tutorial -->
     <string name="instruction_guide">使い方ガイド</string>

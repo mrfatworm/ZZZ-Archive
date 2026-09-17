@@ -30,8 +30,9 @@ class FakeHoYoLabConfigRepository : HoYoLabConfigRepository {
         accountListInDB.clear()
     }
 
+    // A copy, like the snapshot Room hands out: callers iterate it while deleting rows.
     override suspend fun getAllAccountsFromDB(): Flow<List<HoYoLabAccountEntity>> = flow {
-        emit(accountListInDB)
+        emit(accountListInDB.toList())
     }
 
     override suspend fun getAccountFromDB(uid: Int): Flow<HoYoLabAccountEntity?> = flow {
@@ -46,8 +47,6 @@ class FakeHoYoLabConfigRepository : HoYoLabConfigRepository {
         nickName: String,
         profileUrl: String,
         cardUrl: String,
-        lToken: ByteArray,
-        ltUid: ByteArray,
         updatedAt: Long
     ) {
         accountListInDB.add(
@@ -59,11 +58,18 @@ class FakeHoYoLabConfigRepository : HoYoLabConfigRepository {
                 nickName = nickName,
                 profileUrl = profileUrl,
                 cardUrl = cardUrl,
-                lToken = lToken,
-                ltUid = ltUid,
+                lToken = ByteArray(0),
+                ltUid = ByteArray(0),
                 updatedAt = updatedAt
             )
         )
+    }
+
+    override suspend fun clearLegacyCredentialsInDB(uid: Int) {
+        val index = accountListInDB.indexOfFirst { it.uid == uid }
+        if (index >= 0) {
+            accountListInDB[index] = accountListInDB[index].copy(lToken = ByteArray(0), ltUid = ByteArray(0))
+        }
     }
 
     override suspend fun deleteAccountFromDB(uid: Int) {

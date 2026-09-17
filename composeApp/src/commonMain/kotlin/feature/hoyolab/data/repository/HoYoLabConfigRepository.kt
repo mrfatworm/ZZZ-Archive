@@ -51,10 +51,11 @@ interface HoYoLabConfigRepository {
         nickName: String,
         profileUrl: String,
         cardUrl: String,
-        lToken: ByteArray,
-        ltUid: ByteArray,
         updatedAt: Long
     )
+
+    /** See [feature.hoyolab.data.database.HoYoLabAccountEntity.lToken]. */
+    suspend fun clearLegacyCredentialsInDB(uid: Int)
 
     suspend fun deleteAccountFromDB(uid: Int)
 }

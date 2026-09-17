@@ -5,7 +5,7 @@
 
 package feature.hoyolab.domain
 
-import feature.hoyolab.data.crypto.FakeZzzCrypto
+import feature.hoyolab.data.credential.FakeHoYoLabCredentialStore
 import feature.hoyolab.data.database.FakeHoYoLabAccountDao
 import feature.hoyolab.data.database.stubHoYoLabAccountEntity
 import feature.hoyolab.data.repository.FakeHoYoLabAgentRepository
@@ -22,14 +22,14 @@ class HoYoLabAgentUseCaseTest {
     private val repository = FakeHoYoLabAgentRepository()
     private val accountDao = FakeHoYoLabAccountDao()
     private val preferencesRepository = FakePreferenceRepository()
-    private val zzzCrypto = FakeZzzCrypto()
+    private val credentialStore = FakeHoYoLabCredentialStore()
     private val languageUseCase = FakeLanguageUseCase()
     private val useCase =
         HoYoLabAgentUseCase(
             repository = repository,
             accountDao = accountDao,
             preferencesRepository = preferencesRepository,
-            zzzCrypto = zzzCrypto,
+            credentialStore = credentialStore,
             languageUseCase = languageUseCase
         )
 

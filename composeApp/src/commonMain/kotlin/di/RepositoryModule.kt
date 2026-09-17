@@ -12,6 +12,8 @@ import feature.forum.data.ForumRepository
 import feature.forum.data.ForumRepositoryImpl
 import feature.home.data.AssetVersionRepository
 import feature.home.data.AssetVersionRepositoryImpl
+import feature.hoyolab.data.credential.HoYoLabCredentialStore
+import feature.hoyolab.data.credential.KSafeHoYoLabCredentialStore
 import feature.hoyolab.data.crypto.ZzzCrypto
 import feature.hoyolab.data.crypto.ZzzCryptoImpl
 import feature.hoyolab.data.repository.HoYoLabAgentRepository
@@ -42,5 +44,8 @@ val repositoryModule = module {
     single<HoYoLabConfigRepository> { HoYoLabConfigRepositoryImpl(get(), get()) }
     single<HoYoLabAgentRepository> { HoYoLabAgentRepositoryImpl(get()) }
     single<ForumRepository> { ForumRepositoryImpl(get()) }
+    single<HoYoLabCredentialStore> { KSafeHoYoLabCredentialStore(get()) }
+    // Read-only from here on: it exists only so HoYoLabCredentialMigrationUseCase can open the
+    // rows written before the credentials moved to the platform key store.
     single<ZzzCrypto> { ZzzCryptoImpl() }
 }

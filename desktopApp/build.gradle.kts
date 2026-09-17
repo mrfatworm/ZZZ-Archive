@@ -34,7 +34,9 @@ compose.desktop {
         val isAppStoreRelease = project.property("macOsAppStoreRelease").toString().toBoolean()
 
         nativeDistributions {
-            modules("jdk.unsupported")
+            // java.management is required by KSafe for OS-backed key custody in packaged
+            // distributables; without it the JVM key vault falls back to the software vault.
+            modules("jdk.unsupported", "java.management")
             if (isAppStoreRelease) {
                 appResourcesRootDir.set(project.layout.projectDirectory.dir("resources"))
             }
