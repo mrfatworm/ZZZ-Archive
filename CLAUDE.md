@@ -85,10 +85,20 @@ Repositories do **not** return network responses to the UI. The pattern is:
 `UpdateDatabaseUseCase` (in `database/`) is the cross-feature entry point ViewModels call to trigger
 a refresh.
 
-There are **three separate Room databases**, not one with several DAOs: `AgentsListDB`,
-`CoverImagesListDB`, `HoYoLabAccountDB`, each built in `databaseModule` and each with its own folder
-under `composeApp/schemas/`. `AgentsListDB` uses `fallbackToDestructiveMigration(true)` (it is
-re-downloadable cache); the other two do not.
+There are **two Room databases**, split by migration policy rather than by feature — both built in
+`databaseModule`, each with its own folder under `composeApp/schemas/`:
+
+- `ZzzCacheDB` (`database/`) holds every re-downloadable table — currently `AgentsListItemEntity`
+  and `CoverImageListItemEntity`, one DAO each. It is built with
+  `fallbackToDestructiveMigration(true)`, so a schema change never needs a hand-written migration.
+  New cache tables belong here; only add one if losing its rows is harmless.
+- `HoYoLabAccountDB` stays on its own because it stores credentials the user pasted by hand. It
+  cannot take the destructive shortcut, so keeping it apart keeps the two policies apart.
+
+`RoomDatabaseFactory.deleteLegacyCacheDatabases()` drops `agent_list.db` and
+`cover_images_list.db`, the pre-consolidation caches, the first time `ZzzCacheDB` is built. It is
+temporary — remove it, and `ZzzCacheDB.LEGACY_DATABASE_NAMES`, once those versions are out of
+circulation.
 
 ### Networking
 

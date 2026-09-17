@@ -3,11 +3,11 @@
  * License: MIT
  */
 
-package feature.agent.data.database
+package database
 
 import androidx.room.RoomDatabaseConstructor
 
 @Suppress("NO_ACTUAL_FOR_EXPECT")
-expect object AgentsListDBConstructor : RoomDatabaseConstructor<AgentsListDB> {
-    override fun initialize(): AgentsListDB
+expect object ZzzCacheDBConstructor : RoomDatabaseConstructor<ZzzCacheDB> {
+    override fun initialize(): ZzzCacheDB
 }

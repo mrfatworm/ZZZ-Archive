@@ -6,8 +6,6 @@ package database
 
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import feature.agent.data.database.AgentsListDB
-import feature.cover.data.database.CoverImagesListDB
 import feature.hoyolab.data.database.HoYoLabAccountDB
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSDocumentDirectory
@@ -28,24 +26,25 @@ actual class RoomDatabaseFactory {
         return requireNotNull(documentDirectory?.path)
     }
 
-    actual fun createAgentListDatabase(): RoomDatabase.Builder<AgentsListDB> {
-        val dbFile = documentDirectory() + "/${AgentsListDB.DATABASE_NAME}"
-        return Room.databaseBuilder<AgentsListDB>(
-            name = dbFile
-        )
-    }
+    private fun databasePath(databaseName: String): String = documentDirectory() + "/$databaseName"
 
-    actual fun createCoverImagesListDatabase(): RoomDatabase.Builder<CoverImagesListDB> {
-        val dbFile = documentDirectory() + "/${CoverImagesListDB.DATABASE_NAME}"
-        return Room.databaseBuilder<CoverImagesListDB>(
-            name = dbFile
-        )
-    }
+    actual fun createCacheDatabase(): RoomDatabase.Builder<ZzzCacheDB> = Room.databaseBuilder<ZzzCacheDB>(
+        name = databasePath(ZzzCacheDB.DATABASE_NAME)
+    )
 
-    actual fun createHoYoLabAccountDatabase(): RoomDatabase.Builder<HoYoLabAccountDB> {
-        val dbFile = documentDirectory() + "/${HoYoLabAccountDB.DATABASE_NAME}"
-        return Room.databaseBuilder<HoYoLabAccountDB>(
-            name = dbFile
+    actual fun createHoYoLabAccountDatabase(): RoomDatabase.Builder<HoYoLabAccountDB> =
+        Room.databaseBuilder<HoYoLabAccountDB>(
+            name = databasePath(HoYoLabAccountDB.DATABASE_NAME)
         )
+
+    @OptIn(ExperimentalForeignApi::class)
+    actual fun deleteLegacyCacheDatabases() {
+        val fileManager = NSFileManager.defaultManager
+        ZzzCacheDB.LEGACY_DATABASE_NAMES.forEach { databaseName ->
+            val path = databasePath(databaseName)
+            listOf(path, "$path-wal", "$path-shm", "$path.lck").forEach {
+                fileManager.removeItemAtPath(it, error = null)
+            }
+        }
     }
 }

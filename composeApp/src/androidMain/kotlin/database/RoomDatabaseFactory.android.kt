@@ -8,9 +8,8 @@ package database
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import feature.agent.data.database.AgentsListDB
-import feature.cover.data.database.CoverImagesListDB
 import feature.hoyolab.data.database.HoYoLabAccountDB
+import java.io.File
 
 actual class RoomDatabaseFactory(private val context: Context) {
     private fun <T : RoomDatabase> createDB(
@@ -27,12 +26,19 @@ actual class RoomDatabaseFactory(private val context: Context) {
         )
     }
 
-    actual fun createAgentListDatabase(): RoomDatabase.Builder<AgentsListDB> =
-        createDB(AgentsListDB::class.java, AgentsListDB.DATABASE_NAME)
-
-    actual fun createCoverImagesListDatabase(): RoomDatabase.Builder<CoverImagesListDB> =
-        createDB(CoverImagesListDB::class.java, CoverImagesListDB.DATABASE_NAME)
+    actual fun createCacheDatabase(): RoomDatabase.Builder<ZzzCacheDB> =
+        createDB(ZzzCacheDB::class.java, ZzzCacheDB.DATABASE_NAME)
 
     actual fun createHoYoLabAccountDatabase(): RoomDatabase.Builder<HoYoLabAccountDB> =
         createDB(HoYoLabAccountDB::class.java, HoYoLabAccountDB.DATABASE_NAME)
+
+    actual fun deleteLegacyCacheDatabases() {
+        val appContext = context.applicationContext
+        ZzzCacheDB.LEGACY_DATABASE_NAMES.forEach { databaseName ->
+            // deleteDatabase takes the -wal / -shm / -journal siblings with it, but not the .lck
+            // file Room's own FileLock leaves next to the database.
+            appContext.deleteDatabase(databaseName)
+            File("${appContext.getDatabasePath(databaseName).absolutePath}.lck").delete()
+        }
+    }
 }

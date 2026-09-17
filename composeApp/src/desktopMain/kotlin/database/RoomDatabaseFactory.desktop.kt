@@ -7,33 +7,41 @@ package database
 
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import feature.agent.data.database.AgentsListDB
-import feature.cover.data.database.CoverImagesListDB
 import feature.hoyolab.data.database.HoYoLabAccountDB
 import java.io.File
 
 actual class RoomDatabaseFactory {
-    private inline fun <reified T : RoomDatabase> createDB(databaseName: String): RoomDatabase.Builder<T> {
+    // Windows keeps every database in one shared directory; elsewhere each one gets a directory of
+    // its own, named after the database.
+    private fun appDataDir(databaseName: String): File {
         val os = System.getProperty("os.name").lowercase()
-        val appDataDir =
-            when {
-                os.contains("win") -> File(System.getenv("APPDATA"), "ZZZ Archive")
-                else -> File(System.getProperty("java.io.tmpdir"), databaseName)
-            }
+        return when {
+            os.contains("win") -> File(System.getenv("APPDATA"), "ZZZ Archive")
+            else -> File(System.getProperty("java.io.tmpdir"), databaseName)
+        }
+    }
 
+    private inline fun <reified T : RoomDatabase> createDB(databaseName: String): RoomDatabase.Builder<T> {
+        val appDataDir = appDataDir(databaseName)
         if (!appDataDir.exists()) {
             appDataDir.mkdirs()
         }
-
-        val dbFile = File(appDataDir, databaseName)
-        return Room.databaseBuilder(dbFile.absolutePath)
+        return Room.databaseBuilder(File(appDataDir, databaseName).absolutePath)
     }
 
-    actual fun createAgentListDatabase(): RoomDatabase.Builder<AgentsListDB> = createDB(AgentsListDB.DATABASE_NAME)
-
-    actual fun createCoverImagesListDatabase(): RoomDatabase.Builder<CoverImagesListDB> =
-        createDB(CoverImagesListDB.DATABASE_NAME)
+    actual fun createCacheDatabase(): RoomDatabase.Builder<ZzzCacheDB> = createDB(ZzzCacheDB.DATABASE_NAME)
 
     actual fun createHoYoLabAccountDatabase(): RoomDatabase.Builder<HoYoLabAccountDB> =
         createDB(HoYoLabAccountDB.DATABASE_NAME)
+
+    actual fun deleteLegacyCacheDatabases() {
+        ZzzCacheDB.LEGACY_DATABASE_NAMES.forEach { databaseName ->
+            val appDataDir = appDataDir(databaseName)
+            // SQLite leaves -wal, -shm and .lck siblings next to the database file. On Windows the
+            // prefix match is what keeps the HoYoLab database in the same directory untouched.
+            appDataDir.listFiles { file -> file.name.startsWith(databaseName) }?.forEach { it.delete() }
+            // Only succeeds for the per-database directories used off Windows, and only once empty.
+            appDataDir.delete()
+        }
+    }
 }
