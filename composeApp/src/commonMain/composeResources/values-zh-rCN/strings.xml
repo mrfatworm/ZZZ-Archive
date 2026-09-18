@@ -105,6 +105,7 @@
     <!-- Agent Detail -->
     <string name="rarity">稀有度</string>
     <string name="attributes">属性</string>
+    <string name="attribute">属性</string>
     <string name="hp">生命值</string>
     <string name="atk">攻击力</string>
     <string name="def">防御力</string>

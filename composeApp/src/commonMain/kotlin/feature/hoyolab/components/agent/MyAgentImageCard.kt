@@ -47,7 +47,6 @@ import com.github.panpf.sketch.request.ComposableImageRequest
 import com.github.panpf.sketch.util.Size
 import feature.hoyolab.model.agent.MyAgentDetail
 import feature.hoyolab.model.agent.MyAgentDetailState
-import feature.hoyolab.model.agent.MyAgentSkillAwaken
 import feature.hoyolab.model.agent.MyAgentSkin
 import feature.hoyolab.presentation.MyAgentDetailAction
 import org.jetbrains.compose.resources.stringResource
@@ -65,7 +64,6 @@ import zzzarchive.composeapp.generated.resources.ic_check
 import zzzarchive.composeapp.generated.resources.ic_edit
 import zzzarchive.composeapp.generated.resources.ic_minus
 import zzzarchive.composeapp.generated.resources.outfit
-import zzzarchive.composeapp.generated.resources.potential_awakening
 import zzzarchive.composeapp.generated.resources.zoom_in
 import zzzarchive.composeapp.generated.resources.zoom_out
 
@@ -248,61 +246,7 @@ private fun AgentInfo(
             style = AppTheme.typography.labelLarge,
             borderColor = AppTheme.colors.surfaceLow
         )
-
-        val openMindscapeDialog = remember { mutableStateOf(false) }
-        val openAwakenDialog = remember { mutableStateOf(false) }
-        val mindscapes = agentDetail.mindscapes
-        val awaken = agentDetail.skillAwaken
-
-        InfoBadge(
-            text = "M${agentDetail.rank}",
-            onClick = if (mindscapes.isEmpty()) {
-                null
-            } else {
-                { openMindscapeDialog.value = true }
-            }
-        )
-
-        if (awaken is MyAgentSkillAwaken.Awaken) {
-            InfoBadge(
-                text = "${stringResource(Res.string.potential_awakening)} ${awaken.level}/${awaken.maxLevel}",
-                onClick = { openAwakenDialog.value = true }
-            )
-        }
-
-        if (openMindscapeDialog.value) {
-            MyAgentMindscapeDialog(mindscapes = mindscapes) { openMindscapeDialog.value = false }
-        }
-        if (openAwakenDialog.value && awaken is MyAgentSkillAwaken.Awaken) {
-            MyAgentAwakenDialog(awaken = awaken) { openAwakenDialog.value = false }
-        }
     }
-}
-
-@Composable
-private fun InfoBadge(
-    text: String,
-    onClick: (() -> Unit)?
-) {
-    Text(
-        modifier =
-            Modifier
-                .clip(AppTheme.shape.r300)
-                .background(AppTheme.colors.onSurfaceVariant)
-                .then(
-                    if (onClick == null) {
-                        Modifier
-                    } else {
-                        Modifier.pointerHoverIcon(PointerIcon.Hand).clickable { onClick() }
-                    }
-                ).padding(
-                    horizontal = AppTheme.spacing.s300,
-                    vertical = AppTheme.spacing.s200
-                ),
-        text = text,
-        color = AppTheme.colors.surfaceContainer,
-        style = AppTheme.typography.labelMedium
-    )
 }
 
 @Composable
@@ -327,7 +271,8 @@ private fun SkinPicker(
                         width = if (isSelected) 2.dp else 0.dp,
                         color = if (isSelected) AppTheme.colors.primary else AppTheme.colors.surfaceContainer,
                         shape = AppTheme.shape.r300
-                    ).clickable { onSkinClick(skin.id) },
+                    ).pointerHoverIcon(PointerIcon.Hand)
+                    .clickable { onSkinClick(skin.id) },
                 uri = skin.squareImageUrl,
                 contentScale = ContentScale.Crop,
                 contentDescription = "${stringResource(Res.string.outfit)}: ${skin.name}"

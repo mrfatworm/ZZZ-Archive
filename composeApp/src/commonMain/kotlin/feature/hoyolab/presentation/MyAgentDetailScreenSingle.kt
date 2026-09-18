@@ -22,6 +22,7 @@ import feature.hoyolab.components.agent.MyAgentFooterCard
 import feature.hoyolab.components.agent.MyAgentImageCard
 import feature.hoyolab.components.agent.MyAgentPropertiesCard
 import feature.hoyolab.components.agent.MyAgentSkillCard
+import feature.hoyolab.components.agent.MyAgentTraitsRow
 import feature.hoyolab.components.agent.MyAgentWeaponScoreCard
 import feature.hoyolab.model.agent.MyAgentDetailState
 import ui.theme.AppTheme
@@ -52,6 +53,7 @@ fun MyAgentDetailScreenSingle(
             uiState = uiState,
             onAction = onAction
         )
+        MyAgentTraitsRow(agentDetail = uiState.agentDetail)
         MyAgentSkillCard(skills = uiState.agentDetail.skills)
 
         MyAgentWeaponScoreCard(
