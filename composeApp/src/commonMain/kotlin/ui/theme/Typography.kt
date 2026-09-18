@@ -20,7 +20,7 @@ import zzzarchive.composeapp.generated.resources.noto_sans_medium
 import zzzarchive.composeapp.generated.resources.noto_sans_regular
 
 @Stable
-class Typography(
+data class Typography(
     val displayLarge: TextStyle = TextStyle(),
     val displayMedium: TextStyle = TextStyle(),
     val displaySmall: TextStyle = TextStyle(),

@@ -17,6 +17,7 @@ data class MyAgentDetailEquipPlanResponse(
     @SerialName("valid_property_cnt") val validPropertyCnt: Int? = null,
     @SerialName("plan_only_special_property") val planOnlySpecialProperty: Boolean? = null,
     @SerialName("equip_rating") val equipRating: String? = null,
+    @SerialName("equip_rating_score") val equipRatingScore: Double? = null,
     @SerialName("plan_effective_property_list") val planEffectivePropertyList: List<EquipPlanPropertyResponse>? = null
 )
 
@@ -146,5 +147,7 @@ val stubMyAgentDetailEquipPlanResponse =
             ),
         validPropertyCnt = 21,
         planOnlySpecialProperty = false,
+        equipRating = "ER_SS",
+        equipRatingScore = 81.3,
         planEffectivePropertyList = emptyList()
     )

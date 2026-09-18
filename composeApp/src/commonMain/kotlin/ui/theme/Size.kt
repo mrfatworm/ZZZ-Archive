@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Stable
-class Size(
+data class Size(
     val s24: Dp = Dp.Unspecified,
     val s36: Dp = Dp.Unspecified,
     val s32: Dp = Dp.Unspecified,

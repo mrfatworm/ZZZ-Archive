@@ -24,6 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.github.panpf.sketch.AsyncImage
 import feature.hoyolab.model.agent.MyAgentDetailEquipPlan
@@ -128,25 +129,25 @@ private fun MyWeapon(
                 color = AppTheme.colors.surfaceContainer,
                 style = AppTheme.typography.labelMedium
             )
-            Row {
-                for (i in 1..5) {
-                    Icon(
-                        modifier = Modifier.size(AppTheme.size.icon),
-                        imageVector =
-                            vectorResource(
-                                if (i <=
-                                    star
-                                ) {
-                                    Res.drawable.ic_star_filled
-                                } else {
-                                    Res.drawable.ic_star
-                                }
-                            ),
-                        contentDescription = null,
-                        tint = AppTheme.colors.onSurfaceContainer
-                    )
-                }
-            }
+            WeaponStars(star = star)
+        }
+    }
+}
+
+/** The refinement rank as five stars; the share card draws the same row smaller. */
+@Composable
+fun WeaponStars(
+    star: Int,
+    iconSize: Dp = AppTheme.size.icon
+) {
+    Row {
+        for (i in 1..5) {
+            Icon(
+                modifier = Modifier.size(iconSize),
+                imageVector = vectorResource(if (i <= star) Res.drawable.ic_star_filled else Res.drawable.ic_star),
+                contentDescription = null,
+                tint = AppTheme.colors.onSurfaceContainer
+            )
         }
     }
 }

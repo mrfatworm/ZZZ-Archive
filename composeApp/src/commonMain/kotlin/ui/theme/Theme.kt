@@ -179,5 +179,23 @@ fun ZzzArchiveTheme(content: @Composable () -> Unit) {
     }
 }
 
+/**
+ * Tokens for content that is rendered to an image rather than the screen: the palette the caller
+ * picks, and typography and sizes at scale 1, so the user's font and UI scale settings do not
+ * reshape a picture that is meant to look the same wherever it ends up.
+ */
+@Composable
+fun ZzzCaptureTheme(
+    isDark: Boolean,
+    content: @Composable () -> Unit
+) {
+    CompositionLocalProvider(
+        LocalColorScheme provides if (isDark) darkScheme else lightScheme,
+        LocalTypography provides provideTypography(),
+        LocalSize provides provideSize(),
+        content = content
+    )
+}
+
 @Composable
 internal expect fun SystemAppearance(isDark: Boolean)

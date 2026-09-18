@@ -18,7 +18,9 @@ sealed class MyAgentDetailEquipPlan {
         val validPropertyCnt: Int,
         val planOnlySpecialProperty: Boolean,
         val planEffectivePropertyList: List<EquipPlanProperty>,
-        val equipRating: String?
+        val equipRating: String?,
+        /** HoYoLab's 0–100 build score behind [equipRating]; null when the response left it out. */
+        val equipRatingScore: Double?
     ) : MyAgentDetailEquipPlan()
 }
 
@@ -129,5 +131,6 @@ val stubMyAgentDetailEquipPlan =
         validPropertyCnt = 21,
         planOnlySpecialProperty = false,
         planEffectivePropertyList = emptyList(),
-        equipRating = "ER_SS"
+        equipRating = "ER_SS",
+        equipRatingScore = 81.3
     )

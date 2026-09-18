@@ -252,6 +252,13 @@
     <string name="zoom_in">放大</string>
     <string name="zoom_out">縮小</string>
     <string name="background_blur">背景模糊</string>
+    <string name="share">分享</string>
+    <string name="share_card">分享卡片</string>
+    <string name="save_image">儲存圖片</string>
+    <string name="image_saved">圖片已儲存</string>
+    <string name="image_copied">圖片已複製到剪貼簿</string>
+    <string name="share_failed">圖片分享失敗</string>
+    <string name="show_drive_details">顯示驅動盤詳情</string>
 
     <!-- Sponsorship -->
     <string name="sponsorship_title">小額贊助</string>

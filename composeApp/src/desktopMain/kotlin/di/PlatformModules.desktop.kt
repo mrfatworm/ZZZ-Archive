@@ -26,10 +26,13 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import utils.AppActionsUseCase
 import utils.AppActionsUseCaseImpl
+import utils.share.ImageShareHandler
+import utils.share.ImageShareHandlerImpl
 
 actual val platformModule =
     module {
         single<AppActionsUseCase> { AppActionsUseCaseImpl() }
+        single<ImageShareHandler> { ImageShareHandlerImpl() }
         singleOf(::RoomDatabaseFactory)
         singleOf(::DataStoreFactory)
         // The desktop OS secret store is shared by everything the user runs, so the key slot has

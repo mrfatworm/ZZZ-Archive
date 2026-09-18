@@ -4,6 +4,7 @@ zzzVersionCode = "12"
 zzzPackageId = "com.mrfatworm.zzzarchive"
 agp = "9.1.0"
 androidx-activityCompose = "1.13.0"
+androidx-core = "1.19.0"
 androidx-lifecycle = "2.10.0"
 buildConfig = "6.0.9"
 sketch = "4.5.0"
@@ -45,6 +46,7 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 
 #=== Android
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-core = { group = "androidx.core", name = "core", version.ref = "androidx-core" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
 
 #=== DataStore

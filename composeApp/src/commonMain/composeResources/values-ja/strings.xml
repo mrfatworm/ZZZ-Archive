@@ -252,6 +252,13 @@
     <string name="zoom_in">拡大</string>
     <string name="zoom_out">縮小</string>
     <string name="background_blur">背景ぼかし</string>
+    <string name="share">共有</string>
+    <string name="share_card">シェアカード</string>
+    <string name="save_image">画像を保存</string>
+    <string name="image_saved">画像を保存しました</string>
+    <string name="image_copied">画像をクリップボードにコピーしました</string>
+    <string name="share_failed">画像の共有に失敗しました</string>
+    <string name="show_drive_details">ドライバディスクの詳細を表示</string>
 
     <!-- Sponsorship -->
     <string name="sponsorship_title">スポンサーシップ</string>

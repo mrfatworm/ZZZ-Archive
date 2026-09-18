@@ -23,6 +23,8 @@ data class MyAgentDetail(
     val level: Int,
     val rank: Int,
     val imageUrl: String,
+    /** HoYoLab's `#rrggbb` accent for [imageUrl]; empty when the response left it out. */
+    val paintingColor: String,
     val factionImageUrl: String,
     val rarity: ZzzRarity,
     val specialty: AgentSpecialty,
@@ -65,6 +67,8 @@ data class MyAgentSkin(
     val id: Int,
     val name: String,
     val imageUrl: String,
+    /** See [MyAgentDetail.paintingColor]. */
+    val paintingColor: String,
     val squareImageUrl: String,
     val isOriginal: Boolean
 )
@@ -130,6 +134,7 @@ val stubMyAgentDetail =
         level = 60,
         rank = 1,
         imageUrl = "https://act-webstatic.hoyoverse.com/game_record/zzzv2/role_vertical_painting/role_vertical_painting_1251.png",
+        paintingColor = "#28c79d",
         factionImageUrl = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u66fwb/033f6219c3e923be69fe41d80818eb8c.png",
         rarity = ZzzRarity.RARITY_S,
         specialty = AgentSpecialty.Stun,

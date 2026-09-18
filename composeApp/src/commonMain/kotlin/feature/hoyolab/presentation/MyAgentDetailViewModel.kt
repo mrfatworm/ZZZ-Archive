@@ -14,20 +14,29 @@ import feature.hoyolab.domain.HoYoLabPreferenceUseCase
 import feature.hoyolab.model.agent.EquipPlanProperty
 import feature.hoyolab.model.agent.MyAgentDetailEquipPlan
 import feature.hoyolab.model.agent.MyAgentDetailState
+import feature.hoyolab.model.agent.ShareMessage
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import ui.navigation.Screen
+import utils.share.ImageShareHandler
+import utils.share.ShareOutcome
+import utils.todayIsoDate
 
 class MyAgentDetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val hoYoLabAgentUseCase: HoYoLabAgentUseCase,
-    private val hoYoLabPreferenceUseCase: HoYoLabPreferenceUseCase
+    private val hoYoLabPreferenceUseCase: HoYoLabPreferenceUseCase,
+    private val imageShareHandler: ImageShareHandler
 ) : ViewModel() {
     private val agentId: Int = checkNotNull(savedStateHandle.toRoute<Screen.MyAgentDetail>().id)
 
-    private val _uiState = MutableStateFlow(MyAgentDetailState())
+    private val _uiState = MutableStateFlow(MyAgentDetailState(canSaveImage = imageShareHandler.canSave))
     val uiState = _uiState.asStateFlow()
 
     init {
@@ -65,8 +74,51 @@ class MyAgentDetailViewModel(
                     state.copy(selectedSkinId = action.skinId)
                 }
             }
+
+            is MyAgentDetailAction.SetShowUid -> {
+                _uiState.update { state -> state.copy(showUid = action.showUid) }
+            }
+
+            is MyAgentDetailAction.SetShareDriveDetails -> {
+                _uiState.update { state ->
+                    state.copy(shareOptions = state.shareOptions.copy(showDriveDetails = action.showDriveDetails))
+                }
+            }
+
+            is MyAgentDetailAction.SetShareDarkTheme -> {
+                _uiState.update { state ->
+                    state.copy(shareOptions = state.shareOptions.copy(isDarkTheme = action.isDarkTheme))
+                }
+            }
+
+            is MyAgentDetailAction.ShareCard -> deliverCard { imageShareHandler.share(action.png, shareFileName()) }
+
+            is MyAgentDetailAction.SaveCard -> deliverCard { imageShareHandler.save(action.png, shareFileName()) }
+
+            MyAgentDetailAction.DismissShareMessage -> {
+                _uiState.update { state -> state.copy(shareMessage = null) }
+            }
         }
     }
+
+    private fun deliverCard(deliver: suspend () -> Result<ShareOutcome>) {
+        viewModelScope.launch {
+            val message =
+                deliver().fold(
+                    onSuccess = { outcome ->
+                        when (outcome) {
+                            ShareOutcome.Shared, ShareOutcome.Cancelled -> null
+                            ShareOutcome.Copied -> ShareMessage.Copied
+                            ShareOutcome.Saved -> ShareMessage.Saved
+                        }
+                    },
+                    onFailure = { ShareMessage.Failed }
+                )
+            _uiState.update { state -> state.copy(shareMessage = message) }
+        }
+    }
+
+    private fun shareFileName(): String = "zzz-archive-agent-${_uiState.value.agentDetail.id}-${todayIsoDate()}.png"
 
     private suspend fun updateMyAgentDetailFromHoYoLab() {
         hoYoLabAgentUseCase.getAgentDetail(agentId).fold(onSuccess = {

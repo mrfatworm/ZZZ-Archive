@@ -103,7 +103,8 @@ private fun spanStyleOf(
     else -> SpanStyle(color = color, fontWeight = FontWeight.Bold)
 }
 
-private fun parseHexColor(raw: String): Color? {
+/** `#rgb` or `#rrggbb`, as HoYoLab writes colours in rich text and painting metadata; null otherwise. */
+fun parseHexColor(raw: String): Color? {
     // The live data only ever uses #RGB or #RRGGBB.
     val hex = raw.trim().removePrefix("#")
     val rgb = when (hex.length) {

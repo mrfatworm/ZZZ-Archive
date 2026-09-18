@@ -44,7 +44,9 @@ import androidx.compose.ui.unit.dp
 import com.github.panpf.sketch.AsyncImage
 import com.github.panpf.sketch.cache.CachePolicy
 import com.github.panpf.sketch.request.ComposableImageRequest
+import com.github.panpf.sketch.request.ImageRequest
 import com.github.panpf.sketch.util.Size
+import feature.hoyolab.components.share.MyAgentShareDialog
 import feature.hoyolab.model.agent.MyAgentDetail
 import feature.hoyolab.model.agent.MyAgentDetailState
 import feature.hoyolab.model.agent.MyAgentSkin
@@ -63,7 +65,9 @@ import zzzarchive.composeapp.generated.resources.ic_arrow_back
 import zzzarchive.composeapp.generated.resources.ic_check
 import zzzarchive.composeapp.generated.resources.ic_edit
 import zzzarchive.composeapp.generated.resources.ic_minus
+import zzzarchive.composeapp.generated.resources.ic_share
 import zzzarchive.composeapp.generated.resources.outfit
+import zzzarchive.composeapp.generated.resources.share
 import zzzarchive.composeapp.generated.resources.zoom_in
 import zzzarchive.composeapp.generated.resources.zoom_out
 
@@ -116,19 +120,10 @@ fun MyAgentImageCard(
                             translationY = offset.y * scale
                         ).transformable(state = state, enabled = uiState.adjustMode),
                 request =
-                    ComposableImageRequest(
-                        if (uiState.isCustomImage) uiState.customImgUrl else selectedSkinImageUrl
-                    ) {
-                        // A custom image is user supplied and its content can change behind the
-                        // same URL, so it is never cached. The official painting and the outfits
-                        // are immutable, and the outfit picker re-requests them on every tap, so
-                        // caching them is what keeps switching outfits off the network.
-                        if (uiState.isCustomImage) {
-                            downloadCachePolicy(CachePolicy.DISABLED)
-                            resultCachePolicy(CachePolicy.DISABLED)
-                        }
-                        size(Size.Origin)
-                    },
+                    paintingImageRequest(
+                        url = if (uiState.isCustomImage) uiState.customImgUrl else selectedSkinImageUrl,
+                        isCustomImage = uiState.isCustomImage
+                    ),
                 contentScale = if (uiState.isCustomImage) ContentScale.Fit else ContentScale.Crop,
                 contentDescription = null
             )
@@ -180,6 +175,7 @@ fun MyAgentImageCard(
             }
 
             val openEditDialog = remember { mutableStateOf(false) }
+            val openShareDialog = remember { mutableStateOf(false) }
 
             Row(
                 modifier = Modifier
@@ -197,6 +193,9 @@ fun MyAgentImageCard(
                         }
                     )
                 }
+                ZzzIconButton(iconRes = Res.drawable.ic_share, contentDescriptionRes = Res.string.share) {
+                    openShareDialog.value = true
+                }
                 ZzzIconButton(iconRes = Res.drawable.ic_edit) {
                     openEditDialog.value = true
                 }
@@ -208,9 +207,33 @@ fun MyAgentImageCard(
                         openEditDialog.value = false
                     }
                 }
+
+                openShareDialog.value -> {
+                    MyAgentShareDialog(uiState, onAction) {
+                        openShareDialog.value = false
+                    }
+                }
             }
         }
     }
+}
+
+/**
+ * The painting request shared by this card and the share card, so both hit one cache entry.
+ * A custom image is user supplied and its content can change behind the same URL, so it is never
+ * cached. The official painting and the outfits are immutable, and the outfit picker re-requests
+ * them on every tap, so caching them is what keeps switching outfits off the network.
+ */
+@Composable
+fun paintingImageRequest(
+    url: String,
+    isCustomImage: Boolean
+): ImageRequest = ComposableImageRequest(url) {
+    if (isCustomImage) {
+        downloadCachePolicy(CachePolicy.DISABLED)
+        resultCachePolicy(CachePolicy.DISABLED)
+    }
+    size(Size.Origin)
 }
 
 @Composable

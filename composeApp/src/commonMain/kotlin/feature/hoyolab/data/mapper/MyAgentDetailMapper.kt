@@ -48,6 +48,7 @@ fun MyAgentDetailItemResponse.toMyAgentDetail(): MyAgentDetail = MyAgentDetail(
     level = level ?: 0,
     rank = rank ?: 0,
     imageUrl = roleVerticalPaintingUrl.orEmpty(),
+    paintingColor = verticalPaintingColor.orEmpty(),
     factionImageUrl = groupIconPath.orEmpty(),
     rarity = findRarityFromHoYoLab(rarity.orEmpty()),
     specialty = findAgentSpecialtyFromHoYoLab(avatarProfession ?: 0),
@@ -116,6 +117,7 @@ fun MyAgentSkinResponse.toMyAgentSkin(): MyAgentSkin = MyAgentSkin(
     id = skinId ?: 0,
     name = skinName.orEmpty(),
     imageUrl = skinVerticalPaintingUrl.orEmpty(),
+    paintingColor = skinVerticalPaintingColor.orEmpty(),
     squareImageUrl = skinSquareUrl.orEmpty(),
     isOriginal = isOriginal ?: false
 )
@@ -176,7 +178,8 @@ fun MyAgentDetailEquipPlanResponse.toMyAgentDetailEquipPlan(): MyAgentDetailEqui
         validPropertyCnt = validPropertyCnt ?: 0,
         planOnlySpecialProperty = planOnlySpecialProperty ?: false,
         planEffectivePropertyList = planEffectivePropertyList?.map { it.toEquipPlanProperty() } ?: emptyList(),
-        equipRating = equipRating
+        equipRating = equipRating,
+        equipRatingScore = equipRatingScore
     )
 
 fun MyAgentPropertyResponse.toMyAgentProperty(): MyAgentDriveProperty = MyAgentDriveProperty(

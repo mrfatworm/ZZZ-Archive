@@ -26,6 +26,7 @@ import ui.components.ZzzTextFiled
 import ui.components.buttons.ZzzIconButton
 import ui.components.buttons.ZzzPrimaryButton
 import ui.components.dialogs.BasicDialog
+import ui.components.dialogs.DialogTopBar
 import ui.theme.AppTheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.apply
@@ -45,7 +46,11 @@ fun MyAgentEditDialog(
     onDismiss: () -> Unit
 ) {
     BasicDialog(onDismissRequest = onDismiss) {
-        TopBar(onDismiss)
+        DialogTopBar(
+            modifier = Modifier.padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
+            title = stringResource(Res.string.setting),
+            onDismiss = onDismiss
+        )
         Content(uiState, onApply = { showUid, isCustom, imageUrl, author, hasBlurBackground ->
             onAction(
                 MyAgentDetailAction.ConfirmEditImage(
@@ -58,29 +63,6 @@ fun MyAgentEditDialog(
             )
             onDismiss()
         })
-    }
-}
-
-@Composable
-private fun TopBar(onDismiss: () -> Unit) {
-    Box(
-        Modifier
-            .fillMaxWidth()
-            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350)
-    ) {
-        Text(
-            modifier = Modifier.align(Alignment.Center),
-            text = stringResource(Res.string.setting),
-            color = AppTheme.colors.onSurfaceVariant,
-            style = AppTheme.typography.titleMedium
-        )
-        ZzzIconButton(
-            modifier = Modifier.align(Alignment.CenterEnd),
-            iconRes = Res.drawable.ic_close,
-            contentDescriptionRes = Res.string.close
-        ) {
-            onDismiss()
-        }
     }
 }
 

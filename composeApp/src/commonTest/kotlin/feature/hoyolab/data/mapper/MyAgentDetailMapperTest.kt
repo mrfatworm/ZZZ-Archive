@@ -5,6 +5,7 @@
 
 package feature.hoyolab.data.mapper
 
+import feature.hoyolab.model.agent.MyAgentDetailEquipPlan
 import feature.hoyolab.model.agent.MyAgentDetailWeapon
 import feature.hoyolab.model.agent.MyAgentEquipSuit
 import feature.hoyolab.model.agent.MyAgentSkillAwaken
@@ -120,5 +121,25 @@ class MyAgentDetailMapperTest {
         // to build equip_plan_info.valid_property_cnt. The disc card must use the same measure.
         val expected = stubEquipResponse.properties!!.filter { it.valid == true }.sumOf { it.level ?: 0 }
         assertEquals(expected, equip.subProperties.filter { it.valid }.sumOf { it.level })
+    }
+
+    @Test
+    fun `Build score and painting colours survive mapping`() {
+        val detail = agentResponse.toMyAgentDetail()
+        assertEquals("#28c79d", detail.paintingColor)
+        assertTrue(detail.skins.all { it.paintingColor == "#28c79d" })
+        val plan = detail.equipPlanInfo
+        assertIs<MyAgentDetailEquipPlan.MyAgentEquipPlan>(plan)
+        assertEquals("ER_SS", plan.equipRating)
+        assertEquals(81.3, plan.equipRatingScore)
+    }
+
+    @Test
+    fun `A response without a build score maps to null rather than zero`() {
+        val planWithoutScore = agentResponse.equipPlanInfo!!.copy(equipRatingScore = null)
+        val withoutScore = agentResponse.copy(equipPlanInfo = planWithoutScore)
+        val plan = withoutScore.toMyAgentDetail().equipPlanInfo
+        assertIs<MyAgentDetailEquipPlan.MyAgentEquipPlan>(plan)
+        assertEquals(null, plan.equipRatingScore)
     }
 }

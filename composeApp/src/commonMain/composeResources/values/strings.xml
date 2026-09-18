@@ -252,6 +252,13 @@
     <string name="zoom_in">Zoom In</string>
     <string name="zoom_out">Zoom Out</string>
     <string name="background_blur">Background Blur</string>
+    <string name="share">Share</string>
+    <string name="share_card">Share Card</string>
+    <string name="save_image">Save Image</string>
+    <string name="image_saved">Image saved</string>
+    <string name="image_copied">Image copied to clipboard</string>
+    <string name="share_failed">Failed to share the image</string>
+    <string name="show_drive_details">Show Drive Details</string>
 
     <!-- Sponsorship -->
     <string name="sponsorship_title">Sponsorship</string>

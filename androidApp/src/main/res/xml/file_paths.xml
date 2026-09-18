@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Rendered share cards, handed to other apps through the FileProvider in the manifest. -->
+<paths>
+    <cache-path name="share" path="share/" />
+</paths>

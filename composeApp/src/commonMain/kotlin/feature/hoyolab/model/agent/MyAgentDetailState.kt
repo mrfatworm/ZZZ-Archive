@@ -22,7 +22,11 @@ data class MyAgentDetailState(
     val hasBlurBackground: Boolean = true,
     val isImageEditMode: Boolean = false,
     val adjustMode: Boolean = false,
-    val errorMessage: String = ""
+    val errorMessage: String = "",
+    /** Whether the platform offers "save image" next to "share"; false on iOS and before Android 10. */
+    val canSaveImage: Boolean = false,
+    val shareOptions: ShareCardOptions = ShareCardOptions(),
+    val shareMessage: ShareMessage? = null
 )
 
 val emptyMyAgentDetail =
@@ -32,6 +36,7 @@ val emptyMyAgentDetail =
         level = 0,
         rank = 0,
         imageUrl = "",
+        paintingColor = "",
         factionImageUrl = "",
         rarity = ZzzRarity.RARITY_D,
         specialty = AgentSpecialty.None,
