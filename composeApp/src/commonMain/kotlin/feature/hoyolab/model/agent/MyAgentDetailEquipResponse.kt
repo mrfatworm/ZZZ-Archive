@@ -129,7 +129,7 @@ val stubEquipResponse =
                     propertyId = 20103,
                     base = "2.4%",
                     level = 1,
-                    valid = false,
+                    valid = true,
                     systemId = 201,
                     add = 0
                 ),
@@ -138,7 +138,7 @@ val stubEquipResponse =
                     propertyId = 21103,
                     base = "9.6%",
                     level = 2,
-                    valid = false,
+                    valid = true,
                     systemId = 211,
                     add = 1
                 )
@@ -164,7 +164,7 @@ val stubEquipResponse =
                 desc2 = "<color=#FFFFFF>[普通攻擊]</color>、<color=#FFFFFF>[衝刺攻擊]</color>、<color=#FFFFFF>[閃避反擊]</color>對主要攻擊目標造成的失衡值提升20%。"
             ),
         equipmentType = 1,
-        invalidPropertyCnt = 4,
+        invalidPropertyCnt = 3,
         allHit = false
     )
 

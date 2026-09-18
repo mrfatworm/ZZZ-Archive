@@ -29,6 +29,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.github.panpf.sketch.AsyncImage
 import feature.hoyolab.model.agent.MyAgentDetailEquip
+import feature.hoyolab.model.agent.MyAgentEquipSuit
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.ContentCard
 import ui.theme.AppTheme
@@ -42,6 +43,7 @@ fun MyAgentDrivesCard(
     drives: List<MyAgentDetailEquip>
 ) {
     if (drives.isEmpty()) return
+    val openedSuit = remember { mutableStateOf<MyAgentEquipSuit.EquipSuit?>(null) }
     FlowRow(
         modifier = modifier.fillMaxWidth(),
         maxItemsInEachRow = 3,
@@ -52,24 +54,41 @@ fun MyAgentDrivesCard(
         for (drive in drives) {
             MyAgentDriveItem(
                 modifier = Modifier.weight(1f).widthIn(min = 160.dp),
-                drive = drive
+                drive = drive,
+                onSuitClick = { openedSuit.value = it }
             )
         }
+    }
+
+    openedSuit.value?.let { suit ->
+        MyAgentDriveSuitDialog(suit = suit) { openedSuit.value = null }
     }
 }
 
 @Composable
 private fun MyAgentDriveItem(
     modifier: Modifier = Modifier,
-    drive: MyAgentDetailEquip
+    drive: MyAgentDetailEquip,
+    onSuitClick: (MyAgentEquipSuit.EquipSuit) -> Unit
 ) {
-    ContentCard(modifier = modifier.width(IntrinsicSize.Min), hasDefaultPadding = false) {
+    val suit = drive.equipSuit
+    ContentCard(
+        modifier = modifier.width(IntrinsicSize.Min),
+        hasDefaultPadding = false,
+        onClick = if (suit is MyAgentEquipSuit.EquipSuit) {
+            { onSuitClick(suit) }
+        } else {
+            null
+        }
+    ) {
         Column(modifier = Modifier) {
             MyAgentDriveHeader(drive)
-            MyAgentDriveMainPropertyItem(
-                title = drive.mainProperties.first().name,
-                value = drive.mainProperties.first().base
-            )
+            drive.mainProperties.firstOrNull()?.let { mainProperty ->
+                MyAgentDriveMainPropertyItem(
+                    title = mainProperty.name,
+                    value = mainProperty.base
+                )
+            }
             for (subProperty in drive.subProperties) {
                 MyAgentDriveSubPropertyItem(
                     title = subProperty.name,
@@ -83,7 +102,9 @@ private fun MyAgentDriveItem(
 
 @Composable
 private fun MyAgentDriveHeader(drive: MyAgentDetailEquip) {
-    val totalHit = remember { drive.subProperties.filter { it.valid }.sumOf { it.level } }
+    // `level` is the roll count of a sub stat (initial roll + upgrades), so summing it over the
+    // valid ones reproduces HoYoLab's own equip_plan_info.valid_property_cnt across the six discs.
+    val totalHit = remember(drive) { drive.subProperties.filter { it.valid }.sumOf { it.level } }
 
     Row {
         AsyncImage(
@@ -140,7 +161,9 @@ private fun MyAgentDriveMainPropertyItem(
     value: String
 ) {
     val titleSmall = AppTheme.typography.titleSmall
-    var titleFontSize by remember { mutableStateOf(titleSmall.fontSize) }
+    // Keyed on what it was measured for: the size only ever shrinks, so an unkeyed remember would
+    // hold a reused slot at the smaller size after the disc -- or the user's font scale -- changed.
+    var titleFontSize by remember(title, titleSmall.fontSize) { mutableStateOf(titleSmall.fontSize) }
     Row(
         modifier =
             modifier.background(AppTheme.colors.surfaceContainer).padding(

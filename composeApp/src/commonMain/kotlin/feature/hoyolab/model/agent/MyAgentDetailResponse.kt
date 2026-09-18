@@ -39,7 +39,34 @@ data class MyAgentDetailItemResponse(
     @SerialName("equip_plan_info") val equipPlanInfo: MyAgentDetailEquipPlanResponse? = null,
     @SerialName("us_full_name") val usFullName: String? = null,
     @SerialName("vertical_painting_color") val verticalPaintingColor: String? = null,
-    @SerialName("sub_element_type") val subElementType: Int? = null
+    @SerialName("sub_element_type") val subElementType: Int? = null,
+    @SerialName("role_square_url") val roleSquareUrl: String? = null,
+    @SerialName("skin_list") val skinList: List<MyAgentSkinResponse>? = null,
+    val ranks: List<MyAgentRankResponse>? = null,
+    @SerialName("awaken_state") val awakenState: String? = null,
+    @SerialName("skill_awaken") val skillAwaken: MyAgentSkillAwakenResponse? = null
+)
+
+@Serializable
+data class MyAgentRankResponse(
+    val id: Int? = null,
+    val name: String? = null,
+    val desc: String? = null,
+    val pos: Int? = null,
+    @SerialName("is_unlocked") val isUnlocked: Boolean? = null
+)
+
+@Serializable
+data class MyAgentSkinResponse(
+    @SerialName("skin_id") val skinId: Int? = null,
+    @SerialName("skin_name") val skinName: String? = null,
+    @SerialName("skin_vertical_painting_url") val skinVerticalPaintingUrl: String? = null,
+    @SerialName("skin_square_url") val skinSquareUrl: String? = null,
+    @SerialName("skin_hollow_icon_path") val skinHollowIconPath: String? = null,
+    @SerialName("skin_vertical_painting_color") val skinVerticalPaintingColor: String? = null,
+    val unlocked: Boolean? = null,
+    val rarity: String? = null,
+    @SerialName("is_original") val isOriginal: Boolean? = null
 )
 
 @Serializable
@@ -96,7 +123,52 @@ val stubMyAgentDetailResponse =
                             equipPlanInfo = stubMyAgentDetailEquipPlanResponse,
                             usFullName = "Qing Yi",
                             verticalPaintingColor = "#28c79d",
-                            subElementType = 0
+                            subElementType = 1,
+                            ranks =
+                                listOf(
+                                    MyAgentRankResponse(
+                                        id = 1,
+                                        name = "熾芒",
+                                        desc = "發動<color=#FFFFFF>[強化特殊技]</color>時，暴擊率提升<color=#2BAD00>15%</color>。",
+                                        pos = 1,
+                                        isUnlocked = true
+                                    ),
+                                    MyAgentRankResponse(
+                                        id = 2,
+                                        name = "斷鋼",
+                                        desc = "對失衡目標造成的傷害提升<color=#2BAD00>20%</color>。",
+                                        pos = 2,
+                                        isUnlocked = false
+                                    )
+                                ),
+                            awakenState = "AwakenStateActivated",
+                            skillAwaken = stubMyAgentSkillAwakenResponse,
+                            roleSquareUrl = "https://act-webstatic.hoyoverse.com/game_record/zzzv2/role_square_avatar/role_square_avatar_1251.png",
+                            skinList =
+                                listOf(
+                                    MyAgentSkinResponse(
+                                        skinId = 3112511,
+                                        skinName = "青衣·遊園夢",
+                                        skinVerticalPaintingUrl = "https://act-webstatic.hoyoverse.com/game_record/zzzv2/role_vertical_painting/role_vertical_painting_1251_3112511.png",
+                                        skinSquareUrl = "https://act-webstatic.hoyoverse.com/game_record/zzzv2/role_square_avatar/role_square_avatar_1251_3112511.png",
+                                        skinHollowIconPath = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u66fwb/b48ab775e50814d8e30e56f6cf6a55d0.png",
+                                        skinVerticalPaintingColor = "#28c79d",
+                                        unlocked = true,
+                                        rarity = "S",
+                                        isOriginal = false
+                                    ),
+                                    MyAgentSkinResponse(
+                                        skinId = 3112510,
+                                        skinName = "青衣",
+                                        skinVerticalPaintingUrl = "https://act-webstatic.hoyoverse.com/game_record/zzzv2/role_vertical_painting/role_vertical_painting_1251.png",
+                                        skinSquareUrl = "https://act-webstatic.hoyoverse.com/game_record/zzzv2/role_square_avatar/role_square_avatar_1251.png",
+                                        skinHollowIconPath = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u66fwb/b48ab775e50814d8e30e56f6cf6a55d0.png",
+                                        skinVerticalPaintingColor = "#28c79d",
+                                        unlocked = true,
+                                        rarity = "S",
+                                        isOriginal = true
+                                    )
+                                )
                         )
                     )
             )

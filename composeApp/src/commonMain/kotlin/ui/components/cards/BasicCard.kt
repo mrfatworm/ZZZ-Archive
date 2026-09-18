@@ -9,6 +9,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -27,6 +28,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.graphics.shadow.Shadow
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import ui.components.buttons.ZzzIconButton
@@ -37,10 +40,15 @@ import zzzarchive.composeapp.generated.resources.ic_arrow_back
 import zzzarchive.composeapp.generated.resources.ic_arrow_next
 import zzzarchive.composeapp.generated.resources.previous
 
+/**
+ * [onClick] belongs to the card rather than the caller's modifier so that it lands inside the card's
+ * own clip -- hung outside, the ripple would spill past the 16dp corners.
+ */
 @Composable
 fun ContentCard(
     modifier: Modifier = Modifier,
     hasDefaultPadding: Boolean = true,
+    onClick: (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit
 ) {
     Column(
@@ -55,6 +63,13 @@ fun ContentCard(
                 )
                 .clip(AppTheme.shape.r400)
                 .background(AppTheme.colors.surfaceContainer)
+                .then(
+                    if (onClick == null) {
+                        Modifier
+                    } else {
+                        Modifier.pointerHoverIcon(PointerIcon.Hand).clickable { onClick() }
+                    }
+                )
                 .padding(if (hasDefaultPadding) cardPadding() else 0.dp)
     ) {
         content()

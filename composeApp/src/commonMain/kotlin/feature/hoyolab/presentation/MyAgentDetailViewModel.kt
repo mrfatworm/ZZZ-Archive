@@ -1,3 +1,8 @@
+/*
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: MIT
+ */
+
 package feature.hoyolab.presentation
 
 import androidx.lifecycle.SavedStateHandle
@@ -54,6 +59,12 @@ class MyAgentDetailViewModel(
                     state.copy(adjustMode = false)
                 }
             }
+
+            is MyAgentDetailAction.SelectSkin -> {
+                _uiState.update { state ->
+                    state.copy(selectedSkinId = action.skinId)
+                }
+            }
         }
     }
 
@@ -87,8 +98,13 @@ class MyAgentDetailViewModel(
                         emptyList()
                     }
                 }
+            val defaultSkinId = (it.skins.firstOrNull { skin -> skin.isOriginal } ?: it.skins.firstOrNull())?.id ?: 0
             _uiState.update { state ->
-                state.copy(agentDetail = it, planProperties = planProperties)
+                state.copy(
+                    agentDetail = it,
+                    planProperties = planProperties,
+                    selectedSkinId = defaultSkinId
+                )
             }
         }, onFailure = {
             _uiState.update { state ->

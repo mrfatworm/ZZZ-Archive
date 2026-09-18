@@ -82,7 +82,7 @@ class HoYoLabHttpImpl(engine: HttpClientEngine) : HoYoLabHttp {
     ): SignResponse = client
         .post {
             url {
-                takeFrom(" https://sg-public-api.hoyolab.com/event/luna/zzz/os/sign")
+                takeFrom("https://sg-public-api.hoyolab.com/event/luna/zzz/os/sign")
             }
             parameter("lang", languageCode)
             parameter("act_id", "e202406031448091")

@@ -239,6 +239,12 @@
     <string name="effective_sub_stats">有効サブステータス</string>
     <string name="hit">命中 %1$d</string>
     <string name="display_uid">UIDを表示</string>
+    <string name="outfit">衣装</string>
+    <string name="frost">烈霜</string>
+    <string name="auric_ink">玄墨</string>
+    <string name="potential_awakening">潜在覚醒</string>
+    <string name="locked">未解放</string>
+    <string name="inactive">未発動</string>
     <string name="custom_image">カスタム画像</string>
     <string name="image_url">画像URL</string>
     <string name="author_name_optional">作者名（任意）</string>

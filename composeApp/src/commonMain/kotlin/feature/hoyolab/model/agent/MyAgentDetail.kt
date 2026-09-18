@@ -9,26 +9,66 @@ import feature.hoyolab.data.mapper.toMyAgentDetailEquip
 import feature.hoyolab.data.mapper.toMyAgentDetailEquipPlan
 import feature.hoyolab.data.mapper.toMyAgentDetailSkill
 import feature.hoyolab.data.mapper.toMyAgentDetailWeapon
+import feature.hoyolab.data.mapper.toMyAgentMindscapes
+import feature.hoyolab.data.mapper.toMyAgentSkillAwaken
+import feature.hoyolab.data.mapper.toMyAgentSkin
 import utils.AgentAttribute
 import utils.AgentSpecialty
+import utils.AgentSubAttribute
 import utils.ZzzRarity
 
 data class MyAgentDetail(
     val id: Int,
     val name: String,
     val level: Int,
-    val mindscapes: Int,
+    val rank: Int,
     val imageUrl: String,
     val factionImageUrl: String,
     val rarity: ZzzRarity,
     val specialty: AgentSpecialty,
     val attribute: AgentAttribute,
+    val subAttribute: AgentSubAttribute,
     val equip: List<MyAgentDetailEquip>,
     val weapon: MyAgentDetailWeapon,
     val properties: List<MyAgentDetailProperty>,
     val skills: List<MyAgentDetailSkill>,
-    val equipPlanInfo: MyAgentDetailEquipPlan
+    val equipPlanInfo: MyAgentDetailEquipPlan,
+    val skins: List<MyAgentSkin>,
+    val mindscapes: List<MyAgentMindscape>,
+    val skillAwaken: MyAgentSkillAwaken
 )
+
+/** One mindscape cinema tier, unlocked once the agent's rank reaches [id]. */
+data class MyAgentMindscape(val id: Int, val name: String, val description: String, val isUnlocked: Boolean)
+
+sealed class MyAgentSkillAwaken {
+    data object Empty : MyAgentSkillAwaken()
+
+    data class Awaken(val level: Int, val maxLevel: Int, val tiers: List<MyAgentSkillAwakenTier>) :
+        MyAgentSkillAwaken()
+}
+
+data class MyAgentSkillAwakenTier(
+    val level: Int,
+    val name: String,
+    val isUnlocked: Boolean,
+    val skills: List<MyAgentAwakenSkill>
+)
+
+data class MyAgentAwakenSkill(val skillType: Int, val summary: String, val items: List<MyAgentDetailSkillItem>)
+
+/**
+ * An outfit the player owns for this agent. HoYoLab always returns at least the default outfit,
+ * flagged [isOriginal], so [MyAgentDetail.skins] is only worth offering as a picker past one entry.
+ */
+data class MyAgentSkin(
+    val id: Int,
+    val name: String,
+    val imageUrl: String,
+    val squareImageUrl: String,
+    val isOriginal: Boolean
+)
+
 data class MyAgentDetailEquip(
     val id: Int,
     val level: Int,
@@ -66,7 +106,9 @@ sealed class MyAgentDetailWeapon {
     ) : MyAgentDetailWeapon()
 }
 
-data class MyAgentDetailSkill(val level: Int, val skillType: Int, val items: List<MyAgentDetailSkillItemResponse>)
+data class MyAgentDetailSkill(val level: Int, val skillType: Int, val items: List<MyAgentDetailSkillItem>)
+
+data class MyAgentDetailSkillItem(val title: String, val text: String, val isAwaken: Boolean)
 
 data class MyAgentDetailProperty(val id: Int, val name: String, val base: String, val add: String, val final: String)
 
@@ -86,12 +128,13 @@ val stubMyAgentDetail =
         id = 1251,
         name = "青衣",
         level = 60,
-        mindscapes = 1,
+        rank = 1,
         imageUrl = "https://act-webstatic.hoyoverse.com/game_record/zzzv2/role_vertical_painting/role_vertical_painting_1251.png",
         factionImageUrl = "https://act-webstatic.hoyoverse.com/darkmatter/nap/prod_gf_cn/item_icon_u66fwb/033f6219c3e923be69fe41d80818eb8c.png",
         rarity = ZzzRarity.RARITY_S,
         specialty = AgentSpecialty.Stun,
         attribute = AgentAttribute.Electric,
+        subAttribute = AgentSubAttribute.Frost,
         equip = listOf(stubEquipResponse.toMyAgentDetailEquip()),
         weapon = stubMyAgentDetailWeaponResponse.toMyAgentDetailWeapon(),
         properties =
@@ -112,5 +155,19 @@ val stubMyAgentDetail =
                 )
             ),
         skills = listOf(stubMyAgentDetailSkillResponse.toMyAgentDetailSkill()),
-        equipPlanInfo = stubMyAgentDetailEquipPlanResponse.toMyAgentDetailEquipPlan()
+        equipPlanInfo = stubMyAgentDetailEquipPlanResponse.toMyAgentDetailEquipPlan(),
+        skins =
+            stubMyAgentDetailResponse.data
+                ?.avatarList
+                ?.first()
+                ?.skinList
+                ?.map { it.toMyAgentSkin() }
+                .orEmpty(),
+        mindscapes =
+            stubMyAgentDetailResponse.data
+                ?.avatarList
+                ?.first()
+                ?.ranks
+                .toMyAgentMindscapes(),
+        skillAwaken = stubMyAgentSkillAwakenResponse.toMyAgentSkillAwaken()
     )

@@ -6,6 +6,7 @@
 package feature.hoyolab.components.agent
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,9 +16,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.github.panpf.sketch.AsyncImage
@@ -41,6 +46,7 @@ fun MyAgentWeaponScoreCard(
     weapon: MyAgentDetailWeapon,
     equipPlan: MyAgentDetailEquipPlan
 ) {
+    val openTalentDialog = remember { mutableStateOf(false) }
     ContentCard(modifier = modifier) {
         Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)) {
             if (weapon is MyAgentDetailWeapon.MyAgentWeapon) {
@@ -49,7 +55,13 @@ fun MyAgentWeaponScoreCard(
                     weapon.iconUrl,
                     weapon.name,
                     weapon.level,
-                    weapon.star
+                    weapon.star,
+                    // Only worth opening when the response actually carried the talent text.
+                    onClick = if (weapon.talentContent.isEmpty()) {
+                        null
+                    } else {
+                        { openTalentDialog.value = true }
+                    }
                 )
             } else {
                 MyWeaponEmpty(Modifier.weight(1f))
@@ -59,6 +71,10 @@ fun MyAgentWeaponScoreCard(
             }
         }
     }
+
+    if (openTalentDialog.value && weapon is MyAgentDetailWeapon.MyAgentWeapon) {
+        MyAgentWeaponTalentDialog(weapon = weapon) { openTalentDialog.value = false }
+    }
 }
 
 @Composable
@@ -67,10 +83,20 @@ private fun MyWeapon(
     imgUrl: String,
     name: String,
     level: Int,
-    star: Int
+    star: Int,
+    onClick: (() -> Unit)?
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier.then(
+            if (onClick == null) {
+                Modifier
+            } else {
+                Modifier
+                    .clip(AppTheme.shape.r300)
+                    .pointerHoverIcon(PointerIcon.Hand)
+                    .clickable { onClick() }
+            }
+        ),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)
     ) {
         val wEngineSize = 96.dp

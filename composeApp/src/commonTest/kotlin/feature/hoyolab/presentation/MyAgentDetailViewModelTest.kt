@@ -65,6 +65,23 @@ class MyAgentDetailViewModelTest : MainDispatcherTest() {
     }
 
     @Test
+    fun `Default outfit is the original one`() {
+        val state = viewModel.uiState.value
+        assertEquals(2, state.agentDetail.skins.size)
+        assertEquals(
+            stubMyAgentDetail.skins.first { it.isOriginal }.id,
+            state.selectedSkinId
+        )
+    }
+
+    @Test
+    fun `Select outfit`() {
+        val alternative = stubMyAgentDetail.skins.first { !it.isOriginal }
+        viewModel.onAction(MyAgentDetailAction.SelectSkin(alternative.id))
+        assertEquals(alternative.id, viewModel.uiState.value.selectedSkinId)
+    }
+
+    @Test
     fun `Adjust image done`() {
         viewModel.onAction(MyAgentDetailAction.AdjustImageDone)
         val state = viewModel.uiState.value

@@ -239,6 +239,12 @@
     <string name="effective_sub_stats">有效词条</string>
     <string name="hit">命中 %1$d</string>
     <string name="display_uid">显示 UID</string>
+    <string name="outfit">时装</string>
+    <string name="frost">烈霜</string>
+    <string name="auric_ink">玄墨</string>
+    <string name="potential_awakening">潜能觉醒</string>
+    <string name="locked">未解锁</string>
+    <string name="inactive">未生效</string>
     <string name="custom_image">自定义图片</string>
     <string name="image_url">图片网址</string>
     <string name="author_name_optional">作者名称（选填）</string>

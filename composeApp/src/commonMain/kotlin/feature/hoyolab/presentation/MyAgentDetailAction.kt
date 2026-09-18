@@ -17,4 +17,6 @@ sealed class MyAgentDetailAction {
     ) : MyAgentDetailAction()
 
     data object AdjustImageDone : MyAgentDetailAction()
+
+    data class SelectSkin(val skinId: Int) : MyAgentDetailAction()
 }

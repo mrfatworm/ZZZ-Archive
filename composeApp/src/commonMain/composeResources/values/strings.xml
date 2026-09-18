@@ -239,6 +239,12 @@
     <string name="effective_sub_stats">Effective Sub Stats</string>
     <string name="hit">Hit %1$d</string>
     <string name="display_uid">Display UID</string>
+    <string name="outfit">Outfit</string>
+    <string name="frost">Frost</string>
+    <string name="auric_ink">Auric Ink</string>
+    <string name="potential_awakening">Potential Awakening</string>
+    <string name="locked">Locked</string>
+    <string name="inactive">Inactive</string>
     <string name="custom_image">Custom Image</string>
     <string name="image_url">Image URL</string>
     <string name="author_name_optional">Author Name (optional)</string>

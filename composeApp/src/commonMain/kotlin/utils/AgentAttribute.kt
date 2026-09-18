@@ -10,9 +10,11 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import ui.theme.ColorScheme
 import zzzarchive.composeapp.generated.resources.Res
+import zzzarchive.composeapp.generated.resources.auric_ink
 import zzzarchive.composeapp.generated.resources.electric
 import zzzarchive.composeapp.generated.resources.ether
 import zzzarchive.composeapp.generated.resources.fire
+import zzzarchive.composeapp.generated.resources.frost
 import zzzarchive.composeapp.generated.resources.ic_attribute_electric
 import zzzarchive.composeapp.generated.resources.ic_attribute_ether
 import zzzarchive.composeapp.generated.resources.ic_attribute_fire
@@ -52,6 +54,28 @@ enum class AgentAttribute(val textRes: StringResource, val iconRes: DrawableReso
 fun findAgentAttribute(attribute: String): AgentAttribute =
     AgentAttribute.entries.find { it.name.lowercase().lowercase() == attribute }
         ?: AgentAttribute.None
+
+/**
+ * A variant of a base [AgentAttribute]: it deals the base element's damage but carries its own
+ * anomaly, so HoYoLab reports it as `sub_element_type` alongside the unchanged `element_type`.
+ *
+ * Only the two variants that could be confirmed against live responses are named here (Miyabi
+ * reports 1, Yixuan reports 2); anything else falls through to [None] rather than an invented label.
+ *
+ * Carried on [feature.hoyolab.model.agent.MyAgentDetail] but deliberately not surfaced in the My
+ * Agent UI, so [textRes] currently has no reader.
+ */
+enum class AgentSubAttribute(val textRes: StringResource) {
+    Frost(Res.string.frost),
+    AuricInk(Res.string.auric_ink),
+    None(Res.string.unknown)
+}
+
+fun findAgentSubAttributeFromHoYoLab(subAttributeId: Int): AgentSubAttribute = when (subAttributeId) {
+    1 -> AgentSubAttribute.Frost
+    2 -> AgentSubAttribute.AuricInk
+    else -> AgentSubAttribute.None
+}
 
 fun findAgentAttributeFromHoYoLab(attributeId: Int): AgentAttribute = when (attributeId) {
     200 -> AgentAttribute.Physical
