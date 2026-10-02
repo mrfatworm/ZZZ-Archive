@@ -7,6 +7,7 @@ package feature.cover.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import network.assetUrl
 
 @Entity
 data class CoverImageListItemEntity(
@@ -23,7 +24,7 @@ data class CoverImageListItemEntity(
 val stubCoverImageListItemEntity =
     CoverImageListItemEntity(
         id = 1,
-        imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Banner/1.webp",
+        imageUrl = assetUrl("Banner/1.webp"),
         artworkUrl = "https://www.pixiv.net/artworks/124677174",
         artworkName = "banner",
         artworkDescription = "banner test",

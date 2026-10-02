@@ -13,7 +13,6 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
-import io.ktor.http.path
 import io.ktor.http.takeFrom
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
@@ -37,8 +36,7 @@ fun createZzzHttpClient(engine: HttpClientEngine): HttpClient = HttpClient(engin
 //        }
     defaultRequest {
         url {
-            takeFrom("https://raw.githubusercontent.com")
-            path("/${ZzzConfig.API_PATH}/")
+            takeFrom("${ZzzConfig.API_URL}/")
         }
         contentType(ContentType.Application.Json)
     }

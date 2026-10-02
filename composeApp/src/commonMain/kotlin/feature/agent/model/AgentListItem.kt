@@ -5,6 +5,7 @@
 
 package feature.agent.model
 
+import network.assetUrl
 import utils.AgentAttribute
 import utils.AgentSpecialty
 import utils.ZzzRarity
@@ -32,7 +33,7 @@ val stubAgentsList =
         AgentListItem(
             id = 3,
             name = "貓又",
-            imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Agent/Profile/3.webp",
+            imageUrl = assetUrl("Agent/Profile/3.webp"),
             isHighlight = false,
             rarity = ZzzRarity.RARITY_S,
             specialty = AgentSpecialty.Attack,
@@ -47,7 +48,7 @@ val stubAgentsList =
         AgentListItem(
             id = 4,
             name = "安比",
-            imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Agent/Profile/4.webp",
+            imageUrl = assetUrl("Agent/Profile/4.webp"),
             isHighlight = false,
             rarity = ZzzRarity.RARITY_A,
             specialty = AgentSpecialty.Stun,
@@ -62,7 +63,7 @@ val stubAgentsList =
         AgentListItem(
             id = 16,
             name = "可琳",
-            imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Agent/Profile/16.webp",
+            imageUrl = assetUrl("Agent/Profile/16.webp"),
             isHighlight = false,
             rarity = ZzzRarity.RARITY_A,
             specialty = AgentSpecialty.Attack,

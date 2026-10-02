@@ -48,8 +48,8 @@ import com.github.panpf.sketch.AsyncImage
 import com.github.panpf.sketch.SubcomposeAsyncImage
 import com.github.panpf.sketch.request.ComposableImageRequest
 import com.github.panpf.sketch.util.Size
-import com.mrfatworm.zzzarchive.ZzzConfig
 import kotlinx.coroutines.launch
+import network.assetUrl
 import ui.components.ImageNotFound
 import ui.components.buttons.ZzzIconButton
 import ui.theme.AppTheme
@@ -67,16 +67,15 @@ fun AgentGalleryScreen(
     portraitCount: Int,
     onBackClick: () -> Unit
 ) {
-    val path = ZzzConfig.ASSET_PATH
     val extraPortraitImages = (1 until portraitCount).map { i ->
-        "https://raw.githubusercontent.com/$path/Agent/Portrait/$agentId-$i.webp"
+        assetUrl("Agent/Portrait/$agentId-$i.webp")
     }
     val imageUrls = listOf(
-        "https://raw.githubusercontent.com/$path/Agent/Portrait/$agentId.webp"
+        assetUrl("Agent/Portrait/$agentId.webp")
     ) + extraPortraitImages + listOf(
-        "https://raw.githubusercontent.com/$path/Agent/Mindscape/Partial/$agentId.webp",
-        "https://raw.githubusercontent.com/$path/Agent/Mindscape/Full/$agentId.webp",
-        "https://raw.githubusercontent.com/$path/W-Engine/Match-Agent/$agentId.webp"
+        assetUrl("Agent/Mindscape/Partial/$agentId.webp"),
+        assetUrl("Agent/Mindscape/Full/$agentId.webp"),
+        assetUrl("W-Engine/Match-Agent/$agentId.webp")
     )
     var selectedImageUrl by remember { mutableStateOf(imageUrls.first()) }
     val contentType = AppTheme.contentType

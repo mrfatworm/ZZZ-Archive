@@ -5,7 +5,7 @@
 
 package feature.agent.model
 
-import com.mrfatworm.zzzarchive.ZzzConfig
+import network.assetUrl
 import org.jetbrains.compose.resources.StringResource
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.airspace_patrol_department
@@ -53,12 +53,9 @@ data class Faction(val id: Int) {
         else -> Res.string.unknown
     }
 
-    fun getFactionIconUrl(path: String = ZzzConfig.ASSET_PATH): String =
-        "https://raw.githubusercontent.com/$path/Agent/Faction/Icon/$id.webp"
+    fun getFactionIconUrl(): String = assetUrl("Agent/Faction/Icon/$id.webp")
 
-    fun getFactionThumbnailUrl(path: String = ZzzConfig.ASSET_PATH): String =
-        "https://raw.githubusercontent.com/$path/Agent/Faction/Thumbnail/$id.webp"
+    fun getFactionThumbnailUrl(): String = assetUrl("Agent/Faction/Thumbnail/$id.webp")
 
-    fun getFactionFullUrl(path: String = ZzzConfig.ASSET_PATH): String =
-        "https://raw.githubusercontent.com/$path/Agent/Faction/Full/$id.webp"
+    fun getFactionFullUrl(): String = assetUrl("Agent/Faction/Full/$id.webp")
 }

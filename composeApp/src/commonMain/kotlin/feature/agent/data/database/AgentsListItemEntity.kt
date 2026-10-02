@@ -7,6 +7,7 @@ package feature.agent.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import network.assetUrl
 
 @Entity
 data class AgentsListItemEntity(
@@ -28,7 +29,7 @@ val stubAgentsListItemEntity =
     AgentsListItemEntity(
         id = 3,
         name = "貓又",
-        imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Agent/Profile/3.webp",
+        imageUrl = assetUrl("Agent/Profile/3.webp"),
         isHighlight = false,
         rarity = 5,
         specialty = "attack",

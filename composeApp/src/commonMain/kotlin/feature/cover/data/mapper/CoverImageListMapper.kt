@@ -5,15 +5,13 @@
 
 package feature.cover.data.mapper
 
-import com.mrfatworm.zzzarchive.ZzzConfig
 import feature.cover.data.database.CoverImageListItemEntity
 import feature.cover.model.CoverImageListItemResponse
+import network.assetUrl
 
-fun CoverImageListItemResponse.toCoverImageListItemEntity(
-    path: String = ZzzConfig.ASSET_PATH
-): CoverImageListItemEntity = CoverImageListItemEntity(
+fun CoverImageListItemResponse.toCoverImageListItemEntity(): CoverImageListItemEntity = CoverImageListItemEntity(
     id = id,
-    imageUrl = "https://raw.githubusercontent.com/$path/Banner/$id.webp",
+    imageUrl = assetUrl("Banner/$id.webp"),
     artworkUrl = artworkUrl,
     artworkName = artworkName,
     artworkDescription = artworkDescription,

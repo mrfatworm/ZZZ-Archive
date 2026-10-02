@@ -23,6 +23,7 @@ import network.ZzzHttp
 import network.ZzzHttpImpl
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
+import platform.Foundation.NSURLRequestReloadIgnoringLocalCacheData
 import utils.AppActionsUseCase
 import utils.AppActionsUseCaseImpl
 import utils.share.ImageShareHandler
@@ -35,7 +36,15 @@ actual val platformModule =
         singleOf(::RoomDatabaseFactory)
         singleOf(::DataStoreFactory)
         single { KSafe() }
-        single<ZzzHttp> { ZzzHttpImpl(Darwin.create()) }
+        // jsDelivr sends max-age=604800, which NSURLCache would honour for a week and so hide
+        // asset repo updates that the CDN has already purged. Room caches this data anyway.
+        single<ZzzHttp> {
+            ZzzHttpImpl(
+                Darwin.create {
+                    configureSession { requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData }
+                }
+            )
+        }
         single<OfficialWebHttp> { OfficialWebHttpImpl(Darwin.create()) }
         single<PixivHttp> { PixivHttpImpl(Darwin.create()) }
         single<GoogleDocHttp> { GoogleDocHttpImpl(Darwin.create()) }

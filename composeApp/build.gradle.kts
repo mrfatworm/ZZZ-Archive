@@ -124,20 +124,16 @@ val aesKey: String = if (localPropertiesFile.exists()) {
 val zzzVersionName = libs.versions.zzzVersionName.get()
 val isLive = project.extra["zzzVariant"] == "Live"
 
+// The ZZZ-Archive-Asset repo served through jsDelivr's GitHub CDN rather than
+// raw.githubusercontent.com, which throttles large files. Live reads the repo's main, Dev its dev.
+val assetRepoUrl = "https://cdn.jsdelivr.net/gh/mrfatworm/ZZZ-Archive-Asset@" + if (isLive) "main" else "dev"
+
 buildConfig {
     packageName = libs.versions.zzzPackageId.get()
     className = "ZzzConfig"
 
-    buildConfigField<String>(
-        "ASSET_PATH",
-        if (isLive) "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Asset"
-        else "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset"
-    )
-    buildConfigField<String>(
-        "API_PATH",
-        if (isLive) "mrfatworm/ZZZ-Archive-Asset/refs/heads/main/Api"
-        else "mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Api"
-    )
+    buildConfigField<String>("ASSET_URL", "$assetRepoUrl/Asset")
+    buildConfigField<String>("API_URL", "$assetRepoUrl/Api")
     buildConfigField<String>(
         "VERSION",
         if (isLive) zzzVersionName else "$zzzVersionName-Beta"
