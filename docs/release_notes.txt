@@ -1,9 +1,15 @@
-### ✨ New Features
-- Support Simplified Chinese
-- Add Angels of delusion faction
-- Display multiple agent portraits in gallery
-- Add title for Agent List filter
+### New Features
+- Add shareable build card to My Agent detail
+- Add outfit picker to My Agent detail
+- Show descriptions for mindscapes, potential awakening, skills, W-Engine and drive disc sets in My Agent detail
+- Add Wind and Lumiflux attributes and five new factions
 
-### 🚀 Improvements
-- Add display cutout padding to navigation rail
-- Update UI for BasicCard and Tag component
+### Fixes
+- Drive disc details could show the previous disc's values
+
+### Improvements
+- Store HoYoLab credentials in the platform's secure key store
+- Show mindscape, potential awakening and attribute as cards below the agent image
+- Support animated WebP images
+- Load forum lists from the new ZZZ Archive API
+- Internal refactoring and dependency updates
