@@ -1,9 +1,6 @@
 name: Deploy to Google Play Closed Testing
 
 on:
-  push:
-    branches:
-      - 'release/**'
   workflow_dispatch:
 
 jobs:
@@ -14,11 +11,11 @@ jobs:
       # Checkout the repository
       - uses: actions/checkout@v4
 
-      - name: set up JDK 18
+      - name: set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '18'
+          java-version: '21'
           cache: gradle
 
       # Grant execute permission for gradlew

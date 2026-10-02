@@ -92,8 +92,10 @@ This project follows a GitFlow-style model with two long-lived branch roles:
 
 - **Feature branches** (`feature/xxx`, `fix/xxx`, `refactor/xxx`) branch off `main` and merge
   back into `main` with **Squash and merge**, keeping one clean commit per change.
-- **Releasing**: bump the version on `main` first, then cut `release/x.x.x` from `main`. Pushing to
-  `release/**` triggers the Google Play and TestFlight deploy workflows.
+- **Releasing**: bump the version on `main` first, then cut `release/x.x.x` from `main`. The Google
+  Play and TestFlight deploy workflows are manual only: run them from the Actions tab (or
+  `gh workflow run <file> --ref release/x.x.x`) against the release branch. Each upload needs a new
+  `zzzVersionCode`, so a hotfix pushed to a release branch does not redeploy until it is bumped.
 - **Hotfixes** for a shipped version are committed on that version's `release/x.x.x` branch.
 - **Hotfixes forward-port automatically**: a push to `release/**` runs
   `.github/workflows/forward-port-hotfix.yml`, which cherry-picks the new commits onto `main` and
