@@ -11,5 +11,6 @@
 - Store HoYoLab credentials in the platform's secure key store
 - Show mindscape, potential awakening and attribute as cards below the agent image
 - Support animated WebP images
+- Load images much faster through a CDN
 - Load forum lists from the new ZZZ Archive API
 - Internal refactoring and dependency updates
