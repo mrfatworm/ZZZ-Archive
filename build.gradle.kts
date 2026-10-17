@@ -26,4 +26,10 @@ require(zzzVariant in setOf("Dev", "Live")) {
 
 subprojects {
     extra["zzzVariant"] = zzzVariant
+
+    // On macOS a test JVM that touches AWT/Skiko grows a Dock icon and steals the foreground.
+    // UIElement turns it into a background process; AWT still works and other platforms ignore it.
+    tasks.withType<Test>().configureEach {
+        systemProperty("apple.awt.UIElement", "true")
+    }
 }
